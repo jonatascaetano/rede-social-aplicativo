@@ -55,10 +55,26 @@ class DatabaseModel extends Model {
       case 401:
         // ignore: avoid_print
         print('não autorizado');
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   SnackBar(content: (context){
+
+        //   })
+        // );
         break;
       case 404:
         // ignore: avoid_print
         print('não econtrado');
+        break;
+      default:
+    }
+  }
+
+  popupMenuButtonSelect({required String item, required BuildContext context}) {
+    // ignore: avoid_print
+    print(item);
+    switch (item) {
+      case 'exit':
+        removeId(context: context);
         break;
       default:
     }
