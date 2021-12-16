@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
+  String id;
+  bool user;
+  Profile({required this.id, required this.user, Key? key}) : super(key: key);
 
   @override
   _ProfileState createState() => _ProfileState();
@@ -10,6 +13,6 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Profile"));
+    return Center(child: Text("Profile: " + widget.id));
   }
 }

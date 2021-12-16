@@ -3,7 +3,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/scoped_model/database_model.dart';
 import 'package:social_network_application/scoped_model/language_model.dart';
 import 'package:social_network_application/scoped_model/theme_model.dart';
-import 'view/my_app.dart';
+import 'package:social_network_application/view/splash_screen.dart';
 
 void main() {
   runApp(const Model());
@@ -31,7 +31,7 @@ class _ModelState extends State<Model> {
                       theme: theme.themeData,
                       themeMode: theme.themeMode,
                       debugShowCheckedModeBanner: false,
-                      home: const MyApp());
+                      home: const SplashScreen());
                 }))));
   }
 }
