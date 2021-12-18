@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/scoped_model/database_model.dart';
-import 'package:social_network_application/view/register.dart';
+import 'package:social_network_application/view/register/invitation.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -50,7 +50,7 @@ class _LoginState extends State<Login> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const Register()));
+                          builder: (context) => const Invitation()));
                 },
                 child: const Text("New account"),
               )

@@ -14,17 +14,12 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<DatabaseModel>(
         builder: (context, child, database) {
-      database.getId(context: context);
-      return const Scaffold(
-        body: Center(
-          child: Text(
-            'Application',
-            style: TextStyle(
-              fontSize: 24,
-            ),
-          ),
-        ),
-      );
+      return Scaffold(
+          body: FutureBuilder<void>(
+              future: database.getId(context: context),
+              builder: (context, snapshot) {
+                return const Center(child: Text("Application"));
+              }));
     });
   }
 }

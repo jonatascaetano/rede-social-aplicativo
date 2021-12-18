@@ -25,6 +25,9 @@ class UserUpdateDTO {
     return map;
   }
 
+  UserUpdateDTO({required this.idUser, required this.name, required this.email, required this.password, required this.image,
+    required this.description, required this.birthDate, required this.city, required this.privacy, required this.status });
+
   UserUpdateDTO.fromMap({required Map map}) {
     idUser = map["idUser"];
     name = map["name"];

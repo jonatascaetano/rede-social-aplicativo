@@ -1,13 +1,13 @@
 class EntityMini {
-  late String id;
-  late String name;
-  late String image;
-  late String description;
-  late int evaluationQuantity;
-  late double evaluationAverage;
-  late int season;
-  late int type;
-  late String genre;
+  late String? id;
+  late String? name;
+  late String? image;
+  late String? description;
+  late int? evaluationQuantity;
+  late double? evaluationAverage;
+  late int? season;
+  late int? type;
+  late String? genre;
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};

@@ -1,11 +1,11 @@
 class EpisodeMini {
-  late String id;
-  late String name;
-  late String image;
-  late String description;
-  late int number;
-  late int evaluationQuantity;
-  late double evaluationAverage;
+  late String? id;
+  late String? name;
+  late String? image;
+  late String? description;
+  late int? number;
+  late int? evaluationQuantity;
+  late double? evaluationAverage;
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};

@@ -17,6 +17,9 @@ class EpisodeCreation {
     return map;
   }
 
+  EpisodeCreation({required this.idEpisode, required this.name, required this.description, required this.image,
+    required this.release, required this.number});
+
   EpisodeCreation.fromMap({required Map map}) {
     idEpisode = map["idEpisode"];
     name = map["name"];

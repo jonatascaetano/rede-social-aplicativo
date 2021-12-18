@@ -1,10 +1,10 @@
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 
 class FollowerMini {
-  late String id;
-  late DateTime release;
-  late UserMini user;
-  late List<UserMini> following;
+  late String? id;
+  late DateTime? release;
+  late UserMini? user;
+  late List<UserMini>? following;
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};

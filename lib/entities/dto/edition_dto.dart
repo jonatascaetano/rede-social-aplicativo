@@ -4,7 +4,7 @@ class EditionDTO {
   late String idSeason;
   late String idEpisode;
   late DateTime release;
-  late Object previus;
+  late Object previous;
   late Object current;
   late String attribute;
 
@@ -15,11 +15,14 @@ class EditionDTO {
     map["idSeason"] = idSeason;
     map["idEpisode"] = idEpisode;
     map["release"] = release;
-    map["previus"] = previus;
+    map["previous"] = previous;
     map["current"] = current;
     map["attribute"] = attribute;
     return map;
   }
+
+  EditionDTO({required this.idUser, required this.idEntity, required this.idSeason, required this.idEpisode,
+    required this.release, required this.previous, required this.current, required this.attribute});
 
   EditionDTO.fromMap({required Map map}) {
     idUser = map["idUser"];
@@ -27,7 +30,7 @@ class EditionDTO {
     idSeason = map["idSeason"];
     idEpisode = map["idEpisode"];
     release = map["release"];
-    previus = map["previus"];
+    previous = map["previous"];
     current = map["current"];
     attribute = map["attribute"];
   }

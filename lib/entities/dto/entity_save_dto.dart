@@ -27,6 +27,20 @@ class EntitySaveDTO {
     return map;
   }
 
+  EntitySaveDTO({
+    required this.idEntitySave,
+    required this.idUser,
+    required this.idEntity,
+    required this.idSeason,
+    required this.idEpisode,
+    required this.category,
+    required this.release,
+    required this.goal,
+    required this.rated,
+    required this.review,
+    required this.type
+  });
+
   EntitySaveDTO.fromMap({required Map map}) {
     idEntitySave = map["idEntitySave"];
     idUser = map["idUser"];

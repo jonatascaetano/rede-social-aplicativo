@@ -1,14 +1,14 @@
 class UserMini {
-  late String id;
-  late String name;
-  late String image;
-  late String description;
-  late String city;
-  late bool checked;
-  late bool privacy;
-  late bool status;
-  late int following;
-  late int followers;
+  late String? id;
+  late String? name;
+  late String? image;
+  late String? description;
+  late String? city;
+  late bool? checked;
+  late bool? privacy;
+  late bool? status;
+  late int? following;
+  late int? followers;
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};

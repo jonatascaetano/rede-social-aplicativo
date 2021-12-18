@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/scoped_model/database_model.dart';
 import 'package:social_network_application/scoped_model/language_model.dart';
+import 'package:social_network_application/view/seach.dart';
 import 'home.dart';
 import 'profile.dart';
 import 'trending.dart';
@@ -27,7 +28,7 @@ class _MyAppState extends State<MyApp> {
           const Trending(),
           Profile(
             id: database.id,
-            user: true,
+            isUser: true,
           ),
         ];
         return Scaffold(
@@ -43,7 +44,9 @@ class _MyAppState extends State<MyApp> {
                 icon: const Icon(Icons.notifications),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  showSearch(context: context, delegate: Search());
+                },
                 icon: const Icon(Icons.search),
               ),
               PopupMenuButton<String>(
@@ -66,7 +69,7 @@ class _MyAppState extends State<MyApp> {
           ),
           bottomNavigationBar: BottomNavigationBar(
               backgroundColor: Colors.white,
-              elevation: 0.0,
+              elevation: 0.5,
               currentIndex: value,
               onTap: (index) {
                 setState(() {

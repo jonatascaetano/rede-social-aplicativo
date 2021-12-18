@@ -15,6 +15,8 @@ class CommentDTO {
     return map;
   }
 
+  CommentDTO({required this.idComment, required this.release, required this.body, required this.idUser, required this.idPost});
+
   CommentDTO.fromMap({required Map map}) {
     idComment = map["idComment"];
     release = map["release"];

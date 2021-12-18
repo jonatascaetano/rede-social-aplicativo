@@ -2,11 +2,11 @@ import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 
 class WorkerMini {
-  late String id;
-  late DateTime release;
-  late String role;
-  late UserMini user;
-  late EntityMini entity;
+  late String? id;
+  late DateTime? release;
+  late String? role;
+  late UserMini? user;
+  late EntityMini? entity;
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};

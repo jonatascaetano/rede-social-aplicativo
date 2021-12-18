@@ -5,18 +5,18 @@ import 'package:social_network_application/entities/mini_dto/season_mini.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 
 class EntitySaveMini {
-  late String id;
-  late int type;
-  late int categoty;
-  late bool goal;
-  late bool rated;
-  late bool review;
-  late UserMini user;
-  late EntityMini entity;
-  late SeasonMini season;
-  late EpisodeMini episode;
-  late EvaluationMini evaluation;
-  late List<DateTime> historic;
+  late String? id;
+  late int? type;
+  late int? categoty;
+  late bool? goal;
+  late bool? rated;
+  late bool? review;
+  late UserMini? user;
+  late EntityMini? entity;
+  late SeasonMini? season;
+  late EpisodeMini? episode;
+  late EvaluationMini? evaluation;
+  late List<DateTime>? historic;
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};

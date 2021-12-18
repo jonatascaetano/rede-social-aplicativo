@@ -21,6 +21,9 @@ class EvaluationDTO {
     return map;
   }
 
+  EvaluationDTO({required this.idEvaluation, required this.idUser, required this.idEntity, required this.idSeason,
+    required this.idEpisode, required this.value, required this.release, required this.type});
+
   EvaluationDTO.fromMap({required Map map}) {
     idEvaluation = map["idEvaluation"];
     idUser = map["idUser"];

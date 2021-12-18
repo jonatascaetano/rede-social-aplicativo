@@ -11,6 +11,8 @@ class WorkerDTO {
     return map;
   }
 
+  WorkerDTO({required this.idUser, required this.idEntity, required this.role});
+
   WorkerDTO.fromMap({required Map map}) {
     idUser = map["idUser"];
     idEntity = map["idEntity"];

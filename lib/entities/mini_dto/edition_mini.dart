@@ -4,15 +4,15 @@ import 'package:social_network_application/entities/mini_dto/season_mini.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 
 class EditionMini {
-  late String id;
-  late UserMini user;
-  late EntityMini entity;
-  late SeasonMini season;
-  late EpisodeMini episode;
-  late String attribute;
-  late Object previus;
-  late Object current;
-  late DateTime release;
+  late String? id;
+  late UserMini? user;
+  late EntityMini? entity;
+  late SeasonMini? season;
+  late EpisodeMini? episode;
+  late String? attribute;
+  late Object? previus;
+  late Object? current;
+  late DateTime? release;
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};

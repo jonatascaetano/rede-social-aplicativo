@@ -17,6 +17,9 @@ class SeasonCreationDTO {
     return map;
   }
 
+  SeasonCreationDTO({required this.name, required this.image, required this.description, required this.release,
+      required this.number, required this.episode});
+
   SeasonCreationDTO.fromMap({required Map map}) {
     name = map["name"];
     image = map["image"];

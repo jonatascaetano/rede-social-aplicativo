@@ -1,10 +1,10 @@
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 
 class InvitationMini {
-  late DateTime release;
-  late String value;
-  late UserMini user;
-  late List<UserMini> invited;
+  late DateTime? release;
+  late String? value;
+  late UserMini? user;
+  late List<UserMini>? invited;
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};

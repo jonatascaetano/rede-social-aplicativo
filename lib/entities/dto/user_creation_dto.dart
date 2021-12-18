@@ -1,8 +1,8 @@
 class UserCreationDTO {
-  late String name;
-  late String email;
-  late String invitationValue;
-  late String password;
+  late String? name;
+  late String? email;
+  late String? invitationValue;
+  late String? password;
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
@@ -12,6 +12,12 @@ class UserCreationDTO {
     map["password"] = password;
     return map;
   }
+
+  UserCreationDTO(
+      {required this.name,
+      required this.email,
+      required this.invitationValue,
+      required this.password});
 
   UserCreationDTO.fromMap({required Map map}) {
     name = map["name"];

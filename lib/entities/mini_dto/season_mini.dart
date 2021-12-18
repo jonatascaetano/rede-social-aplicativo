@@ -1,12 +1,12 @@
 class SeasonMini {
-  late String id;
-  late String name;
-  late String image;
-  late String description;
-  late int number;
-  late int evaluationQuantity;
-  late double evaluationAverage;
-  late int episode;
+  late String? id;
+  late String? name;
+  late String? image;
+  late String? description;
+  late int? number;
+  late int? evaluationQuantity;
+  late double? evaluationAverage;
+  late int? episode;
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};

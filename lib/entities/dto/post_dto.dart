@@ -23,6 +23,9 @@ class PostDTO {
     return map;
   }
 
+  PostDTO({required this.idPost, required this.type, required this.release, required this.body, required this.category,
+    required this.idUser, required this.idEntity, required this.idSeason, required this.idEpisode});
+
   PostDTO.fromMap({required Map map}) {
     idPost = map["idPost"];
     type = map["type"];

@@ -4,17 +4,17 @@ import 'package:social_network_application/entities/mini_dto/season_mini.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 
 class PostMini {
-  late String id;
-  late int type;
-  late DateTime release;
-  late String body;
-  late int category;
-  late UserMini user;
-  late EntityMini entity;
-  late SeasonMini season;
-  late EpisodeMini episode;
-  late int comments;
-  late int likes;
+  late String? id;
+  late int? type;
+  late DateTime? release;
+  late String? body;
+  late int? category;
+  late UserMini? user;
+  late EntityMini? entity;
+  late SeasonMini? season;
+  late EpisodeMini? episode;
+  late int? comments;
+  late int? likes;
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
