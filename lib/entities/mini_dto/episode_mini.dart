@@ -1,11 +1,12 @@
 class EpisodeMini {
-  late String? id;
-  late String? name;
+  late String id;
+  late String name;
   late String? image;
   late String? description;
-  late int? number;
-  late int? evaluationQuantity;
-  late double? evaluationAverage;
+  late int number;
+  late int evaluationQuantity;
+  late double evaluationAverage;
+  late String typeObject;
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
@@ -16,6 +17,7 @@ class EpisodeMini {
     map["number"] = number;
     map["evaluationQuantity"] = evaluationQuantity;
     map["evaluationAverage"] = evaluationAverage;
+    map["typeObject"] = typeObject;
     return map;
   }
 
@@ -27,5 +29,6 @@ class EpisodeMini {
     number = map["number"];
     evaluationQuantity = map["evaluationQuantity"];
     evaluationAverage = map["evaluationAverage"];
+    typeObject = map['typeObject'];
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:social_network_application/scoped_model/database_model.dart';
-import 'package:social_network_application/view/result_search.dart';
+import 'package:social_network_application/view/search/result_search.dart';
 
 class Search extends SearchDelegate {
   @override

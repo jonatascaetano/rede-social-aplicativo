@@ -4,20 +4,29 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_network_application/entities/dto/user_creation_dto.dart';
+import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
+import 'package:social_network_application/entities/mini_dto/episode_mini.dart';
+import 'package:social_network_application/entities/mini_dto/season_mini.dart';
+import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 import 'package:social_network_application/view/login.dart';
 import 'dart:convert';
 
 import 'package:social_network_application/view/my_app.dart';
-import 'package:social_network_application/view/profile.dart';
 import 'package:social_network_application/view/register/email.dart';
 import 'package:social_network_application/view/register/name.dart';
 import 'package:social_network_application/view/register/password.dart';
+import 'package:social_network_application/view/widgets/mini_results/entity_mini_result.dart';
+import 'package:social_network_application/view/widgets/mini_results/episode_mini_result.dart';
+import 'package:social_network_application/view/widgets/mini_results/season_mini_result.dart';
+import 'package:social_network_application/view/widgets/mini_results/user_mini_result.dart';
 
 class DatabaseModel extends Model {
   String id = '';
 
   static const String base =
       "https://jonatas-social-network-api.herokuapp.com/";
+
+  //inicio login
 
   saveId({required id, required BuildContext context}) async {
     final prefs = await SharedPreferences.getInstance();
@@ -83,6 +92,10 @@ class DatabaseModel extends Model {
       );
     }
   }
+
+  //final login
+
+  //inicio register
 
   checkInvitation({
     required UserCreationDTO userCreationDTO,
@@ -228,19 +241,51 @@ class DatabaseModel extends Model {
     }
   }
 
-  //profile
+  //final register
+
+  //inicio profile
 
   Future<Map<String, dynamic>> getProfile({required String id}) async {
     var url = Uri.parse(base + 'users/get/user/$id');
     var response = await http.get(url);
+    // ignore: avoid_print
+    print('getProfile: ' + response.statusCode.toString());
     switch (response.statusCode) {
       case 200:
-        Map<String, dynamic>? map = json.decode(response.body);
-        return map!;
-      case 400:
+        Map<String, dynamic> map = json.decode(response.body);
+        return map;
+      case 404:
         return {};
       default:
         return {};
+    }
+  }
+
+  Future<List<dynamic>> getWorkersUser({required String idUser}) async {
+    var url = Uri.parse(base + 'users/get/user/$idUser/workers');
+    var response = await http.get(url);
+    // ignore: avoid_print
+    print("getWorkersUser: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 200:
+        List<dynamic> list = json.decode(response.body);
+        return list;
+      default:
+        return [];
+    }
+  }
+
+  Future<String?> deleteWorker(
+      {required String idWorker, required String idUser}) async {
+    var url = Uri.parse(base + 'workers/delete/worker/$idWorker/user/$idUser');
+    var response = await http.delete(url);
+    // ignore: avoid_print
+    print("deleteWorker: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 200:
+        return idWorker;
+      default:
+        return null;
     }
   }
 
@@ -248,29 +293,73 @@ class DatabaseModel extends Model {
     return true;
   }
 
-  Future<bool> checkFollowing(
+  Future<int?> checkFollowing(
       {required String id, required String idFollowing}) async {
-    bool follow = false;
-    var url = Uri.parse(
-        base + 'followers/get/check/following/user/$id/following/$idFollowing');
-    // ignore: avoid_print
-    print("follower id: $id, following id: ${this.id}");
-    await http.get(url).then((value) {
+    try {
+      var url = Uri.parse(base +
+          'followers/get/check/following/user/$id/following/$idFollowing');
       // ignore: avoid_print
-      print("follow: " + value.statusCode.toString());
-      switch (value.statusCode) {
-        case 200:
-          follow = true;
-          break;
-        case 404:
-          follow = false;
-          break;
-      }
-    });
-    return follow;
+      print("follower id: $id, following id: ${this.id}");
+      var response = await http.get(url);
+      // ignore: avoid_print
+      print("follow: " + response.statusCode.toString());
+      return response.statusCode;
+    } catch (e) {
+      return null;
+    }
   }
 
-  //search
+  Future<List<dynamic>> getFollowers({required String idUser}) async {
+    var url = Uri.parse(base + 'followers/get/followers/user/$idUser');
+    var response = await http.get(url);
+    switch (response.statusCode) {
+      case 200:
+        List<dynamic> list = json.decode(response.body);
+        return list;
+      default:
+        return [];
+    }
+  }
+
+  Future<List<dynamic>> getFollowwings({required String idUser}) async {
+    var url = Uri.parse(base + 'followers/get/followings/user/$idUser');
+    var response = await http.get(url);
+    switch (response.statusCode) {
+      case 200:
+        List<dynamic> list = json.decode(response.body);
+        return list;
+      default:
+        return [];
+    }
+  }
+
+  removeFollowing({required idFollower, required idFollowing}) async {
+    var url = Uri.parse(
+        base + 'followers/post/follower/$idFollower/following/$idFollowing');
+    var response = await http.post(url);
+    // ignore: avoid_print
+    print('removeFollowing: ' + response.statusCode.toString());
+  }
+
+  removeFollower({required idFollower, required idFollowing}) async {
+    var url = Uri.parse(
+        base + 'followers/post/follower/$idFollowing/following/$idFollower');
+    var response = await http.post(url);
+    // ignore: avoid_print
+    print('removeFollowing: ' + response.statusCode.toString());
+  }
+
+  addFollowing({required idFollower, required idFollowing}) async {
+    var url = Uri.parse(
+        base + 'followers/delete/follower/$idFollower/following/$idFollowing');
+    var response = await http.delete(url);
+    // ignore: avoid_print
+    print('addFollowing: ' + response.statusCode.toString());
+  }
+
+  //final profile
+
+  // inicio search
 
   Future<Set<String>>? getByNameSuggestions(String text) async {
     Set<String>? found = {};
@@ -395,22 +484,31 @@ class DatabaseModel extends Model {
       // ignore: avoid_print
       print(e);
     }
+    // ignore: avoid_print
+    print("found: " + found.toString());
     return found;
   }
 
-  void goToViewObject({required Map map, required BuildContext context}) {
-    switch (map['typeEntity']) {
-      case 0:
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => Profile(id: map['id'], isUser: false)));
-        break;
+  Widget goToViewMiniResult({required Map map}) {
+    switch (map['typeObject']) {
+      case 'USER':
+        UserMini userMini = UserMini.fromMap(map: map);
+        return UserMiniResult(userMini: userMini);
+      case 'ENTITY':
+        EntityMini entityMini = EntityMini.fromMap(map: map);
+        return EntityMiniResult(entityMini: entityMini);
+      case 'SEASON':
+        SeasonMini seasonMini = SeasonMini.fromMap(map: map);
+        return SeasonMiniResult(seasonMini: seasonMini);
+      case 'EPISODE':
+        EpisodeMini episodeMini = EpisodeMini.fromMap(map: map);
+        return EpisodeMiniResult(episodeMini: episodeMini);
       default:
-        // ignore: avoid_print
-        print(map['typeEntity']);
+        return Container();
     }
   }
+
+  //final search
 
   popupMenuButtonSelect({required String item, required BuildContext context}) {
     // ignore: avoid_print

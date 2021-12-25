@@ -1,12 +1,13 @@
 class EntityMini {
-  late String? id;
-  late String? name;
+  late String id;
+  late String name;
   late String? image;
   late String? description;
-  late int? evaluationQuantity;
-  late double? evaluationAverage;
-  late int? season;
-  late int? type;
+  late int evaluationQuantity;
+  late double evaluationAverage;
+  late int season;
+  late String typeObject;
+  late String typeEntity;
   late String? genre;
 
   Map<String, dynamic> toMap() {
@@ -18,7 +19,8 @@ class EntityMini {
     map["evaluationQuantity"] = evaluationQuantity;
     map["evaluationAverage"] = evaluationAverage;
     map["season"] = season;
-    map["type"] = type;
+    map["typeObject"] = typeObject;
+    map["typeEntity"] = typeEntity;
     map["genre"] = genre;
     return map;
   }
@@ -31,7 +33,8 @@ class EntityMini {
     evaluationQuantity = map["evaluationQuantity"];
     evaluationAverage = map["evaluationAverage"];
     season = map["season"];
-    type = map["type"];
+    typeObject = map['typeObject'];
+    typeEntity = map['typeEntity'];
     genre = map["genre"];
   }
 }

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/scoped_model/database_model.dart';
 import 'package:social_network_application/scoped_model/language_model.dart';
-import 'package:social_network_application/view/seach.dart';
-import 'home.dart';
-import 'profile.dart';
-import 'trending.dart';
+import 'package:social_network_application/view/abas/profile.dart';
+import 'package:social_network_application/view/search/seach.dart';
+import 'abas/home.dart';
+import 'abas/trending.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -26,10 +26,7 @@ class _MyAppState extends State<MyApp> {
         List<Widget> select = [
           const Home(),
           const Trending(),
-          Profile(
-            id: database.id,
-            isUser: true,
-          ),
+          const Profile(),
         ];
         return Scaffold(
           appBar: AppBar(
@@ -50,17 +47,19 @@ class _MyAppState extends State<MyApp> {
                 icon: const Icon(Icons.search),
               ),
               PopupMenuButton<String>(
-                  //icon: const Icon(Icons.dehaze),
+                  icon: const Icon(Icons.dehaze_rounded),
                   onSelected: (item) {
-                database.popupMenuButtonSelect(item: item, context: context);
-              }, itemBuilder: (context) {
-                return language.popupMenuButtonList.map((item) {
-                  return PopupMenuItem<String>(
-                    value: item,
-                    child: Text(item),
-                  );
-                }).toList();
-              })
+                    database.popupMenuButtonSelect(
+                        item: item, context: context);
+                  },
+                  itemBuilder: (context) {
+                    return language.popupMenuButtonList.map((item) {
+                      return PopupMenuItem<String>(
+                        value: item,
+                        child: Text(item),
+                      );
+                    }).toList();
+                  })
             ],
           ),
           body: Padding(

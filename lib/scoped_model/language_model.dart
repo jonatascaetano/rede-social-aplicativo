@@ -5,7 +5,7 @@ class LanguageModel extends Model {
   List<String> popupMenuButtonList = ['invitation', 'dark theme', 'exit'];
   List<String> typeObject = ['user', 'entity', 'season', 'episode'];
 
-  List<String> entities = [
+  List<String> typeEntities = [
     'filmes',
     'series',
     'animes',
@@ -20,7 +20,7 @@ class LanguageModel extends Model {
     'receitas',
   ];
 
-  List<IconData> entitiesIcon = [
+  List<IconData> typeEntitiesIcon = [
     Icons.local_movies,
     Icons.movie,
     Icons.bubble_chart_rounded,
@@ -35,7 +35,7 @@ class LanguageModel extends Model {
     Icons.kitchen,
   ];
 
-  List<List<String>> categories = [
+  List<List<String>> entitiesCategories = [
     [
       'todos',
       'viu',
