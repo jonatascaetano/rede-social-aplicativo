@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:social_network_application/entities/mini_dto/user_mini.dart';
-import 'package:social_network_application/entities/mini_dto/worker_mini.dart';
-import 'package:social_network_application/scoped_model/database_model.dart';
-import 'package:social_network_application/scoped_model/language_model.dart';
-import 'package:social_network_application/view/widgets/mini_profile/entities_mini_profile.dart';
+import 'package:social_network_application/scoped_model/auxiliar/language_model.dart';
+import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/view/profile/followers.dart';
 import 'package:social_network_application/view/profile/following.dart';
-import 'package:social_network_application/view/widgets/mini_profile/worker_mini_profile.dart';
+import 'package:social_network_application/view/profile/update_profile.dart';
+import 'package:social_network_application/widgets/mini_profile/entities_mini_profile.dart';
+import 'package:social_network_application/widgets/mini_profile/worker_mini_profile.dart';
 
 // ignore: must_be_immutable
 class Profile extends StatefulWidget {
@@ -20,42 +19,31 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<DatabaseModel>(
-        builder: (context, child, database) {
+    return ScopedModelDescendant<ProfileModel>(
+        builder: (context, child, profile) {
       return Scaffold(
-        body: FutureBuilder<Map<String, dynamic>>(
-            future: database.getProfile(id: database.id),
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                case ConnectionState.waiting:
-                  return const Center(child: CircularProgressIndicator());
-                default:
-                  if (!snapshot.hasData) {
-                    return const Center(
-                      child: Text("Account unavailable"),
-                    );
-                  } else {
-                    Map<String, dynamic> map = snapshot.data!;
-                    UserMini userMini = UserMini.fromMap(map: map);
-                    if (!userMini.status) {
-                      return const Center(
-                        child: Text("Account unavailable"),
-                      );
-                    } else {
-                      return ListView(
-                        children: [
-                          Container(
-                            color: Colors.transparent,
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 60, 0, 8),
+          body: Stack(
+        children: [
+          profile.profileNull
+              ? Container()
+              : ListView(
+                  children: [
+                    Container(
+                      color: Colors.transparent,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 60, 0, 8),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  userMini.image != null
+                                  profile.userMini.image != null
                                       ? CircleAvatar(
-                                          backgroundImage: NetworkImage(
-                                              userMini.image.toString()),
+                                          backgroundImage: NetworkImage(profile
+                                              .userMini.image
+                                              .toString()),
                                           radius: 60.0,
                                         )
                                       : CircleAvatar(
@@ -76,7 +64,7 @@ class _ProfileState extends State<Profile> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          userMini.name,
+                                          profile.userMini.name,
                                           style: const TextStyle(
                                             fontSize: 28,
                                             color: Colors.purple,
@@ -85,9 +73,9 @@ class _ProfileState extends State<Profile> {
                                         const SizedBox(
                                           width: 2.0,
                                         ),
-                                        userMini.checked
+                                        profile.userMini.checked
                                             ? Icon(
-                                                Icons.check_circle_sharp,
+                                                Icons.check_circle_outlined,
                                                 color: Colors.blue[900],
                                               )
                                             : Container()
@@ -97,11 +85,11 @@ class _ProfileState extends State<Profile> {
                                   const SizedBox(
                                     height: 8.0,
                                   ),
-                                  userMini.city != null
+                                  profile.userMini.city != null
                                       ? Column(
                                           children: [
                                             Text(
-                                              userMini.city!,
+                                              profile.userMini.city!,
                                               style: const TextStyle(
                                                 fontSize: 18,
                                               ),
@@ -112,6 +100,15 @@ class _ProfileState extends State<Profile> {
                                           ],
                                         )
                                       : Container(),
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const UpdateProfile()));
+                                      },
+                                      child: const Text('edit profile')),
                                   SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
                                     child: Row(
@@ -125,7 +122,8 @@ class _ProfileState extends State<Profile> {
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         Followers(
-                                                          idUser: userMini.id,
+                                                          idUser: profile
+                                                              .userMini.id,
                                                           isUser: true,
                                                         )));
                                           },
@@ -142,7 +140,9 @@ class _ProfileState extends State<Profile> {
                                                 width: 4.0,
                                               ),
                                               Text(
-                                                userMini.followers.toString(),
+                                                profile
+                                                    .userMini.quantityFollowers
+                                                    .toString(),
                                                 style: const TextStyle(
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.normal,
@@ -161,7 +161,8 @@ class _ProfileState extends State<Profile> {
                                                   MaterialPageRoute(
                                                       builder: (context) =>
                                                           Following(
-                                                            idUser: userMini.id,
+                                                            idUser: profile
+                                                                .userMini.id,
                                                             isUser: true,
                                                           )));
                                             },
@@ -179,7 +180,9 @@ class _ProfileState extends State<Profile> {
                                                   width: 4.0,
                                                 ),
                                                 Text(
-                                                  userMini.following.toString(),
+                                                  profile.userMini
+                                                      .quantityFollowing
+                                                      .toString(),
                                                   style: const TextStyle(
                                                     fontSize: 16,
                                                     fontWeight:
@@ -191,14 +194,14 @@ class _ProfileState extends State<Profile> {
                                       ],
                                     ),
                                   ),
-                                  userMini.description != null
+                                  profile.userMini.description != null
                                       ? Column(
                                           children: [
                                             Padding(
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: Text(
-                                                userMini.description!,
+                                                profile.userMini.description!,
                                                 style: TextStyle(
                                                   fontSize: 16,
                                                   color: Colors.grey[800],
@@ -211,79 +214,59 @@ class _ProfileState extends State<Profile> {
                                           ],
                                         )
                                       : Container(),
-                                  FutureBuilder<List<dynamic>>(
-                                      future: database.getWorkersUser(
-                                          idUser: userMini.id),
-                                      builder: (context, snapshot) {
-                                        switch (snapshot.connectionState) {
-                                          case ConnectionState.none:
-                                          case ConnectionState.waiting:
-                                            return Container();
-                                          default:
-                                            if (!snapshot.hasData) {
-                                              return const SizedBox(
-                                                height: 100.0,
-                                                child: Center(
-                                                    child: Text("no data")),
-                                              );
-                                            } else {
-                                              List<WorkerMini> list = [];
-                                              for (var map in snapshot.data!) {
-                                                WorkerMini workerMini =
-                                                    WorkerMini.fromMap(
-                                                        map: map as Map);
-                                                list.add(workerMini);
-                                              }
-                                              return Column(
-                                                children: [
-                                                  SizedBox(
-                                                    height: 200,
-                                                    child: ListView.builder(
-                                                        scrollDirection:
-                                                            Axis.horizontal,
-                                                        itemCount: list.length,
-                                                        itemBuilder:
-                                                            (context, index) {
-                                                          return WorkerMiniProfile(
-                                                            workerMini:
-                                                                list[index],
-                                                            isUser: true,
-                                                          );
-                                                        }),
-                                                  )
-                                                ],
-                                              );
-                                            }
-                                        }
-                                      }),
-                                  const SizedBox(
-                                    height: 16.0,
-                                  ),
-                                  SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: LanguageModel()
-                                          .typeEntities
-                                          .map((e) => EntityMiniProfile(
-                                              index: LanguageModel()
-                                                  .typeEntities
-                                                  .indexOf(e)))
-                                          .toList(),
-                                    ),
-                                  )
                                 ],
                               ),
                             ),
-                          )
-                        ],
-                      );
-                    }
-                  }
-              }
-            }),
-      );
+                            profile.workers.isNotEmpty
+                                ? SizedBox(
+                                    height: 200,
+                                    child: ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: profile.workers.length,
+                                        itemBuilder: (context, index) {
+                                          return WorkerMiniProfile(
+                                            workerMini: profile.workers[index],
+                                            isUser: true,
+                                          );
+                                        }),
+                                  )
+                                : Container(),
+                            profile.workers.isNotEmpty
+                                ? const SizedBox(
+                                    height: 16.0,
+                                  )
+                                : Container(),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: LanguageModel()
+                                    .typeEntities
+                                    .map((e) => EntityMiniProfile(
+                                        index: LanguageModel()
+                                            .typeEntities
+                                            .indexOf(e)))
+                                    .toList(),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+          profile.load
+              ? Positioned(
+                  bottom: 0.1,
+                  child: SizedBox(
+                    height: 5.0,
+                    width: MediaQuery.of(context).size.width,
+                    child: const LinearProgressIndicator(),
+                  ),
+                )
+              : Container(),
+        ],
+      ));
     });
   }
 }

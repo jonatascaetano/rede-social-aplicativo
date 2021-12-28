@@ -1,26 +1,26 @@
-enum TypeEntity {
+class TypeEntity {
   // ignore: constant_identifier_names
-  MOVIES,
+  static const MOVIES = 'MOVIES';
   // ignore: constant_identifier_names
-  SERIES,
+  static const SERIES = 'SERIES';
   // ignore: constant_identifier_names
-  ANIMES,
+  static const ANIMES = 'ANIMES';
   // ignore: constant_identifier_names
-  NOVELS,
+  static const NOVELS = 'NOVELS';
   // ignore: constant_identifier_names
-  TV_SHOWS,
+  static const TV_SHOWS = 'TV_SHOWS';
   // ignore: constant_identifier_names
-  BOOKS,
+  static const BOOKS = 'BOOKS';
   // ignore: constant_identifier_names
-  GAMES,
+  static const GAMES = 'GAMES';
   // ignore: constant_identifier_names
-  WEB_PROGRAMS,
+  static const WEB_PROGRAMS = 'WEB_PROGRAMS';
   // ignore: constant_identifier_names
-  SONGS,
+  static const SONGS = 'SONGS';
   // ignore: constant_identifier_names
-  MUSIC_ALBUMS,
+  static const MUSIC_ALBUMS = 'MUSIC_ALBUMS';
   // ignore: constant_identifier_names
-  PLACES,
+  static const PLACES = 'PLACES';
   // ignore: constant_identifier_names
-  RECIPES,
+  static const RECIPES = 'RECIPES';
 }

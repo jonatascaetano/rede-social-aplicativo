@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:social_network_application/converts_enum/convert_to_enum.dart';
 import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
+import 'package:social_network_application/scoped_model/auxiliar/language_model.dart';
 import 'package:social_network_application/view/objects/entity.dart';
 
 // ignore: must_be_immutable
@@ -42,14 +44,25 @@ class _EntityMiniResultState extends State<EntityMiniResult> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  widget.entityMini.name,
-                  style: const TextStyle(
-                    fontSize: 16,
+                SizedBox(
+                  width: 200.0,
+                  child: Text(
+                    widget.entityMini.name,
+                    overflow: TextOverflow.fade,
+                    maxLines: 1,
+                    softWrap: false,
+                    style: const TextStyle(
+                      fontSize: 16,
+                    ),
                   ),
                 ),
                 Text(
-                  widget.entityMini.typeEntity.toString(),
+                  LanguageModel().typeEntities[
+                      ConvertToEnum.convertTypeEntityToValue(
+                          typeEntity: widget.entityMini.typeEntity.toString())],
+                  overflow: TextOverflow.fade,
+                  maxLines: 1,
+                  softWrap: false,
                   style: const TextStyle(
                     fontSize: 16,
                   ),

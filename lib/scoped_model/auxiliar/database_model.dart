@@ -8,6 +8,7 @@ import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
 import 'package:social_network_application/entities/mini_dto/episode_mini.dart';
 import 'package:social_network_application/entities/mini_dto/season_mini.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
+import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/view/login.dart';
 import 'dart:convert';
 
@@ -15,13 +16,14 @@ import 'package:social_network_application/view/my_app.dart';
 import 'package:social_network_application/view/register/email.dart';
 import 'package:social_network_application/view/register/name.dart';
 import 'package:social_network_application/view/register/password.dart';
-import 'package:social_network_application/view/widgets/mini_results/entity_mini_result.dart';
-import 'package:social_network_application/view/widgets/mini_results/episode_mini_result.dart';
-import 'package:social_network_application/view/widgets/mini_results/season_mini_result.dart';
-import 'package:social_network_application/view/widgets/mini_results/user_mini_result.dart';
+import 'package:social_network_application/widgets/mini_results/entity_mini_result.dart';
+import 'package:social_network_application/widgets/mini_results/episode_mini_result.dart';
+import 'package:social_network_application/widgets/mini_results/season_mini_result.dart';
+import 'package:social_network_application/widgets/mini_results/user_mini_result.dart';
 
 class DatabaseModel extends Model {
   String id = '';
+  bool load = false;
 
   static const String base =
       "https://jonatas-social-network-api.herokuapp.com/";
@@ -31,6 +33,7 @@ class DatabaseModel extends Model {
   saveId({required id, required BuildContext context}) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString("id", id);
+    ScopedModel.of<ProfileModel>(context).getProfile();
     getId(context: context);
   }
 

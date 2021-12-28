@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:social_network_application/scoped_model/database_model.dart';
+import 'package:social_network_application/scoped_model/auxiliar/database_model.dart';
 import 'package:social_network_application/view/register/invitation.dart';
 
 class Login extends StatefulWidget {

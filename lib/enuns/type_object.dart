@@ -1,26 +1,26 @@
-enum TypeObject {
+class TypeObject {
   // ignore: constant_identifier_names
-  USER,
+  static const String USER = 'USER';
   // ignore: constant_identifier_names
-  ENTITY,
+  static const String ENTITY = 'ENTITY';
   // ignore: constant_identifier_names
-  SEASON,
+  static const String SEASON = 'SEASON';
   // ignore: constant_identifier_names
-  EPISODE,
+  static const String EPISODE = 'EPISODE';
   // ignore: constant_identifier_names
-  WORKER,
+  static const String WORKER = 'WORKER';
   // ignore: constant_identifier_names
-  POST,
+  static const String POST = 'POST';
   // ignore: constant_identifier_names
-  INVITATION,
+  static const String INVITATION = 'INVITATION';
   // ignore: constant_identifier_names
-  FOLLOWER,
+  static const String FOLLOWER = 'FOLLOWER';
   // ignore: constant_identifier_names
-  EVALUATION,
+  static const String EVALUATION = 'EVALUATION';
   // ignore: constant_identifier_names
-  ENTITY_SAVE,
+  static const String ENTITY_SAVE = 'ENTITY_SAVE';
   // ignore: constant_identifier_names
-  EDITION,
+  static const String EDITION = 'EDITION';
   // ignore: constant_identifier_names
-  COMMENT,
+  static const String COMMENT = 'COMMENT';
 }

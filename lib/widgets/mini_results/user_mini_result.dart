@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
-import 'package:social_network_application/scoped_model/language_model.dart';
+import 'package:social_network_application/scoped_model/auxiliar/language_model.dart';
 import 'package:social_network_application/view/objects/user.dart';
 
 // ignore: must_be_immutable
@@ -21,7 +21,6 @@ class _UserMiniResultState extends State<UserMiniResult> {
             context,
             MaterialPageRoute(
                 builder: (context) => User(
-                      isUser: false,
                       userMini: widget.userMini,
                     )));
       },
@@ -46,16 +45,22 @@ class _UserMiniResultState extends State<UserMiniResult> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  widget.userMini.name,
-                  style: const TextStyle(
-                    fontSize: 16,
+                SizedBox(
+                  width: 200.0,
+                  child: Text(
+                    widget.userMini.name,
+                    overflow: TextOverflow.fade,
+                    maxLines: 1,
+                    softWrap: false,
+                    style: const TextStyle(
+                      fontSize: 16,
+                    ),
                   ),
                 ),
                 Text(
                   LanguageModel().typeObject[0],
                   style: const TextStyle(
-                    fontSize: 12,
+                    fontSize: 16,
                   ),
                 ),
               ],

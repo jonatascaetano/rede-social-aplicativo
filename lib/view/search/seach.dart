@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:social_network_application/scoped_model/database_model.dart';
+import 'package:social_network_application/scoped_model/auxiliar/database_model.dart';
 import 'package:social_network_application/view/search/result_search.dart';
 
 class Search extends SearchDelegate {
@@ -31,7 +31,10 @@ class Search extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return ResultSearch(query: query);
+    return ResultSearch(
+      query: query,
+      result: true,
+    );
   }
 
   @override
@@ -58,8 +61,10 @@ class Search extends SearchDelegate {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => ResultSearch(
-                                          query:
-                                              snapshot.data!.toList()[index])));
+                                            query:
+                                                snapshot.data!.toList()[index],
+                                            result: false,
+                                          )));
                             },
                             child: ListTile(
                               title: Row(
@@ -68,7 +73,15 @@ class Search extends SearchDelegate {
                                   const SizedBox(
                                     width: 8.0,
                                   ),
-                                  Text(snapshot.data!.toList()[index])
+                                  SizedBox(
+                                    width: 200.0,
+                                    child: Text(
+                                      snapshot.data!.toList()[index],
+                                      overflow: TextOverflow.fade,
+                                      maxLines: 1,
+                                      softWrap: false,
+                                    ),
+                                  )
                                 ],
                               ),
                             ));

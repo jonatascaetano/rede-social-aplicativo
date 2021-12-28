@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/entities/dto/user_creation_dto.dart';
-import 'package:social_network_application/scoped_model/database_model.dart';
+import 'package:social_network_application/scoped_model/auxiliar/database_model.dart';
 
 class Invitation extends StatefulWidget {
   const Invitation({Key? key}) : super(key: key);
