@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/scoped_model/auxiliar/database_model.dart';
 import 'package:social_network_application/scoped_model/auxiliar/language_model.dart';
+import 'package:social_network_application/scoped_model/login_model.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/auxiliar/theme_model.dart';
+import 'package:social_network_application/scoped_model/registe_model.dart';
 import 'package:social_network_application/view/splash_screen.dart';
 
 void main() {
@@ -30,11 +32,18 @@ class _ModelState extends State<Model> {
             model: ProfileModel(),
             child: ScopedModelDescendant<ThemeModel>(
               builder: (context, child, theme) {
-                return MaterialApp(
-                    theme: theme.themeData,
-                    themeMode: theme.themeMode,
-                    debugShowCheckedModeBanner: false,
-                    home: const SplashScreen());
+                return ScopedModel<RegisterModel>(
+                  model: RegisterModel(),
+                  child: ScopedModel<LoginModel>(
+                    model: LoginModel(),
+                    child: MaterialApp(
+                      theme: theme.themeData,
+                      themeMode: theme.themeMode,
+                      debugShowCheckedModeBanner: false,
+                      home: const SplashScreen(),
+                    ),
+                  ),
+                );
               },
             ),
           ),

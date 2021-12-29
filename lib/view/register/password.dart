@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/entities/dto/user_creation_dto.dart';
-import 'package:social_network_application/scoped_model/auxiliar/database_model.dart';
+import 'package:social_network_application/scoped_model/registe_model.dart';
 
 // ignore: must_be_immutable
 class Password extends StatefulWidget {
@@ -17,44 +17,58 @@ class _PasswordState extends State<Password> {
 
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<DatabaseModel>(
-        builder: (context, child, database) {
-      return Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextField(
-                controller: controller,
-                decoration: InputDecoration(
-                  label: widget.userCreationDTO.password == null
-                      ? const Text("password")
-                      : const Text("Confirm the Password"),
-                ),
+    return ScopedModelDescendant<RegisterModel>(
+        builder: (context, child, register) {
+      return Stack(
+        children: [
+          Scaffold(
+            body: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextField(
+                    controller: controller,
+                    decoration: InputDecoration(
+                      label: widget.userCreationDTO.password == null
+                          ? const Text("password")
+                          : const Text("Confirm the Password"),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      if (widget.userCreationDTO.password == null) {
+                        widget.userCreationDTO.password = controller.text;
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Password(
+                                    userCreationDTO: widget.userCreationDTO)));
+                      } else {
+                        register.checkPassword(
+                          userCreationDTO: widget.userCreationDTO,
+                          password: controller.text,
+                          context: context,
+                        );
+                      }
+                    },
+                    child: const Text("Confirm"),
+                  ),
+                ],
               ),
-              TextButton(
-                onPressed: () {
-                  if (widget.userCreationDTO.password == null) {
-                    widget.userCreationDTO.password = controller.text;
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Password(
-                                userCreationDTO: widget.userCreationDTO)));
-                  } else {
-                    database.checkPassword(
-                      userCreationDTO: widget.userCreationDTO,
-                      password: controller.text,
-                      context: context,
-                    );
-                  }
-                },
-                child: const Text("Confirm"),
-              ),
-            ],
+            ),
           ),
-        ),
+          register.load
+              ? Positioned(
+                  bottom: 0.1,
+                  child: SizedBox(
+                    height: 5.0,
+                    width: MediaQuery.of(context).size.width,
+                    child: const LinearProgressIndicator(),
+                  ),
+                )
+              : Container(),
+        ],
       );
     });
   }

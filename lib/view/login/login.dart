@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:social_network_application/scoped_model/auxiliar/database_model.dart';
+import 'package:social_network_application/scoped_model/login_model.dart';
 import 'package:social_network_application/view/register/invitation.dart';
 
 class Login extends StatefulWidget {
@@ -16,8 +16,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<DatabaseModel>(
-        builder: (context, child, database) {
+    return ScopedModelDescendant<LoginModel>(builder: (context, child, login) {
       return Scaffold(
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -38,7 +37,7 @@ class _LoginState extends State<Login> {
               ),
               TextButton(
                 onPressed: () {
-                  database.login(
+                  login.login(
                       email: email.text,
                       password: password.text,
                       context: context);

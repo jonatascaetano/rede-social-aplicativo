@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:social_network_application/entities/dto/user_creation_dto.dart';
 
-import 'package:social_network_application/scoped_model/profile_model.dart';
-import 'package:social_network_application/view/login.dart';
-import 'dart:convert';
+import 'package:social_network_application/view/login/login.dart';
 
 import 'package:social_network_application/view/my_app.dart';
-import 'package:social_network_application/view/register/email.dart';
-import 'package:social_network_application/view/register/name.dart';
-import 'package:social_network_application/view/register/password.dart';
 
 class DatabaseModel extends Model {
   String id = '';
@@ -23,12 +16,12 @@ class DatabaseModel extends Model {
 
   //inicio login
 
-  saveId({required id, required BuildContext context}) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString("id", id);
-    ScopedModel.of<ProfileModel>(context).getProfile();
-    getId(context: context);
-  }
+  // saveId({required id, required BuildContext context}) async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   await prefs.setString("id", id);
+  //   ScopedModel.of<ProfileModel>(context).getProfile();
+  //   getId(context: context);
+  // }
 
   Future<void> getId({required BuildContext context}) async {
     final prefs = await SharedPreferences.getInstance();
@@ -48,194 +41,194 @@ class DatabaseModel extends Model {
     getId(context: context);
   }
 
-  void login(
-      {required String email,
-      required String password,
-      required BuildContext context}) async {
-    try {
-      var url =
-          Uri.parse(base + 'users/get/login/email/$email/password/$password');
-      var response = await http.get(url);
-      id = response.body;
-      switch (response.statusCode) {
-        case 200:
-          saveId(id: id, context: context);
-          // ignore: avoid_print
-          print('autorizado: id ' + id);
-          break;
-        case 401:
-          // ignore: avoid_print
-          print('não autorizado');
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Incorrect password')),
-          );
-          break;
-        case 404:
-          // ignore: avoid_print
-          print('não econtrado');
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Email not registered')),
-          );
-          break;
-        default:
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Try again later')),
-          );
-      }
-    } catch (_) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Try again later')),
-      );
-    }
-  }
+  // void login(
+  //     {required String email,
+  //     required String password,
+  //     required BuildContext context}) async {
+  //   try {
+  //     var url =
+  //         Uri.parse(base + 'users/get/login/email/$email/password/$password');
+  //     var response = await http.get(url);
+  //     id = response.body;
+  //     switch (response.statusCode) {
+  //       case 200:
+  //         saveId(id: id, context: context);
+  //         // ignore: avoid_print
+  //         print('autorizado: id ' + id);
+  //         break;
+  //       case 401:
+  //         // ignore: avoid_print
+  //         print('não autorizado');
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           const SnackBar(content: Text('Incorrect password')),
+  //         );
+  //         break;
+  //       case 404:
+  //         // ignore: avoid_print
+  //         print('não econtrado');
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           const SnackBar(content: Text('Email not registered')),
+  //         );
+  //         break;
+  //       default:
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           const SnackBar(content: Text('Try again later')),
+  //         );
+  //     }
+  //   } catch (_) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(content: Text('Try again later')),
+  //     );
+  //   }
+  // }
 
   //final login
 
   //inicio register
 
-  checkInvitation({
-    required UserCreationDTO userCreationDTO,
-    required BuildContext context,
-  }) async {
-    try {
-      var url = Uri.parse(base +
-          'invitations/get/check/invitation/${userCreationDTO.invitationValue!}');
-      var response = await http.get(url);
-      // ignore: avoid_print
-      print(response.statusCode);
-      switch (response.statusCode) {
-        case 202:
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      Email(userCreationDTO: userCreationDTO)));
-          break;
-        case 406:
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Invalid invitation')),
-          );
-          break;
-        default:
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Try again later')),
-          );
-      }
-    } catch (_) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Try again later')),
-      );
-    }
-  }
+  // checkInvitation({
+  //   required UserCreationDTO userCreationDTO,
+  //   required BuildContext context,
+  // }) async {
+  //   try {
+  //     var url = Uri.parse(base +
+  //         'invitations/get/check/invitation/${userCreationDTO.invitationValue!}');
+  //     var response = await http.get(url);
+  //     // ignore: avoid_print
+  //     print(response.statusCode);
+  //     switch (response.statusCode) {
+  //       case 202:
+  //         Navigator.push(
+  //             context,
+  //             MaterialPageRoute(
+  //                 builder: (context) =>
+  //                     Email(userCreationDTO: userCreationDTO)));
+  //         break;
+  //       case 406:
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           const SnackBar(content: Text('Invalid invitation')),
+  //         );
+  //         break;
+  //       default:
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           const SnackBar(content: Text('Try again later')),
+  //         );
+  //     }
+  //   } catch (_) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(content: Text('Try again later')),
+  //     );
+  //   }
+  // }
 
-  checkEmail({
-    required UserCreationDTO userCreationDTO,
-    required BuildContext context,
-  }) async {
-    try {
-      var url =
-          Uri.parse(base + 'users/get/check/email/${userCreationDTO.email!}');
-      var response = await http.get(url);
-      // ignore: avoid_print
-      print(response.statusCode);
-      switch (response.statusCode) {
-        case 202:
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      Name(userCreationDTO: userCreationDTO)));
-          break;
-        case 406:
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Invalid email')),
-          );
-          break;
-        default:
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Try again later')),
-          );
-      }
-    } catch (_) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Try again later')),
-      );
-    }
-  }
+  // checkEmail({
+  //   required UserCreationDTO userCreationDTO,
+  //   required BuildContext context,
+  // }) async {
+  //   try {
+  //     var url =
+  //         Uri.parse(base + 'users/get/check/email/${userCreationDTO.email!}');
+  //     var response = await http.get(url);
+  //     // ignore: avoid_print
+  //     print(response.statusCode);
+  //     switch (response.statusCode) {
+  //       case 202:
+  //         Navigator.push(
+  //             context,
+  //             MaterialPageRoute(
+  //                 builder: (context) =>
+  //                     Name(userCreationDTO: userCreationDTO)));
+  //         break;
+  //       case 406:
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           const SnackBar(content: Text('Invalid email')),
+  //         );
+  //         break;
+  //       default:
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           const SnackBar(content: Text('Try again later')),
+  //         );
+  //     }
+  //   } catch (_) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(content: Text('Try again later')),
+  //     );
+  //   }
+  // }
 
-  checkName({
-    required UserCreationDTO userCreationDTO,
-    required BuildContext context,
-  }) async {
-    try {
-      var url =
-          Uri.parse(base + 'users/get/check/name/${userCreationDTO.name!}');
-      var response = await http.get(url);
-      // ignore: avoid_print
-      print(response.statusCode);
-      switch (response.statusCode) {
-        case 202:
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      Password(userCreationDTO: userCreationDTO)));
-          break;
-        case 406:
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Invalid name')),
-          );
-          break;
-        default:
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Try again later')),
-          );
-      }
-    } catch (_) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Try again later')),
-      );
-    }
-  }
+  // checkName({
+  //   required UserCreationDTO userCreationDTO,
+  //   required BuildContext context,
+  // }) async {
+  //   try {
+  //     var url =
+  //         Uri.parse(base + 'users/get/check/name/${userCreationDTO.name!}');
+  //     var response = await http.get(url);
+  //     // ignore: avoid_print
+  //     print(response.statusCode);
+  //     switch (response.statusCode) {
+  //       case 202:
+  //         Navigator.push(
+  //             context,
+  //             MaterialPageRoute(
+  //                 builder: (context) =>
+  //                     Password(userCreationDTO: userCreationDTO)));
+  //         break;
+  //       case 406:
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           const SnackBar(content: Text('Invalid name')),
+  //         );
+  //         break;
+  //       default:
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           const SnackBar(content: Text('Try again later')),
+  //         );
+  //     }
+  //   } catch (_) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(content: Text('Try again later')),
+  //     );
+  //   }
+  // }
 
-  checkPassword({
-    required UserCreationDTO userCreationDTO,
-    required String password,
-    required BuildContext context,
-  }) async {
-    try {
-      if (userCreationDTO.password! == password) {
-        var url = Uri.parse(base + 'users/post/user');
-        //var body = json.encode(userCreationDTO);
-        var response = await http.post(
-          url,
-          headers: {"Content-type": "application/json; charset=UTF-8"},
-          body: json.encode(userCreationDTO.toMap()),
-        );
-        // ignore: avoid_print'EPISODE', avoid_print
-        print(response.statusCode);
-        switch (response.statusCode) {
-          case 201:
-            saveId(id: response.body, context: context);
-            break;
-          default:
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Try again later')),
-            );
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Passwords do not match')),
-        );
-      }
-    } catch (e) {
-      // ignore: avoid_print
-      print(e);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Try again later')),
-      );
-    }
-  }
+  // checkPassword({
+  //   required UserCreationDTO userCreationDTO,
+  //   required String password,
+  //   required BuildContext context,
+  // }) async {
+  //   try {
+  //     if (userCreationDTO.password! == password) {
+  //       var url = Uri.parse(base + 'users/post/user');
+  //       //var body = json.encode(userCreationDTO);
+  //       var response = await http.post(
+  //         url,
+  //         headers: {"Content-type": "application/json; charset=UTF-8"},
+  //         body: json.encode(userCreationDTO.toMap()),
+  //       );
+  //       // ignore: avoid_print'EPISODE', avoid_print
+  //       print(response.statusCode);
+  //       switch (response.statusCode) {
+  //         case 201:
+  //           saveId(id: response.body, context: context);
+  //           break;
+  //         default:
+  //           ScaffoldMessenger.of(context).showSnackBar(
+  //             const SnackBar(content: Text('Try again later')),
+  //           );
+  //       }
+  //     } else {
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         const SnackBar(content: Text('Passwords do not match')),
+  //       );
+  //     }
+  //   } catch (e) {
+  //     // ignore: avoid_print
+  //     print(e);
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(content: Text('Try again later')),
+  //     );
+  //   }
+  // }
 
   //final register
 
