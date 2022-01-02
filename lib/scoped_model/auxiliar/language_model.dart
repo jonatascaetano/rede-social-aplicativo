@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class LanguageModel extends Model {
+  String language = 'English';
+
   List<String> popupMenuButtonList = ['invitation', 'dark theme', 'exit'];
   List<String> typeObject = ['user', 'entity', 'season', 'episode'];
 

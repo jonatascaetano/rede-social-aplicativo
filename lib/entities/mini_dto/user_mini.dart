@@ -4,7 +4,9 @@ class UserMini {
   late String name;
   late String? image;
   late String? description;
-  late String? city;
+  late String? place;
+
+  late String? email;
 
   late bool checked;
   late bool privacy;
@@ -20,7 +22,8 @@ class UserMini {
     map["name"] = name;
     map["image"] = image;
     map["description"] = description;
-    map["city"] = city;
+    map["place"] = place;
+    map["email"] = email;
     map["checked"] = checked;
     map["privacy"] = privacy;
     map["status"] = status;
@@ -35,7 +38,8 @@ class UserMini {
     name = map["name"];
     image = map["image"];
     description = map["description"];
-    city = map["city"];
+    place = map["place"];
+    email = map["email"];
     checked = map["checked"];
     privacy = map["privacy"];
     status = map["status"];

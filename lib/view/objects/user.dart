@@ -31,233 +31,227 @@ class _UserState extends State<User> {
                   : ListView(
                       children: [
                         //inicio da area profile
-                        Container(
-                          color: Colors.transparent,
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 100, 0, 8),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                user.userMini.image != null
-                                    ? CircleAvatar(
-                                        backgroundImage: NetworkImage(
-                                            user.userMini.image.toString()),
-                                        radius: 60.0,
-                                      )
-                                    : CircleAvatar(
-                                        backgroundColor: Colors.grey[300],
-                                        child: const Icon(
-                                          Icons.person,
-                                          size: 80.0,
-                                        ),
-                                        radius: 60.0,
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            user.userMini.image != null
+                                ? Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 100, 0, 8),
+                                    child: CircleAvatar(
+                                      backgroundImage: NetworkImage(
+                                          user.userMini.image.toString()),
+                                      radius: 60.0,
+                                    ),
+                                  )
+                                : Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 100, 0, 8),
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.grey[300],
+                                      child: const Icon(
+                                        Icons.person,
+                                        size: 80.0,
                                       ),
-                                const SizedBox(
-                                  height: 16.0,
-                                ),
-                                SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        user.userMini.name,
-                                        style: const TextStyle(
-                                          fontSize: 28,
-                                          color: Colors.purple,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 2.0,
-                                      ),
-                                      user.userMini.checked
-                                          ? Icon(
-                                              Icons.check_circle_outlined,
-                                              color: Colors.blue[900],
-                                            )
-                                          : Container()
-                                    ],
+                                      radius: 60.0,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 8.0,
-                                ),
-                                user.userMini.city != null
-                                    ? Column(
-                                        children: [
-                                          Text(
-                                            user.userMini.city!,
-                                            style: const TextStyle(
-                                              fontSize: 18,
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            height: 16.0,
-                                          ),
-                                        ],
-                                      )
-                                    : Container(),
-                                user.showFollowButton
-                                    ? user.isFollowing
-                                        ? ElevatedButton(
-                                            onPressed: () {
-                                              user.removeFollowing(
-                                                idFollowing: user.userMini.id,
-                                                context: context,
-                                              );
-                                            },
-                                            child: const Text('Unfollow'))
-                                        : ElevatedButton(
-                                            onPressed: () {
-                                              user.addFollowing(
-                                                idFollowing: user.userMini.id,
-                                                context: context,
-                                              );
-                                            },
-                                            child: const Text('Follow'))
-                                    : Container(),
-                                SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      Followers(
-                                                        idUser:
-                                                            user.userMini.id,
-                                                        isUser: false,
-                                                      )));
-                                        },
-                                        child: Row(
-                                          children: [
-                                            const Text(
-                                              'Followers',
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.normal,
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              width: 4.0,
-                                            ),
-                                            Text(
-                                              user.userMini.quantityFollowers
-                                                  .toString(),
-                                              style: const TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.normal,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 16.0,
-                                      ),
-                                      TextButton(
-                                          onPressed: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        Following(
-                                                          idUser:
-                                                              user.userMini.id,
-                                                          isUser: false,
-                                                        )));
-                                          },
-                                          child: Row(
-                                            children: [
-                                              const Text(
-                                                'Following',
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                width: 4.0,
-                                              ),
-                                              Text(
-                                                user.userMini.quantityFollowing
-                                                    .toString(),
-                                                style: const TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                              ),
-                                            ],
-                                          )),
-                                    ],
-                                  ),
-                                ),
-                                user.userMini.description != null
-                                    ? Column(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(
-                                              user.userMini.description!,
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                                color: Colors.grey[800],
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            height: 16.0,
-                                          ),
-                                        ],
-                                      )
-                                    : Container(),
-                                user.workers.isNotEmpty
-                                    ? SizedBox(
-                                        height: 200,
-                                        child: ListView.builder(
-                                            scrollDirection: Axis.horizontal,
-                                            itemCount: user.workers.length,
-                                            itemBuilder: (context, index) {
-                                              return WorkerMiniProfile(
-                                                workerMini: user.workers[index],
-                                                isUser: false,
-                                              );
-                                            }),
-                                      )
-                                    : Container(),
-                                const SizedBox(
-                                  height: 16.0,
-                                ),
-                                SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: LanguageModel()
-                                        .typeEntities
-                                        .map((e) => EntityMiniProfile(
-                                            index: LanguageModel()
-                                                .typeEntities
-                                                .indexOf(e)))
-                                        .toList(),
-                                  ),
-                                )
-                              ],
+                            const SizedBox(
+                              height: 16.0,
                             ),
-                          ),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    user.userMini.name,
+                                    style: const TextStyle(
+                                      fontSize: 28,
+                                      color: Colors.purple,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 2.0,
+                                  ),
+                                  user.userMini.checked
+                                      ? Icon(
+                                          Icons.check_circle_outlined,
+                                          color: Colors.blue[900],
+                                        )
+                                      : Container()
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 8.0,
+                            ),
+                            const SizedBox(
+                              height: 8.0,
+                            ),
+                            user.userMini.place != null
+                                ? Center(
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 8.0),
+                                      child: Text(
+                                        user.userMini.place!,
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                : Container(),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Followers(
+                                                    idUser: user.userMini.id,
+                                                    isUser: false,
+                                                  )));
+                                    },
+                                    child: Row(
+                                      children: [
+                                        const Text(
+                                          'Followers',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 4.0,
+                                        ),
+                                        Text(
+                                          user.userMini.quantityFollowers
+                                              .toString(),
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 8.0,
+                                  ),
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => Following(
+                                                      idUser: user.userMini.id,
+                                                      isUser: false,
+                                                    )));
+                                      },
+                                      child: Row(
+                                        children: [
+                                          const Text(
+                                            'Following',
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 4.0,
+                                          ),
+                                          Text(
+                                            user.userMini.quantityFollowing
+                                                .toString(),
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                          ),
+                                        ],
+                                      )),
+                                ],
+                              ),
+                            ),
+                            user.userMini.description != null
+                                ? Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        8.0, 0.0, 0.0, 16.0),
+                                    child: Text(
+                                      user.userMini.description!,
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.grey[800],
+                                      ),
+                                    ),
+                                  )
+                                : Container(),
+                          ],
                         ),
-
-                        //final da area profile
-
-                        //inicio area post
-
+                        user.showFollowButton
+                            ? user.isFollowing
+                                ? Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: ElevatedButton(
+                                        onPressed: () {
+                                          user.removeFollowing(
+                                            idFollowing: user.userMini.id,
+                                            context: context,
+                                          );
+                                        },
+                                        child: const Text('Unfollow')),
+                                  )
+                                : Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: ElevatedButton(
+                                        onPressed: () {
+                                          user.addFollowing(
+                                            idFollowing: user.userMini.id,
+                                            context: context,
+                                          );
+                                        },
+                                        child: const Text('Follow')),
+                                  )
+                            : Container(),
+                        user.workers.isNotEmpty
+                            ? SizedBox(
+                                height: 200,
+                                child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: user.workers.length,
+                                    itemBuilder: (context, index) {
+                                      return WorkerMiniProfile(
+                                        workerMini: user.workers[index],
+                                        isUser: false,
+                                      );
+                                    }),
+                              )
+                            : Container(),
                         const SizedBox(
                           height: 16.0,
                         ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: LanguageModel()
+                                .typeEntities
+                                .map((e) => EntityMiniProfile(
+                                    index: LanguageModel()
+                                        .typeEntities
+                                        .indexOf(e)))
+                                .toList(),
+                          ),
+                        ),
+                        //final da area profile
+
+                        //inicio area post
                       ],
                     ),
               user.load

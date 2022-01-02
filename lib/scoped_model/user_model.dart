@@ -110,7 +110,7 @@ class UserModel extends Model {
     var response = await http.delete(url);
     // ignore: avoid_print
     print('removeFollowing: ' + response.statusCode.toString());
-    ScopedModel.of<ProfileModel>(context).getProfile();
+    ScopedModel.of<ProfileModel>(context).getProfile(context: context);
     getProfile(idUser: idFollowing);
     checkFollowing(idUser: idFollowing);
     notifyListeners();
@@ -128,7 +128,7 @@ class UserModel extends Model {
     var response = await http.post(url);
     // ignore: avoid_print
     print('addFollowing: ' + response.statusCode.toString());
-    ScopedModel.of<ProfileModel>(context).getProfile();
+    ScopedModel.of<ProfileModel>(context).getProfile(context: context);
     getProfile(idUser: idFollowing);
     checkFollowing(idUser: idFollowing);
     notifyListeners();

@@ -1,14 +1,19 @@
 class UserUpdateDTO {
   late String idUser;
-  late String name;
-  late String email;
-  late String password;
-  late String image;
-  late String description;
-  late DateTime birthDate;
-  late String city;
-  late bool privacy;
-  late bool status;
+
+  late String? name;
+  late String? description;
+  late String? image;
+  late String? place;
+
+  late String? email;
+  late String? password;
+
+  late bool? checked;
+  late bool? privacy;
+  late bool? status;
+
+  late DateTime? birthDate;
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
@@ -19,14 +24,23 @@ class UserUpdateDTO {
     map["image"] = image;
     map["description"] = description;
     map["birthDate"] = birthDate;
-    map["city"] = city;
+    map["place"] = place;
     map["privacy"] = privacy;
     map["status"] = status;
     return map;
   }
 
-  UserUpdateDTO({required this.idUser, required this.name, required this.email, required this.password, required this.image,
-    required this.description, required this.birthDate, required this.city, required this.privacy, required this.status });
+  UserUpdateDTO(
+      {required this.idUser,
+      required this.name,
+      required this.email,
+      required this.password,
+      required this.image,
+      required this.description,
+      required this.birthDate,
+      required this.place,
+      required this.privacy,
+      required this.status});
 
   UserUpdateDTO.fromMap({required Map map}) {
     idUser = map["idUser"];
@@ -36,7 +50,7 @@ class UserUpdateDTO {
     image = map["image"];
     description = map["description"];
     birthDate = map["birthDate"];
-    city = map["city"];
+    place = map["place"];
     privacy = map["privacy"];
     status = map["status"];
   }

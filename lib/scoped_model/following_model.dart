@@ -59,7 +59,7 @@ class FollowingModel extends Model {
     var response = await http.delete(url);
     // ignore: avoid_print
     print('removeFollowing: ' + response.statusCode.toString());
-    ScopedModel.of<ProfileModel>(context).getProfile();
+    ScopedModel.of<ProfileModel>(context).getProfile(context: context);
     getFollowwings(idUser: idFollower);
     notifyListeners();
   }

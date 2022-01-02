@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "829923063105",
+    "project_id": "jonatas-social-network",
+    "storage_bucket": "jonatas-social-network.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829923063105:android:e78b08a23ead4806429dc0",
+        "android_client_info": {
+          "package_name": "com.jonatas_social_network_application.social_network_application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "829923063105-e18jpht61fahvrd6i2dtn5kfkbttbqpt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-EL2_v483D58MOz6dJhd_1QkSx1j8RBA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "829923063105-e18jpht61fahvrd6i2dtn5kfkbttbqpt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -26,18 +27,25 @@ class RegisterModel extends Model {
   }
 
   Future<void> getId({required BuildContext context}) async {
-    final prefs = await SharedPreferences.getInstance();
-    try {
-      id = prefs.getString("id")!;
-      ScopedModel.of<ProfileModel>(context).getProfile();
-      load = false;
-      notifyListeners();
-      Navigator.pushAndRemoveUntil(context,
-          MaterialPageRoute(builder: (context) => const MyApp()), (_) => false);
-    } catch (e) {
-      Navigator.pushAndRemoveUntil(context,
-          MaterialPageRoute(builder: (context) => const Login()), (_) => false);
-    }
+    Timer(const Duration(seconds: 4), () async {
+      final prefs = await SharedPreferences.getInstance();
+      try {
+        id = prefs.getString("id")!;
+        ScopedModel.of<ProfileModel>(context).getProfile(context: context);
+        ScopedModel.of<ProfileModel>(context).getWorkers();
+        load = false;
+        notifyListeners();
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const MyApp()),
+            (_) => false);
+      } catch (e) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const Login()),
+            (_) => false);
+      }
+    });
   }
 
   checkInvitation({

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,30 +17,31 @@ class LoginModel extends Model {
   saveId({required id, required BuildContext context}) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString("id", id);
-    ScopedModel.of<ProfileModel>(context).getProfile();
+    ScopedModel.of<ProfileModel>(context).getProfile(context: context);
     getId(context: context);
   }
 
   Future<void> getId({required BuildContext context}) async {
-    final prefs = await SharedPreferences.getInstance();
-    try {
-      // ignore: unused_local_variable
-      String id = prefs.getString("id")!;
-      ScopedModel.of<ProfileModel>(context).getProfile();
-      load = false;
-      notifyListeners();
-      Navigator.pushAndRemoveUntil(context,
-          MaterialPageRoute(builder: (context) => const MyApp()), (_) => false);
-    } catch (e) {
-      Navigator.pushAndRemoveUntil(context,
-          MaterialPageRoute(builder: (context) => const Login()), (_) => false);
-    }
-  }
-
-  removeId({required BuildContext context}) async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.remove("id");
-    getId(context: context);
+    Timer(const Duration(seconds: 4), () async {
+      final prefs = await SharedPreferences.getInstance();
+      try {
+        // ignore: unused_local_variable
+        String id = prefs.getString("id")!;
+        ScopedModel.of<ProfileModel>(context).getProfile(context: context);
+        ScopedModel.of<ProfileModel>(context).getWorkers();
+        load = false;
+        notifyListeners();
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const MyApp()),
+            (_) => false);
+      } catch (e) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const Login()),
+            (_) => false);
+      }
+    });
   }
 
   void login(
