@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
+import 'package:social_network_application/view/update_profile/email_update.dart';
 import 'package:social_network_application/view/update_profile/image_update.dart';
+import 'package:social_network_application/view/update_profile/password_update.dart';
 import 'package:social_network_application/view/update_profile/place_update.dart';
 import 'package:social_network_application/view/update_profile/description_update.dart';
 import 'package:social_network_application/view/update_profile/name_update.dart';
@@ -181,6 +183,70 @@ class _UpdateProfileState extends State<UpdateProfile> {
                               builder: (context) => DescriptionUpdate(
                                     description: profile.userMini.description,
                                   )),
+                        );
+                      },
+                      child: const Text('Edit'),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const Text(
+                      'Email',
+                      style: TextStyle(
+                        fontSize: 24,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      profile.userMini.email,
+                      style: const TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EmailUpdate(
+                                    email: profile.userMini.email,
+                                  )),
+                        );
+                      },
+                      child: const Text('Edit'),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const Text(
+                      'Password',
+                      style: TextStyle(
+                        fontSize: 24,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    const Text(
+                      '******************',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PasswordUpdate()),
                         );
                       },
                       child: const Text('Edit'),

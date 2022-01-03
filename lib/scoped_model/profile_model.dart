@@ -257,5 +257,65 @@ class ProfileModel extends Model {
     }
   }
 
+  updateEmail(
+      {required UserUpdateDTO userUpdateDTO,
+      required BuildContext context}) async {
+    load = true;
+    notifyListeners();
+    var url = Uri.parse(base + 'users/put/email');
+    var response =
+        await http.put(url, body: json.encode(userUpdateDTO.toMap()), headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
+    // ignore: avoid_print
+    print("updateEmail: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 202:
+        getProfile(context: context);
+        load = false;
+        notifyListeners();
+        Navigator.pop(context);
+        break;
+      default:
+        load = false;
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Try again later')),
+        );
+        break;
+    }
+  }
+
+  updatePassword(
+      {required UserUpdateDTO userUpdateDTO,
+      required BuildContext context}) async {
+    load = true;
+    notifyListeners();
+    var url = Uri.parse(base + 'users/put/password');
+    var response =
+        await http.put(url, body: json.encode(userUpdateDTO.toMap()), headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
+    // ignore: avoid_print
+    print("updatePassword: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 202:
+        getProfile(context: context);
+        load = false;
+        notifyListeners();
+        Navigator.pop(context);
+        break;
+      default:
+        load = false;
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Try again later')),
+        );
+        break;
+    }
+  }
+
   getPost() {}
 }

@@ -6,7 +6,7 @@ class UserMini {
   late String? description;
   late String? place;
 
-  late String? email;
+  late String email;
 
   late bool checked;
   late bool privacy;
