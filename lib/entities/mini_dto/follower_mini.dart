@@ -6,15 +6,6 @@ class FollowerMini {
   late UserMini? user;
   late List<UserMini>? following;
 
-  Map<String, dynamic> toMap() {
-    Map<String, dynamic> map = {};
-    map["id"] = id;
-    map["release"] = release;
-    map["user"] = user;
-    map["following"] = following;
-    return map;
-  }
-
   FollowerMini.fromMap({required Map map}) {
     id = map["id"];
     release = map["release"];

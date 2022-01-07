@@ -8,17 +8,6 @@ class InvitationMini {
   late String typeObject;
   late List<UserMini>? invited = [];
 
-  Map<String, dynamic> toMap() {
-    Map<String, dynamic> map = {};
-    map["id"] = id;
-    map["release"] = release;
-    map["value"] = value;
-    map["user"] = user;
-    map["typeObject"] = typeObject;
-    map["invited"] = invited;
-    return map;
-  }
-
   InvitationMini.fromMap({required Map map}) {
     id = map["id"];
     release = map["release"];

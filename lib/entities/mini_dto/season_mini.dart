@@ -1,37 +1,27 @@
+import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
+
 class SeasonMini {
   late String id;
   late String name;
-  late String? image;
+  late List<dynamic> images = [];
   late String? description;
-  late int number;
+  late int numberSeason;
   late int evaluationQuantity;
   late double evaluationAverage;
-  late int episode;
+  late int episodeQuantity;
   late String typeObject;
-
-  Map<String, dynamic> toMap() {
-    Map<String, dynamic> map = {};
-    map["id"] = id;
-    map["name"] = name;
-    map["image"] = image;
-    map["description"] = description;
-    map["number"] = number;
-    map["evaluationQuantity"] = evaluationQuantity;
-    map["evaluationAverage"] = evaluationAverage;
-    map["episode"] = episode;
-    map["typeObject"] = typeObject;
-    return map;
-  }
+  late EntityMini entity;
 
   SeasonMini.fromMap({required Map map}) {
     id = map["id"];
     name = map["name"];
-    image = map["image"];
+    images = map["images"];
     description = map["description"];
-    number = map["number"];
+    numberSeason = map["numberSeason"];
     evaluationQuantity = map["evaluationQuantity"];
     evaluationAverage = map["evaluationAverage"];
-    episode = map["episode"];
+    episodeQuantity = map["episodeQuantity"];
     typeObject = map['typeObject'];
+    entity = EntityMini.fromMap(map: map["entity"]);
   }
 }

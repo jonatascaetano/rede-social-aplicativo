@@ -241,10 +241,10 @@ class _UserState extends State<User> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: LanguageModel()
-                                .typeEntities
+                                .typeEntitiesMini
                                 .map((e) => EntityMiniProfile(
                                     index: LanguageModel()
-                                        .typeEntities
+                                        .typeEntitiesMini
                                         .indexOf(e)))
                                 .toList(),
                           ),

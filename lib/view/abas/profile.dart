@@ -225,10 +225,11 @@ class _ProfileState extends State<Profile> {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: LanguageModel()
-                              .typeEntities
+                              .typeEntitiesMini
                               .map((e) => EntityMiniProfile(
-                                  index:
-                                      LanguageModel().typeEntities.indexOf(e)))
+                                  index: LanguageModel()
+                                      .typeEntitiesMini
+                                      .indexOf(e)))
                               .toList(),
                         ),
                       )

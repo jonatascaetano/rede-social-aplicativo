@@ -26,10 +26,10 @@ class _SeasonMiniResultState extends State<SeasonMiniResult> {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-            widget.seasonMini.image != null
+            widget.seasonMini.images.isNotEmpty
                 ? CircleAvatar(
                     backgroundImage:
-                        NetworkImage(widget.seasonMini.image.toString()),
+                        NetworkImage(widget.seasonMini.images[0].toString()),
                     radius: 30.0,
                   )
                 : CircleAvatar(

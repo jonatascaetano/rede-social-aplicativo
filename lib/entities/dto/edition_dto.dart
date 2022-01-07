@@ -21,17 +21,14 @@ class EditionDTO {
     return map;
   }
 
-  EditionDTO({required this.idUser, required this.idEntity, required this.idSeason, required this.idEpisode,
-    required this.release, required this.previous, required this.current, required this.attribute});
-
-  EditionDTO.fromMap({required Map map}) {
-    idUser = map["idUser"];
-    idEntity = map["idEntity"];
-    idSeason = map["idSeason"];
-    idEpisode = map["idEpisode"];
-    release = map["release"];
-    previous = map["previous"];
-    current = map["current"];
-    attribute = map["attribute"];
-  }
+  EditionDTO({
+    required this.idUser,
+    required this.idEntity,
+    required this.idSeason,
+    required this.idEpisode,
+    required this.release,
+    required this.previous,
+    required this.current,
+    required this.attribute,
+  });
 }

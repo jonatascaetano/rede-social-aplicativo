@@ -10,18 +10,6 @@ class WorkerMini {
   late UserMini user;
   late EntityMini entity;
 
-  Map<String, dynamic> toMap() {
-    Map<String, dynamic> map = {};
-    map["id"] = id;
-    map["release"] = release;
-    map["role"] = role;
-    map["typeWorker"] = typeWorker;
-    map["typeObject"] = typeObject;
-    map["user"] = user.toMap();
-    map["entity"] = entity.toMap();
-    return map;
-  }
-
   WorkerMini.fromMap({required Map map}) {
     id = map["id"];
     release = map["release"];

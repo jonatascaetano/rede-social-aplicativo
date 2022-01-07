@@ -27,10 +27,10 @@ class _EntityMiniResultState extends State<EntityMiniResult> {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-            widget.entityMini.image != null
+            widget.entityMini.images.isNotEmpty
                 ? CircleAvatar(
                     backgroundImage:
-                        NetworkImage(widget.entityMini.image.toString()),
+                        NetworkImage(widget.entityMini.images[0].toString()),
                     radius: 30.0,
                   )
                 : CircleAvatar(

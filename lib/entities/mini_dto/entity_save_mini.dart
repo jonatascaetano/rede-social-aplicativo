@@ -18,23 +18,6 @@ class EntitySaveMini {
   late EvaluationMini? evaluation;
   late List<DateTime>? historic;
 
-  Map<String, dynamic> toMap() {
-    Map<String, dynamic> map = {};
-    map["id"] = id;
-    map["type"] = type;
-    map["categoty"] = categoty;
-    map["goal"] = goal;
-    map["rated"] = rated;
-    map["review"] = review;
-    map["user"] = user;
-    map["entity"] = entity;
-    map["season"] = season;
-    map["episode"] = episode;
-    map["evaluation"] = evaluation;
-    map["historic"] = historic;
-    return map;
-  }
-
   EntitySaveMini.fromMap({required Map map}) {
     id = map["id"];
     type = map["type"];

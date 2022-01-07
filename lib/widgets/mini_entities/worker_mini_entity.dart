@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/entities/mini_dto/worker_mini.dart';
 import 'package:social_network_application/scoped_model/worker_model.dart';
-import 'package:social_network_application/view/objects/entity.dart';
+import 'package:social_network_application/view/objects/user.dart';
 
 // ignore: must_be_immutable
-class WorkerMiniProfile extends StatefulWidget {
+class WorkerMiniEntity extends StatefulWidget {
   WorkerMini workerMini;
-  bool isUser;
-  WorkerMiniProfile({required this.workerMini, required this.isUser, Key? key})
+  String idUser;
+  WorkerMiniEntity({required this.workerMini, required this.idUser, Key? key})
       : super(key: key);
 
   @override
-  _WorkerMiniProfileState createState() => _WorkerMiniProfileState();
+  _WorkerMiniEntityState createState() => _WorkerMiniEntityState();
 }
 
-class _WorkerMiniProfileState extends State<WorkerMiniProfile> {
+class _WorkerMiniEntityState extends State<WorkerMiniEntity> {
   @override
   Widget build(BuildContext context) {
     return ScopedModel<WorkerModel>(
@@ -36,11 +36,10 @@ class _WorkerMiniProfileState extends State<WorkerMiniProfile> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      widget.workerMini.entity.images.isNotEmpty
+                      widget.workerMini.user.image != null
                           ? CircleAvatar(
-                              backgroundImage: NetworkImage(widget
-                                  .workerMini.entity.images[0]
-                                  .toString()),
+                              backgroundImage: NetworkImage(
+                                  widget.workerMini.user.image.toString()),
                               radius: 30.0,
                             )
                           : CircleAvatar(
@@ -65,7 +64,7 @@ class _WorkerMiniProfileState extends State<WorkerMiniProfile> {
                         height: 4.0,
                       ),
                       Text(
-                        widget.workerMini.entity.name,
+                        widget.workerMini.user.name,
                         overflow: TextOverflow.fade,
                         maxLines: 1,
                         softWrap: false,
@@ -77,22 +76,24 @@ class _WorkerMiniProfileState extends State<WorkerMiniProfile> {
                       const SizedBox(
                         height: 4.0,
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Entity(
-                                      entityMini: widget.workerMini.entity)));
-                        },
-                        child: const Text("view"),
-                      ),
+                      widget.idUser != widget.workerMini.user.id
+                          ? ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => User(
+                                            userMini: widget.workerMini.user)));
+                              },
+                              child: const Text("view"),
+                            )
+                          : Container(),
                     ],
                   ),
                 ),
               ),
             ),
-            widget.isUser
+            widget.idUser == widget.workerMini.user.id
                 ? Positioned(
                     top: 2.0,
                     right: 2.0,

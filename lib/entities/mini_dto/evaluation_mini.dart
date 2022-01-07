@@ -13,19 +13,6 @@ class EvaluationMini {
   late SeasonMini? season;
   late EpisodeMini? episode;
 
-  Map<String, dynamic> toMap() {
-    Map<String, dynamic> map = {};
-    map["id"] = id;
-    map["type"] = type;
-    map["value"] = value;
-    map["release"] = release;
-    map["user"] = user;
-    map["entity"] = entity;
-    map["season"] = season;
-    map["episode"] = episode;
-    return map;
-  }
-
   EvaluationMini.fromMap({required Map map}) {
     id = map["id"];
     type = map["type"];

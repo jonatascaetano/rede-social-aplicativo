@@ -38,20 +38,6 @@ class EntitySaveDTO {
     required this.goal,
     required this.rated,
     required this.review,
-    required this.type
+    required this.type,
   });
-
-  EntitySaveDTO.fromMap({required Map map}) {
-    idEntitySave = map["idEntitySave"];
-    idUser = map["idUser"];
-    idEntity = map["idEntity"];
-    idSeason = map["idSeason"];
-    idEpisode = map["idEpisode"];
-    category = map["category"];
-    release = map["release"];
-    goal = map["goal"];
-    rated = map["rated"];
-    review = map["review"];
-    type = map["type"];
-  }
 }

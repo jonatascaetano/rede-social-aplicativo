@@ -30,28 +30,16 @@ class UserUpdateDTO {
     return map;
   }
 
-  UserUpdateDTO(
-      {required this.idUser,
-      required this.name,
-      required this.email,
-      required this.password,
-      required this.image,
-      required this.description,
-      required this.birthDate,
-      required this.place,
-      required this.privacy,
-      required this.status});
-
-  UserUpdateDTO.fromMap({required Map map}) {
-    idUser = map["idUser"];
-    name = map["name"];
-    email = map["email"];
-    password = map["password"];
-    image = map["image"];
-    description = map["description"];
-    birthDate = map["birthDate"];
-    place = map["place"];
-    privacy = map["privacy"];
-    status = map["status"];
-  }
+  UserUpdateDTO({
+    required this.idUser,
+    required this.name,
+    required this.email,
+    required this.password,
+    required this.image,
+    required this.description,
+    required this.birthDate,
+    required this.place,
+    required this.privacy,
+    required this.status,
+  });
 }

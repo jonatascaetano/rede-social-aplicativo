@@ -16,22 +16,6 @@ class PostMini {
   late int? comments;
   late int? likes;
 
-  Map<String, dynamic> toMap() {
-    Map<String, dynamic> map = {};
-    map["id"] = id;
-    map["type"] = type;
-    map["release"] = release;
-    map["body"] = body;
-    map["category"] = category;
-    map["user"] = user;
-    map["entity"] = entity;
-    map["season"] = season;
-    map["episode"] = episode;
-    map["comments"] = comments;
-    map["likes"] = likes;
-    return map;
-  }
-
   PostMini.fromMap({required Map map}) {
     id = map["id"];
     type = map["type"];

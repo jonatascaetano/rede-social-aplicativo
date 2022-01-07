@@ -4,22 +4,36 @@ import 'package:scoped_model/scoped_model.dart';
 class LanguageModel extends Model {
   String language = 'English';
 
-  List<String> popupMenuButtonList = ['invitation', 'dark theme', 'exit'];
   List<String> typeObject = ['user', 'entity', 'season', 'episode'];
 
   List<String> typeEntities = [
-    'filmes',
-    'series',
-    'animes',
-    'novelas',
-    'programas de tv',
-    'livros',
-    'jogos',
-    'programas da internet',
-    'musicas',
-    'albuns de musica',
-    'locais',
-    'receitas',
+    'Movie',
+    'Series',
+    'Anime',
+    'novel',
+    'TV show',
+    'Book',
+    'Game',
+    'Web program',
+    'Song',
+    'Music Album',
+    'Place',
+    'Recipe',
+  ];
+
+  List<String> typeEntitiesMini = [
+    'Movies',
+    'Series',
+    'Animes',
+    'Novels',
+    'TV Shows',
+    'Books',
+    'Games',
+    'Web Programs',
+    'Songs',
+    'Music Albums',
+    'Places',
+    'Recipes',
   ];
 
   List<IconData> typeEntitiesIcon = [

@@ -32,7 +32,7 @@ class _EntityMiniProfileState extends State<EntityMiniProfile> {
             ),
             const SizedBox(height: 8.0),
             Text(
-              LanguageModel().typeEntities[widget.index],
+              LanguageModel().typeEntitiesMini[widget.index],
               style: const TextStyle(
                 fontSize: 14,
               ),

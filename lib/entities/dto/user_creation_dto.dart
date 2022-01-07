@@ -13,16 +13,10 @@ class UserCreationDTO {
     return map;
   }
 
-  UserCreationDTO(
-      {required this.name,
-      required this.email,
-      required this.invitationValue,
-      required this.password});
-
-  UserCreationDTO.fromMap({required Map map}) {
-    name = map["name"];
-    email = map["email"];
-    invitationValue = map["invitationValue"];
-    password = map["password"];
-  }
+  UserCreationDTO({
+    required this.name,
+    required this.email,
+    required this.invitationValue,
+    required this.password,
+  });
 }

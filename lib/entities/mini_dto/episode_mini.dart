@@ -8,19 +8,6 @@ class EpisodeMini {
   late double evaluationAverage;
   late String typeObject;
 
-  Map<String, dynamic> toMap() {
-    Map<String, dynamic> map = {};
-    map["id"] = id;
-    map["name"] = name;
-    map["image"] = image;
-    map["description"] = description;
-    map["number"] = number;
-    map["evaluationQuantity"] = evaluationQuantity;
-    map["evaluationAverage"] = evaluationAverage;
-    map["typeObject"] = typeObject;
-    return map;
-  }
-
   EpisodeMini.fromMap({required Map map}) {
     id = map["id"];
     name = map["name"];
