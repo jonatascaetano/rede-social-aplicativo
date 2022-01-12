@@ -8,7 +8,6 @@ class EntityMini {
   late String typeObject;
   late String typeEntity;
   late List<dynamic> images = [];
-  late List<dynamic> information = [];
 
   EntityMini.fromMap({required Map map}) {
     id = map["id"];
@@ -20,6 +19,5 @@ class EntityMini {
     typeObject = map['typeObject'];
     typeEntity = map['typeEntity'];
     images = map["images"];
-    information = map["information"];
   }
 }

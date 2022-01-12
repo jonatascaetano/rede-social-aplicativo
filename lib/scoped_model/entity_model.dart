@@ -25,13 +25,6 @@ class EntityModel extends Model {
   int maxLine = 5;
   List<DropdownMenuItem<int>> dropdownList = [];
 
-  EntityModel({required String entityId}) {
-    getId();
-    getById(entityId: entityId);
-    getWorkers(entityId: entityId);
-    getSeason(entityId: entityId);
-  }
-
   Future<String> getId() async {
     final prefs = await SharedPreferences.getInstance();
     idUser = prefs.getString("id")!;

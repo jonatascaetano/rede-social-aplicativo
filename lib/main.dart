@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/scoped_model/auxiliar/language_model.dart';
+import 'package:social_network_application/scoped_model/entity_model.dart';
 import 'package:social_network_application/scoped_model/login_model.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/auxiliar/theme_model.dart';
@@ -33,7 +34,9 @@ class _ModelState extends State<Model> {
             child: ScopedModel<RegisterModel>(
               model: RegisterModel(),
               child: ScopedModel<LoginModel>(
-                  model: LoginModel(),
+                model: LoginModel(),
+                child: ScopedModel<EntityModel>(
+                  model: EntityModel(),
                   child: ScopedModelDescendant<ThemeModel>(
                       builder: (context, child, theme) {
                     return MaterialApp(
@@ -42,7 +45,9 @@ class _ModelState extends State<Model> {
                       debugShowCheckedModeBanner: false,
                       home: const SplashScreen(),
                     );
-                  })),
+                  }),
+                ),
+              ),
             )),
       ),
     );
