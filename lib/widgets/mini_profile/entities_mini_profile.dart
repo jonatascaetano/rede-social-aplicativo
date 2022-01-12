@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:social_network_application/scoped_model/auxiliar/language_model.dart';
+import 'package:social_network_application/scoped_model/support/language_model.dart';
 
 // ignore: must_be_immutable
 class EntityMiniProfile extends StatefulWidget {

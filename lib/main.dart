@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:social_network_application/scoped_model/auxiliar/language_model.dart';
 import 'package:social_network_application/scoped_model/entity_model.dart';
 import 'package:social_network_application/scoped_model/login_model.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
-import 'package:social_network_application/scoped_model/auxiliar/theme_model.dart';
 import 'package:social_network_application/scoped_model/registe_model.dart';
 import 'package:social_network_application/view/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+import 'scoped_model/support/language_model.dart';
+import 'scoped_model/support/theme_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

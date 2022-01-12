@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:social_network_application/scoped_model/auxiliar/language_model.dart';
-import 'package:social_network_application/scoped_model/auxiliar/menu_model.dart';
+import 'package:social_network_application/scoped_model/menu_model.dart';
+import 'package:social_network_application/scoped_model/support/language_model.dart';
 
 class Menu extends StatefulWidget {
   const Menu({Key? key}) : super(key: key);

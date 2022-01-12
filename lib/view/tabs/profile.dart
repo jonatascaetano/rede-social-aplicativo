@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:social_network_application/scoped_model/auxiliar/language_model.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
+import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/view/profile/followers.dart';
 import 'package:social_network_application/view/profile/following.dart';
 import 'package:social_network_application/view/profile/update_profile.dart';

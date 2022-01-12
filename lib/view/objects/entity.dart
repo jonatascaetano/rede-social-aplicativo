@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/converts_enum/convert_to_enum.dart';
 import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
-import 'package:social_network_application/scoped_model/auxiliar/language_model.dart';
 import 'package:social_network_application/scoped_model/entity_model.dart';
+import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/view/entity/new_season_entity.dart';
 import 'package:social_network_application/view/entity/new_worker_entity.dart';
 import 'package:social_network_application/view/entity/update_entity.dart';
@@ -23,6 +23,7 @@ class Entity extends StatefulWidget {
 class _EntityState extends State<Entity> {
   @override
   void initState() {
+    ScopedModel.of<EntityModel>(context).entityMiniIsNull = true;
     ScopedModel.of<EntityModel>(context).getId();
     ScopedModel.of<EntityModel>(context)
         .getById(entityId: widget.entityMini.id);

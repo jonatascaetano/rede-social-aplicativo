@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/scoped_model/followers_model.dart';
-import 'package:social_network_application/scoped_model/auxiliar/theme_model.dart';
+import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/widgets/mini_profile/follower_mini_profile.dart';
 
 // ignore: must_be_immutable

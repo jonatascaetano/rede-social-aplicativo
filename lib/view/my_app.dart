@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:social_network_application/scoped_model/auxiliar/language_model.dart';
-import 'package:social_network_application/view/abas/profile.dart';
+import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/view/menu.dart';
 import 'package:social_network_application/view/search/seach.dart';
-import 'abas/home.dart';
-import 'abas/trending.dart';
+
+import 'tabs/home.dart';
+import 'tabs/profile.dart';
+import 'tabs/trending.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);

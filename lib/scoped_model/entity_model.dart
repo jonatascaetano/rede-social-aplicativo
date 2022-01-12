@@ -9,7 +9,7 @@ import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
 import 'package:social_network_application/entities/mini_dto/entity_save_mini.dart';
 import 'package:social_network_application/entities/mini_dto/season_mini.dart';
 import 'package:social_network_application/entities/mini_dto/worker_mini.dart';
-import 'package:social_network_application/scoped_model/auxiliar/language_model.dart';
+import 'package:social_network_application/scoped_model/support/language_model.dart';
 
 class EntityModel extends Model {
   static const String base =
