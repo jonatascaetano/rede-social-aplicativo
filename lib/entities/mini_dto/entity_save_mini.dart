@@ -1,6 +1,5 @@
 import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
 import 'package:social_network_application/entities/mini_dto/episode_mini.dart';
-import 'package:social_network_application/entities/mini_dto/evaluation_mini.dart';
 import 'package:social_network_application/entities/mini_dto/season_mini.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 
@@ -15,7 +14,7 @@ class EntitySaveMini {
   late EntityMini? entity;
   late SeasonMini? season;
   late EpisodeMini? episode;
-  late EvaluationMini? evaluation;
+  late int? evaluation;
   late List<DateTime>? historic;
 
   EntitySaveMini.fromMap({required Map map}) {

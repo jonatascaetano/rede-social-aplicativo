@@ -35,7 +35,7 @@ class _EntityMiniResultState extends State<EntityMiniResult> {
                   )
                 : CircleAvatar(
                     backgroundColor: Colors.grey[200],
-                    child: const Icon(Icons.person),
+                    child: const Icon(Icons.image),
                     radius: 30.0,
                   ),
             const SizedBox(

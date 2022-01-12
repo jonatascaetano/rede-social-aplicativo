@@ -46,6 +46,8 @@ class _DescriptionUpdateState extends State<DescriptionUpdate> {
                 children: [
                   TextField(
                     controller: controller,
+                    minLines: 1,
+                    maxLines: 10,
                     decoration: const InputDecoration(
                       label: Text("description"),
                     ),

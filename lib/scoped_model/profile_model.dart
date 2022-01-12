@@ -51,6 +51,7 @@ class ProfileModel extends Model {
         print(item);
         userMini = UserMini.fromMap(map: item as Map);
         profileNull = false;
+        notifyListeners();
         load = false;
         notifyListeners();
         break;

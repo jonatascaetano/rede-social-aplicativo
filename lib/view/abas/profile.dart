@@ -137,7 +137,7 @@ class _ProfileState extends State<Profile> {
                                   ),
                                 ),
                                 const SizedBox(
-                                  width: 8.0,
+                                  width: 4.0,
                                 ),
                                 TextButton(
                                     onPressed: () {
@@ -174,21 +174,20 @@ class _ProfileState extends State<Profile> {
                               ],
                             ),
                           ),
-                          profile.userMini.description != null
-                              ? Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                      8.0, 0.0, 0.0, 16.0),
-                                  child: Text(
-                                    profile.userMini.description!,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.grey[800],
-                                    ),
-                                  ),
-                                )
-                              : Container(),
                         ],
                       ),
+                      profile.userMini.description != null
+                          ? Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                profile.userMini.description!,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.grey[800],
+                                ),
+                              ),
+                            )
+                          : Container(),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ElevatedButton(

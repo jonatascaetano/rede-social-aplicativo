@@ -34,7 +34,7 @@ class _WorkerMiniProfileState extends State<WorkerMiniProfile> {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       widget.workerMini.entity.images.isNotEmpty
                           ? CircleAvatar(
@@ -46,7 +46,7 @@ class _WorkerMiniProfileState extends State<WorkerMiniProfile> {
                           : CircleAvatar(
                               backgroundColor: Colors.grey[300],
                               child: const Icon(
-                                Icons.person,
+                                Icons.image,
                                 size: 30.0,
                               ),
                               radius: 30.0,

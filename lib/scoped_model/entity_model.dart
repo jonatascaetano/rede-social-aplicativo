@@ -1,11 +1,15 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:social_network_application/converts_enum/convert_to_enum.dart';
 import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
+import 'package:social_network_application/entities/mini_dto/entity_save_mini.dart';
 import 'package:social_network_application/entities/mini_dto/season_mini.dart';
 import 'package:social_network_application/entities/mini_dto/worker_mini.dart';
+import 'package:social_network_application/scoped_model/auxiliar/language_model.dart';
 
 class EntityModel extends Model {
   static const String base =
@@ -17,6 +21,9 @@ class EntityModel extends Model {
   List<WorkerMini> workers = [];
   List<SeasonMini> seasons = [];
   late String idUser;
+  EntitySaveMini? entitySaveMini;
+  int maxLine = 5;
+  List<DropdownMenuItem<int>> dropdownList = [];
 
   EntityModel({required String entityId}) {
     getId();
@@ -48,6 +55,7 @@ class EntityModel extends Model {
         // ignore: avoid_print
         print(item);
         entityMini = EntityMini.fromMap(map: item);
+        loadDropdownList();
         load = false;
         entityMiniIsNull = false;
         notifyListeners();
@@ -107,4 +115,42 @@ class EntityModel extends Model {
 
   newWorker() {}
   deleteWorker() {}
+
+  updateMaxLine() {
+    if (maxLine == 5) {
+      maxLine = 500;
+      notifyListeners();
+    } else {
+      maxLine = 5;
+      notifyListeners();
+    }
+  }
+
+  loadDropdownList() {
+    dropdownList.add(DropdownMenuItem(
+      child: Text(LanguageModel().entitiesCategories[
+          ConvertToEnum.convertTypeEntityToValue(
+              typeEntity: entityMini.typeEntity)][1]),
+      value: 1,
+    ));
+    dropdownList.add(DropdownMenuItem(
+      child: Text(LanguageModel().entitiesCategories[
+          ConvertToEnum.convertTypeEntityToValue(
+              typeEntity: entityMini.typeEntity)][2]),
+      value: 2,
+    ));
+    dropdownList.add(DropdownMenuItem(
+      child: Text(LanguageModel().entitiesCategories[
+          ConvertToEnum.convertTypeEntityToValue(
+              typeEntity: entityMini.typeEntity)][3]),
+      value: 3,
+    ));
+    dropdownList.add(DropdownMenuItem(
+      child: Text(LanguageModel().entitiesCategories[
+          ConvertToEnum.convertTypeEntityToValue(
+              typeEntity: entityMini.typeEntity)][4]),
+      value: 4,
+    ));
+    notifyListeners();
+  }
 }

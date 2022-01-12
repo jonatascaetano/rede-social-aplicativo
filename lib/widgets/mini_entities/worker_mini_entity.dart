@@ -22,8 +22,17 @@ class _WorkerMiniEntityState extends State<WorkerMiniEntity> {
         model: WorkerModel(),
         child: ScopedModelDescendant<WorkerModel>(
             builder: (context, child, worker) {
-          return Stack(children: [
-            Padding(
+          return GestureDetector(
+            onTap: () {
+              if (widget.idUser != widget.workerMini.user.id) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            User(userMini: widget.workerMini.user)));
+              }
+            },
+            child: Padding(
               padding: const EdgeInsets.all(4.0),
               child: Container(
                 width: 150.0,
@@ -32,9 +41,9 @@ class _WorkerMiniEntityState extends State<WorkerMiniEntity> {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
+                  padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       widget.workerMini.user.image != null
                           ? CircleAvatar(
@@ -73,40 +82,12 @@ class _WorkerMiniEntityState extends State<WorkerMiniEntity> {
                           fontSize: 13.0,
                         ),
                       ),
-                      const SizedBox(
-                        height: 4.0,
-                      ),
-                      widget.idUser != widget.workerMini.user.id
-                          ? ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => User(
-                                            userMini: widget.workerMini.user)));
-                              },
-                              child: const Text("view"),
-                            )
-                          : Container(),
                     ],
                   ),
                 ),
               ),
             ),
-            widget.idUser == widget.workerMini.user.id
-                ? Positioned(
-                    top: 2.0,
-                    right: 2.0,
-                    child: IconButton(
-                      onPressed: () {
-                        worker.deleteWorker(
-                            workerMini: widget.workerMini, context: context);
-                      },
-                      icon: const Icon(Icons.clear_rounded),
-                    ),
-                  )
-                : Container()
-          ]);
+          );
         }));
   }
 }

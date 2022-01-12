@@ -29,24 +29,21 @@ class _ModelState extends State<Model> {
       child: ScopedModel<LanguageModel>(
         model: LanguageModel(),
         child: ScopedModel<ProfileModel>(
-          model: ProfileModel(),
-          child: ScopedModelDescendant<ThemeModel>(
-            builder: (context, child, theme) {
-              return ScopedModel<RegisterModel>(
-                model: RegisterModel(),
-                child: ScopedModel<LoginModel>(
+            model: ProfileModel(),
+            child: ScopedModel<RegisterModel>(
+              model: RegisterModel(),
+              child: ScopedModel<LoginModel>(
                   model: LoginModel(),
-                  child: MaterialApp(
-                    theme: theme.themeData,
-                    themeMode: theme.themeMode,
-                    debugShowCheckedModeBanner: false,
-                    home: const SplashScreen(),
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
+                  child: ScopedModelDescendant<ThemeModel>(
+                      builder: (context, child, theme) {
+                    return MaterialApp(
+                      theme: theme.themeData,
+                      themeMode: theme.themeMode,
+                      debugShowCheckedModeBanner: false,
+                      home: const SplashScreen(),
+                    );
+                  })),
+            )),
       ),
     );
   }
