@@ -179,21 +179,20 @@ class _UserState extends State<User> {
                                 ],
                               ),
                             ),
-                            user.userMini.description != null
-                                ? Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        8.0, 0.0, 0.0, 16.0),
-                                    child: Text(
-                                      user.userMini.description!,
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.grey[800],
-                                      ),
-                                    ),
-                                  )
-                                : Container(),
                           ],
                         ),
+                        user.userMini.description != null
+                            ? Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  user.userMini.description!,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.grey[800],
+                                  ),
+                                ),
+                              )
+                            : Container(),
                         user.showFollowButton
                             ? user.isFollowing
                                 ? Padding(

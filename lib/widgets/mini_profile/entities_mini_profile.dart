@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
+import 'package:social_network_application/view/datasheet.dart';
 
 // ignore: must_be_immutable
 class EntityMiniProfile extends StatefulWidget {
@@ -18,7 +19,14 @@ class _EntityMiniProfileState extends State<EntityMiniProfile> {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       width: 80.0,
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Datasheet(
+                        index: widget.index,
+                      )));
+        },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
