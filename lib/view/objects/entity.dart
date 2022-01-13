@@ -14,7 +14,9 @@ import 'package:social_network_application/widgets/mini_entities/worker_mini_ent
 // ignore: must_be_immutable
 class Entity extends StatefulWidget {
   EntityMini entityMini;
-  Entity({required this.entityMini, Key? key}) : super(key: key);
+  bool datasheetIsOpen;
+  Entity({required this.entityMini, required this.datasheetIsOpen, Key? key})
+      : super(key: key);
 
   @override
   _EntityState createState() => _EntityState();

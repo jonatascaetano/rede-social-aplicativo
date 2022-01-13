@@ -13,7 +13,14 @@ import 'package:social_network_application/view/tabs%20datasheet/category_8.dart
 // ignore: must_be_immutable
 class Datasheet extends StatefulWidget {
   int index;
-  Datasheet({required this.index, Key? key}) : super(key: key);
+  bool isUser;
+  String idUser;
+  Datasheet(
+      {required this.index,
+      required this.isUser,
+      required this.idUser,
+      Key? key})
+      : super(key: key);
 
   @override
   _DatasheetState createState() => _DatasheetState();

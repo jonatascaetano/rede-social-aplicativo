@@ -225,10 +225,15 @@ class _ProfileState extends State<Profile> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: LanguageModel()
                               .typeEntitiesMini
-                              .map((e) => EntityMiniProfile(
+                              .map(
+                                (e) => EntityMiniProfile(
                                   index: LanguageModel()
                                       .typeEntitiesMini
-                                      .indexOf(e)))
+                                      .indexOf(e),
+                                  isUser: true,
+                                  idUser: '',
+                                ),
+                              )
                               .toList(),
                         ),
                       )

@@ -241,10 +241,15 @@ class _UserState extends State<User> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: LanguageModel()
                                 .typeEntitiesMini
-                                .map((e) => EntityMiniProfile(
+                                .map(
+                                  (e) => EntityMiniProfile(
                                     index: LanguageModel()
                                         .typeEntitiesMini
-                                        .indexOf(e)))
+                                        .indexOf(e),
+                                    isUser: false,
+                                    idUser: widget.userMini.id,
+                                  ),
+                                )
                                 .toList(),
                           ),
                         ),

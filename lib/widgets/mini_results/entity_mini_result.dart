@@ -21,7 +21,10 @@ class _EntityMiniResultState extends State<EntityMiniResult> {
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => Entity(entityMini: widget.entityMini)));
+                builder: (context) => Entity(
+                      entityMini: widget.entityMini,
+                      datasheetIsOpen: false,
+                    )));
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),

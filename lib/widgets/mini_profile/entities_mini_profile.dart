@@ -5,7 +5,14 @@ import 'package:social_network_application/view/datasheet.dart';
 // ignore: must_be_immutable
 class EntityMiniProfile extends StatefulWidget {
   int index;
-  EntityMiniProfile({required this.index, Key? key}) : super(key: key);
+  bool isUser;
+  String idUser;
+  EntityMiniProfile(
+      {required this.index,
+      required this.isUser,
+      required this.idUser,
+      Key? key})
+      : super(key: key);
 
   @override
   _EntityMiniProfileState createState() => _EntityMiniProfileState();
@@ -25,6 +32,8 @@ class _EntityMiniProfileState extends State<EntityMiniProfile> {
               MaterialPageRoute(
                   builder: (context) => Datasheet(
                         index: widget.index,
+                        isUser: widget.isUser,
+                        idUser: widget.idUser,
                       )));
         },
         child: Column(

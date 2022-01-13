@@ -83,7 +83,9 @@ class _WorkerMiniProfileState extends State<WorkerMiniProfile> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Entity(
-                                      entityMini: widget.workerMini.entity)));
+                                        entityMini: widget.workerMini.entity,
+                                        datasheetIsOpen: false,
+                                      )));
                         },
                         child: const Text("view"),
                       ),
