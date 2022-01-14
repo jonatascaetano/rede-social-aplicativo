@@ -28,7 +28,7 @@ class LoginModel extends Model {
         // ignore: unused_local_variable
         String id = prefs.getString("id")!;
         ScopedModel.of<ProfileModel>(context).getProfile(context: context);
-        ScopedModel.of<ProfileModel>(context).getWorkers();
+        //ScopedModel.of<ProfileModel>(context).getWorkers();
         load = false;
         notifyListeners();
         Navigator.pushAndRemoveUntil(

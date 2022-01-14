@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/converts_enum/convert_to_enum.dart';
+import 'package:social_network_application/entities/dto/entity_save_dto.dart';
 import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
 import 'package:social_network_application/scoped_model/entity_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/view/entity/new_season_entity.dart';
 import 'package:social_network_application/view/entity/new_worker_entity.dart';
 import 'package:social_network_application/view/entity/update_entity.dart';
+import 'package:social_network_application/view/entity/update_review_entity.dart';
 import 'package:social_network_application/widgets/mini_entities/evaluation.dart';
 import 'package:social_network_application/widgets/mini_entities/season_mini_entity.dart';
 import 'package:social_network_application/widgets/mini_entities/worker_mini_entity.dart';
@@ -26,9 +28,13 @@ class _EntityState extends State<Entity> {
   @override
   void initState() {
     ScopedModel.of<EntityModel>(context).entityMiniIsNull = true;
+    ScopedModel.of<EntityModel>(context).dropdownList = [];
+    ScopedModel.of<EntityModel>(context).entitySaveMini = null;
     ScopedModel.of<EntityModel>(context).getId();
     ScopedModel.of<EntityModel>(context)
-        .getById(entityId: widget.entityMini.id);
+        .getEntity(entityId: widget.entityMini.id);
+    ScopedModel.of<EntityModel>(context)
+        .getEntitySave(entityId: widget.entityMini.id);
     ScopedModel.of<EntityModel>(context)
         .getWorkers(entityId: widget.entityMini.id);
     ScopedModel.of<EntityModel>(context)
@@ -166,13 +172,41 @@ class _EntityState extends State<Entity> {
                     //categoty update
                     Align(
                       alignment: Alignment.bottomCenter,
-                      child: DropdownButton(
+                      child: DropdownButton<int>(
                         hint: entity.entitySaveMini == null
                             ? const Text('category')
-                            : entity
-                                .dropdownList[entity.entitySaveMini!.categoty!],
+                            : entity.dropdownList[
+                                entity.entitySaveMini!.category! - 1],
                         items: entity.dropdownList,
-                        onChanged: (value) {},
+                        onChanged: (value) {
+                          // ignore: avoid_print
+                          EntitySaveDTO entitySaveDTO = EntitySaveDTO(
+                            idEntitySave: null,
+                            idUser: entity.idUser,
+                            idEntity: entity.entityMini.id,
+                            idSeason: null,
+                            idEpisode: null,
+                            category: value!,
+                            goal: null,
+                            rated: null,
+                            reviewed: null,
+                            evaluation: null,
+                            review: null,
+                            typeEntitySave: null,
+                          );
+                          if (entity.entitySaveMini == null) {
+                            entity.newEntitySave(
+                                entitySaveDTO: entitySaveDTO, context: context);
+                          } else {
+                            if (value != entity.entitySaveMini!.category!) {
+                              entitySaveDTO.idEntitySave =
+                                  entity.entitySaveMini!.id;
+                              entity.updateCategoryEntitySave(
+                                  entitySaveDTO: entitySaveDTO,
+                                  context: context);
+                            }
+                          }
+                        },
                       ),
                     ),
                     //*categoty update
@@ -185,7 +219,29 @@ class _EntityState extends State<Entity> {
                       children: [
                         //review update
                         ElevatedButton(
-                            onPressed: () {}, child: const Text('add review')),
+                          onPressed: () {
+                            if (entity.entitySaveMini != null &&
+                                entity.entitySaveMini!.reviewed) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => UpdateReviewEntity(
+                                          review:
+                                              entity.entitySaveMini!.review!)));
+                            } else if (entity.entitySaveMini != null) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          UpdateReviewEntity(review: '')));
+                            }
+                          },
+                          child: entity.entitySaveMini != null
+                              ? entity.entitySaveMini!.reviewed
+                                  ? const Text('update review')
+                                  : const Text('add review')
+                              : const Text('add review'),
+                        ),
                         //*review update
 
                         const SizedBox(
@@ -194,7 +250,36 @@ class _EntityState extends State<Entity> {
 
                         //goal update
                         IconButton(
-                            onPressed: () {}, icon: const Icon(Icons.add_task)),
+                          onPressed: () {
+                            if (entity.entitySaveMini != null) {
+                              EntitySaveDTO entitySaveDTO = EntitySaveDTO(
+                                idEntitySave: entity.entitySaveMini!.id,
+                                idUser: entity.idUser,
+                                idEntity: entity.entityMini.id,
+                                idSeason: null,
+                                idEpisode: null,
+                                category: null,
+                                goal: !entity.entitySaveMini!.goal,
+                                rated: null,
+                                reviewed: null,
+                                evaluation: null,
+                                review: null,
+                                typeEntitySave: null,
+                              );
+                              entity.updateGoalEntitySave(
+                                  entitySaveDTO: entitySaveDTO,
+                                  context: context);
+                            }
+                          },
+                          icon: Icon(
+                            Icons.add_task,
+                            color: entity.entitySaveMini != null
+                                ? entity.entitySaveMini!.goal
+                                    ? Colors.purple
+                                    : Colors.grey
+                                : Colors.grey,
+                          ),
+                        ),
                         //*goal update
                       ],
                     ),

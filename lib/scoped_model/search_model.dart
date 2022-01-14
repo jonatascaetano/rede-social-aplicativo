@@ -27,7 +27,10 @@ class SearchModel extends Model {
     Set<String>? found = {};
     try {
       var url = Uri.parse(base + 'users/get/users/name?name=$text');
-      var response = await http.get(url);
+      var response = await http.get(url, headers: {
+        "Accept": "application/json; charset=utf-8",
+        "content-type": "application/json; charset=utf-8"
+      });
       // ignore: avoid_print
       switch (response.statusCode) {
         case 200:
@@ -42,7 +45,10 @@ class SearchModel extends Model {
     }
     try {
       var url = Uri.parse(base + 'entities/get/entities/name?name=$text');
-      var response = await http.get(url);
+      var response = await http.get(url, headers: {
+        "Accept": "application/json; charset=utf-8",
+        "content-type": "application/json; charset=utf-8"
+      });
       switch (response.statusCode) {
         case 200:
           List<dynamic> list = json.decode(response.body);
@@ -56,7 +62,10 @@ class SearchModel extends Model {
     }
     try {
       var url = Uri.parse(base + 'seasons/get/seasons/name?name=$text');
-      var response = await http.get(url);
+      var response = await http.get(url, headers: {
+        "Accept": "application/json; charset=utf-8",
+        "content-type": "application/json; charset=utf-8"
+      });
       switch (response.statusCode) {
         case 200:
           List<dynamic> list = json.decode(response.body);
@@ -70,7 +79,10 @@ class SearchModel extends Model {
     }
     try {
       var url = Uri.parse(base + 'episodes/get/episodes/name?name=$text');
-      var response = await http.get(url);
+      var response = await http.get(url, headers: {
+        "Accept": "application/json; charset=utf-8",
+        "content-type": "application/json; charset=utf-8"
+      });
       switch (response.statusCode) {
         case 200:
           List<dynamic> list = json.decode(response.body);
@@ -90,7 +102,10 @@ class SearchModel extends Model {
     List<Map>? found = [];
     try {
       var url = Uri.parse(base + 'users/get/users/name?name=$text');
-      var response = await http.get(url);
+      var response = await http.get(url, headers: {
+        "Accept": "application/json; charset=utf-8",
+        "content-type": "application/json; charset=utf-8"
+      });
       // ignore: avoid_print
       switch (response.statusCode) {
         case 200:
@@ -107,7 +122,10 @@ class SearchModel extends Model {
     }
     try {
       var url = Uri.parse(base + 'entities/get/entities/name?name=$text');
-      var response = await http.get(url);
+      var response = await http.get(url, headers: {
+        "Accept": "application/json; charset=utf-8",
+        "content-type": "application/json; charset=utf-8"
+      });
       switch (response.statusCode) {
         case 200:
           List<dynamic> list = json.decode(response.body);
@@ -121,7 +139,10 @@ class SearchModel extends Model {
     }
     try {
       var url = Uri.parse(base + 'seasons/get/seasons/name?name=$text');
-      var response = await http.get(url);
+      var response = await http.get(url, headers: {
+        "Accept": "application/json; charset=utf-8",
+        "content-type": "application/json; charset=utf-8"
+      });
       switch (response.statusCode) {
         case 200:
           List<dynamic> list = json.decode(response.body);
@@ -135,7 +156,10 @@ class SearchModel extends Model {
     }
     try {
       var url = Uri.parse(base + 'episodes/get/episodes/name?name=$text');
-      var response = await http.get(url);
+      var response = await http.get(url, headers: {
+        "Accept": "application/json; charset=utf-8",
+        "content-type": "application/json; charset=utf-8"
+      });
       switch (response.statusCode) {
         case 200:
           List<dynamic> list = json.decode(response.body);

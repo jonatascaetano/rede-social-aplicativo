@@ -1,15 +1,16 @@
 class EntitySaveDTO {
-  late String idEntitySave;
-  late String idUser;
-  late String idEntity;
-  late String idSeason;
-  late String idEpisode;
-  late int category;
-  late DateTime release;
-  late bool goal;
-  late bool rated;
-  late bool review;
-  late int type;
+  late String? idEntitySave;
+  late String? idUser;
+  late String? idEntity;
+  late String? idSeason;
+  late String? idEpisode;
+  late int? category;
+  late bool? goal;
+  late bool? rated;
+  late bool? reviewed;
+  late int? evaluation;
+  late String? review;
+  late String? typeEntitySave;
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
@@ -19,11 +20,12 @@ class EntitySaveDTO {
     map["idSeason"] = idSeason;
     map["idEpisode"] = idEpisode;
     map["category"] = category;
-    map["release"] = release;
     map["goal"] = goal;
     map["rated"] = rated;
+    map["reviewed"] = reviewed;
+    map["evaluation"] = evaluation;
     map["review"] = review;
-    map["type"] = type;
+    map["typeEntitySave"] = typeEntitySave;
     return map;
   }
 
@@ -34,10 +36,11 @@ class EntitySaveDTO {
     required this.idSeason,
     required this.idEpisode,
     required this.category,
-    required this.release,
     required this.goal,
     required this.rated,
+    required this.reviewed,
+    required this.evaluation,
     required this.review,
-    required this.type,
+    required this.typeEntitySave,
   });
 }

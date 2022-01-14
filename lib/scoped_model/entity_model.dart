@@ -5,6 +5,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:social_network_application/converts_enum/convert_to_enum.dart';
+import 'package:social_network_application/entities/dto/entity_save_dto.dart';
 import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
 import 'package:social_network_application/entities/mini_dto/entity_save_mini.dart';
 import 'package:social_network_application/entities/mini_dto/season_mini.dart';
@@ -32,7 +33,7 @@ class EntityModel extends Model {
     return prefs.getString("id")!;
   }
 
-  getById({required String entityId}) async {
+  getEntity({required String entityId}) async {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'entities/get/entity/$entityId');
@@ -80,7 +81,30 @@ class EntityModel extends Model {
     }
   }
 
-  getEntitySave() {}
+  getEntitySave({required String entityId}) async {
+    load = true;
+    notifyListeners();
+    String idUser = await getId();
+    var url = Uri.parse(
+        base + 'entities/get/entity/$entityId/entitysave/user/$idUser');
+    var response = await http.get(url, headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
+// ignore: avoid_print
+    print("getEntitySave: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 200:
+        var item = json.decode(response.body);
+        // ignore: avoid_print
+        print(item.toString());
+        entitySaveMini = EntitySaveMini.fromMap(map: item);
+        load = false;
+        notifyListeners();
+        break;
+    }
+  }
+
   getWorkers({required String entityId}) async {
     load = true;
     notifyListeners();
@@ -106,9 +130,6 @@ class EntityModel extends Model {
     }
   }
 
-  newWorker() {}
-  deleteWorker() {}
-
   updateMaxLine() {
     if (maxLine == 5) {
       maxLine = 500;
@@ -120,6 +141,7 @@ class EntityModel extends Model {
   }
 
   loadDropdownList() {
+    dropdownList = [];
     dropdownList.add(DropdownMenuItem(
       child: Text(LanguageModel().entitiesCategories[
           ConvertToEnum.convertTypeEntityToValue(
@@ -145,5 +167,167 @@ class EntityModel extends Model {
       value: 4,
     ));
     notifyListeners();
+  }
+
+  newEntitySave(
+      {required EntitySaveDTO entitySaveDTO,
+      required BuildContext context}) async {
+    load = true;
+    notifyListeners();
+    var url = Uri.parse(base + 'entitysaves/post/entity');
+    var response = await http
+        .post(url, body: json.encode(entitySaveDTO.toMap()), headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
+// ignore: avoid_print
+    print("newEntitySave: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 201:
+        var item = json.decode(response.body);
+        // ignore: avoid_print
+        print(item.toString());
+        entitySaveMini = EntitySaveMini.fromMap(map: item);
+        load = false;
+        notifyListeners();
+        break;
+      default:
+        load = false;
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Try again later')),
+        );
+        break;
+    }
+  }
+
+  updateCategoryEntitySave(
+      {required EntitySaveDTO entitySaveDTO,
+      required BuildContext context}) async {
+    load = true;
+    notifyListeners();
+    var url = Uri.parse(base + 'entitysaves/put/category');
+    var response =
+        await http.put(url, body: json.encode(entitySaveDTO.toMap()), headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
+// ignore: avoid_print
+    print("updateCategoryEntitySave: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 202:
+        var item = json.decode(response.body);
+        // ignore: avoid_print
+        print(item.toString());
+        entitySaveMini = EntitySaveMini.fromMap(map: item);
+        load = false;
+        notifyListeners();
+        break;
+      default:
+        load = false;
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Try again later')),
+        );
+        break;
+    }
+  }
+
+  updateEvaluationEntitySave(
+      {required EntitySaveDTO entitySaveDTO,
+      required BuildContext context}) async {
+    load = true;
+    notifyListeners();
+    var url = Uri.parse(base + 'entitysaves/put/evaluation');
+    var response =
+        await http.put(url, body: json.encode(entitySaveDTO.toMap()), headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
+// ignore: avoid_print
+    print("updateEvaluationEntitySave: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 202:
+        var item = json.decode(response.body);
+        // ignore: avoid_print
+        print(item.toString());
+        entitySaveMini = EntitySaveMini.fromMap(map: item);
+        load = false;
+        notifyListeners();
+        getEntity(entityId: entitySaveMini!.entity!.id);
+        break;
+      default:
+        load = false;
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Try again later')),
+        );
+        break;
+    }
+  }
+
+  updateGoalEntitySave(
+      {required EntitySaveDTO entitySaveDTO,
+      required BuildContext context}) async {
+    load = true;
+    notifyListeners();
+    var url = Uri.parse(base + 'entitysaves/put/goal');
+    var response =
+        await http.put(url, body: json.encode(entitySaveDTO.toMap()), headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
+// ignore: avoid_print
+    print("updateGoalEntitySave: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 202:
+        var item = json.decode(response.body);
+        // ignore: avoid_print
+        print(item.toString());
+        entitySaveMini = EntitySaveMini.fromMap(map: item);
+        load = false;
+        notifyListeners();
+        break;
+      default:
+        load = false;
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Try again later')),
+        );
+        break;
+    }
+  }
+
+  updateReviewEntitySave(
+      {required EntitySaveDTO entitySaveDTO,
+      required BuildContext context}) async {
+    load = true;
+    notifyListeners();
+    var url = Uri.parse(base + 'entitysaves/put/review');
+    var response =
+        await http.put(url, body: json.encode(entitySaveDTO.toMap()), headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
+// ignore: avoid_print
+    print("updateReviewEntitySave: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 202:
+        var item = json.decode(response.body);
+        // ignore: avoid_print
+        print(item.toString());
+        entitySaveMini = EntitySaveMini.fromMap(map: item);
+        load = false;
+        notifyListeners();
+        Navigator.pop(context);
+        break;
+      default:
+        load = false;
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Try again later')),
+        );
+        break;
+    }
   }
 }

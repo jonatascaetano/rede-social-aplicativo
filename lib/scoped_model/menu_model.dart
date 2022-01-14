@@ -103,6 +103,7 @@ class MenuModel extends Model {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString("invitation", invitation);
     invitationIsNull = false;
+    load = false;
     notifyListeners();
   }
 

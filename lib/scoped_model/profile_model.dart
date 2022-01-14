@@ -54,6 +54,7 @@ class ProfileModel extends Model {
         notifyListeners();
         load = false;
         notifyListeners();
+        getWorkers();
         break;
       default:
         load = false;
