@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/scoped_model/entity_model.dart';
+import 'package:social_network_application/scoped_model/episode_model.dart';
 import 'package:social_network_application/scoped_model/login_model.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/registe_model.dart';
+import 'package:social_network_application/scoped_model/season_model.dart';
 import 'package:social_network_application/view/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -38,15 +40,21 @@ class _ModelState extends State<Model> {
                 model: LoginModel(),
                 child: ScopedModel<EntityModel>(
                   model: EntityModel(),
-                  child: ScopedModelDescendant<ThemeModel>(
-                      builder: (context, child, theme) {
-                    return MaterialApp(
-                      theme: theme.themeData,
-                      themeMode: theme.themeMode,
-                      debugShowCheckedModeBanner: false,
-                      home: const SplashScreen(),
-                    );
-                  }),
+                  child: ScopedModel<SeasonModel>(
+                    model: SeasonModel(),
+                    child: ScopedModel<EpisodeModel>(
+                      model: EpisodeModel(),
+                      child: ScopedModelDescendant<ThemeModel>(
+                          builder: (context, child, theme) {
+                        return MaterialApp(
+                          theme: theme.themeData,
+                          themeMode: theme.themeMode,
+                          debugShowCheckedModeBanner: false,
+                          home: const SplashScreen(),
+                        );
+                      }),
+                    ),
+                  ),
                 ),
               ),
             )),

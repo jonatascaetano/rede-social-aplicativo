@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             const Center(
               child: Text(
-                "Application",
+                "Bundle",
                 style: TextStyle(
                   fontSize: 28,
                   color: Colors.purple,
