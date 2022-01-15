@@ -27,10 +27,10 @@ class _EpisodeMiniResultState extends State<EpisodeMiniResult> {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-            widget.episodeMini.image != null
+            widget.episodeMini.images.isNotEmpty
                 ? CircleAvatar(
                     backgroundImage:
-                        NetworkImage(widget.episodeMini.image.toString()),
+                        NetworkImage(widget.episodeMini.images[0].toString()),
                     radius: 30.0,
                   )
                 : CircleAvatar(

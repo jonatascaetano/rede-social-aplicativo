@@ -1,28 +1,22 @@
-class EpisodeCreation {
+class EpisodeDTO {
   late String idEpisode;
   late String name;
   late String description;
-  late String image;
-  late DateTime release;
-  late int number;
+  late int numberEpisode;
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
     map["idEpisode"] = idEpisode;
     map["name"] = name;
     map["description"] = description;
-    map["image"] = image;
-    map["release"] = release;
-    map["number"] = number;
+    map["numberEpisode"] = numberEpisode;
     return map;
   }
 
-  EpisodeCreation({
+  EpisodeDTO({
     required this.idEpisode,
     required this.name,
     required this.description,
-    required this.image,
-    required this.release,
-    required this.number,
+    required this.numberEpisode,
   });
 }
