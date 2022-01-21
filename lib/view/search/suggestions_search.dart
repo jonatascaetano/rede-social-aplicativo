@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/scoped_model/search_model.dart';
+import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/search/results_search.dart';
 
 // ignore: must_be_immutable
@@ -15,7 +16,8 @@ class SuggestionsSearch extends StatefulWidget {
 class _SuggestionsSearchState extends State<SuggestionsSearch> {
   @override
   Widget build(BuildContext context) {
-    return ScopedModel<SearchModel>(
+    return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
+      return ScopedModel<SearchModel>(
         model: SearchModel(),
         child: ScopedModelDescendant<SearchModel>(
             builder: (context, child, search) {
@@ -51,9 +53,12 @@ class _SuggestionsSearchState extends State<SuggestionsSearch> {
                                   child: ListTile(
                                     title: Row(
                                       children: [
-                                        const Icon(Icons.search),
+                                        Icon(
+                                          Icons.search,
+                                          color: theme.title,
+                                        ),
                                         const SizedBox(
-                                          width: 8.0,
+                                          width: 24.0,
                                         ),
                                         SizedBox(
                                           width: 200.0,
@@ -62,6 +67,11 @@ class _SuggestionsSearchState extends State<SuggestionsSearch> {
                                             overflow: TextOverflow.fade,
                                             maxLines: 1,
                                             softWrap: false,
+                                            style: TextStyle(
+                                              fontSize: 19,
+                                              color: theme.title,
+                                              fontWeight: FontWeight.normal,
+                                            ),
                                           ),
                                         )
                                       ],
@@ -72,6 +82,8 @@ class _SuggestionsSearchState extends State<SuggestionsSearch> {
                   }
                 }),
           );
-        }));
+        }),
+      );
+    });
   }
 }

@@ -5,13 +5,10 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:social_network_application/entities/dto/user_creation_dto.dart';
+import 'package:social_network_application/entities/dto/user_dto.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
-import 'package:social_network_application/view/login/login.dart';
+import 'package:social_network_application/view/authentication/login.dart';
 import 'package:social_network_application/view/my_app.dart';
-import 'package:social_network_application/view/register/email.dart';
-import 'package:social_network_application/view/register/name.dart';
-import 'package:social_network_application/view/register/password.dart';
 
 class RegisterModel extends Model {
   static const String base =
@@ -49,26 +46,24 @@ class RegisterModel extends Model {
   }
 
   checkInvitation({
-    required UserCreationDTO userCreationDTO,
+    required UserDTO userDTO,
     required BuildContext context,
   }) async {
     load = true;
     notifyListeners();
     try {
-      var url = Uri.parse(base +
-          'invitations/get/check/invitation/${userCreationDTO.invitationValue!}');
+      var url = Uri.parse(
+          base + 'invitations/get/check/invitation/${userDTO.invitation!}');
       var response = await http.get(url);
       // ignore: avoid_print
-      print(response.statusCode);
+      print('checkInvitation: ' + response.statusCode.toString());
       switch (response.statusCode) {
         case 202:
           load = false;
           notifyListeners();
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      Email(userCreationDTO: userCreationDTO)));
+          checkEmail(userDTO: userDTO, context: context);
+          // Navigator.push(context,
+          //     MaterialPageRoute(builder: (context) => Email(userDTO: userDTO)));
           break;
         case 406:
           ScaffoldMessenger.of(context).showSnackBar(
@@ -94,26 +89,23 @@ class RegisterModel extends Model {
   }
 
   checkEmail({
-    required UserCreationDTO userCreationDTO,
+    required UserDTO userDTO,
     required BuildContext context,
   }) async {
     load = true;
     notifyListeners();
     try {
-      var url =
-          Uri.parse(base + 'users/get/check/email/${userCreationDTO.email!}');
+      var url = Uri.parse(base + 'users/get/check/email/${userDTO.email!}');
       var response = await http.get(url);
       // ignore: avoid_print
-      print(response.statusCode);
+      print('checkEmail: ' + response.statusCode.toString());
       switch (response.statusCode) {
         case 202:
           load = false;
           notifyListeners();
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      Name(userCreationDTO: userCreationDTO)));
+          checkName(userDTO: userDTO, context: context);
+          // Navigator.push(context,
+          //     MaterialPageRoute(builder: (context) => Name(userDTO: userDTO)));
           break;
         case 406:
           ScaffoldMessenger.of(context).showSnackBar(
@@ -139,26 +131,25 @@ class RegisterModel extends Model {
   }
 
   checkName({
-    required UserCreationDTO userCreationDTO,
+    required UserDTO userDTO,
     required BuildContext context,
   }) async {
     load = true;
     notifyListeners();
     try {
-      var url =
-          Uri.parse(base + 'users/get/check/name/${userCreationDTO.name!}');
+      var url = Uri.parse(base + 'users/get/check/name/${userDTO.name!}');
       var response = await http.get(url);
       // ignore: avoid_print
-      print(response.statusCode);
+      print('checkName: ' + response.statusCode.toString());
       switch (response.statusCode) {
         case 202:
           load = false;
           notifyListeners();
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      Password(userCreationDTO: userCreationDTO)));
+          createAccount(userDTO: userDTO, context: context);
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //         builder: (context) => Password(userDTO: userDTO)));
           break;
         case 406:
           ScaffoldMessenger.of(context).showSnackBar(
@@ -183,37 +174,36 @@ class RegisterModel extends Model {
     }
   }
 
-  checkPassword({
-    required UserCreationDTO userCreationDTO,
-    required String password,
-    required BuildContext context,
-  }) async {
-    load = true;
-    notifyListeners();
-    try {
-      if (userCreationDTO.password! == password) {
-        createAccount(userCreationDTO: userCreationDTO, context: context);
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Passwords do not match')),
-        );
-        load = false;
-        notifyListeners();
-      }
-    } catch (e) {
-      // ignore: avoid_print
-      print(e);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Try again later')),
-      );
-      load = false;
-      notifyListeners();
-    }
-  }
+  // checkPassword({
+  //   required UserDTO userDTO,
+  //   required String password,
+  //   required BuildContext context,
+  // }) async {
+  //   load = true;
+  //   notifyListeners();
+  //   try {
+  //     if (userDTO.password! == password) {
+  //       createAccount(userDTO: userDTO, context: context);
+  //     } else {
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         const SnackBar(content: Text('Passwords do not match')),
+  //       );
+  //       load = false;
+  //       notifyListeners();
+  //     }
+  //   } catch (e) {
+  //     // ignore: avoid_print
+  //     print(e);
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(content: Text('Try again later')),
+  //     );
+  //     load = false;
+  //     notifyListeners();
+  //   }
+  // }
 
   createAccount(
-      {required UserCreationDTO userCreationDTO,
-      required BuildContext context}) async {
+      {required UserDTO userDTO, required BuildContext context}) async {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'users/post/user');
@@ -221,10 +211,10 @@ class RegisterModel extends Model {
     var response = await http.post(
       url,
       headers: {"Content-type": "application/json; charset=UTF-8"},
-      body: json.encode(userCreationDTO.toMap()),
+      body: json.encode(userDTO.toMap()),
     );
     // ignore: avoid_print'EPISODE', avoid_print
-    print(response.statusCode);
+    print('createAccount: ' + response.statusCode.toString());
     switch (response.statusCode) {
       case 201:
         saveId(id: response.body, context: context);

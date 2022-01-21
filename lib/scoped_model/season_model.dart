@@ -93,13 +93,13 @@ class SeasonModel extends Model {
   getEpisodes({required String seasonId}) async {
     load = true;
     notifyListeners();
-    var url = Uri.parse(base + 'seasons/get/episodes/$seasonId');
+    var url = Uri.parse(base + 'seasons/get/season/$seasonId/episodes');
     var response = await http.get(url, headers: {
       "Accept": "application/json; charset=utf-8",
       "content-type": "application/json; charset=utf-8"
     });
 // ignore: avoid_print
-    print("getSeason: " + response.statusCode.toString());
+    print("getEpisodes: " + response.statusCode.toString());
     switch (response.statusCode) {
       case 200:
         episodes = [];

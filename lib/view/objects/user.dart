@@ -35,30 +35,55 @@ class _UserState extends State<User> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             user.userMini.image != null
-                                ? Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 100, 0, 8),
-                                    child: CircleAvatar(
-                                      backgroundImage: NetworkImage(
-                                          user.userMini.image.toString()),
-                                      radius: 60.0,
+                                ? Container(
+                                    height: 300,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.9,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image:
+                                            NetworkImage(user.userMini.image!),
+                                        fit: BoxFit.fitHeight,
+                                      ),
                                     ),
                                   )
-                                : Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 100, 0, 8),
-                                    child: CircleAvatar(
-                                      backgroundColor: Colors.grey[300],
-                                      child: const Icon(
-                                        Icons.person,
-                                        size: 80.0,
+                                : Container(
+                                    color: Colors.purple[100],
+                                    height: 300,
+                                    child: const Center(
+                                      child: Icon(
+                                        Icons.image,
+                                        size: 100,
                                       ),
-                                      radius: 60.0,
-                                    ),
-                                  ),
+                                    )),
                             const SizedBox(
                               height: 16.0,
                             ),
+                            // user.userMini.image != null
+                            //     ? Padding(
+                            //         padding:
+                            //             const EdgeInsets.fromLTRB(0, 100, 0, 8),
+                            //         child: CircleAvatar(
+                            //           backgroundImage: NetworkImage(
+                            //               user.userMini.image.toString()),
+                            //           radius: 60.0,
+                            //         ),
+                            //       )
+                            //     : Padding(
+                            //         padding:
+                            //             const EdgeInsets.fromLTRB(0, 100, 0, 8),
+                            //         child: CircleAvatar(
+                            //           backgroundColor: Colors.grey[300],
+                            //           child: const Icon(
+                            //             Icons.person,
+                            //             size: 80.0,
+                            //           ),
+                            //           radius: 60.0,
+                            //         ),
+                            //       ),
+                            // const SizedBox(
+                            //   height: 16.0,
+                            // ),
                             SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
@@ -83,12 +108,11 @@ class _UserState extends State<User> {
                                 ],
                               ),
                             ),
+
                             const SizedBox(
                               height: 8.0,
                             ),
-                            const SizedBox(
-                              height: 8.0,
-                            ),
+
                             user.userMini.place != null
                                 ? Center(
                                     child: Padding(
@@ -98,6 +122,7 @@ class _UserState extends State<User> {
                                         user.userMini.place!,
                                         style: const TextStyle(
                                           fontSize: 18,
+                                          letterSpacing: 2.0,
                                         ),
                                       ),
                                     ),
@@ -124,6 +149,7 @@ class _UserState extends State<User> {
                                           'Followers',
                                           style: TextStyle(
                                             fontSize: 16,
+                                            letterSpacing: 1.0,
                                             fontWeight: FontWeight.normal,
                                           ),
                                         ),
@@ -135,6 +161,7 @@ class _UserState extends State<User> {
                                               .toString(),
                                           style: const TextStyle(
                                             fontSize: 16,
+                                            letterSpacing: 1.0,
                                             fontWeight: FontWeight.normal,
                                           ),
                                         ),
@@ -160,6 +187,7 @@ class _UserState extends State<User> {
                                             'Following',
                                             style: TextStyle(
                                               fontSize: 16,
+                                              letterSpacing: 1.0,
                                               fontWeight: FontWeight.normal,
                                             ),
                                           ),
@@ -171,6 +199,7 @@ class _UserState extends State<User> {
                                                 .toString(),
                                             style: const TextStyle(
                                               fontSize: 16,
+                                              letterSpacing: 1.0,
                                               fontWeight: FontWeight.normal,
                                             ),
                                           ),
@@ -187,8 +216,9 @@ class _UserState extends State<User> {
                                 child: Text(
                                   user.userMini.description!,
                                   style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.grey[800],
+                                    fontSize: 18,
+                                    letterSpacing: 1.0,
+                                    color: Colors.grey[700],
                                   ),
                                 ),
                               )
@@ -198,24 +228,38 @@ class _UserState extends State<User> {
                                 ? Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: ElevatedButton(
-                                        onPressed: () {
-                                          user.removeFollowing(
-                                            idFollowing: user.userMini.id,
-                                            context: context,
-                                          );
-                                        },
-                                        child: const Text('Unfollow')),
+                                      onPressed: () {
+                                        user.removeFollowing(
+                                          idFollowing: user.userMini.id,
+                                          context: context,
+                                        );
+                                      },
+                                      child: const Text(
+                                        'Unfollow',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          letterSpacing: 2.0,
+                                        ),
+                                      ),
+                                    ),
                                   )
                                 : Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: ElevatedButton(
-                                        onPressed: () {
-                                          user.addFollowing(
-                                            idFollowing: user.userMini.id,
-                                            context: context,
-                                          );
-                                        },
-                                        child: const Text('Follow')),
+                                      onPressed: () {
+                                        user.addFollowing(
+                                          idFollowing: user.userMini.id,
+                                          context: context,
+                                        );
+                                      },
+                                      child: const Text(
+                                        'Follow',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          letterSpacing: 2.0,
+                                        ),
+                                      ),
+                                    ),
                                   )
                             : Container(),
                         user.workers.isNotEmpty

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/entities/mini_dto/worker_mini.dart';
+import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/scoped_model/worker_model.dart';
 import 'package:social_network_application/view/objects/user.dart';
 
@@ -18,76 +19,112 @@ class WorkerMiniEntity extends StatefulWidget {
 class _WorkerMiniEntityState extends State<WorkerMiniEntity> {
   @override
   Widget build(BuildContext context) {
-    return ScopedModel<WorkerModel>(
-        model: WorkerModel(),
-        child: ScopedModelDescendant<WorkerModel>(
-            builder: (context, child, worker) {
-          return GestureDetector(
-            onTap: () {
-              if (widget.idUser != widget.workerMini.user.id) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            User(userMini: widget.workerMini.user)));
-              }
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
+    return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
+      return ScopedModel<WorkerModel>(
+          model: WorkerModel(),
+          child: ScopedModelDescendant<WorkerModel>(
+              builder: (context, child, worker) {
+            return GestureDetector(
+              onTap: () {
+                if (widget.idUser != widget.workerMini.user.id) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              User(userMini: widget.workerMini.user)));
+                }
+              },
               child: Container(
-                width: 150.0,
+                margin: const EdgeInsets.all(4.0),
+                width: 200.0,
                 decoration: BoxDecoration(
-                  border: Border.all(color: const Color(0xffce93d8)),
+                  border: Border.all(color: theme.shadow),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      widget.workerMini.user.image != null
-                          ? CircleAvatar(
-                              backgroundImage: NetworkImage(
-                                  widget.workerMini.user.image.toString()),
-                              radius: 30.0,
-                            )
-                          : CircleAvatar(
-                              backgroundColor: Colors.grey[300],
-                              child: const Icon(
-                                Icons.person,
-                                size: 30.0,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    widget.workerMini.user.image != null
+                        ? Container(
+                            height: 150,
+                            width: 200,
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(10.0),
+                                  topRight: Radius.circular(10.0)),
+                              image: DecorationImage(
+                                image:
+                                    NetworkImage(widget.workerMini.user.image!),
+                                fit: BoxFit.fitHeight,
                               ),
-                              radius: 30.0,
                             ),
-                      const SizedBox(
-                        height: 8.0,
+                          )
+                        : Container(
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(10.0),
+                                  topRight: Radius.circular(10.0)),
+                              color: theme.shadow,
+                            ),
+                            height: 150,
+                            width: 200,
+                            child: Center(
+                              child: Icon(
+                                Icons.image,
+                                color: theme.emphasis,
+                                size: 150,
+                              ),
+                            ),
+                          ),
+                    // ? CircleAvatar(
+                    //     backgroundImage: NetworkImage(widget
+                    //         .workerMini.user.images[0]
+                    //         .toString()),
+                    //     radius: 30.0,
+                    //   )
+                    // : CircleAvatar(
+                    //     backgroundColor: Colors.grey[300],
+                    //     child: const Icon(
+                    //       Icons.person,
+                    //       size: 30.0,
+                    //     ),
+                    //     radius: 30.0,
+                    //   ),
+                    const SizedBox(
+                      height: 24.0,
+                    ),
+                    Text(
+                      widget.workerMini.role.toLowerCase(),
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.fade,
+                      maxLines: 1,
+                      softWrap: false,
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        color: theme.title,
+                        fontWeight: FontWeight.normal,
                       ),
-                      Text(
-                        widget.workerMini.role,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 16.0,
-                        ),
+                    ),
+                    const SizedBox(
+                      height: 4.0,
+                    ),
+                    Text(
+                      widget.workerMini.user.name.toLowerCase(),
+                      overflow: TextOverflow.fade,
+                      maxLines: 1,
+                      softWrap: false,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        color: theme.subtitle,
+                        fontWeight: FontWeight.normal,
                       ),
-                      const SizedBox(
-                        height: 4.0,
-                      ),
-                      Text(
-                        widget.workerMini.user.name,
-                        overflow: TextOverflow.fade,
-                        maxLines: 1,
-                        softWrap: false,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 13.0,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-          );
-        }));
+            );
+          }));
+    });
   }
 }

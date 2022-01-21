@@ -26,9 +26,14 @@ class _FollowersState extends State<Followers> {
               builder: (context, child, theme) {
             return Scaffold(
                 appBar: AppBar(
-                  title: const Text(
+                  title: Text(
                     "Followers",
-                    style: TextStyle(color: Colors.purple),
+                    style: TextStyle(
+                      color: theme.title,
+                      fontSize: 24.0,
+                      letterSpacing: 1.0,
+                      fontWeight: FontWeight.normal,
+                    ),
                   ),
                   elevation: 0.0,
                 ),
@@ -42,12 +47,21 @@ class _FollowersState extends State<Followers> {
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(
-                                      color: const Color(0xffce93d8)),
+                                    color: theme.shadow,
+                                  ),
                                 ),
-                                child: const Center(
+                                child: Center(
                                   child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text('followers'),
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'followers',
+                                      style: TextStyle(
+                                        color: theme.title,
+                                        fontSize: 24.0,
+                                        letterSpacing: 1.0,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
                                   ),
                                 )),
                           )

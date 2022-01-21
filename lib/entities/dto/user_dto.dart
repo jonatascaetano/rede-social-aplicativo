@@ -1,5 +1,5 @@
-class UserUpdateDTO {
-  late String idUser;
+class UserDTO {
+  late String? idUser;
 
   late String? name;
   late String? description;
@@ -13,7 +13,7 @@ class UserUpdateDTO {
   late bool? privacy;
   late bool? status;
 
-  late DateTime? birthDate;
+  late String? invitation;
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
@@ -23,23 +23,22 @@ class UserUpdateDTO {
     map["password"] = password;
     map["image"] = image;
     map["description"] = description;
-    map["birthDate"] = birthDate;
     map["place"] = place;
     map["privacy"] = privacy;
     map["status"] = status;
     return map;
   }
 
-  UserUpdateDTO({
+  UserDTO({
     required this.idUser,
     required this.name,
     required this.email,
     required this.password,
     required this.image,
     required this.description,
-    required this.birthDate,
     required this.place,
     required this.privacy,
     required this.status,
+    required this.invitation,
   });
 }

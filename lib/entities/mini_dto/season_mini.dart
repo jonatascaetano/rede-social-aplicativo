@@ -3,7 +3,7 @@ import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
 class SeasonMini {
   late String id;
   late String name;
-  late List<dynamic> images = [];
+  late String? image;
   late String? description;
   late int numberSeason;
   late int evaluationQuantity;
@@ -15,7 +15,7 @@ class SeasonMini {
   SeasonMini.fromMap({required Map map}) {
     id = map["id"];
     name = map["name"];
-    images = map["images"];
+    image = map["image"];
     description = map["description"];
     numberSeason = map["numberSeason"];
     evaluationQuantity = map["evaluationQuantity"];

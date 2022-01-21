@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
+import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/menu.dart';
 import 'package:social_network_application/view/search/seach.dart';
 
@@ -20,67 +21,121 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<LanguageModel>(
-        builder: (context, child, language) {
-      List<Widget> select = [
-        const Home(),
-        const Trending(),
-        const Profile(),
-      ];
-      return Scaffold(
-        appBar: AppBar(
-          elevation: 0.0,
-          title: const Text(
-            "Application",
-            style: TextStyle(color: Colors.purple),
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.notifications),
+    return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
+      return ScopedModelDescendant<LanguageModel>(
+          builder: (context, child, language) {
+        List<Widget> select = [
+          const Home(),
+          const Trending(),
+          const Profile(),
+        ];
+        return Scaffold(
+          appBar: AppBar(
+            elevation: 1.0,
+            title: Text(
+              "Bundle",
+              style: TextStyle(
+                color: theme.title,
+                fontSize: 28,
+                letterSpacing: 4.0,
+                fontWeight: FontWeight.normal,
+              ),
             ),
-            IconButton(
-              onPressed: () {
-                showSearch(context: context, delegate: Search());
-              },
-              icon: const Icon(Icons.search),
-            ),
-            IconButton(
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: Container(
+                  decoration: BoxDecoration(
+                    color: theme.shadow,
+                    shape: BoxShape.circle,
+                  ),
+                  height: 50.0,
+                  width: 50.0,
+                  child: Icon(
+                    Icons.notifications,
+                    color: theme.icon,
+                    size: 30.0,
+                  ),
+                ),
+              ),
+              IconButton(
+                  onPressed: () {
+                    showSearch(context: context, delegate: Search());
+                  },
+                  icon: Container(
+                    decoration: BoxDecoration(
+                      color: theme.shadow,
+                      shape: BoxShape.circle,
+                    ),
+                    height: 50.0,
+                    width: 50.0,
+                    child: Icon(
+                      Icons.search,
+                      color: theme.icon,
+                      size: 30.0,
+                    ),
+                  )),
+              IconButton(
                 onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const Menu()));
                 },
-                icon: const Icon(Icons.dehaze_rounded))
-          ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(0.0),
-          child: select[value],
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-            backgroundColor: Colors.white,
-            elevation: 0.5,
-            currentIndex: value,
-            onTap: (index) {
-              setState(() {
-                value = index;
-              });
-            },
-            items: const [
-              BottomNavigationBarItem(
-                label: "home",
-                icon: Icon(Icons.home),
-              ),
-              BottomNavigationBarItem(
-                label: "trending",
-                icon: Icon(Icons.whatshot),
-              ),
-              BottomNavigationBarItem(
-                label: "profile",
-                icon: Icon(Icons.person_rounded),
-              ),
-            ]),
-      );
+                icon: Container(
+                  decoration: BoxDecoration(
+                    color: theme.shadow,
+                    shape: BoxShape.circle,
+                  ),
+                  height: 50.0,
+                  width: 50.0,
+                  child: Icon(
+                    Icons.dehaze_rounded,
+                    color: theme.icon,
+                    size: 30.0,
+                  ),
+                ),
+              )
+            ],
+          ),
+          body: Padding(
+            padding: const EdgeInsets.all(0.0),
+            child: select[value],
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+              backgroundColor: theme.background,
+              unselectedItemColor: theme.icon,
+              selectedItemColor: theme.title,
+              elevation: 0.5,
+              currentIndex: value,
+              onTap: (index) {
+                setState(() {
+                  value = index;
+                });
+              },
+              items: const [
+                BottomNavigationBarItem(
+                  label: "home",
+                  icon: Icon(
+                    Icons.home,
+                    size: 30.0,
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: "trending",
+                  icon: Icon(
+                    Icons.whatshot,
+                    size: 30.0,
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: "profile",
+                  icon: Icon(
+                    Icons.person_rounded,
+                    size: 30.0,
+                  ),
+                ),
+              ]),
+        );
+      });
     });
   }
 }

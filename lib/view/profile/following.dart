@@ -26,9 +26,14 @@ class _FollowingState extends State<Following> {
               builder: (context, child, theme) {
             return Scaffold(
                 appBar: AppBar(
-                  title: const Text(
+                  title: Text(
                     "Following",
-                    style: TextStyle(color: Colors.purple),
+                    style: TextStyle(
+                      color: theme.title,
+                      fontSize: 24.0,
+                      letterSpacing: 1.0,
+                      fontWeight: FontWeight.normal,
+                    ),
                   ),
                   elevation: 0.0,
                 ),
@@ -41,13 +46,20 @@ class _FollowingState extends State<Following> {
                                 height: 250,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  border: Border.all(
-                                      color: const Color(0xffce93d8)),
+                                  border: Border.all(color: theme.shadow),
                                 ),
-                                child: const Center(
+                                child: Center(
                                   child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text('following'),
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'following',
+                                      style: TextStyle(
+                                        color: theme.title,
+                                        fontSize: 24.0,
+                                        letterSpacing: 1.0,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
                                   ),
                                 )),
                           )

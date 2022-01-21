@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:social_network_application/entities/dto/user_update_dto.dart';
+import 'package:social_network_application/entities/dto/user_dto.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 import 'dart:convert';
 
 import 'package:social_network_application/entities/mini_dto/worker_mini.dart';
-import 'package:social_network_application/view/login/login.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+
+import 'package:social_network_application/view/authentication/login.dart';
 
 class ProfileModel extends Model {
   static const String base =
@@ -110,55 +111,56 @@ class ProfileModel extends Model {
     notifyListeners();
   }
 
-  updateImage(
-      {required UserUpdateDTO userUpdateDTO,
-      required BuildContext context}) async {
+  addImageProfile(
+      {required UserDTO userDTO, required BuildContext context}) async {
     load = true;
     notifyListeners();
     try {
       //--save image firebase -/
-
       await FirebaseStorage.instance
           .ref()
-          .child("profile")
-          .child(userMini.id + ".jpg")
+          .child('profile')
+          .child(userDTO.idUser! + ".jpg")
           .putFile(imageFile)
           .snapshot
           .ref
           .getDownloadURL()
-          .then((value) {
-        userUpdateDTO.image = value;
+          .then((value) async {
+        // ignore: avoid_print
+        print('value: ' + value);
+        userDTO.image = value;
+
+        //--save image api -/
+        var url = Uri.parse(base + 'users/put/add/image');
+        var response =
+            await http.put(url, body: json.encode(userDTO.toMap()), headers: {
+          "Accept": "application/json; charset=utf-8",
+          "content-type": "application/json; charset=utf-8"
+        });
+        // ignore: avoid_print
+        print("updateImage: " + response.statusCode.toString());
+        switch (response.statusCode) {
+          case 202:
+            getProfile(context: context);
+            load = false;
+            imageIsNull = true;
+            notifyListeners();
+            Navigator.pop(context);
+            break;
+          default:
+            load = false;
+            imageIsNull = true;
+            notifyListeners();
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Try again later')),
+            );
+            break;
+        }
+        //**save image api */
       });
 
       //**save image firebase */
 
-      //--save image api -/
-      var url = Uri.parse(base + 'users/put/image');
-      var response = await http
-          .put(url, body: json.encode(userUpdateDTO.toMap()), headers: {
-        "Accept": "application/json; charset=utf-8",
-        "content-type": "application/json; charset=utf-8"
-      });
-      // ignore: avoid_print
-      print("updateImage: " + response.statusCode.toString());
-      switch (response.statusCode) {
-        case 202:
-          getProfile(context: context);
-          load = false;
-          imageIsNull = true;
-          notifyListeners();
-          Navigator.pop(context);
-          break;
-        default:
-          load = false;
-          imageIsNull = true;
-          notifyListeners();
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Try again later')),
-          );
-          break;
-      }
-      //**save image api */
     } catch (e) {
       load = false;
       imageIsNull = true;
@@ -169,14 +171,71 @@ class ProfileModel extends Model {
     }
   }
 
-  updateName(
-      {required UserUpdateDTO userUpdateDTO,
-      required BuildContext context}) async {
+  removeImageProfile(
+      {required UserDTO userDTO, required BuildContext context}) async {
+    load = true;
+    notifyListeners();
+    try {
+      //--save image firebase -/
+
+      await FirebaseStorage.instance
+          .ref()
+          .child('profile')
+          .child(userDTO.image!)
+          // ignore: avoid_print
+          .delete()
+          .onError((error, stackTrace) {
+        // ignore: avoid_print
+        print(error.toString() + ' : ' + stackTrace.toString());
+      }).then((_) async {
+        //--save image api -/
+        var url = Uri.parse(base + 'users/put/remove/image');
+        var response =
+            await http.put(url, body: json.encode(userDTO.toMap()), headers: {
+          "Accept": "application/json; charset=utf-8",
+          "content-type": "application/json; charset=utf-8"
+        });
+        // ignore: avoid_print
+        print("deleteImage: " + response.statusCode.toString());
+        switch (response.statusCode) {
+          case 202:
+            getProfile(context: context);
+            load = false;
+            imageIsNull = true;
+            notifyListeners();
+            Navigator.pop(context);
+            break;
+          default:
+            load = false;
+            imageIsNull = true;
+            notifyListeners();
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Try again later')),
+            );
+            break;
+        }
+        //**save image api */
+      });
+      // ignore: avoid_print
+
+      //**save image firebase */
+
+    } catch (e) {
+      load = false;
+      imageIsNull = true;
+      notifyListeners();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Try again later')),
+      );
+    }
+  }
+
+  updateName({required UserDTO userDTO, required BuildContext context}) async {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'users/put/name');
     var response =
-        await http.put(url, body: json.encode(userUpdateDTO.toMap()), headers: {
+        await http.put(url, body: json.encode(userDTO.toMap()), headers: {
       "Accept": "application/json; charset=utf-8",
       "content-type": "application/json; charset=utf-8"
     });
@@ -199,14 +258,12 @@ class ProfileModel extends Model {
     }
   }
 
-  updatePlace(
-      {required UserUpdateDTO userUpdateDTO,
-      required BuildContext context}) async {
+  updatePlace({required UserDTO userDTO, required BuildContext context}) async {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'users/put/place');
     var response =
-        await http.put(url, body: json.encode(userUpdateDTO.toMap()), headers: {
+        await http.put(url, body: json.encode(userDTO.toMap()), headers: {
       "Accept": "application/json; charset=utf-8",
       "content-type": "application/json; charset=utf-8"
     });
@@ -230,8 +287,7 @@ class ProfileModel extends Model {
   }
 
   updateDescription(
-      {required UserUpdateDTO userUpdateDTO,
-      required BuildContext context}) async {
+      {required UserDTO userUpdateDTO, required BuildContext context}) async {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'users/put/description');
@@ -259,14 +315,12 @@ class ProfileModel extends Model {
     }
   }
 
-  updateEmail(
-      {required UserUpdateDTO userUpdateDTO,
-      required BuildContext context}) async {
+  updateEmail({required UserDTO userDTO, required BuildContext context}) async {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'users/put/email');
     var response =
-        await http.put(url, body: json.encode(userUpdateDTO.toMap()), headers: {
+        await http.put(url, body: json.encode(userDTO.toMap()), headers: {
       "Accept": "application/json; charset=utf-8",
       "content-type": "application/json; charset=utf-8"
     });
@@ -290,13 +344,12 @@ class ProfileModel extends Model {
   }
 
   updatePassword(
-      {required UserUpdateDTO userUpdateDTO,
-      required BuildContext context}) async {
+      {required UserDTO userDTO, required BuildContext context}) async {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'users/put/password');
     var response =
-        await http.put(url, body: json.encode(userUpdateDTO.toMap()), headers: {
+        await http.put(url, body: json.encode(userDTO.toMap()), headers: {
       "Accept": "application/json; charset=utf-8",
       "content-type": "application/json; charset=utf-8"
     });

@@ -6,7 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_network_application/entities/mini_dto/invitation_mini.dart';
-import 'package:social_network_application/view/login/login.dart';
+import 'package:social_network_application/scoped_model/support/language_model.dart';
+import 'package:social_network_application/scoped_model/support/theme_model.dart';
+import 'package:social_network_application/view/authentication/login.dart';
+import 'package:social_network_application/view/new_entity.dart';
 
 class MenuModel extends Model {
   static const String base =
@@ -113,7 +116,7 @@ class MenuModel extends Model {
   getDarkMode() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      isDark = prefs.getBool("isDark")!;
+      isDark = prefs.getBool("dark")!;
       notifyListeners();
     } catch (e) {
       isDark = false;
@@ -121,11 +124,71 @@ class MenuModel extends Model {
     }
   }
 
-  saveDarkMode({required bool darkMode}) async {
+  saveDarkMode({required bool dark, required BuildContext context}) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool("isDark", darkMode);
+    await prefs.setBool("dark", dark);
+    ScopedModel.of<ThemeModel>(context).getDarkMode();
     getDarkMode();
   }
 
   //--dark mode
+
+  //--new entity
+  showListEntitiesBottomSheet(BuildContext context) {
+    showModalBottomSheet<dynamic>(
+        //isScrollControlled: true,
+        context: context,
+        builder: (context) {
+          return BottomSheet(
+              onClosing: () {},
+              builder: (context) {
+                return GridView.count(
+                  childAspectRatio: 1.0 / 1.3,
+                  crossAxisCount: 3,
+                  children: LanguageModel().typeEntities.map((e) {
+                    return GestureDetector(
+                      child: Container(
+                        color: Colors.transparent,
+                        margin: const EdgeInsets.all(4.0),
+                        padding: const EdgeInsets.only(top: 18.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            CircleAvatar(
+                              child: Icon(
+                                LanguageModel().typeEntitiesIcon[
+                                    LanguageModel().typeEntities.indexOf(e)],
+                                size: 20.0,
+                              ),
+                              backgroundColor: Colors.grey[300],
+                              radius: 30.0,
+                            ),
+                            const SizedBox(height: 8.0),
+                            Text(
+                              e,
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                              maxLines: 2,
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 8.0),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => NewEntity(
+                                      typeEntity: e,
+                                    )));
+                      },
+                    );
+                  }).toList(),
+                );
+              });
+        });
+  }
 }

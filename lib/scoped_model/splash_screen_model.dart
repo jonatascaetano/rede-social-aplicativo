@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
-import 'package:social_network_application/view/login/login.dart';
+import 'package:social_network_application/view/authentication/login.dart';
 import 'package:social_network_application/view/my_app.dart';
 
 class SplashScreenModel extends Model {

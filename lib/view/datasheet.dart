@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
+import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/tabs%20datasheet/category_0.dart';
 import 'package:social_network_application/view/tabs%20datasheet/category_1.dart';
 import 'package:social_network_application/view/tabs%20datasheet/category_2.dart';
@@ -31,105 +33,173 @@ class _DatasheetState extends State<Datasheet>
   @override
   // ignore: must_call_super
   Widget build(BuildContext context) {
-    return Scaffold(
-        //backgroundColor: Colors.black,
-        body: Container(
-      margin: const EdgeInsets.only(top: 24.0),
-      child: DefaultTabController(
-          length: 9,
-          child: NestedScrollView(
-              headerSliverBuilder:
-                  (BuildContext context, bool innerBoxIsScrolled) {
-                return <Widget>[
-                  SliverAppBar(
-                    //backgroundColor: Color(0xff0f1b1b),
-                    toolbarHeight: 40.0,
-                    floating: false,
-                    pinned: false,
-                    snap: false,
-                    flexibleSpace: FlexibleSpaceBar(
-                        titlePadding: const EdgeInsets.symmetric(
-                            horizontal: 32.0, vertical: 0.0),
-                        title: Padding(
-                          padding: const EdgeInsets.only(left: 16, bottom: 8),
-                          child: Text(
+    return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
+      return Scaffold(
+          //backgroundColor: Colors.black,
+          body: Container(
+        margin: const EdgeInsets.only(top: 24.0),
+        child: DefaultTabController(
+            length: 9,
+            child: NestedScrollView(
+                headerSliverBuilder:
+                    (BuildContext context, bool innerBoxIsScrolled) {
+                  return <Widget>[
+                    SliverAppBar(
+                      //backgroundColor: Color(0xff0f1b1b),
+                      toolbarHeight: 40.0,
+                      floating: false,
+                      pinned: false,
+                      snap: false,
+                      flexibleSpace: FlexibleSpaceBar(
+                          titlePadding: const EdgeInsets.symmetric(
+                              horizontal: 32.0, vertical: 0.0),
+                          title: Padding(
+                            padding: const EdgeInsets.only(left: 16, bottom: 8),
+                            child: Text(
                               LanguageModel()
-                                  .typeEntities[widget.index]
+                                  .typeEntitiesMini[widget.index]
                                   .toString(),
-                              style: const TextStyle(
-                                color: Colors.purple,
+                              style: TextStyle(
+                                color: theme.title,
                                 fontSize: 24.0,
-                              )),
-                        )),
-                    actions: const [],
-                  ),
-                  SliverPersistentHeader(
-                    delegate: _SliverAppBarDelegate(
-                      TabBar(
-                        isScrollable: true,
-                        labelColor: Colors.purple,
-                        //indicatorColor: const Color(0xffb34700),
-                        unselectedLabelColor: Colors.grey,
-                        tabs: [
-                          Tab(
-                            child: Text(LanguageModel()
-                                .entitiesCategories[widget.index][0]),
-                          ),
-                          Tab(
-                            child: Text(LanguageModel()
-                                .entitiesCategories[widget.index][1]),
-                          ),
-                          Tab(
-                            child: Text(LanguageModel()
-                                .entitiesCategories[widget.index][2]),
-                          ),
-                          Tab(
-                            child: Text(LanguageModel()
-                                .entitiesCategories[widget.index][3]),
-                          ),
-                          Tab(
-                            child: Text(LanguageModel()
-                                .entitiesCategories[widget.index][4]),
-                          ),
-                          Tab(
-                            child: Text(LanguageModel()
-                                .entitiesCategories[widget.index][5]),
-                          ),
-                          Tab(
-                            child: Text(LanguageModel()
-                                .entitiesCategories[widget.index][6]),
-                          ),
-                          Tab(
-                            child: Text(LanguageModel()
-                                .entitiesCategories[widget.index][7]),
-                          ),
-                          Tab(
-                            child: Text(LanguageModel()
-                                .entitiesCategories[widget.index][8]),
-                          ),
-                        ],
-                      ),
+                                letterSpacing: 1.0,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          )),
+                      actions: const [],
                     ),
-                    pinned: true,
-                    floating: false,
-                  ),
-                ];
-              },
-              body: Container(
-                margin: EdgeInsets.zero,
-                child: const TabBarView(children: [
-                  Category0(),
-                  Category1(),
-                  Category2(),
-                  Category3(),
-                  Category4(),
-                  Category5(),
-                  Category6(),
-                  Category7(),
-                  Category8(),
-                ]),
-              ))),
-    ));
+                    SliverPersistentHeader(
+                      delegate: _SliverAppBarDelegate(
+                        TabBar(
+                          isScrollable: true,
+                          labelColor: theme.title,
+                          indicatorColor: theme.emphasis,
+                          unselectedLabelColor: theme.subtitle,
+                          tabs: [
+                            Tab(
+                              child: Text(
+                                LanguageModel().entitiesCategories[widget.index]
+                                    [0],
+                                style: const TextStyle(
+                                  fontSize: 19,
+                                  letterSpacing: 1.0,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ),
+                            Tab(
+                              child: Text(
+                                LanguageModel().entitiesCategories[widget.index]
+                                    [1],
+                                style: const TextStyle(
+                                  fontSize: 19,
+                                  letterSpacing: 1.0,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ),
+                            Tab(
+                              child: Text(
+                                LanguageModel().entitiesCategories[widget.index]
+                                    [2],
+                                style: const TextStyle(
+                                  fontSize: 19,
+                                  letterSpacing: 1.0,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ),
+                            Tab(
+                              child: Text(
+                                LanguageModel().entitiesCategories[widget.index]
+                                    [3],
+                                style: const TextStyle(
+                                  fontSize: 19,
+                                  letterSpacing: 1.0,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ),
+                            Tab(
+                              child: Text(
+                                LanguageModel().entitiesCategories[widget.index]
+                                    [4],
+                                style: const TextStyle(
+                                  fontSize: 19,
+                                  letterSpacing: 1.0,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ),
+                            Tab(
+                              child: Text(
+                                LanguageModel().entitiesCategories[widget.index]
+                                    [5],
+                                style: const TextStyle(
+                                  fontSize: 19,
+                                  letterSpacing: 1.0,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ),
+                            Tab(
+                              child: Text(
+                                LanguageModel().entitiesCategories[widget.index]
+                                    [6],
+                                style: const TextStyle(
+                                  fontSize: 19,
+                                  letterSpacing: 1.0,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ),
+                            Tab(
+                              child: Text(
+                                LanguageModel().entitiesCategories[widget.index]
+                                    [7],
+                                style: const TextStyle(
+                                  fontSize: 19,
+                                  letterSpacing: 1.0,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ),
+                            Tab(
+                              child: Text(
+                                LanguageModel().entitiesCategories[widget.index]
+                                    [8],
+                                style: const TextStyle(
+                                  fontSize: 19,
+                                  letterSpacing: 1.0,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      pinned: true,
+                      floating: false,
+                    ),
+                  ];
+                },
+                body: Container(
+                  margin: EdgeInsets.zero,
+                  child: const TabBarView(children: [
+                    Category0(),
+                    Category1(),
+                    Category2(),
+                    Category3(),
+                    Category4(),
+                    Category5(),
+                    Category6(),
+                    Category7(),
+                    Category8(),
+                  ]),
+                ))),
+      ));
+    });
   }
 
   @override
