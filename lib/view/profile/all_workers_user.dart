@@ -6,11 +6,11 @@ import 'package:social_network_application/scoped_model/support/theme_model.dart
 import 'package:social_network_application/widgets/mini_profile/worker_mini_profile.dart';
 
 // ignore: must_be_immutable
-class AllWorkersProfile extends StatefulWidget {
+class AllWorkersUser extends StatefulWidget {
   bool isUser;
   UserMini userMini;
   List<WorkerMini> workers;
-  AllWorkersProfile(
+  AllWorkersUser(
       {required this.isUser,
       required this.userMini,
       required this.workers,
@@ -18,10 +18,10 @@ class AllWorkersProfile extends StatefulWidget {
       : super(key: key);
 
   @override
-  _AllWorkersProfileState createState() => _AllWorkersProfileState();
+  _AllWorkersUserState createState() => _AllWorkersUserState();
 }
 
-class _AllWorkersProfileState extends State<AllWorkersProfile> {
+class _AllWorkersUserState extends State<AllWorkersUser> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {

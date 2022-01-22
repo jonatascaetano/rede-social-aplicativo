@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/entities/mini_dto/episode_mini.dart';
+import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/objects/episode.dart';
 
 // ignore: must_be_immutable
@@ -14,16 +16,15 @@ class EpisodeMiniSeason extends StatefulWidget {
 class _EpisodeMiniSeasonState extends State<EpisodeMiniSeason> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: Container(
-        width: 150.0,
-        decoration: BoxDecoration(
-          border: Border.all(color: const Color(0xffe1bee7)),
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
+    return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
+      return Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Container(
+          width: 200.0,
+          decoration: BoxDecoration(
+            border: Border.all(color: theme.shadow),
+            borderRadius: BorderRadius.circular(8.0),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -31,18 +32,36 @@ class _EpisodeMiniSeasonState extends State<EpisodeMiniSeason> {
                 child: Column(
                   children: [
                     widget.episodeMini.image != null
-                        ? CircleAvatar(
-                            backgroundImage:
-                                NetworkImage(widget.episodeMini.image!),
-                            radius: 30.0,
-                          )
-                        : CircleAvatar(
-                            backgroundColor: Colors.grey[300],
-                            child: const Icon(
-                              Icons.image,
-                              size: 30.0,
+                        ? Container(
+                            height: 150,
+                            width: 200,
+                            decoration: BoxDecoration(
+                              color: theme.shadow,
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(10.0),
+                                  topRight: Radius.circular(10.0)),
+                              image: DecorationImage(
+                                image: NetworkImage(widget.episodeMini.image!),
+                                fit: BoxFit.fitHeight,
+                              ),
                             ),
-                            radius: 30.0,
+                          )
+                        : Container(
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(10.0),
+                                  topRight: Radius.circular(10.0)),
+                              color: theme.shadow,
+                            ),
+                            height: 150,
+                            width: 200,
+                            child: Center(
+                              child: Icon(
+                                Icons.image,
+                                color: theme.emphasis,
+                                size: 150,
+                              ),
+                            ),
                           ),
                     const SizedBox(
                       height: 8.0,
@@ -53,9 +72,11 @@ class _EpisodeMiniSeasonState extends State<EpisodeMiniSeason> {
                       overflow: TextOverflow.fade,
                       maxLines: 1,
                       softWrap: false,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 18.0,
                         letterSpacing: 2.0,
+                        color: theme.title,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                     const SizedBox(
@@ -77,7 +98,7 @@ class _EpisodeMiniSeasonState extends State<EpisodeMiniSeason> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   elevation: 1.0,
-                  primary: Colors.purple.shade200,
+                  primary: theme.buttonMain,
                 ),
                 onPressed: () {
                   Navigator.push(
@@ -88,10 +109,10 @@ class _EpisodeMiniSeasonState extends State<EpisodeMiniSeason> {
                     ),
                   );
                 },
-                child: const Text(
+                child: Text(
                   "view",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: theme.buttonMainText,
                     fontSize: 18.0,
                     letterSpacing: 2.0,
                   ),
@@ -100,7 +121,7 @@ class _EpisodeMiniSeasonState extends State<EpisodeMiniSeason> {
             ],
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

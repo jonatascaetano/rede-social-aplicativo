@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
+import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/scoped_model/user_model.dart';
+import 'package:social_network_application/view/profile/all_workers_user.dart';
 import 'package:social_network_application/view/profile/followers.dart';
 import 'package:social_network_application/view/profile/following.dart';
 import 'package:social_network_application/widgets/mini_profile/entities_mini_profile.dart';
@@ -20,26 +22,33 @@ class User extends StatefulWidget {
 class _UserState extends State<User> {
   @override
   Widget build(BuildContext context) {
-    return ScopedModel<UserModel>(
-      model: UserModel(idUser: widget.userMini.id),
-      child: ScopedModelDescendant<UserModel>(builder: (context, child, user) {
-        return Scaffold(
-          body: Stack(
-            children: [
-              user.profileNull
-                  ? Container()
-                  : ListView(
-                      children: [
-                        //inicio da area profile
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
+    return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
+      return ScopedModel<UserModel>(
+        model: UserModel(idUser: widget.userMini.id),
+        child:
+            ScopedModelDescendant<UserModel>(builder: (context, child, user) {
+          return Scaffold(
+            body: Container(
+              margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+              padding: EdgeInsets.zero,
+              child: Stack(
+                children: [
+                  user.profileNull
+                      ? Container()
+                      : ListView(
+                          padding: EdgeInsets.zero,
                           children: [
+                            //inicio da area profile
                             user.userMini.image != null
                                 ? Container(
-                                    height: 300,
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.9,
+                                    margin: EdgeInsets.zero,
+                                    padding: EdgeInsets.zero,
+                                    height: (MediaQuery.of(context).size.width /
+                                            16) *
+                                        9,
+                                    width: MediaQuery.of(context).size.width,
                                     decoration: BoxDecoration(
+                                      color: theme.shadow,
                                       image: DecorationImage(
                                         image:
                                             NetworkImage(user.userMini.image!),
@@ -48,14 +57,19 @@ class _UserState extends State<User> {
                                     ),
                                   )
                                 : Container(
-                                    color: Colors.purple[100],
-                                    height: 300,
-                                    child: const Center(
+                                    color: theme.shadow,
+                                    height: (MediaQuery.of(context).size.width /
+                                            16) *
+                                        9,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Center(
                                       child: Icon(
                                         Icons.image,
                                         size: 100,
+                                        color: theme.emphasis,
                                       ),
                                     )),
+
                             const SizedBox(
                               height: 16.0,
                             ),
@@ -84,238 +98,321 @@ class _UserState extends State<User> {
                             // const SizedBox(
                             //   height: 16.0,
                             // ),
-                            SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 0.0, vertical: 8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    user.userMini.name,
-                                    style: const TextStyle(
-                                      fontSize: 28,
-                                      color: Colors.purple,
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Center(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            user.userMini.name,
+                                            style: TextStyle(
+                                              fontSize: 28,
+                                              color: theme.title,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 2.0,
+                                          ),
+                                          user.userMini.checked
+                                              ? Icon(
+                                                  Icons.check_circle_outlined,
+                                                  color: theme.emphasis,
+                                                )
+                                              : Container()
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                  const SizedBox(
-                                    width: 2.0,
-                                  ),
-                                  user.userMini.checked
-                                      ? Icon(
-                                          Icons.check_circle_outlined,
-                                          color: Colors.blue[900],
-                                        )
-                                      : Container()
                                 ],
                               ),
                             ),
+
+                            user.showFollowButton
+                                ? user.isFollowing
+                                    ? Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            primary: theme.button,
+                                            elevation: 0.0,
+                                          ),
+                                          onPressed: () {
+                                            user.removeFollowing(
+                                              idFollowing: user.userMini.id,
+                                              context: context,
+                                            );
+                                          },
+                                          child: Text(
+                                            'Unfollow',
+                                            style: TextStyle(
+                                              fontSize: 19,
+                                              letterSpacing: 1.0,
+                                              color: theme.buttonText,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            primary: theme.button,
+                                            elevation: 0.0,
+                                          ),
+                                          onPressed: () {
+                                            user.addFollowing(
+                                              idFollowing: user.userMini.id,
+                                              context: context,
+                                            );
+                                          },
+                                          child: Text(
+                                            'Follow',
+                                            style: TextStyle(
+                                              fontSize: 19,
+                                              letterSpacing: 1.0,
+                                              color: theme.buttonText,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                : Container(),
 
                             const SizedBox(
                               height: 8.0,
                             ),
 
-                            user.userMini.place != null
-                                ? Center(
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 8.0),
-                                      child: Text(
-                                        user.userMini.place!,
-                                        style: const TextStyle(
-                                          fontSize: 18,
-                                          letterSpacing: 2.0,
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Followers(
+                                                        idUser:
+                                                            user.userMini.id,
+                                                        isUser: false,
+                                                      )));
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Text('Followers',
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  letterSpacing: 1.0,
+                                                  fontWeight: FontWeight.normal,
+                                                  color: theme.subtitle,
+                                                )),
+                                            const SizedBox(
+                                              width: 4.0,
+                                            ),
+                                            Text(
+                                                user.userMini.quantityFollowers
+                                                    .toString(),
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  letterSpacing: 1.0,
+                                                  fontWeight: FontWeight.normal,
+                                                  color: theme.subtitle,
+                                                )),
+                                          ],
                                         ),
                                       ),
-                                    ),
-                                  )
-                                : Container(),
-                            SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => Followers(
-                                                    idUser: user.userMini.id,
-                                                    isUser: false,
-                                                  )));
-                                    },
+                                      const SizedBox(
+                                        width: 8.0,
+                                      ),
+                                      TextButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        Following(
+                                                          idUser:
+                                                              user.userMini.id,
+                                                          isUser: false,
+                                                        )));
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Text('Following',
+                                                  style: TextStyle(
+                                                    fontSize: 16,
+                                                    letterSpacing: 1.0,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    color: theme.subtitle,
+                                                  )),
+                                              const SizedBox(
+                                                width: 4.0,
+                                              ),
+                                              Text(
+                                                  user.userMini
+                                                      .quantityFollowing
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                    fontSize: 16,
+                                                    letterSpacing: 1.0,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    color: theme.subtitle,
+                                                  )),
+                                            ],
+                                          )),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            user.userMini.place != null
+                                ? Padding(
+                                    padding: const EdgeInsets.all(8.0),
                                     child: Row(
                                       children: [
-                                        const Text(
-                                          'Followers',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            letterSpacing: 1.0,
-                                            fontWeight: FontWeight.normal,
-                                          ),
+                                        Icon(
+                                          Icons.place,
+                                          color: theme.detail,
                                         ),
                                         const SizedBox(
                                           width: 4.0,
                                         ),
                                         Text(
-                                          user.userMini.quantityFollowers
-                                              .toString(),
-                                          style: const TextStyle(
-                                            fontSize: 16,
-                                            letterSpacing: 1.0,
-                                            fontWeight: FontWeight.normal,
+                                          user.userMini.place!,
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            letterSpacing: 0.5,
+                                            color: theme.title,
                                           ),
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    width: 8.0,
-                                  ),
-                                  TextButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => Following(
-                                                      idUser: user.userMini.id,
-                                                      isUser: false,
-                                                    )));
-                                      },
-                                      child: Row(
-                                        children: [
-                                          const Text(
-                                            'Following',
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              letterSpacing: 1.0,
-                                              fontWeight: FontWeight.normal,
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 4.0,
-                                          ),
-                                          Text(
-                                            user.userMini.quantityFollowing
-                                                .toString(),
-                                            style: const TextStyle(
-                                              fontSize: 16,
-                                              letterSpacing: 1.0,
-                                              fontWeight: FontWeight.normal,
-                                            ),
-                                          ),
-                                        ],
-                                      )),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        user.userMini.description != null
-                            ? Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  user.userMini.description!,
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    letterSpacing: 1.0,
-                                    color: Colors.grey[700],
-                                  ),
-                                ),
-                              )
-                            : Container(),
-                        user.showFollowButton
-                            ? user.isFollowing
+                                  )
+                                : Container(),
+
+                            user.userMini.description != null
                                 ? Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        user.removeFollowing(
-                                          idFollowing: user.userMini.id,
-                                          context: context,
-                                        );
-                                      },
-                                      child: const Text(
-                                        'Unfollow',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          letterSpacing: 2.0,
-                                        ),
+                                    child: Text(
+                                      user.userMini.description!,
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        letterSpacing: 0.5,
+                                        color: theme.subtitle,
                                       ),
                                     ),
                                   )
-                                : Padding(
+                                : Container(),
+                            user.workers.isNotEmpty
+                                ? Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        user.addFollowing(
-                                          idFollowing: user.userMini.id,
-                                          context: context,
-                                        );
-                                      },
-                                      child: const Text(
-                                        'Follow',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          letterSpacing: 2.0,
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            'View all works',
+                                            style: TextStyle(
+                                                fontSize: 19,
+                                                color: theme.title),
+                                          ),
                                         ),
-                                      ),
+                                        IconButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    AllWorkersUser(
+                                                  isUser: false,
+                                                  userMini: user.userMini,
+                                                  workers: user.workers,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          icon: Icon(
+                                            Icons.arrow_forward,
+                                            color: theme.title,
+                                            size: 24.0,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   )
-                            : Container(),
-                        user.workers.isNotEmpty
-                            ? SizedBox(
-                                height: 200,
-                                child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: user.workers.length,
-                                    itemBuilder: (context, index) {
-                                      return WorkerMiniProfile(
-                                        workerMini: user.workers[index],
-                                        isUser: false,
-                                      );
-                                    }),
-                              )
-                            : Container(),
-                        const SizedBox(
-                          height: 16.0,
-                        ),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: LanguageModel()
-                                .typeEntitiesMini
-                                .map(
-                                  (e) => EntityMiniProfile(
-                                    index: LanguageModel()
-                                        .typeEntitiesMini
-                                        .indexOf(e),
-                                    isUser: false,
-                                    idUser: widget.userMini.id,
-                                  ),
-                                )
-                                .toList(),
-                          ),
-                        ),
-                        //final da area profile
+                                : Container(),
 
-                        //inicio area post
-                      ],
-                    ),
-              user.load
-                  ? Positioned(
-                      bottom: 0.1,
-                      child: SizedBox(
-                        height: 5.0,
-                        width: MediaQuery.of(context).size.width,
-                        child: const LinearProgressIndicator(),
-                      ),
-                    )
-                  : Container(),
-            ],
-          ),
-        );
-      }),
-    );
+                            user.workers.isNotEmpty
+                                ? SizedBox(
+                                    height: 280,
+                                    child: ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: user.workers.length,
+                                        itemBuilder: (context, index) {
+                                          return WorkerMiniProfile(
+                                            workerMini: user.workers[index],
+                                            isUser: false,
+                                          );
+                                        }),
+                                  )
+                                : Container(),
+
+                            const SizedBox(
+                              height: 16.0,
+                            ),
+
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: LanguageModel()
+                                    .typeEntitiesMini
+                                    .map(
+                                      (e) => EntityMiniProfile(
+                                        index: LanguageModel()
+                                            .typeEntitiesMini
+                                            .indexOf(e),
+                                        isUser: false,
+                                        idUser: widget.userMini.id,
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
+                            ),
+                            //final da area profile
+
+                            //inicio area post
+                          ],
+                        ),
+                  user.load
+                      ? Positioned(
+                          bottom: 0.1,
+                          child: SizedBox(
+                            height: 5.0,
+                            width: MediaQuery.of(context).size.width,
+                            child: const LinearProgressIndicator(),
+                          ),
+                        )
+                      : Container(),
+                ],
+              ),
+            ),
+          );
+        }),
+      );
+    });
   }
 }

@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:social_network_application/scoped_model/entity_model.dart';
+import 'package:social_network_application/scoped_model/season_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
-import 'package:social_network_application/widgets/mini_entities/worker_mini_entity.dart';
+import 'package:social_network_application/widgets/mini_seasons/episode_mini_season.dart';
 
-class AllWorkersEntity extends StatefulWidget {
-  const AllWorkersEntity({Key? key}) : super(key: key);
+class AllEpisodesSeason extends StatefulWidget {
+  const AllEpisodesSeason({Key? key}) : super(key: key);
 
   @override
-  _AllWorkersEntityState createState() => _AllWorkersEntityState();
+  _AllEpisodesSeasonState createState() => _AllEpisodesSeasonState();
 }
 
-class _AllWorkersEntityState extends State<AllWorkersEntity> {
+class _AllEpisodesSeasonState extends State<AllEpisodesSeason> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<EntityModel>(
-          builder: (context, child, entity) {
+      return ScopedModelDescendant<SeasonModel>(
+          builder: (context, child, season) {
         return Scaffold(
           appBar: AppBar(
             elevation: 0.0,
             title: Text(
-              entity.entityMini.name + " cast",
+              season.seasonMini.name + " seasons",
               style: TextStyle(
                 color: theme.title,
                 fontSize: 24.0,
@@ -31,12 +31,11 @@ class _AllWorkersEntityState extends State<AllWorkersEntity> {
             ),
           ),
           body: GridView.count(
-            childAspectRatio: 1.0 / 1.65,
+            childAspectRatio: 1.0 / 1.6,
             crossAxisCount: 2,
-            children: entity.workers.map((e) {
-              return WorkerMiniEntity(
-                workerMini: e,
-                idUser: entity.idUser,
+            children: season.episodes.map((e) {
+              return EpisodeMiniSeason(
+                episodeMini: e,
               );
             }).toList(),
           ),

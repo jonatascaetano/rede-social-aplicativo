@@ -84,6 +84,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                   height: 200,
                                   width: MediaQuery.of(context).size.width,
                                   decoration: BoxDecoration(
+                                    color: theme.shadow,
                                     image: DecorationImage(
                                       image:
                                           NetworkImage(profile.userMini.image!),

@@ -35,6 +35,7 @@ class _SeasonMiniEntityState extends State<SeasonMiniEntity> {
                         height: 150,
                         width: 200,
                         decoration: BoxDecoration(
+                          color: theme.shadow,
                           borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(10.0),
                               topRight: Radius.circular(10.0)),

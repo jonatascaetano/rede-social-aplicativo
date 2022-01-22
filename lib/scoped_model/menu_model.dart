@@ -139,56 +139,61 @@ class MenuModel extends Model {
         //isScrollControlled: true,
         context: context,
         builder: (context) {
-          return BottomSheet(
-              onClosing: () {},
-              builder: (context) {
-                return GridView.count(
-                  childAspectRatio: 1.0 / 1.3,
-                  crossAxisCount: 3,
-                  children: LanguageModel().typeEntities.map((e) {
-                    return GestureDetector(
-                      child: Container(
-                        color: Colors.transparent,
-                        margin: const EdgeInsets.all(4.0),
-                        padding: const EdgeInsets.only(top: 18.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            CircleAvatar(
-                              child: Icon(
-                                LanguageModel().typeEntitiesIcon[
-                                    LanguageModel().typeEntities.indexOf(e)],
-                                size: 20.0,
+          return ScopedModelDescendant<ThemeModel>(
+              builder: (context, child, theme) {
+            return BottomSheet(
+                onClosing: () {},
+                builder: (context) {
+                  return GridView.count(
+                    childAspectRatio: 1.0 / 1.6,
+                    crossAxisCount: 3,
+                    children: LanguageModel().typeEntities.map((e) {
+                      return GestureDetector(
+                        child: Container(
+                          color: Colors.transparent,
+                          margin: const EdgeInsets.all(4.0),
+                          padding: const EdgeInsets.only(top: 18.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              CircleAvatar(
+                                child: Icon(
+                                  LanguageModel().typeEntitiesIcon[
+                                      LanguageModel().typeEntities.indexOf(e)],
+                                  size: 30.0,
+                                  color: theme.buttonText,
+                                ),
+                                backgroundColor: theme.button,
+                                radius: 40.0,
                               ),
-                              backgroundColor: Colors.grey[300],
-                              radius: 30.0,
-                            ),
-                            const SizedBox(height: 8.0),
-                            Text(
-                              e,
-                              style: const TextStyle(
-                                fontSize: 14,
+                              const SizedBox(height: 8.0),
+                              Text(
+                                e,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: theme.buttonText,
+                                ),
+                                maxLines: 2,
+                                textAlign: TextAlign.center,
                               ),
-                              maxLines: 2,
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(height: 8.0),
-                          ],
+                              const SizedBox(height: 8.0),
+                            ],
+                          ),
                         ),
-                      ),
-                      onTap: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => NewEntity(
-                                      typeEntity: e,
-                                    )));
-                      },
-                    );
-                  }).toList(),
-                );
-              });
+                        onTap: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => NewEntity(
+                                        typeEntity: e,
+                                      )));
+                        },
+                      );
+                    }).toList(),
+                  );
+                });
+          });
         });
   }
 }

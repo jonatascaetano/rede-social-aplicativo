@@ -26,6 +26,7 @@ class UserDTO {
     map["place"] = place;
     map["privacy"] = privacy;
     map["status"] = status;
+    map["invitation"] = invitation;
     return map;
   }
 

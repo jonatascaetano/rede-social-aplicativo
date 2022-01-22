@@ -22,7 +22,130 @@ class _FollowerMiniProfileState extends State<FollowerMiniProfile> {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModelDescendant<FollowersModel>(
           builder: (context, child, followers) {
-        return Padding(
+        return GestureDetector(
+          onTap: () {
+            if (widget.userMini.id != followers.id) {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => User(
+                            userMini: widget.userMini,
+                          )));
+            }
+          },
+          child: Container(
+            margin: const EdgeInsets.all(4.0),
+            width: 200.0,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: theme.shadow,
+              ), //  const Color(0xffce93d8)),
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                    child: Column(
+                  children: [
+                    widget.userMini.image != null
+                        ? Container(
+                            height: 150,
+                            width: 200,
+                            decoration: BoxDecoration(
+                              color: theme.shadow,
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(10.0),
+                                  topRight: Radius.circular(10.0)),
+                              image: DecorationImage(
+                                image: NetworkImage(widget.userMini.image!),
+                                fit: BoxFit.fitHeight,
+                              ),
+                            ),
+                          )
+                        : Container(
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(10.0),
+                                  topRight: Radius.circular(10.0)),
+                              color: theme.shadow,
+                            ),
+                            height: 150,
+                            width: 200,
+                            child: Center(
+                              child: Icon(
+                                Icons.image,
+                                color: theme.emphasis,
+                                size: 100,
+                              ),
+                            )),
+                    // ? CircleAvatar(
+                    //     backgroundImage: NetworkImage(widget
+                    //         .workerMini.entity.images[0]
+                    //         .toString()),
+                    //     radius: 30.0,
+                    //   )
+                    // : CircleAvatar(
+                    //     backgroundColor: Colors.grey[300],
+                    //     child: const Icon(
+                    //       Icons.image,
+                    //       size: 30.0,
+                    //     ),
+                    //     radius: 30.0,
+                    //   ),
+                    const SizedBox(
+                      height: 8.0,
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 4.0, vertical: 0.0),
+                      child: Text(
+                        widget.userMini.name,
+                        overflow: TextOverflow.fade,
+                        maxLines: 1,
+                        softWrap: false,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          color: theme.title,
+                          letterSpacing: 2.0,
+                        ),
+                      ),
+                    ),
+                  ],
+                )),
+                const SizedBox(
+                  height: 2.0,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 4.0, vertical: 0.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      followers.removeFollower(
+                          idFollower: widget.userMini.id, context: context);
+                    },
+                    child: Text(
+                      'remove',
+                      style: TextStyle(
+                        fontSize: 18,
+                        letterSpacing: 2.0,
+                        color: theme.buttonMainText,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: theme.buttonMain,
+                      elevation: 1.0,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+        /*
+        Padding(
           padding: const EdgeInsets.all(8.0),
           child: SizedBox(
             height: 40.0,
@@ -106,6 +229,7 @@ class _FollowerMiniProfileState extends State<FollowerMiniProfile> {
             ),
           ),
         );
+        */
       });
     });
   }

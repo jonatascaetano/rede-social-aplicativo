@@ -63,7 +63,7 @@ class _LoginState extends State<Login> {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.purple.shade300,
+                        primary: theme.buttonMain,
                         elevation: 0.0,
                       ),
                       onPressed: () {
@@ -72,17 +72,18 @@ class _LoginState extends State<Login> {
                             password: password.text,
                             context: context);
                       },
-                      child: const Text(
+                      child: Text(
                         "Enter",
                         style: TextStyle(
-                          fontSize: 16,
-                          letterSpacing: 2.0,
+                          color: theme.buttonMainText,
+                          fontSize: 19,
+                          letterSpacing: 1.5,
                         ),
                       ),
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.blue,
+                        primary: theme.button,
                         elevation: 0.0,
                       ),
                       onPressed: () {
@@ -91,11 +92,12 @@ class _LoginState extends State<Login> {
                             MaterialPageRoute(
                                 builder: (context) => const Invitation()));
                       },
-                      child: const Text(
+                      child: Text(
                         "New account",
                         style: TextStyle(
-                          fontSize: 16,
-                          letterSpacing: 2.0,
+                          color: theme.buttonText,
+                          fontSize: 19,
+                          letterSpacing: 1.5,
                         ),
                       ),
                     )

@@ -22,13 +22,6 @@ class _EvaluationState extends State<Evaluation> {
           builder: (context, child, entity) {
         return IconButton(
             onPressed: () {
-              if (entity.entitySaveMini == null) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                      content: Text(
-                          'Put it in your catalog to be able to evaluate')),
-                );
-              }
               if (widget.evaluation != widget.value &&
                   entity.entitySaveMini != null) {
                 EntitySaveDTO entitySaveDTO = EntitySaveDTO(

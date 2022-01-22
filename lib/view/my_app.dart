@@ -4,6 +4,7 @@ import 'package:social_network_application/scoped_model/support/language_model.d
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/menu.dart';
 import 'package:social_network_application/view/search/seach.dart';
+import 'package:social_network_application/view/tabs/calendar.dart';
 
 import 'tabs/home.dart';
 import 'tabs/profile.dart';
@@ -27,6 +28,7 @@ class _MyAppState extends State<MyApp> {
         List<Widget> select = [
           const Home(),
           const Trending(),
+          const Calendar(),
           const Profile(),
         ];
         return Scaffold(
@@ -104,7 +106,10 @@ class _MyAppState extends State<MyApp> {
               backgroundColor: theme.background,
               unselectedItemColor: theme.icon,
               selectedItemColor: theme.title,
-              elevation: 0.5,
+              unselectedLabelStyle: TextStyle(color: theme.icon),
+              showUnselectedLabels: true,
+              elevation: 1.0,
+              type: BottomNavigationBarType.fixed,
               currentIndex: value,
               onTap: (index) {
                 setState(() {
@@ -123,6 +128,13 @@ class _MyAppState extends State<MyApp> {
                   label: "trending",
                   icon: Icon(
                     Icons.whatshot,
+                    size: 30.0,
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: "calendar",
+                  icon: Icon(
+                    Icons.calendar_today,
                     size: 30.0,
                   ),
                 ),

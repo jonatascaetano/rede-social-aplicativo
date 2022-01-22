@@ -65,14 +65,27 @@ class _FollowersState extends State<Followers> {
                                   ),
                                 )),
                           )
-                        : ListView.builder(
-                            itemCount: followers.followers.length,
-                            itemBuilder: (context, index) {
+                        : GridView.count(
+                            childAspectRatio: 1.0 / 1.5,
+                            crossAxisCount: 2,
+                            children: followers.followers.map((e) {
                               return FollowerMiniProfile(
-                                userMini: followers.followers[index],
+                                userMini: e,
                                 isUser: widget.isUser,
                               );
-                            }),
+                            }).toList(),
+                          ),
+                    // : ListView.builder(
+                    //     itemCount: followers.followers.length,
+                    //     itemBuilder: (context, index) {
+                    //       return Container(
+                    //         height: 200,
+                    //         child: FollowerMiniProfile(
+                    //           userMini: followers.followers[index],
+                    //           isUser: widget.isUser,
+                    //         ),
+                    //       );
+                    //     }),
                     followers.load
                         ? Positioned(
                             bottom: 0.1,

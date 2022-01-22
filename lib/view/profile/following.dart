@@ -63,14 +63,24 @@ class _FollowingState extends State<Following> {
                                   ),
                                 )),
                           )
-                        : ListView.builder(
-                            itemCount: following.following.length,
-                            itemBuilder: (context, index) {
+                        : GridView.count(
+                            childAspectRatio: 1.0 / 1.5,
+                            crossAxisCount: 2,
+                            children: following.following.map((e) {
                               return FollowingMiniProfile(
-                                userMini: following.following[index],
+                                userMini: e,
                                 isUser: widget.isUser,
                               );
-                            }),
+                            }).toList(),
+                          ),
+                    // : ListView.builder(
+                    //     itemCount: following.following.length,
+                    //     itemBuilder: (context, index) {
+                    //       return FollowingMiniProfile(
+                    //         userMini: following.following[index],
+                    //         isUser: widget.isUser,
+                    //       );
+                    //     }),
                     following.load
                         ? Positioned(
                             bottom: 0.1,

@@ -95,7 +95,7 @@ class _InvitationState extends State<Invitation> {
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.purple.shade300,
+                    primary: theme.buttonMain,
                     elevation: 0.0,
                   ),
                   onPressed: () {
@@ -114,11 +114,12 @@ class _InvitationState extends State<Invitation> {
                     register.checkInvitation(
                         userDTO: userDTO, context: context);
                   },
-                  child: const Text(
+                  child: Text(
                     "Confirm",
                     style: TextStyle(
-                      fontSize: 16,
-                      letterSpacing: 2.0,
+                      color: theme.buttonMainText,
+                      fontSize: 19,
+                      letterSpacing: 1.5,
                     ),
                   ),
                 ),

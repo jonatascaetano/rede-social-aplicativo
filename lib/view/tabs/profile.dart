@@ -33,9 +33,12 @@ class _ProfileState extends State<Profile> {
                       children: [
                         profile.userMini.image != null
                             ? Container(
-                                height: 200,
+                                height:
+                                    (MediaQuery.of(context).size.width / 16) *
+                                        9,
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
+                                  color: theme.shadow,
                                   image: DecorationImage(
                                     image:
                                         NetworkImage(profile.userMini.image!),
@@ -45,7 +48,10 @@ class _ProfileState extends State<Profile> {
                               )
                             : Container(
                                 color: theme.shadow,
-                                height: 200,
+                                height:
+                                    (MediaQuery.of(context).size.width / 16) *
+                                        9,
+                                width: MediaQuery.of(context).size.width,
                                 child: Center(
                                   child: Icon(
                                     Icons.image,
@@ -177,10 +183,11 @@ class _ProfileState extends State<Profile> {
                                         Text(
                                           'Followers',
                                           style: TextStyle(
-                                              fontSize: 16,
-                                              letterSpacing: 1.0,
-                                              fontWeight: FontWeight.normal,
-                                              color: theme.subtitle),
+                                            fontSize: 16,
+                                            letterSpacing: 1.0,
+                                            fontWeight: FontWeight.normal,
+                                            color: theme.subtitle,
+                                          ),
                                         ),
                                         const SizedBox(
                                           width: 4.0,
@@ -189,10 +196,11 @@ class _ProfileState extends State<Profile> {
                                           profile.userMini.quantityFollowers
                                               .toString(),
                                           style: TextStyle(
-                                              fontSize: 16,
-                                              letterSpacing: 1.0,
-                                              fontWeight: FontWeight.normal,
-                                              color: theme.subtitle),
+                                            fontSize: 16,
+                                            letterSpacing: 1.0,
+                                            fontWeight: FontWeight.normal,
+                                            color: theme.subtitle,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -216,10 +224,11 @@ class _ProfileState extends State<Profile> {
                                           Text(
                                             'Following',
                                             style: TextStyle(
-                                                letterSpacing: 1.0,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.normal,
-                                                color: theme.subtitle),
+                                              letterSpacing: 1.0,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.normal,
+                                              color: theme.subtitle,
+                                            ),
                                           ),
                                           const SizedBox(
                                             width: 4.0,
@@ -228,10 +237,11 @@ class _ProfileState extends State<Profile> {
                                             profile.userMini.quantityFollowing
                                                 .toString(),
                                             style: TextStyle(
-                                                fontSize: 16,
-                                                letterSpacing: 1.0,
-                                                fontWeight: FontWeight.normal,
-                                                color: theme.subtitle),
+                                              fontSize: 16,
+                                              letterSpacing: 1.0,
+                                              fontWeight: FontWeight.normal,
+                                              color: theme.subtitle,
+                                            ),
                                           ),
                                         ],
                                       )),
@@ -254,15 +264,17 @@ class _ProfileState extends State<Profile> {
                                     ),
                                     Text(
                                       profile.userMini.place!,
-                                      style: const TextStyle(
-                                        fontSize: 19,
-                                        letterSpacing: 2.0,
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        letterSpacing: 0.5,
+                                        color: theme.title,
                                       ),
                                     ),
                                   ],
                                 ),
                               )
                             : Container(),
+
                         profile.userMini.description != null
                             ? Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -295,7 +307,11 @@ class _ProfileState extends State<Profile> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                const AllWorkersProfile(),
+                                                AllWorkersProfile(
+                                              isUser: true,
+                                              userMini: profile.userMini,
+                                              workers: profile.workers,
+                                            ),
                                           ),
                                         );
                                       },

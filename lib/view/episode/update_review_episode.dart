@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/entities/dto/entity_save_dto.dart';
-import 'package:social_network_application/scoped_model/season_model.dart';
+import 'package:social_network_application/scoped_model/episode_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 
 // ignore: must_be_immutable
-class UpdateReviewSeason extends StatefulWidget {
+class UpdateReviewEpisode extends StatefulWidget {
   String review;
-  UpdateReviewSeason({required this.review, Key? key}) : super(key: key);
+  UpdateReviewEpisode({required this.review, Key? key}) : super(key: key);
 
   @override
-  _UpdateReviewSeasonState createState() => _UpdateReviewSeasonState();
+  _UpdateReviewEpisodeState createState() => _UpdateReviewEpisodeState();
 }
 
-class _UpdateReviewSeasonState extends State<UpdateReviewSeason> {
+class _UpdateReviewEpisodeState extends State<UpdateReviewEpisode> {
   TextEditingController controller = TextEditingController();
 
   @override
@@ -25,8 +25,8 @@ class _UpdateReviewSeasonState extends State<UpdateReviewSeason> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<SeasonModel>(
-          builder: (context, child, season) {
+      return ScopedModelDescendant<EpisodeModel>(
+          builder: (context, child, episode) {
         return Scaffold(
           appBar: AppBar(
             elevation: 0.0,
@@ -65,12 +65,12 @@ class _UpdateReviewSeasonState extends State<UpdateReviewSeason> {
                         elevation: 0.0,
                       ),
                       onPressed: () {
-                        EntitySaveDTO entitySaveDTO = EntitySaveDTO(
-                          idEntitySave: season.entitySaveMini!.id,
+                        EntitySaveDTO episodeSaveDTO = EntitySaveDTO(
+                          idEntitySave: episode.entitySaveMini!.id,
                           idUser: null,
-                          idEntity: null,
-                          idSeason: null,
                           idEpisode: null,
+                          idSeason: null,
+                          idEntity: null,
                           category: null,
                           goal: null,
                           rated: null,
@@ -79,8 +79,8 @@ class _UpdateReviewSeasonState extends State<UpdateReviewSeason> {
                           review: controller.text,
                           typeEntitySave: null,
                         );
-                        season.updateReviewEntitySave(
-                            entitySaveDTO: entitySaveDTO, context: context);
+                        episode.updateReviewEntitySave(
+                            entitySaveDTO: episodeSaveDTO, context: context);
                       },
                       child: Text(
                         "Confirm",
@@ -94,7 +94,7 @@ class _UpdateReviewSeasonState extends State<UpdateReviewSeason> {
                   ],
                 ),
               ),
-              season.load
+              episode.load
                   ? Positioned(
                       bottom: 0.1,
                       child: SizedBox(
