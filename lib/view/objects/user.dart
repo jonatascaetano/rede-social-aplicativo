@@ -114,8 +114,10 @@ class _UserState extends State<User> {
                                           Text(
                                             user.userMini.name,
                                             style: TextStyle(
-                                              fontSize: 28,
+                                              fontSize: 21,
                                               color: theme.title,
+                                              letterSpacing: 1.0,
+                                              fontWeight: FontWeight.normal,
                                             ),
                                           ),
                                           const SizedBox(
@@ -150,13 +152,27 @@ class _UserState extends State<User> {
                                               context: context,
                                             );
                                           },
-                                          child: Text(
-                                            'Unfollow',
-                                            style: TextStyle(
-                                              fontSize: 19,
-                                              letterSpacing: 1.0,
-                                              color: theme.buttonText,
-                                            ),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Icon(
+                                                Icons.person_remove,
+                                                color: theme.buttonMain,
+                                              ),
+                                              const SizedBox(
+                                                width: 4.0,
+                                              ),
+                                              Text(
+                                                'Unfollow',
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: theme.buttonText,
+                                                  letterSpacing: 1.0,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       )
@@ -173,13 +189,27 @@ class _UserState extends State<User> {
                                               context: context,
                                             );
                                           },
-                                          child: Text(
-                                            'Follow',
-                                            style: TextStyle(
-                                              fontSize: 19,
-                                              letterSpacing: 1.0,
-                                              color: theme.buttonText,
-                                            ),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Icon(
+                                                Icons.person_add,
+                                                color: theme.buttonMain,
+                                              ),
+                                              const SizedBox(
+                                                width: 4.0,
+                                              ),
+                                              Text(
+                                                'Follow',
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: theme.buttonText,
+                                                  letterSpacing: 1.0,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       )
@@ -211,25 +241,28 @@ class _UserState extends State<User> {
                                         },
                                         child: Row(
                                           children: [
-                                            Text('Followers',
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  letterSpacing: 1.0,
-                                                  fontWeight: FontWeight.normal,
-                                                  color: theme.subtitle,
-                                                )),
+                                            Text(
+                                              'Followers',
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                color: theme.subtitle,
+                                                letterSpacing: 1.0,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            ),
                                             const SizedBox(
                                               width: 4.0,
                                             ),
                                             Text(
-                                                user.userMini.quantityFollowers
-                                                    .toString(),
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  letterSpacing: 1.0,
-                                                  fontWeight: FontWeight.normal,
-                                                  color: theme.subtitle,
-                                                )),
+                                              user.userMini.quantityFollowers
+                                                  .toString(),
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                color: theme.subtitle,
+                                                letterSpacing: 1.0,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -250,28 +283,28 @@ class _UserState extends State<User> {
                                           },
                                           child: Row(
                                             children: [
-                                              Text('Following',
-                                                  style: TextStyle(
-                                                    fontSize: 16,
-                                                    letterSpacing: 1.0,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                    color: theme.subtitle,
-                                                  )),
+                                              Text(
+                                                'Following',
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: theme.subtitle,
+                                                  letterSpacing: 1.0,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
                                               const SizedBox(
                                                 width: 4.0,
                                               ),
                                               Text(
-                                                  user.userMini
-                                                      .quantityFollowing
-                                                      .toString(),
-                                                  style: TextStyle(
-                                                    fontSize: 16,
-                                                    letterSpacing: 1.0,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                    color: theme.subtitle,
-                                                  )),
+                                                user.userMini.quantityFollowing
+                                                    .toString(),
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: theme.subtitle,
+                                                  letterSpacing: 1.0,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
                                             ],
                                           )),
                                     ],
@@ -279,30 +312,30 @@ class _UserState extends State<User> {
                                 ),
                               ],
                             ),
-                            user.userMini.place != null
-                                ? Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.place,
-                                          color: theme.detail,
-                                        ),
-                                        const SizedBox(
-                                          width: 4.0,
-                                        ),
-                                        Text(
-                                          user.userMini.place!,
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            letterSpacing: 0.5,
-                                            color: theme.title,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                : Container(),
+                            // user.userMini.place != null
+                            //     ? Padding(
+                            //         padding: const EdgeInsets.all(8.0),
+                            //         child: Row(
+                            //           children: [
+                            //             Icon(
+                            //               Icons.place,
+                            //               color: theme.detail,
+                            //             ),
+                            //             const SizedBox(
+                            //               width: 4.0,
+                            //             ),
+                            //             Text(
+                            //               user.userMini.place!,
+                            //               style: TextStyle(
+                            //                 fontSize: 18,
+                            //                 letterSpacing: 0.5,
+                            //                 color: theme.title,
+                            //               ),
+                            //             ),
+                            //           ],
+                            //         ),
+                            //       )
+                            //     : Container(),
 
                             user.userMini.description != null
                                 ? Padding(
@@ -310,9 +343,10 @@ class _UserState extends State<User> {
                                     child: Text(
                                       user.userMini.description!,
                                       style: TextStyle(
-                                        fontSize: 18,
-                                        letterSpacing: 0.5,
-                                        color: theme.subtitle,
+                                        fontSize: 16,
+                                        color: theme.title,
+                                        letterSpacing: 1.0,
+                                        fontWeight: FontWeight.normal,
                                       ),
                                     ),
                                   )
@@ -326,8 +360,11 @@ class _UserState extends State<User> {
                                           child: Text(
                                             'View all works',
                                             style: TextStyle(
-                                                fontSize: 19,
-                                                color: theme.title),
+                                              fontSize: 16,
+                                              color: theme.subtitle,
+                                              letterSpacing: 1.0,
+                                              fontWeight: FontWeight.normal,
+                                            ),
                                           ),
                                         ),
                                         IconButton(
@@ -346,7 +383,7 @@ class _UserState extends State<User> {
                                           },
                                           icon: Icon(
                                             Icons.arrow_forward,
-                                            color: theme.title,
+                                            color: theme.subtitle,
                                             size: 24.0,
                                           ),
                                         ),
@@ -357,7 +394,7 @@ class _UserState extends State<User> {
 
                             user.workers.isNotEmpty
                                 ? SizedBox(
-                                    height: 280,
+                                    height: 260,
                                     child: ListView.builder(
                                         scrollDirection: Axis.horizontal,
                                         itemCount: user.workers.length,

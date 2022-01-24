@@ -142,6 +142,7 @@ class MenuModel extends Model {
           return ScopedModelDescendant<ThemeModel>(
               builder: (context, child, theme) {
             return BottomSheet(
+                backgroundColor: theme.background,
                 onClosing: () {},
                 builder: (context) {
                   return GridView.count(

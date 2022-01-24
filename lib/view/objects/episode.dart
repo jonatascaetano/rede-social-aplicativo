@@ -3,6 +3,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/entities/dto/entity_save_dto.dart';
 import 'package:social_network_application/entities/mini_dto/episode_mini.dart';
 import 'package:social_network_application/scoped_model/episode_model.dart';
+import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/episode/update_episode.dart';
 import 'package:social_network_application/view/episode/update_review_episode.dart';
@@ -87,8 +88,9 @@ class _EpisodeState extends State<Episode> {
                           textAlign: TextAlign.center,
                           maxLines: 2,
                           style: TextStyle(
-                            fontSize: 28,
+                            fontSize: 21,
                             color: theme.title,
+                            letterSpacing: 1.0,
                             fontWeight: FontWeight.normal,
                           ),
                         ),
@@ -100,7 +102,8 @@ class _EpisodeState extends State<Episode> {
                           textAlign: TextAlign.center,
                           maxLines: 2,
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 16,
+                            letterSpacing: 1.0,
                             color: theme.subtitle,
                             fontWeight: FontWeight.normal,
                           ),
@@ -113,7 +116,8 @@ class _EpisodeState extends State<Episode> {
                           textAlign: TextAlign.center,
                           maxLines: 2,
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 16,
+                            letterSpacing: 1.0,
                             color: theme.subtitle,
                             fontWeight: FontWeight.normal,
                           ),
@@ -127,14 +131,23 @@ class _EpisodeState extends State<Episode> {
                               elevation: 0.0,
                             ),
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => UpdateEpisode(
-                                      episodeMini: episode.episodeMini,
-                                      context: context),
-                                ),
-                              );
+                              if (ScopedModel.of<ProfileModel>(context)
+                                  .userMini
+                                  .checked) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => UpdateEpisode(
+                                        episodeMini: episode.episodeMini,
+                                        context: context),
+                                  ),
+                                );
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            'only released to verified users')));
+                              }
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -149,9 +162,10 @@ class _EpisodeState extends State<Episode> {
                                 Text(
                                   'edit episode'.toLowerCase(),
                                   style: TextStyle(
-                                    fontSize: 19,
+                                    fontSize: 16,
                                     letterSpacing: 1.0,
                                     color: theme.buttonText,
+                                    fontWeight: FontWeight.normal,
                                   ),
                                 ),
                               ],
@@ -223,7 +237,7 @@ class _EpisodeState extends State<Episode> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 28,
-                            letterSpacing: 2.0,
+                            letterSpacing: 1.0,
                             color: theme.emphasis,
                             fontWeight: FontWeight.normal,
                           ),
@@ -238,9 +252,10 @@ class _EpisodeState extends State<Episode> {
                               ' evaluations)',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 16,
                             letterSpacing: 1.0,
-                            color: theme.subtitle,
+                            color: theme.title,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                         const SizedBox(
@@ -333,25 +348,28 @@ class _EpisodeState extends State<Episode> {
                                             ? Text(
                                                 'update review',
                                                 style: TextStyle(
-                                                  fontSize: 18,
-                                                  letterSpacing: 2.0,
+                                                  fontSize: 16,
+                                                  letterSpacing: 1.0,
                                                   color: theme.buttonMainText,
+                                                  fontWeight: FontWeight.normal,
                                                 ),
                                               )
                                             : Text(
                                                 'add review',
                                                 style: TextStyle(
-                                                  fontSize: 18,
-                                                  letterSpacing: 2.0,
+                                                  fontSize: 16,
+                                                  letterSpacing: 1.0,
                                                   color: theme.buttonMainText,
+                                                  fontWeight: FontWeight.normal,
                                                 ),
                                               )
                                         : Text(
                                             'add review',
                                             style: TextStyle(
-                                              fontSize: 18,
-                                              letterSpacing: 2.0,
+                                              fontSize: 16,
+                                              letterSpacing: 1.0,
                                               color: theme.buttonMainText,
+                                              fontWeight: FontWeight.normal,
                                             ),
                                           ),
                                   ),
@@ -398,9 +416,9 @@ class _EpisodeState extends State<Episode> {
                                   //*goal update
                                 ],
                               ),
-                        const SizedBox(
-                          height: 8.0,
-                        ),
+                        // const SizedBox(
+                        //   height: 8.0,
+                        // ),
 
                         // SizedBox(
                         //   height: 200,
@@ -464,9 +482,10 @@ class _EpisodeState extends State<Episode> {
                                   episode.episodeMini.description!,
                                   maxLines: episode.maxLine,
                                   style: TextStyle(
-                                    fontSize: 18,
-                                    letterSpacing: 0.5,
-                                    color: theme.subtitle,
+                                    fontSize: 16,
+                                    letterSpacing: 1.0,
+                                    color: theme.title,
+                                    fontWeight: FontWeight.normal,
                                   ),
                                 ),
                               )

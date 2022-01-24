@@ -32,7 +32,9 @@ class _WorkerMiniProfileState extends State<WorkerMiniProfile> {
                   border: Border.all(
                     color: theme.shadow,
                   ), //  const Color(0xffce93d8)),
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(10.0),
+                      topRight: Radius.circular(10.0)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -94,36 +96,39 @@ class _WorkerMiniProfileState extends State<WorkerMiniProfile> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 4.0, vertical: 0.0),
                           child: Text(
-                            widget.workerMini.role.toLowerCase(),
-                            overflow: TextOverflow.fade,
-                            maxLines: 1,
-                            softWrap: false,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              color: theme.title,
-                              letterSpacing: 2.0,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 2.0,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 4.0, vertical: 0.0),
-                          child: Text(
                             widget.workerMini.entity.name,
                             overflow: TextOverflow.fade,
                             maxLines: 1,
                             softWrap: false,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 15.0,
-                              color: theme.subtitle,
-                              letterSpacing: 2.0,
+                              fontSize: 16,
+                              letterSpacing: 1.0,
+                              color: theme.title,
+                              fontWeight: FontWeight.normal,
                             ),
                           ),
+                        ),
+
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 4.0, vertical: 0.0),
+                          child: Text(
+                            widget.workerMini.role.toLowerCase(),
+                            overflow: TextOverflow.fade,
+                            maxLines: 1,
+                            softWrap: false,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 16,
+                              letterSpacing: 1.0,
+                              color: theme.subtitle,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 2.0,
                         ),
                       ],
                     )),
@@ -146,9 +151,10 @@ class _WorkerMiniProfileState extends State<WorkerMiniProfile> {
                         child: Text(
                           "view",
                           style: TextStyle(
-                            fontSize: 18,
-                            letterSpacing: 2.0,
+                            fontSize: 16,
+                            letterSpacing: 1.0,
                             color: theme.buttonMainText,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                         style: ElevatedButton.styleFrom(

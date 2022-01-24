@@ -248,6 +248,12 @@ class ProfileModel extends Model {
         notifyListeners();
         Navigator.pop(context);
         break;
+      case 406:
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('invalid name')),
+        );
+        break;
       default:
         load = false;
         notifyListeners();

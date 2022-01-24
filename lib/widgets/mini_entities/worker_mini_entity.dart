@@ -39,7 +39,10 @@ class _WorkerMiniEntityState extends State<WorkerMiniEntity> {
                 width: 200.0,
                 decoration: BoxDecoration(
                   border: Border.all(color: theme.shadow),
-                  borderRadius: BorderRadius.circular(8.0),
+                  //borderRadius: BorderRadius.circular(8.0),
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(10.0),
+                      topRight: Radius.circular(10.0)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -95,30 +98,32 @@ class _WorkerMiniEntityState extends State<WorkerMiniEntity> {
                       height: 24.0,
                     ),
                     Text(
+                      widget.workerMini.user.name,
+                      overflow: TextOverflow.fade,
+                      maxLines: 1,
+                      softWrap: false,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 16,
+                        letterSpacing: 1.0,
+                        color: theme.title,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      height: 4.0,
+                    ),
+
+                    Text(
                       widget.workerMini.role.toLowerCase(),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.fade,
                       maxLines: 1,
                       softWrap: false,
                       style: TextStyle(
-                        fontSize: 18.0,
-                        color: theme.title,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 4.0,
-                    ),
-                    Text(
-                      widget.workerMini.user.name.toLowerCase(),
-                      overflow: TextOverflow.fade,
-                      maxLines: 1,
-                      softWrap: false,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 16.0,
+                        fontSize: 16,
+                        letterSpacing: 1.0,
                         color: theme.subtitle,
-                        fontWeight: FontWeight.normal,
                       ),
                     ),
                   ],

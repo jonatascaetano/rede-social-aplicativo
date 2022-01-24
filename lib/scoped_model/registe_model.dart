@@ -59,8 +59,6 @@ class RegisterModel extends Model {
       print('checkInvitation: ' + response.statusCode.toString());
       switch (response.statusCode) {
         case 202:
-          load = false;
-          notifyListeners();
           checkEmail(userDTO: userDTO, context: context);
           // Navigator.push(context,
           //     MaterialPageRoute(builder: (context) => Email(userDTO: userDTO)));
@@ -92,8 +90,6 @@ class RegisterModel extends Model {
     required UserDTO userDTO,
     required BuildContext context,
   }) async {
-    load = true;
-    notifyListeners();
     try {
       var url = Uri.parse(base + 'users/get/check/email/${userDTO.email!}');
       var response = await http.get(url);
@@ -101,8 +97,6 @@ class RegisterModel extends Model {
       print('checkEmail: ' + response.statusCode.toString());
       switch (response.statusCode) {
         case 202:
-          load = false;
-          notifyListeners();
           checkName(userDTO: userDTO, context: context);
           // Navigator.push(context,
           //     MaterialPageRoute(builder: (context) => Name(userDTO: userDTO)));
@@ -134,8 +128,6 @@ class RegisterModel extends Model {
     required UserDTO userDTO,
     required BuildContext context,
   }) async {
-    load = true;
-    notifyListeners();
     try {
       var url = Uri.parse(base + 'users/get/check/name/${userDTO.name!}');
       var response = await http.get(url);
@@ -143,8 +135,6 @@ class RegisterModel extends Model {
       print('checkName: ' + response.statusCode.toString());
       switch (response.statusCode) {
         case 202:
-          load = false;
-          notifyListeners();
           createAccount(userDTO: userDTO, context: context);
           // Navigator.push(
           //     context,
@@ -204,8 +194,6 @@ class RegisterModel extends Model {
 
   createAccount(
       {required UserDTO userDTO, required BuildContext context}) async {
-    load = true;
-    notifyListeners();
     var url = Uri.parse(base + 'users/post/user');
     //var body = json.encode(userCreationDTO);
     var response = await http.post(

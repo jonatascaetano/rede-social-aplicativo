@@ -23,7 +23,10 @@ class _EpisodeMiniSeasonState extends State<EpisodeMiniSeason> {
           width: 200.0,
           decoration: BoxDecoration(
             border: Border.all(color: theme.shadow),
-            borderRadius: BorderRadius.circular(8.0),
+            //borderRadius: BorderRadius.circular(8.0),
+            borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(10.0),
+                topRight: Radius.circular(10.0)),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -73,10 +76,9 @@ class _EpisodeMiniSeasonState extends State<EpisodeMiniSeason> {
                       maxLines: 1,
                       softWrap: false,
                       style: TextStyle(
-                        fontSize: 18.0,
-                        letterSpacing: 2.0,
+                        fontSize: 16,
+                        letterSpacing: 1.0,
                         color: theme.title,
-                        fontWeight: FontWeight.normal,
                       ),
                     ),
                     const SizedBox(
@@ -112,9 +114,9 @@ class _EpisodeMiniSeasonState extends State<EpisodeMiniSeason> {
                 child: Text(
                   "view",
                   style: TextStyle(
+                    fontSize: 16,
+                    letterSpacing: 1.0,
                     color: theme.buttonMainText,
-                    fontSize: 18.0,
-                    letterSpacing: 2.0,
                   ),
                 ),
               )

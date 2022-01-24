@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/entities/dto/entity_save_dto.dart';
 import 'package:social_network_application/entities/mini_dto/season_mini.dart';
+import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/season_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/season/all_episodes_season.dart';
@@ -92,8 +93,9 @@ class _SeasonState extends State<Season> {
                           textAlign: TextAlign.center,
                           maxLines: 2,
                           style: TextStyle(
-                            fontSize: 28,
+                            fontSize: 21,
                             color: theme.title,
+                            letterSpacing: 1.0,
                             fontWeight: FontWeight.normal,
                           ),
                         ),
@@ -105,7 +107,8 @@ class _SeasonState extends State<Season> {
                           textAlign: TextAlign.center,
                           maxLines: 2,
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 16,
+                            letterSpacing: 1.0,
                             color: theme.subtitle,
                             fontWeight: FontWeight.normal,
                           ),
@@ -122,13 +125,22 @@ class _SeasonState extends State<Season> {
                               elevation: 0.0,
                             ),
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => UpdateSeason(
-                                            context: context,
-                                            seasonMini: season.seasonMini,
-                                          )));
+                              if (ScopedModel.of<ProfileModel>(context)
+                                  .userMini
+                                  .checked) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => UpdateSeason(
+                                              context: context,
+                                              seasonMini: season.seasonMini,
+                                            )));
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            'only released to verified users')));
+                              }
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -143,9 +155,10 @@ class _SeasonState extends State<Season> {
                                 Text(
                                   'edit season'.toLowerCase(),
                                   style: TextStyle(
-                                    fontSize: 19,
+                                    fontSize: 16,
                                     letterSpacing: 1.0,
                                     color: theme.buttonText,
+                                    fontWeight: FontWeight.normal,
                                   ),
                                 ),
                               ],
@@ -211,7 +224,7 @@ class _SeasonState extends State<Season> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 28,
-                            letterSpacing: 2.0,
+                            letterSpacing: 1.0,
                             color: theme.emphasis,
                             fontWeight: FontWeight.normal,
                           ),
@@ -225,9 +238,10 @@ class _SeasonState extends State<Season> {
                               ' evaluations)',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 16,
                             letterSpacing: 1.0,
-                            color: theme.subtitle,
+                            color: theme.title,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                         const SizedBox(
@@ -319,24 +333,24 @@ class _SeasonState extends State<Season> {
                                             ? Text(
                                                 'update review',
                                                 style: TextStyle(
-                                                  fontSize: 18,
-                                                  letterSpacing: 2.0,
+                                                  fontSize: 16,
+                                                  letterSpacing: 1.0,
                                                   color: theme.buttonMainText,
                                                 ),
                                               )
                                             : Text(
                                                 'add review',
                                                 style: TextStyle(
-                                                  fontSize: 18,
-                                                  letterSpacing: 2.0,
+                                                  fontSize: 16,
+                                                  letterSpacing: 1.0,
                                                   color: theme.buttonMainText,
                                                 ),
                                               )
                                         : Text(
                                             'add review',
                                             style: TextStyle(
-                                              fontSize: 18,
-                                              letterSpacing: 2.0,
+                                              fontSize: 16,
+                                              letterSpacing: 1.0,
                                               color: theme.buttonMainText,
                                             ),
                                           ),
@@ -394,9 +408,9 @@ class _SeasonState extends State<Season> {
                                   season.seasonMini.description!,
                                   maxLines: season.maxLine,
                                   style: TextStyle(
-                                    fontSize: 18,
-                                    letterSpacing: 0.5,
-                                    color: theme.subtitle,
+                                    fontSize: 16,
+                                    letterSpacing: 1.0,
+                                    color: theme.title,
                                   ),
                                 ),
                               )
@@ -412,7 +426,10 @@ class _SeasonState extends State<Season> {
                                 child: Text(
                                   'View all episodes',
                                   style: TextStyle(
-                                      fontSize: 19, color: theme.title),
+                                    fontSize: 16,
+                                    letterSpacing: 1.0,
+                                    color: theme.subtitle,
+                                  ),
                                 ),
                               ),
                               IconButton(
@@ -427,7 +444,7 @@ class _SeasonState extends State<Season> {
                                 },
                                 icon: Icon(
                                   Icons.arrow_forward,
-                                  color: theme.title,
+                                  color: theme.subtitle,
                                   size: 24.0,
                                 ),
                               ),
@@ -446,15 +463,25 @@ class _SeasonState extends State<Season> {
                                     padding: const EdgeInsets.all(4.0),
                                     child: GestureDetector(
                                       onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  NewEpisodeSeason(
-                                                      seasonMini:
-                                                          season.seasonMini,
-                                                      context: context)),
-                                        );
+                                        if (ScopedModel.of<ProfileModel>(
+                                                context)
+                                            .userMini
+                                            .checked) {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    NewEpisodeSeason(
+                                                        seasonMini:
+                                                            season.seasonMini,
+                                                        context: context)),
+                                          );
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  content: Text(
+                                                      'only released to verified users')));
+                                        }
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(
@@ -476,7 +503,7 @@ class _SeasonState extends State<Season> {
                                               'add episode',
                                               style: TextStyle(
                                                 fontSize: 16,
-                                                letterSpacing: 1.5,
+                                                letterSpacing: 1.0,
                                                 color: theme.title,
                                               ),
                                             ),

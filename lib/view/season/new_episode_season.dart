@@ -20,6 +20,7 @@ class _NewEpisodeSeasonState extends State<NewEpisodeSeason> {
   TextEditingController name = TextEditingController();
   TextEditingController description = TextEditingController();
   TextEditingController numberEpisode = TextEditingController();
+  final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,103 +29,127 @@ class _NewEpisodeSeasonState extends State<NewEpisodeSeason> {
           model: NewEpisodeModel(),
           child: ScopedModelDescendant<NewEpisodeModel>(
               builder: (context, child, episode) {
-            return Scaffold(
-              appBar: AppBar(
-                elevation: 0.0,
-                title: Text(
-                  "New episode",
-                  style: TextStyle(
-                    color: theme.title,
-                    fontSize: 24.0,
-                    letterSpacing: 1.0,
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
-              ),
-              body: Stack(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 30.0),
-                    child: ListView(
-                      children: [
-                        TextField(
-                          controller: name,
-                          minLines: 1,
-                          maxLines: 10,
-                          decoration: const InputDecoration(
-                            label: Text("name"),
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 8.0,
-                        ),
-                        TextField(
-                          controller: description,
-                          minLines: 10,
-                          maxLines: 10,
-                          decoration: const InputDecoration(
-                            label: Text("description"),
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 8.0,
-                        ),
-                        TextField(
-                          controller: numberEpisode,
-                          minLines: 1,
-                          maxLines: 10,
-                          decoration: const InputDecoration(
-                            label: Text("episode number"),
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 8.0,
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: theme.buttonMain,
-                            elevation: 0.0,
-                          ),
-                          onPressed: () {
-                            EpisodeDTO episodeDTO = EpisodeDTO(
-                              name: name.text,
-                              description: description.text,
-                              numberEpisode: int.parse(numberEpisode.text),
-                              idEpisode: '',
-                            );
-                            episode.createEpisode(
-                              episodeDTO: episodeDTO,
-                              idSeason: widget.seasonMini.id,
-                              context: context,
-                            );
-                          },
-                          child: Text(
-                            "Confirm",
-                            style: TextStyle(
-                              fontSize: 16,
-                              letterSpacing: 2.0,
-                              color: theme.buttonMainText,
-                            ),
-                          ),
-                        ),
-                      ],
+            return Form(
+              key: _globalKey,
+              child: Scaffold(
+                appBar: AppBar(
+                  elevation: 0.0,
+                  title: Text(
+                    "New episode",
+                    style: TextStyle(
+                      color: theme.title,
+                      fontSize: 24.0,
+                      letterSpacing: 1.0,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
-                  episode.load
-                      ? Positioned(
-                          bottom: 0.1,
-                          child: SizedBox(
-                            height: 5.0,
-                            width: MediaQuery.of(context).size.width,
-                            child: const LinearProgressIndicator(),
+                ),
+                body: Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 30.0),
+                      child: ListView(
+                        children: [
+                          TextFormField(
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'inform the name';
+                              }
+                            },
+                            controller: name,
+                            keyboardType: TextInputType.text,
+                            minLines: 1,
+                            maxLines: 10,
+                            decoration: const InputDecoration(
+                              label: Text("name"),
+                              border: OutlineInputBorder(),
+                            ),
                           ),
-                        )
-                      : Container(),
-                ],
+                          const SizedBox(
+                            height: 8.0,
+                          ),
+                          TextFormField(
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'inform the synopsis';
+                              }
+                            },
+                            controller: description,
+                            keyboardType: TextInputType.text,
+                            minLines: 10,
+                            maxLines: 10,
+                            decoration: const InputDecoration(
+                              label: Text("description"),
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8.0,
+                          ),
+                          TextFormField(
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'enter episode number';
+                              }
+                            },
+                            controller: numberEpisode,
+                            keyboardType: TextInputType.number,
+                            minLines: 1,
+                            maxLines: 10,
+                            decoration: const InputDecoration(
+                              label: Text("episode number"),
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8.0,
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: theme.buttonMain,
+                              elevation: 0.0,
+                            ),
+                            onPressed: () {
+                              if (_globalKey.currentState!.validate()) {
+                                EpisodeDTO episodeDTO = EpisodeDTO(
+                                  name: name.text,
+                                  description: description.text,
+                                  numberEpisode: int.parse(numberEpisode.text),
+                                  idEpisode: '',
+                                );
+                                episode.createEpisode(
+                                  episodeDTO: episodeDTO,
+                                  idSeason: widget.seasonMini.id,
+                                  context: context,
+                                );
+                              }
+                            },
+                            child: Text(
+                              "Confirm",
+                              style: TextStyle(
+                                fontSize: 16,
+                                letterSpacing: 1.0,
+                                color: theme.buttonMainText,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    episode.load
+                        ? Positioned(
+                            bottom: 0.1,
+                            child: SizedBox(
+                              height: 5.0,
+                              width: MediaQuery.of(context).size.width,
+                              child: const LinearProgressIndicator(),
+                            ),
+                          )
+                        : Container(),
+                  ],
+                ),
               ),
             );
           }));

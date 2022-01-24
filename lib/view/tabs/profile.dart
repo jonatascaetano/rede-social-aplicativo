@@ -103,8 +103,10 @@ class _ProfileState extends State<Profile> {
                                       Text(
                                         profile.userMini.name,
                                         style: TextStyle(
-                                          fontSize: 28,
+                                          fontSize: 21,
                                           color: theme.title,
+                                          letterSpacing: 1.0,
+                                          fontWeight: FontWeight.normal,
                                         ),
                                       ),
                                       const SizedBox(
@@ -150,9 +152,9 @@ class _ProfileState extends State<Profile> {
                                 Text(
                                   'edit profile',
                                   style: TextStyle(
-                                    fontSize: 19,
+                                    fontSize: 16,
                                     letterSpacing: 1.0,
-                                    color: theme.buttonText,
+                                    color: theme.title,
                                   ),
                                 ),
                               ],
@@ -250,30 +252,30 @@ class _ProfileState extends State<Profile> {
                             ),
                           ],
                         ),
-                        profile.userMini.place != null
-                            ? Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.place,
-                                      color: theme.detail,
-                                    ),
-                                    const SizedBox(
-                                      width: 4.0,
-                                    ),
-                                    Text(
-                                      profile.userMini.place!,
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        letterSpacing: 0.5,
-                                        color: theme.title,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            : Container(),
+                        // profile.userMini.place != null
+                        //     ? Padding(
+                        //         padding: const EdgeInsets.all(8.0),
+                        //         child: Row(
+                        //           children: [
+                        //             Icon(
+                        //               Icons.place,
+                        //               color: theme.detail,
+                        //             ),
+                        //             const SizedBox(
+                        //               width: 4.0,
+                        //             ),
+                        //             Text(
+                        //               profile.userMini.place!,
+                        //               style: TextStyle(
+                        //                 fontSize: 18,
+                        //                 letterSpacing: 0.5,
+                        //                 color: theme.title,
+                        //               ),
+                        //             ),
+                        //           ],
+                        //         ),
+                        //       )
+                        //     : Container(),
 
                         profile.userMini.description != null
                             ? Padding(
@@ -281,9 +283,10 @@ class _ProfileState extends State<Profile> {
                                 child: Text(
                                   profile.userMini.description!,
                                   style: TextStyle(
-                                    fontSize: 18,
-                                    letterSpacing: 0.5,
-                                    color: theme.subtitle,
+                                    fontSize: 16,
+                                    letterSpacing: 1.0,
+                                    color: theme.title,
+                                    fontWeight: FontWeight.normal,
                                   ),
                                 ),
                               )
@@ -298,7 +301,11 @@ class _ProfileState extends State<Profile> {
                                       child: Text(
                                         'View all works',
                                         style: TextStyle(
-                                            fontSize: 19, color: theme.title),
+                                          fontSize: 16,
+                                          letterSpacing: 1.0,
+                                          color: theme.subtitle,
+                                          fontWeight: FontWeight.normal,
+                                        ),
                                       ),
                                     ),
                                     IconButton(
@@ -317,7 +324,7 @@ class _ProfileState extends State<Profile> {
                                       },
                                       icon: Icon(
                                         Icons.arrow_forward,
-                                        color: theme.title,
+                                        color: theme.subtitle,
                                         size: 24.0,
                                       ),
                                     ),
@@ -347,7 +354,7 @@ class _ProfileState extends State<Profile> {
                         //     : Container(),
                         profile.workers.isNotEmpty
                             ? SizedBox(
-                                height: 280,
+                                height: 260,
                                 child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
                                     itemCount: profile.workers.length,

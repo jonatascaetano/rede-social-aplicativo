@@ -4,6 +4,7 @@ import 'package:social_network_application/converts_enum/convert_to_enum.dart';
 import 'package:social_network_application/entities/dto/entity_save_dto.dart';
 import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
 import 'package:social_network_application/scoped_model/entity_model.dart';
+import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/entity/all_seasons_entity.dart';
@@ -98,8 +99,9 @@ class _EntityState extends State<Entity> {
                           textAlign: TextAlign.center,
                           maxLines: 2,
                           style: TextStyle(
-                            fontSize: 28,
+                            fontSize: 21,
                             color: theme.title,
+                            letterSpacing: 1.0,
                             fontWeight: FontWeight.normal,
                           ),
                         ),
@@ -114,10 +116,10 @@ class _EntityState extends State<Entity> {
                               .toString(),
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.normal,
+                            fontSize: 16,
+                            letterSpacing: 1.0,
                             color: theme.subtitle,
-                            letterSpacing: 2.0,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
 
@@ -132,13 +134,22 @@ class _EntityState extends State<Entity> {
                               elevation: 0.0,
                             ),
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => UpdateEntity(
-                                            context: context,
-                                            entityMini: entity.entityMini,
-                                          )));
+                              if (ScopedModel.of<ProfileModel>(context)
+                                  .userMini
+                                  .checked) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => UpdateEntity(
+                                              context: context,
+                                              entityMini: entity.entityMini,
+                                            )));
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            'only released to verified users')));
+                              }
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -160,7 +171,7 @@ class _EntityState extends State<Entity> {
                                           .toString()
                                           .toLowerCase(),
                                   style: TextStyle(
-                                    fontSize: 19,
+                                    fontSize: 16,
                                     letterSpacing: 1.0,
                                     color: theme.buttonText,
                                   ),
@@ -225,7 +236,7 @@ class _EntityState extends State<Entity> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 28,
-                            letterSpacing: 2.0,
+                            letterSpacing: 1.0,
                             color: theme.emphasis,
                             fontWeight: FontWeight.normal,
                           ),
@@ -239,9 +250,10 @@ class _EntityState extends State<Entity> {
                               ' evaluations)',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 16,
                             letterSpacing: 1.0,
-                            color: theme.subtitle,
+                            color: theme.title,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                         const SizedBox(
@@ -252,6 +264,7 @@ class _EntityState extends State<Entity> {
                         Align(
                           alignment: Alignment.bottomCenter,
                           child: DropdownButton<int>(
+                            dropdownColor: theme.background,
                             // style: const TextStyle(
                             //   fontSize: 18,
                             //   letterSpacing: 2.0,
@@ -337,24 +350,24 @@ class _EntityState extends State<Entity> {
                                             ? Text(
                                                 'update review',
                                                 style: TextStyle(
-                                                  fontSize: 18,
-                                                  letterSpacing: 2.0,
+                                                  fontSize: 16,
+                                                  letterSpacing: 1.0,
                                                   color: theme.buttonMainText,
                                                 ),
                                               )
                                             : Text(
                                                 'add review',
                                                 style: TextStyle(
-                                                  fontSize: 18,
-                                                  letterSpacing: 2.0,
+                                                  fontSize: 16,
+                                                  letterSpacing: 1.0,
                                                   color: theme.buttonMainText,
                                                 ),
                                               )
                                         : Text(
                                             'add review',
                                             style: TextStyle(
-                                              fontSize: 18,
-                                              letterSpacing: 2.0,
+                                              fontSize: 16,
+                                              letterSpacing: 1.0,
                                               color: theme.buttonMainText,
                                             ),
                                           ),
@@ -397,7 +410,7 @@ class _EntityState extends State<Entity> {
                                           ? entity.entitySaveMini!.goal
                                               ? theme.emphasis
                                               : theme.button
-                                          : Colors.grey,
+                                          : theme.button,
                                     ),
                                   ),
                                   //*goal update
@@ -417,9 +430,9 @@ class _EntityState extends State<Entity> {
                                   entity.entityMini.description!,
                                   maxLines: entity.maxLine,
                                   style: TextStyle(
-                                    fontSize: 18,
-                                    letterSpacing: 0.5,
-                                    color: theme.subtitle,
+                                    fontSize: 16,
+                                    letterSpacing: 1.0,
+                                    color: theme.title,
                                   ),
                                 ),
                               )
@@ -433,7 +446,10 @@ class _EntityState extends State<Entity> {
                                 child: Text(
                                   'View all seasons',
                                   style: TextStyle(
-                                      fontSize: 19, color: theme.title),
+                                    fontSize: 16,
+                                    letterSpacing: 1.0,
+                                    color: theme.subtitle,
+                                  ),
                                 ),
                               ),
                               IconButton(
@@ -448,7 +464,7 @@ class _EntityState extends State<Entity> {
                                 },
                                 icon: Icon(
                                   Icons.arrow_forward,
-                                  color: theme.title,
+                                  color: theme.subtitle,
                                   size: 24.0,
                                 ),
                               ),
@@ -467,15 +483,25 @@ class _EntityState extends State<Entity> {
                                     padding: const EdgeInsets.all(4.0),
                                     child: GestureDetector(
                                       onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  NewSeasonEntity(
-                                                      entityMini:
-                                                          entity.entityMini,
-                                                      context: context)),
-                                        );
+                                        if (ScopedModel.of<ProfileModel>(
+                                                context)
+                                            .userMini
+                                            .checked) {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    NewSeasonEntity(
+                                                        entityMini:
+                                                            entity.entityMini,
+                                                        context: context)),
+                                          );
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  content: Text(
+                                                      'only released to verified users')));
+                                        }
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(
@@ -496,9 +522,10 @@ class _EntityState extends State<Entity> {
                                             Text(
                                               'add season',
                                               style: TextStyle(
-                                                  fontSize: 16,
-                                                  letterSpacing: 1.5,
-                                                  color: theme.title),
+                                                fontSize: 16,
+                                                letterSpacing: 1.0,
+                                                color: theme.title,
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -521,7 +548,10 @@ class _EntityState extends State<Entity> {
                                 child: Text(
                                   'View all cast',
                                   style: TextStyle(
-                                      fontSize: 19, color: theme.title),
+                                    fontSize: 16,
+                                    letterSpacing: 1.0,
+                                    color: theme.subtitle,
+                                  ),
                                 ),
                               ),
                               IconButton(
@@ -536,7 +566,7 @@ class _EntityState extends State<Entity> {
                                 },
                                 icon: Icon(
                                   Icons.arrow_forward,
-                                  color: theme.title,
+                                  color: theme.subtitle,
                                   size: 24.0,
                                 ),
                               ),
@@ -545,7 +575,7 @@ class _EntityState extends State<Entity> {
                         ),
 
                         SizedBox(
-                          height: 280,
+                          height: 260,
                           child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: entity.workers.length + 1,
@@ -555,16 +585,26 @@ class _EntityState extends State<Entity> {
                                     padding: const EdgeInsets.all(4.0),
                                     child: GestureDetector(
                                       onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                NewWorkerEntity(
-                                                    entityMini:
-                                                        entity.entityMini,
-                                                    context: context),
-                                          ),
-                                        );
+                                        if (ScopedModel.of<ProfileModel>(
+                                                context)
+                                            .userMini
+                                            .checked) {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  NewWorkerEntity(
+                                                      entityMini:
+                                                          entity.entityMini,
+                                                      context: context),
+                                            ),
+                                          );
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  content: Text(
+                                                      'only released to verified users')));
+                                        }
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(
@@ -589,7 +629,7 @@ class _EntityState extends State<Entity> {
                                                 'add worker',
                                                 style: TextStyle(
                                                   fontSize: 16,
-                                                  letterSpacing: 1.5,
+                                                  letterSpacing: 1.0,
                                                   color: theme.title,
                                                 ),
                                               ),

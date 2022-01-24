@@ -107,9 +107,10 @@ class _FollowerMiniProfileState extends State<FollowerMiniProfile> {
                         softWrap: false,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 16,
+                          letterSpacing: 1.0,
                           color: theme.title,
-                          letterSpacing: 2.0,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
                     ),
@@ -118,28 +119,32 @@ class _FollowerMiniProfileState extends State<FollowerMiniProfile> {
                 const SizedBox(
                   height: 2.0,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 4.0, vertical: 0.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      followers.removeFollower(
-                          idFollower: widget.userMini.id, context: context);
-                    },
-                    child: Text(
-                      'remove',
-                      style: TextStyle(
-                        fontSize: 18,
-                        letterSpacing: 2.0,
-                        color: theme.buttonMainText,
+                !widget.isUser
+                    ? Container()
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 4.0, vertical: 0.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            followers.removeFollower(
+                                idFollower: widget.userMini.id,
+                                context: context);
+                          },
+                          child: Text(
+                            'remove',
+                            style: TextStyle(
+                              fontSize: 16,
+                              letterSpacing: 1.0,
+                              color: theme.buttonMainText,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            primary: theme.buttonMain,
+                            elevation: 1.0,
+                          ),
+                        ),
                       ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      primary: theme.buttonMain,
-                      elevation: 1.0,
-                    ),
-                  ),
-                ),
               ],
             ),
           ),

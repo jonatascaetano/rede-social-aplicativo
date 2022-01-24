@@ -20,6 +20,7 @@ class _NewSeasonEntityState extends State<NewSeasonEntity> {
   TextEditingController name = TextEditingController();
   TextEditingController description = TextEditingController();
   TextEditingController numberSeason = TextEditingController();
+  final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,102 +29,126 @@ class _NewSeasonEntityState extends State<NewSeasonEntity> {
           model: NewSeasonModel(),
           child: ScopedModelDescendant<NewSeasonModel>(
               builder: (context, child, season) {
-            return Scaffold(
-              appBar: AppBar(
-                elevation: 0.0,
-                title: Text(
-                  "New season",
-                  style: TextStyle(
-                    color: theme.title,
-                    fontSize: 24.0,
-                    letterSpacing: 1.0,
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
-              ),
-              body: Stack(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 30.0),
-                    child: ListView(
-                      children: [
-                        TextField(
-                          controller: name,
-                          minLines: 1,
-                          maxLines: 10,
-                          decoration: const InputDecoration(
-                            label: Text("name"),
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 8.0,
-                        ),
-                        TextField(
-                          controller: description,
-                          minLines: 10,
-                          maxLines: 10,
-                          decoration: const InputDecoration(
-                            label: Text("description"),
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 8.0,
-                        ),
-                        TextField(
-                          controller: numberSeason,
-                          minLines: 1,
-                          maxLines: 10,
-                          decoration: const InputDecoration(
-                            label: Text("season number"),
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 8.0,
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: theme.buttonMain,
-                            elevation: 0.0,
-                          ),
-                          onPressed: () {
-                            SeasonDTO seasonDTO = SeasonDTO(
-                              name: name.text,
-                              description: description.text,
-                              numberSeason: int.parse(numberSeason.text),
-                            );
-                            season.createSeason(
-                              seasonDTO: seasonDTO,
-                              idEntity: widget.entityMini.id,
-                              context: context,
-                            );
-                          },
-                          child: Text(
-                            "Confirm",
-                            style: TextStyle(
-                              fontSize: 16,
-                              letterSpacing: 2.0,
-                              color: theme.buttonMainText,
-                            ),
-                          ),
-                        ),
-                      ],
+            return Form(
+              key: _globalKey,
+              child: Scaffold(
+                appBar: AppBar(
+                  elevation: 0.0,
+                  title: Text(
+                    "New season",
+                    style: TextStyle(
+                      color: theme.title,
+                      fontSize: 24.0,
+                      letterSpacing: 1.0,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
-                  season.load
-                      ? Positioned(
-                          bottom: 0.1,
-                          child: SizedBox(
-                            height: 5.0,
-                            width: MediaQuery.of(context).size.width,
-                            child: const LinearProgressIndicator(),
+                ),
+                body: Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 30.0),
+                      child: ListView(
+                        children: [
+                          TextFormField(
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'inform the name';
+                              }
+                            },
+                            controller: name,
+                            keyboardType: TextInputType.text,
+                            minLines: 1,
+                            maxLines: 10,
+                            decoration: const InputDecoration(
+                              label: Text("name"),
+                              border: OutlineInputBorder(),
+                            ),
                           ),
-                        )
-                      : Container(),
-                ],
+                          const SizedBox(
+                            height: 8.0,
+                          ),
+                          TextFormField(
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'inform the synopsis';
+                              }
+                            },
+                            controller: description,
+                            keyboardType: TextInputType.text,
+                            minLines: 10,
+                            maxLines: 10,
+                            decoration: const InputDecoration(
+                              label: Text("description"),
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8.0,
+                          ),
+                          TextFormField(
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'enter season number';
+                              }
+                            },
+                            controller: numberSeason,
+                            keyboardType: TextInputType.number,
+                            minLines: 1,
+                            maxLines: 10,
+                            decoration: const InputDecoration(
+                              label: Text("season number"),
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8.0,
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: theme.buttonMain,
+                              elevation: 0.0,
+                            ),
+                            onPressed: () {
+                              if (_globalKey.currentState!.validate()) {
+                                SeasonDTO seasonDTO = SeasonDTO(
+                                  name: name.text,
+                                  description: description.text,
+                                  numberSeason: int.parse(numberSeason.text),
+                                );
+                                season.createSeason(
+                                  seasonDTO: seasonDTO,
+                                  idEntity: widget.entityMini.id,
+                                  context: context,
+                                );
+                              }
+                            },
+                            child: Text(
+                              "Confirm",
+                              style: TextStyle(
+                                fontSize: 16,
+                                letterSpacing: 1.0,
+                                color: theme.buttonMainText,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    season.load
+                        ? Positioned(
+                            bottom: 0.1,
+                            child: SizedBox(
+                              height: 5.0,
+                              width: MediaQuery.of(context).size.width,
+                              child: const LinearProgressIndicator(),
+                            ),
+                          )
+                        : Container(),
+                  ],
+                ),
               ),
             );
           }));

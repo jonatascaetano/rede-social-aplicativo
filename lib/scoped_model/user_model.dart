@@ -33,7 +33,10 @@ class UserModel extends Model {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'users/get/user/$idUser');
-    var response = await http.get(url);
+    var response = await http.get(url, headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
     // ignore: avoid_print
     print('getProfile: ' + response.statusCode.toString());
     switch (response.statusCode) {
@@ -50,7 +53,10 @@ class UserModel extends Model {
 
   getWorkersUser({required String idUser}) async {
     var url = Uri.parse(base + 'users/get/user/$idUser/workers');
-    var response = await http.get(url);
+    var response = await http.get(url, headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
     // ignore: avoid_print
     print("getWorkersUser: " + response.statusCode.toString());
     switch (response.statusCode) {

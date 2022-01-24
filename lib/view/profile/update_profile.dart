@@ -8,7 +8,6 @@ import 'package:social_network_application/view/update_profile/email_update.dart
 import 'package:social_network_application/view/update_profile/image_update.dart';
 import 'package:social_network_application/view/update_profile/name_update.dart';
 import 'package:social_network_application/view/update_profile/password_update.dart';
-import 'package:social_network_application/view/update_profile/place_update.dart';
 
 class UpdateProfile extends StatefulWidget {
   const UpdateProfile({Key? key}) : super(key: key);
@@ -220,63 +219,64 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       //   },
                       //   child: const Text('Edit'),
                       // ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      Divider(
-                        color: theme.shadow,
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              'Place',
-                              style: TextStyle(
-                                fontSize: 19,
-                                letterSpacing: 1.5,
-                                color: theme.title,
-                              ),
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => PlaceUpdate(
-                                          place: profile.userMini.place,
-                                        )),
-                              );
-                            },
-                            child: Text(
-                              'edit',
-                              style: TextStyle(
-                                fontSize: 19,
-                                letterSpacing: 1.5,
-                                color: theme.subtitle,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      profile.userMini.place != null
-                          ? Text(
-                              profile.userMini.place!,
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: theme.subtitle,
-                              ),
-                            )
-                          : Text(
-                              'empty',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: theme.subtitle,
-                              ),
-                            ),
+                      // const SizedBox(
+                      //   height: 16,
+                      // ),
+                      // Divider(
+                      //   color: theme.shadow,
+                      // ),
+                      // Row(
+                      //   children: [
+                      //     Expanded(
+                      //       child: Text(
+                      //         'Place',
+                      //         style: TextStyle(
+                      //           fontSize: 19,
+                      //           letterSpacing: 1.5,
+                      //           color: theme.title,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     TextButton(
+                      //       onPressed: () {
+                      //         Navigator.push(
+                      //           context,
+                      //           MaterialPageRoute(
+                      //               builder: (context) => PlaceUpdate(
+                      //                     place: profile.userMini.place,
+                      //                   )),
+                      //         );
+                      //       },
+                      //       child: Text(
+                      //         'edit',
+                      //         style: TextStyle(
+                      //           fontSize: 19,
+                      //           letterSpacing: 1.5,
+                      //           color: theme.subtitle,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+                      // const SizedBox(
+                      //   height: 8,
+                      // ),
+                      // profile.userMini.place != null
+                      //     ? Text(
+                      //         profile.userMini.place!,
+                      //         style: TextStyle(
+                      //           fontSize: 16,
+                      //           color: theme.subtitle,
+                      //         ),
+                      //       )
+                      //     : Text(
+                      //         'empty',
+                      //         style: TextStyle(
+                      //           fontSize: 16,
+                      //           color: theme.subtitle,
+                      //         ),
+                      //       ),
+
                       // const SizedBox(
                       //   height: 4,
                       // ),

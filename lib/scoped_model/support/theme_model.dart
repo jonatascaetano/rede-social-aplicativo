@@ -58,11 +58,12 @@ class ThemeModel extends Model {
         // visualDensity: VisualDensity.adaptivePlatformDensity,
 
         brightness: Brightness.dark,
-        colorScheme: const ColorScheme.dark(),
+        colorScheme:
+            const ColorScheme.dark(primary: Colors.blue), // Color(0xff1d1f27)),
         primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: const Color(0xff1f1f1f),
+        scaffoldBackgroundColor: const Color(0xff1d1f27), //Color(0xff1f1f1f),
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xff1f1f1f),
+          backgroundColor: Color(0xff1d1f27), //Color(0xff1f1f1f), //1d1f27
           elevation: 0.0,
           iconTheme: IconThemeData(
             color: Colors.white,
@@ -77,11 +78,12 @@ class ThemeModel extends Model {
       title = Colors.white;
       subtitle = Colors.grey.shade400;
       icon = Colors.grey.shade400;
-      background = const Color(0xff1f1f1f);
-      shadow = Colors.grey.shade800;
+      background = const Color(0xff1d1f27); //Color(0xff1f1f1f);
+      shadow = const Color(0xff17191f); //Colors.grey.shade800;
       buttonMain = const Color(0xff09aaff);
       buttonMainText = Colors.white;
-      button = Colors.grey.shade800;
+      button =
+          const Color(0xff242731); //Colors.grey.shade800; //saturado 1c1e28
       buttonText = Colors.white;
 
       notifyListeners();
@@ -92,7 +94,7 @@ class ThemeModel extends Model {
         // visualDensity: VisualDensity.adaptivePlatformDensity,
         brightness: Brightness.light,
         colorScheme: const ColorScheme.light(),
-        primarySwatch: Colors.purple,
+        primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.white,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,

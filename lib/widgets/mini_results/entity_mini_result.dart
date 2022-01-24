@@ -60,8 +60,9 @@ class _EntityMiniResultState extends State<EntityMiniResult> {
                       maxLines: 1,
                       softWrap: false,
                       style: TextStyle(
-                        fontSize: 19,
+                        fontSize: 16,
                         color: theme.title,
+                        letterSpacing: 1.0,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
@@ -77,6 +78,7 @@ class _EntityMiniResultState extends State<EntityMiniResult> {
                     style: TextStyle(
                       fontSize: 14,
                       color: theme.subtitle,
+                      letterSpacing: 1.0,
                       fontWeight: FontWeight.normal,
                     ),
                   ),

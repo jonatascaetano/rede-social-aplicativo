@@ -55,7 +55,7 @@ class _MyAppState extends State<MyApp> {
                   width: 50.0,
                   child: Icon(
                     Icons.notifications,
-                    color: theme.icon,
+                    color: theme.title,
                     size: 30.0,
                   ),
                 ),
@@ -73,7 +73,7 @@ class _MyAppState extends State<MyApp> {
                     width: 50.0,
                     child: Icon(
                       Icons.search,
-                      color: theme.icon,
+                      color: theme.title,
                       size: 30.0,
                     ),
                   )),
@@ -91,7 +91,7 @@ class _MyAppState extends State<MyApp> {
                   width: 50.0,
                   child: Icon(
                     Icons.dehaze_rounded,
-                    color: theme.icon,
+                    color: theme.title,
                     size: 30.0,
                   ),
                 ),
@@ -102,13 +102,15 @@ class _MyAppState extends State<MyApp> {
             padding: const EdgeInsets.all(0.0),
             child: select[value],
           ),
+
+          /*
           bottomNavigationBar: BottomNavigationBar(
               backgroundColor: theme.background,
               unselectedItemColor: theme.icon,
               selectedItemColor: theme.title,
               unselectedLabelStyle: TextStyle(color: theme.icon),
               showUnselectedLabels: true,
-              elevation: 1.0,
+              elevation: 0.0,
               type: BottomNavigationBarType.fixed,
               currentIndex: value,
               onTap: (index) {
@@ -121,31 +123,32 @@ class _MyAppState extends State<MyApp> {
                   label: "home",
                   icon: Icon(
                     Icons.home,
-                    size: 30.0,
+                    //size: 30.0,
                   ),
                 ),
                 BottomNavigationBarItem(
                   label: "trending",
                   icon: Icon(
                     Icons.whatshot,
-                    size: 30.0,
+                    //size: 30.0,
                   ),
                 ),
                 BottomNavigationBarItem(
                   label: "calendar",
                   icon: Icon(
                     Icons.calendar_today,
-                    size: 30.0,
+                    //size: 30.0,
                   ),
                 ),
                 BottomNavigationBarItem(
                   label: "profile",
                   icon: Icon(
                     Icons.person_rounded,
-                    size: 30.0,
+                    //size: 30.0,
                   ),
                 ),
               ]),
+              */
         );
       });
     });

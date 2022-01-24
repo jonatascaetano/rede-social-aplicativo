@@ -52,8 +52,9 @@ class _SeasonMiniResultState extends State<SeasonMiniResult> {
                       maxLines: 1,
                       softWrap: false,
                       style: TextStyle(
-                        fontSize: 19,
+                        fontSize: 16,
                         color: theme.title,
+                        letterSpacing: 1.0,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
@@ -70,8 +71,9 @@ class _SeasonMiniResultState extends State<SeasonMiniResult> {
                   Text(
                     widget.seasonMini.entity.name,
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 16,
                       color: theme.subtitle,
+                      letterSpacing: 1.0,
                       fontWeight: FontWeight.normal,
                     ),
                   ),
