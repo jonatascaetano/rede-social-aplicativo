@@ -25,7 +25,7 @@ class _FollowingMiniProfileState extends State<FollowingMiniProfile> {
         return GestureDetector(
           onTap: () {
             if (widget.userMini.id != following.id) {
-              Navigator.pushReplacement(
+              Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => User(

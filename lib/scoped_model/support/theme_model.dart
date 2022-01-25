@@ -10,7 +10,7 @@ class ThemeModel extends Model {
     // visualDensity: VisualDensity.adaptivePlatformDensity,
     brightness: Brightness.light,
     colorScheme: const ColorScheme.light(),
-    primarySwatch: Colors.purple,
+    primarySwatch: Colors.blue,
     scaffoldBackgroundColor: Colors.white,
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.white,

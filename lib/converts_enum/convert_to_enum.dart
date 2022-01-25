@@ -87,4 +87,47 @@ class ConvertToEnum {
     }
     return value;
   }
+
+  static convertValueToTypeEntity({required int index}) {
+    late String value;
+    switch (index) {
+      case 0:
+        value = TypeEntity.MOVIES;
+        break;
+      case 1:
+        value = TypeEntity.SERIES;
+        break;
+      case 2:
+        value = TypeEntity.ANIMES;
+        break;
+      case 3:
+        value = TypeEntity.NOVELS;
+        break;
+      case 4:
+        value = TypeEntity.NOVELS;
+        break;
+      case 5:
+        value = TypeEntity.NOVELS;
+        break;
+      case 6:
+        value = TypeEntity.NOVELS;
+        break;
+      case 7:
+        value = TypeEntity.NOVELS;
+        break;
+      case 8:
+        value = TypeEntity.NOVELS;
+        break;
+      case 9:
+        value = TypeEntity.NOVELS;
+        break;
+      case 10:
+        value = TypeEntity.NOVELS;
+        break;
+      case 11:
+        value = TypeEntity.NOVELS;
+        break;
+    }
+    return value;
+  }
 }

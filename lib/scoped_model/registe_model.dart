@@ -63,6 +63,13 @@ class RegisterModel extends Model {
           // Navigator.push(context,
           //     MaterialPageRoute(builder: (context) => Email(userDTO: userDTO)));
           break;
+        case 400:
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Invalid invitation')),
+          );
+          load = false;
+          notifyListeners();
+          break;
         case 406:
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Invalid invitation')),
@@ -141,7 +148,7 @@ class RegisterModel extends Model {
           //     MaterialPageRoute(
           //         builder: (context) => Password(userDTO: userDTO)));
           break;
-        case 406:
+        case 400:
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Invalid name')),
           );
@@ -163,34 +170,6 @@ class RegisterModel extends Model {
       notifyListeners();
     }
   }
-
-  // checkPassword({
-  //   required UserDTO userDTO,
-  //   required String password,
-  //   required BuildContext context,
-  // }) async {
-  //   load = true;
-  //   notifyListeners();
-  //   try {
-  //     if (userDTO.password! == password) {
-  //       createAccount(userDTO: userDTO, context: context);
-  //     } else {
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         const SnackBar(content: Text('Passwords do not match')),
-  //       );
-  //       load = false;
-  //       notifyListeners();
-  //     }
-  //   } catch (e) {
-  //     // ignore: avoid_print
-  //     print(e);
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(content: Text('Try again later')),
-  //     );
-  //     load = false;
-  //     notifyListeners();
-  //   }
-  // }
 
   createAccount(
       {required UserDTO userDTO, required BuildContext context}) async {

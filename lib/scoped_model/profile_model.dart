@@ -339,6 +339,18 @@ class ProfileModel extends Model {
         notifyListeners();
         Navigator.pop(context);
         break;
+      case 400:
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('invalid email')),
+        );
+        break;
+      case 406:
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('invalid email')),
+        );
+        break;  
       default:
         load = false;
         notifyListeners();

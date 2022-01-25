@@ -37,8 +37,9 @@ class _MenuState extends State<Menu> {
               body: Stack(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: ListView(
+                      padding: EdgeInsets.zero,
                       children: [
                         GestureDetector(
                           child: Padding(
@@ -51,18 +52,19 @@ class _MenuState extends State<Menu> {
                                 const SizedBox(
                                   height: 8.0,
                                 ),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.person_rounded,
-                                      size: 24,
-                                      color: theme.emphasis,
-                                    ),
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    Expanded(
-                                      child: Column(
+                                Container(
+                                  color: Colors.transparent,
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.person_rounded,
+                                        size: 24,
+                                        color: theme.emphasis,
+                                      ),
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
+                                      Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
@@ -96,7 +98,7 @@ class _MenuState extends State<Menu> {
                                             height: 2.0,
                                           ),
                                           Text(
-                                            "view your profile",
+                                            "View your profile",
                                             style: TextStyle(
                                               fontSize: 16,
                                               letterSpacing: 1.0,
@@ -106,8 +108,8 @@ class _MenuState extends State<Menu> {
                                           ),
                                         ],
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                                 const SizedBox(
                                   height: 8.0,
@@ -119,10 +121,12 @@ class _MenuState extends State<Menu> {
                             ),
                           ),
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const Profile()));
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Profile(),
+                              ),
+                            );
                           },
                         ),
 
@@ -225,7 +229,7 @@ class _MenuState extends State<Menu> {
                           onTap: () {},
                         ),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(12, 6, 12, 6),
+                          padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
                           child: Row(
                             children: [
                               Icon(

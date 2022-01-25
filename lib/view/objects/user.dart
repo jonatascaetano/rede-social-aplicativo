@@ -28,8 +28,22 @@ class _UserState extends State<User> {
         child:
             ScopedModelDescendant<UserModel>(builder: (context, child, user) {
           return Scaffold(
+            appBar: AppBar(
+              elevation: 0.0,
+              title: !user.profileNull
+                  ? Text(
+                      user.userMini.name,
+                      style: TextStyle(
+                        color: theme.title,
+                        fontSize: 24.0,
+                        letterSpacing: 1.0,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    )
+                  : const Text(''),
+            ),
             body: Container(
-              margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+              //margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
               padding: EdgeInsets.zero,
               child: Stack(
                 children: [

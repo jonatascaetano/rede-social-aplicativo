@@ -41,319 +41,348 @@ class _EpisodeState extends State<Episode> {
       return ScopedModelDescendant<EpisodeModel>(
           builder: (context, child, episode) {
         return Scaffold(
+            appBar: AppBar(
+              elevation: 0.0,
+              title: !episode.episodeMiniIsNull
+                  ? Text(
+                      episode.episodeMini.name,
+                      style: TextStyle(
+                        color: theme.title,
+                        fontSize: 24.0,
+                        letterSpacing: 1.0,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    )
+                  : const Text(''),
+            ),
             body: Container(
-          margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-          padding: EdgeInsets.zero,
-          child: Stack(
-            children: [
-              !episode.episodeMiniIsNull
-                  ? ListView(
-                      padding: EdgeInsets.zero,
-                      children: [
-                        episode.episodeMini.image != null
-                            ? Container(
-                                margin: EdgeInsets.zero,
-                                padding: EdgeInsets.zero,
-                                height:
-                                    (MediaQuery.of(context).size.width / 16) *
+              // margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+              padding: EdgeInsets.zero,
+              child: Stack(
+                children: [
+                  !episode.episodeMiniIsNull
+                      ? ListView(
+                          padding: EdgeInsets.zero,
+                          children: [
+                            episode.episodeMini.image != null
+                                ? Container(
+                                    margin: EdgeInsets.zero,
+                                    padding: EdgeInsets.zero,
+                                    height: (MediaQuery.of(context).size.width /
+                                            16) *
                                         9,
-                                width: MediaQuery.of(context).size.width,
-                                decoration: BoxDecoration(
-                                  color: theme.shadow,
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                        episode.episodeMini.image!),
-                                    fit: BoxFit.fitHeight,
-                                  ),
-                                ),
-                              )
-                            : Container(
-                                color: theme.shadow,
-                                height:
-                                    (MediaQuery.of(context).size.width / 16) *
+                                    width: MediaQuery.of(context).size.width,
+                                    decoration: BoxDecoration(
+                                      color: theme.shadow,
+                                      image: DecorationImage(
+                                        image: NetworkImage(
+                                            episode.episodeMini.image!),
+                                        fit: BoxFit.fitHeight,
+                                      ),
+                                    ),
+                                  )
+                                : Container(
+                                    color: theme.shadow,
+                                    height: (MediaQuery.of(context).size.width /
+                                            16) *
                                         9,
-                                width: MediaQuery.of(context).size.width,
-                                child: Center(
-                                  child: Icon(
-                                    Icons.image,
-                                    size: 100,
-                                    color: theme.emphasis,
-                                  ),
-                                )),
-                        const SizedBox(
-                          height: 16.0,
-                        ),
-                        Text(
-                          episode.episodeMini.name,
-                          textAlign: TextAlign.center,
-                          maxLines: 2,
-                          style: TextStyle(
-                            fontSize: 21,
-                            color: theme.title,
-                            letterSpacing: 1.0,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 4.0,
-                        ),
-                        Text(
-                          episode.episodeMini.season.name,
-                          textAlign: TextAlign.center,
-                          maxLines: 2,
-                          style: TextStyle(
-                            fontSize: 16,
-                            letterSpacing: 1.0,
-                            color: theme.subtitle,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 4.0,
-                        ),
-                        Text(
-                          episode.episodeMini.season.entity.name,
-                          textAlign: TextAlign.center,
-                          maxLines: 2,
-                          style: TextStyle(
-                            fontSize: 16,
-                            letterSpacing: 1.0,
-                            color: theme.subtitle,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: theme.button,
-                              elevation: 0.0,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.image,
+                                        size: 100,
+                                        color: theme.emphasis,
+                                      ),
+                                    )),
+                            const SizedBox(
+                              height: 16.0,
                             ),
-                            onPressed: () {
-                              if (ScopedModel.of<ProfileModel>(context)
-                                  .userMini
-                                  .checked) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => UpdateEpisode(
-                                        episodeMini: episode.episodeMini,
-                                        context: context),
-                                  ),
-                                );
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text(
-                                            'only released to verified users')));
-                              }
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.edit,
-                                  color: theme.buttonMain,
-                                ),
-                                const SizedBox(
-                                  width: 4.0,
-                                ),
-                                Text(
-                                  'edit episode'.toLowerCase(),
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    letterSpacing: 1.0,
-                                    color: theme.buttonText,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                ),
-                              ],
+                            Text(
+                              episode.episodeMini.name,
+                              textAlign: TextAlign.center,
+                              maxLines: 2,
+                              style: TextStyle(
+                                fontSize: 21,
+                                color: theme.title,
+                                letterSpacing: 1.0,
+                                fontWeight: FontWeight.normal,
+                              ),
                             ),
-                          ),
-                        ),
+                            const SizedBox(
+                              height: 4.0,
+                            ),
+                            Text(
+                              episode.episodeMini.season.name,
+                              textAlign: TextAlign.center,
+                              maxLines: 2,
+                              style: TextStyle(
+                                fontSize: 16,
+                                letterSpacing: 1.0,
+                                color: theme.subtitle,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 4.0,
+                            ),
+                            Text(
+                              episode.episodeMini.season.entity.name,
+                              textAlign: TextAlign.center,
+                              maxLines: 2,
+                              style: TextStyle(
+                                fontSize: 16,
+                                letterSpacing: 1.0,
+                                color: theme.subtitle,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
 
-                        //update evaluation
-                        episode.entitySaveMini == null
-                            ? Container()
-                            : Container(
-                                margin: EdgeInsets.zero,
-                                padding: EdgeInsets.zero,
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: theme.button,
+                                  elevation: 0.0,
+                                ),
+                                onPressed: () {
+                                  if (ScopedModel.of<ProfileModel>(context)
+                                      .userMini
+                                      .checked) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => UpdateEpisode(
+                                            episodeMini: episode.episodeMini,
+                                            context: context),
+                                      ),
+                                    );
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(
+                                            content: Text(
+                                                'only released to verified users')));
+                                  }
+                                },
                                 child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Evaluation(
-                                        value: 1,
-                                        evaluation:
-                                            episode.entitySaveMini != null
-                                                ? episode
-                                                    .entitySaveMini!.evaluation!
-                                                : 0),
-                                    Evaluation(
-                                        value: 2,
-                                        evaluation:
-                                            episode.entitySaveMini != null
-                                                ? episode
-                                                    .entitySaveMini!.evaluation!
-                                                : 0),
-                                    Evaluation(
-                                        value: 3,
-                                        evaluation:
-                                            episode.entitySaveMini != null
-                                                ? episode
-                                                    .entitySaveMini!.evaluation!
-                                                : 0),
-                                    Evaluation(
-                                        value: 4,
-                                        evaluation:
-                                            episode.entitySaveMini != null
-                                                ? episode
-                                                    .entitySaveMini!.evaluation!
-                                                : 3),
-                                    Evaluation(
-                                        value: 5,
-                                        evaluation:
-                                            episode.entitySaveMini != null
-                                                ? episode
-                                                    .entitySaveMini!.evaluation!
-                                                : 0),
+                                    Icon(
+                                      Icons.edit,
+                                      color: theme.buttonMain,
+                                    ),
+                                    const SizedBox(
+                                      width: 4.0,
+                                    ),
+                                    Text(
+                                      'edit episode'.toLowerCase(),
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        letterSpacing: 1.0,
+                                        color: theme.buttonText,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
-                        //*update evaluation
+                            ),
 
-                        //*update evaluation
-                        episode.entitySaveMini == null
-                            ? Container()
-                            : const SizedBox(
-                                height: 16.0,
-                              ),
-                        //*update evaluation
-
-                        Text(
-                          episode.episodeMini.evaluationAverage.toString(),
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 28,
-                            letterSpacing: 1.0,
-                            color: theme.emphasis,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 2.0,
-                        ),
-                        Text(
-                          '( ' +
-                              episode.episodeMini.evaluationQuantity
-                                  .toString() +
-                              ' evaluations)',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 16,
-                            letterSpacing: 1.0,
-                            color: theme.title,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 8.0,
-                        ),
-
-                        //categoty update
-
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: DropdownButton<int>(
-                            hint: episode.entitySaveMini == null
-                                ? const Text('category')
-                                : episode.dropdownList[
-                                    episode.entitySaveMini!.category! - 1],
-                            items: episode.dropdownList,
-                            onChanged: (value) {
-                              // ignore: avoid_print
-                              EntitySaveDTO entitySaveDTO = EntitySaveDTO(
-                                idEntitySave: null,
-                                idUser: episode.idUser,
-                                idEntity: null,
-                                idSeason: null,
-                                idEpisode: episode.episodeMini.id,
-                                category: value!,
-                                goal: null,
-                                rated: null,
-                                reviewed: null,
-                                evaluation: null,
-                                review: null,
-                                typeEntitySave: null,
-                              );
-                              if (episode.entitySaveMini == null) {
-                                episode.newEntitySave(
-                                    entitySaveDTO: entitySaveDTO,
-                                    context: context);
-                              } else {
-                                if (value !=
-                                    episode.entitySaveMini!.category!) {
-                                  entitySaveDTO.idEntitySave =
-                                      episode.entitySaveMini!.id;
-                                  episode.updateCategoryEntitySave(
-                                      entitySaveDTO: entitySaveDTO,
-                                      context: context);
-                                }
-                              }
-                            },
-                          ),
-                        ),
-
-                        //*categoty update
-
-                        const SizedBox(
-                          height: 8.0,
-                        ),
-                        episode.entitySaveMini == null
-                            ? Container()
-                            : Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  //review update
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      primary: theme.buttonMain,
-                                      elevation: 1.0,
+                            //update evaluation
+                            episode.entitySaveMini == null
+                                ? Container()
+                                : Container(
+                                    margin: EdgeInsets.zero,
+                                    padding: EdgeInsets.zero,
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Evaluation(
+                                            value: 1,
+                                            evaluation:
+                                                episode.entitySaveMini != null
+                                                    ? episode.entitySaveMini!
+                                                        .evaluation!
+                                                    : 0),
+                                        Evaluation(
+                                            value: 2,
+                                            evaluation:
+                                                episode.entitySaveMini != null
+                                                    ? episode.entitySaveMini!
+                                                        .evaluation!
+                                                    : 0),
+                                        Evaluation(
+                                            value: 3,
+                                            evaluation:
+                                                episode.entitySaveMini != null
+                                                    ? episode.entitySaveMini!
+                                                        .evaluation!
+                                                    : 0),
+                                        Evaluation(
+                                            value: 4,
+                                            evaluation:
+                                                episode.entitySaveMini != null
+                                                    ? episode.entitySaveMini!
+                                                        .evaluation!
+                                                    : 3),
+                                        Evaluation(
+                                            value: 5,
+                                            evaluation:
+                                                episode.entitySaveMini != null
+                                                    ? episode.entitySaveMini!
+                                                        .evaluation!
+                                                    : 0),
+                                      ],
                                     ),
-                                    onPressed: () {
-                                      if (episode.entitySaveMini != null &&
-                                          episode.entitySaveMini!.reviewed) {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    UpdateReviewEpisode(
-                                                        review: episode
-                                                            .entitySaveMini!
-                                                            .review!)));
-                                      } else if (episode.entitySaveMini !=
-                                          null) {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    UpdateReviewEpisode(
-                                                        review: '')));
-                                      }
-                                    },
-                                    child: episode.entitySaveMini != null
-                                        ? episode.entitySaveMini!.reviewed
-                                            ? Text(
-                                                'update review',
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  letterSpacing: 1.0,
-                                                  color: theme.buttonMainText,
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                              )
+                                  ),
+                            //*update evaluation
+
+                            //*update evaluation
+                            episode.entitySaveMini == null
+                                ? Container()
+                                : const SizedBox(
+                                    height: 16.0,
+                                  ),
+                            //*update evaluation
+
+                            Text(
+                              episode.episodeMini.evaluationAverage.toString(),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 28,
+                                letterSpacing: 1.0,
+                                color: theme.emphasis,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 2.0,
+                            ),
+                            Text(
+                              '( ' +
+                                  episode.episodeMini.evaluationQuantity
+                                      .toString() +
+                                  ' evaluations)',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 16,
+                                letterSpacing: 1.0,
+                                color: theme.title,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 8.0,
+                            ),
+
+                            //categoty update
+
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: DropdownButton<int>(
+                                hint: episode.entitySaveMini == null
+                                    ? const Text('category')
+                                    : episode.dropdownList[
+                                        episode.entitySaveMini!.category! - 1],
+                                items: episode.dropdownList,
+                                onChanged: (value) {
+                                  // ignore: avoid_print
+                                  EntitySaveDTO entitySaveDTO = EntitySaveDTO(
+                                    idEntitySave: null,
+                                    idUser: episode.idUser,
+                                    idEntity: null,
+                                    idSeason: null,
+                                    idEpisode: episode.episodeMini.id,
+                                    category: value!,
+                                    goal: null,
+                                    rated: null,
+                                    reviewed: null,
+                                    evaluation: null,
+                                    review: null,
+                                    typeEntitySave: null,
+                                  );
+                                  if (episode.entitySaveMini == null) {
+                                    episode.newEntitySave(
+                                        entitySaveDTO: entitySaveDTO,
+                                        context: context);
+                                  } else {
+                                    if (value !=
+                                        episode.entitySaveMini!.category!) {
+                                      entitySaveDTO.idEntitySave =
+                                          episode.entitySaveMini!.id;
+                                      episode.updateCategoryEntitySave(
+                                          entitySaveDTO: entitySaveDTO,
+                                          context: context);
+                                    }
+                                  }
+                                },
+                              ),
+                            ),
+
+                            //*categoty update
+
+                            const SizedBox(
+                              height: 8.0,
+                            ),
+                            episode.entitySaveMini == null
+                                ? Container()
+                                : Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      //review update
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          primary: theme.buttonMain,
+                                          elevation: 1.0,
+                                        ),
+                                        onPressed: () {
+                                          if (episode.entitySaveMini != null &&
+                                              episode
+                                                  .entitySaveMini!.reviewed) {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        UpdateReviewEpisode(
+                                                            review: episode
+                                                                .entitySaveMini!
+                                                                .review!)));
+                                          } else if (episode.entitySaveMini !=
+                                              null) {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        UpdateReviewEpisode(
+                                                            review: '')));
+                                          }
+                                        },
+                                        child: episode.entitySaveMini != null
+                                            ? episode.entitySaveMini!.reviewed
+                                                ? Text(
+                                                    'update review',
+                                                    style: TextStyle(
+                                                      fontSize: 16,
+                                                      letterSpacing: 1.0,
+                                                      color:
+                                                          theme.buttonMainText,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
+                                                  )
+                                                : Text(
+                                                    'add review',
+                                                    style: TextStyle(
+                                                      fontSize: 16,
+                                                      letterSpacing: 1.0,
+                                                      color:
+                                                          theme.buttonMainText,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
+                                                  )
                                             : Text(
                                                 'add review',
                                                 style: TextStyle(
@@ -362,206 +391,197 @@ class _EpisodeState extends State<Episode> {
                                                   color: theme.buttonMainText,
                                                   fontWeight: FontWeight.normal,
                                                 ),
-                                              )
-                                        : Text(
-                                            'add review',
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              letterSpacing: 1.0,
-                                              color: theme.buttonMainText,
-                                              fontWeight: FontWeight.normal,
-                                            ),
-                                          ),
+                                              ),
+                                      ),
+                                      //*review update
+
+                                      // const SizedBox(
+                                      //   width: 4.0,
+                                      // ),
+
+                                      //goal update
+
+                                      // IconButton(
+                                      //   onPressed: () {
+                                      //     if (season.entitySaveMini != null) {
+                                      //       EntitySaveDTO entitySaveDTO = EntitySaveDTO(
+                                      //         idEntitySave: entity.entitySaveMini!.id,
+                                      //         idUser: entity.idUser,
+                                      //         idEntity: entity.entityMini.id,
+                                      //         idSeason: null,
+                                      //         idEpisode: null,
+                                      //         category: null,
+                                      //         goal: !entity.entitySaveMini!.goal,
+                                      //         rated: null,
+                                      //         reviewed: null,
+                                      //         evaluation: null,
+                                      //         review: null,
+                                      //         typeEntitySave: null,
+                                      //       );
+                                      //       entity.updateGoalEntitySave(
+                                      //           entitySaveDTO: entitySaveDTO,
+                                      //           context: context);
+                                      //     }
+                                      //   },
+                                      //   icon: Icon(
+                                      //     Icons.add_task,
+                                      //     color: season.entitySaveMini != null
+                                      //         ? season.entitySaveMini!.goal
+                                      //             ? Colors.purple
+                                      //             : Colors.grey
+                                      //         : Colors.grey,
+                                      //    ),
+                                      // ),
+
+                                      //*goal update
+                                    ],
                                   ),
-                                  //*review update
+                            // const SizedBox(
+                            //   height: 8.0,
+                            // ),
 
-                                  // const SizedBox(
-                                  //   width: 4.0,
-                                  // ),
+                            // SizedBox(
+                            //   height: 200,
+                            //   child: ListView.builder(
+                            //       scrollDirection: Axis.horizontal,
+                            //       itemCount: season.episodes.length + 1,
+                            //       itemBuilder: (context, index) {
+                            //         if (index == season.episodes.length) {
+                            //           return Padding(
+                            //             padding: const EdgeInsets.all(4.0),
+                            //             child: GestureDetector(
+                            //               onTap: () {
+                            //                 Navigator.push(
+                            //                   context,
+                            //                   MaterialPageRoute(
+                            //                       builder: (context) =>
+                            //                           NewEpisodeSeason(
+                            //                               seasonMini: season.seasonMini,
+                            //                               context: context)),
+                            //                 );
+                            //               },
+                            //               child: Container(
+                            //                 decoration: BoxDecoration(
+                            //                   border: Border.all(
+                            //                       color: const Color(0xffce93d8)),
+                            //                   borderRadius: BorderRadius.circular(8.0),
+                            //                 ),
+                            //                 width: 150,
+                            //                 child: Column(
+                            //                   mainAxisAlignment:
+                            //                       MainAxisAlignment.center,
+                            //                   children: const [
+                            //                     Icon(Icons.add_box_outlined),
+                            //                     Text('add episode'),
+                            //                   ],
+                            //                 ),
+                            //               ),
+                            //             ),
+                            //           );
+                            //         } else {
+                            //           return EpisodeMiniSeason(
+                            //               episodeMini: season.episodes[index]);
+                            //         }
+                            //       }),
+                            // ),
 
-                                  //goal update
+                            // const SizedBox(
+                            //   height: 16.0,
+                            // ),
 
-                                  // IconButton(
-                                  //   onPressed: () {
-                                  //     if (season.entitySaveMini != null) {
-                                  //       EntitySaveDTO entitySaveDTO = EntitySaveDTO(
-                                  //         idEntitySave: entity.entitySaveMini!.id,
-                                  //         idUser: entity.idUser,
-                                  //         idEntity: entity.entityMini.id,
-                                  //         idSeason: null,
-                                  //         idEpisode: null,
-                                  //         category: null,
-                                  //         goal: !entity.entitySaveMini!.goal,
-                                  //         rated: null,
-                                  //         reviewed: null,
-                                  //         evaluation: null,
-                                  //         review: null,
-                                  //         typeEntitySave: null,
-                                  //       );
-                                  //       entity.updateGoalEntitySave(
-                                  //           entitySaveDTO: entitySaveDTO,
-                                  //           context: context);
-                                  //     }
-                                  //   },
-                                  //   icon: Icon(
-                                  //     Icons.add_task,
-                                  //     color: season.entitySaveMini != null
-                                  //         ? season.entitySaveMini!.goal
-                                  //             ? Colors.purple
-                                  //             : Colors.grey
-                                  //         : Colors.grey,
-                                  //    ),
-                                  // ),
+                            const SizedBox(
+                              height: 16.0,
+                            ),
 
-                                  //*goal update
-                                ],
-                              ),
-                        // const SizedBox(
-                        //   height: 8.0,
-                        // ),
+                            episode.episodeMini.description != null
+                                ? ExpansionTile(
+                                    onExpansionChanged: (_) {
+                                      episode.updateMaxLine();
+                                    },
+                                    title: Text(
+                                      episode.episodeMini.description!,
+                                      maxLines: episode.maxLine,
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        letterSpacing: 1.0,
+                                        color: theme.title,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                  )
+                                : Container(),
+                            const SizedBox(
+                              height: 8.0,
+                            ),
 
-                        // SizedBox(
-                        //   height: 200,
-                        //   child: ListView.builder(
-                        //       scrollDirection: Axis.horizontal,
-                        //       itemCount: season.episodes.length + 1,
-                        //       itemBuilder: (context, index) {
-                        //         if (index == season.episodes.length) {
-                        //           return Padding(
-                        //             padding: const EdgeInsets.all(4.0),
-                        //             child: GestureDetector(
-                        //               onTap: () {
-                        //                 Navigator.push(
-                        //                   context,
-                        //                   MaterialPageRoute(
-                        //                       builder: (context) =>
-                        //                           NewEpisodeSeason(
-                        //                               seasonMini: season.seasonMini,
-                        //                               context: context)),
-                        //                 );
-                        //               },
-                        //               child: Container(
-                        //                 decoration: BoxDecoration(
-                        //                   border: Border.all(
-                        //                       color: const Color(0xffce93d8)),
-                        //                   borderRadius: BorderRadius.circular(8.0),
-                        //                 ),
-                        //                 width: 150,
-                        //                 child: Column(
-                        //                   mainAxisAlignment:
-                        //                       MainAxisAlignment.center,
-                        //                   children: const [
-                        //                     Icon(Icons.add_box_outlined),
-                        //                     Text('add episode'),
-                        //                   ],
-                        //                 ),
-                        //               ),
-                        //             ),
-                        //           );
-                        //         } else {
-                        //           return EpisodeMiniSeason(
-                        //               episodeMini: season.episodes[index]);
-                        //         }
-                        //       }),
-                        // ),
-
-                        // const SizedBox(
-                        //   height: 16.0,
-                        // ),
-
-                        const SizedBox(
-                          height: 16.0,
-                        ),
-
-                        episode.episodeMini.description != null
-                            ? ExpansionTile(
-                                onExpansionChanged: (_) {
-                                  episode.updateMaxLine();
-                                },
-                                title: Text(
-                                  episode.episodeMini.description!,
-                                  maxLines: episode.maxLine,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    letterSpacing: 1.0,
-                                    color: theme.title,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                ),
-                              )
-                            : Container(),
-                        const SizedBox(
-                          height: 8.0,
-                        ),
-
-                        // SizedBox(
-                        //   height: 150,
-                        //   child: ListView.builder(
-                        //       scrollDirection: Axis.horizontal,
-                        //       itemCount: season.workers.length + 1,
-                        //       itemBuilder: (context, index) {
-                        //         if (index == season.workers.length) {
-                        //           return Padding(
-                        //             padding: const EdgeInsets.all(4.0),
-                        //             child: GestureDetector(
-                        //               onTap: () {
-                        //                 // Navigator.push(
-                        //                 //   context,
-                        //                 //   MaterialPageRoute(
-                        //                 //     builder: (context) => NewWorkerEntity(
-                        //                 //         entityMini: entity.entityMini,
-                        //                 //         context: context),
-                        //                 //   ),
-                        //                 // );
-                        //               },
-                        //               child: Container(
-                        //                 decoration: BoxDecoration(
-                        //                   border: Border.all(
-                        //                       color: const Color(0xffce93d8)),
-                        //                   borderRadius: BorderRadius.circular(8.0),
-                        //                 ),
-                        //                 width: 150,
-                        //                 child: Center(
-                        //                   child: Column(
-                        //                     mainAxisAlignment:
-                        //                         MainAxisAlignment.center,
-                        //                     children: const [
-                        //                       Icon(Icons.add_box_outlined),
-                        //                       Text('add worker'),
-                        //                     ],
-                        //                   ),
-                        //                 ),
-                        //               ),
-                        //             ),
-                        //           );
-                        //         } else {
-                        //           return Container();
-                        //           return WorkerMiniEntity(
-                        //             workerMini: entity.workers[index],
-                        //             idUser: entity.idUser,
-                        //           );
-                        //         }
-                        //       }),
-                        // ),
-                        // const SizedBox(
-                        //   height: 16.0,
-                        // )
-                      ],
-                    )
-                  : Container(),
-              episode.load
-                  ? Positioned(
-                      bottom: 0.1,
-                      child: SizedBox(
-                        height: 5.0,
-                        width: MediaQuery.of(context).size.width,
-                        child: const LinearProgressIndicator(),
-                      ),
-                    )
-                  : Container(),
-            ],
-          ),
-        ));
+                            // SizedBox(
+                            //   height: 150,
+                            //   child: ListView.builder(
+                            //       scrollDirection: Axis.horizontal,
+                            //       itemCount: season.workers.length + 1,
+                            //       itemBuilder: (context, index) {
+                            //         if (index == season.workers.length) {
+                            //           return Padding(
+                            //             padding: const EdgeInsets.all(4.0),
+                            //             child: GestureDetector(
+                            //               onTap: () {
+                            //                 // Navigator.push(
+                            //                 //   context,
+                            //                 //   MaterialPageRoute(
+                            //                 //     builder: (context) => NewWorkerEntity(
+                            //                 //         entityMini: entity.entityMini,
+                            //                 //         context: context),
+                            //                 //   ),
+                            //                 // );
+                            //               },
+                            //               child: Container(
+                            //                 decoration: BoxDecoration(
+                            //                   border: Border.all(
+                            //                       color: const Color(0xffce93d8)),
+                            //                   borderRadius: BorderRadius.circular(8.0),
+                            //                 ),
+                            //                 width: 150,
+                            //                 child: Center(
+                            //                   child: Column(
+                            //                     mainAxisAlignment:
+                            //                         MainAxisAlignment.center,
+                            //                     children: const [
+                            //                       Icon(Icons.add_box_outlined),
+                            //                       Text('add worker'),
+                            //                     ],
+                            //                   ),
+                            //                 ),
+                            //               ),
+                            //             ),
+                            //           );
+                            //         } else {
+                            //           return Container();
+                            //           return WorkerMiniEntity(
+                            //             workerMini: entity.workers[index],
+                            //             idUser: entity.idUser,
+                            //           );
+                            //         }
+                            //       }),
+                            // ),
+                            // const SizedBox(
+                            //   height: 16.0,
+                            // )
+                          ],
+                        )
+                      : Container(),
+                  episode.load
+                      ? Positioned(
+                          bottom: 0.1,
+                          child: SizedBox(
+                            height: 5.0,
+                            width: MediaQuery.of(context).size.width,
+                            child: const LinearProgressIndicator(),
+                          ),
+                        )
+                      : Container(),
+                ],
+              ),
+            ));
       });
     });
   }

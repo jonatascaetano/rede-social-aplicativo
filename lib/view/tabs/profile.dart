@@ -25,6 +25,18 @@ class _ProfileState extends State<Profile> {
       return ScopedModelDescendant<ProfileModel>(
           builder: (context, child, profile) {
         return Scaffold(
+          appBar: AppBar(
+            elevation: 0.0,
+            title: Text(
+              'Profile',
+              style: TextStyle(
+                color: theme.title,
+                fontSize: 24.0,
+                letterSpacing: 1.0,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+          ),
           body: Stack(
             children: [
               profile.profileNull
@@ -383,7 +395,7 @@ class _ProfileState extends State<Profile> {
                                         .typeEntitiesMini
                                         .indexOf(e),
                                     isUser: true,
-                                    idUser: '',
+                                    idUser: profile.userMini.id,
                                   ),
                                 )
                                 .toList(),
