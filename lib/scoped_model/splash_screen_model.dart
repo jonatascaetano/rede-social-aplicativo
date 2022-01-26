@@ -23,7 +23,6 @@ class SplashScreenModel extends Model {
         final prefs = await SharedPreferences.getInstance();
         id = prefs.getString("id")!;
         ScopedModel.of<ProfileModel>(context).getProfile(context: context);
-        ScopedModel.of<ProfileModel>(context).getWorkers();
         load = false;
         notifyListeners();
         Navigator.pushAndRemoveUntil(

@@ -4,6 +4,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_network_application/entities/dto/user_dto.dart';
+import 'package:social_network_application/entities/mini_dto/post_update_mini.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 import 'dart:convert';
 
@@ -23,10 +24,12 @@ class ProfileModel extends Model {
   bool load = false;
   bool imageIsNull = true;
   late File imageFile;
+  List<PostUpdateMini> posts = [];
 
-  // ProfileModel({required BuildContext context}) {
+  //ProfileModel({required BuildContext context}) {
   //   getProfile(context: context);
   //   getWorkers();
+  //   getPosts();
   // }
 
   Future<String> getId() async {
@@ -56,6 +59,7 @@ class ProfileModel extends Model {
         load = false;
         notifyListeners();
         getWorkers();
+        getAllPosts(context: context);
         break;
       default:
         load = false;
@@ -350,7 +354,7 @@ class ProfileModel extends Model {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('invalid email')),
         );
-        break;  
+        break;
       default:
         load = false;
         notifyListeners();
@@ -390,5 +394,37 @@ class ProfileModel extends Model {
     }
   }
 
-  getPost() {}
+  getAllPosts({required BuildContext context}) async {
+    load = true;
+    notifyListeners();
+    String id = await getId();
+    var url = Uri.parse(base + 'posts/get/user/$id/all');
+    var response = await http.get(url, headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
+    // ignore: avoid_print
+    print("getPosts: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 200:
+        posts = [];
+        var itens = json.decode(response.body);
+        for (var item in itens) {
+          if (item['typePost'] == "UPDATE") {
+            PostUpdateMini postUpdateMini = PostUpdateMini.fromMap(map: item);
+            posts.add(postUpdateMini);
+          }
+        }
+        load = false;
+        notifyListeners();
+        break;
+      default:
+        load = false;
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Try again later')),
+        );
+        break;
+    }
+  }
 }

@@ -86,7 +86,7 @@ class _UpdateReviewEpisodeState extends State<UpdateReviewEpisode> {
                               reviewed: true,
                               evaluation: null,
                               review: controller.text,
-                              typeEntitySave: null,
+                              level: null,
                             );
                             episode.updateReviewEntitySave(
                                 entitySaveDTO: episodeSaveDTO,

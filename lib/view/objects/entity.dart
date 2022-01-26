@@ -312,7 +312,7 @@ class _EntityState extends State<Entity> {
                                     reviewed: null,
                                     evaluation: null,
                                     review: null,
-                                    typeEntitySave: null,
+                                    level: null,
                                   );
                                   if (entity.entitySaveMini == null) {
                                     entity.newEntitySave(
@@ -422,7 +422,7 @@ class _EntityState extends State<Entity> {
                                               reviewed: null,
                                               evaluation: null,
                                               review: null,
-                                              typeEntitySave: null,
+                                              level: null,
                                             );
                                             entity.updateGoalEntitySave(
                                                 entitySaveDTO: entitySaveDTO,

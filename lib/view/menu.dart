@@ -56,11 +56,31 @@ class _MenuState extends State<Menu> {
                                   color: Colors.transparent,
                                   child: Row(
                                     children: [
-                                      Icon(
-                                        Icons.person_rounded,
-                                        size: 24,
-                                        color: theme.emphasis,
-                                      ),
+                                      !ScopedModel.of<ProfileModel>(context)
+                                              .profileNull
+                                          ? ScopedModel.of<ProfileModel>(
+                                                          context)
+                                                      .userMini
+                                                      .image !=
+                                                  null
+                                              ? CircleAvatar(
+                                                  backgroundImage: NetworkImage(
+                                                      ScopedModel.of<
+                                                                  ProfileModel>(
+                                                              context)
+                                                          .userMini
+                                                          .image!),
+                                                  radius: 30.0,
+                                                )
+                                              : CircleAvatar(
+                                                  backgroundColor: theme.shadow,
+                                                  child: Icon(
+                                                    Icons.image,
+                                                    color: theme.emphasis,
+                                                  ),
+                                                  radius: 30.0,
+                                                )
+                                          : Container(),
                                       const SizedBox(
                                         width: 8,
                                       ),

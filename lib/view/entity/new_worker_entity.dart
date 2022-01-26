@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/entities/dto/worker_dto.dart';
 import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
-import 'package:social_network_application/enuns/type_worker.dart';
+import 'package:social_network_application/enuns/level.dart';
 import 'package:social_network_application/scoped_model/new_worker_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 
@@ -78,7 +78,7 @@ class _NewWorkerEntityState extends State<NewWorkerEntity> {
                                     idUser: worker.id,
                                     idEntity: widget.entityMini.id,
                                     role: controller.text,
-                                    typeWorker: TypeWorker.ENTITY);
+                                    level: Level.ENTITY);
                                 worker.createWorker(
                                     workerDTO: workerDTO,
                                     context: widget.context);

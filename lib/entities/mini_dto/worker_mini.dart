@@ -5,7 +5,7 @@ class WorkerMini {
   late String id;
   late DateTime? release;
   late String role;
-  late String typeWorker;
+  late String level;
   late String typeObject;
   late UserMini user;
   late EntityMini entity;
@@ -14,7 +14,7 @@ class WorkerMini {
     id = map["id"];
     release = map["release"];
     role = map["role"];
-    typeWorker = map["typeWorker"];
+    level = map["level"];
     typeObject = map["typeObject"];
     user = UserMini.fromMap(map: map["user"]);
     entity = EntityMini.fromMap(map: map["entity"]);

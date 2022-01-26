@@ -10,7 +10,7 @@ class EntitySaveDTO {
   late bool? reviewed;
   late int? evaluation;
   late String? review;
-  late String? typeEntitySave;
+  late String? level;
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
@@ -25,7 +25,7 @@ class EntitySaveDTO {
     map["reviewed"] = reviewed;
     map["evaluation"] = evaluation;
     map["review"] = review;
-    map["typeEntitySave"] = typeEntitySave;
+    map["level"] = level;
     return map;
   }
 
@@ -41,6 +41,6 @@ class EntitySaveDTO {
     required this.reviewed,
     required this.evaluation,
     required this.review,
-    required this.typeEntitySave,
+    required this.level,
   });
 }

@@ -36,7 +36,7 @@ class _EvaluationState extends State<Evaluation> {
                     reviewed: null,
                     evaluation: widget.value,
                     review: null,
-                    typeEntitySave: null);
+                    level: null);
                 entity.updateEvaluationEntitySave(
                     entitySaveDTO: entitySaveDTO, context: context);
               }
