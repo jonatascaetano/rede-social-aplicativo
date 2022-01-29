@@ -20,11 +20,14 @@ class _EvaluationState extends State<Evaluation> {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModelDescendant<EntityModel>(
           builder: (context, child, entity) {
-        return IconButton(
-            onPressed: () {
-              if (widget.evaluation != widget.value &&
-                  entity.entitySaveMini != null) {
-                EntitySaveDTO entitySaveDTO = EntitySaveDTO(
+        return Container(
+          margin: EdgeInsets.zero,
+          padding: EdgeInsets.zero,
+          child: IconButton(
+              onPressed: () {
+                if (widget.evaluation != widget.value &&
+                    entity.entitySaveMini != null) {
+                  EntitySaveDTO entitySaveDTO = EntitySaveDTO(
                     idEntitySave: entity.entitySaveMini!.id,
                     idUser: null,
                     idEntity: null,
@@ -36,18 +39,21 @@ class _EvaluationState extends State<Evaluation> {
                     reviewed: null,
                     evaluation: widget.value,
                     review: null,
-                    level: null);
-                entity.updateEvaluationEntitySave(
-                    entitySaveDTO: entitySaveDTO, context: context);
-              }
-            },
-            icon: Icon(
-              Icons.star,
-              size: 60,
-              color: widget.evaluation >= widget.value
-                  ? Colors.yellow[700]
-                  : theme.icon,
-            ));
+                    level: null,
+                    spoiler: false,
+                  );
+                  entity.updateEvaluationEntitySave(
+                      entitySaveDTO: entitySaveDTO, context: context);
+                }
+              },
+              icon: Icon(
+                Icons.star,
+                size: 60,
+                color: widget.evaluation >= widget.value
+                    ? Colors.yellow[700]
+                    : theme.icon,
+              )),
+        );
       });
     });
   }

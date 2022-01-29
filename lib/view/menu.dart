@@ -84,49 +84,57 @@ class _MenuState extends State<Menu> {
                                       const SizedBox(
                                         width: 8,
                                       ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          !ScopedModel.of<ProfileModel>(context)
-                                                  .profileNull
-                                              ? Text(
-                                                  // ignore: unnecessary_null_comparison
-                                                  ScopedModel.of<ProfileModel>(
-                                                          context)
-                                                      .userMini
-                                                      .name,
-                                                  style: TextStyle(
-                                                    fontSize: 19,
-                                                    letterSpacing: 1.0,
-                                                    color: theme.title,
-                                                    fontWeight:
-                                                        FontWeight.normal,
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width -
+                                                120,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            !ScopedModel.of<ProfileModel>(
+                                                        context)
+                                                    .profileNull
+                                                ? Text(
+                                                    // ignore: unnecessary_null_comparison
+                                                    ScopedModel.of<
+                                                                ProfileModel>(
+                                                            context)
+                                                        .userMini
+                                                        .name,
+                                                    maxLines: 2,
+                                                    style: TextStyle(
+                                                      fontSize: 16,
+                                                      letterSpacing: 1.0,
+                                                      color: theme.title,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  )
+                                                : Text(
+                                                    'Profile',
+                                                    style: TextStyle(
+                                                      fontSize: 17,
+                                                      letterSpacing: 1.0,
+                                                      color: theme.title,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
                                                   ),
-                                                )
-                                              : Text(
-                                                  'Profile',
-                                                  style: TextStyle(
-                                                    fontSize: 19,
-                                                    letterSpacing: 1.0,
-                                                    color: theme.title,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                  ),
-                                                ),
-                                          const SizedBox(
-                                            height: 2.0,
-                                          ),
-                                          Text(
-                                            "View your profile",
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              letterSpacing: 1.0,
-                                              color: theme.subtitle,
-                                              fontWeight: FontWeight.normal,
+                                            const SizedBox(
+                                              height: 2.0,
                                             ),
-                                          ),
-                                        ],
+                                            Text(
+                                              "View your profile",
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                letterSpacing: 1.0,
+                                                color: theme.subtitle,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),

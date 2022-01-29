@@ -294,6 +294,7 @@ class _SeasonState extends State<Season> {
                                     evaluation: null,
                                     review: null,
                                     level: null,
+                                    spoiler: false,
                                   );
                                   if (season.entitySaveMini == null) {
                                     season.newEntitySave(

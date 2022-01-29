@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:social_network_application/converts_enum/convert_to_enum.dart';
+import 'package:social_network_application/converts/convert_to_enum.dart';
 import 'package:social_network_application/entities/dto/entity_save_dto.dart';
 import 'package:social_network_application/entities/mini_dto/entity_save_mini.dart';
 import 'package:social_network_application/entities/mini_dto/episode_mini.dart';

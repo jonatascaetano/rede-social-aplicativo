@@ -29,6 +29,7 @@ class _Category4State extends State<Category4> {
                   body: category.entitySaves.isEmpty
                       ? Container()
                       : GridView.count(
+                          padding: EdgeInsets.zero,
                           childAspectRatio: 1.0 / 1.5,
                           crossAxisCount: 2,
                           children: category.entitySaves.map((e) {

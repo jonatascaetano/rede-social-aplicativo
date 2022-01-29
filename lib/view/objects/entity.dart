@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:social_network_application/converts_enum/convert_to_enum.dart';
+import 'package:social_network_application/converts/convert_to_enum.dart';
 import 'package:social_network_application/entities/dto/entity_save_dto.dart';
 import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
 import 'package:social_network_application/scoped_model/entity_model.dart';
@@ -313,6 +313,7 @@ class _EntityState extends State<Entity> {
                                     evaluation: null,
                                     review: null,
                                     level: null,
+                                    spoiler: false,
                                   );
                                   if (entity.entitySaveMini == null) {
                                     entity.newEntitySave(
@@ -423,6 +424,7 @@ class _EntityState extends State<Entity> {
                                               evaluation: null,
                                               review: null,
                                               level: null,
+                                              spoiler: false,
                                             );
                                             entity.updateGoalEntitySave(
                                                 entitySaveDTO: entitySaveDTO,

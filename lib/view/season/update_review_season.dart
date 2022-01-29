@@ -16,6 +16,7 @@ class UpdateReviewSeason extends StatefulWidget {
 class _UpdateReviewSeasonState extends State<UpdateReviewSeason> {
   TextEditingController controller = TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
+  bool spoiler = false;
 
   @override
   void initState() {
@@ -50,6 +51,35 @@ class _UpdateReviewSeasonState extends State<UpdateReviewSeason> {
                       horizontal: 8.0, vertical: 30.0),
                   child: ListView(
                     children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "Contains spoiler?",
+                              style: TextStyle(
+                                fontSize: 16,
+                                letterSpacing: 1.0,
+                                color:
+                                    ScopedModel.of<ThemeModel>(context).title,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Switch.adaptive(
+                                value: spoiler,
+                                onChanged: (value) {
+                                  setState(() {
+                                    spoiler = value;
+                                  });
+                                }),
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 16.0,
+                      ),
                       TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -87,6 +117,7 @@ class _UpdateReviewSeasonState extends State<UpdateReviewSeason> {
                               evaluation: null,
                               review: controller.text,
                               level: null,
+                              spoiler: spoiler,
                             );
                             season.updateReviewEntitySave(
                                 entitySaveDTO: entitySaveDTO, context: context);

@@ -302,6 +302,7 @@ class _EpisodeState extends State<Episode> {
                                     evaluation: null,
                                     review: null,
                                     level: null,
+                                    spoiler: false,
                                   );
                                   if (episode.entitySaveMini == null) {
                                     episode.newEntitySave(

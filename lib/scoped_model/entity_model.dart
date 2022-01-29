@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'package:social_network_application/converts_enum/convert_to_enum.dart';
+import 'package:social_network_application/converts/convert_to_enum.dart';
 import 'package:social_network_application/entities/dto/entity_save_dto.dart';
 import 'package:social_network_application/entities/dto/post_update_dto.dart';
 import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
@@ -306,7 +306,10 @@ class EntityModel extends Model {
         entitySaveMini = EntitySaveMini.fromMap(map: item);
         load = false;
         notifyListeners();
-        newPost(entitySaveMini: entitySaveMini!, category: 5, context: context);
+        if (entitySaveMini!.goal) {
+          newPost(
+              entitySaveMini: entitySaveMini!, category: 5, context: context);
+        }
         break;
       default:
         load = false;
@@ -337,9 +340,6 @@ class EntityModel extends Model {
         // ignore: avoid_print
         print(item.toString());
         entitySaveMini = EntitySaveMini.fromMap(map: item);
-        load = false;
-        notifyListeners();
-        Navigator.pop(context);
         newPost(entitySaveMini: entitySaveMini!, category: 7, context: context);
         break;
       default:
@@ -361,8 +361,8 @@ class EntityModel extends Model {
     PostUpdateDTO postUpdateDTO = PostUpdateDTO(
       idPost: null,
       level: entitySaveMini.level,
-      release: null,
-      body: null,
+      release: DateTime.now().toString(),
+      body: category == 7 ? entitySaveMini.review : null,
       category: category,
       idUser: idUser,
       idEntity: entitySaveMini.level == Level.ENTITY
@@ -374,10 +374,11 @@ class EntityModel extends Model {
       idEpisode: entitySaveMini.level == Level.EPISODE
           ? entitySaveMini.episode!.id
           : null,
-      evaluation:
-          entitySaveMini.evaluation != null ? entitySaveMini.evaluation! : 0,
-      spoiler: false,
+      evaluation: category == 6 ? entitySaveMini.evaluation! : 0,
+      spoiler: category == 7 ? entitySaveMini.spoiler : false,
     );
+    // ignore: avoid_print
+    print("postUpdateDTO: " + postUpdateDTO.toMap().toString());
     var url = Uri.parse(base + 'posts/post/update');
     var response = await http
         .post(url, body: json.encode(postUpdateDTO.toMap()), headers: {
@@ -392,14 +393,21 @@ class EntityModel extends Model {
         // ignore: avoid_print
         print(item.toString());
         PostUpdateMini postUpdateMini = PostUpdateMini.fromMap(map: item);
-        load = false;
-        notifyListeners();
-        ScopedModel.of<ProfileModel>(context).getAllPosts(context: context);
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    AddBodyPostEntity(postUpdateMini: postUpdateMini)));
+        if (postUpdateMini.category != 7) {
+          load = false;
+          notifyListeners();
+          ScopedModel.of<ProfileModel>(context).getAllPosts(context: context);
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      AddBodyPostEntity(postUpdateMini: postUpdateMini)));
+        } else {
+          ScopedModel.of<ProfileModel>(context).getAllPosts(context: context);
+          load = false;
+          notifyListeners();
+          Navigator.pop(context);
+        }
         break;
       default:
         load = false;

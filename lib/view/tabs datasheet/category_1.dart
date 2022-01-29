@@ -19,7 +19,8 @@ class _Category1State extends State<Category1> {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<CategoryModel>(
-          model: CategoryModel(entitySaveMinis: widget.entitySaveMini, category: 1),
+          model: CategoryModel(
+              entitySaveMinis: widget.entitySaveMini, category: 1),
           child: ScopedModelDescendant<CategoryModel>(
               builder: (context, child, category) {
             return Stack(
@@ -28,6 +29,7 @@ class _Category1State extends State<Category1> {
                   body: category.entitySaves.isEmpty
                       ? Container()
                       : GridView.count(
+                          padding: EdgeInsets.zero,
                           childAspectRatio: 1.0 / 1.5,
                           crossAxisCount: 2,
                           children: category.entitySaves.map((e) {

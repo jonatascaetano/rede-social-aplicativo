@@ -25,18 +25,20 @@ class _EvaluationState extends State<Evaluation> {
               if (widget.evaluation != widget.value &&
                   season.entitySaveMini != null) {
                 EntitySaveDTO entitySaveDTO = EntitySaveDTO(
-                    idEntitySave: season.entitySaveMini!.id,
-                    idUser: null,
-                    idEntity: null,
-                    idSeason: null,
-                    idEpisode: null,
-                    category: null,
-                    goal: null,
-                    rated: null,
-                    reviewed: null,
-                    evaluation: widget.value,
-                    review: null,
-                    level: null);
+                  idEntitySave: season.entitySaveMini!.id,
+                  idUser: null,
+                  idEntity: null,
+                  idSeason: null,
+                  idEpisode: null,
+                  category: null,
+                  goal: null,
+                  rated: null,
+                  reviewed: null,
+                  evaluation: widget.value,
+                  review: null,
+                  level: null,
+                  spoiler: false,
+                );
                 season.updateEvaluationEntitySave(
                     entitySaveDTO: entitySaveDTO, context: context);
               }

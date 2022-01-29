@@ -19,6 +19,7 @@ class _Category0State extends State<Category0> {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return Scaffold(
         body: GridView.count(
+          padding: EdgeInsets.zero,
           childAspectRatio: 1.0 / 1.5,
           crossAxisCount: 2,
           children: widget.entitySaveMini.map((e) {

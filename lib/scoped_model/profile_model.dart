@@ -427,4 +427,32 @@ class ProfileModel extends Model {
         break;
     }
   }
+
+  updateLikePost(
+      {required BuildContext context, required String idPost}) async {
+    load = true;
+    notifyListeners();
+    String id = await getId();
+    var url = Uri.parse(base + 'posts/put/like/post/$idPost/user/$id');
+    var response = await http.put(url, headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
+    // ignore: avoid_print
+    print("updateLikePost: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 202:
+        getAllPosts(context: context);
+        load = false;
+        notifyListeners();
+        break;
+      default:
+        load = false;
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Try again later')),
+        );
+        break;
+    }
+  }
 }

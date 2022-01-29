@@ -20,11 +20,20 @@ class _HomeState extends State<Home> {
         return Scaffold(
           body: Stack(
             children: [
-              ListView.builder(
+              ListView.separated(
+                  separatorBuilder: (context, index) {
+                    return Divider(
+                      height: 10.0,
+                      thickness: 10.0,
+                      color: theme.shadow,
+                    );
+                  },
                   itemCount: profile.posts.length,
                   itemBuilder: (context, index) {
                     return UpdatePostEntityWidget(
-                        postUpdateMini: profile.posts[index]);
+                      postUpdateMini: profile.posts[index],
+                      screenComment: false,
+                    );
                   }),
               profile.load
                   ? Positioned(
