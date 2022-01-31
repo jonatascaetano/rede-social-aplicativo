@@ -1,3 +1,4 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/entities/dto/entity_save_dto.dart';
@@ -19,6 +20,39 @@ class Episode extends StatefulWidget {
 }
 
 class _EpisodeState extends State<Episode> {
+  void handleEvent(
+      AdmobAdEvent event, Map<String, dynamic> args, String adType) {
+    switch (event) {
+      case AdmobAdEvent.loaded:
+        // ignore: avoid_print
+        print('Novo $adType Ad carregado!');
+        break;
+      case AdmobAdEvent.opened:
+        // ignore: avoid_print
+        print('Admob $adType Ad aberto!');
+        break;
+      case AdmobAdEvent.closed:
+        // ignore: avoid_print
+        print('Admob $adType Ad fechado!');
+        break;
+      case AdmobAdEvent.failedToLoad:
+        // ignore: avoid_print
+        print('Admob $adType falhou ao carregar. :(');
+        break;
+      default:
+    }
+  }
+
+  AdmobBanner getBanner(AdmobBannerSize size) {
+    return AdmobBanner(
+      adUnitId: "ca-app-pub-3940256099942544/6300978111",
+      adSize: size,
+      listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
+        handleEvent(event, args!, 'Banner');
+      },
+    );
+  }
+
   @override
   void initState() {
     ScopedModel.of<EpisodeModel>(context).episodeMiniIsNull = true;
@@ -489,6 +523,12 @@ class _EpisodeState extends State<Episode> {
                             // const SizedBox(
                             //   height: 16.0,
                             // ),
+
+                            const SizedBox(
+                              height: 16.0,
+                            ),
+
+                            getBanner(AdmobBannerSize.MEDIUM_RECTANGLE),
 
                             const SizedBox(
                               height: 16.0,
