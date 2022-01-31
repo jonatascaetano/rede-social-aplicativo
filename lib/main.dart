@@ -1,3 +1,4 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -15,6 +16,7 @@ import 'scoped_model/support/theme_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Admob.initialize();
   await Firebase.initializeApp();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {

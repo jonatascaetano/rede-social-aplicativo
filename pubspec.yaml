@@ -41,6 +41,7 @@ dependencies:
   firebase_core: ^1.10.6
   image_picker: ^0.8.4+4
   carousel_slider: ^4.0.0
+  admob_flutter: ^2.0.0
 
 dev_dependencies:
   flutter_test:
