@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:social_network_application/entities/mini_dto/post_update_mini.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 import 'package:social_network_application/entities/mini_dto/worker_mini.dart';
+import 'package:social_network_application/enuns/level.dart';
+import 'package:social_network_application/enuns/type_post.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
+import 'package:social_network_application/widgets/post/update_post_entity_widget.dart';
 
 class UserModel extends Model {
   static const String base =
@@ -17,10 +21,12 @@ class UserModel extends Model {
   bool profileNull = true;
   late UserMini userMini;
   bool load = false;
+  List<dynamic> myPosts = [];
+  late String idUSer;
 
-  UserModel({required String idUser}) {
+  UserModel({required String idUser, required BuildContext context}) {
     getWorkersUser(idUser: idUser);
-    getProfile(idUser: idUser);
+    getProfile(idUser: idUser, context: context);
     checkFollowing(idUser: idUser);
   }
 
@@ -29,7 +35,7 @@ class UserModel extends Model {
     return prefs.getString("id")!;
   }
 
-  getProfile({required String idUser}) async {
+  getProfile({required String idUser, required BuildContext context}) async {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'users/get/user/$idUser');
@@ -48,6 +54,7 @@ class UserModel extends Model {
         profileNull = false;
         load = false;
         notifyListeners();
+        getMyPosts(context: context);
     }
   }
 
@@ -117,7 +124,7 @@ class UserModel extends Model {
     // ignore: avoid_print
     print('removeFollowing: ' + response.statusCode.toString());
     ScopedModel.of<ProfileModel>(context).getProfile(context: context);
-    getProfile(idUser: idFollowing);
+    getProfile(idUser: idFollowing, context: context);
     checkFollowing(idUser: idFollowing);
     notifyListeners();
   }
@@ -135,12 +142,89 @@ class UserModel extends Model {
     // ignore: avoid_print
     print('addFollowing: ' + response.statusCode.toString());
     ScopedModel.of<ProfileModel>(context).getProfile(context: context);
-    getProfile(idUser: idFollowing);
+    getProfile(idUser: idFollowing, context: context);
     checkFollowing(idUser: idFollowing);
     notifyListeners();
   }
 
-  Future<bool> getPost() async {
-    return true;
+  getMyPosts({required BuildContext context}) async {
+    load = true;
+    notifyListeners();
+    var url = Uri.parse(base + 'users/get/user/${userMini.id}/posts/my');
+    var response = await http.get(url, headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
+    // ignore: avoid_print
+    print("getMyPostsUser: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 200:
+        //posts = [];
+        myPosts = [];
+        var itens = json.decode(response.body);
+        myPosts = itens;
+        // for (var item in itens) {
+        //   if (item['typePost'] == "UPDATE") {
+        //     PostUpdateMini postUpdateMini = PostUpdateMini.fromMap(map: item);
+        //     posts.add(postUpdateMini);
+        //   }
+        // }
+        load = false;
+        notifyListeners();
+        break;
+      default:
+        load = false;
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Try again later')),
+        );
+        break;
+    }
+  }
+
+  updateLikePost(
+      {required BuildContext context, required String idPost}) async {
+    load = true;
+    notifyListeners();
+    String id = await getId();
+    var url = Uri.parse(base + 'posts/put/like/post/$idPost/user/$id');
+    var response = await http.put(url, headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
+    // ignore: avoid_print
+    print("updateLikePostUser: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 202:
+        getMyPosts(context: context);
+        notifyListeners();
+        load = false;
+        notifyListeners();
+        ScopedModel.of<ProfileModel>(context).getAllPosts(context: context);
+        break;
+      default:
+        load = false;
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Try again later')),
+        );
+        break;
+    }
+  }
+
+  returnPostWidget({required Map post, required bool screenComment}) {
+    // ignore: avoid_print
+    switch (post["typePost"]) {
+      case TypePost.UPDATE:
+        if (post["level"] == Level.ENTITY) {
+          return UpdatePostEntityWidget(
+            postUpdateMini: PostUpdateMini.fromMap(map: post),
+            screenComment: screenComment,
+            screenUser: true,
+          );
+        }
+        break;
+      default:
+    }
   }
 }

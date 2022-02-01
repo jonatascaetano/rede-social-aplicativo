@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
-import 'package:social_network_application/widgets/post/update_post_entity_widget.dart';
 import 'package:admob_flutter/admob_flutter.dart';
 
 class Home extends StatefulWidget {
@@ -62,7 +61,7 @@ class _HomeState extends State<Home> {
                       color: theme.shadow,
                     );
                   },
-                  itemCount: profile.posts.length,
+                  itemCount: profile.allPosts.length,
                   itemBuilder: (context, index) {
                     if (index % 2 == 0) {
                       return Column(
@@ -79,17 +78,24 @@ class _HomeState extends State<Home> {
                             thickness: 10.0,
                             color: theme.shadow,
                           ),
-                          UpdatePostEntityWidget(
-                            postUpdateMini: profile.posts[index],
-                            screenComment: false,
-                          ),
+                          profile.returnPostWidget(
+                              post: profile.allPosts[index],
+                              screenComment: false),
+                          // UpdatePostEntityWidget(
+                          //   postUpdateMini: profile.posts[index],
+                          //   screenComment: false,
+                          // ),
                         ],
                       );
                     } else {
-                      return UpdatePostEntityWidget(
-                        postUpdateMini: profile.posts[index],
+                      return profile.returnPostWidget(
+                        post: profile.allPosts[index],
                         screenComment: false,
                       );
+                      // UpdatePostEntityWidget(
+                      //   postUpdateMini: profile.posts[index],
+                      //   screenComment: false,
+                      // );
                     }
                   }),
               profile.load

@@ -29,62 +29,65 @@ class _EntityMiniResultState extends State<EntityMiniResult> {
                         datasheetIsOpen: false,
                       )));
         },
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              widget.entityMini.image != null
-                  ? CircleAvatar(
-                      backgroundImage: NetworkImage(widget.entityMini.image!),
-                      radius: 30.0,
-                    )
-                  : CircleAvatar(
-                      backgroundColor: theme.shadow,
-                      child: Icon(
-                        Icons.image,
-                        color: theme.emphasis,
+        child: Container(
+          color: Colors.transparent,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                widget.entityMini.image != null
+                    ? CircleAvatar(
+                        backgroundImage: NetworkImage(widget.entityMini.image!),
+                        radius: 30.0,
+                      )
+                    : CircleAvatar(
+                        backgroundColor: theme.shadow,
+                        child: Icon(
+                          Icons.image,
+                          color: theme.emphasis,
+                        ),
+                        radius: 30.0,
                       ),
-                      radius: 30.0,
+                const SizedBox(
+                  width: 8.0,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 200.0,
+                      child: Text(
+                        widget.entityMini.name,
+                        overflow: TextOverflow.fade,
+                        maxLines: 1,
+                        softWrap: false,
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: theme.title,
+                          letterSpacing: 1.0,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
                     ),
-              const SizedBox(
-                width: 8.0,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 200.0,
-                    child: Text(
-                      widget.entityMini.name,
+                    Text(
+                      LanguageModel().typeEntities[
+                          ConvertToEnum.convertTypeEntityToValue(
+                              typeEntity:
+                                  widget.entityMini.typeEntity.toString())],
                       overflow: TextOverflow.fade,
                       maxLines: 1,
                       softWrap: false,
                       style: TextStyle(
-                        fontSize: 16,
-                        color: theme.title,
+                        fontSize: 14,
+                        color: theme.subtitle,
                         letterSpacing: 1.0,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
-                  ),
-                  Text(
-                    LanguageModel().typeEntities[
-                        ConvertToEnum.convertTypeEntityToValue(
-                            typeEntity:
-                                widget.entityMini.typeEntity.toString())],
-                    overflow: TextOverflow.fade,
-                    maxLines: 1,
-                    softWrap: false,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: theme.subtitle,
-                      letterSpacing: 1.0,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
-                ],
-              )
-            ],
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       );

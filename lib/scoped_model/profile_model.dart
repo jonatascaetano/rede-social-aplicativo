@@ -10,9 +10,12 @@ import 'dart:convert';
 
 import 'package:social_network_application/entities/mini_dto/worker_mini.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:social_network_application/enuns/level.dart';
+import 'package:social_network_application/enuns/type_post.dart';
 import 'dart:io';
 
 import 'package:social_network_application/view/authentication/login.dart';
+import 'package:social_network_application/widgets/post/update_post_entity_widget.dart';
 
 class ProfileModel extends Model {
   static const String base =
@@ -25,6 +28,8 @@ class ProfileModel extends Model {
   bool imageIsNull = true;
   late File imageFile;
   List<PostUpdateMini> posts = [];
+  List<dynamic> allPosts = [];
+  List<dynamic> myPosts = [];
 
   //ProfileModel({required BuildContext context}) {
   //   getProfile(context: context);
@@ -60,6 +65,7 @@ class ProfileModel extends Model {
         notifyListeners();
         getWorkers();
         getAllPosts(context: context);
+        getMyPosts(context: context);
         break;
       default:
         load = false;
@@ -404,17 +410,58 @@ class ProfileModel extends Model {
       "content-type": "application/json; charset=utf-8"
     });
     // ignore: avoid_print
-    print("getPosts: " + response.statusCode.toString());
+    print("getAllPosts: " + response.statusCode.toString());
     switch (response.statusCode) {
       case 200:
-        posts = [];
+        //posts = [];
+        allPosts = [];
         var itens = json.decode(response.body);
-        for (var item in itens) {
-          if (item['typePost'] == "UPDATE") {
-            PostUpdateMini postUpdateMini = PostUpdateMini.fromMap(map: item);
-            posts.add(postUpdateMini);
-          }
-        }
+        allPosts = itens;
+        getMyPosts(context: context);
+        // for (var item in itens) {
+        //   if (item['typePost'] == "UPDATE") {
+        //     PostUpdateMini postUpdateMini = PostUpdateMini.fromMap(map: item);
+        //     posts.add(postUpdateMini);
+        //   }
+        // }
+        notifyListeners();
+        load = false;
+        notifyListeners();
+        break;
+      default:
+        load = false;
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Try again later')),
+        );
+        break;
+    }
+  }
+
+  getMyPosts({required BuildContext context}) async {
+    load = true;
+    notifyListeners();
+    String id = await getId();
+    var url = Uri.parse(base + 'users/get/user/$id/posts/my');
+    var response = await http.get(url, headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
+    // ignore: avoid_print
+    print("getMyPosts: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 200:
+        //posts = [];
+        myPosts = [];
+        var itens = json.decode(response.body);
+        myPosts = itens;
+        // for (var item in itens) {
+        //   if (item['typePost'] == "UPDATE") {
+        //     PostUpdateMini postUpdateMini = PostUpdateMini.fromMap(map: item);
+        //     posts.add(postUpdateMini);
+        //   }
+        // }
+        notifyListeners();
         load = false;
         notifyListeners();
         break;
@@ -443,8 +490,6 @@ class ProfileModel extends Model {
     switch (response.statusCode) {
       case 202:
         getAllPosts(context: context);
-        load = false;
-        notifyListeners();
         break;
       default:
         load = false;
@@ -453,6 +498,22 @@ class ProfileModel extends Model {
           const SnackBar(content: Text('Try again later')),
         );
         break;
+    }
+  }
+
+  returnPostWidget({required Map post, required bool screenComment}) {
+    // ignore: avoid_print
+    switch (post["typePost"]) {
+      case TypePost.UPDATE:
+        if (post["level"] == Level.ENTITY) {
+          return UpdatePostEntityWidget(
+            postUpdateMini: PostUpdateMini.fromMap(map: post),
+            screenComment: screenComment,
+            screenUser: false,
+          );
+        }
+        break;
+      default:
     }
   }
 }

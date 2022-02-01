@@ -27,52 +27,55 @@ class _UserMiniResultState extends State<UserMiniResult> {
                         userMini: widget.userMini,
                       )));
         },
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              widget.userMini.image != null
-                  ? CircleAvatar(
-                      backgroundImage: NetworkImage(widget.userMini.image!),
-                      radius: 30.0,
-                    )
-                  : CircleAvatar(
-                      backgroundColor: theme.shadow,
-                      child: Icon(Icons.person, color: theme.emphasis),
-                      radius: 30.0,
+        child: Container(
+          color: Colors.transparent,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                widget.userMini.image != null
+                    ? CircleAvatar(
+                        backgroundImage: NetworkImage(widget.userMini.image!),
+                        radius: 30.0,
+                      )
+                    : CircleAvatar(
+                        backgroundColor: theme.shadow,
+                        child: Icon(Icons.person, color: theme.emphasis),
+                        radius: 30.0,
+                      ),
+                const SizedBox(
+                  width: 8.0,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 200.0,
+                      child: Text(
+                        widget.userMini.name,
+                        overflow: TextOverflow.fade,
+                        maxLines: 1,
+                        softWrap: false,
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: theme.title,
+                          letterSpacing: 1.0,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
                     ),
-              const SizedBox(
-                width: 8.0,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 200.0,
-                    child: Text(
-                      widget.userMini.name,
-                      overflow: TextOverflow.fade,
-                      maxLines: 1,
-                      softWrap: false,
+                    Text(
+                      LanguageModel().typeObject[0],
                       style: TextStyle(
                         fontSize: 16,
-                        color: theme.title,
-                        letterSpacing: 1.0,
+                        color: theme.subtitle,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
-                  ),
-                  Text(
-                    LanguageModel().typeObject[0],
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: theme.subtitle,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
-                ],
-              )
-            ],
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       );

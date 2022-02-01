@@ -1,3 +1,4 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
@@ -20,11 +21,44 @@ class User extends StatefulWidget {
 }
 
 class _UserState extends State<User> {
+  void handleEvent(
+      AdmobAdEvent event, Map<String, dynamic> args, String adType) {
+    switch (event) {
+      case AdmobAdEvent.loaded:
+        // ignore: avoid_print
+        print('Novo $adType Ad carregado!');
+        break;
+      case AdmobAdEvent.opened:
+        // ignore: avoid_print
+        print('Admob $adType Ad aberto!');
+        break;
+      case AdmobAdEvent.closed:
+        // ignore: avoid_print
+        print('Admob $adType Ad fechado!');
+        break;
+      case AdmobAdEvent.failedToLoad:
+        // ignore: avoid_print
+        print('Admob $adType falhou ao carregar. :(');
+        break;
+      default:
+    }
+  }
+
+  AdmobBanner getBanner(AdmobBannerSize size) {
+    return AdmobBanner(
+      adUnitId: "ca-app-pub-3940256099942544/6300978111",
+      adSize: size,
+      listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
+        handleEvent(event, args!, 'Banner');
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<UserModel>(
-        model: UserModel(idUser: widget.userMini.id),
+        model: UserModel(idUser: widget.userMini.id, context: context),
         child:
             ScopedModelDescendant<UserModel>(builder: (context, child, user) {
           return Scaffold(
@@ -446,6 +480,61 @@ class _UserState extends State<User> {
                             //final da area profile
 
                             //inicio area post
+                            Divider(
+                              height: 10.0,
+                              thickness: 10.0,
+                              color: theme.shadow,
+                            ),
+
+                            ListView.separated(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                separatorBuilder: (context, index) {
+                                  return Divider(
+                                    height: 10.0,
+                                    thickness: 10.0,
+                                    color: theme.shadow,
+                                  );
+                                },
+                                itemCount: user.myPosts.length,
+                                itemBuilder: (context, index) {
+                                  if (index % 2 == 0) {
+                                    return Column(
+                                      children: [
+                                        Container(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          decoration: BoxDecoration(
+                                            color: theme.shadow,
+                                          ),
+                                          child: getBanner(
+                                              AdmobBannerSize.MEDIUM_RECTANGLE),
+                                        ),
+                                        Divider(
+                                          height: 10.0,
+                                          thickness: 10.0,
+                                          color: theme.shadow,
+                                        ),
+                                        user.returnPostWidget(
+                                            post: user.myPosts[index],
+                                            screenComment: false),
+                                        // UpdatePostEntityWidget(
+                                        //   postUpdateMini: profile.posts[index],
+                                        //   screenComment: false,
+                                        // ),
+                                      ],
+                                    );
+                                  } else {
+                                    return user.returnPostWidget(
+                                      post: user.myPosts[index],
+                                      screenComment: false,
+                                    );
+                                    // UpdatePostEntityWidget(
+                                    //   postUpdateMini: profile.posts[index],
+                                    //   screenComment: false,
+                                    // );
+                                  }
+                                }),
                           ],
                         ),
                   user.load

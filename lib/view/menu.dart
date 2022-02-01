@@ -108,7 +108,7 @@ class _MenuState extends State<Menu> {
                                                       letterSpacing: 1.0,
                                                       color: theme.title,
                                                       fontWeight:
-                                                          FontWeight.bold,
+                                                          FontWeight.normal,
                                                     ),
                                                   )
                                                 : Text(
