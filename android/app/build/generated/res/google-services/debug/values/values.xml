@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">829923063105-e18jpht61fahvrd6i2dtn5kfkbttbqpt.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">829923063105</string>
+    <string name="google_api_key" translatable="false">AIzaSyD-EL2_v483D58MOz6dJhd_1QkSx1j8RBA</string>
+    <string name="google_app_id" translatable="false">1:829923063105:android:e78b08a23ead4806429dc0</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyD-EL2_v483D58MOz6dJhd_1QkSx1j8RBA</string>
+    <string name="google_storage_bucket" translatable="false">jonatas-social-network.appspot.com</string>
+    <string name="project_id" translatable="false">jonatas-social-network</string>
+</resources>
