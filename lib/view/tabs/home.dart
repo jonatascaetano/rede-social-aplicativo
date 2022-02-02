@@ -53,51 +53,64 @@ class _HomeState extends State<Home> {
         return Scaffold(
           body: Stack(
             children: [
-              ListView.separated(
-                  separatorBuilder: (context, index) {
-                    return Divider(
-                      height: 10.0,
-                      thickness: 10.0,
-                      color: theme.shadow,
-                    );
-                  },
-                  itemCount: profile.allPosts.length,
-                  itemBuilder: (context, index) {
-                    if (index % 2 == 0) {
-                      return Column(
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              color: theme.shadow,
-                            ),
-                            child: getBanner(AdmobBannerSize.MEDIUM_RECTANGLE),
-                          ),
-                          Divider(
-                            height: 10.0,
-                            thickness: 10.0,
-                            color: theme.shadow,
-                          ),
-                          profile.returnPostWidget(
-                              post: profile.allPosts[index],
-                              screenComment: false),
+              ListView(
+                shrinkWrap: true,
+                children: [
+                  Divider(
+                    height: 10.0,
+                    thickness: 10.0,
+                    color: theme.shadow,
+                  ),
+                  ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      separatorBuilder: (context, index) {
+                        return Divider(
+                          height: 10.0,
+                          thickness: 10.0,
+                          color: theme.shadow,
+                        );
+                      },
+                      itemCount: profile.allPosts.length,
+                      itemBuilder: (context, index) {
+                        if (index % 2 == 0 && index != 0) {
+                          return Column(
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                  color: theme.shadow,
+                                ),
+                                child:
+                                    getBanner(AdmobBannerSize.MEDIUM_RECTANGLE),
+                              ),
+                              Divider(
+                                height: 10.0,
+                                thickness: 10.0,
+                                color: theme.shadow,
+                              ),
+                              profile.returnPostWidget(
+                                  post: profile.allPosts[index],
+                                  screenComment: false),
+                              // UpdatePostEntityWidget(
+                              //   postUpdateMini: profile.posts[index],
+                              //   screenComment: false,
+                              // ),
+                            ],
+                          );
+                        } else {
+                          return profile.returnPostWidget(
+                            post: profile.allPosts[index],
+                            screenComment: false,
+                          );
                           // UpdatePostEntityWidget(
                           //   postUpdateMini: profile.posts[index],
                           //   screenComment: false,
-                          // ),
-                        ],
-                      );
-                    } else {
-                      return profile.returnPostWidget(
-                        post: profile.allPosts[index],
-                        screenComment: false,
-                      );
-                      // UpdatePostEntityWidget(
-                      //   postUpdateMini: profile.posts[index],
-                      //   screenComment: false,
-                      // );
-                    }
-                  }),
+                          // );
+                        }
+                      }),
+                ],
+              ),
               profile.load
                   ? Positioned(
                       bottom: 0.1,

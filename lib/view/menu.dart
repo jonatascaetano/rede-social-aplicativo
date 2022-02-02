@@ -104,7 +104,7 @@ class _MenuState extends State<Menu> {
                                                         .name,
                                                     maxLines: 2,
                                                     style: TextStyle(
-                                                      fontSize: 16,
+                                                      fontSize: 18,
                                                       letterSpacing: 1.0,
                                                       color: theme.title,
                                                       fontWeight:
