@@ -57,8 +57,8 @@ class _HomeState extends State<Home> {
                 shrinkWrap: true,
                 children: [
                   Divider(
-                    height: 10.0,
-                    thickness: 10.0,
+                    height: 5.0,
+                    thickness: 5.0,
                     color: theme.shadow,
                   ),
                   ListView.separated(
@@ -73,7 +73,7 @@ class _HomeState extends State<Home> {
                       },
                       itemCount: profile.allPosts.length,
                       itemBuilder: (context, index) {
-                        if (index % 2 == 0 && index != 0) {
+                        if (index % 4 == 0 && index != 0) {
                           return Column(
                             children: [
                               Container(
@@ -91,7 +91,8 @@ class _HomeState extends State<Home> {
                               ),
                               profile.returnPostWidget(
                                   post: profile.allPosts[index],
-                                  screenComment: false),
+                                  screenComment: false,
+                                  contextPage: context),
                               // UpdatePostEntityWidget(
                               //   postUpdateMini: profile.posts[index],
                               //   screenComment: false,
@@ -102,6 +103,7 @@ class _HomeState extends State<Home> {
                           return profile.returnPostWidget(
                             post: profile.allPosts[index],
                             screenComment: false,
+                            contextPage: context,
                           );
                           // UpdatePostEntityWidget(
                           //   postUpdateMini: profile.posts[index],
@@ -113,7 +115,7 @@ class _HomeState extends State<Home> {
               ),
               profile.load
                   ? Positioned(
-                      bottom: 0.1,
+                      bottom: 0.0,
                       child: SizedBox(
                         height: 5.0,
                         width: MediaQuery.of(context).size.width,

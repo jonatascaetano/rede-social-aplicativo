@@ -144,5 +144,30 @@ class CommentModel extends Model {
     }
   }
 
-  updateLikeComment() {}
+  updateLikeComment(
+      {required BuildContext context,
+      required String idComment,
+      required String idPost}) async {
+    notifyListeners();
+    String id = await getId();
+    var url = Uri.parse(base + 'comments/put/like/comment/$idComment/user/$id');
+    var response = await http.put(url, headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
+    // ignore: avoid_print
+    print("updateLikePost: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 202:
+        getAllCommentPost(idPost: idPost, context: context);
+        notifyListeners();
+        break;
+      default:
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Try again later')),
+        );
+        break;
+    }
+  }
 }

@@ -75,7 +75,7 @@ class PostModel extends Model {
         ScopedModel.of<ProfileModel>(context).getAllPosts(context: context);
         ScopedModel.of<UserModel>(context).getMyPosts(context: context);
         notifyListeners();
-        return postUpdateMini;
+        break;
       default:
         notifyListeners();
         ScaffoldMessenger.of(context).showSnackBar(

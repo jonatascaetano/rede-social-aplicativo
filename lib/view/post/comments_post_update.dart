@@ -11,8 +11,12 @@ import 'package:social_network_application/widgets/post/update_post_entity_widge
 class CommentsPostUpdate extends StatefulWidget {
   PostUpdateMini postUpdateMini;
   bool screenUser;
+  BuildContext contextPage;
   CommentsPostUpdate(
-      {required this.postUpdateMini, required this.screenUser, Key? key})
+      {required this.postUpdateMini,
+      required this.screenUser,
+      required this.contextPage,
+      Key? key})
       : super(key: key);
 
   @override
@@ -53,6 +57,7 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                               postUpdateMini: widget.postUpdateMini,
                               screenComment: true,
                               screenUser: widget.screenUser,
+                              contextPage: widget.contextPage,
                             ),
                             Divider(
                               color: theme.button,
@@ -63,7 +68,9 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                 itemCount: comment.comments.length,
                                 itemBuilder: (context, index) {
                                   return CommentWidget(
-                                      commentMini: comment.comments[index]);
+                                    commentMini: comment.comments[index],
+                                    idPost: widget.postUpdateMini.id!,
+                                  );
                                 }),
                           ],
                         ),
@@ -84,10 +91,16 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                 if (comment.controller.text.isNotEmpty) {
                                   comment.addCommentPost(
                                     idPost: widget.postUpdateMini.id!,
-                                    context: context,
+                                    context: widget.contextPage,
                                     body: comment.controller.text,
                                     screenUser: widget.screenUser,
                                   );
+                                  FocusScopeNode currentFocus =
+                                      FocusScope.of(context);
+
+                                  if (!currentFocus.hasPrimaryFocus) {
+                                    currentFocus.unfocus();
+                                  }
                                 }
                               },
                               icon: const Icon(Icons.send),
@@ -97,6 +110,16 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                       ),
                     ],
                   ),
+                  comment.load
+                      ? Positioned(
+                          bottom: 0.1,
+                          child: SizedBox(
+                            height: 5.0,
+                            width: MediaQuery.of(context).size.width,
+                            child: const LinearProgressIndicator(),
+                          ),
+                        )
+                      : Container(),
                 ],
               ),
             );
@@ -108,7 +131,9 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
 // ignore: must_be_immutable
 class CommentWidget extends StatefulWidget {
   CommentMini commentMini;
-  CommentWidget({required this.commentMini, Key? key}) : super(key: key);
+  String idPost;
+  CommentWidget({required this.commentMini, required this.idPost, Key? key})
+      : super(key: key);
 
   @override
   _CommentWidgetState createState() => _CommentWidgetState();
@@ -118,7 +143,7 @@ class _CommentWidgetState extends State<CommentWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 16.0),
+      margin: const EdgeInsets.symmetric(vertical: 4.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -182,9 +207,6 @@ class _CommentWidgetState extends State<CommentWidget> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 4.0,
-              ),
               Center(
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width - 80,
@@ -192,7 +214,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       const SizedBox(
-                        width: 4.0,
+                        width: 8.0,
                       ),
                       Text(
                         ConvertDate.convertToDatePost(
@@ -214,13 +236,21 @@ class _CommentWidgetState extends State<CommentWidget> {
                           fontWeight: FontWeight.normal,
                         ),
                       ),
-                      const SizedBox(
-                        width: 4.0,
-                      ),
-                      Icon(
-                        Icons.thumb_up_alt_outlined,
-                        size: 16,
-                        color: ScopedModel.of<ThemeModel>(context).subtitle,
+                      IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          ScopedModel.of<CommentModel>(context)
+                              .updateLikeComment(
+                            context: context,
+                            idComment: widget.commentMini.id,
+                            idPost: widget.idPost,
+                          );
+                        },
+                        icon: Icon(
+                          Icons.thumb_up_alt_outlined,
+                          size: 16,
+                          color: ScopedModel.of<ThemeModel>(context).subtitle,
+                        ),
                       ),
                     ],
                   ),

@@ -17,10 +17,12 @@ class UpdatePostEntityWidget extends StatefulWidget {
   PostUpdateMini postUpdateMini;
   bool screenComment;
   bool screenUser;
+  BuildContext contextPage;
   UpdatePostEntityWidget(
       {required this.postUpdateMini,
       required this.screenComment,
       required this.screenUser,
+      required this.contextPage,
       Key? key})
       : super(key: key);
 
@@ -309,6 +311,7 @@ class _UpdatePostEntityWidgetState extends State<UpdatePostEntityWidget> {
                               builder: (context) => CommentsPostUpdate(
                                 postUpdateMini: widget.postUpdateMini,
                                 screenUser: widget.screenUser,
+                                contextPage: widget.contextPage,
                               ),
                             ),
                           );
@@ -338,6 +341,7 @@ class _UpdatePostEntityWidgetState extends State<UpdatePostEntityWidget> {
                               builder: (context) => CommentsPostUpdate(
                                 postUpdateMini: widget.postUpdateMini,
                                 screenUser: widget.screenUser,
+                                contextPage: widget.contextPage,
                               ),
                             ),
                           );
@@ -374,12 +378,13 @@ class _UpdatePostEntityWidgetState extends State<UpdatePostEntityWidget> {
                               context: context,
                               idPost: widget.postUpdateMini.id!);
                         } else if (widget.screenUser && !widget.screenComment) {
-                          ScopedModel.of<UserModel>(context).updateLikePost(
-                              context: context,
-                              idPost: widget.postUpdateMini.id!);
+                          ScopedModel.of<UserModel>(widget.contextPage)
+                              .updateLikePost(
+                                  context: widget.contextPage,
+                                  idPost: widget.postUpdateMini.id!);
                         } else {
                           post.updateLikePost(
-                            context: context,
+                            context: widget.contextPage,
                             idPost: widget.postUpdateMini.id!,
                           );
                         }
@@ -444,6 +449,7 @@ class _UpdatePostEntityWidgetState extends State<UpdatePostEntityWidget> {
                               builder: (context) => CommentsPostUpdate(
                                 postUpdateMini: widget.postUpdateMini,
                                 screenUser: widget.screenUser,
+                                contextPage: widget.contextPage,
                               ),
                             ),
                           );

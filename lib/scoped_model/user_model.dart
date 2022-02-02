@@ -212,7 +212,10 @@ class UserModel extends Model {
     }
   }
 
-  returnPostWidget({required Map post, required bool screenComment}) {
+  returnPostWidget(
+      {required Map post,
+      required bool screenComment,
+      required BuildContext contextPage}) {
     // ignore: avoid_print
     switch (post["typePost"]) {
       case TypePost.UPDATE:
@@ -221,6 +224,7 @@ class UserModel extends Model {
             postUpdateMini: PostUpdateMini.fromMap(map: post),
             screenComment: screenComment,
             screenUser: true,
+            contextPage: contextPage,
           );
         }
         break;

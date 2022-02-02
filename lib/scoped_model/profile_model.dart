@@ -501,7 +501,10 @@ class ProfileModel extends Model {
     }
   }
 
-  returnPostWidget({required Map post, required bool screenComment}) {
+  returnPostWidget(
+      {required Map post,
+      required bool screenComment,
+      required BuildContext contextPage}) {
     // ignore: avoid_print
     switch (post["typePost"]) {
       case TypePost.UPDATE:
@@ -510,6 +513,7 @@ class ProfileModel extends Model {
             postUpdateMini: PostUpdateMini.fromMap(map: post),
             screenComment: screenComment,
             screenUser: false,
+            contextPage: contextPage,
           );
         }
         break;

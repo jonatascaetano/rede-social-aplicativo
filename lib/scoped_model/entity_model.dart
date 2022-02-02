@@ -234,7 +234,6 @@ class EntityModel extends Model {
         // ignore: avoid_print
         print(item.toString());
         entitySaveMini = EntitySaveMini.fromMap(map: item);
-        load = false;
         notifyListeners();
         newPost(
             entitySaveMini: entitySaveMini!,
@@ -396,12 +395,12 @@ class EntityModel extends Model {
         if (postUpdateMini.category != 7) {
           load = false;
           notifyListeners();
-          ScopedModel.of<ProfileModel>(context).getAllPosts(context: context);
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) =>
                       AddBodyPostEntity(postUpdateMini: postUpdateMini)));
+          ScopedModel.of<ProfileModel>(context).getAllPosts(context: context);
         } else {
           ScopedModel.of<ProfileModel>(context).getAllPosts(context: context);
           load = false;

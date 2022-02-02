@@ -498,7 +498,7 @@ class _UserState extends State<User> {
                                 },
                                 itemCount: user.myPosts.length,
                                 itemBuilder: (context, index) {
-                                  if (index % 2 == 0) {
+                                  if (index % 4 == 0) {
                                     return Column(
                                       children: [
                                         Container(
@@ -516,8 +516,10 @@ class _UserState extends State<User> {
                                           color: theme.shadow,
                                         ),
                                         user.returnPostWidget(
-                                            post: user.myPosts[index],
-                                            screenComment: false),
+                                          post: user.myPosts[index],
+                                          screenComment: false,
+                                          contextPage: context,
+                                        ),
                                         // UpdatePostEntityWidget(
                                         //   postUpdateMini: profile.posts[index],
                                         //   screenComment: false,
@@ -528,6 +530,7 @@ class _UserState extends State<User> {
                                     return user.returnPostWidget(
                                       post: user.myPosts[index],
                                       screenComment: false,
+                                      contextPage: context,
                                     );
                                     // UpdatePostEntityWidget(
                                     //   postUpdateMini: profile.posts[index],
