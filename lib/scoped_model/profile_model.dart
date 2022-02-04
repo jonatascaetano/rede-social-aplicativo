@@ -501,6 +501,34 @@ class ProfileModel extends Model {
     }
   }
 
+  removePost({required BuildContext context, required String idPost}) async {
+    load = true;
+    notifyListeners();
+    String id = await getId();
+    var url = Uri.parse(base + 'posts/delete/post/$idPost/user/$id');
+    var response = await http.delete(
+      url,
+      headers: {
+        "Accept": "application/json; charset=utf-8",
+        "content-type": "application/json; charset=utf-8"
+      },
+    );
+    // ignore: avoid_print
+    print("removePost: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 200:
+        getAllPosts(context: context);
+        break;
+      default:
+        load = false;
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Try again later')),
+        );
+        break;
+    }
+  }
+
   returnPostWidget(
       {required Map post,
       required bool screenComment,

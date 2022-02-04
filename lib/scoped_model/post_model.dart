@@ -41,7 +41,7 @@ class PostModel extends Model {
       "content-type": "application/json; charset=utf-8"
     });
     // ignore: avoid_print
-    print("getPostUpdateMini: " + response.statusCode.toString());
+    print("getPostUpdateMini***: " + response.statusCode.toString());
     switch (response.statusCode) {
       case 200:
         var item = json.decode(response.body);
@@ -84,4 +84,6 @@ class PostModel extends Model {
         break;
     }
   }
+
+  removePost({required BuildContext context, required String idPost}) async {}
 }
