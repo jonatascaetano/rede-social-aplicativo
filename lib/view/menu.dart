@@ -317,17 +317,19 @@ class _MenuState extends State<Menu> {
                             ),
                           ),
                           onTap: () {
-                            if (ScopedModel.of<ProfileModel>(context)
-                                .userMini
-                                .checked) {
-                              menu.showListEntitiesBottomSheet(context);
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text(
-                                        'only released to verified users')),
-                              );
-                            }
+                            menu.showListEntitiesBottomSheet(context);
+
+                            // if (ScopedModel.of<ProfileModel>(context)
+                            //     .userMini
+                            //     .checked) {
+                            //   menu.showListEntitiesBottomSheet(context);
+                            // } else {
+                            //   ScaffoldMessenger.of(context).showSnackBar(
+                            //     const SnackBar(
+                            //         content: Text(
+                            //             'only released to verified users')),
+                            //   );
+                            // }
                           },
                         ),
                         GestureDetector(

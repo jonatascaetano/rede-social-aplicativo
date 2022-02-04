@@ -6,10 +6,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_network_application/entities/mini_dto/post_update_mini.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 import 'package:social_network_application/entities/mini_dto/worker_mini.dart';
-import 'package:social_network_application/enuns/level.dart';
 import 'package:social_network_application/enuns/type_post.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
-import 'package:social_network_application/widgets/post/update_post_entity_widget.dart';
+import 'package:social_network_application/widgets/post/update_post_widget.dart';
 
 class UserModel extends Model {
   static const String base =
@@ -248,15 +247,12 @@ class UserModel extends Model {
     // ignore: avoid_print
     switch (post["typePost"]) {
       case TypePost.UPDATE:
-        if (post["level"] == Level.ENTITY) {
-          return UpdatePostEntityWidget(
-            postUpdateMini: PostUpdateMini.fromMap(map: post),
-            screenComment: screenComment,
-            screenUser: true,
-            contextPage: contextPage,
-          );
-        }
-        break;
+        return UpdatePostWidget(
+          postUpdateMini: PostUpdateMini.fromMap(map: post),
+          screenComment: screenComment,
+          screenUser: true,
+          contextPage: contextPage,
+        );
       default:
     }
   }

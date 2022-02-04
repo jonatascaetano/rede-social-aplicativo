@@ -10,12 +10,11 @@ import 'dart:convert';
 
 import 'package:social_network_application/entities/mini_dto/worker_mini.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:social_network_application/enuns/level.dart';
 import 'package:social_network_application/enuns/type_post.dart';
 import 'dart:io';
 
 import 'package:social_network_application/view/authentication/login.dart';
-import 'package:social_network_application/widgets/post/update_post_entity_widget.dart';
+import 'package:social_network_application/widgets/post/update_post_widget.dart';
 
 class ProfileModel extends Model {
   static const String base =
@@ -536,15 +535,12 @@ class ProfileModel extends Model {
     // ignore: avoid_print
     switch (post["typePost"]) {
       case TypePost.UPDATE:
-        if (post["level"] == Level.ENTITY) {
-          return UpdatePostEntityWidget(
-            postUpdateMini: PostUpdateMini.fromMap(map: post),
-            screenComment: screenComment,
-            screenUser: false,
-            contextPage: contextPage,
-          );
-        }
-        break;
+        return UpdatePostWidget(
+          postUpdateMini: PostUpdateMini.fromMap(map: post),
+          screenComment: screenComment,
+          screenUser: false,
+          contextPage: contextPage,
+        );
       default:
     }
   }

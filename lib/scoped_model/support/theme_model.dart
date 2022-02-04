@@ -3,6 +3,18 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeModel extends Model {
+  //init textStyle
+  double sizeAppBar = 21;
+  double sizeTitle = 18;
+  double sizeText = 15;
+  double sizeButton = 14;
+  double letterSpacingAppBar = 2.0;
+  double letterSpacingTitle = 1.0;
+  double letterSpacingText = 0.5;
+  double letterSpacingButton = 0.5;
+
+  //final textStyle
+
   bool dark = false;
   ThemeData themeData = ThemeData(
     // brightness: Brightness.light,
@@ -82,8 +94,8 @@ class ThemeModel extends Model {
       shadow = const Color(0xff17191f); //Colors.grey.shade800;
       buttonMain = const Color(0xff09aaff);
       buttonMainText = Colors.white;
-      button =
-          const Color(0xff242731); //Colors.grey.shade800; //saturado 1c1e28
+      button = const Color(
+          0xff2d313d); //383d4c //Colors.grey.shade800; //saturado 1c1e28
       buttonText = Colors.white;
 
       notifyListeners();

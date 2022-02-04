@@ -21,6 +21,7 @@ class _EvaluationState extends State<Evaluation> {
       return ScopedModelDescendant<EpisodeModel>(
           builder: (context, child, episode) {
         return IconButton(
+            padding: EdgeInsets.zero,
             onPressed: () {
               if (widget.evaluation != widget.value &&
                   episode.entitySaveMini != null) {

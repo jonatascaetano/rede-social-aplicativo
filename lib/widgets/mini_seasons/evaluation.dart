@@ -21,6 +21,7 @@ class _EvaluationState extends State<Evaluation> {
       return ScopedModelDescendant<SeasonModel>(
           builder: (context, child, season) {
         return IconButton(
+            padding: EdgeInsets.zero,
             onPressed: () {
               if (widget.evaluation != widget.value &&
                   season.entitySaveMini != null) {

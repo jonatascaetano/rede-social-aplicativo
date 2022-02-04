@@ -4,11 +4,14 @@ import 'package:social_network_application/converts/convert_date.dart';
 import 'package:social_network_application/converts/convert_to_enum.dart';
 import 'package:social_network_application/entities/mini_dto/comment_mini.dart';
 import 'package:social_network_application/entities/mini_dto/post_update_mini.dart';
+import 'package:social_network_application/enuns/level.dart';
 import 'package:social_network_application/scoped_model/comment_model.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/objects/entity.dart';
+import 'package:social_network_application/view/objects/episode.dart';
+import 'package:social_network_application/view/objects/season.dart';
 import 'package:social_network_application/view/objects/user.dart';
 
 // ignore: must_be_immutable
@@ -47,8 +50,8 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                   'Post of ' + widget.postUpdateMini.user!.name,
                   style: TextStyle(
                     color: theme.title,
-                    fontSize: 24.0,
-                    letterSpacing: 1.0,
+                    fontSize: theme.sizeAppBar,
+                    letterSpacing: theme.letterSpacingAppBar,
                     fontWeight: FontWeight.normal,
                   ),
                 ),
@@ -126,117 +129,25 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                       width: 8.0,
                                     ),
                                     Expanded(
-                                      child: Wrap(
-                                        crossAxisAlignment:
-                                            WrapCrossAlignment.center,
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () {
-                                              if (widget.postUpdateMini.user!
-                                                      .id !=
-                                                  ScopedModel.of<ProfileModel>(
-                                                          context)
-                                                      .userMini
-                                                      .id) {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) => User(
-                                                          userMini: widget
-                                                              .postUpdateMini
-                                                              .user!)),
-                                                );
-                                              }
-                                            },
-                                            child: Text(
-                                              widget.postUpdateMini.user!.name,
-                                              // +
-                                              // " " +
-                                              // LanguageModel().entitiesCategories[
-                                              //         ConvertToEnum.convertTypeEntityToValue(
-                                              //             typeEntity: widget.postUpdateMini
-                                              //                 .entity!.typeEntity)]
-                                              //     [widget.postUpdateMini.category] +
-                                              // " " +
-                                              // widget.postUpdateMini.entity!.name,
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                                letterSpacing: 1.0,
-                                                color: theme.title,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ),
-                                          const Text(" "),
-                                          Text(
-                                            LanguageModel()
-                                                    .entitiesCategoriesPost[
-                                                ConvertToEnum
-                                                    .convertTypeEntityToValue(
-                                                        typeEntity: widget
-                                                            .postUpdateMini
-                                                            .entity!
-                                                            .typeEntity)][widget
-                                                .postUpdateMini.category],
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              letterSpacing: 1.0,
-                                              color: theme.title,
-                                              fontWeight: FontWeight.normal,
-                                            ),
-                                          ),
-                                          const Text(" "),
-                                          GestureDetector(
-                                            onTap: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          Entity(
-                                                              entityMini: widget
-                                                                  .postUpdateMini
-                                                                  .entity!,
-                                                              datasheetIsOpen:
-                                                                  false)));
-                                            },
-                                            child: Text(
-                                              widget
-                                                  .postUpdateMini.entity!.name,
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                                letterSpacing: 1.0,
-                                                color: theme.title,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ),
-                                          // Text(
-                                          //   " • ",
-                                          //   textAlign: TextAlign.center,
-                                          //   style: TextStyle(
-                                          //     fontSize: 14,
-                                          //     letterSpacing: 1.0,
-                                          //     color: theme.subtitle,
-                                          //     fontWeight: FontWeight.normal,
-                                          //   ),
-                                          // ),
-                                          Text(
-                                            " • " +
-                                                ConvertDate.convertToDatePost(
-                                                    release: widget
-                                                        .postUpdateMini
-                                                        .release!),
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              letterSpacing: 1.0,
-                                              color: theme.subtitle,
-                                              fontWeight: FontWeight.normal,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                        child: widget.postUpdateMini.level ==
+                                                Level.ENTITY
+                                            ? entity(
+                                                context: context,
+                                                postUpdateMini:
+                                                    widget.postUpdateMini,
+                                              )
+                                            : widget.postUpdateMini.level ==
+                                                    Level.SEASON
+                                                ? season(
+                                                    postUpdateMini:
+                                                        widget.postUpdateMini,
+                                                    context: context,
+                                                  )
+                                                : episode(
+                                                    postUpdateMini:
+                                                        widget.postUpdateMini,
+                                                    context: context,
+                                                  )),
                                     const SizedBox(
                                       width: 8.0,
                                     ),
@@ -371,8 +282,9 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                                 widget.postUpdateMini.body!,
                                                 textAlign: TextAlign.left,
                                                 style: TextStyle(
-                                                  fontSize: 18,
-                                                  letterSpacing: 1.0,
+                                                  fontSize: theme.sizeText,
+                                                  letterSpacing:
+                                                      theme.letterSpacingText,
                                                   color: theme.title,
                                                   fontWeight: FontWeight.normal,
                                                 ),
@@ -386,9 +298,11 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                         title: Text(
                                           'Spoiler',
                                           style: TextStyle(
-                                            fontSize: 16,
-                                            letterSpacing: 1.0,
+                                            fontSize: theme.sizeText,
+                                            letterSpacing:
+                                                theme.letterSpacingText,
                                             color: theme.title,
+                                            fontWeight: FontWeight.normal,
                                           ),
                                         ),
                                         children: [
@@ -401,8 +315,9 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                                 widget.postUpdateMini.body!,
                                                 textAlign: TextAlign.left,
                                                 style: TextStyle(
-                                                  fontSize: 16,
-                                                  letterSpacing: 1.0,
+                                                  fontSize: theme.sizeText,
+                                                  letterSpacing:
+                                                      theme.letterSpacingText,
                                                   color: theme.title,
                                                   fontWeight: FontWeight.normal,
                                                 ),
@@ -414,6 +329,27 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                 const SizedBox(
                                   height: 8.0,
                                 ),
+                                widget.postUpdateMini.level == Level.ENTITY
+                                    ? entityImage(
+                                        postUpdateMini: widget.postUpdateMini,
+                                        contextPage: widget.contextPage,
+                                        //screenComment: widget.screenComment,
+                                        screenUser: widget.screenUser)
+                                    : widget.postUpdateMini.level ==
+                                            Level.SEASON
+                                        ? seasonImage(
+                                            postUpdateMini:
+                                                widget.postUpdateMini,
+                                            contextPage: widget.contextPage,
+                                            //screenComment: widget.screenComment,
+                                            screenUser: widget.screenUser)
+                                        : episodeImage(
+                                            postUpdateMini:
+                                                widget.postUpdateMini,
+                                            contextPage: widget.contextPage,
+                                            //screenComment: widget.screenComment,
+                                            screenUser: widget.screenUser),
+                                /*
                                 widget.postUpdateMini.entity!.image != null
                                     ? GestureDetector(
                                         onTap: () {},
@@ -459,6 +395,7 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                           ),
                                         ),
                                       ),
+                                      */
                                 const SizedBox(
                                   height: 16.0,
                                 ),
@@ -495,8 +432,10 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
-                                                  const Icon(Icons
-                                                      .thumb_up_alt_outlined),
+                                                  Icon(
+                                                    Icons.thumb_up_alt_outlined,
+                                                    size: theme.sizeTitle,
+                                                  ),
                                                   const SizedBox(
                                                     width: 6.0,
                                                   ),
@@ -512,8 +451,9 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                                     //     : widget.postUpdateMini.likeQuantity
                                                     //         .toString(),
                                                     style: TextStyle(
-                                                      fontSize: 21,
-                                                      letterSpacing: 1.0,
+                                                      fontSize: theme.sizeTitle,
+                                                      letterSpacing: theme
+                                                          .letterSpacingText,
                                                       color: theme.title,
                                                       fontWeight:
                                                           FontWeight.normal,
@@ -550,8 +490,10 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
-                                                  const Icon(
-                                                      Icons.messenger_outline),
+                                                  Icon(
+                                                    Icons.messenger_outline,
+                                                    size: theme.sizeTitle,
+                                                  ),
                                                   const SizedBox(
                                                     width: 6.0,
                                                   ),
@@ -568,8 +510,9 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                                     //     : widget.postUpdateMini.commentQuantity
                                                     //         .toString(),
                                                     style: TextStyle(
-                                                      fontSize: 21,
-                                                      letterSpacing: 1.0,
+                                                      fontSize: theme.sizeTitle,
+                                                      letterSpacing: theme
+                                                          .letterSpacingText,
                                                       color: theme.title,
                                                       fontWeight:
                                                           FontWeight.normal,
@@ -684,174 +627,755 @@ class CommentWidget extends StatefulWidget {
 class _CommentWidgetState extends State<CommentWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 4.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          widget.commentMini.user.image != null
-              ? CircleAvatar(
-                  backgroundImage: NetworkImage(widget.commentMini.user.image!),
-                  radius: 30.0,
-                )
-              : CircleAvatar(
-                  backgroundColor: ScopedModel.of<ThemeModel>(context).shadow,
-                  child: Icon(
-                    Icons.image,
-                    color: ScopedModel.of<ThemeModel>(context).emphasis,
+    return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
+      return Container(
+        margin: const EdgeInsets.symmetric(vertical: 4.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            widget.commentMini.user.image != null
+                ? CircleAvatar(
+                    backgroundImage:
+                        NetworkImage(widget.commentMini.user.image!),
+                    radius: 30.0,
+                  )
+                : CircleAvatar(
+                    backgroundColor: ScopedModel.of<ThemeModel>(context).shadow,
+                    child: Icon(
+                      Icons.image,
+                      color: ScopedModel.of<ThemeModel>(context).emphasis,
+                    ),
+                    radius: 30.0,
                   ),
-                  radius: 30.0,
-                ),
-          const SizedBox(
-            width: 8.0,
-          ),
-          Column(
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width - 80,
-                decoration: BoxDecoration(
-                  color: ScopedModel.of<ThemeModel>(context).button,
-                  border: Border.all(
+            const SizedBox(
+              width: 8.0,
+            ),
+            Column(
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width - 80,
+                  decoration: BoxDecoration(
                     color: ScopedModel.of<ThemeModel>(context).button,
+                    border: Border.all(
+                      color: ScopedModel.of<ThemeModel>(context).button,
+                    ),
+                    borderRadius: const BorderRadius.all(Radius.circular(16.0)),
                   ),
-                  borderRadius: const BorderRadius.all(Radius.circular(16.0)),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      User(userMini: widget.commentMini.user)));
-                        },
-                        child: Text(
-                          widget.commentMini.user.name,
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 16,
-                            letterSpacing: 1.0,
-                            color: ScopedModel.of<ThemeModel>(context).title,
-                            fontWeight: FontWeight.bold,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => User(
+                                        userMini: widget.commentMini.user)));
+                          },
+                          child: Text(
+                            widget.commentMini.user.name,
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontSize: theme.sizeText,
+                              letterSpacing: theme.letterSpacingText,
+                              color: ScopedModel.of<ThemeModel>(context).title,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 8.0,
-                      ),
-                      Text(
-                        widget.commentMini.body,
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontSize: 16,
-                          letterSpacing: 1.0,
-                          color: ScopedModel.of<ThemeModel>(context).title,
-                          fontWeight: FontWeight.normal,
+                        const SizedBox(
+                          height: 8.0,
                         ),
-                      ),
-                    ],
+                        Text(
+                          widget.commentMini.body,
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: theme.sizeText,
+                            letterSpacing: theme.letterSpacingText,
+                            color: ScopedModel.of<ThemeModel>(context).title,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Center(
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width - 80,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        width: 8.0,
-                      ),
-                      Text(
-                        ConvertDate.convertToDatePost(
-                                release: widget.commentMini.release) +
-                            " • ",
-                        style: TextStyle(
-                          fontSize: 16,
-                          letterSpacing: 1.0,
-                          color: ScopedModel.of<ThemeModel>(context).subtitle,
-                          fontWeight: FontWeight.normal,
+                Center(
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width - 80,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          width: 8.0,
                         ),
-                      ),
-                      Text(
-                        widget.commentMini.likeQuantity.toString(),
-                        style: TextStyle(
-                          fontSize: 16,
-                          letterSpacing: 1.0,
-                          color: ScopedModel.of<ThemeModel>(context).subtitle,
-                          fontWeight: FontWeight.normal,
+                        Text(
+                          ConvertDate.convertToDatePost(
+                                  release: widget.commentMini.release) +
+                              " • ",
+                          style: TextStyle(
+                            fontSize: theme.sizeText,
+                            letterSpacing: theme.letterSpacingText,
+                            color: ScopedModel.of<ThemeModel>(context).subtitle,
+                            fontWeight: FontWeight.normal,
+                          ),
                         ),
-                      ),
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          ScopedModel.of<CommentModel>(context)
-                              .updateLikeComment(
-                            context: context,
-                            idComment: widget.commentMini.id,
-                            idPost: widget.idPost,
-                          );
-                        },
-                        icon: Icon(
-                          Icons.thumb_up_alt_outlined,
-                          size: 16,
-                          color: ScopedModel.of<ThemeModel>(context).subtitle,
+                        Text(
+                          widget.commentMini.likeQuantity.toString(),
+                          style: TextStyle(
+                            fontSize: theme.sizeText,
+                            letterSpacing: theme.letterSpacingText,
+                            color: ScopedModel.of<ThemeModel>(context).subtitle,
+                            fontWeight: FontWeight.normal,
+                          ),
                         ),
-                      ),
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          if (widget.commentMini.user.id ==
-                              ScopedModel.of<ProfileModel>(context)
-                                  .userMini
-                                  .id) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                backgroundColor:
-                                    ScopedModel.of<ThemeModel>(context)
-                                        .background,
-                                content: Text('delete comment?',
-                                    style: TextStyle(
-                                      color: ScopedModel.of<ThemeModel>(context)
-                                          .subtitle,
-                                    )),
-                                action: SnackBarAction(
-                                    label: 'yes',
-                                    textColor:
-                                        ScopedModel.of<ThemeModel>(context)
-                                            .emphasis,
-                                    onPressed: () {
-                                      ScopedModel.of<CommentModel>(context)
-                                          .removeCommentPost(
-                                        context: widget.contextPage,
-                                        idComment: widget.commentMini.id,
-                                        idPost: widget.idPost,
-                                        screenUser: widget.screenUser,
-                                      );
-                                    }),
-                              ),
+                        IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            ScopedModel.of<CommentModel>(context)
+                                .updateLikeComment(
+                              context: context,
+                              idComment: widget.commentMini.id,
+                              idPost: widget.idPost,
                             );
-                          }
-                        },
-                        icon: Icon(
-                          Icons.more_vert_sharp,
-                          size: 16,
-                          color: ScopedModel.of<ThemeModel>(context).subtitle,
+                          },
+                          icon: Icon(
+                            Icons.thumb_up_alt_outlined,
+                            size: theme.sizeTitle,
+                            color: ScopedModel.of<ThemeModel>(context).subtitle,
+                          ),
                         ),
-                      ),
-                    ],
+                        IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            if (widget.commentMini.user.id ==
+                                ScopedModel.of<ProfileModel>(context)
+                                    .userMini
+                                    .id) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  backgroundColor:
+                                      ScopedModel.of<ThemeModel>(context)
+                                          .background,
+                                  content: Text('delete comment?',
+                                      style: TextStyle(
+                                        color:
+                                            ScopedModel.of<ThemeModel>(context)
+                                                .subtitle,
+                                      )),
+                                  action: SnackBarAction(
+                                      label: 'yes',
+                                      textColor:
+                                          ScopedModel.of<ThemeModel>(context)
+                                              .emphasis,
+                                      onPressed: () {
+                                        ScopedModel.of<CommentModel>(context)
+                                            .removeCommentPost(
+                                          context: widget.contextPage,
+                                          idComment: widget.commentMini.id,
+                                          idPost: widget.idPost,
+                                          screenUser: widget.screenUser,
+                                        );
+                                      }),
+                                ),
+                              );
+                            }
+                          },
+                          icon: Icon(
+                            Icons.more_vert_sharp,
+                            size: theme.sizeTitle,
+                            color: ScopedModel.of<ThemeModel>(context).subtitle,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
+              ],
+            ),
+          ],
+        ),
+      );
+    });
   }
+}
+
+Widget entity(
+    {required PostUpdateMini postUpdateMini, required BuildContext context}) {
+  return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        GestureDetector(
+          onTap: () {
+            if (postUpdateMini.user!.id !=
+                ScopedModel.of<ProfileModel>(context).userMini.id) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => User(userMini: postUpdateMini.user!)),
+              );
+            }
+          },
+          child: Text(
+            postUpdateMini.user!.name,
+            // +
+            // " " +
+            // LanguageModel().entitiesCategories[
+            //         ConvertToEnum.convertTypeEntityToValue(
+            //             typeEntity: widget.postUpdateMini
+            //                 .entity!.typeEntity)]
+            //     [widget.postUpdateMini.category] +
+            // " " +
+            // widget.postUpdateMini.entity!.name,
+            style: TextStyle(
+              fontSize: theme.sizeText,
+              letterSpacing: theme.letterSpacingText,
+              color: theme.title,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        const Text(" "),
+        Text(
+          LanguageModel().entitiesCategoriesPost[
+                  ConvertToEnum.convertTypeEntityToValue(
+                      typeEntity: postUpdateMini.entity!.typeEntity)]
+              [postUpdateMini.category],
+          style: TextStyle(
+            fontSize: theme.sizeText,
+            letterSpacing: theme.letterSpacingText,
+            color: theme.subtitle,
+            fontWeight: FontWeight.normal,
+          ),
+        ),
+        const Text(" "),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Entity(
+                        entityMini: postUpdateMini.entity!,
+                        datasheetIsOpen: false)));
+          },
+          child: Text(
+            postUpdateMini.entity!.name,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: theme.sizeText,
+              letterSpacing: theme.letterSpacingText,
+              color: theme.title,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        // Text(
+        //   " • ",
+        //   textAlign: TextAlign.center,
+        //   style: TextStyle(
+        //     fontSize: 14,
+        //     letterSpacing: 1.0,
+        //     color: theme.subtitle,
+        //     fontWeight: FontWeight.normal,
+        //   ),
+        // ),
+        Text(
+          " • " +
+              ConvertDate.convertToDatePost(release: postUpdateMini.release!),
+          style: TextStyle(
+            fontSize: theme.sizeText,
+            letterSpacing: theme.letterSpacingText,
+            color: theme.subtitle,
+            fontWeight: FontWeight.normal,
+          ),
+        ),
+      ],
+    );
+  });
+}
+
+Widget season(
+    {required PostUpdateMini postUpdateMini, required BuildContext context}) {
+  return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        GestureDetector(
+          onTap: () {
+            if (postUpdateMini.user!.id !=
+                ScopedModel.of<ProfileModel>(context).userMini.id) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => User(userMini: postUpdateMini.user!)),
+              );
+            }
+          },
+          child: Text(
+            postUpdateMini.user!.name,
+            // +
+            // " " +
+            // LanguageModel().entitiesCategories[
+            //         ConvertToEnum.convertTypeEntityToValue(
+            //             typeEntity: widget.postUpdateMini
+            //                 .entity!.typeEntity)]
+            //     [widget.postUpdateMini.category] +
+            // " " +
+            // widget.postUpdateMini.entity!.name,
+            style: TextStyle(
+              fontSize: theme.sizeText,
+              letterSpacing: theme.letterSpacingText,
+              color: theme.title,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        const Text(" "),
+        Text(
+          LanguageModel().entitiesCategoriesPost[
+                  ConvertToEnum.convertTypeEntityToValue(
+                      typeEntity: postUpdateMini.season!.entity.typeEntity)]
+              [postUpdateMini.category],
+          style: TextStyle(
+            fontSize: theme.sizeText,
+            letterSpacing: theme.letterSpacingText,
+            color: theme.subtitle,
+            fontWeight: FontWeight.normal,
+          ),
+        ),
+        const Text(" "),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Season(
+                          seasonMini: postUpdateMini.season!,
+                        )));
+          },
+          child: Text(
+            postUpdateMini.season!.name,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: theme.sizeText,
+              letterSpacing: theme.letterSpacingText,
+              color: theme.title,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Text(
+          " • ",
+          style: TextStyle(
+            fontSize: theme.sizeText,
+            letterSpacing: theme.letterSpacingText,
+            color: theme.subtitle,
+            fontWeight: FontWeight.normal,
+          ),
+        ),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Entity(
+                        entityMini: postUpdateMini.season!.entity,
+                        datasheetIsOpen: false)));
+          },
+          child: Text(
+            postUpdateMini.season!.entity.name,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: theme.sizeText,
+              letterSpacing: theme.letterSpacingText,
+              color: theme.title,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        // Text(
+        //   " • ",
+        //   textAlign: TextAlign.center,
+        //   style: TextStyle(
+        //     fontSize: 14,
+        //     letterSpacing: 1.0,
+        //     color: theme.subtitle,
+        //     fontWeight: FontWeight.normal,
+        //   ),
+        // ),
+        Text(
+          " • " +
+              ConvertDate.convertToDatePost(release: postUpdateMini.release!),
+          style: TextStyle(
+            fontSize: theme.sizeText,
+            letterSpacing: theme.letterSpacingText,
+            color: theme.subtitle,
+            fontWeight: FontWeight.normal,
+          ),
+        ),
+      ],
+    );
+  });
+}
+
+Widget episode(
+    {required PostUpdateMini postUpdateMini, required BuildContext context}) {
+  return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        GestureDetector(
+          onTap: () {
+            if (postUpdateMini.user!.id !=
+                ScopedModel.of<ProfileModel>(context).userMini.id) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => User(userMini: postUpdateMini.user!)),
+              );
+            }
+          },
+          child: Text(
+            postUpdateMini.user!.name,
+            // +
+            // " " +
+            // LanguageModel().entitiesCategories[
+            //         ConvertToEnum.convertTypeEntityToValue(
+            //             typeEntity: widget.postUpdateMini
+            //                 .entity!.typeEntity)]
+            //     [widget.postUpdateMini.category] +
+            // " " +
+            // widget.postUpdateMini.entity!.name,
+            style: TextStyle(
+              fontSize: theme.sizeText,
+              letterSpacing: theme.letterSpacingText,
+              color: theme.title,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        const Text(" "),
+        Text(
+          LanguageModel().entitiesCategoriesPost[
+              ConvertToEnum.convertTypeEntityToValue(
+                  typeEntity: postUpdateMini.episode!.season.entity
+                      .typeEntity)][postUpdateMini.category],
+          style: TextStyle(
+            fontSize: theme.sizeText,
+            letterSpacing: theme.letterSpacingText,
+            color: theme.subtitle,
+            fontWeight: FontWeight.normal,
+          ),
+        ),
+        const Text(" "),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Episode(
+                          episodeMini: postUpdateMini.episode!,
+                        )));
+          },
+          child: Text(
+            postUpdateMini.episode!.name,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: theme.sizeText,
+              letterSpacing: theme.letterSpacingText,
+              color: theme.title,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Text(
+          " • ",
+          style: TextStyle(
+            fontSize: theme.sizeText,
+            letterSpacing: theme.letterSpacingText,
+            color: theme.subtitle,
+            fontWeight: FontWeight.normal,
+          ),
+        ),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Season(
+                          seasonMini: postUpdateMini.episode!.season,
+                        )));
+          },
+          child: Text(
+            postUpdateMini.episode!.season.name,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: theme.sizeText,
+              letterSpacing: theme.letterSpacingText,
+              color: theme.title,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Text(
+          " • ",
+          style: TextStyle(
+            fontSize: theme.sizeText,
+            letterSpacing: theme.letterSpacingText,
+            color: theme.subtitle,
+            fontWeight: FontWeight.normal,
+          ),
+        ),
+        const Text(" "),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Entity(
+                        entityMini: postUpdateMini.episode!.season.entity,
+                        datasheetIsOpen: false)));
+          },
+          child: Text(
+            postUpdateMini.episode!.season.entity.name,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: theme.sizeText,
+              letterSpacing: theme.letterSpacingText,
+              color: theme.title,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        // Text(
+        //   " • ",
+        //   textAlign: TextAlign.center,
+        //   style: TextStyle(
+        //     fontSize: 14,
+        //     letterSpacing: 1.0,
+        //     color: theme.subtitle,
+        //     fontWeight: FontWeight.normal,
+        //   ),
+        // ),
+        Text(
+          " • " +
+              ConvertDate.convertToDatePost(release: postUpdateMini.release!),
+          style: TextStyle(
+            fontSize: theme.sizeText,
+            letterSpacing: theme.letterSpacingText,
+            color: theme.subtitle,
+            fontWeight: FontWeight.normal,
+          ),
+        ),
+      ],
+    );
+  });
+}
+
+Widget entityImage({
+  required PostUpdateMini postUpdateMini,
+  required BuildContext contextPage,
+  //required bool screenComment,
+  required bool screenUser,
+}) {
+  return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
+    return postUpdateMini.entity!.image != null
+        ? GestureDetector(
+            onTap: () {
+              // if (!screenComment) {
+              //   Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => CommentsPostUpdate(
+              //         postUpdateMini: postUpdateMini,
+              //         screenUser: screenUser,
+              //         contextPage: contextPage,
+              //       ),
+              //     ),
+              //   );
+              // }
+            },
+            child: Container(
+              margin: EdgeInsets.zero,
+              padding: EdgeInsets.zero,
+              height: (MediaQuery.of(context).size.width / 16) * 9,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                color: theme.shadow,
+                image: DecorationImage(
+                  image: NetworkImage(postUpdateMini.entity!.image!),
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
+            ),
+          )
+        : GestureDetector(
+            onTap: () {
+              // if (!screenComment) {
+              //   Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => CommentsPostUpdate(
+              //         postUpdateMini: postUpdateMini,
+              //         screenUser: screenUser,
+              //         contextPage: contextPage,
+              //       ),
+              //     ),
+              //   );
+              // }
+            },
+            child: Container(
+              color: theme.shadow,
+              height: (MediaQuery.of(context).size.width / 16) * 9,
+              width: MediaQuery.of(context).size.width,
+              child: Center(
+                child: Icon(
+                  Icons.image,
+                  size: 100,
+                  color: theme.emphasis,
+                ),
+              ),
+            ),
+          );
+  });
+}
+
+Widget seasonImage({
+  required PostUpdateMini postUpdateMini,
+  required BuildContext contextPage,
+  //required bool screenComment,
+  required bool screenUser,
+}) {
+  return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
+    return postUpdateMini.season!.image != null
+        ? GestureDetector(
+            onTap: () {
+              // if (!screenComment) {
+              //   Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => CommentsPostUpdate(
+              //         postUpdateMini: postUpdateMini,
+              //         screenUser: screenUser,
+              //         contextPage: contextPage,
+              //       ),
+              //     ),
+              //   );
+              // }
+            },
+            child: Container(
+              margin: EdgeInsets.zero,
+              padding: EdgeInsets.zero,
+              height: (MediaQuery.of(context).size.width / 16) * 9,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                color: theme.shadow,
+                image: DecorationImage(
+                  image: NetworkImage(postUpdateMini.season!.image!),
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
+            ),
+          )
+        : GestureDetector(
+            onTap: () {
+              // if (!screenComment) {
+              //   Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => CommentsPostUpdate(
+              //         postUpdateMini: postUpdateMini,
+              //         screenUser: screenUser,
+              //         contextPage: contextPage,
+              //       ),
+              //     ),
+              //   );
+              // }
+            },
+            child: Container(
+              color: theme.shadow,
+              height: (MediaQuery.of(context).size.width / 16) * 9,
+              width: MediaQuery.of(context).size.width,
+              child: Center(
+                child: Icon(
+                  Icons.image,
+                  size: 100,
+                  color: theme.emphasis,
+                ),
+              ),
+            ),
+          );
+  });
+}
+
+Widget episodeImage({
+  required PostUpdateMini postUpdateMini,
+  required BuildContext contextPage,
+  //required bool screenComment,
+  required bool screenUser,
+}) {
+  return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
+    return postUpdateMini.episode!.image != null
+        ? GestureDetector(
+            onTap: () {
+              // if (!screenComment) {
+              //   Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => CommentsPostUpdate(
+              //         postUpdateMini: postUpdateMini,
+              //         screenUser: screenUser,
+              //         contextPage: contextPage,
+              //       ),
+              //     ),
+              //   );
+              // }
+            },
+            child: Container(
+              margin: EdgeInsets.zero,
+              padding: EdgeInsets.zero,
+              height: (MediaQuery.of(context).size.width / 16) * 9,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                color: theme.shadow,
+                image: DecorationImage(
+                  image: NetworkImage(postUpdateMini.episode!.image!),
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
+            ),
+          )
+        : GestureDetector(
+            onTap: () {
+              // if (!screenComment) {
+              //   Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => CommentsPostUpdate(
+              //         postUpdateMini: postUpdateMini,
+              //         screenUser: screenUser,
+              //         contextPage: contextPage,
+              //       ),
+              //     ),
+              //   );
+              // }
+            },
+            child: Container(
+              color: theme.shadow,
+              height: (MediaQuery.of(context).size.width / 16) * 9,
+              width: MediaQuery.of(context).size.width,
+              child: Center(
+                child: Icon(
+                  Icons.image,
+                  size: 100,
+                  color: theme.emphasis,
+                ),
+              ),
+            ),
+          );
+  });
 }

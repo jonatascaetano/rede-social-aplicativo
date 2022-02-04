@@ -24,6 +24,7 @@ class _EvaluationState extends State<Evaluation> {
           margin: EdgeInsets.zero,
           padding: EdgeInsets.zero,
           child: IconButton(
+              padding: EdgeInsets.zero,
               onPressed: () {
                 if (widget.evaluation != widget.value &&
                     entity.entitySaveMini != null) {

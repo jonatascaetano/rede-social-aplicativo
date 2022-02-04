@@ -5,7 +5,6 @@ import 'package:social_network_application/converts/convert_to_enum.dart';
 import 'package:social_network_application/entities/dto/entity_save_dto.dart';
 import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
 import 'package:social_network_application/scoped_model/entity_model.dart';
-import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/entity/all_seasons_entity.dart';
@@ -183,22 +182,30 @@ class _EntityState extends State<Entity> {
                                   elevation: 0.0,
                                 ),
                                 onPressed: () {
-                                  if (ScopedModel.of<ProfileModel>(context)
-                                      .userMini
-                                      .checked) {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => UpdateEntity(
-                                                  context: context,
-                                                  entityMini: entity.entityMini,
-                                                )));
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        const SnackBar(
-                                            content: Text(
-                                                'only released to verified users')));
-                                  }
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => UpdateEntity(
+                                                context: context,
+                                                entityMini: entity.entityMini,
+                                              )));
+
+                                  // if (ScopedModel.of<ProfileModel>(context)
+                                  //     .userMini
+                                  //     .checked) {
+                                  //   Navigator.push(
+                                  //       context,
+                                  //       MaterialPageRoute(
+                                  //           builder: (context) => UpdateEntity(
+                                  //                 context: context,
+                                  //                 entityMini: entity.entityMini,
+                                  //               )));
+                                  // } else {
+                                  //   ScaffoldMessenger.of(context).showSnackBar(
+                                  //       const SnackBar(
+                                  //           content: Text(
+                                  //               'only released to verified users')));
+                                  // }
                                 },
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -234,50 +241,46 @@ class _EntityState extends State<Entity> {
                             //update evaluation
                             entity.entitySaveMini == null
                                 ? Container()
-                                : Container(
-                                    margin: EdgeInsets.zero,
-                                    padding: EdgeInsets.zero,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Evaluation(
-                                            value: 1,
-                                            evaluation:
-                                                entity.entitySaveMini != null
-                                                    ? entity.entitySaveMini!
-                                                        .evaluation!
-                                                    : 0),
-                                        Evaluation(
-                                            value: 2,
-                                            evaluation:
-                                                entity.entitySaveMini != null
-                                                    ? entity.entitySaveMini!
-                                                        .evaluation!
-                                                    : 0),
-                                        Evaluation(
-                                            value: 3,
-                                            evaluation:
-                                                entity.entitySaveMini != null
-                                                    ? entity.entitySaveMini!
-                                                        .evaluation!
-                                                    : 0),
-                                        Evaluation(
-                                            value: 4,
-                                            evaluation:
-                                                entity.entitySaveMini != null
-                                                    ? entity.entitySaveMini!
-                                                        .evaluation!
-                                                    : 3),
-                                        Evaluation(
-                                            value: 5,
-                                            evaluation:
-                                                entity.entitySaveMini != null
-                                                    ? entity.entitySaveMini!
-                                                        .evaluation!
-                                                    : 0),
-                                      ],
-                                    ),
+                                : Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Evaluation(
+                                          value: 1,
+                                          evaluation:
+                                              entity.entitySaveMini != null
+                                                  ? entity.entitySaveMini!
+                                                      .evaluation!
+                                                  : 0),
+                                      Evaluation(
+                                          value: 2,
+                                          evaluation:
+                                              entity.entitySaveMini != null
+                                                  ? entity.entitySaveMini!
+                                                      .evaluation!
+                                                  : 0),
+                                      Evaluation(
+                                          value: 3,
+                                          evaluation:
+                                              entity.entitySaveMini != null
+                                                  ? entity.entitySaveMini!
+                                                      .evaluation!
+                                                  : 0),
+                                      Evaluation(
+                                          value: 4,
+                                          evaluation:
+                                              entity.entitySaveMini != null
+                                                  ? entity.entitySaveMini!
+                                                      .evaluation!
+                                                  : 3),
+                                      Evaluation(
+                                          value: 5,
+                                          evaluation:
+                                              entity.entitySaveMini != null
+                                                  ? entity.entitySaveMini!
+                                                      .evaluation!
+                                                  : 0),
+                                    ],
                                   ),
                             //*update evaluation
                             entity.entitySaveMini == null
@@ -551,25 +554,33 @@ class _EntityState extends State<Entity> {
                                         padding: const EdgeInsets.all(4.0),
                                         child: GestureDetector(
                                           onTap: () {
-                                            if (ScopedModel.of<ProfileModel>(
-                                                    context)
-                                                .userMini
-                                                .checked) {
-                                              Navigator.push(
+                                            Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         NewSeasonEntity(
                                                             entityMini: entity
                                                                 .entityMini,
-                                                            context: context)),
-                                              );
-                                            } else {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(const SnackBar(
-                                                      content: Text(
-                                                          'only released to verified users')));
-                                            }
+                                                            context: context)));
+                                            // if (ScopedModel.of<ProfileModel>(
+                                            //         context)
+                                            //     .userMini
+                                            //     .checked) {
+                                            //   Navigator.push(
+                                            //     context,
+                                            //     MaterialPageRoute(
+                                            //         builder: (context) =>
+                                            //             NewSeasonEntity(
+                                            //                 entityMini: entity
+                                            //                     .entityMini,
+                                            //                 context: context)),
+                                            //   );
+                                            // } else {
+                                            //   ScaffoldMessenger.of(context)
+                                            //       .showSnackBar(const SnackBar(
+                                            //           content: Text(
+                                            //               'only released to verified users')));
+                                            // }
                                           },
                                           child: Container(
                                             decoration: BoxDecoration(
@@ -653,26 +664,36 @@ class _EntityState extends State<Entity> {
                                         padding: const EdgeInsets.all(4.0),
                                         child: GestureDetector(
                                           onTap: () {
-                                            if (ScopedModel.of<ProfileModel>(
-                                                    context)
-                                                .userMini
-                                                .checked) {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      NewWorkerEntity(
-                                                          entityMini:
-                                                              entity.entityMini,
-                                                          context: context),
-                                                ),
-                                              );
-                                            } else {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(const SnackBar(
-                                                      content: Text(
-                                                          'only released to verified users')));
-                                            }
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    NewWorkerEntity(
+                                                        entityMini:
+                                                            entity.entityMini,
+                                                        context: context),
+                                              ),
+                                            );
+                                            // if (ScopedModel.of<ProfileModel>(
+                                            //         context)
+                                            //     .userMini
+                                            //     .checked) {
+                                            //   Navigator.push(
+                                            //     context,
+                                            //     MaterialPageRoute(
+                                            //       builder: (context) =>
+                                            //           NewWorkerEntity(
+                                            //               entityMini:
+                                            //                   entity.entityMini,
+                                            //               context: context),
+                                            //     ),
+                                            //   );
+                                            // } else {
+                                            //   ScaffoldMessenger.of(context)
+                                            //       .showSnackBar(const SnackBar(
+                                            //           content: Text(
+                                            //               'only released to verified users')));
+                                            // }
                                           },
                                           child: Container(
                                             decoration: BoxDecoration(

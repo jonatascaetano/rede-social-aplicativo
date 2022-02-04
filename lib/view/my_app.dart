@@ -38,8 +38,8 @@ class _MyAppState extends State<MyApp> {
               "Bundle",
               style: TextStyle(
                 color: theme.title,
-                fontSize: 28,
-                letterSpacing: 4.0,
+                fontSize: theme.sizeAppBar,
+                letterSpacing: theme.letterSpacingAppBar,
                 fontWeight: FontWeight.normal,
               ),
             ),
@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
                   child: Icon(
                     Icons.notifications,
                     color: theme.title,
-                    size: 30.0,
+                    //size: 30.0,
                   ),
                 ),
               ),
@@ -74,7 +74,7 @@ class _MyAppState extends State<MyApp> {
                     child: Icon(
                       Icons.search,
                       color: theme.title,
-                      size: 30.0,
+                      //size: 30.0,
                     ),
                   )),
               IconButton(
@@ -92,7 +92,7 @@ class _MyAppState extends State<MyApp> {
                   child: Icon(
                     Icons.dehaze_rounded,
                     color: theme.title,
-                    size: 30.0,
+                    //size: 30.0,
                   ),
                 ),
               )

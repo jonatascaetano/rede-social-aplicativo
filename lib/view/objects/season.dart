@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/entities/dto/entity_save_dto.dart';
 import 'package:social_network_application/entities/mini_dto/season_mini.dart';
-import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/season_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/season/all_episodes_season.dart';
@@ -150,6 +149,23 @@ class _SeasonState extends State<Season> {
                             const SizedBox(
                               height: 4.0,
                             ),
+
+                            Text(
+                              'Season ' +
+                                  season.seasonMini.numberSeason.toString(),
+                              textAlign: TextAlign.center,
+                              maxLines: 2,
+                              style: TextStyle(
+                                fontSize: 16,
+                                letterSpacing: 1.0,
+                                color: theme.subtitle,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+
+                            const SizedBox(
+                              height: 4.0,
+                            ),
                             Text(
                               season.seasonMini.entity.name,
                               textAlign: TextAlign.center,
@@ -173,22 +189,29 @@ class _SeasonState extends State<Season> {
                                   elevation: 0.0,
                                 ),
                                 onPressed: () {
-                                  if (ScopedModel.of<ProfileModel>(context)
-                                      .userMini
-                                      .checked) {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => UpdateSeason(
-                                                  context: context,
-                                                  seasonMini: season.seasonMini,
-                                                )));
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        const SnackBar(
-                                            content: Text(
-                                                'only released to verified users')));
-                                  }
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => UpdateSeason(
+                                                context: context,
+                                                seasonMini: season.seasonMini,
+                                              )));
+                                  // if (ScopedModel.of<ProfileModel>(context)
+                                  //     .userMini
+                                  //     .checked) {
+                                  //   Navigator.push(
+                                  //       context,
+                                  //       MaterialPageRoute(
+                                  //           builder: (context) => UpdateSeason(
+                                  //                 context: context,
+                                  //                 seasonMini: season.seasonMini,
+                                  //               )));
+                                  // } else {
+                                  //   ScaffoldMessenger.of(context).showSnackBar(
+                                  //       const SnackBar(
+                                  //           content: Text(
+                                  //               'only released to verified users')));
+                                  // }
                                 },
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -217,52 +240,48 @@ class _SeasonState extends State<Season> {
                             //update evaluation
                             season.entitySaveMini == null
                                 ? Container()
-                                : Container(
-                                    margin: EdgeInsets.zero,
-                                    padding: EdgeInsets.zero,
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Evaluation(
-                                            value: 1,
-                                            evaluation:
-                                                season.entitySaveMini != null
-                                                    ? season.entitySaveMini!
-                                                        .evaluation!
-                                                    : 0),
-                                        Evaluation(
-                                            value: 2,
-                                            evaluation:
-                                                season.entitySaveMini != null
-                                                    ? season.entitySaveMini!
-                                                        .evaluation!
-                                                    : 0),
-                                        Evaluation(
-                                            value: 3,
-                                            evaluation:
-                                                season.entitySaveMini != null
-                                                    ? season.entitySaveMini!
-                                                        .evaluation!
-                                                    : 0),
-                                        Evaluation(
-                                            value: 4,
-                                            evaluation:
-                                                season.entitySaveMini != null
-                                                    ? season.entitySaveMini!
-                                                        .evaluation!
-                                                    : 3),
-                                        Evaluation(
-                                            value: 5,
-                                            evaluation:
-                                                season.entitySaveMini != null
-                                                    ? season.entitySaveMini!
-                                                        .evaluation!
-                                                    : 0),
-                                      ],
-                                    ),
+                                : Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Evaluation(
+                                          value: 1,
+                                          evaluation:
+                                              season.entitySaveMini != null
+                                                  ? season.entitySaveMini!
+                                                      .evaluation!
+                                                  : 0),
+                                      Evaluation(
+                                          value: 2,
+                                          evaluation:
+                                              season.entitySaveMini != null
+                                                  ? season.entitySaveMini!
+                                                      .evaluation!
+                                                  : 0),
+                                      Evaluation(
+                                          value: 3,
+                                          evaluation:
+                                              season.entitySaveMini != null
+                                                  ? season.entitySaveMini!
+                                                      .evaluation!
+                                                  : 0),
+                                      Evaluation(
+                                          value: 4,
+                                          evaluation:
+                                              season.entitySaveMini != null
+                                                  ? season.entitySaveMini!
+                                                      .evaluation!
+                                                  : 3),
+                                      Evaluation(
+                                          value: 5,
+                                          evaluation:
+                                              season.entitySaveMini != null
+                                                  ? season.entitySaveMini!
+                                                      .evaluation!
+                                                  : 0),
+                                    ],
                                   ),
 
                             //*update evaluation
@@ -527,25 +546,34 @@ class _SeasonState extends State<Season> {
                                         padding: const EdgeInsets.all(4.0),
                                         child: GestureDetector(
                                           onTap: () {
-                                            if (ScopedModel.of<ProfileModel>(
-                                                    context)
-                                                .userMini
-                                                .checked) {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        NewEpisodeSeason(
-                                                            seasonMini: season
-                                                                .seasonMini,
-                                                            context: context)),
-                                              );
-                                            } else {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(const SnackBar(
-                                                      content: Text(
-                                                          'only released to verified users')));
-                                            }
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      NewEpisodeSeason(
+                                                          seasonMini:
+                                                              season.seasonMini,
+                                                          context: context)),
+                                            );
+                                            // if (ScopedModel.of<ProfileModel>(
+                                            //         context)
+                                            //     .userMini
+                                            //     .checked) {
+                                            //   Navigator.push(
+                                            //     context,
+                                            //     MaterialPageRoute(
+                                            //         builder: (context) =>
+                                            //             NewEpisodeSeason(
+                                            //                 seasonMini: season
+                                            //                     .seasonMini,
+                                            //                 context: context)),
+                                            //   );
+                                            // } else {
+                                            //   ScaffoldMessenger.of(context)
+                                            //       .showSnackBar(const SnackBar(
+                                            //           content: Text(
+                                            //               'only released to verified users')));
+                                            // }
                                           },
                                           child: Container(
                                             decoration: BoxDecoration(

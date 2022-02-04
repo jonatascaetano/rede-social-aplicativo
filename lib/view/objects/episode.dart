@@ -4,7 +4,6 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/entities/dto/entity_save_dto.dart';
 import 'package:social_network_application/entities/mini_dto/episode_mini.dart';
 import 'package:social_network_application/scoped_model/episode_model.dart';
-import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/episode/update_episode.dart';
 import 'package:social_network_application/view/episode/update_review_episode.dart';
@@ -145,6 +144,23 @@ class _EpisodeState extends State<Episode> {
                             const SizedBox(
                               height: 4.0,
                             ),
+
+                            Text(
+                              'Episode ' +
+                                  episode.episodeMini.numberEpisode.toString(),
+                              textAlign: TextAlign.center,
+                              maxLines: 2,
+                              style: TextStyle(
+                                fontSize: 16,
+                                letterSpacing: 1.0,
+                                color: theme.subtitle,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+
+                            const SizedBox(
+                              height: 4.0,
+                            ),
                             Text(
                               episode.episodeMini.season.name,
                               textAlign: TextAlign.center,
@@ -179,23 +195,31 @@ class _EpisodeState extends State<Episode> {
                                   elevation: 0.0,
                                 ),
                                 onPressed: () {
-                                  if (ScopedModel.of<ProfileModel>(context)
-                                      .userMini
-                                      .checked) {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => UpdateEpisode(
-                                            episodeMini: episode.episodeMini,
-                                            context: context),
-                                      ),
-                                    );
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        const SnackBar(
-                                            content: Text(
-                                                'only released to verified users')));
-                                  }
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => UpdateEpisode(
+                                          episodeMini: episode.episodeMini,
+                                          context: context),
+                                    ),
+                                  );
+                                  // if (ScopedModel.of<ProfileModel>(context)
+                                  //     .userMini
+                                  //     .checked) {
+                                  //   Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //       builder: (context) => UpdateEpisode(
+                                  //           episodeMini: episode.episodeMini,
+                                  //           context: context),
+                                  //     ),
+                                  //   );
+                                  // } else {
+                                  //   ScaffoldMessenger.of(context).showSnackBar(
+                                  //       const SnackBar(
+                                  //           content: Text(
+                                  //               'only released to verified users')));
+                                  // }
                                 },
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -224,52 +248,48 @@ class _EpisodeState extends State<Episode> {
                             //update evaluation
                             episode.entitySaveMini == null
                                 ? Container()
-                                : Container(
-                                    margin: EdgeInsets.zero,
-                                    padding: EdgeInsets.zero,
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Evaluation(
-                                            value: 1,
-                                            evaluation:
-                                                episode.entitySaveMini != null
-                                                    ? episode.entitySaveMini!
-                                                        .evaluation!
-                                                    : 0),
-                                        Evaluation(
-                                            value: 2,
-                                            evaluation:
-                                                episode.entitySaveMini != null
-                                                    ? episode.entitySaveMini!
-                                                        .evaluation!
-                                                    : 0),
-                                        Evaluation(
-                                            value: 3,
-                                            evaluation:
-                                                episode.entitySaveMini != null
-                                                    ? episode.entitySaveMini!
-                                                        .evaluation!
-                                                    : 0),
-                                        Evaluation(
-                                            value: 4,
-                                            evaluation:
-                                                episode.entitySaveMini != null
-                                                    ? episode.entitySaveMini!
-                                                        .evaluation!
-                                                    : 3),
-                                        Evaluation(
-                                            value: 5,
-                                            evaluation:
-                                                episode.entitySaveMini != null
-                                                    ? episode.entitySaveMini!
-                                                        .evaluation!
-                                                    : 0),
-                                      ],
-                                    ),
+                                : Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Evaluation(
+                                          value: 1,
+                                          evaluation:
+                                              episode.entitySaveMini != null
+                                                  ? episode.entitySaveMini!
+                                                      .evaluation!
+                                                  : 0),
+                                      Evaluation(
+                                          value: 2,
+                                          evaluation:
+                                              episode.entitySaveMini != null
+                                                  ? episode.entitySaveMini!
+                                                      .evaluation!
+                                                  : 0),
+                                      Evaluation(
+                                          value: 3,
+                                          evaluation:
+                                              episode.entitySaveMini != null
+                                                  ? episode.entitySaveMini!
+                                                      .evaluation!
+                                                  : 0),
+                                      Evaluation(
+                                          value: 4,
+                                          evaluation:
+                                              episode.entitySaveMini != null
+                                                  ? episode.entitySaveMini!
+                                                      .evaluation!
+                                                  : 3),
+                                      Evaluation(
+                                          value: 5,
+                                          evaluation:
+                                              episode.entitySaveMini != null
+                                                  ? episode.entitySaveMini!
+                                                      .evaluation!
+                                                  : 0),
+                                    ],
                                   ),
                             //*update evaluation
 

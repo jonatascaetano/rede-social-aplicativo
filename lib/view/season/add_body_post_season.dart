@@ -1,0 +1,150 @@
+import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
+import 'package:social_network_application/entities/dto/post_update_dto.dart';
+import 'package:social_network_application/entities/mini_dto/post_update_mini.dart';
+import 'package:social_network_application/scoped_model/entity_model.dart';
+import 'package:social_network_application/scoped_model/season_model.dart';
+import 'package:social_network_application/scoped_model/support/theme_model.dart';
+
+// ignore: must_be_immutable
+class AddBodyPostSeason extends StatefulWidget {
+  PostUpdateMini postUpdateMini;
+  AddBodyPostSeason({required this.postUpdateMini, Key? key}) : super(key: key);
+
+  @override
+  _AddBodyPostSeasonState createState() => _AddBodyPostSeasonState();
+}
+
+class _AddBodyPostSeasonState extends State<AddBodyPostSeason> {
+  TextEditingController body = TextEditingController();
+  bool spoiler = false;
+  final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _globalKey,
+      child: Scaffold(
+        appBar: AppBar(
+            elevation: 0.0,
+            title: Text(
+              'Add comment in post',
+              style: TextStyle(
+                color: ScopedModel.of<ThemeModel>(context).title,
+                fontSize: 24.0,
+                letterSpacing: 1.0,
+                fontWeight: FontWeight.normal,
+              ),
+            )),
+        body: Stack(children: [
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
+            child: ListView(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        "Contains spoiler?",
+                        style: TextStyle(
+                          fontSize: 16,
+                          letterSpacing: 1.0,
+                          color: ScopedModel.of<ThemeModel>(context).title,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Switch.adaptive(
+                          value: spoiler,
+                          onChanged: (value) {
+                            setState(() {
+                              spoiler = value;
+                            });
+                          }),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 16.0,
+                ),
+                TextFormField(
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'comment cannot be null';
+                    }
+                  },
+                  minLines: 10,
+                  maxLines: 10,
+                  controller: body,
+                  keyboardType: TextInputType.text,
+                  decoration: const InputDecoration(
+                    label: Text("comment"),
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(
+                  height: 8.0,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: ScopedModel.of<ThemeModel>(context).buttonMain,
+                    elevation: 0.0,
+                  ),
+                  onPressed: () {
+                    if (_globalKey.currentState!.validate()) {
+                      PostUpdateDTO postUpdateDTO = PostUpdateDTO(
+                        idPost: widget.postUpdateMini.id,
+                        level: null,
+                        release: null,
+                        body: body.text,
+                        category: 0,
+                        idUser: widget.postUpdateMini.user!.id,
+                        idEntity: null,
+                        idSeason: null,
+                        idEpisode: null,
+                        evaluation: 0,
+                        spoiler: spoiler,
+                      );
+                      ScopedModel.of<SeasonModel>(context).addBodyPost(
+                          postUpdateDTO: postUpdateDTO, context: context);
+                    }
+                  },
+                  child: Text(
+                    "Confirm",
+                    style: TextStyle(
+                      color: ScopedModel.of<ThemeModel>(context).buttonMainText,
+                      fontSize: 16,
+                      letterSpacing: 1.0,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ),
+                ScopedModel.of<EntityModel>(context).load
+                    ? Positioned(
+                        bottom: 0.1,
+                        child: SizedBox(
+                          height: 5.0,
+                          width: MediaQuery.of(context).size.width,
+                          child: const LinearProgressIndicator(),
+                        ),
+                      )
+                    : Container(),
+              ],
+            ),
+          ),
+        ]),
+      ),
+    );
+    /*
+    return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
+      return ScopedModelDescendant<EntityModel>(
+          builder: (context, child, entity) {
+        return
+      });
+    });
+    */
+  }
+}
