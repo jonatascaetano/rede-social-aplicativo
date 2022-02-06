@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_network_application/entities/mini_dto/invitation_mini.dart';
+import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/authentication/login.dart';
@@ -38,6 +39,8 @@ class MenuModel extends Model {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove("id");
     load = false;
+    notifyListeners();
+    ScopedModel.of<ProfileModel>(context).postsAreNull = true;
     notifyListeners();
     Navigator.pushAndRemoveUntil(context,
         MaterialPageRoute(builder: (context) => const Login()), (_) => false);

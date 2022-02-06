@@ -31,7 +31,7 @@ class _AllSeasonsEntityState extends State<AllSeasonsEntity> {
             ),
           ),
           body: GridView.count(
-            childAspectRatio: 1.0 / 1.7,
+            childAspectRatio: 1.0 / 1.8,
             crossAxisCount: 2,
             children: entity.seasons.map((e) {
               return SeasonMiniEntity(

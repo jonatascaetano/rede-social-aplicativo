@@ -135,6 +135,7 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                                 context: context,
                                                 postUpdateMini:
                                                     widget.postUpdateMini,
+                                                screenUser: widget.screenUser,
                                               )
                                             : widget.postUpdateMini.level ==
                                                     Level.SEASON
@@ -142,11 +143,15 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                                     postUpdateMini:
                                                         widget.postUpdateMini,
                                                     context: context,
+                                                    screenUser:
+                                                        widget.screenUser,
                                                   )
                                                 : episode(
                                                     postUpdateMini:
                                                         widget.postUpdateMini,
                                                     context: context,
+                                                    screenUser:
+                                                        widget.screenUser,
                                                   )),
                                     const SizedBox(
                                       width: 8.0,
@@ -804,7 +809,9 @@ class _CommentWidgetState extends State<CommentWidget> {
 }
 
 Widget entity(
-    {required PostUpdateMini postUpdateMini, required BuildContext context}) {
+    {required PostUpdateMini postUpdateMini,
+    required BuildContext context,
+    required bool screenUser}) {
   return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
@@ -899,7 +906,9 @@ Widget entity(
 }
 
 Widget season(
-    {required PostUpdateMini postUpdateMini, required BuildContext context}) {
+    {required PostUpdateMini postUpdateMini,
+    required BuildContext context,
+    required bool screenUser}) {
   return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
@@ -1023,7 +1032,9 @@ Widget season(
 }
 
 Widget episode(
-    {required PostUpdateMini postUpdateMini, required BuildContext context}) {
+    {required PostUpdateMini postUpdateMini,
+    required BuildContext context,
+    required bool screenUser}) {
   return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,

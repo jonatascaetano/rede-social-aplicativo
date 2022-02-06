@@ -3,7 +3,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/entities/mini_dto/entity_save_mini.dart';
 import 'package:social_network_application/scoped_model/category_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
-import 'package:social_network_application/widgets/datasheet/entity_mini_datasheet.dart';
+import 'package:social_network_application/widgets/datasheet/entity_mini_datasheet_evaluated.dart';
 
 // ignore: must_be_immutable
 class Category6 extends StatefulWidget {
@@ -30,10 +30,11 @@ class _Category6State extends State<Category6> {
                       ? Container()
                       : GridView.count(
                           padding: EdgeInsets.zero,
-                          childAspectRatio: 1.0 / 1.5,
+                          childAspectRatio: 1.0 / 1.7,
                           crossAxisCount: 2,
                           children: category.entitySaves.map((e) {
-                            return EntityMiniDatasheet(entitySaveMini: e);
+                            return EntityMiniDatasheetEvaluated(
+                                entitySaveMini: e);
                           }).toList(),
                         ),
                 ),

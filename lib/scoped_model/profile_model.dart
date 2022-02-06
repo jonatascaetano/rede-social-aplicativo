@@ -29,6 +29,7 @@ class ProfileModel extends Model {
   List<PostUpdateMini> posts = [];
   List<dynamic> allPosts = [];
   List<dynamic> myPosts = [];
+  bool postsAreNull = true;
 
   //ProfileModel({required BuildContext context}) {
   //   getProfile(context: context);
@@ -423,6 +424,8 @@ class ProfileModel extends Model {
         //     posts.add(postUpdateMini);
         //   }
         // }
+        notifyListeners();
+        postsAreNull = false;
         notifyListeners();
         load = false;
         notifyListeners();

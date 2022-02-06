@@ -536,7 +536,7 @@ class _SeasonState extends State<Season> {
                             ),
 
                             SizedBox(
-                              height: 250,
+                              height: 260,
                               child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   itemCount: season.episodes.length + 1,

@@ -48,7 +48,10 @@ class _UpdatePostWidgetState extends State<UpdatePostWidget> {
                   ? GestureDetector(
                       onTap: () {
                         if (widget.postUpdateMini.user!.id !=
-                            ScopedModel.of<ProfileModel>(context).userMini.id) {
+                                ScopedModel.of<ProfileModel>(context)
+                                    .userMini
+                                    .id &&
+                            !widget.screenUser) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -66,7 +69,10 @@ class _UpdatePostWidgetState extends State<UpdatePostWidget> {
                   : GestureDetector(
                       onTap: () {
                         if (widget.postUpdateMini.user!.id !=
-                            ScopedModel.of<ProfileModel>(context).userMini.id) {
+                                ScopedModel.of<ProfileModel>(context)
+                                    .userMini
+                                    .id &&
+                            !widget.screenUser) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -92,15 +98,18 @@ class _UpdatePostWidgetState extends State<UpdatePostWidget> {
                       ? entity(
                           context: context,
                           postUpdateMini: widget.postUpdateMini,
+                          screenUser: widget.screenUser,
                         )
                       : widget.postUpdateMini.level == Level.SEASON
                           ? season(
                               postUpdateMini: widget.postUpdateMini,
                               context: context,
+                              screenUser: widget.screenUser,
                             )
                           : episode(
                               postUpdateMini: widget.postUpdateMini,
                               context: context,
+                              screenUser: widget.screenUser,
                             )),
               const SizedBox(
                 width: 8.0,
@@ -492,7 +501,9 @@ class _UpdatePostWidgetState extends State<UpdatePostWidget> {
 }
 
 Widget entity(
-    {required PostUpdateMini postUpdateMini, required BuildContext context}) {
+    {required PostUpdateMini postUpdateMini,
+    required BuildContext context,
+    required bool screenUser}) {
   return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
@@ -500,7 +511,8 @@ Widget entity(
         GestureDetector(
           onTap: () {
             if (postUpdateMini.user!.id !=
-                ScopedModel.of<ProfileModel>(context).userMini.id) {
+                    ScopedModel.of<ProfileModel>(context).userMini.id &&
+                !screenUser) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -587,7 +599,9 @@ Widget entity(
 }
 
 Widget season(
-    {required PostUpdateMini postUpdateMini, required BuildContext context}) {
+    {required PostUpdateMini postUpdateMini,
+    required BuildContext context,
+    required bool screenUser}) {
   return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
@@ -595,7 +609,8 @@ Widget season(
         GestureDetector(
           onTap: () {
             if (postUpdateMini.user!.id !=
-                ScopedModel.of<ProfileModel>(context).userMini.id) {
+                    ScopedModel.of<ProfileModel>(context).userMini.id &&
+                !screenUser) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -711,7 +726,9 @@ Widget season(
 }
 
 Widget episode(
-    {required PostUpdateMini postUpdateMini, required BuildContext context}) {
+    {required PostUpdateMini postUpdateMini,
+    required BuildContext context,
+    required bool screenUser}) {
   return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
@@ -719,7 +736,8 @@ Widget episode(
         GestureDetector(
           onTap: () {
             if (postUpdateMini.user!.id !=
-                ScopedModel.of<ProfileModel>(context).userMini.id) {
+                    ScopedModel.of<ProfileModel>(context).userMini.id &&
+                !screenUser) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
