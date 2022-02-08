@@ -4,11 +4,9 @@ import 'package:social_network_application/scoped_model/support/language_model.d
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/menu.dart';
 import 'package:social_network_application/view/search/seach.dart';
-import 'package:social_network_application/view/tabs/calendar.dart';
 
 import 'tabs/home.dart';
 import 'tabs/profile.dart';
-import 'tabs/trending.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -27,8 +25,8 @@ class _MyAppState extends State<MyApp> {
           builder: (context, child, language) {
         List<Widget> select = [
           const Home(),
-          const Trending(),
-          const Calendar(),
+          // const Trending(),
+          // const Calendar(),
           const Profile(),
         ];
         return Scaffold(

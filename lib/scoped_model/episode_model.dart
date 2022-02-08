@@ -14,7 +14,7 @@ import 'package:http/http.dart' as http;
 import 'package:social_network_application/enuns/level.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
-import 'package:social_network_application/view/episode/add_body_post_episode.dart';
+import 'package:social_network_application/view/objects/episode/add_body_post_episode.dart';
 
 class EpisodeModel extends Model {
   static const String base =

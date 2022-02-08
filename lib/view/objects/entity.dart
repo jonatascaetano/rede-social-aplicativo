@@ -7,15 +7,16 @@ import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
 import 'package:social_network_application/scoped_model/entity_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
-import 'package:social_network_application/view/entity/all_seasons_entity.dart';
-import 'package:social_network_application/view/entity/all_workers_entity.dart';
-import 'package:social_network_application/view/entity/new_season_entity.dart';
-import 'package:social_network_application/view/entity/new_worker_entity.dart';
-import 'package:social_network_application/view/entity/update_entity.dart';
-import 'package:social_network_application/view/entity/update_review_entity.dart';
 import 'package:social_network_application/widgets/mini_entities/evaluation.dart';
 import 'package:social_network_application/widgets/mini_entities/season_mini_entity.dart';
 import 'package:social_network_application/widgets/mini_entities/worker_mini_entity.dart';
+
+import 'entity/all_seasons_entity.dart';
+import 'entity/all_workers_entity.dart';
+import 'entity/new_season_entity.dart';
+import 'entity/new_worker_entity.dart';
+import 'entity/update_entity.dart';
+import 'entity/update_review_entity.dart';
 
 // ignore: must_be_immutable
 class Entity extends StatefulWidget {

@@ -5,9 +5,9 @@ import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/scoped_model/user_model.dart';
-import 'package:social_network_application/view/profile/all_workers_user.dart';
-import 'package:social_network_application/view/profile/followers.dart';
-import 'package:social_network_application/view/profile/following.dart';
+import 'package:social_network_application/view/tabs/profile/all_workers_user.dart';
+import 'package:social_network_application/view/tabs/profile/followers.dart';
+import 'package:social_network_application/view/tabs/profile/following.dart';
 import 'package:social_network_application/widgets/mini_profile/entities_mini_profile.dart';
 import 'package:social_network_application/widgets/mini_profile/worker_mini_profile.dart';
 

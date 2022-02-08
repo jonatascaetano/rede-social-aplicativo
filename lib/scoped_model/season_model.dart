@@ -15,7 +15,7 @@ import 'package:http/http.dart' as http;
 import 'package:social_network_application/enuns/level.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
-import 'package:social_network_application/view/season/add_body_post_season.dart';
+import 'package:social_network_application/view/objects/season/add_body_post_season.dart';
 
 class SeasonModel extends Model {
   static const String base =

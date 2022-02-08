@@ -3,11 +3,12 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/entities/dto/user_dto.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
-import 'package:social_network_application/view/update_profile/description_update.dart';
-import 'package:social_network_application/view/update_profile/email_update.dart';
-import 'package:social_network_application/view/update_profile/image_update.dart';
-import 'package:social_network_application/view/update_profile/name_update.dart';
-import 'package:social_network_application/view/update_profile/password_update.dart';
+
+import 'update_profile/description_update.dart';
+import 'update_profile/email_update.dart';
+import 'update_profile/image_update.dart';
+import 'update_profile/name_update.dart';
+import 'update_profile/password_update.dart';
 
 class UpdateProfile extends StatefulWidget {
   const UpdateProfile({Key? key}) : super(key: key);

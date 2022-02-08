@@ -5,9 +5,10 @@ import 'package:social_network_application/entities/dto/entity_save_dto.dart';
 import 'package:social_network_application/entities/mini_dto/episode_mini.dart';
 import 'package:social_network_application/scoped_model/episode_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
-import 'package:social_network_application/view/episode/update_episode.dart';
-import 'package:social_network_application/view/episode/update_review_episode.dart';
 import 'package:social_network_application/widgets/mini_episodes/evaluation.dart';
+
+import 'episode/update_episode.dart';
+import 'episode/update_review_episode.dart';
 
 // ignore: must_be_immutable
 class Episode extends StatefulWidget {

@@ -15,7 +15,7 @@ import 'package:social_network_application/entities/mini_dto/worker_mini.dart';
 import 'package:social_network_application/enuns/level.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
-import 'package:social_network_application/view/entity/add_body_post_entity.dart';
+import 'package:social_network_application/view/objects/entity/add_body_post_entity.dart';
 
 class EntityModel extends Model {
   static const String base =
