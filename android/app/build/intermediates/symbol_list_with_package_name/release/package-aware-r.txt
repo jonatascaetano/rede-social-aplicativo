@@ -279,3 +279,4 @@ styleable GradientColorItem android_color android_offset
 styleable LoadingImageView circleCrop imageAspectRatio imageAspectRatioAdjust
 styleable SignInButton buttonSize colorScheme scopeUris
 xml flutter_image_picker_file_paths
+xml flutter_share_file_paths

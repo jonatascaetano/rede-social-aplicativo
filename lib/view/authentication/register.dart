@@ -1,8 +1,10 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/entities/dto/user_dto.dart';
 import 'package:social_network_application/scoped_model/registe_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Invitation extends StatefulWidget {
   const Invitation({Key? key}) : super(key: key);
@@ -170,6 +172,74 @@ class _InvitationState extends State<Invitation> {
                           ),
                         ),
                       ),
+                      RichText(
+                          text: TextSpan(children: [
+                        TextSpan(
+                          text:
+                              'By clicking confirm you declare that you agree with our ',
+                          style: TextStyle(
+                            fontSize:
+                                ScopedModel.of<ThemeModel>(context).sizeText,
+                            color: ScopedModel.of<ThemeModel>(context).title,
+                            letterSpacing: ScopedModel.of<ThemeModel>(context)
+                                .letterSpacingText,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                        TextSpan(
+                            text: 'terms of use ',
+                            style: TextStyle(
+                              fontSize:
+                                  ScopedModel.of<ThemeModel>(context).sizeText,
+                              color:
+                                  ScopedModel.of<ThemeModel>(context).emphasis,
+                              letterSpacing: ScopedModel.of<ThemeModel>(context)
+                                  .letterSpacingText,
+                              fontWeight: FontWeight.normal,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () async {
+                                const url =
+                                    'https://euteconto-app.blogspot.com/2020/12/termos-de-uso_29.html';
+                                if (await canLaunch(url)) {
+                                  await launch(url);
+                                } else {
+                                  throw 'Could not launch $url';
+                                }
+                              }),
+                        TextSpan(
+                          text: 'and our ',
+                          style: TextStyle(
+                            fontSize:
+                                ScopedModel.of<ThemeModel>(context).sizeText,
+                            color: ScopedModel.of<ThemeModel>(context).title,
+                            letterSpacing: ScopedModel.of<ThemeModel>(context)
+                                .letterSpacingText,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                        TextSpan(
+                            text: 'privacy policy',
+                            style: TextStyle(
+                              fontSize:
+                                  ScopedModel.of<ThemeModel>(context).sizeText,
+                              color:
+                                  ScopedModel.of<ThemeModel>(context).emphasis,
+                              letterSpacing: ScopedModel.of<ThemeModel>(context)
+                                  .letterSpacingText,
+                              fontWeight: FontWeight.normal,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () async {
+                                const url =
+                                    'https://euteconto-app.blogspot.com/2021/01/politica-de-privacidade.html';
+                                if (await canLaunch(url)) {
+                                  await launch(url);
+                                } else {
+                                  throw 'Could not launch $url';
+                                }
+                              })
+                      ])),
                     ],
                   ),
                 ),

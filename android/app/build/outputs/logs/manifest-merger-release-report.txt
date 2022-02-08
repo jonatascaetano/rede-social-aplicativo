@@ -1,15 +1,17 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:1:1-47:12
-INJECTED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:1:1-47:12
-INJECTED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:1:1-47:12
-INJECTED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:1:1-47:12
+ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:1:1-69:12
+INJECTED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:1:1-69:12
+INJECTED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:1:1-69:12
+INJECTED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:1:1-69:12
 MERGED from [:shared_preferences_android] /home/jonatas/projetos/social-network-application/build/shared_preferences_android/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
 MERGED from [:firebase_storage] /home/jonatas/projetos/social-network-application/build/firebase_storage/intermediates/library_manifest/release/AndroidManifest.xml:2:1-15:12
 MERGED from [:firebase_core] /home/jonatas/projetos/social-network-application/build/firebase_core/intermediates/library_manifest/release/AndroidManifest.xml:2:1-15:12
 MERGED from [:image_picker] /home/jonatas/projetos/social-network-application/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:2:1-19:12
 MERGED from [:flutter_plugin_android_lifecycle] /home/jonatas/projetos/social-network-application/build/flutter_plugin_android_lifecycle/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
+MERGED from [:share_plus] /home/jonatas/projetos/social-network-application/build/share_plus/intermediates/library_manifest/release/AndroidManifest.xml:2:1-19:12
 MERGED from [:admob_flutter] /home/jonatas/projetos/social-network-application/build/admob_flutter/intermediates/library_manifest/release/AndroidManifest.xml:2:1-9:12
+MERGED from [:url_launcher_android] /home/jonatas/projetos/social-network-application/build/url_launcher_android/intermediates/library_manifest/release/AndroidManifest.xml:2:1-14:12
 MERGED from [com.google.firebase:firebase-ads:19.1.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/412c2b9e4450b99b613a330e9aa27ca7/jetified-firebase-ads-19.1.0/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.firebase:firebase-analytics:20.0.2] /home/jonatas/.gradle/caches/transforms-2/files-2.1/72b55080cc0742d9b9b8b9e3d6cc51df/jetified-firebase-analytics-20.0.2/AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.multidex:multidex:2.0.1] /home/jonatas/.gradle/caches/transforms-2/files-2.1/a6079fbdb9ead8a5f7530dad43c4bc79/multidex-2.0.1/AndroidManifest.xml:17:1-22:12
@@ -19,7 +21,6 @@ MERGED from [com.google.firebase:firebase-appcheck-interop:16.0.0-beta01] /home/
 MERGED from [com.google.firebase:firebase-auth-interop:18.0.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/afdba1041817d6115459667abab79881/jetified-firebase-auth-interop-18.0.0/AndroidManifest.xml:2:1-10:12
 MERGED from [com.google.firebase:firebase-installations:17.0.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/2b663374f2a3beef67e4fc09532fc190/jetified-firebase-installations-17.0.0/AndroidManifest.xml:2:1-24:12
 MERGED from [com.google.firebase:firebase-common:20.0.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/e8c12af64c0d197211b7d090cb61cdf8/jetified-firebase-common-20.0.0/AndroidManifest.xml:15:1-40:12
-MERGED from [androidx.exifinterface:exifinterface:1.3.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/5aab23ebf0755884548d9d3bd3ecce40/exifinterface-1.3.0/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-measurement:20.0.2] /home/jonatas/.gradle/caches/transforms-2/files-2.1/7f76d9c9603f5f5c54251ad07a4d5d56/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:17:1-46:12
 MERGED from [com.google.android.gms:play-services-measurement-sdk:20.0.2] /home/jonatas/.gradle/caches/transforms-2/files-2.1/dce05d276f45b568b9f088fcc719b69c/jetified-play-services-measurement-sdk-20.0.2/AndroidManifest.xml:17:1-25:12
 MERGED from [com.google.android.gms:play-services-ads:19.1.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/6c8729d0854291e2f95a289d291ad76f/jetified-play-services-ads-19.1.0/AndroidManifest.xml:17:1-25:12
@@ -49,6 +50,7 @@ MERGED from [androidx.customview:customview:1.0.0] /home/jonatas/.gradle/caches/
 MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/00f3203391459c0511dc68ed11c07cc4/swiperefreshlayout-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/b3b81dbbcca08326c40e5acfc36670a3/asynclayoutinflater-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.core:core:1.6.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/8ec5a4192b12a309556d408337153575/core-1.6.0/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/5aab23ebf0755884548d9d3bd3ecce40/exifinterface-1.3.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/e491a17ea3905cf4e8cc01da5acf5904/lifecycle-runtime-2.2.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.savedstate:savedstate:1.0.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/dba0871f5234d26df488af8865310f6f/jetified-savedstate-1.0.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/af5ac34d8217e841163337c0c136aaf0/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
@@ -65,20 +67,20 @@ MERGED from [androidx.interpolator:interpolator:1.0.0] /home/jonatas/.gradle/cac
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/9dc01f80be5d003ac3d9f81c085f13fd/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/2be4a00b738a307c9b0b855eef46b421/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-ads-base:19.1.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/71457b65e00fabc0f27b75c70c732000/jetified-play-services-ads-base-19.1.0/AndroidManifest.xml:2:1-9:12
-INJECTED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:1:1-47:12
-INJECTED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:1:1-47:12
-INJECTED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:1:1-47:12
+INJECTED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:1:1-69:12
+INJECTED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:1:1-69:12
+INJECTED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:1:1-69:12
 	package
 		ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:2:5-80
 		INJECTED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml
 		INJECTED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml
-		ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:1:1-47:12
+		ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:1:1-69:12
 		INJECTED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml
-		ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:1:1-47:12
+		ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:1:1-69:12
 		INJECTED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:1:11-69
@@ -110,6 +112,10 @@ MERGED from [:firebase_core] /home/jonatas/projetos/social-network-application/b
 MERGED from [:firebase_core] /home/jonatas/projetos/social-network-application/build/firebase_core/intermediates/library_manifest/release/AndroidManifest.xml:7:5-13:19
 MERGED from [:image_picker] /home/jonatas/projetos/social-network-application/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:7:5-17:19
 MERGED from [:image_picker] /home/jonatas/projetos/social-network-application/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:7:5-17:19
+MERGED from [:share_plus] /home/jonatas/projetos/social-network-application/build/share_plus/intermediates/library_manifest/release/AndroidManifest.xml:7:5-17:19
+MERGED from [:share_plus] /home/jonatas/projetos/social-network-application/build/share_plus/intermediates/library_manifest/release/AndroidManifest.xml:7:5-17:19
+MERGED from [:url_launcher_android] /home/jonatas/projetos/social-network-application/build/url_launcher_android/intermediates/library_manifest/release/AndroidManifest.xml:7:5-12:19
+MERGED from [:url_launcher_android] /home/jonatas/projetos/social-network-application/build/url_launcher_android/intermediates/library_manifest/release/AndroidManifest.xml:7:5-12:19
 MERGED from [com.google.firebase:firebase-ads:19.1.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/412c2b9e4450b99b613a330e9aa27ca7/jetified-firebase-ads-19.1.0/AndroidManifest.xml:7:5-20
 MERGED from [com.google.firebase:firebase-ads:19.1.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/412c2b9e4450b99b613a330e9aa27ca7/jetified-firebase-ads-19.1.0/AndroidManifest.xml:7:5-20
 MERGED from [com.google.firebase:firebase-analytics:20.0.2] /home/jonatas/.gradle/caches/transforms-2/files-2.1/72b55080cc0742d9b9b8b9e3d6cc51df/jetified-firebase-analytics-20.0.2/AndroidManifest.xml:7:5-20
@@ -210,6 +216,38 @@ ADDED from /home/jonatas/projetos/social-network-application/android/app/src/mai
 		ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:45:13-67
 	android:name
 		ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:44:13-69
+queries
+ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:47:5-68:15
+intent#action:name:android.intent.action.VIEW+data:scheme:https
+ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:49:5-52:14
+action#android.intent.action.VIEW
+ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:50:9-61
+	android:name
+		ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:50:17-58
+data
+ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:51:9-40
+	android:scheme
+		ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:51:15-37
+	android:mimeType
+		ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:66:15-37
+intent#action:name:android.intent.action.DIAL+data:scheme:tel
+ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:54:5-57:14
+action#android.intent.action.DIAL
+ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:55:9-61
+	android:name
+		ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:55:17-58
+intent#action:name:android.intent.action.SENDTO+data:scheme:smsto
+ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:59:5-62:14
+action#android.intent.action.SENDTO
+ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:60:9-63
+	android:name
+		ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:60:17-60
+intent#action:name:android.intent.action.SEND+data:mimeType:*/*
+ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:64:5-67:14
+action#android.intent.action.SEND
+ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:65:9-61
+	android:name
+		ADDED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml:65:17-58
 uses-sdk
 INJECTED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/jonatas/projetos/social-network-application/android/app/src/main/AndroidManifest.xml
@@ -224,8 +262,12 @@ MERGED from [:image_picker] /home/jonatas/projetos/social-network-application/bu
 MERGED from [:image_picker] /home/jonatas/projetos/social-network-application/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:flutter_plugin_android_lifecycle] /home/jonatas/projetos/social-network-application/build/flutter_plugin_android_lifecycle/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:flutter_plugin_android_lifecycle] /home/jonatas/projetos/social-network-application/build/flutter_plugin_android_lifecycle/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:share_plus] /home/jonatas/projetos/social-network-application/build/share_plus/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:share_plus] /home/jonatas/projetos/social-network-application/build/share_plus/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:admob_flutter] /home/jonatas/projetos/social-network-application/build/admob_flutter/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:admob_flutter] /home/jonatas/projetos/social-network-application/build/admob_flutter/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:url_launcher_android] /home/jonatas/projetos/social-network-application/build/url_launcher_android/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:url_launcher_android] /home/jonatas/projetos/social-network-application/build/url_launcher_android/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-ads:19.1.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/412c2b9e4450b99b613a330e9aa27ca7/jetified-firebase-ads-19.1.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-ads:19.1.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/412c2b9e4450b99b613a330e9aa27ca7/jetified-firebase-ads-19.1.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-analytics:20.0.2] /home/jonatas/.gradle/caches/transforms-2/files-2.1/72b55080cc0742d9b9b8b9e3d6cc51df/jetified-firebase-analytics-20.0.2/AndroidManifest.xml:5:5-44
@@ -244,8 +286,6 @@ MERGED from [com.google.firebase:firebase-installations:17.0.0] /home/jonatas/.g
 MERGED from [com.google.firebase:firebase-installations:17.0.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/2b663374f2a3beef67e4fc09532fc190/jetified-firebase-installations-17.0.0/AndroidManifest.xml:6:5-8:41
 MERGED from [com.google.firebase:firebase-common:20.0.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/e8c12af64c0d197211b7d090cb61cdf8/jetified-firebase-common-20.0.0/AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.firebase:firebase-common:20.0.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/e8c12af64c0d197211b7d090cb61cdf8/jetified-firebase-common-20.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.exifinterface:exifinterface:1.3.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/5aab23ebf0755884548d9d3bd3ecce40/exifinterface-1.3.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.exifinterface:exifinterface:1.3.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/5aab23ebf0755884548d9d3bd3ecce40/exifinterface-1.3.0/AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.android.gms:play-services-measurement:20.0.2] /home/jonatas/.gradle/caches/transforms-2/files-2.1/7f76d9c9603f5f5c54251ad07a4d5d56/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-measurement:20.0.2] /home/jonatas/.gradle/caches/transforms-2/files-2.1/7f76d9c9603f5f5c54251ad07a4d5d56/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-measurement-sdk:20.0.2] /home/jonatas/.gradle/caches/transforms-2/files-2.1/dce05d276f45b568b9f088fcc719b69c/jetified-play-services-measurement-sdk-20.0.2/AndroidManifest.xml:20:5-44
@@ -304,6 +344,8 @@ MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /home/jonat
 MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/b3b81dbbcca08326c40e5acfc36670a3/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.core:core:1.6.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/8ec5a4192b12a309556d408337153575/core-1.6.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.core:core:1.6.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/8ec5a4192b12a309556d408337153575/core-1.6.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/5aab23ebf0755884548d9d3bd3ecce40/exifinterface-1.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/5aab23ebf0755884548d9d3bd3ecce40/exifinterface-1.3.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/e491a17ea3905cf4e8cc01da5acf5904/lifecycle-runtime-2.2.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/e491a17ea3905cf4e8cc01da5acf5904/lifecycle-runtime-2.2.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.savedstate:savedstate:1.0.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/dba0871f5234d26df488af8865310f6f/jetified-savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
@@ -396,6 +438,24 @@ ADDED from [:image_picker] /home/jonatas/projetos/social-network-application/bui
 		ADDED from [:image_picker] /home/jonatas/projetos/social-network-application/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:15:17-72
 	android:name
 		ADDED from [:image_picker] /home/jonatas/projetos/social-network-application/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:14:17-67
+provider#dev.fluttercommunity.plus.share.ShareFileProvider
+ADDED from [:share_plus] /home/jonatas/projetos/social-network-application/build/share_plus/intermediates/library_manifest/release/AndroidManifest.xml:8:9-16:20
+	android:grantUriPermissions
+		ADDED from [:share_plus] /home/jonatas/projetos/social-network-application/build/share_plus/intermediates/library_manifest/release/AndroidManifest.xml:12:13-47
+	android:authorities
+		ADDED from [:share_plus] /home/jonatas/projetos/social-network-application/build/share_plus/intermediates/library_manifest/release/AndroidManifest.xml:10:13-74
+	android:exported
+		ADDED from [:share_plus] /home/jonatas/projetos/social-network-application/build/share_plus/intermediates/library_manifest/release/AndroidManifest.xml:11:13-37
+	android:name
+		ADDED from [:share_plus] /home/jonatas/projetos/social-network-application/build/share_plus/intermediates/library_manifest/release/AndroidManifest.xml:9:13-77
+activity#io.flutter.plugins.urllauncher.WebViewActivity
+ADDED from [:url_launcher_android] /home/jonatas/projetos/social-network-application/build/url_launcher_android/intermediates/library_manifest/release/AndroidManifest.xml:8:9-11:74
+	android:exported
+		ADDED from [:url_launcher_android] /home/jonatas/projetos/social-network-application/build/url_launcher_android/intermediates/library_manifest/release/AndroidManifest.xml:10:13-37
+	android:theme
+		ADDED from [:url_launcher_android] /home/jonatas/projetos/social-network-application/build/url_launcher_android/intermediates/library_manifest/release/AndroidManifest.xml:11:13-71
+	android:name
+		ADDED from [:url_launcher_android] /home/jonatas/projetos/social-network-application/build/url_launcher_android/intermediates/library_manifest/release/AndroidManifest.xml:9:13-74
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from [com.google.firebase:firebase-storage:20.0.0] /home/jonatas/.gradle/caches/transforms-2/files-2.1/aac17191751d9819c4ba4efa4c4713d8/jetified-firebase-storage-20.0.0/AndroidManifest.xml:26:5-79
 MERGED from [com.google.android.gms:play-services-measurement-api:20.0.2] /home/jonatas/.gradle/caches/transforms-2/files-2.1/9e738151abdf33b4f102becf9a6bad6e/jetified-play-services-measurement-api-20.0.2/AndroidManifest.xml:23:5-79
