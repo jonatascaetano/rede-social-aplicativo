@@ -10,6 +10,8 @@ import 'package:social_network_application/enuns/type_post.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/widgets/post/update_post_widget.dart';
 
+import 'support/theme_model.dart';
+
 class UserModel extends Model {
   static const String base =
       "https://jonatas-social-network-api.herokuapp.com/";
@@ -22,11 +24,13 @@ class UserModel extends Model {
   bool load = false;
   List<dynamic> myPosts = [];
   late String idUSer;
+  bool blocked = false;
 
   UserModel({required String idUser, required BuildContext context}) {
     getWorkersUser(idUser: idUser);
     getProfile(idUser: idUser, context: context);
     checkFollowing(idUser: idUser);
+    isBlocked(idUser: idUser);
   }
 
   Future<String> getId() async {
@@ -211,34 +215,41 @@ class UserModel extends Model {
     }
   }
 
-  removePost({required BuildContext context, required String idPost}) async {
-    load = true;
-    notifyListeners();
-    String id = await getId();
-    var url = Uri.parse(base + 'posts/delete/post/$idPost/user/$id');
-    var response = await http.delete(
-      url,
-      headers: {
-        "Accept": "application/json; charset=utf-8",
-        "content-type": "application/json; charset=utf-8"
-      },
-    );
-    // ignore: avoid_print
-    print("removePost: " + response.statusCode.toString());
-    switch (response.statusCode) {
-      case 200:
-        getMyPosts(context: context);
-        ScopedModel.of<ProfileModel>(context).getAllPosts(context: context);
-        break;
-      default:
-        load = false;
-        notifyListeners();
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Try again later')),
-        );
-        break;
-    }
-  }
+  // removePost(
+  //     {required BuildContext context,
+  //     required String idPost,
+  //     required BuildContext contextScreenComment,
+  //     required bool screenComment}) async {
+  //   load = true;
+  //   notifyListeners();
+  //   String id = await getId();
+  //   var url = Uri.parse(base + 'posts/delete/post/$idPost/user/$id');
+  //   var response = await http.delete(
+  //     url,
+  //     headers: {
+  //       "Accept": "application/json; charset=utf-8",
+  //       "content-type": "application/json; charset=utf-8"
+  //     },
+  //   );
+  //   // ignore: avoid_print
+  //   print("removePost: " + response.statusCode.toString());
+  //   switch (response.statusCode) {
+  //     case 200:
+  //       if (screenComment) {
+  //         Navigator.pop(contextScreenComment);
+  //       }
+  //       getMyPosts(context: context);
+  //       ScopedModel.of<ProfileModel>(context).getAllPosts(context: context);
+  //       break;
+  //     default:
+  //       load = false;
+  //       notifyListeners();
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         const SnackBar(content: Text('Try again later')),
+  //       );
+  //       break;
+  //   }
+  // }
 
   returnPostWidget(
       {required Map post,
@@ -255,5 +266,155 @@ class UserModel extends Model {
         );
       default:
     }
+  }
+
+  isBlocked({required String idUser}) async {
+    blocked = false;
+    notifyListeners();
+    String id = await getId();
+    var url = Uri.parse(base + 'users/check/blocked/user/$id/blocked/$idUser');
+    var response = await http.get(url, headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
+    // ignore: avoid_print
+    print("isBlocked: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 200:
+        var item = json.decode(response.body);
+        blocked = item;
+        notifyListeners();
+        break;
+    }
+  }
+
+  addBlocke({required String idUser, required BuildContext context}) async {
+    blocked = false;
+    notifyListeners();
+    String id = await getId();
+    var url =
+        Uri.parse(base + 'users/put/add/blocked/user/$id/blocked/$idUser');
+    var response = await http.put(url, headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
+    // ignore: avoid_print
+    print("addBlocke: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 202:
+        blocked = true;
+        notifyListeners();
+        break;
+    }
+  }
+
+  removeBlocke({required String idUser, required BuildContext context}) async {
+    blocked = false;
+    notifyListeners();
+    String id = await getId();
+    var url =
+        Uri.parse(base + 'users/put/remove/blocked/user/$id/blocked/$idUser');
+    var response = await http.put(url, headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
+    // ignore: avoid_print
+    print("removeBlocke: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 202:
+        blocked = false;
+        notifyListeners();
+        break;
+    }
+  }
+
+  showOptionsUserBottomSheet(
+      {required BuildContext context, required String idUser}) {
+    showModalBottomSheet<dynamic>(
+        //isScrollControlled: true,
+        context: context,
+        builder: (context) {
+          return ScopedModelDescendant<ThemeModel>(
+              builder: (context, child, theme) {
+            return BottomSheet(
+                backgroundColor: theme.background,
+                onClosing: () {},
+                builder: (context) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(
+                        height: 16.0,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                          blocked
+                              ? removeBlocke(idUser: idUser, context: context)
+                              : addBlocke(idUser: idUser, context: context);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.block),
+                              const SizedBox(
+                                width: 8.0,
+                              ),
+                              blocked
+                                  ? Text(
+                                      'Unlock',
+                                      style: TextStyle(
+                                        fontSize: theme.sizeText,
+                                        letterSpacing: theme.letterSpacingText,
+                                        color: theme.title,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    )
+                                  : Text(
+                                      'Block',
+                                      style: TextStyle(
+                                        fontSize: theme.sizeText,
+                                        letterSpacing: theme.letterSpacingText,
+                                        color: theme.title,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.outlined_flag),
+                              const SizedBox(
+                                width: 8.0,
+                              ),
+                              Text(
+                                'Report',
+                                style: TextStyle(
+                                  fontSize: theme.sizeText,
+                                  letterSpacing: theme.letterSpacingText,
+                                  color: theme.title,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 16.0,
+                      ),
+                    ],
+                  );
+                });
+          });
+        });
   }
 }

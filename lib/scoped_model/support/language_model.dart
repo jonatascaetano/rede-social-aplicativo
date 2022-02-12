@@ -320,4 +320,12 @@ class LanguageModel extends Model {
       //'feitas por ano',
     ], //receita
   ];
+
+  List<String> typeReport = [
+    'Sexual content',
+    'Violent or repulsive content',
+    'Hateful or abusive content',
+    'Harmful or dangerous acts',
+    'Spam or misleading',
+  ];
 }

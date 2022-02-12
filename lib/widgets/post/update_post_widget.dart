@@ -119,34 +119,48 @@ class _UpdatePostWidgetState extends State<UpdatePostWidget> {
                 onPressed: () {
                   if (widget.postUpdateMini.user!.id ==
                       ScopedModel.of<ProfileModel>(context).userMini.id) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        backgroundColor:
-                            ScopedModel.of<ThemeModel>(context).background,
-                        content: Text('delete post?',
-                            style: TextStyle(
-                              color:
-                                  ScopedModel.of<ThemeModel>(context).subtitle,
-                            )),
-                        action: SnackBarAction(
-                            label: 'yes',
-                            textColor:
-                                ScopedModel.of<ThemeModel>(context).emphasis,
-                            onPressed: () {
-                              if (!widget.screenComment && !widget.screenUser) {
-                                ScopedModel.of<ProfileModel>(context)
-                                    .removePost(
-                                        context: context,
-                                        idPost: widget.postUpdateMini.id!);
-                              } else if (widget.screenUser &&
-                                  !widget.screenComment) {
-                                ScopedModel.of<UserModel>(widget.contextPage)
-                                    .removePost(
-                                        context: widget.contextPage,
-                                        idPost: widget.postUpdateMini.id!);
-                              }
-                            }),
-                      ),
+                    ScopedModel.of<ProfileModel>(context)
+                        .showDeletePostBottomSheet(
+                      context: context,
+                      idPost: widget.postUpdateMini.id!,
+                      screenComment: widget.screenComment,
+                      screenUser: widget.screenUser,
+                      contextPage: widget.contextPage,
+                    );
+                    // ScaffoldMessenger.of(context).showSnackBar(
+                    //   SnackBar(
+                    //     backgroundColor:
+                    //         ScopedModel.of<ThemeModel>(context).background,
+                    //     content: Text('delete post?',
+                    //         style: TextStyle(
+                    //           color:
+                    //               ScopedModel.of<ThemeModel>(context).subtitle,
+                    //         )),
+                    //     action: SnackBarAction(
+                    //         label: 'yes',
+                    //         textColor:
+                    //             ScopedModel.of<ThemeModel>(context).emphasis,
+                    //         onPressed: () {
+                    //           if (!widget.screenComment && !widget.screenUser) {
+                    //             ScopedModel.of<ProfileModel>(context)
+                    //                 .removePost(
+                    //                     context: context,
+                    //                     idPost: widget.postUpdateMini.id!);
+                    //           } else if (widget.screenUser &&
+                    //               !widget.screenComment) {
+                    //             ScopedModel.of<UserModel>(widget.contextPage)
+                    //                 .removePost(
+                    //                     context: widget.contextPage,
+                    //                     idPost: widget.postUpdateMini.id!);
+                    //           }
+                    //         }),
+                    //   ),
+                    // );
+                  } else {
+                    ScopedModel.of<ProfileModel>(context)
+                        .showOptionsPostBottomSheet(
+                      context: context,
+                      idPost: widget.postUpdateMini.id!,
                     );
                   }
                 },
@@ -548,7 +562,7 @@ Widget entity(
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
-            color: theme.subtitle,
+            color: theme.title,
             fontWeight: FontWeight.normal,
           ),
         ),
@@ -589,7 +603,7 @@ Widget entity(
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
-            color: theme.subtitle,
+            color: theme.title,
             fontWeight: FontWeight.normal,
           ),
         ),
@@ -646,7 +660,7 @@ Widget season(
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
-            color: theme.subtitle,
+            color: theme.title,
             fontWeight: FontWeight.normal,
           ),
         ),
@@ -676,7 +690,7 @@ Widget season(
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
-            color: theme.subtitle,
+            color: theme.title,
             fontWeight: FontWeight.normal,
           ),
         ),
@@ -716,7 +730,7 @@ Widget season(
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
-            color: theme.subtitle,
+            color: theme.title,
             fontWeight: FontWeight.normal,
           ),
         ),
@@ -773,7 +787,7 @@ Widget episode(
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
-            color: theme.subtitle,
+            color: theme.title,
             fontWeight: FontWeight.normal,
           ),
         ),
@@ -803,7 +817,7 @@ Widget episode(
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
-            color: theme.subtitle,
+            color: theme.title,
             fontWeight: FontWeight.normal,
           ),
         ),
@@ -832,7 +846,7 @@ Widget episode(
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
-            color: theme.subtitle,
+            color: theme.title,
             fontWeight: FontWeight.normal,
           ),
         ),
@@ -873,7 +887,7 @@ Widget episode(
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
-            color: theme.subtitle,
+            color: theme.title,
             fontWeight: FontWeight.normal,
           ),
         ),

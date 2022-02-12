@@ -10,6 +10,8 @@ import 'package:social_network_application/entities/mini_dto/post_update_mini.da
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/user_model.dart';
 
+import 'support/theme_model.dart';
+
 class CommentModel extends Model {
   static const String base =
       "https://jonatas-social-network-api.herokuapp.com/";
@@ -265,7 +267,8 @@ class CommentModel extends Model {
       },
     );
     // ignore: avoid_print
-    print("removePost: " + response.statusCode.toString());
+    print("removePostCommentScreen: " + response.statusCode.toString());
+
     switch (response.statusCode) {
       case 200:
         ScopedModel.of<ProfileModel>(context).getAllPosts(context: context);
@@ -282,5 +285,71 @@ class CommentModel extends Model {
         );
         break;
     }
+  }
+
+  showDeletePostBottomSheet({
+    required BuildContext contextCommentPage,
+    required String idPost,
+    required bool screenComment,
+    required bool screenUser,
+    required BuildContext contextPage,
+  }) {
+    showModalBottomSheet<dynamic>(
+
+        //isScrollControlled: true,
+        context: contextCommentPage,
+        builder: (context) {
+          return ScopedModelDescendant<ThemeModel>(
+              builder: (context, child, theme) {
+            return BottomSheet(
+                backgroundColor: theme.background,
+                onClosing: () {},
+                builder: (context) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(
+                        height: 16.0,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                          removePost(
+                            context: contextCommentPage,
+                            idPost: idPost,
+                            screenUser: screenUser,
+                            contextPage: contextPage,
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.delete),
+                              const SizedBox(
+                                width: 8.0,
+                              ),
+                              Text(
+                                'Delete',
+                                style: TextStyle(
+                                  fontSize: theme.sizeText,
+                                  letterSpacing: theme.letterSpacingText,
+                                  color: theme.title,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 16.0,
+                      )
+                    ],
+                  );
+                });
+          });
+        });
   }
 }

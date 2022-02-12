@@ -117,7 +117,6 @@ class _UserState extends State<User> {
                                         color: theme.emphasis,
                                       ),
                                     )),
-
                             const SizedBox(
                               height: 16.0,
                             ),
@@ -185,11 +184,11 @@ class _UserState extends State<User> {
                               ),
                             ),
 
-                            user.showFollowButton
-                                ? user.isFollowing
-                                    ? Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: ElevatedButton(
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: user.showFollowButton
+                                  ? user.isFollowing
+                                      ? ElevatedButton(
                                           style: ElevatedButton.styleFrom(
                                             primary: theme.button,
                                             elevation: 0.0,
@@ -222,11 +221,8 @@ class _UserState extends State<User> {
                                               ),
                                             ],
                                           ),
-                                        ),
-                                      )
-                                    : Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: ElevatedButton(
+                                        )
+                                      : ElevatedButton(
                                           style: ElevatedButton.styleFrom(
                                             primary: theme.button,
                                             elevation: 0.0,
@@ -259,9 +255,9 @@ class _UserState extends State<User> {
                                               ),
                                             ],
                                           ),
-                                        ),
-                                      )
-                                : Container(),
+                                        )
+                                  : Container(),
+                            ),
 
                             const SizedBox(
                               height: 8.0,
@@ -385,7 +381,8 @@ class _UserState extends State<User> {
                             //       )
                             //     : Container(),
 
-                            user.userMini.description != null
+                            user.userMini.description != null &&
+                                    user.userMini.description!.isNotEmpty
                                 ? Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
@@ -539,6 +536,26 @@ class _UserState extends State<User> {
                                   }
                                 }),
                           ],
+                        ),
+                  user.profileNull
+                      ? Container()
+                      : Positioned(
+                          top: 8.0,
+                          right: 8.0,
+                          child: IconButton(
+                            onPressed: () {
+                              user.showOptionsUserBottomSheet(
+                                context: context,
+                                idUser: widget.userMini.id,
+                              );
+                            },
+                            icon: Icon(
+                              Icons.more_vert_sharp,
+                              size: 21,
+                              color:
+                                  ScopedModel.of<ThemeModel>(context).subtitle,
+                            ),
+                          ),
                         ),
                   user.load
                       ? Positioned(

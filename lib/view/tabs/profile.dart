@@ -324,7 +324,8 @@ class _ProfileState extends State<Profile> {
                         //       )
                         //     : Container(),
 
-                        profile.userMini.description != null
+                        profile.userMini.description != null &&
+                                profile.userMini.description!.isNotEmpty
                             ? Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(

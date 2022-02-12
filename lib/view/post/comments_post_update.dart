@@ -158,43 +158,57 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                     ),
                                     IconButton(
                                       padding: EdgeInsets.zero,
-                                      onPressed: () {
+                                      onPressed: () async {
                                         if (widget.postUpdateMini.user!.id ==
                                             ScopedModel.of<ProfileModel>(
                                                     context)
                                                 .userMini
                                                 .id) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              backgroundColor:
-                                                  ScopedModel.of<ThemeModel>(
-                                                          context)
-                                                      .background,
-                                              content: Text('delete post?',
-                                                  style: TextStyle(
-                                                    color: ScopedModel.of<
-                                                            ThemeModel>(context)
-                                                        .subtitle,
-                                                  )),
-                                              action: SnackBarAction(
-                                                  label: 'yes',
-                                                  textColor: ScopedModel.of<
-                                                          ThemeModel>(context)
-                                                      .emphasis,
-                                                  onPressed: () {
-                                                    comment.removePost(
-                                                      context:
-                                                          widget.contextPage,
-                                                      idPost: widget
-                                                          .postUpdateMini.id!,
-                                                      contextPage:
-                                                          widget.contextPage,
-                                                      screenUser:
-                                                          widget.screenUser,
-                                                    );
-                                                  }),
-                                            ),
+                                          comment.showDeletePostBottomSheet(
+                                            idPost: widget.postUpdateMini.id!,
+                                            screenComment: true,
+                                            screenUser: widget.screenUser,
+                                            contextPage: widget.contextPage,
+                                            contextCommentPage: context,
+                                          );
+                                          // ScaffoldMessenger.of(context)
+                                          //     .showSnackBar(
+                                          //   SnackBar(
+                                          //     backgroundColor:
+                                          //         ScopedModel.of<ThemeModel>(
+                                          //                 context)
+                                          //             .background,
+                                          //     content: Text('delete post?',
+                                          //         style: TextStyle(
+                                          //           color: ScopedModel.of<
+                                          //                   ThemeModel>(context)
+                                          //               .subtitle,
+                                          //         )),
+                                          //     action: SnackBarAction(
+                                          //         label: 'yes',
+                                          //         textColor: ScopedModel.of<
+                                          //                 ThemeModel>(context)
+                                          //             .emphasis,
+                                          //         onPressed: () {
+                                          //           comment.removePost(
+                                          //             context:
+                                          //                 widget.contextPage,
+                                          //             idPost: widget
+                                          //                 .postUpdateMini.id!,
+                                          //             contextPage:
+                                          //                 widget.contextPage,
+                                          //             screenUser:
+                                          //                 widget.screenUser,
+                                          //           );
+                                          //         }),
+                                          //   ),
+                                          // );
+                                        } else {
+                                          ScopedModel.of<ProfileModel>(
+                                                  widget.contextPage)
+                                              .showOptionsPostBottomSheet(
+                                            context: context,
+                                            idPost: widget.postUpdateMini.id!,
                                           );
                                         }
                                       },
@@ -760,32 +774,48 @@ class _CommentWidgetState extends State<CommentWidget> {
                                 ScopedModel.of<ProfileModel>(context)
                                     .userMini
                                     .id) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  backgroundColor:
-                                      ScopedModel.of<ThemeModel>(context)
-                                          .background,
-                                  content: Text('delete comment?',
-                                      style: TextStyle(
-                                        color:
-                                            ScopedModel.of<ThemeModel>(context)
-                                                .subtitle,
-                                      )),
-                                  action: SnackBarAction(
-                                      label: 'yes',
-                                      textColor:
-                                          ScopedModel.of<ThemeModel>(context)
-                                              .emphasis,
-                                      onPressed: () {
-                                        ScopedModel.of<CommentModel>(context)
-                                            .removeCommentPost(
-                                          context: widget.contextPage,
-                                          idComment: widget.commentMini.id,
-                                          idPost: widget.idPost,
-                                          screenUser: widget.screenUser,
-                                        );
-                                      }),
-                                ),
+                              ScopedModel.of<ProfileModel>(context)
+                                  .showDeleteCommentBottomSheet(
+                                context: context,
+                                idPost: widget.idPost,
+                                idComment: widget.commentMini.id,
+                                screenComment: true,
+                                screenUser: widget.screenUser,
+                                contextPage: widget.contextPage,
+                              );
+                              // ScaffoldMessenger.of(context).showSnackBar(
+                              //   SnackBar(
+                              //     backgroundColor:
+                              //         ScopedModel.of<ThemeModel>(context)
+                              //             .background,
+                              //     content: Text('delete comment?',
+                              //         style: TextStyle(
+                              //           color:
+                              //               ScopedModel.of<ThemeModel>(context)
+                              //                   .subtitle,
+                              //         )),
+                              //     action: SnackBarAction(
+                              //         label: 'yes',
+                              //         textColor:
+                              //             ScopedModel.of<ThemeModel>(context)
+                              //                 .emphasis,
+                              //         onPressed: () {
+                              //           ScopedModel.of<CommentModel>(context)
+                              //               .removeCommentPost(
+                              //             context: widget.contextPage,
+                              //             idComment: widget.commentMini.id,
+                              //             idPost: widget.idPost,
+                              //             screenUser: widget.screenUser,
+                              //           );
+                              //         }),
+                              //   ),
+                              // );
+
+                            } else {
+                              ScopedModel.of<ProfileModel>(context)
+                                  .showOptionsCommentBottomSheet(
+                                context: context,
+                                idComment: widget.commentMini.id,
                               );
                             }
                           },
@@ -855,7 +885,7 @@ Widget entity(
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
-            color: theme.subtitle,
+            color: theme.title,
             fontWeight: FontWeight.normal,
           ),
         ),
@@ -896,7 +926,7 @@ Widget entity(
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
-            color: theme.subtitle,
+            color: theme.title,
             fontWeight: FontWeight.normal,
           ),
         ),
@@ -952,7 +982,7 @@ Widget season(
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
-            color: theme.subtitle,
+            color: theme.title,
             fontWeight: FontWeight.normal,
           ),
         ),
@@ -982,7 +1012,7 @@ Widget season(
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
-            color: theme.subtitle,
+            color: theme.title,
             fontWeight: FontWeight.normal,
           ),
         ),
@@ -1022,7 +1052,7 @@ Widget season(
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
-            color: theme.subtitle,
+            color: theme.title,
             fontWeight: FontWeight.normal,
           ),
         ),
@@ -1078,7 +1108,7 @@ Widget episode(
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
-            color: theme.subtitle,
+            color: theme.title,
             fontWeight: FontWeight.normal,
           ),
         ),
@@ -1108,7 +1138,7 @@ Widget episode(
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
-            color: theme.subtitle,
+            color: theme.title,
             fontWeight: FontWeight.normal,
           ),
         ),
@@ -1137,7 +1167,7 @@ Widget episode(
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
-            color: theme.subtitle,
+            color: theme.title,
             fontWeight: FontWeight.normal,
           ),
         ),
@@ -1178,7 +1208,7 @@ Widget episode(
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
-            color: theme.subtitle,
+            color: theme.title,
             fontWeight: FontWeight.normal,
           ),
         ),

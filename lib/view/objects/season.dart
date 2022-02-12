@@ -5,7 +5,7 @@ import 'package:social_network_application/entities/dto/entity_save_dto.dart';
 import 'package:social_network_application/entities/mini_dto/season_mini.dart';
 import 'package:social_network_application/scoped_model/season_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
-import 'package:social_network_application/view/season/update_season.dart';
+import 'package:social_network_application/view/objects/season/update_season.dart';
 import 'package:social_network_application/widgets/mini_seasons/episode_mini_season.dart';
 import 'package:social_network_application/widgets/mini_seasons/evaluation.dart';
 

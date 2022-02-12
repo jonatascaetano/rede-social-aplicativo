@@ -7,14 +7,18 @@ import 'package:social_network_application/entities/dto/user_dto.dart';
 import 'package:social_network_application/entities/mini_dto/post_update_mini.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 import 'dart:convert';
-
 import 'package:social_network_application/entities/mini_dto/worker_mini.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_network_application/enuns/type_post.dart';
+import 'package:social_network_application/enuns/type_report.dart';
 import 'dart:io';
 
 import 'package:social_network_application/view/authentication/login.dart';
 import 'package:social_network_application/widgets/post/update_post_widget.dart';
+
+import 'comment_model.dart';
+import 'support/language_model.dart';
+import 'support/theme_model.dart';
 
 class ProfileModel extends Model {
   static const String base =
@@ -503,7 +507,11 @@ class ProfileModel extends Model {
     }
   }
 
-  removePost({required BuildContext context, required String idPost}) async {
+  removePost(
+      {required BuildContext context,
+      required String idPost,
+      required BuildContext contextScreenComment,
+      required bool screenComment}) async {
     load = true;
     notifyListeners();
     String id = await getId();
@@ -546,5 +554,431 @@ class ProfileModel extends Model {
         );
       default:
     }
+  }
+
+  showDeletePostBottomSheet(
+      {required BuildContext context,
+      required String idPost,
+      required bool screenComment,
+      required bool screenUser,
+      required BuildContext contextPage}) {
+    showModalBottomSheet<dynamic>(
+
+        //isScrollControlled: true,
+        context: context,
+        builder: (context) {
+          return ScopedModelDescendant<ThemeModel>(
+              builder: (context, child, theme) {
+            return BottomSheet(
+                backgroundColor: theme.background,
+                onClosing: () {},
+                builder: (context) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(
+                        height: 16.0,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                          if (!screenComment && !screenUser) {
+                            removePost(
+                              context: context,
+                              idPost: idPost,
+                              contextScreenComment: context,
+                              screenComment: screenComment,
+                            );
+                          }
+                          // else if (screenUser && !screenComment) {
+                          //   ScopedModel.of<UserModel>(contextPage).removePost(
+                          //     context: contextPage,
+                          //     idPost: idPost,
+                          //     contextScreenComment: context,
+                          //     screenComment: screenComment,
+                          //   );
+                          // }
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.delete),
+                              const SizedBox(
+                                width: 8.0,
+                              ),
+                              Text(
+                                'Delete',
+                                style: TextStyle(
+                                  fontSize: theme.sizeText,
+                                  letterSpacing: theme.letterSpacingText,
+                                  color: theme.title,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 16.0,
+                      )
+                    ],
+                  );
+                });
+          });
+        });
+  }
+
+  showDeleteCommentBottomSheet(
+      {required BuildContext context,
+      required String idPost,
+      required String idComment,
+      required bool screenComment,
+      required bool screenUser,
+      required BuildContext contextPage}) {
+    showModalBottomSheet<dynamic>(
+
+        //isScrollControlled: true,
+        context: context,
+        builder: (context) {
+          return ScopedModelDescendant<ThemeModel>(
+              builder: (context, child, theme) {
+            return BottomSheet(
+                backgroundColor: theme.background,
+                onClosing: () {},
+                builder: (context) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(
+                        height: 16.0,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                          ScopedModel.of<CommentModel>(context)
+                              .removeCommentPost(
+                            context: contextPage,
+                            idComment: idComment,
+                            idPost: idPost,
+                            screenUser: screenUser,
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.delete),
+                              const SizedBox(
+                                width: 8.0,
+                              ),
+                              Text(
+                                'Delete',
+                                style: TextStyle(
+                                  fontSize: theme.sizeText,
+                                  letterSpacing: theme.letterSpacingText,
+                                  color: theme.title,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 16.0,
+                      )
+                    ],
+                  );
+                });
+          });
+        });
+  }
+
+  showOptionsPostBottomSheet(
+      {required BuildContext context, required String idPost}) {
+    showModalBottomSheet<dynamic>(
+
+        //isScrollControlled: true,
+        context: context,
+        builder: (context) {
+          return ScopedModelDescendant<ThemeModel>(
+              builder: (context, child, theme) {
+            return BottomSheet(
+                backgroundColor: theme.background,
+                onClosing: () {},
+                builder: (context) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(
+                        height: 16.0,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                          showOptionsReportPost(
+                              context: context, idPost: idPost);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.outlined_flag),
+                              const SizedBox(
+                                width: 8.0,
+                              ),
+                              Text(
+                                'Report',
+                                style: TextStyle(
+                                  fontSize: theme.sizeText,
+                                  letterSpacing: theme.letterSpacingText,
+                                  color: theme.title,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 16.0,
+                      )
+                    ],
+                  );
+                });
+          });
+        });
+  }
+
+  showOptionsCommentBottomSheet(
+      {required BuildContext context, required String idComment}) {
+    showModalBottomSheet<dynamic>(
+
+        //isScrollControlled: true,
+        context: context,
+        builder: (context) {
+          return ScopedModelDescendant<ThemeModel>(
+              builder: (context, child, theme) {
+            return BottomSheet(
+                backgroundColor: theme.background,
+                onClosing: () {},
+                builder: (context) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(
+                        height: 16.0,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                          showOptionsReportComment(
+                              context: context, idComment: idComment);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.outlined_flag),
+                              const SizedBox(
+                                width: 8.0,
+                              ),
+                              Text(
+                                'Report',
+                                style: TextStyle(
+                                  fontSize: theme.sizeText,
+                                  letterSpacing: theme.letterSpacingText,
+                                  color: theme.title,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 16.0,
+                      ),
+                    ],
+                  );
+                });
+          });
+        });
+  }
+
+  showOptionsReportPost(
+      {required BuildContext context, required String idPost}) {
+    notifyListeners();
+    showDialog(
+        context: context,
+        builder: (context) {
+          return OptionReport(
+            contextAncestor: context,
+            idPost: idPost,
+          );
+        });
+  }
+
+  showOptionsReportComment(
+      {required BuildContext context, required String idComment}) {}
+}
+
+// ignore: must_be_immutable
+class OptionReport extends StatefulWidget {
+  BuildContext contextAncestor;
+  String idPost;
+  OptionReport({required this.contextAncestor, required this.idPost, Key? key})
+      : super(key: key);
+
+  @override
+  _OptionReportState createState() => _OptionReportState();
+}
+
+class _OptionReportState extends State<OptionReport> {
+  String groupValue = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
+      return SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: AlertDialog(
+            backgroundColor: theme.background,
+            title: const Text('Report Post'),
+            content: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  RadioListTile<String>(
+                      title: Text(
+                        LanguageModel().typeReport[0],
+                        style: TextStyle(
+                          fontSize: theme.sizeText,
+                          letterSpacing: theme.letterSpacingText,
+                          color: theme.title,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      value: TypeReport.SEXUAL_CONTENT,
+                      groupValue: groupValue,
+                      onChanged: (value) {
+                        setState(() {
+                          groupValue = value!;
+                        });
+                        // ignore: avoid_print
+                        print(groupValue);
+                      }),
+                  RadioListTile<String>(
+                      title: Text(
+                        LanguageModel().typeReport[1],
+                        style: TextStyle(
+                          fontSize: theme.sizeText,
+                          letterSpacing: theme.letterSpacingText,
+                          color: theme.title,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      value: TypeReport.VIOLENT_OR_REPULSIVE_CONTENT,
+                      groupValue: groupValue,
+                      onChanged: (value) {
+                        setState(() {
+                          groupValue = value!;
+                        });
+                        // ignore: avoid_print
+                        print(groupValue);
+                      }),
+                  RadioListTile<String>(
+                      title: Text(
+                        LanguageModel().typeReport[2],
+                        style: TextStyle(
+                          fontSize: theme.sizeText,
+                          letterSpacing: theme.letterSpacingText,
+                          color: theme.title,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      value: TypeReport.HATEFUL_OR_ABUSIVE_CONTENT,
+                      groupValue: groupValue,
+                      onChanged: (value) {
+                        setState(() {
+                          groupValue = value!;
+                        });
+                        // ignore: avoid_print
+                        print(groupValue);
+                      }),
+                  RadioListTile<String>(
+                      title: Text(
+                        LanguageModel().typeReport[3],
+                        style: TextStyle(
+                          fontSize: theme.sizeText,
+                          letterSpacing: theme.letterSpacingText,
+                          color: theme.title,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      value: TypeReport.HARMFUL_OR_DANGEROUS_ACTS,
+                      groupValue: groupValue,
+                      onChanged: (value) {
+                        setState(() {
+                          groupValue = value!;
+                        });
+                        // ignore: avoid_print
+                        print(groupValue);
+                      }),
+                  RadioListTile<String>(
+                      title: Text(
+                        LanguageModel().typeReport[4],
+                        style: TextStyle(
+                          fontSize: theme.sizeText,
+                          letterSpacing: theme.letterSpacingText,
+                          color: theme.title,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      value: TypeReport.SPAM_OR_MISLEADING,
+                      groupValue: groupValue,
+                      onChanged: (value) {
+                        setState(() {
+                          groupValue = value!;
+                        });
+                        // ignore: avoid_print
+                        print(groupValue);
+                      }),
+                  const SizedBox(
+                    height: 16.0,
+                  ),
+                  Divider(
+                    height: 1.0,
+                    thickness: 1.0,
+                    color: theme.subtitle,
+                  ),
+                  const SizedBox(
+                    height: 16.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text('Cancel')),
+                      ElevatedButton(
+                          onPressed: () {}, child: const Text('Report')),
+                    ],
+                  )
+                ],
+              ),
+            )),
+      );
+    });
   }
 }
