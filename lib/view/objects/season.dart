@@ -294,7 +294,8 @@ class _SeasonState extends State<Season> {
                             //*update evaluation
 
                             Text(
-                              season.seasonMini.evaluationAverage.toString(),
+                              season.seasonMini.evaluationAverage
+                                  .toStringAsPrecision(2),
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 28,

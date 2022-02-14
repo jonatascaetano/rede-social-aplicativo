@@ -271,9 +271,11 @@ class CommentModel extends Model {
 
     switch (response.statusCode) {
       case 200:
-        ScopedModel.of<ProfileModel>(context).getAllPosts(context: context);
+        await ScopedModel.of<ProfileModel>(context)
+            .getAllPosts(context: context);
         if (screenUser) {
-          ScopedModel.of<UserModel>(contextPage).getMyPosts(context: context);
+          await ScopedModel.of<UserModel>(contextPage)
+              .getMyPosts(context: context);
         }
         Navigator.pop(context);
         break;
@@ -320,6 +322,72 @@ class CommentModel extends Model {
                             idPost: idPost,
                             screenUser: screenUser,
                             contextPage: contextPage,
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.delete),
+                              const SizedBox(
+                                width: 8.0,
+                              ),
+                              Text(
+                                'Delete',
+                                style: TextStyle(
+                                  fontSize: theme.sizeText,
+                                  letterSpacing: theme.letterSpacingText,
+                                  color: theme.title,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 16.0,
+                      )
+                    ],
+                  );
+                });
+          });
+        });
+  }
+
+  showDeleteCommentBottomSheet(
+      {required BuildContext contextCommentPage,
+      required String idPost,
+      required String idComment,
+      required bool screenComment,
+      required bool screenUser,
+      required BuildContext contextPage}) {
+    showModalBottomSheet<dynamic>(
+
+        //isScrollControlled: true,
+        context: contextCommentPage,
+        builder: (context) {
+          return ScopedModelDescendant<ThemeModel>(
+              builder: (context, child, theme) {
+            return BottomSheet(
+                backgroundColor: theme.background,
+                onClosing: () {},
+                builder: (context) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(
+                        height: 16.0,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                          removeCommentPost(
+                            context: contextCommentPage,
+                            idComment: idComment,
+                            idPost: idPost,
+                            screenUser: screenUser,
                           );
                         },
                         child: Padding(

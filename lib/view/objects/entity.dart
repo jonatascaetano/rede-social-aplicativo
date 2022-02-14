@@ -291,7 +291,8 @@ class _EntityState extends State<Entity> {
                                   ),
 
                             Text(
-                              entity.entityMini.evaluationAverage.toString(),
+                              entity.entityMini.evaluationAverage
+                                  .toStringAsPrecision(2),
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 28,

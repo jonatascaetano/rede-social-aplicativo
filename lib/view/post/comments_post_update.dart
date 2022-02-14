@@ -72,6 +72,9 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                 Row(
                                   //mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
+                                    const SizedBox(
+                                      width: 8.0,
+                                    ),
                                     widget.postUpdateMini.user!.image != null
                                         ? GestureDetector(
                                             onTap: () {
@@ -126,7 +129,7 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                             ),
                                           ),
                                     const SizedBox(
-                                      width: 8.0,
+                                      width: 4.0,
                                     ),
                                     Expanded(
                                         child: widget.postUpdateMini.level ==
@@ -154,7 +157,7 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                                         widget.screenUser,
                                                   )),
                                     const SizedBox(
-                                      width: 8.0,
+                                      width: 4.0,
                                     ),
                                     IconButton(
                                       padding: EdgeInsets.zero,
@@ -207,7 +210,7 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                           ScopedModel.of<ProfileModel>(
                                                   widget.contextPage)
                                               .showOptionsPostBottomSheet(
-                                            context: context,
+                                            contextAncestor: context,
                                             idPost: widget.postUpdateMini.id!,
                                           );
                                         }
@@ -652,6 +655,9 @@ class _CommentWidgetState extends State<CommentWidget> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(
+              width: 8.0,
+            ),
             widget.commentMini.user.image != null
                 ? CircleAvatar(
                     backgroundImage:
@@ -742,6 +748,9 @@ class _CommentWidgetState extends State<CommentWidget> {
                             fontWeight: FontWeight.normal,
                           ),
                         ),
+                        const SizedBox(
+                          width: 8.0,
+                        ),
                         Text(
                           widget.commentMini.likeQuantity.toString(),
                           style: TextStyle(
@@ -774,9 +783,9 @@ class _CommentWidgetState extends State<CommentWidget> {
                                 ScopedModel.of<ProfileModel>(context)
                                     .userMini
                                     .id) {
-                              ScopedModel.of<ProfileModel>(context)
+                              ScopedModel.of<CommentModel>(context)
                                   .showDeleteCommentBottomSheet(
-                                context: context,
+                                contextCommentPage: context,
                                 idPost: widget.idPost,
                                 idComment: widget.commentMini.id,
                                 screenComment: true,
@@ -814,7 +823,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                             } else {
                               ScopedModel.of<ProfileModel>(context)
                                   .showOptionsCommentBottomSheet(
-                                context: context,
+                                contextAncestor: context,
                                 idComment: widget.commentMini.id,
                               );
                             }

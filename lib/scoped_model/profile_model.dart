@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:social_network_application/entities/dto/report_dto.dart';
 import 'package:social_network_application/entities/dto/user_dto.dart';
 import 'package:social_network_application/entities/mini_dto/post_update_mini.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 import 'dart:convert';
 import 'package:social_network_application/entities/mini_dto/worker_mini.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:social_network_application/enuns/level_report.dart';
 import 'package:social_network_application/enuns/type_post.dart';
 import 'package:social_network_application/enuns/type_report.dart';
 import 'dart:io';
@@ -16,7 +18,6 @@ import 'dart:io';
 import 'package:social_network_application/view/authentication/login.dart';
 import 'package:social_network_application/widgets/post/update_post_widget.dart';
 
-import 'comment_model.dart';
 import 'support/language_model.dart';
 import 'support/theme_model.dart';
 
@@ -631,79 +632,79 @@ class ProfileModel extends Model {
         });
   }
 
-  showDeleteCommentBottomSheet(
-      {required BuildContext context,
-      required String idPost,
-      required String idComment,
-      required bool screenComment,
-      required bool screenUser,
-      required BuildContext contextPage}) {
-    showModalBottomSheet<dynamic>(
+  // showDeleteCommentBottomSheet(
+  //     {required BuildContext context,
+  //     required String idPost,
+  //     required String idComment,
+  //     required bool screenComment,
+  //     required bool screenUser,
+  //     required BuildContext contextPage}) {
+  //   showModalBottomSheet<dynamic>(
 
-        //isScrollControlled: true,
-        context: context,
-        builder: (context) {
-          return ScopedModelDescendant<ThemeModel>(
-              builder: (context, child, theme) {
-            return BottomSheet(
-                backgroundColor: theme.background,
-                onClosing: () {},
-                builder: (context) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const SizedBox(
-                        height: 16.0,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                          ScopedModel.of<CommentModel>(context)
-                              .removeCommentPost(
-                            context: contextPage,
-                            idComment: idComment,
-                            idPost: idPost,
-                            screenUser: screenUser,
-                          );
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              const Icon(Icons.delete),
-                              const SizedBox(
-                                width: 8.0,
-                              ),
-                              Text(
-                                'Delete',
-                                style: TextStyle(
-                                  fontSize: theme.sizeText,
-                                  letterSpacing: theme.letterSpacingText,
-                                  color: theme.title,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 16.0,
-                      )
-                    ],
-                  );
-                });
-          });
-        });
-  }
+  //       //isScrollControlled: true,
+  //       context: context,
+  //       builder: (context) {
+  //         return ScopedModelDescendant<ThemeModel>(
+  //             builder: (context, child, theme) {
+  //           return BottomSheet(
+  //               backgroundColor: theme.background,
+  //               onClosing: () {},
+  //               builder: (context) {
+  //                 return Column(
+  //                   crossAxisAlignment: CrossAxisAlignment.start,
+  //                   mainAxisSize: MainAxisSize.min,
+  //                   children: [
+  //                     const SizedBox(
+  //                       height: 16.0,
+  //                     ),
+  //                     GestureDetector(
+  //                       onTap: () {
+  //                         Navigator.pop(context);
+  //                         ScopedModel.of<CommentModel>(contextPage)
+  //                             .removeCommentPost(
+  //                           context: contextPage,
+  //                           idComment: idComment,
+  //                           idPost: idPost,
+  //                           screenUser: screenUser,
+  //                         );
+  //                       },
+  //                       child: Padding(
+  //                         padding: const EdgeInsets.all(8.0),
+  //                         child: Row(
+  //                           children: [
+  //                             const Icon(Icons.delete),
+  //                             const SizedBox(
+  //                               width: 8.0,
+  //                             ),
+  //                             Text(
+  //                               'Delete',
+  //                               style: TextStyle(
+  //                                 fontSize: theme.sizeText,
+  //                                 letterSpacing: theme.letterSpacingText,
+  //                                 color: theme.title,
+  //                                 fontWeight: FontWeight.normal,
+  //                               ),
+  //                             ),
+  //                           ],
+  //                         ),
+  //                       ),
+  //                     ),
+  //                     const SizedBox(
+  //                       height: 16.0,
+  //                     )
+  //                   ],
+  //                 );
+  //               });
+  //         });
+  //       });
+  // }
 
   showOptionsPostBottomSheet(
-      {required BuildContext context, required String idPost}) {
+      {required BuildContext contextAncestor, required String idPost}) {
     showModalBottomSheet<dynamic>(
 
         //isScrollControlled: true,
-        context: context,
+        context: contextAncestor,
         builder: (context) {
           return ScopedModelDescendant<ThemeModel>(
               builder: (context, child, theme) {
@@ -721,8 +722,17 @@ class ProfileModel extends Model {
                       GestureDetector(
                         onTap: () {
                           Navigator.pop(context);
-                          showOptionsReportPost(
-                              context: context, idPost: idPost);
+                          ReportDTO reportDTO = ReportDTO(
+                            id: null,
+                            levelReport: LevelReport.POST,
+                            idReported: idPost,
+                            typeReport: null,
+                            idAuthor: userMini.id,
+                            release: DateTime.now().toString(),
+                          );
+                          showOptionsReport(
+                              contextAncestor: contextAncestor,
+                              reportDTO: reportDTO);
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -756,11 +766,11 @@ class ProfileModel extends Model {
   }
 
   showOptionsCommentBottomSheet(
-      {required BuildContext context, required String idComment}) {
+      {required BuildContext contextAncestor, required String idComment}) {
     showModalBottomSheet<dynamic>(
 
         //isScrollControlled: true,
-        context: context,
+        context: contextAncestor,
         builder: (context) {
           return ScopedModelDescendant<ThemeModel>(
               builder: (context, child, theme) {
@@ -778,8 +788,17 @@ class ProfileModel extends Model {
                       GestureDetector(
                         onTap: () {
                           Navigator.pop(context);
-                          showOptionsReportComment(
-                              context: context, idComment: idComment);
+                          ReportDTO reportDTO = ReportDTO(
+                            id: null,
+                            levelReport: LevelReport.COMMENT,
+                            idReported: idComment,
+                            typeReport: null,
+                            idAuthor: userMini.id,
+                            release: DateTime.now().toString(),
+                          );
+                          showOptionsReport(
+                              contextAncestor: contextAncestor,
+                              reportDTO: reportDTO);
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -812,29 +831,57 @@ class ProfileModel extends Model {
         });
   }
 
-  showOptionsReportPost(
-      {required BuildContext context, required String idPost}) {
+  showOptionsReport(
+      {required BuildContext contextAncestor, required ReportDTO reportDTO}) {
     notifyListeners();
     showDialog(
-        context: context,
+        context: contextAncestor,
         builder: (context) {
           return OptionReport(
-            contextAncestor: context,
-            idPost: idPost,
+            contextAncestor: contextAncestor,
+            reportDTO: reportDTO,
           );
         });
   }
 
-  showOptionsReportComment(
-      {required BuildContext context, required String idComment}) {}
+  report({required ReportDTO reportDTO, required BuildContext context}) async {
+    load = true;
+    notifyListeners();
+    var url = Uri.parse(base + 'reports/post');
+    var response =
+        await http.post(url, body: json.encode(reportDTO.toMap()), headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
+    // ignore: avoid_print
+    print('report: ' + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 201:
+        load = false;
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Reported')),
+        );
+        break;
+      default:
+        load = false;
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Try again later')),
+        );
+    }
+  }
 }
 
 // ignore: must_be_immutable
 class OptionReport extends StatefulWidget {
   BuildContext contextAncestor;
-  String idPost;
-  OptionReport({required this.contextAncestor, required this.idPost, Key? key})
-      : super(key: key);
+  ReportDTO reportDTO;
+  OptionReport({
+    required this.contextAncestor,
+    required this.reportDTO,
+    Key? key,
+  }) : super(key: key);
 
   @override
   _OptionReportState createState() => _OptionReportState();
@@ -972,7 +1019,16 @@ class _OptionReportState extends State<OptionReport> {
                           },
                           child: const Text('Cancel')),
                       ElevatedButton(
-                          onPressed: () {}, child: const Text('Report')),
+                          onPressed: () {
+                            Navigator.pop(context);
+                            widget.reportDTO.typeReport = groupValue;
+                            ScopedModel.of<ProfileModel>(widget.contextAncestor)
+                                .report(
+                              reportDTO: widget.reportDTO,
+                              context: widget.contextAncestor,
+                            );
+                          },
+                          child: const Text('Report')),
                     ],
                   )
                 ],

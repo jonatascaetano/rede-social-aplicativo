@@ -91,8 +91,12 @@ class Search extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return SuggestionsSearch(
-      query: query,
-    );
+    if (query.isNotEmpty) {
+      return SuggestionsSearch(
+        query: query,
+      );
+    } else {
+      return Container();
+    }
   }
 }

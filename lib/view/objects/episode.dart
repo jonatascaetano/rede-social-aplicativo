@@ -303,7 +303,8 @@ class _EpisodeState extends State<Episode> {
                             //*update evaluation
 
                             Text(
-                              episode.episodeMini.evaluationAverage.toString(),
+                              episode.episodeMini.evaluationAverage
+                                  .toStringAsPrecision(2),
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 28,

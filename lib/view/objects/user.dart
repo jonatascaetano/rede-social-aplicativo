@@ -88,35 +88,90 @@ class _UserState extends State<User> {
                           children: [
                             //inicio da area profile
                             user.userMini.image != null
-                                ? Container(
-                                    margin: EdgeInsets.zero,
-                                    padding: EdgeInsets.zero,
-                                    height: (MediaQuery.of(context).size.width /
-                                            16) *
-                                        9,
-                                    width: MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(
-                                      color: theme.shadow,
-                                      image: DecorationImage(
-                                        image:
-                                            NetworkImage(user.userMini.image!),
-                                        fit: BoxFit.fitHeight,
+                                ? Stack(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.zero,
+                                        padding: EdgeInsets.zero,
+                                        height:
+                                            (MediaQuery.of(context).size.width /
+                                                    16) *
+                                                9,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(
+                                          color: theme.shadow,
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                                user.userMini.image!),
+                                            fit: BoxFit.fitHeight,
+                                          ),
+                                        ),
                                       ),
-                                    ),
+                                      user.profileNull
+                                          ? Container()
+                                          : Positioned(
+                                              top: 8.0,
+                                              right: 8.0,
+                                              child: IconButton(
+                                                onPressed: () {
+                                                  user.showOptionsUserBottomSheet(
+                                                    contextPageUser: context,
+                                                    idUser: widget.userMini.id,
+                                                  );
+                                                },
+                                                icon: Icon(
+                                                  Icons.more_vert_sharp,
+                                                  size: 21,
+                                                  color: ScopedModel.of<
+                                                          ThemeModel>(context)
+                                                      .subtitle,
+                                                ),
+                                              ),
+                                            ),
+                                    ],
                                   )
-                                : Container(
-                                    color: theme.shadow,
-                                    height: (MediaQuery.of(context).size.width /
-                                            16) *
-                                        9,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.image,
-                                        size: 100,
-                                        color: theme.emphasis,
-                                      ),
-                                    )),
+                                : Stack(
+                                    children: [
+                                      Container(
+                                          color: theme.shadow,
+                                          height: (MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  16) *
+                                              9,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          child: Center(
+                                            child: Icon(
+                                              Icons.image,
+                                              size: 100,
+                                              color: theme.emphasis,
+                                            ),
+                                          )),
+                                      user.profileNull
+                                          ? Container()
+                                          : Positioned(
+                                              top: 8.0,
+                                              right: 8.0,
+                                              child: IconButton(
+                                                onPressed: () {
+                                                  user.showOptionsUserBottomSheet(
+                                                    contextPageUser: context,
+                                                    idUser: widget.userMini.id,
+                                                  );
+                                                },
+                                                icon: Icon(
+                                                  Icons.more_vert_sharp,
+                                                  size: 21,
+                                                  color: ScopedModel.of<
+                                                          ThemeModel>(context)
+                                                      .subtitle,
+                                                ),
+                                              ),
+                                            ),
+                                    ],
+                                  ),
                             const SizedBox(
                               height: 16.0,
                             ),
@@ -184,80 +239,110 @@ class _UserState extends State<User> {
                               ),
                             ),
 
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: user.showFollowButton
-                                  ? user.isFollowing
-                                      ? ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            primary: theme.button,
-                                            elevation: 0.0,
+                            user.blocked
+                                ? Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.block,
+                                          color: theme.detail,
+                                        ),
+                                        const SizedBox(
+                                          width: 4.0,
+                                        ),
+                                        Text(
+                                          'User blocked',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            color: theme.detail,
+                                            letterSpacing: 1.0,
+                                            fontWeight: FontWeight.normal,
                                           ),
-                                          onPressed: () {
-                                            user.removeFollowing(
-                                              idFollowing: user.userMini.id,
-                                              context: context,
-                                            );
-                                          },
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.person_remove,
-                                                color: theme.buttonMain,
-                                              ),
-                                              const SizedBox(
-                                                width: 4.0,
-                                              ),
-                                              Text(
-                                                'Unfollow',
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  color: theme.buttonText,
-                                                  letterSpacing: 1.0,
-                                                  fontWeight: FontWeight.normal,
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                : Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: user.showFollowButton
+                                        ? user.isFollowing
+                                            ? ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: theme.button,
+                                                  elevation: 0.0,
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      : ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            primary: theme.button,
-                                            elevation: 0.0,
-                                          ),
-                                          onPressed: () {
-                                            user.addFollowing(
-                                              idFollowing: user.userMini.id,
-                                              context: context,
-                                            );
-                                          },
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.person_add,
-                                                color: theme.buttonMain,
-                                              ),
-                                              const SizedBox(
-                                                width: 4.0,
-                                              ),
-                                              Text(
-                                                'Follow',
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  color: theme.buttonText,
-                                                  letterSpacing: 1.0,
-                                                  fontWeight: FontWeight.normal,
+                                                onPressed: () {
+                                                  user.removeFollowing(
+                                                    idFollowing:
+                                                        user.userMini.id,
+                                                    context: context,
+                                                  );
+                                                },
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Icon(
+                                                      Icons.person_remove,
+                                                      color: theme.buttonMain,
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 4.0,
+                                                    ),
+                                                    Text(
+                                                      'Unfollow',
+                                                      style: TextStyle(
+                                                        fontSize: 16,
+                                                        color: theme.buttonText,
+                                                        letterSpacing: 1.0,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                  : Container(),
-                            ),
+                                              )
+                                            : ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: theme.button,
+                                                  elevation: 0.0,
+                                                ),
+                                                onPressed: () {
+                                                  user.addFollowing(
+                                                    idFollowing:
+                                                        user.userMini.id,
+                                                    context: context,
+                                                  );
+                                                },
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Icon(
+                                                      Icons.person_add,
+                                                      color: theme.buttonMain,
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 4.0,
+                                                    ),
+                                                    Text(
+                                                      'Follow',
+                                                      style: TextStyle(
+                                                        fontSize: 16,
+                                                        color: theme.buttonText,
+                                                        letterSpacing: 1.0,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                        : Container(),
+                                  ),
 
                             const SizedBox(
                               height: 8.0,
@@ -536,26 +621,6 @@ class _UserState extends State<User> {
                                   }
                                 }),
                           ],
-                        ),
-                  user.profileNull
-                      ? Container()
-                      : Positioned(
-                          top: 8.0,
-                          right: 8.0,
-                          child: IconButton(
-                            onPressed: () {
-                              user.showOptionsUserBottomSheet(
-                                context: context,
-                                idUser: widget.userMini.id,
-                              );
-                            },
-                            icon: Icon(
-                              Icons.more_vert_sharp,
-                              size: 21,
-                              color:
-                                  ScopedModel.of<ThemeModel>(context).subtitle,
-                            ),
-                          ),
                         ),
                   user.load
                       ? Positioned(

@@ -44,6 +44,9 @@ class _UpdatePostWidgetState extends State<UpdatePostWidget> {
           Row(
             //mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const SizedBox(
+                width: 8.0,
+              ),
               widget.postUpdateMini.user!.image != null
                   ? GestureDetector(
                       onTap: () {
@@ -91,7 +94,7 @@ class _UpdatePostWidgetState extends State<UpdatePostWidget> {
                       ),
                     ),
               const SizedBox(
-                width: 8.0,
+                width: 4.0,
               ),
               Expanded(
                   child: widget.postUpdateMini.level == Level.ENTITY
@@ -112,7 +115,7 @@ class _UpdatePostWidgetState extends State<UpdatePostWidget> {
                               screenUser: widget.screenUser,
                             )),
               const SizedBox(
-                width: 8.0,
+                width: 4.0,
               ),
               IconButton(
                 padding: EdgeInsets.zero,
@@ -159,7 +162,7 @@ class _UpdatePostWidgetState extends State<UpdatePostWidget> {
                   } else {
                     ScopedModel.of<ProfileModel>(context)
                         .showOptionsPostBottomSheet(
-                      context: context,
+                      contextAncestor: context,
                       idPost: widget.postUpdateMini.id!,
                     );
                   }

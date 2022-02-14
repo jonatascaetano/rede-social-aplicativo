@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:social_network_application/entities/dto/report_dto.dart';
 import 'package:social_network_application/entities/mini_dto/post_update_mini.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 import 'package:social_network_application/entities/mini_dto/worker_mini.dart';
+import 'package:social_network_application/enuns/level_report.dart';
 import 'package:social_network_application/enuns/type_post.dart';
+import 'package:social_network_application/enuns/type_report.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/widgets/post/update_post_widget.dart';
 
+import 'support/language_model.dart';
 import 'support/theme_model.dart';
 
 class UserModel extends Model {
@@ -304,6 +308,8 @@ class UserModel extends Model {
       case 202:
         blocked = true;
         notifyListeners();
+        getProfile(idUser: idUser, context: context);
+        checkFollowing(idUser: idUser);
         break;
     }
   }
@@ -329,10 +335,11 @@ class UserModel extends Model {
   }
 
   showOptionsUserBottomSheet(
-      {required BuildContext context, required String idUser}) {
+      {required BuildContext contextPageUser, required String idUser}) async {
+    String id = await getId();
     showModalBottomSheet<dynamic>(
         //isScrollControlled: true,
-        context: context,
+        context: contextPageUser,
         builder: (context) {
           return ScopedModelDescendant<ThemeModel>(
               builder: (context, child, theme) {
@@ -386,7 +393,20 @@ class UserModel extends Model {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pop(context);
+                          ReportDTO reportDTO = ReportDTO(
+                            id: null,
+                            levelReport: LevelReport.USER,
+                            idReported: idUser,
+                            typeReport: null,
+                            idAuthor: id,
+                            release: DateTime.now().toString(),
+                          );
+                          showOptionsReport(
+                              contextPageUser: contextPageUser,
+                              reportDTO: reportDTO);
+                        },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
@@ -416,5 +436,212 @@ class UserModel extends Model {
                 });
           });
         });
+  }
+
+  showOptionsReport(
+      {required BuildContext contextPageUser, required ReportDTO reportDTO}) {
+    notifyListeners();
+    showDialog(
+        context: contextPageUser,
+        builder: (context) {
+          return OptionReport(
+            contextAncestor: contextPageUser,
+            reportDTO: reportDTO,
+          );
+        });
+  }
+
+  report({required ReportDTO reportDTO, required BuildContext context}) async {
+    load = true;
+    notifyListeners();
+    var url = Uri.parse(base + 'reports/post');
+    var response =
+        await http.post(url, body: json.encode(reportDTO.toMap()), headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
+    // ignore: avoid_print
+    print('report: ' + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 201:
+        load = false;
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Reported')),
+        );
+        break;
+      default:
+        load = false;
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Try again later')),
+        );
+    }
+  }
+}
+
+// ignore: must_be_immutable
+class OptionReport extends StatefulWidget {
+  BuildContext contextAncestor;
+  ReportDTO reportDTO;
+  OptionReport({
+    required this.contextAncestor,
+    required this.reportDTO,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  _OptionReportState createState() => _OptionReportState();
+}
+
+class _OptionReportState extends State<OptionReport> {
+  String groupValue = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
+      return SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: AlertDialog(
+            backgroundColor: theme.background,
+            title: const Text('Report Post'),
+            content: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  RadioListTile<String>(
+                      title: Text(
+                        LanguageModel().typeReport[0],
+                        style: TextStyle(
+                          fontSize: theme.sizeText,
+                          letterSpacing: theme.letterSpacingText,
+                          color: theme.title,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      value: TypeReport.SEXUAL_CONTENT,
+                      groupValue: groupValue,
+                      onChanged: (value) {
+                        setState(() {
+                          groupValue = value!;
+                        });
+                        // ignore: avoid_print
+                        print(groupValue);
+                      }),
+                  RadioListTile<String>(
+                      title: Text(
+                        LanguageModel().typeReport[1],
+                        style: TextStyle(
+                          fontSize: theme.sizeText,
+                          letterSpacing: theme.letterSpacingText,
+                          color: theme.title,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      value: TypeReport.VIOLENT_OR_REPULSIVE_CONTENT,
+                      groupValue: groupValue,
+                      onChanged: (value) {
+                        setState(() {
+                          groupValue = value!;
+                        });
+                        // ignore: avoid_print
+                        print(groupValue);
+                      }),
+                  RadioListTile<String>(
+                      title: Text(
+                        LanguageModel().typeReport[2],
+                        style: TextStyle(
+                          fontSize: theme.sizeText,
+                          letterSpacing: theme.letterSpacingText,
+                          color: theme.title,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      value: TypeReport.HATEFUL_OR_ABUSIVE_CONTENT,
+                      groupValue: groupValue,
+                      onChanged: (value) {
+                        setState(() {
+                          groupValue = value!;
+                        });
+                        // ignore: avoid_print
+                        print(groupValue);
+                      }),
+                  RadioListTile<String>(
+                      title: Text(
+                        LanguageModel().typeReport[3],
+                        style: TextStyle(
+                          fontSize: theme.sizeText,
+                          letterSpacing: theme.letterSpacingText,
+                          color: theme.title,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      value: TypeReport.HARMFUL_OR_DANGEROUS_ACTS,
+                      groupValue: groupValue,
+                      onChanged: (value) {
+                        setState(() {
+                          groupValue = value!;
+                        });
+                        // ignore: avoid_print
+                        print(groupValue);
+                      }),
+                  RadioListTile<String>(
+                      title: Text(
+                        LanguageModel().typeReport[4],
+                        style: TextStyle(
+                          fontSize: theme.sizeText,
+                          letterSpacing: theme.letterSpacingText,
+                          color: theme.title,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      value: TypeReport.SPAM_OR_MISLEADING,
+                      groupValue: groupValue,
+                      onChanged: (value) {
+                        setState(() {
+                          groupValue = value!;
+                        });
+                        // ignore: avoid_print
+                        print(groupValue);
+                      }),
+                  const SizedBox(
+                    height: 16.0,
+                  ),
+                  Divider(
+                    height: 1.0,
+                    thickness: 1.0,
+                    color: theme.subtitle,
+                  ),
+                  const SizedBox(
+                    height: 16.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text('Cancel')),
+                      ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            widget.reportDTO.typeReport = groupValue;
+                            ScopedModel.of<UserModel>(widget.contextAncestor)
+                                .report(
+                              reportDTO: widget.reportDTO,
+                              context: widget.contextAncestor,
+                            );
+                          },
+                          child: const Text('Report')),
+                    ],
+                  )
+                ],
+              ),
+            )),
+      );
+    });
   }
 }
