@@ -25,8 +25,8 @@ class _ImageUpdateState extends State<ImageUpdate> {
               "Update image",
               style: TextStyle(
                 color: theme.title,
-                fontSize: 24.0,
-                letterSpacing: 1.0,
+                fontSize: theme.sizeAppBar,
+                letterSpacing: theme.letterSpacingAppBar,
                 fontWeight: FontWeight.normal,
               ),
             ),
@@ -87,21 +87,23 @@ class _ImageUpdateState extends State<ImageUpdate> {
                                     name: null,
                                     email: null,
                                     password: null,
-                                    image: null,
+                                    imageProfile: null,
                                     description: null,
                                     place: null,
                                     privacy: null,
                                     status: null,
-                                    invitation: null);
+                                    invitation: null,
+                                    release: '');
                                 profile.addImageProfile(
                                     userDTO: userDTO, context: context);
                               },
                               child: Text(
                                 "Confirm",
                                 style: TextStyle(
-                                  fontSize: 16,
-                                  letterSpacing: 2.0,
+                                  fontSize: theme.sizeButton,
+                                  letterSpacing: theme.letterSpacingButton,
                                   color: theme.buttonMainText,
+                                  fontWeight: FontWeight.normal,
                                 ),
                               ),
                             )
@@ -116,9 +118,10 @@ class _ImageUpdateState extends State<ImageUpdate> {
                               child: Text(
                                 "Select",
                                 style: TextStyle(
-                                  fontSize: 16,
-                                  letterSpacing: 2.0,
+                                  fontSize: theme.sizeButton,
+                                  letterSpacing: theme.letterSpacingButton,
                                   color: theme.buttonText,
+                                  fontWeight: FontWeight.normal,
                                 ),
                               ),
                             ),
@@ -134,9 +137,10 @@ class _ImageUpdateState extends State<ImageUpdate> {
                               child: Text(
                                 "Cancel",
                                 style: TextStyle(
-                                  fontSize: 16,
-                                  letterSpacing: 2.0,
+                                  fontSize: theme.sizeButton,
+                                  letterSpacing: theme.letterSpacingButton,
                                   color: theme.buttonText,
+                                  fontWeight: FontWeight.normal,
                                 ),
                               ),
                             )

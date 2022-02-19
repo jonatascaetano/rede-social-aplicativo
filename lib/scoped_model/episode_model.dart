@@ -297,7 +297,7 @@ class EpisodeModel extends Model {
       release: DateTime.now().toString(),
       body: category == 7 ? entitySaveMini.review : null,
       category: category,
-      idUser: idUser,
+      idAuthor: idUser,
       idEntity: entitySaveMini.level == Level.ENTITY
           ? entitySaveMini.entity!.id
           : null,

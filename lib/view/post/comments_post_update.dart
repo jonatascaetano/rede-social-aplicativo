@@ -47,7 +47,7 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
               appBar: AppBar(
                 elevation: 0.0,
                 title: Text(
-                  'Post of ' + widget.postUpdateMini.user!.name,
+                  'Post of ' + widget.postUpdateMini.author!.name,
                   style: TextStyle(
                     color: theme.title,
                     fontSize: theme.sizeAppBar,
@@ -58,320 +58,356 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
               ),
               body: Stack(
                 children: [
-                  Column(
-                    children: [
-                      Expanded(
-                        child: ListView(
-                          shrinkWrap: true,
+                  comment.postUpdateMiniIsNull
+                      ? Container()
+                      : Column(
                           children: [
-                            Column(
-                              children: [
-                                const SizedBox(
-                                  height: 16.0,
-                                ),
-                                Row(
-                                  //mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const SizedBox(
-                                      width: 8.0,
-                                    ),
-                                    widget.postUpdateMini.user!.image != null
-                                        ? GestureDetector(
-                                            onTap: () {
-                                              if (widget.postUpdateMini.user!
-                                                      .id !=
-                                                  ScopedModel.of<ProfileModel>(
-                                                          context)
-                                                      .userMini
-                                                      .id) {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) => User(
-                                                          userMini: widget
-                                                              .postUpdateMini
-                                                              .user!)),
-                                                );
-                                              }
-                                            },
-                                            child: CircleAvatar(
-                                              backgroundImage: NetworkImage(
-                                                  widget.postUpdateMini.user!
-                                                      .image!),
-                                              radius: 30.0,
-                                            ),
-                                          )
-                                        : GestureDetector(
-                                            onTap: () {
-                                              if (widget.postUpdateMini.user!
-                                                      .id !=
-                                                  ScopedModel.of<ProfileModel>(
-                                                          context)
-                                                      .userMini
-                                                      .id) {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) => User(
-                                                          userMini: widget
-                                                              .postUpdateMini
-                                                              .user!)),
-                                                );
-                                              }
-                                            },
-                                            child: CircleAvatar(
-                                              backgroundColor: theme.shadow,
-                                              child: Icon(
-                                                Icons.image,
-                                                color: theme.emphasis,
-                                              ),
-                                              radius: 30.0,
-                                            ),
-                                          ),
-                                    const SizedBox(
-                                      width: 4.0,
-                                    ),
-                                    Expanded(
-                                        child: widget.postUpdateMini.level ==
-                                                Level.ENTITY
-                                            ? entity(
-                                                context: context,
-                                                postUpdateMini:
-                                                    widget.postUpdateMini,
-                                                screenUser: widget.screenUser,
-                                              )
-                                            : widget.postUpdateMini.level ==
-                                                    Level.SEASON
-                                                ? season(
-                                                    postUpdateMini:
-                                                        widget.postUpdateMini,
-                                                    context: context,
-                                                    screenUser:
-                                                        widget.screenUser,
-                                                  )
-                                                : episode(
-                                                    postUpdateMini:
-                                                        widget.postUpdateMini,
-                                                    context: context,
-                                                    screenUser:
-                                                        widget.screenUser,
-                                                  )),
-                                    const SizedBox(
-                                      width: 4.0,
-                                    ),
-                                    IconButton(
-                                      padding: EdgeInsets.zero,
-                                      onPressed: () async {
-                                        if (widget.postUpdateMini.user!.id ==
-                                            ScopedModel.of<ProfileModel>(
-                                                    context)
-                                                .userMini
-                                                .id) {
-                                          comment.showDeletePostBottomSheet(
-                                            idPost: widget.postUpdateMini.id!,
-                                            screenComment: true,
-                                            screenUser: widget.screenUser,
-                                            contextPage: widget.contextPage,
-                                            contextCommentPage: context,
-                                          );
-                                          // ScaffoldMessenger.of(context)
-                                          //     .showSnackBar(
-                                          //   SnackBar(
-                                          //     backgroundColor:
-                                          //         ScopedModel.of<ThemeModel>(
-                                          //                 context)
-                                          //             .background,
-                                          //     content: Text('delete post?',
-                                          //         style: TextStyle(
-                                          //           color: ScopedModel.of<
-                                          //                   ThemeModel>(context)
-                                          //               .subtitle,
-                                          //         )),
-                                          //     action: SnackBarAction(
-                                          //         label: 'yes',
-                                          //         textColor: ScopedModel.of<
-                                          //                 ThemeModel>(context)
-                                          //             .emphasis,
-                                          //         onPressed: () {
-                                          //           comment.removePost(
-                                          //             context:
-                                          //                 widget.contextPage,
-                                          //             idPost: widget
-                                          //                 .postUpdateMini.id!,
-                                          //             contextPage:
-                                          //                 widget.contextPage,
-                                          //             screenUser:
-                                          //                 widget.screenUser,
-                                          //           );
-                                          //         }),
-                                          //   ),
-                                          // );
-                                        } else {
-                                          ScopedModel.of<ProfileModel>(
-                                                  widget.contextPage)
-                                              .showOptionsPostBottomSheet(
-                                            contextAncestor: context,
-                                            idPost: widget.postUpdateMini.id!,
-                                          );
-                                        }
-                                      },
-                                      icon: Icon(
-                                        Icons.more_vert_sharp,
-                                        size: 21,
-                                        color:
-                                            ScopedModel.of<ThemeModel>(context)
-                                                .subtitle,
+                            Expanded(
+                              child: ListView(
+                                shrinkWrap: true,
+                                children: [
+                                  Column(
+                                    children: [
+                                      const SizedBox(
+                                        height: 16.0,
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 8.0,
-                                ),
-                                widget.postUpdateMini.category != 6
-                                    ? Container()
-                                    : Container(
-                                        margin: EdgeInsets.zero,
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 4.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Icon(
-                                              Icons.star,
-                                              size: 50,
-                                              color: widget.postUpdateMini
-                                                          .evaluation >=
-                                                      1
-                                                  ? Colors.yellow[700]
-                                                  : theme.icon,
-                                            ),
-                                            Icon(
-                                              Icons.star,
-                                              size: 50,
-                                              color: widget.postUpdateMini
-                                                          .evaluation >=
-                                                      2
-                                                  ? Colors.yellow[700]
-                                                  : theme.icon,
-                                            ),
-                                            Icon(
-                                              Icons.star,
-                                              size: 50,
-                                              color: widget.postUpdateMini
-                                                          .evaluation >=
-                                                      3
-                                                  ? Colors.yellow[700]
-                                                  : theme.icon,
-                                            ),
-                                            Icon(
-                                              Icons.star,
-                                              size: 50,
-                                              color: widget.postUpdateMini
-                                                          .evaluation >=
-                                                      4
-                                                  ? Colors.yellow[700]
-                                                  : theme.icon,
-                                            ),
-                                            Icon(
-                                              Icons.star,
-                                              size: 50,
-                                              color: widget.postUpdateMini
-                                                          .evaluation >=
-                                                      5
-                                                  ? Colors.yellow[700]
-                                                  : theme.icon,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                widget.postUpdateMini.category != 6
-                                    ? Container()
-                                    : const SizedBox(
-                                        height: 8.0,
-                                      ),
-                                !widget.postUpdateMini.spoiler
-                                    ? widget.postUpdateMini.body != null
-                                        ? Align(
-                                            alignment: Alignment.centerLeft,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 2.0,
-                                                      horizontal: 8.0),
-                                              child: Text(
-                                                widget.postUpdateMini.body!,
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(
-                                                  fontSize: theme.sizeText,
-                                                  letterSpacing:
-                                                      theme.letterSpacingText,
-                                                  color: theme.title,
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                              ),
-                                            ),
-                                          )
-                                        : Container()
-                                    : ExpansionTile(
-                                        tilePadding: const EdgeInsets.symmetric(
-                                            vertical: 2.0, horizontal: 8.0),
-                                        title: Text(
-                                          'Spoiler',
-                                          style: TextStyle(
-                                            fontSize: theme.sizeText,
-                                            letterSpacing:
-                                                theme.letterSpacingText,
-                                            color: theme.title,
-                                            fontWeight: FontWeight.normal,
-                                          ),
-                                        ),
+                                      Row(
+                                        //mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 2.0, horizontal: 8.0),
-                                            child: Align(
-                                              alignment: Alignment.centerLeft,
-                                              child: Text(
-                                                widget.postUpdateMini.body!,
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(
-                                                  fontSize: theme.sizeText,
-                                                  letterSpacing:
-                                                      theme.letterSpacingText,
-                                                  color: theme.title,
-                                                  fontWeight: FontWeight.normal,
+                                          const SizedBox(
+                                            width: 8.0,
+                                          ),
+                                          widget.postUpdateMini.author!
+                                                      .imageProfile !=
+                                                  null
+                                              ? GestureDetector(
+                                                  onTap: () {
+                                                    if (widget.postUpdateMini
+                                                            .author!.id !=
+                                                        ScopedModel.of<
+                                                                    ProfileModel>(
+                                                                context)
+                                                            .userMini
+                                                            .id) {
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) => User(
+                                                                userMini: widget
+                                                                    .postUpdateMini
+                                                                    .author!)),
+                                                      );
+                                                    }
+                                                  },
+                                                  child: CircleAvatar(
+                                                    backgroundImage:
+                                                        NetworkImage(widget
+                                                            .postUpdateMini
+                                                            .author!
+                                                            .imageProfile!),
+                                                    radius: 30.0,
+                                                  ),
+                                                )
+                                              : GestureDetector(
+                                                  onTap: () {
+                                                    if (widget.postUpdateMini
+                                                            .author!.id !=
+                                                        ScopedModel.of<
+                                                                    ProfileModel>(
+                                                                context)
+                                                            .userMini
+                                                            .id) {
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) => User(
+                                                                userMini: widget
+                                                                    .postUpdateMini
+                                                                    .author!)),
+                                                      );
+                                                    }
+                                                  },
+                                                  child: CircleAvatar(
+                                                    backgroundColor:
+                                                        theme.shadow,
+                                                    child: Icon(
+                                                      Icons.image,
+                                                      color: theme.emphasis,
+                                                    ),
+                                                    radius: 30.0,
+                                                  ),
                                                 ),
-                                              ),
+                                          const SizedBox(
+                                            width: 4.0,
+                                          ),
+                                          Expanded(
+                                              child: widget.postUpdateMini
+                                                          .level ==
+                                                      Level.ENTITY
+                                                  ? entity(
+                                                      context: context,
+                                                      postUpdateMini:
+                                                          widget.postUpdateMini,
+                                                      screenUser:
+                                                          widget.screenUser,
+                                                    )
+                                                  : widget.postUpdateMini
+                                                              .level ==
+                                                          Level.SEASON
+                                                      ? season(
+                                                          postUpdateMini: widget
+                                                              .postUpdateMini,
+                                                          context: context,
+                                                          screenUser:
+                                                              widget.screenUser,
+                                                        )
+                                                      : episode(
+                                                          postUpdateMini: widget
+                                                              .postUpdateMini,
+                                                          context: context,
+                                                          screenUser:
+                                                              widget.screenUser,
+                                                        )),
+                                          const SizedBox(
+                                            width: 4.0,
+                                          ),
+                                          IconButton(
+                                            padding: EdgeInsets.zero,
+                                            onPressed: () async {
+                                              if (widget.postUpdateMini.author!
+                                                      .id ==
+                                                  ScopedModel.of<ProfileModel>(
+                                                          context)
+                                                      .userMini
+                                                      .id) {
+                                                comment
+                                                    .showDeletePostBottomSheet(
+                                                  idPost:
+                                                      widget.postUpdateMini.id!,
+                                                  screenComment: true,
+                                                  screenUser: widget.screenUser,
+                                                  contextPage:
+                                                      widget.contextPage,
+                                                  contextCommentPage: context,
+                                                );
+                                                // ScaffoldMessenger.of(context)
+                                                //     .showSnackBar(
+                                                //   SnackBar(
+                                                //     backgroundColor:
+                                                //         ScopedModel.of<ThemeModel>(
+                                                //                 context)
+                                                //             .background,
+                                                //     content: Text('delete post?',
+                                                //         style: TextStyle(
+                                                //           color: ScopedModel.of<
+                                                //                   ThemeModel>(context)
+                                                //               .subtitle,
+                                                //         )),
+                                                //     action: SnackBarAction(
+                                                //         label: 'yes',
+                                                //         textColor: ScopedModel.of<
+                                                //                 ThemeModel>(context)
+                                                //             .emphasis,
+                                                //         onPressed: () {
+                                                //           comment.removePost(
+                                                //             context:
+                                                //                 widget.contextPage,
+                                                //             idPost: widget
+                                                //                 .postUpdateMini.id!,
+                                                //             contextPage:
+                                                //                 widget.contextPage,
+                                                //             screenUser:
+                                                //                 widget.screenUser,
+                                                //           );
+                                                //         }),
+                                                //   ),
+                                                // );
+                                              } else {
+                                                ScopedModel.of<ProfileModel>(
+                                                        widget.contextPage)
+                                                    .showOptionsPostBottomSheet(
+                                                  contextAncestor: context,
+                                                  idPost:
+                                                      widget.postUpdateMini.id!,
+                                                );
+                                              }
+                                            },
+                                            icon: Icon(
+                                              Icons.more_vert_sharp,
+                                              size: 21,
+                                              color: ScopedModel.of<ThemeModel>(
+                                                      context)
+                                                  .subtitle,
                                             ),
                                           ),
                                         ],
                                       ),
-                                const SizedBox(
-                                  height: 8.0,
-                                ),
-                                widget.postUpdateMini.level == Level.ENTITY
-                                    ? entityImage(
-                                        postUpdateMini: widget.postUpdateMini,
-                                        contextPage: widget.contextPage,
-                                        //screenComment: widget.screenComment,
-                                        screenUser: widget.screenUser)
-                                    : widget.postUpdateMini.level ==
-                                            Level.SEASON
-                                        ? seasonImage(
-                                            postUpdateMini:
-                                                widget.postUpdateMini,
-                                            contextPage: widget.contextPage,
-                                            //screenComment: widget.screenComment,
-                                            screenUser: widget.screenUser)
-                                        : episodeImage(
-                                            postUpdateMini:
-                                                widget.postUpdateMini,
-                                            contextPage: widget.contextPage,
-                                            //screenComment: widget.screenComment,
-                                            screenUser: widget.screenUser),
-                                /*
+                                      const SizedBox(
+                                        height: 8.0,
+                                      ),
+                                      widget.postUpdateMini.category != 6
+                                          ? Container()
+                                          : Container(
+                                              margin: EdgeInsets.zero,
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 4.0),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  Icon(
+                                                    Icons.star,
+                                                    size: 50,
+                                                    color: widget.postUpdateMini
+                                                                .evaluation >=
+                                                            1
+                                                        ? Colors.yellow[700]
+                                                        : theme.icon,
+                                                  ),
+                                                  Icon(
+                                                    Icons.star,
+                                                    size: 50,
+                                                    color: widget.postUpdateMini
+                                                                .evaluation >=
+                                                            2
+                                                        ? Colors.yellow[700]
+                                                        : theme.icon,
+                                                  ),
+                                                  Icon(
+                                                    Icons.star,
+                                                    size: 50,
+                                                    color: widget.postUpdateMini
+                                                                .evaluation >=
+                                                            3
+                                                        ? Colors.yellow[700]
+                                                        : theme.icon,
+                                                  ),
+                                                  Icon(
+                                                    Icons.star,
+                                                    size: 50,
+                                                    color: widget.postUpdateMini
+                                                                .evaluation >=
+                                                            4
+                                                        ? Colors.yellow[700]
+                                                        : theme.icon,
+                                                  ),
+                                                  Icon(
+                                                    Icons.star,
+                                                    size: 50,
+                                                    color: widget.postUpdateMini
+                                                                .evaluation >=
+                                                            5
+                                                        ? Colors.yellow[700]
+                                                        : theme.icon,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                      widget.postUpdateMini.category != 6
+                                          ? Container()
+                                          : const SizedBox(
+                                              height: 8.0,
+                                            ),
+                                      !widget.postUpdateMini.spoiler
+                                          ? widget.postUpdateMini.body != null
+                                              ? Align(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        vertical: 2.0,
+                                                        horizontal: 8.0),
+                                                    child: Text(
+                                                      widget
+                                                          .postUpdateMini.body!,
+                                                      textAlign: TextAlign.left,
+                                                      style: TextStyle(
+                                                        fontSize:
+                                                            theme.sizeText,
+                                                        letterSpacing: theme
+                                                            .letterSpacingText,
+                                                        color: theme.title,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )
+                                              : Container()
+                                          : ExpansionTile(
+                                              tilePadding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 2.0,
+                                                      horizontal: 8.0),
+                                              title: Text(
+                                                'Spoiler',
+                                                style: TextStyle(
+                                                  fontSize: theme.sizeText,
+                                                  letterSpacing:
+                                                      theme.letterSpacingText,
+                                                  color: theme.title,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      vertical: 2.0,
+                                                      horizontal: 8.0),
+                                                  child: Align(
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Text(
+                                                      widget
+                                                          .postUpdateMini.body!,
+                                                      textAlign: TextAlign.left,
+                                                      style: TextStyle(
+                                                        fontSize:
+                                                            theme.sizeText,
+                                                        letterSpacing: theme
+                                                            .letterSpacingText,
+                                                        color: theme.title,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                      const SizedBox(
+                                        height: 8.0,
+                                      ),
+                                      widget.postUpdateMini.level ==
+                                              Level.ENTITY
+                                          ? entityImage(
+                                              postUpdateMini:
+                                                  widget.postUpdateMini,
+                                              contextPage: widget.contextPage,
+                                              //screenComment: widget.screenComment,
+                                              screenUser: widget.screenUser)
+                                          : widget.postUpdateMini.level ==
+                                                  Level.SEASON
+                                              ? seasonImage(
+                                                  postUpdateMini:
+                                                      widget.postUpdateMini,
+                                                  contextPage:
+                                                      widget.contextPage,
+                                                  //screenComment: widget.screenComment,
+                                                  screenUser: widget.screenUser)
+                                              : episodeImage(
+                                                  postUpdateMini:
+                                                      widget.postUpdateMini,
+                                                  contextPage:
+                                                      widget.contextPage,
+                                                  //screenComment: widget.screenComment,
+                                                  screenUser:
+                                                      widget.screenUser),
+                                      /*
                                 widget.postUpdateMini.entity!.image != null
                                     ? GestureDetector(
                                         onTap: () {},
@@ -418,198 +454,222 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                         ),
                                       ),
                                       */
-                                const SizedBox(
-                                  height: 16.0,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    const SizedBox(
-                                      width: 8.0,
-                                    ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          comment.updateLikePost(
-                                            context: widget.contextPage,
-                                            idPost: widget.postUpdateMini.id!,
-                                          );
-                                        },
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            color: theme.button,
-                                            border: Border.all(
-                                              color: theme.button,
-                                            ),
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(16.0)),
+                                      const SizedBox(
+                                        height: 16.0,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          const SizedBox(
+                                            width: 8.0,
                                           ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Center(
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Icon(
-                                                    Icons.thumb_up_alt_outlined,
-                                                    size: theme.sizeTitle,
+                                          Expanded(
+                                            flex: 1,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                comment.updateLikePost(
+                                                  context: widget.contextPage,
+                                                  idPost:
+                                                      widget.postUpdateMini.id!,
+                                                );
+                                              },
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  color: theme.button,
+                                                  border: Border.all(
+                                                    color: theme.button,
                                                   ),
-                                                  const SizedBox(
-                                                    width: 6.0,
-                                                  ),
-                                                  Text(
-                                                    comment.likeQuantity
-                                                        .toString(),
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(
+                                                              16.0)),
+                                                ),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Center(
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Icon(
+                                                          Icons
+                                                              .thumb_up_alt_outlined,
+                                                          size: theme.sizeTitle,
+                                                          color: comment
+                                                                  .postUpdateMini
+                                                                  .liked
+                                                              ? theme.emphasis
+                                                              : theme.title,
+                                                        ),
+                                                        const SizedBox(
+                                                          width: 6.0,
+                                                        ),
+                                                        Text(
+                                                          comment.likeQuantity
+                                                              .toString(),
 
-                                                    // widget.screenComment
-                                                    //     ? post.likeQuantity == 0
-                                                    //         ? widget.postUpdateMini.likeQuantity
-                                                    //             .toString()
-                                                    //         : post.likeQuantity.toString()
-                                                    //     : widget.postUpdateMini.likeQuantity
-                                                    //         .toString(),
-                                                    style: TextStyle(
-                                                      fontSize: theme.sizeTitle,
-                                                      letterSpacing: theme
-                                                          .letterSpacingText,
-                                                      color: theme.title,
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                                          // widget.screenComment
+                                                          //     ? post.likeQuantity == 0
+                                                          //         ? widget.postUpdateMini.likeQuantity
+                                                          //             .toString()
+                                                          //         : post.likeQuantity.toString()
+                                                          //     : widget.postUpdateMini.likeQuantity
+                                                          //         .toString(),
+                                                          style: TextStyle(
+                                                            fontSize:
+                                                                theme.sizeTitle,
+                                                            letterSpacing: theme
+                                                                .letterSpacingText,
+                                                            color: comment
+                                                                    .postUpdateMini
+                                                                    .liked
+                                                                ? theme.emphasis
+                                                                : theme.title,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
-                                                ],
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 8.0,
-                                    ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: GestureDetector(
-                                        onTap: () {},
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            color: theme.button,
-                                            border: Border.all(
-                                              color: theme.button,
-                                            ),
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(16.0)),
+                                          const SizedBox(
+                                            width: 8.0,
                                           ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Center(
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Icon(
-                                                    Icons.messenger_outline,
-                                                    size: theme.sizeTitle,
+                                          Expanded(
+                                            flex: 1,
+                                            child: GestureDetector(
+                                              onTap: () {},
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  color: theme.button,
+                                                  border: Border.all(
+                                                    color: theme.button,
                                                   ),
-                                                  const SizedBox(
-                                                    width: 6.0,
-                                                  ),
-                                                  Text(
-                                                    comment.commentQuantity
-                                                        .toString(),
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(
+                                                              16.0)),
+                                                ),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Center(
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Icon(
+                                                          Icons
+                                                              .messenger_outline,
+                                                          size: theme.sizeTitle,
+                                                        ),
+                                                        const SizedBox(
+                                                          width: 6.0,
+                                                        ),
+                                                        Text(
+                                                          comment
+                                                              .commentQuantity
+                                                              .toString(),
 
-                                                    // widget.screenComment
-                                                    //     ? post.commentQuantity == 0
-                                                    //         ? widget
-                                                    //             .postUpdateMini.commentQuantity
-                                                    //             .toString()
-                                                    //         : post.commentQuantity.toString()
-                                                    //     : widget.postUpdateMini.commentQuantity
-                                                    //         .toString(),
-                                                    style: TextStyle(
-                                                      fontSize: theme.sizeTitle,
-                                                      letterSpacing: theme
-                                                          .letterSpacingText,
-                                                      color: theme.title,
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                                          // widget.screenComment
+                                                          //     ? post.commentQuantity == 0
+                                                          //         ? widget
+                                                          //             .postUpdateMini.commentQuantity
+                                                          //             .toString()
+                                                          //         : post.commentQuantity.toString()
+                                                          //     : widget.postUpdateMini.commentQuantity
+                                                          //         .toString(),
+                                                          style: TextStyle(
+                                                            fontSize:
+                                                                theme.sizeTitle,
+                                                            letterSpacing: theme
+                                                                .letterSpacingText,
+                                                            color: theme.title,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
-                                                ],
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
+                                          const SizedBox(
+                                            width: 8.0,
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      width: 8.0,
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 16.0,
-                                ),
-                              ],
+                                      const SizedBox(
+                                        height: 16.0,
+                                      ),
+                                    ],
+                                  ),
+                                  Divider(
+                                    color: theme.button,
+                                  ),
+                                  ListView.builder(
+                                      shrinkWrap: true,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      itemCount: comment.comments.length,
+                                      itemBuilder: (context, index) {
+                                        return CommentWidget(
+                                          commentMini: comment.comments[index],
+                                          idPost: widget.postUpdateMini.id!,
+                                          contextPage: widget.contextPage,
+                                          screenUser: widget.screenUser,
+                                        );
+                                      }),
+                                ],
+                              ),
                             ),
-                            Divider(
-                              color: theme.button,
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              color: ScopedModel.of<ThemeModel>(context).button,
+                              child: TextField(
+                                controller: comment.controller,
+                                minLines: 1,
+                                maxLines: 5,
+                                keyboardType: TextInputType.emailAddress,
+                                decoration: InputDecoration(
+                                  label: const Text("comment"),
+                                  //border: OutlineInputBorder(),
+                                  suffixIcon: IconButton(
+                                    onPressed: () {
+                                      if (comment.controller.text.isNotEmpty) {
+                                        comment.addCommentPost(
+                                          idPost: widget.postUpdateMini.id!,
+                                          context: widget.contextPage,
+                                          body: comment.controller.text,
+                                          screenUser: widget.screenUser,
+                                        );
+                                        FocusScopeNode currentFocus =
+                                            FocusScope.of(context);
+
+                                        if (!currentFocus.hasPrimaryFocus) {
+                                          currentFocus.unfocus();
+                                        }
+                                      }
+                                    },
+                                    icon: const Icon(Icons.send),
+                                  ),
+                                ),
+                              ),
                             ),
-                            ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: comment.comments.length,
-                                itemBuilder: (context, index) {
-                                  return CommentWidget(
-                                    commentMini: comment.comments[index],
-                                    idPost: widget.postUpdateMini.id!,
-                                    contextPage: widget.contextPage,
-                                    screenUser: widget.screenUser,
-                                  );
-                                }),
                           ],
                         ),
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        color: ScopedModel.of<ThemeModel>(context).button,
-                        child: TextField(
-                          controller: comment.controller,
-                          minLines: 1,
-                          maxLines: 5,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            label: const Text("comment"),
-                            //border: OutlineInputBorder(),
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                if (comment.controller.text.isNotEmpty) {
-                                  comment.addCommentPost(
-                                    idPost: widget.postUpdateMini.id!,
-                                    context: widget.contextPage,
-                                    body: comment.controller.text,
-                                    screenUser: widget.screenUser,
-                                  );
-                                  FocusScopeNode currentFocus =
-                                      FocusScope.of(context);
-
-                                  if (!currentFocus.hasPrimaryFocus) {
-                                    currentFocus.unfocus();
-                                  }
-                                }
-                              },
-                              icon: const Icon(Icons.send),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                   comment.load
                       ? Positioned(
                           bottom: 0.1,
@@ -658,10 +718,10 @@ class _CommentWidgetState extends State<CommentWidget> {
             const SizedBox(
               width: 8.0,
             ),
-            widget.commentMini.user.image != null
+            widget.commentMini.author.imageProfile != null
                 ? CircleAvatar(
                     backgroundImage:
-                        NetworkImage(widget.commentMini.user.image!),
+                        NetworkImage(widget.commentMini.author.imageProfile!),
                     radius: 30.0,
                   )
                 : CircleAvatar(
@@ -687,7 +747,8 @@ class _CommentWidgetState extends State<CommentWidget> {
                     borderRadius: const BorderRadius.all(Radius.circular(16.0)),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 16.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -698,10 +759,10 @@ class _CommentWidgetState extends State<CommentWidget> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => User(
-                                        userMini: widget.commentMini.user)));
+                                        userMini: widget.commentMini.author)));
                           },
                           child: Text(
-                            widget.commentMini.user.name,
+                            widget.commentMini.author.name,
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontSize: theme.sizeText,
@@ -712,7 +773,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                           ),
                         ),
                         const SizedBox(
-                          height: 8.0,
+                          height: 4.0,
                         ),
                         Text(
                           widget.commentMini.body,
@@ -756,7 +817,9 @@ class _CommentWidgetState extends State<CommentWidget> {
                           style: TextStyle(
                             fontSize: theme.sizeText,
                             letterSpacing: theme.letterSpacingText,
-                            color: ScopedModel.of<ThemeModel>(context).subtitle,
+                            color: widget.commentMini.liked
+                                ? theme.emphasis
+                                : theme.title,
                             fontWeight: FontWeight.normal,
                           ),
                         ),
@@ -773,13 +836,15 @@ class _CommentWidgetState extends State<CommentWidget> {
                           icon: Icon(
                             Icons.thumb_up_alt_outlined,
                             size: theme.sizeTitle,
-                            color: ScopedModel.of<ThemeModel>(context).subtitle,
+                            color: widget.commentMini.liked
+                                ? theme.emphasis
+                                : theme.title,
                           ),
                         ),
                         IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
-                            if (widget.commentMini.user.id ==
+                            if (widget.commentMini.author.id ==
                                 ScopedModel.of<ProfileModel>(context)
                                     .userMini
                                     .id) {
@@ -857,17 +922,18 @@ Widget entity(
       children: [
         GestureDetector(
           onTap: () {
-            if (postUpdateMini.user!.id !=
+            if (postUpdateMini.author!.id !=
                 ScopedModel.of<ProfileModel>(context).userMini.id) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => User(userMini: postUpdateMini.user!)),
+                    builder: (context) =>
+                        User(userMini: postUpdateMini.author!)),
               );
             }
           },
           child: Text(
-            postUpdateMini.user!.name,
+            postUpdateMini.author!.name,
             // +
             // " " +
             // LanguageModel().entitiesCategories[
@@ -954,17 +1020,18 @@ Widget season(
       children: [
         GestureDetector(
           onTap: () {
-            if (postUpdateMini.user!.id !=
+            if (postUpdateMini.author!.id !=
                 ScopedModel.of<ProfileModel>(context).userMini.id) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => User(userMini: postUpdateMini.user!)),
+                    builder: (context) =>
+                        User(userMini: postUpdateMini.author!)),
               );
             }
           },
           child: Text(
-            postUpdateMini.user!.name,
+            postUpdateMini.author!.name,
             // +
             // " " +
             // LanguageModel().entitiesCategories[
@@ -1080,17 +1147,18 @@ Widget episode(
       children: [
         GestureDetector(
           onTap: () {
-            if (postUpdateMini.user!.id !=
+            if (postUpdateMini.author!.id !=
                 ScopedModel.of<ProfileModel>(context).userMini.id) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => User(userMini: postUpdateMini.user!)),
+                    builder: (context) =>
+                        User(userMini: postUpdateMini.author!)),
               );
             }
           },
           child: Text(
-            postUpdateMini.user!.name,
+            postUpdateMini.author!.name,
             // +
             // " " +
             // LanguageModel().entitiesCategories[

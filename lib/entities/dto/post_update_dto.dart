@@ -9,7 +9,7 @@ class PostUpdateDTO {
   late String? release;
   late String? body;
   late int category;
-  late String idUser;
+  late String idAuthor;
   late String? idEntity;
   late String? idSeason;
   late String? idEpisode;
@@ -25,7 +25,7 @@ class PostUpdateDTO {
     map["release"] = release;
     map["body"] = body;
     map["category"] = category;
-    map["idUser"] = idUser;
+    map["idAuthor"] = idAuthor;
     map["idEntity"] = idEntity;
     map["idSeason"] = idSeason;
     map["idEpisode"] = idEpisode;
@@ -42,7 +42,7 @@ class PostUpdateDTO {
     required this.release,
     required this.body,
     required this.category,
-    required this.idUser,
+    required this.idAuthor,
     required this.idEntity,
     required this.idSeason,
     required this.idEpisode,

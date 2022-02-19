@@ -30,8 +30,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
                 'Update profile',
                 style: TextStyle(
                   color: theme.title,
-                  fontSize: 24.0,
-                  letterSpacing: 1.0,
+                  fontSize: theme.sizeAppBar,
+                  letterSpacing: theme.letterSpacingAppBar,
                   fontWeight: FontWeight.normal,
                 ),
               ),
@@ -48,9 +48,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
                             child: Text(
                               'Images',
                               style: TextStyle(
-                                fontSize: 19,
-                                letterSpacing: 1.5,
+                                fontSize: theme.sizeText,
+                                letterSpacing: theme.letterSpacingText,
                                 color: theme.title,
+                                fontWeight: FontWeight.normal,
                               ),
                             ),
                           ),
@@ -65,9 +66,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
                             child: Text(
                               'edit',
                               style: TextStyle(
-                                fontSize: 19,
-                                letterSpacing: 1.5,
-                                color: theme.subtitle,
+                                fontSize: theme.sizeText,
+                                letterSpacing: theme.letterSpacingText,
+                                color: theme.title,
+                                fontWeight: FontWeight.normal,
                               ),
                             ),
                           )
@@ -76,7 +78,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       const SizedBox(
                         height: 8,
                       ),
-                      profile.userMini.image != null
+                      profile.userMini.imageProfile != null
                           ? Stack(children: [
                               GestureDetector(
                                 onTap: () {},
@@ -86,8 +88,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                   decoration: BoxDecoration(
                                     color: theme.shadow,
                                     image: DecorationImage(
-                                      image:
-                                          NetworkImage(profile.userMini.image!),
+                                      image: NetworkImage(
+                                          profile.userMini.imageProfile!),
                                       fit: BoxFit.fitHeight,
                                     ),
                                   ),
@@ -103,12 +105,14 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                             name: null,
                                             email: null,
                                             password: null,
-                                            image: profile.userMini.image!,
+                                            imageProfile:
+                                                profile.userMini.imageProfile!,
                                             description: null,
                                             place: null,
                                             privacy: null,
                                             status: null,
-                                            invitation: null);
+                                            invitation: null,
+                                            release: DateTime.now().toString());
                                         profile.removeImageProfile(
                                             userDTO: userDTO, context: context);
                                       },
@@ -168,9 +172,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
                             child: Text(
                               'Name',
                               style: TextStyle(
-                                fontSize: 19,
-                                letterSpacing: 1.5,
+                                fontSize: theme.sizeText,
+                                letterSpacing: theme.letterSpacingText,
                                 color: theme.title,
+                                fontWeight: FontWeight.normal,
                               ),
                             ),
                           ),
@@ -187,9 +192,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
                             child: Text(
                               'edit',
                               style: TextStyle(
-                                fontSize: 19,
-                                letterSpacing: 1.5,
-                                color: theme.subtitle,
+                                fontSize: theme.sizeText,
+                                letterSpacing: theme.letterSpacingText,
+                                color: theme.title,
+                                fontWeight: FontWeight.normal,
                               ),
                             ),
                           )
@@ -201,8 +207,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       Text(
                         profile.userMini.name,
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: theme.sizeText,
+                          letterSpacing: theme.letterSpacingText,
                           color: theme.subtitle,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
                       // const SizedBox(
@@ -305,9 +313,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
                             child: Text(
                               'Description',
                               style: TextStyle(
-                                fontSize: 19,
-                                letterSpacing: 1.5,
+                                fontSize: theme.sizeText,
+                                letterSpacing: theme.letterSpacingText,
                                 color: theme.title,
+                                fontWeight: FontWeight.normal,
                               ),
                             ),
                           ),
@@ -325,9 +334,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
                             child: Text(
                               'edit',
                               style: TextStyle(
-                                fontSize: 19,
-                                letterSpacing: 1.5,
-                                color: theme.subtitle,
+                                fontSize: theme.sizeText,
+                                letterSpacing: theme.letterSpacingText,
+                                color: theme.title,
+                                fontWeight: FontWeight.normal,
                               ),
                             ),
                           ),
@@ -337,18 +347,32 @@ class _UpdateProfileState extends State<UpdateProfile> {
                         height: 8,
                       ),
                       profile.userMini.description != null
-                          ? Text(
-                              profile.userMini.description!,
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: theme.subtitle,
-                              ),
-                            )
+                          ? profile.userMini.description!.isEmpty
+                              ? Text(
+                                  profile.userMini.description!,
+                                  style: TextStyle(
+                                    fontSize: theme.sizeText,
+                                    letterSpacing: theme.letterSpacingText,
+                                    color: theme.subtitle,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                )
+                              : Text(
+                                  'empty',
+                                  style: TextStyle(
+                                    fontSize: theme.sizeText,
+                                    letterSpacing: theme.letterSpacingText,
+                                    color: theme.subtitle,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                )
                           : Text(
                               'empty',
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: theme.sizeText,
+                                letterSpacing: theme.letterSpacingText,
                                 color: theme.subtitle,
+                                fontWeight: FontWeight.normal,
                               ),
                             ),
                       // const SizedBox(
@@ -378,9 +402,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
                             child: Text(
                               'Email',
                               style: TextStyle(
-                                fontSize: 19,
-                                letterSpacing: 1.5,
+                                fontSize: theme.sizeText,
+                                letterSpacing: theme.letterSpacingText,
                                 color: theme.title,
+                                fontWeight: FontWeight.normal,
                               ),
                             ),
                           ),
@@ -397,9 +422,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
                             child: Text(
                               'edit',
                               style: TextStyle(
-                                fontSize: 19,
-                                letterSpacing: 1.5,
-                                color: theme.subtitle,
+                                fontSize: theme.sizeText,
+                                letterSpacing: theme.letterSpacingText,
+                                color: theme.title,
+                                fontWeight: FontWeight.normal,
                               ),
                             ),
                           )
@@ -411,8 +437,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       Text(
                         profile.userMini.email,
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: theme.sizeText,
+                          letterSpacing: theme.letterSpacingText,
                           color: theme.subtitle,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
                       // const SizedBox(
@@ -442,9 +470,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
                             child: Text(
                               'Password',
                               style: TextStyle(
-                                fontSize: 19,
-                                letterSpacing: 1.5,
+                                fontSize: theme.sizeText,
+                                letterSpacing: theme.letterSpacingText,
                                 color: theme.title,
+                                fontWeight: FontWeight.normal,
                               ),
                             ),
                           ),
@@ -460,9 +489,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
                             child: Text(
                               'edit',
                               style: TextStyle(
-                                fontSize: 19,
-                                letterSpacing: 1.5,
-                                color: theme.subtitle,
+                                fontSize: theme.sizeText,
+                                letterSpacing: theme.letterSpacingText,
+                                color: theme.title,
+                                fontWeight: FontWeight.normal,
                               ),
                             ),
                           )
@@ -474,8 +504,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       Text(
                         '******************',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: theme.sizeText,
+                          letterSpacing: theme.letterSpacingText,
                           color: theme.subtitle,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
                       // const SizedBox(

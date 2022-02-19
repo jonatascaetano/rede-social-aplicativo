@@ -44,7 +44,8 @@ class CommentModel extends Model {
       {required BuildContext context, required String idPost}) async {
     load = true;
     notifyListeners();
-    var url = Uri.parse(base + 'posts/get/post/$idPost');
+    String idUser = await getId();
+    var url = Uri.parse(base + 'posts/get/post/$idPost/user/$idUser');
     var response = await http.get(url, headers: {
       "Accept": "application/json; charset=utf-8",
       "content-type": "application/json; charset=utf-8"
@@ -59,6 +60,8 @@ class CommentModel extends Model {
         commentQuantity = postUpdateMini.commentQuantity;
         load = false;
         notifyListeners();
+        postUpdateMiniIsNull = false;
+        notifyListeners();
         break;
       default:
         ScaffoldMessenger.of(context).showSnackBar(
@@ -72,7 +75,8 @@ class CommentModel extends Model {
       {required String idPost, required BuildContext context}) async {
     load = true;
     notifyListeners();
-    var url = Uri.parse(base + 'posts/get/post/$idPost/comments');
+    String idUser = await getId();
+    var url = Uri.parse(base + 'posts/get/post/$idPost/comments/user/$idUser');
     var response = await http.get(url, headers: {
       "Accept": "application/json; charset=utf-8",
       "content-type": "application/json; charset=utf-8"
@@ -141,10 +145,10 @@ class CommentModel extends Model {
     String id = await getId();
     CommentDTO commentDTO = CommentDTO(
       idComment: null,
-      idUser: id,
       idPost: idPost,
       body: body,
       release: DateTime.now().toString(),
+      idAuthor: id,
     );
     var url = Uri.parse(base + 'comments/post/comment');
     var response = await http.post(
@@ -188,7 +192,7 @@ class CommentModel extends Model {
     String id = await getId();
     CommentDTO commentDTO = CommentDTO(
         idComment: idComment,
-        idUser: id,
+        idAuthor: id,
         idPost: idPost,
         body: null,
         release: DateTime.now().toString());

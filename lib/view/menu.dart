@@ -30,8 +30,8 @@ class _MenuState extends State<Menu> {
                   'Menu',
                   style: TextStyle(
                     color: theme.title,
-                    fontSize: 24.0,
-                    letterSpacing: 1.0,
+                    fontSize: theme.sizeAppBar,
+                    letterSpacing: theme.letterSpacingAppBar,
                     fontWeight: FontWeight.normal,
                   ),
                 ),
@@ -64,7 +64,7 @@ class _MenuState extends State<Menu> {
                                           ? ScopedModel.of<ProfileModel>(
                                                           context)
                                                       .userMini
-                                                      .image !=
+                                                      .imageProfile !=
                                                   null
                                               ? CircleAvatar(
                                                   backgroundImage: NetworkImage(
@@ -72,7 +72,7 @@ class _MenuState extends State<Menu> {
                                                                   ProfileModel>(
                                                               context)
                                                           .userMini
-                                                          .image!),
+                                                          .imageProfile!),
                                                   radius: 30.0,
                                                 )
                                               : CircleAvatar(
@@ -107,8 +107,9 @@ class _MenuState extends State<Menu> {
                                                         .name,
                                                     maxLines: 2,
                                                     style: TextStyle(
-                                                      fontSize: 18,
-                                                      letterSpacing: 1.0,
+                                                      fontSize: theme.sizeTitle,
+                                                      letterSpacing: theme
+                                                          .letterSpacingTitle,
                                                       color: theme.title,
                                                       fontWeight:
                                                           FontWeight.normal,
@@ -117,8 +118,9 @@ class _MenuState extends State<Menu> {
                                                 : Text(
                                                     'Profile',
                                                     style: TextStyle(
-                                                      fontSize: 17,
-                                                      letterSpacing: 1.0,
+                                                      fontSize: theme.sizeTitle,
+                                                      letterSpacing: theme
+                                                          .letterSpacingTitle,
                                                       color: theme.title,
                                                       fontWeight:
                                                           FontWeight.normal,
@@ -130,8 +132,9 @@ class _MenuState extends State<Menu> {
                                             Text(
                                               "View your profile",
                                               style: TextStyle(
-                                                fontSize: 16,
-                                                letterSpacing: 1.0,
+                                                fontSize: theme.sizeText,
+                                                letterSpacing:
+                                                    theme.letterSpacingText,
                                                 color: theme.subtitle,
                                                 fontWeight: FontWeight.normal,
                                               ),
@@ -178,8 +181,8 @@ class _MenuState extends State<Menu> {
                                   child: Text(
                                     "Invitation",
                                     style: TextStyle(
-                                      fontSize: 16,
-                                      letterSpacing: 1.0,
+                                      fontSize: theme.sizeText,
+                                      letterSpacing: theme.letterSpacingText,
                                       color: theme.title,
                                       fontWeight: FontWeight.normal,
                                     ),
@@ -188,8 +191,8 @@ class _MenuState extends State<Menu> {
                                 Text(
                                   menu.invitation,
                                   style: TextStyle(
-                                    fontSize: 16,
-                                    letterSpacing: 1.0,
+                                    fontSize: theme.sizeText,
+                                    letterSpacing: theme.letterSpacingText,
                                     color: theme.title,
                                     fontWeight: FontWeight.normal,
                                   ),
@@ -238,8 +241,8 @@ class _MenuState extends State<Menu> {
                                   child: Text(
                                     "Language",
                                     style: TextStyle(
-                                      fontSize: 16,
-                                      letterSpacing: 1.0,
+                                      fontSize: theme.sizeText,
+                                      letterSpacing: theme.letterSpacingText,
                                       color: theme.title,
                                       fontWeight: FontWeight.normal,
                                     ),
@@ -248,8 +251,8 @@ class _MenuState extends State<Menu> {
                                 Text(
                                   LanguageModel().language,
                                   style: TextStyle(
-                                    fontSize: 16,
-                                    letterSpacing: 1.0,
+                                    fontSize: theme.sizeText,
+                                    letterSpacing: theme.letterSpacingText,
                                     color: theme.title,
                                     fontWeight: FontWeight.normal,
                                   ),
@@ -275,8 +278,8 @@ class _MenuState extends State<Menu> {
                                 child: Text(
                                   "Dark mode",
                                   style: TextStyle(
-                                    fontSize: 16,
-                                    letterSpacing: 1.0,
+                                    fontSize: theme.sizeText,
+                                    letterSpacing: theme.letterSpacingText,
                                     color: theme.title,
                                     fontWeight: FontWeight.normal,
                                   ),
@@ -310,8 +313,8 @@ class _MenuState extends State<Menu> {
                                 Text(
                                   "Register new",
                                   style: TextStyle(
-                                    fontSize: 16,
-                                    letterSpacing: 1.0,
+                                    fontSize: theme.sizeText,
+                                    letterSpacing: theme.letterSpacingText,
                                     color: theme.title,
                                     fontWeight: FontWeight.normal,
                                   ),
@@ -351,8 +354,8 @@ class _MenuState extends State<Menu> {
                                 Text(
                                   "Exit",
                                   style: TextStyle(
-                                    fontSize: 16,
-                                    letterSpacing: 1.0,
+                                    fontSize: theme.sizeText,
+                                    letterSpacing: theme.letterSpacingText,
                                     color: theme.title,
                                     fontWeight: FontWeight.normal,
                                   ),

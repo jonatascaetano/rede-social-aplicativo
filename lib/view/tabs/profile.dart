@@ -65,8 +65,8 @@ class _ProfileState extends State<Profile> {
               'Profile',
               style: TextStyle(
                 color: theme.title,
-                fontSize: 24.0,
-                letterSpacing: 1.0,
+                fontSize: theme.sizeAppBar,
+                letterSpacing: theme.letterSpacingAppBar,
                 fontWeight: FontWeight.normal,
               ),
             ),
@@ -78,7 +78,7 @@ class _ProfileState extends State<Profile> {
                   : ListView(
                       shrinkWrap: true,
                       children: [
-                        profile.userMini.image != null
+                        profile.userMini.imageProfile != null
                             ? Container(
                                 height:
                                     (MediaQuery.of(context).size.width / 16) *
@@ -87,8 +87,8 @@ class _ProfileState extends State<Profile> {
                                 decoration: BoxDecoration(
                                   color: theme.shadow,
                                   image: DecorationImage(
-                                    image:
-                                        NetworkImage(profile.userMini.image!),
+                                    image: NetworkImage(
+                                        profile.userMini.imageProfile!),
                                     fit: BoxFit.fitHeight,
                                   ),
                                 ),
@@ -150,9 +150,10 @@ class _ProfileState extends State<Profile> {
                                       Text(
                                         profile.userMini.name,
                                         style: TextStyle(
-                                          fontSize: 21,
+                                          fontSize: theme.sizeTitle,
+                                          letterSpacing:
+                                              theme.letterSpacingTitle,
                                           color: theme.title,
-                                          letterSpacing: 1.0,
                                           fontWeight: FontWeight.normal,
                                         ),
                                       ),
@@ -172,6 +173,23 @@ class _ProfileState extends State<Profile> {
                             ],
                           ),
                         ),
+                        profile.userMini.description != null &&
+                                profile.userMini.description!.isNotEmpty
+                            ? Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  profile.userMini.description!,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: theme.sizeText,
+                                    letterSpacing: theme.letterSpacingText,
+                                    color: theme.subtitle,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                              )
+                            : Container(),
+
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: ElevatedButton(
@@ -199,9 +217,10 @@ class _ProfileState extends State<Profile> {
                                 Text(
                                   'edit profile',
                                   style: TextStyle(
-                                    fontSize: 16,
-                                    letterSpacing: 1.0,
-                                    color: theme.title,
+                                    fontSize: theme.sizeButton,
+                                    letterSpacing: theme.letterSpacingButton,
+                                    color: theme.buttonText,
+                                    fontWeight: FontWeight.normal,
                                   ),
                                 ),
                               ],
@@ -232,10 +251,11 @@ class _ProfileState extends State<Profile> {
                                         Text(
                                           'Followers',
                                           style: TextStyle(
-                                            fontSize: 16,
-                                            letterSpacing: 1.0,
-                                            fontWeight: FontWeight.normal,
+                                            fontSize: theme.sizeText,
+                                            letterSpacing:
+                                                theme.letterSpacingText,
                                             color: theme.subtitle,
+                                            fontWeight: FontWeight.normal,
                                           ),
                                         ),
                                         const SizedBox(
@@ -245,10 +265,11 @@ class _ProfileState extends State<Profile> {
                                           profile.userMini.quantityFollowers
                                               .toString(),
                                           style: TextStyle(
-                                            fontSize: 16,
-                                            letterSpacing: 1.0,
-                                            fontWeight: FontWeight.normal,
+                                            fontSize: theme.sizeText,
+                                            letterSpacing:
+                                                theme.letterSpacingText,
                                             color: theme.subtitle,
+                                            fontWeight: FontWeight.normal,
                                           ),
                                         ),
                                       ],
@@ -273,10 +294,11 @@ class _ProfileState extends State<Profile> {
                                           Text(
                                             'Following',
                                             style: TextStyle(
-                                              letterSpacing: 1.0,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.normal,
+                                              fontSize: theme.sizeText,
+                                              letterSpacing:
+                                                  theme.letterSpacingText,
                                               color: theme.subtitle,
+                                              fontWeight: FontWeight.normal,
                                             ),
                                           ),
                                           const SizedBox(
@@ -286,10 +308,11 @@ class _ProfileState extends State<Profile> {
                                             profile.userMini.quantityFollowing
                                                 .toString(),
                                             style: TextStyle(
-                                              fontSize: 16,
-                                              letterSpacing: 1.0,
-                                              fontWeight: FontWeight.normal,
+                                              fontSize: theme.sizeText,
+                                              letterSpacing:
+                                                  theme.letterSpacingText,
                                               color: theme.subtitle,
+                                              fontWeight: FontWeight.normal,
                                             ),
                                           ),
                                         ],
@@ -324,22 +347,6 @@ class _ProfileState extends State<Profile> {
                         //       )
                         //     : Container(),
 
-                        profile.userMini.description != null &&
-                                profile.userMini.description!.isNotEmpty
-                            ? Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  profile.userMini.description!,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    letterSpacing: 1.0,
-                                    color: theme.title,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                ),
-                              )
-                            : Container(),
-
                         profile.workers.isNotEmpty
                             ? Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -349,8 +356,9 @@ class _ProfileState extends State<Profile> {
                                       child: Text(
                                         'View all works',
                                         style: TextStyle(
-                                          fontSize: 16,
-                                          letterSpacing: 1.0,
+                                          fontSize: theme.sizeText,
+                                          letterSpacing:
+                                              theme.letterSpacingText,
                                           color: theme.subtitle,
                                           fontWeight: FontWeight.normal,
                                         ),
@@ -456,7 +464,7 @@ class _ProfileState extends State<Profile> {
                             },
                             itemCount: profile.myPosts.length,
                             itemBuilder: (context, index) {
-                              if (index % 4 == 0) {
+                              if (index % 4 == 0 && index != 0) {
                                 return Column(
                                   children: [
                                     Container(

@@ -38,8 +38,8 @@ class _NewSeasonEntityState extends State<NewSeasonEntity> {
                     "New season",
                     style: TextStyle(
                       color: theme.title,
-                      fontSize: 24.0,
-                      letterSpacing: 1.0,
+                      fontSize: theme.sizeAppBar,
+                      letterSpacing: theme.letterSpacingAppBar,
                       fontWeight: FontWeight.normal,
                     ),
                   ),
@@ -87,24 +87,24 @@ class _NewSeasonEntityState extends State<NewSeasonEntity> {
                           const SizedBox(
                             height: 8.0,
                           ),
-                          TextFormField(
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'enter season number';
-                              }
-                            },
-                            controller: numberSeason,
-                            keyboardType: TextInputType.number,
-                            minLines: 1,
-                            maxLines: 10,
-                            decoration: const InputDecoration(
-                              label: Text("season number"),
-                              border: OutlineInputBorder(),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 8.0,
-                          ),
+                          // TextFormField(
+                          //   validator: (value) {
+                          //     if (value!.isEmpty) {
+                          //       return 'enter season number';
+                          //     }
+                          //   },
+                          //   controller: numberSeason,
+                          //   keyboardType: TextInputType.number,
+                          //   minLines: 1,
+                          //   maxLines: 10,
+                          //   decoration: const InputDecoration(
+                          //     label: Text("season number"),
+                          //     border: OutlineInputBorder(),
+                          //   ),
+                          // ),
+                          // const SizedBox(
+                          //   height: 8.0,
+                          // ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               primary: theme.buttonMain,
@@ -115,7 +115,7 @@ class _NewSeasonEntityState extends State<NewSeasonEntity> {
                                 SeasonDTO seasonDTO = SeasonDTO(
                                   name: name.text,
                                   description: description.text,
-                                  numberSeason: int.parse(numberSeason.text),
+                                  //numberSeason: int.parse(numberSeason.text),
                                 );
                                 season.createSeason(
                                   seasonDTO: seasonDTO,
@@ -127,9 +127,9 @@ class _NewSeasonEntityState extends State<NewSeasonEntity> {
                             child: Text(
                               "Confirm",
                               style: TextStyle(
-                                fontSize: 16,
-                                letterSpacing: 1.0,
                                 color: theme.buttonMainText,
+                                fontSize: theme.sizeButton,
+                                letterSpacing: theme.letterSpacingButton,
                                 fontWeight: FontWeight.normal,
                               ),
                             ),

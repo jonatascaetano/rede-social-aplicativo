@@ -93,8 +93,8 @@ class _LoginState extends State<Login> {
                           "Enter",
                           style: TextStyle(
                             color: theme.buttonMainText,
-                            fontSize: 16,
-                            letterSpacing: 1.0,
+                            fontSize: theme.sizeButton,
+                            letterSpacing: theme.letterSpacingButton,
                             fontWeight: FontWeight.normal,
                           ),
                         ),
@@ -114,8 +114,8 @@ class _LoginState extends State<Login> {
                           "New account",
                           style: TextStyle(
                             color: theme.buttonText,
-                            fontSize: 16,
-                            letterSpacing: 1.0,
+                            fontSize: theme.sizeButton,
+                            letterSpacing: theme.letterSpacingButton,
                             fontWeight: FontWeight.normal,
                           ),
                         ),

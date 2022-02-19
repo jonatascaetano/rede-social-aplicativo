@@ -30,8 +30,8 @@ class _PasswordUpdateState extends State<PasswordUpdate> {
                 "Update password",
                 style: TextStyle(
                   color: theme.title,
-                  fontSize: 24.0,
-                  letterSpacing: 1.0,
+                  fontSize: theme.sizeAppBar,
+                  letterSpacing: theme.letterSpacingAppBar,
                   fontWeight: FontWeight.normal,
                 ),
               ),
@@ -93,12 +93,13 @@ class _PasswordUpdateState extends State<PasswordUpdate> {
                               name: null,
                               email: null,
                               password: controller2.text,
-                              image: null,
+                              imageProfile: null,
                               description: null,
                               place: null,
                               privacy: null,
                               status: null,
                               invitation: null,
+                              release: '',
                             );
                             profile.updatePassword(
                                 userDTO: userDTO, context: context);
@@ -111,9 +112,10 @@ class _PasswordUpdateState extends State<PasswordUpdate> {
                         child: Text(
                           "Confirm",
                           style: TextStyle(
-                            fontSize: 16,
-                            letterSpacing: 2.0,
+                            fontSize: theme.sizeButton,
+                            letterSpacing: theme.letterSpacingButton,
                             color: theme.buttonMainText,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                       ),

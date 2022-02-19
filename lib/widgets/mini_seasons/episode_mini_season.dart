@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:social_network_application/converts/convert_to_enum.dart';
 import 'package:social_network_application/entities/mini_dto/episode_mini.dart';
 import 'package:social_network_application/scoped_model/episode_mini_season_model.dart';
-import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/objects/episode.dart';
 
@@ -84,23 +82,38 @@ class _EpisodeMiniSeasonState extends State<EpisodeMiniSeason> {
                             maxLines: 1,
                             softWrap: false,
                             style: TextStyle(
-                              fontSize: 16,
-                              letterSpacing: 1.0,
                               color: theme.title,
+                              fontSize: theme.sizeTitle,
+                              letterSpacing: theme.letterSpacingTitle,
+                              fontWeight: FontWeight.normal,
                             ),
                           ),
                           const SizedBox(
                             height: 4.0,
                           ),
                           episodeMiniSeason.entitySaveMiniIsNull
-                              ? Container()
-                              : Text(
-                                  LanguageModel().entitiesCategories[
-                                      ConvertToEnum.convertTypeEntityToValue(
-                                          typeEntity: widget.episodeMini.season
-                                              .entity.typeEntity)][1],
-                                  textAlign: TextAlign.center,
-                                ),
+                              ? Center(
+                                  child: Icon(
+                                    Icons.highlight_remove_sharp,
+                                    color: theme.detail,
+                                  ),
+                                )
+                              : Center(
+                                  child: Icon(
+                                    Icons.check_circle_outline,
+                                    color: theme.emphasis,
+                                  ),
+                                )
+                          // Text(
+                          //     LanguageModel().entitiesCategories[
+                          //         ConvertToEnum.convertTypeEntityToValue(
+                          //             typeEntity: widget.episodeMini.season
+                          //                 .entity.typeEntity)][1],
+                          //     textAlign: TextAlign.center,
+                          //     style: TextStyle(
+                          //       color: theme.emphasis,
+                          //     ),
+                          //   ),
 
                           // Text(
                           //   'Episodes ' + widget.episodeMini.episodeQuantity.toString(),
@@ -132,9 +145,10 @@ class _EpisodeMiniSeasonState extends State<EpisodeMiniSeason> {
                       child: Text(
                         "view",
                         style: TextStyle(
-                          fontSize: 16,
-                          letterSpacing: 1.0,
                           color: theme.buttonMainText,
+                          fontSize: theme.sizeButton,
+                          letterSpacing: theme.letterSpacingButton,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
                     )

@@ -4,6 +4,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/converts/convert_to_enum.dart';
 import 'package:social_network_application/entities/dto/entity_save_dto.dart';
 import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
+import 'package:social_network_application/enuns/type_entity.dart';
 import 'package:social_network_application/scoped_model/entity_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
@@ -93,8 +94,8 @@ class _EntityState extends State<Entity> {
                       entity.entityMini.name,
                       style: TextStyle(
                         color: theme.title,
-                        fontSize: 24.0,
-                        letterSpacing: 1.0,
+                        fontSize: theme.sizeAppBar,
+                        letterSpacing: theme.letterSpacingAppBar,
                         fontWeight: FontWeight.normal,
                       ),
                     )
@@ -147,9 +148,9 @@ class _EntityState extends State<Entity> {
                               textAlign: TextAlign.center,
                               maxLines: 2,
                               style: TextStyle(
-                                fontSize: 21,
+                                fontSize: theme.sizeTitle,
+                                letterSpacing: theme.letterSpacingTitle,
                                 color: theme.title,
-                                letterSpacing: 1.0,
                                 fontWeight: FontWeight.normal,
                               ),
                             ),
@@ -165,16 +166,17 @@ class _EntityState extends State<Entity> {
                                   .toString(),
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: 16,
-                                letterSpacing: 1.0,
+                                fontSize: theme.sizeText,
+                                letterSpacing: theme.letterSpacingText,
                                 color: theme.subtitle,
                                 fontWeight: FontWeight.normal,
                               ),
                             ),
 
-                            const SizedBox(
-                              height: 16.0,
-                            ),
+                            // const SizedBox(
+                            //   height: 16.0,
+                            // ),
+
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: ElevatedButton(
@@ -229,9 +231,11 @@ class _EntityState extends State<Entity> {
                                               .toString()
                                               .toLowerCase(),
                                       style: TextStyle(
-                                        fontSize: 16,
-                                        letterSpacing: 1.0,
+                                        fontSize: theme.sizeButton,
+                                        letterSpacing:
+                                            theme.letterSpacingButton,
                                         color: theme.buttonText,
+                                        fontWeight: FontWeight.normal,
                                       ),
                                     ),
                                   ],
@@ -295,8 +299,8 @@ class _EntityState extends State<Entity> {
                                   .toStringAsPrecision(2),
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: 28,
-                                letterSpacing: 1.0,
+                                fontSize: theme.sizeAppBar,
+                                letterSpacing: theme.letterSpacingAppBar,
                                 color: theme.emphasis,
                                 fontWeight: FontWeight.normal,
                               ),
@@ -311,9 +315,9 @@ class _EntityState extends State<Entity> {
                                   ' evaluations)',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: 16,
-                                letterSpacing: 1.0,
-                                color: theme.title,
+                                fontSize: theme.sizeText,
+                                letterSpacing: theme.letterSpacingText,
+                                color: theme.subtitle,
                                 fontWeight: FontWeight.normal,
                               ),
                             ),
@@ -413,27 +417,37 @@ class _EntityState extends State<Entity> {
                                                 ? Text(
                                                     'update review',
                                                     style: TextStyle(
-                                                      fontSize: 16,
-                                                      letterSpacing: 1.0,
+                                                      fontSize:
+                                                          theme.sizeButton,
+                                                      letterSpacing: theme
+                                                          .letterSpacingButton,
                                                       color:
                                                           theme.buttonMainText,
+                                                      fontWeight:
+                                                          FontWeight.normal,
                                                     ),
                                                   )
                                                 : Text(
                                                     'add review',
                                                     style: TextStyle(
-                                                      fontSize: 16,
-                                                      letterSpacing: 1.0,
+                                                      fontSize:
+                                                          theme.sizeButton,
+                                                      letterSpacing: theme
+                                                          .letterSpacingButton,
                                                       color:
                                                           theme.buttonMainText,
+                                                      fontWeight:
+                                                          FontWeight.normal,
                                                     ),
                                                   )
                                             : Text(
                                                 'add review',
                                                 style: TextStyle(
-                                                  fontSize: 16,
-                                                  letterSpacing: 1.0,
+                                                  fontSize: theme.sizeButton,
+                                                  letterSpacing:
+                                                      theme.letterSpacingButton,
                                                   color: theme.buttonMainText,
+                                                  fontWeight: FontWeight.normal,
                                                 ),
                                               ),
                                       ),
@@ -483,15 +497,6 @@ class _EntityState extends State<Entity> {
                                       //*goal update
                                     ],
                                   ),
-                            const SizedBox(
-                              height: 16.0,
-                            ),
-
-                            getBanner(AdmobBannerSize.MEDIUM_RECTANGLE),
-
-                            const SizedBox(
-                              height: 16.0,
-                            ),
 
                             entity.entityMini.description != null
                                 ? ExpansionTile(
@@ -503,11 +508,167 @@ class _EntityState extends State<Entity> {
                                       entity.entityMini.description!,
                                       maxLines: entity.maxLine,
                                       style: TextStyle(
-                                        fontSize: 16,
-                                        letterSpacing: 1.0,
+                                        fontSize: theme.sizeText,
+                                        letterSpacing: theme.letterSpacingText,
                                         color: theme.title,
+                                        fontWeight: FontWeight.normal,
                                       ),
                                     ),
+                                  )
+                                : Container(),
+                            const SizedBox(
+                              height: 16.0,
+                            ),
+
+                            getBanner(AdmobBannerSize.MEDIUM_RECTANGLE),
+
+                            const SizedBox(
+                              height: 16.0,
+                            ),
+
+                            entity.entityMini.typeEntity == TypeEntity.SERIES ||
+                                    entity.entityMini.typeEntity ==
+                                        TypeEntity.ANIMES ||
+                                    entity.entityMini.typeEntity ==
+                                        TypeEntity.NOVELS ||
+                                    entity.entityMini.typeEntity ==
+                                        TypeEntity.TV_SHOWS ||
+                                    entity.entityMini.typeEntity ==
+                                        TypeEntity.WEB_PROGRAMS ||
+                                    entity.entityMini.typeEntity ==
+                                        TypeEntity.PLACES
+                                ? Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            'View all seasons',
+                                            style: TextStyle(
+                                              fontSize: theme.sizeText,
+                                              letterSpacing:
+                                                  theme.letterSpacingText,
+                                              color: theme.title,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                          ),
+                                        ),
+                                        IconButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const AllSeasonsEntity(),
+                                              ),
+                                            );
+                                          },
+                                          icon: Icon(
+                                            Icons.arrow_forward,
+                                            color: theme.subtitle,
+                                            size: 24.0,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                : Container(),
+                            entity.entityMini.typeEntity == TypeEntity.SERIES ||
+                                    entity.entityMini.typeEntity ==
+                                        TypeEntity.ANIMES ||
+                                    entity.entityMini.typeEntity ==
+                                        TypeEntity.NOVELS ||
+                                    entity.entityMini.typeEntity ==
+                                        TypeEntity.TV_SHOWS ||
+                                    entity.entityMini.typeEntity ==
+                                        TypeEntity.WEB_PROGRAMS ||
+                                    entity.entityMini.typeEntity ==
+                                        TypeEntity.PLACES
+                                ? SizedBox(
+                                    height: 290,
+                                    child: ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: entity.seasons.length + 1,
+                                        itemBuilder: (context, index) {
+                                          if (index == entity.seasons.length) {
+                                            return Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              NewSeasonEntity(
+                                                                  entityMini: entity
+                                                                      .entityMini,
+                                                                  context:
+                                                                      context)));
+                                                  // if (ScopedModel.of<ProfileModel>(
+                                                  //         context)
+                                                  //     .userMini
+                                                  //     .checked) {
+                                                  //   Navigator.push(
+                                                  //     context,
+                                                  //     MaterialPageRoute(
+                                                  //         builder: (context) =>
+                                                  //             NewSeasonEntity(
+                                                  //                 entityMini: entity
+                                                  //                     .entityMini,
+                                                  //                 context: context)),
+                                                  //   );
+                                                  // } else {
+                                                  //   ScaffoldMessenger.of(context)
+                                                  //       .showSnackBar(const SnackBar(
+                                                  //           content: Text(
+                                                  //               'only released to verified users')));
+                                                  // }
+                                                },
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    color: theme.shadow,
+                                                    border: Border.all(
+                                                      color: theme.shadow,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  width: 200,
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Icon(
+                                                          Icons
+                                                              .add_box_outlined,
+                                                          color:
+                                                              theme.emphasis),
+                                                      Text(
+                                                        'add season',
+                                                        style: TextStyle(
+                                                          fontSize:
+                                                              theme.sizeText,
+                                                          letterSpacing: theme
+                                                              .letterSpacingText,
+                                                          color: theme.title,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          } else {
+                                            return SeasonMiniEntity(
+                                              seasonMini: entity.seasons[index],
+                                            );
+                                          }
+                                        }),
                                   )
                                 : Container(),
 
@@ -517,121 +678,12 @@ class _EntityState extends State<Entity> {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      'View all seasons',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        letterSpacing: 1.0,
-                                        color: theme.subtitle,
-                                      ),
-                                    ),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const AllSeasonsEntity(),
-                                        ),
-                                      );
-                                    },
-                                    icon: Icon(
-                                      Icons.arrow_forward,
-                                      color: theme.subtitle,
-                                      size: 24.0,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-
-                            SizedBox(
-                              height: 280,
-                              child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: entity.seasons.length + 1,
-                                  itemBuilder: (context, index) {
-                                    if (index == entity.seasons.length) {
-                                      return Padding(
-                                        padding: const EdgeInsets.all(4.0),
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        NewSeasonEntity(
-                                                            entityMini: entity
-                                                                .entityMini,
-                                                            context: context)));
-                                            // if (ScopedModel.of<ProfileModel>(
-                                            //         context)
-                                            //     .userMini
-                                            //     .checked) {
-                                            //   Navigator.push(
-                                            //     context,
-                                            //     MaterialPageRoute(
-                                            //         builder: (context) =>
-                                            //             NewSeasonEntity(
-                                            //                 entityMini: entity
-                                            //                     .entityMini,
-                                            //                 context: context)),
-                                            //   );
-                                            // } else {
-                                            //   ScaffoldMessenger.of(context)
-                                            //       .showSnackBar(const SnackBar(
-                                            //           content: Text(
-                                            //               'only released to verified users')));
-                                            // }
-                                          },
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              color: theme.shadow,
-                                              border: Border.all(
-                                                color: theme.shadow,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                            width: 200,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(Icons.add_box_outlined,
-                                                    color: theme.emphasis),
-                                                Text(
-                                                  'add season',
-                                                  style: TextStyle(
-                                                    fontSize: 16,
-                                                    letterSpacing: 1.0,
-                                                    color: theme.title,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    } else {
-                                      return SeasonMiniEntity(
-                                        seasonMini: entity.seasons[index],
-                                      );
-                                    }
-                                  }),
-                            ),
-
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
                                       'View all cast',
                                       style: TextStyle(
-                                        fontSize: 16,
-                                        letterSpacing: 1.0,
-                                        color: theme.subtitle,
+                                        fontSize: theme.sizeText,
+                                        letterSpacing: theme.letterSpacingText,
+                                        color: theme.title,
+                                        fontWeight: FontWeight.normal,
                                       ),
                                     ),
                                   ),
@@ -719,9 +771,12 @@ class _EntityState extends State<Entity> {
                                                   Text(
                                                     'add worker',
                                                     style: TextStyle(
-                                                      fontSize: 16,
-                                                      letterSpacing: 1.0,
+                                                      fontSize: theme.sizeText,
+                                                      letterSpacing: theme
+                                                          .letterSpacingText,
                                                       color: theme.title,
+                                                      fontWeight:
+                                                          FontWeight.normal,
                                                     ),
                                                   ),
                                                 ],

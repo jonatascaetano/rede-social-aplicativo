@@ -82,8 +82,8 @@ class _EpisodeState extends State<Episode> {
                       episode.episodeMini.name,
                       style: TextStyle(
                         color: theme.title,
-                        fontSize: 24.0,
-                        letterSpacing: 1.0,
+                        fontSize: theme.sizeAppBar,
+                        letterSpacing: theme.letterSpacingAppBar,
                         fontWeight: FontWeight.normal,
                       ),
                     )
@@ -136,9 +136,9 @@ class _EpisodeState extends State<Episode> {
                               textAlign: TextAlign.center,
                               maxLines: 2,
                               style: TextStyle(
-                                fontSize: 21,
+                                fontSize: theme.sizeTitle,
+                                letterSpacing: theme.letterSpacingTitle,
                                 color: theme.title,
-                                letterSpacing: 1.0,
                                 fontWeight: FontWeight.normal,
                               ),
                             ),
@@ -152,8 +152,8 @@ class _EpisodeState extends State<Episode> {
                               textAlign: TextAlign.center,
                               maxLines: 2,
                               style: TextStyle(
-                                fontSize: 16,
-                                letterSpacing: 1.0,
+                                fontSize: theme.sizeText,
+                                letterSpacing: theme.letterSpacingText,
                                 color: theme.subtitle,
                                 fontWeight: FontWeight.normal,
                               ),
@@ -167,8 +167,8 @@ class _EpisodeState extends State<Episode> {
                               textAlign: TextAlign.center,
                               maxLines: 2,
                               style: TextStyle(
-                                fontSize: 16,
-                                letterSpacing: 1.0,
+                                fontSize: theme.sizeText,
+                                letterSpacing: theme.letterSpacingText,
                                 color: theme.subtitle,
                                 fontWeight: FontWeight.normal,
                               ),
@@ -181,8 +181,8 @@ class _EpisodeState extends State<Episode> {
                               textAlign: TextAlign.center,
                               maxLines: 2,
                               style: TextStyle(
-                                fontSize: 16,
-                                letterSpacing: 1.0,
+                                fontSize: theme.sizeText,
+                                letterSpacing: theme.letterSpacingText,
                                 color: theme.subtitle,
                                 fontWeight: FontWeight.normal,
                               ),
@@ -235,8 +235,9 @@ class _EpisodeState extends State<Episode> {
                                     Text(
                                       'edit episode'.toLowerCase(),
                                       style: TextStyle(
-                                        fontSize: 16,
-                                        letterSpacing: 1.0,
+                                        fontSize: theme.sizeButton,
+                                        letterSpacing:
+                                            theme.letterSpacingButton,
                                         color: theme.buttonText,
                                         fontWeight: FontWeight.normal,
                                       ),
@@ -307,8 +308,8 @@ class _EpisodeState extends State<Episode> {
                                   .toStringAsPrecision(2),
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: 28,
-                                letterSpacing: 1.0,
+                                fontSize: theme.sizeAppBar,
+                                letterSpacing: theme.letterSpacingAppBar,
                                 color: theme.emphasis,
                                 fontWeight: FontWeight.normal,
                               ),
@@ -323,9 +324,9 @@ class _EpisodeState extends State<Episode> {
                                   ' evaluations)',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: 16,
-                                letterSpacing: 1.0,
-                                color: theme.title,
+                                fontSize: theme.sizeText,
+                                letterSpacing: theme.letterSpacingText,
+                                color: theme.subtitle,
                                 fontWeight: FontWeight.normal,
                               ),
                             ),
@@ -421,8 +422,10 @@ class _EpisodeState extends State<Episode> {
                                                 ? Text(
                                                     'update review',
                                                     style: TextStyle(
-                                                      fontSize: 16,
-                                                      letterSpacing: 1.0,
+                                                      fontSize:
+                                                          theme.sizeButton,
+                                                      letterSpacing: theme
+                                                          .letterSpacingButton,
                                                       color:
                                                           theme.buttonMainText,
                                                       fontWeight:
@@ -432,8 +435,10 @@ class _EpisodeState extends State<Episode> {
                                                 : Text(
                                                     'add review',
                                                     style: TextStyle(
-                                                      fontSize: 16,
-                                                      letterSpacing: 1.0,
+                                                      fontSize:
+                                                          theme.sizeButton,
+                                                      letterSpacing: theme
+                                                          .letterSpacingButton,
                                                       color:
                                                           theme.buttonMainText,
                                                       fontWeight:
@@ -443,8 +448,9 @@ class _EpisodeState extends State<Episode> {
                                             : Text(
                                                 'add review',
                                                 style: TextStyle(
-                                                  fontSize: 16,
-                                                  letterSpacing: 1.0,
+                                                  fontSize: theme.sizeButton,
+                                                  letterSpacing:
+                                                      theme.letterSpacingButton,
                                                   color: theme.buttonMainText,
                                                   fontWeight: FontWeight.normal,
                                                 ),
@@ -546,16 +552,6 @@ class _EpisodeState extends State<Episode> {
                             //   height: 16.0,
                             // ),
 
-                            const SizedBox(
-                              height: 16.0,
-                            ),
-
-                            getBanner(AdmobBannerSize.MEDIUM_RECTANGLE),
-
-                            const SizedBox(
-                              height: 16.0,
-                            ),
-
                             episode.episodeMini.description != null
                                 ? ExpansionTile(
                                     onExpansionChanged: (_) {
@@ -565,16 +561,23 @@ class _EpisodeState extends State<Episode> {
                                       episode.episodeMini.description!,
                                       maxLines: episode.maxLine,
                                       style: TextStyle(
-                                        fontSize: 16,
-                                        letterSpacing: 1.0,
+                                        fontSize: theme.sizeText,
+                                        letterSpacing: theme.letterSpacingText,
                                         color: theme.title,
                                         fontWeight: FontWeight.normal,
                                       ),
                                     ),
                                   )
                                 : Container(),
+
                             const SizedBox(
-                              height: 8.0,
+                              height: 16.0,
+                            ),
+
+                            getBanner(AdmobBannerSize.MEDIUM_RECTANGLE),
+
+                            const SizedBox(
+                              height: 16.0,
                             ),
 
                             // SizedBox(

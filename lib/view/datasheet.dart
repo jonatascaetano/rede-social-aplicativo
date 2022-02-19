@@ -72,8 +72,8 @@ class _DatasheetState extends State<Datasheet>
                                       .toString(),
                                   style: TextStyle(
                                     color: theme.title,
-                                    fontSize: 24.0,
-                                    letterSpacing: 1.0,
+                                    fontSize: theme.sizeAppBar,
+                                    letterSpacing: theme.letterSpacingAppBar,
                                     fontWeight: FontWeight.normal,
                                   ),
                                 ),
@@ -92,9 +92,10 @@ class _DatasheetState extends State<Datasheet>
                                   child: Text(
                                     LanguageModel()
                                         .entitiesCategories[widget.index][0],
-                                    style: const TextStyle(
-                                      fontSize: 19,
-                                      letterSpacing: 1.0,
+                                    style: TextStyle(
+                                      fontSize: theme.sizeText,
+                                      letterSpacing: theme.letterSpacingText,
+                                      //color: theme.subtitle,
                                       fontWeight: FontWeight.normal,
                                     ),
                                   ),
@@ -103,9 +104,10 @@ class _DatasheetState extends State<Datasheet>
                                   child: Text(
                                     LanguageModel()
                                         .entitiesCategories[widget.index][1],
-                                    style: const TextStyle(
-                                      fontSize: 19,
-                                      letterSpacing: 1.0,
+                                    style: TextStyle(
+                                      fontSize: theme.sizeText,
+                                      letterSpacing: theme.letterSpacingText,
+                                      //color: theme.subtitle,
                                       fontWeight: FontWeight.normal,
                                     ),
                                   ),
@@ -114,9 +116,10 @@ class _DatasheetState extends State<Datasheet>
                                   child: Text(
                                     LanguageModel()
                                         .entitiesCategories[widget.index][2],
-                                    style: const TextStyle(
-                                      fontSize: 19,
-                                      letterSpacing: 1.0,
+                                    style: TextStyle(
+                                      fontSize: theme.sizeText,
+                                      letterSpacing: theme.letterSpacingText,
+                                      //color: theme.subtitle,
                                       fontWeight: FontWeight.normal,
                                     ),
                                   ),
@@ -125,9 +128,10 @@ class _DatasheetState extends State<Datasheet>
                                   child: Text(
                                     LanguageModel()
                                         .entitiesCategories[widget.index][3],
-                                    style: const TextStyle(
-                                      fontSize: 19,
-                                      letterSpacing: 1.0,
+                                    style: TextStyle(
+                                      fontSize: theme.sizeText,
+                                      letterSpacing: theme.letterSpacingText,
+                                      //color: theme.subtitle,
                                       fontWeight: FontWeight.normal,
                                     ),
                                   ),
@@ -136,9 +140,10 @@ class _DatasheetState extends State<Datasheet>
                                   child: Text(
                                     LanguageModel()
                                         .entitiesCategories[widget.index][4],
-                                    style: const TextStyle(
-                                      fontSize: 19,
-                                      letterSpacing: 1.0,
+                                    style: TextStyle(
+                                      fontSize: theme.sizeText,
+                                      letterSpacing: theme.letterSpacingText,
+                                      //color: theme.subtitle,
                                       fontWeight: FontWeight.normal,
                                     ),
                                   ),
@@ -147,9 +152,10 @@ class _DatasheetState extends State<Datasheet>
                                   child: Text(
                                     LanguageModel()
                                         .entitiesCategories[widget.index][5],
-                                    style: const TextStyle(
-                                      fontSize: 19,
-                                      letterSpacing: 1.0,
+                                    style: TextStyle(
+                                      fontSize: theme.sizeText,
+                                      letterSpacing: theme.letterSpacingText,
+                                      //color: theme.subtitle,
                                       fontWeight: FontWeight.normal,
                                     ),
                                   ),
@@ -158,9 +164,10 @@ class _DatasheetState extends State<Datasheet>
                                   child: Text(
                                     LanguageModel()
                                         .entitiesCategories[widget.index][6],
-                                    style: const TextStyle(
-                                      fontSize: 19,
-                                      letterSpacing: 1.0,
+                                    style: TextStyle(
+                                      fontSize: theme.sizeText,
+                                      letterSpacing: theme.letterSpacingText,
+                                      //color: theme.subtitle,
                                       fontWeight: FontWeight.normal,
                                     ),
                                   ),
@@ -169,9 +176,10 @@ class _DatasheetState extends State<Datasheet>
                                   child: Text(
                                     LanguageModel()
                                         .entitiesCategories[widget.index][7],
-                                    style: const TextStyle(
-                                      fontSize: 19,
-                                      letterSpacing: 1.0,
+                                    style: TextStyle(
+                                      fontSize: theme.sizeText,
+                                      letterSpacing: theme.letterSpacingText,
+                                      //color: theme.subtitle,
                                       fontWeight: FontWeight.normal,
                                     ),
                                   ),

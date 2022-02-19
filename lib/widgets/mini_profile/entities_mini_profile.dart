@@ -55,8 +55,10 @@ class _EntityMiniProfileState extends State<EntityMiniProfile> {
               Text(
                 LanguageModel().typeEntitiesMini[widget.index],
                 style: TextStyle(
-                  fontSize: 18,
-                  color: theme.buttonText,
+                  fontSize: theme.sizeTitle,
+                  letterSpacing: theme.letterSpacingTitle,
+                  color: theme.title,
+                  fontWeight: FontWeight.normal,
                 ),
                 maxLines: 2,
                 textAlign: TextAlign.center,

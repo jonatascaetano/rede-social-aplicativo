@@ -8,7 +8,7 @@ class PostUpdateMini {
   late String? release;
   late String? body;
   late int category;
-  late UserMini? user;
+  late UserMini? author;
   late EntityMini? entity;
   late SeasonMini? season;
   late EpisodeMini? episode;
@@ -18,13 +18,14 @@ class PostUpdateMini {
   late int evaluation;
   late bool spoiler;
   late String typePost;
+  late bool liked;
 
   PostUpdateMini.fromMap({required Map map}) {
     id = map["id"];
     release = map["release"];
     body = map["body"];
     category = map["category"];
-    user = UserMini.fromMap(map: map["user"]);
+    author = UserMini.fromMap(map: map["author"]);
     entity =
         map["entity"] != null ? EntityMini.fromMap(map: map["entity"]) : null;
     season =
@@ -38,5 +39,6 @@ class PostUpdateMini {
     evaluation = map["evaluation"] ?? 0;
     spoiler = map["spoiler"] ?? false;
     typePost = map["typePost"];
+    liked = map["liked"] ?? false;
   }
 }

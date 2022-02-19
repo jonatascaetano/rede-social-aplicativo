@@ -37,8 +37,8 @@ class _EmailUpdateState extends State<EmailUpdate> {
                 "Update email",
                 style: TextStyle(
                   color: theme.title,
-                  fontSize: 24.0,
-                  letterSpacing: 1.0,
+                  fontSize: theme.sizeAppBar,
+                  letterSpacing: theme.letterSpacingAppBar,
                   fontWeight: FontWeight.normal,
                 ),
               ),
@@ -84,12 +84,13 @@ class _EmailUpdateState extends State<EmailUpdate> {
                               name: null,
                               email: controller.text,
                               password: null,
-                              image: null,
+                              imageProfile: null,
                               description: null,
                               place: null,
                               privacy: null,
                               status: null,
                               invitation: null,
+                              release: '',
                             );
                             profile.updateEmail(
                                 userDTO: userDTO, context: context);
@@ -98,9 +99,10 @@ class _EmailUpdateState extends State<EmailUpdate> {
                         child: Text(
                           "Confirm",
                           style: TextStyle(
-                            fontSize: 16,
-                            letterSpacing: 2.0,
+                            fontSize: theme.sizeButton,
+                            letterSpacing: theme.letterSpacingButton,
                             color: theme.buttonMainText,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                       ),

@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:social_network_application/entities/dto/user_dto.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/view/authentication/login.dart';
 import 'package:social_network_application/view/my_app.dart';
@@ -50,6 +52,7 @@ class LoginModel extends Model {
       required BuildContext context}) async {
     load = true;
     notifyListeners();
+
     try {
       var url =
           Uri.parse(base + 'users/get/login/email/$email/password/$password');
@@ -57,6 +60,19 @@ class LoginModel extends Model {
       String id = response.body;
       switch (response.statusCode) {
         case 200:
+          UserDTO userDTO = UserDTO(
+              idUser: id,
+              name: null,
+              email: null,
+              password: null,
+              imageProfile: null,
+              release: DateTime.now().toString(),
+              description: null,
+              place: null,
+              privacy: null,
+              status: null,
+              invitation: null);
+          await updateLogin(userDTO: userDTO, context: context);
           saveId(id: id, context: context);
           // ignore: avoid_print
           print('autorizado: id ' + id);
@@ -91,5 +107,41 @@ class LoginModel extends Model {
       load = false;
       notifyListeners();
     }
+  }
+
+  updateLogin({required UserDTO userDTO, required BuildContext context}) async {
+    load = true;
+    notifyListeners();
+    var url = Uri.parse(base + 'users/put/name');
+    var response =
+        await http.put(url, body: json.encode(userDTO.toMap()), headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
+    // ignore: avoid_print
+    print("updateLogin: " + response.statusCode.toString());
+    // switch (response.statusCode) {
+    //   case 202:
+    //     load = false;
+    //     notifyListeners();
+    //     ScaffoldMessenger.of(context).showSnackBar(
+    //       const SnackBar(content: Text('lastLogin update')),
+    //     );
+    //     break;
+    //   case 406:
+    //     load = false;
+    //     notifyListeners();
+    //     ScaffoldMessenger.of(context).showSnackBar(
+    //       const SnackBar(content: Text('invalid login')),
+    //     );
+    //     break;
+    //   default:
+    //     load = false;
+    //     notifyListeners();
+    //     ScaffoldMessenger.of(context).showSnackBar(
+    //       const SnackBar(content: Text('Try again later')),
+    //     );
+    //     break;
+    // }
   }
 }

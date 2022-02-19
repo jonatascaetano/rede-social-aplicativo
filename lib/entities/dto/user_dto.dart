@@ -3,7 +3,8 @@ class UserDTO {
 
   late String? name;
   late String? description;
-  late String? image;
+  late String? imageProfile;
+  late String? release;
   late String? place;
 
   late String? email;
@@ -21,7 +22,8 @@ class UserDTO {
     map["name"] = name;
     map["email"] = email;
     map["password"] = password;
-    map["image"] = image;
+    map["imageProfile"] = imageProfile;
+    map["release"] = release;
     map["description"] = description;
     map["place"] = place;
     map["privacy"] = privacy;
@@ -35,7 +37,8 @@ class UserDTO {
     required this.name,
     required this.email,
     required this.password,
-    required this.image,
+    required this.imageProfile,
+    required this.release,
     required this.description,
     required this.place,
     required this.privacy,

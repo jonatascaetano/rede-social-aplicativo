@@ -48,7 +48,7 @@ class _FollowerMiniProfileState extends State<FollowerMiniProfile> {
                 Expanded(
                     child: Column(
                   children: [
-                    widget.userMini.image != null
+                    widget.userMini.imageProfile != null
                         ? Container(
                             height: 150,
                             width: 200,
@@ -58,7 +58,8 @@ class _FollowerMiniProfileState extends State<FollowerMiniProfile> {
                                   topLeft: Radius.circular(10.0),
                                   topRight: Radius.circular(10.0)),
                               image: DecorationImage(
-                                image: NetworkImage(widget.userMini.image!),
+                                image:
+                                    NetworkImage(widget.userMini.imageProfile!),
                                 fit: BoxFit.fitHeight,
                               ),
                             ),

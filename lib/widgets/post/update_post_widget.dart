@@ -47,10 +47,10 @@ class _UpdatePostWidgetState extends State<UpdatePostWidget> {
               const SizedBox(
                 width: 8.0,
               ),
-              widget.postUpdateMini.user!.image != null
+              widget.postUpdateMini.author!.imageProfile != null
                   ? GestureDetector(
                       onTap: () {
-                        if (widget.postUpdateMini.user!.id !=
+                        if (widget.postUpdateMini.author!.id !=
                                 ScopedModel.of<ProfileModel>(context)
                                     .userMini
                                     .id &&
@@ -59,19 +59,19 @@ class _UpdatePostWidgetState extends State<UpdatePostWidget> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => User(
-                                    userMini: widget.postUpdateMini.user!)),
+                                    userMini: widget.postUpdateMini.author!)),
                           );
                         }
                       },
                       child: CircleAvatar(
-                        backgroundImage:
-                            NetworkImage(widget.postUpdateMini.user!.image!),
+                        backgroundImage: NetworkImage(
+                            widget.postUpdateMini.author!.imageProfile!),
                         radius: 30.0,
                       ),
                     )
                   : GestureDetector(
                       onTap: () {
-                        if (widget.postUpdateMini.user!.id !=
+                        if (widget.postUpdateMini.author!.id !=
                                 ScopedModel.of<ProfileModel>(context)
                                     .userMini
                                     .id &&
@@ -80,7 +80,7 @@ class _UpdatePostWidgetState extends State<UpdatePostWidget> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => User(
-                                    userMini: widget.postUpdateMini.user!)),
+                                    userMini: widget.postUpdateMini.author!)),
                           );
                         }
                       },
@@ -120,7 +120,7 @@ class _UpdatePostWidgetState extends State<UpdatePostWidget> {
               IconButton(
                 padding: EdgeInsets.zero,
                 onPressed: () {
-                  if (widget.postUpdateMini.user!.id ==
+                  if (widget.postUpdateMini.author!.id ==
                       ScopedModel.of<ProfileModel>(context).userMini.id) {
                     ScopedModel.of<ProfileModel>(context)
                         .showDeletePostBottomSheet(
@@ -408,6 +408,9 @@ class _UpdatePostWidgetState extends State<UpdatePostWidget> {
                             Icon(
                               Icons.thumb_up_alt_outlined,
                               size: theme.sizeTitle,
+                              color: widget.postUpdateMini.liked
+                                  ? theme.emphasis
+                                  : theme.title,
                             ),
                             const SizedBox(
                               width: 6.0,
@@ -425,7 +428,9 @@ class _UpdatePostWidgetState extends State<UpdatePostWidget> {
                               style: TextStyle(
                                 fontSize: theme.sizeTitle,
                                 letterSpacing: theme.letterSpacingText,
-                                color: theme.title,
+                                color: widget.postUpdateMini.liked
+                                    ? theme.emphasis
+                                    : theme.title,
                                 fontWeight: FontWeight.normal,
                               ),
                             ),
@@ -527,18 +532,19 @@ Widget entity(
       children: [
         GestureDetector(
           onTap: () {
-            if (postUpdateMini.user!.id !=
+            if (postUpdateMini.author!.id !=
                     ScopedModel.of<ProfileModel>(context).userMini.id &&
                 !screenUser) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => User(userMini: postUpdateMini.user!)),
+                    builder: (context) =>
+                        User(userMini: postUpdateMini.author!)),
               );
             }
           },
           child: Text(
-            postUpdateMini.user!.name,
+            postUpdateMini.author!.name,
             // +
             // " " +
             // LanguageModel().entitiesCategories[
@@ -625,18 +631,19 @@ Widget season(
       children: [
         GestureDetector(
           onTap: () {
-            if (postUpdateMini.user!.id !=
+            if (postUpdateMini.author!.id !=
                     ScopedModel.of<ProfileModel>(context).userMini.id &&
                 !screenUser) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => User(userMini: postUpdateMini.user!)),
+                    builder: (context) =>
+                        User(userMini: postUpdateMini.author!)),
               );
             }
           },
           child: Text(
-            postUpdateMini.user!.name,
+            postUpdateMini.author!.name,
             // +
             // " " +
             // LanguageModel().entitiesCategories[
@@ -752,18 +759,19 @@ Widget episode(
       children: [
         GestureDetector(
           onTap: () {
-            if (postUpdateMini.user!.id !=
+            if (postUpdateMini.author!.id !=
                     ScopedModel.of<ProfileModel>(context).userMini.id &&
                 !screenUser) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => User(userMini: postUpdateMini.user!)),
+                    builder: (context) =>
+                        User(userMini: postUpdateMini.author!)),
               );
             }
           },
           child: Text(
-            postUpdateMini.user!.name,
+            postUpdateMini.author!.name,
             // +
             // " " +
             // LanguageModel().entitiesCategories[

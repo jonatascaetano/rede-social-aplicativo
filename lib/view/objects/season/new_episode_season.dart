@@ -38,8 +38,8 @@ class _NewEpisodeSeasonState extends State<NewEpisodeSeason> {
                     "New episode",
                     style: TextStyle(
                       color: theme.title,
-                      fontSize: 24.0,
-                      letterSpacing: 1.0,
+                      fontSize: theme.sizeAppBar,
+                      letterSpacing: theme.letterSpacingAppBar,
                       fontWeight: FontWeight.normal,
                     ),
                   ),
@@ -87,24 +87,24 @@ class _NewEpisodeSeasonState extends State<NewEpisodeSeason> {
                           const SizedBox(
                             height: 8.0,
                           ),
-                          TextFormField(
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'enter episode number';
-                              }
-                            },
-                            controller: numberEpisode,
-                            keyboardType: TextInputType.number,
-                            minLines: 1,
-                            maxLines: 10,
-                            decoration: const InputDecoration(
-                              label: Text("episode number"),
-                              border: OutlineInputBorder(),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 8.0,
-                          ),
+                          // TextFormField(
+                          //   validator: (value) {
+                          //     if (value!.isEmpty) {
+                          //       return 'enter episode number';
+                          //     }
+                          //   },
+                          //   controller: numberEpisode,
+                          //   keyboardType: TextInputType.number,
+                          //   minLines: 1,
+                          //   maxLines: 10,
+                          //   decoration: const InputDecoration(
+                          //     label: Text("episode number"),
+                          //     border: OutlineInputBorder(),
+                          //   ),
+                          // ),
+                          // const SizedBox(
+                          //   height: 8.0,
+                          // ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               primary: theme.buttonMain,
@@ -115,7 +115,7 @@ class _NewEpisodeSeasonState extends State<NewEpisodeSeason> {
                                 EpisodeDTO episodeDTO = EpisodeDTO(
                                   name: name.text,
                                   description: description.text,
-                                  numberEpisode: int.parse(numberEpisode.text),
+                                  //numberEpisode: int.parse(numberEpisode.text),
                                   idEpisode: '',
                                 );
                                 episode.createEpisode(
@@ -128,9 +128,9 @@ class _NewEpisodeSeasonState extends State<NewEpisodeSeason> {
                             child: Text(
                               "Confirm",
                               style: TextStyle(
-                                fontSize: 16,
-                                letterSpacing: 1.0,
                                 color: theme.buttonMainText,
+                                fontSize: theme.sizeButton,
+                                letterSpacing: theme.letterSpacingButton,
                                 fontWeight: FontWeight.normal,
                               ),
                             ),

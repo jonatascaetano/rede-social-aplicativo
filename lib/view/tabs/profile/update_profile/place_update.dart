@@ -39,8 +39,8 @@ class _PlaceUpdateState extends State<PlaceUpdate> {
                 "Update place",
                 style: TextStyle(
                   color: theme.title,
-                  fontSize: 24.0,
-                  letterSpacing: 1.0,
+                  fontSize: theme.sizeAppBar,
+                  letterSpacing: theme.letterSpacingAppBar,
                   fontWeight: FontWeight.normal,
                 ),
               ),
@@ -75,12 +75,13 @@ class _PlaceUpdateState extends State<PlaceUpdate> {
                               name: null,
                               email: null,
                               password: null,
-                              image: null,
+                              imageProfile: null,
                               description: null,
                               place: controller.text,
                               privacy: null,
                               status: null,
                               invitation: null,
+                              release: '',
                             );
                             profile.updatePlace(
                                 userDTO: userDTO, context: context);
@@ -89,9 +90,10 @@ class _PlaceUpdateState extends State<PlaceUpdate> {
                         child: Text(
                           "Confirm",
                           style: TextStyle(
-                            fontSize: 16,
-                            letterSpacing: 2.0,
+                            fontSize: theme.sizeButton,
+                            letterSpacing: theme.letterSpacingButton,
                             color: theme.buttonMainText,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                       ),

@@ -33,9 +33,10 @@ class _UserMiniResultState extends State<UserMiniResult> {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                widget.userMini.image != null
+                widget.userMini.imageProfile != null
                     ? CircleAvatar(
-                        backgroundImage: NetworkImage(widget.userMini.image!),
+                        backgroundImage:
+                            NetworkImage(widget.userMini.imageProfile!),
                         radius: 30.0,
                       )
                     : CircleAvatar(

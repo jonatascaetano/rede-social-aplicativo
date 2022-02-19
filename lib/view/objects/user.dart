@@ -69,8 +69,8 @@ class _UserState extends State<User> {
                       user.userMini.name,
                       style: TextStyle(
                         color: theme.title,
-                        fontSize: 24.0,
-                        letterSpacing: 1.0,
+                        fontSize: theme.sizeAppBar,
+                        letterSpacing: theme.letterSpacingAppBar,
                         fontWeight: FontWeight.normal,
                       ),
                     )
@@ -87,7 +87,7 @@ class _UserState extends State<User> {
                           padding: EdgeInsets.zero,
                           children: [
                             //inicio da area profile
-                            user.userMini.image != null
+                            user.userMini.imageProfile != null
                                 ? Stack(
                                     children: [
                                       Container(
@@ -103,7 +103,7 @@ class _UserState extends State<User> {
                                           color: theme.shadow,
                                           image: DecorationImage(
                                             image: NetworkImage(
-                                                user.userMini.image!),
+                                                user.userMini.imageProfile!),
                                             fit: BoxFit.fitHeight,
                                           ),
                                         ),
@@ -216,9 +216,10 @@ class _UserState extends State<User> {
                                           Text(
                                             user.userMini.name,
                                             style: TextStyle(
-                                              fontSize: 21,
+                                              fontSize: theme.sizeTitle,
+                                              letterSpacing:
+                                                  theme.letterSpacingTitle,
                                               color: theme.title,
-                                              letterSpacing: 1.0,
                                               fontWeight: FontWeight.normal,
                                             ),
                                           ),
@@ -239,6 +240,23 @@ class _UserState extends State<User> {
                               ),
                             ),
 
+                            user.userMini.description != null &&
+                                    user.userMini.description!.isNotEmpty
+                                ? Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      user.userMini.description!,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: theme.sizeText,
+                                        letterSpacing: theme.letterSpacingText,
+                                        color: theme.subtitle,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                  )
+                                : Container(),
+
                             user.blocked
                                 ? Padding(
                                     padding: const EdgeInsets.all(8.0),
@@ -256,9 +274,10 @@ class _UserState extends State<User> {
                                         Text(
                                           'User blocked',
                                           style: TextStyle(
-                                            fontSize: 16,
+                                            fontSize: theme.sizeText,
+                                            letterSpacing:
+                                                theme.letterSpacingText,
                                             color: theme.detail,
-                                            letterSpacing: 1.0,
                                             fontWeight: FontWeight.normal,
                                           ),
                                         ),
@@ -295,9 +314,11 @@ class _UserState extends State<User> {
                                                     Text(
                                                       'Unfollow',
                                                       style: TextStyle(
-                                                        fontSize: 16,
+                                                        fontSize:
+                                                            theme.sizeButton,
+                                                        letterSpacing: theme
+                                                            .letterSpacingButton,
                                                         color: theme.buttonText,
-                                                        letterSpacing: 1.0,
                                                         fontWeight:
                                                             FontWeight.normal,
                                                       ),
@@ -331,9 +352,11 @@ class _UserState extends State<User> {
                                                     Text(
                                                       'Follow',
                                                       style: TextStyle(
-                                                        fontSize: 16,
+                                                        fontSize:
+                                                            theme.sizeButton,
+                                                        letterSpacing: theme
+                                                            .letterSpacingButton,
                                                         color: theme.buttonText,
-                                                        letterSpacing: 1.0,
                                                         fontWeight:
                                                             FontWeight.normal,
                                                       ),
@@ -373,9 +396,10 @@ class _UserState extends State<User> {
                                             Text(
                                               'Followers',
                                               style: TextStyle(
-                                                fontSize: 16,
+                                                fontSize: theme.sizeText,
+                                                letterSpacing:
+                                                    theme.letterSpacingText,
                                                 color: theme.subtitle,
-                                                letterSpacing: 1.0,
                                                 fontWeight: FontWeight.normal,
                                               ),
                                             ),
@@ -386,9 +410,10 @@ class _UserState extends State<User> {
                                               user.userMini.quantityFollowers
                                                   .toString(),
                                               style: TextStyle(
-                                                fontSize: 16,
+                                                fontSize: theme.sizeText,
+                                                letterSpacing:
+                                                    theme.letterSpacingText,
                                                 color: theme.subtitle,
-                                                letterSpacing: 1.0,
                                                 fontWeight: FontWeight.normal,
                                               ),
                                             ),
@@ -415,9 +440,10 @@ class _UserState extends State<User> {
                                               Text(
                                                 'Following',
                                                 style: TextStyle(
-                                                  fontSize: 16,
+                                                  fontSize: theme.sizeText,
+                                                  letterSpacing:
+                                                      theme.letterSpacingText,
                                                   color: theme.subtitle,
-                                                  letterSpacing: 1.0,
                                                   fontWeight: FontWeight.normal,
                                                 ),
                                               ),
@@ -428,9 +454,10 @@ class _UserState extends State<User> {
                                                 user.userMini.quantityFollowing
                                                     .toString(),
                                                 style: TextStyle(
-                                                  fontSize: 16,
+                                                  fontSize: theme.sizeText,
+                                                  letterSpacing:
+                                                      theme.letterSpacingText,
                                                   color: theme.subtitle,
-                                                  letterSpacing: 1.0,
                                                   fontWeight: FontWeight.normal,
                                                 ),
                                               ),
@@ -466,21 +493,6 @@ class _UserState extends State<User> {
                             //       )
                             //     : Container(),
 
-                            user.userMini.description != null &&
-                                    user.userMini.description!.isNotEmpty
-                                ? Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      user.userMini.description!,
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color: theme.title,
-                                        letterSpacing: 1.0,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                    ),
-                                  )
-                                : Container(),
                             user.workers.isNotEmpty
                                 ? Padding(
                                     padding: const EdgeInsets.all(8.0),
@@ -490,9 +502,10 @@ class _UserState extends State<User> {
                                           child: Text(
                                             'View all works',
                                             style: TextStyle(
-                                              fontSize: 16,
+                                              fontSize: theme.sizeText,
+                                              letterSpacing:
+                                                  theme.letterSpacingText,
                                               color: theme.subtitle,
-                                              letterSpacing: 1.0,
                                               fontWeight: FontWeight.normal,
                                             ),
                                           ),
@@ -580,7 +593,7 @@ class _UserState extends State<User> {
                                 },
                                 itemCount: user.myPosts.length,
                                 itemBuilder: (context, index) {
-                                  if (index % 4 == 0) {
+                                  if (index % 4 == 0 && index != 0) {
                                     return Column(
                                       children: [
                                         Container(

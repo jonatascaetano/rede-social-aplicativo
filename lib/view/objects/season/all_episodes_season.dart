@@ -31,7 +31,7 @@ class _AllEpisodesSeasonState extends State<AllEpisodesSeason> {
             ),
           ),
           body: GridView.count(
-            childAspectRatio: 1.0 / 1.6,
+            childAspectRatio: 1.0 / 1.7,
             crossAxisCount: 2,
             children: season.episodes.map((e) {
               return EpisodeMiniSeason(

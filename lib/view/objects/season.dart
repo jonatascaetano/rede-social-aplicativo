@@ -87,8 +87,8 @@ class _SeasonState extends State<Season> {
                       season.seasonMini.name,
                       style: TextStyle(
                         color: theme.title,
-                        fontSize: 24.0,
-                        letterSpacing: 1.0,
+                        fontSize: theme.sizeAppBar,
+                        letterSpacing: theme.letterSpacingAppBar,
                         fontWeight: FontWeight.normal,
                       ),
                     )
@@ -141,9 +141,9 @@ class _SeasonState extends State<Season> {
                               textAlign: TextAlign.center,
                               maxLines: 2,
                               style: TextStyle(
-                                fontSize: 21,
+                                fontSize: theme.sizeTitle,
+                                letterSpacing: theme.letterSpacingTitle,
                                 color: theme.title,
-                                letterSpacing: 1.0,
                                 fontWeight: FontWeight.normal,
                               ),
                             ),
@@ -157,8 +157,8 @@ class _SeasonState extends State<Season> {
                               textAlign: TextAlign.center,
                               maxLines: 2,
                               style: TextStyle(
-                                fontSize: 16,
-                                letterSpacing: 1.0,
+                                fontSize: theme.sizeText,
+                                letterSpacing: theme.letterSpacingText,
                                 color: theme.subtitle,
                                 fontWeight: FontWeight.normal,
                               ),
@@ -172,8 +172,8 @@ class _SeasonState extends State<Season> {
                               textAlign: TextAlign.center,
                               maxLines: 2,
                               style: TextStyle(
-                                fontSize: 16,
-                                letterSpacing: 1.0,
+                                fontSize: theme.sizeText,
+                                letterSpacing: theme.letterSpacingText,
                                 color: theme.subtitle,
                                 fontWeight: FontWeight.normal,
                               ),
@@ -227,8 +227,9 @@ class _SeasonState extends State<Season> {
                                     Text(
                                       'edit season'.toLowerCase(),
                                       style: TextStyle(
-                                        fontSize: 16,
-                                        letterSpacing: 1.0,
+                                        fontSize: theme.sizeButton,
+                                        letterSpacing:
+                                            theme.letterSpacingButton,
                                         color: theme.buttonText,
                                         fontWeight: FontWeight.normal,
                                       ),
@@ -298,8 +299,8 @@ class _SeasonState extends State<Season> {
                                   .toStringAsPrecision(2),
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: 28,
-                                letterSpacing: 1.0,
+                                fontSize: theme.sizeAppBar,
+                                letterSpacing: theme.letterSpacingAppBar,
                                 color: theme.emphasis,
                                 fontWeight: FontWeight.normal,
                               ),
@@ -314,9 +315,9 @@ class _SeasonState extends State<Season> {
                                   ' evaluations)',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: 16,
-                                letterSpacing: 1.0,
-                                color: theme.title,
+                                fontSize: theme.sizeText,
+                                letterSpacing: theme.letterSpacingText,
+                                color: theme.subtitle,
                                 fontWeight: FontWeight.normal,
                               ),
                             ),
@@ -411,27 +412,37 @@ class _SeasonState extends State<Season> {
                                                 ? Text(
                                                     'update review',
                                                     style: TextStyle(
-                                                      fontSize: 16,
-                                                      letterSpacing: 1.0,
+                                                      fontSize:
+                                                          theme.sizeButton,
+                                                      letterSpacing: theme
+                                                          .letterSpacingButton,
                                                       color:
                                                           theme.buttonMainText,
+                                                      fontWeight:
+                                                          FontWeight.normal,
                                                     ),
                                                   )
                                                 : Text(
                                                     'add review',
                                                     style: TextStyle(
-                                                      fontSize: 16,
-                                                      letterSpacing: 1.0,
+                                                      fontSize:
+                                                          theme.sizeButton,
+                                                      letterSpacing: theme
+                                                          .letterSpacingButton,
                                                       color:
                                                           theme.buttonMainText,
+                                                      fontWeight:
+                                                          FontWeight.normal,
                                                     ),
                                                   )
                                             : Text(
                                                 'add review',
                                                 style: TextStyle(
-                                                  fontSize: 16,
-                                                  letterSpacing: 1.0,
+                                                  fontSize: theme.sizeButton,
+                                                  letterSpacing:
+                                                      theme.letterSpacingButton,
                                                   color: theme.buttonMainText,
+                                                  fontWeight: FontWeight.normal,
                                                 ),
                                               ),
                                       ),
@@ -474,15 +485,7 @@ class _SeasonState extends State<Season> {
                                       //*goal update
                                     ],
                                   ),
-                            const SizedBox(
-                              height: 16.0,
-                            ),
 
-                            getBanner(AdmobBannerSize.MEDIUM_RECTANGLE),
-
-                            const SizedBox(
-                              height: 16.0,
-                            ),
                             season.seasonMini.description != null
                                 ? ExpansionTile(
                                     tilePadding: const EdgeInsets.all(8.0),
@@ -493,15 +496,22 @@ class _SeasonState extends State<Season> {
                                       season.seasonMini.description!,
                                       maxLines: season.maxLine,
                                       style: TextStyle(
-                                        fontSize: 16,
-                                        letterSpacing: 1.0,
+                                        fontSize: theme.sizeText,
+                                        letterSpacing: theme.letterSpacingText,
                                         color: theme.title,
+                                        fontWeight: FontWeight.normal,
                                       ),
                                     ),
                                   )
                                 : Container(),
                             const SizedBox(
-                              height: 8.0,
+                              height: 16.0,
+                            ),
+
+                            getBanner(AdmobBannerSize.MEDIUM_RECTANGLE),
+
+                            const SizedBox(
+                              height: 16.0,
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -511,9 +521,10 @@ class _SeasonState extends State<Season> {
                                     child: Text(
                                       'View all episodes',
                                       style: TextStyle(
-                                        fontSize: 16,
-                                        letterSpacing: 1.0,
-                                        color: theme.subtitle,
+                                        fontSize: theme.sizeText,
+                                        letterSpacing: theme.letterSpacingText,
+                                        color: theme.title,
+                                        fontWeight: FontWeight.normal,
                                       ),
                                     ),
                                   ),
@@ -538,7 +549,7 @@ class _SeasonState extends State<Season> {
                             ),
 
                             SizedBox(
-                              height: 260,
+                              height: 270,
                               child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   itemCount: season.episodes.length + 1,
@@ -596,9 +607,12 @@ class _SeasonState extends State<Season> {
                                                 Text(
                                                   'add episode',
                                                   style: TextStyle(
-                                                    fontSize: 16,
-                                                    letterSpacing: 1.0,
+                                                    fontSize: theme.sizeText,
+                                                    letterSpacing:
+                                                        theme.letterSpacingText,
                                                     color: theme.title,
+                                                    fontWeight:
+                                                        FontWeight.normal,
                                                   ),
                                                 ),
                                               ],

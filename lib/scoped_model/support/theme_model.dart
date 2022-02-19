@@ -4,11 +4,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeModel extends Model {
   //init textStyle
-  double sizeAppBar = 21;
+  double sizeAppBar = 18;
   double sizeTitle = 18;
   double sizeText = 15;
-  double sizeButton = 14;
-  double letterSpacingAppBar = 2.0;
+  double sizeButton = 18;
+  double letterSpacingAppBar = 1.0;
   double letterSpacingTitle = 1.0;
   double letterSpacingText = 0.5;
   double letterSpacingButton = 0.5;

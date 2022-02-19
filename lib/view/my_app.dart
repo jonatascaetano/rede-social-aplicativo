@@ -6,7 +6,6 @@ import 'package:social_network_application/view/menu.dart';
 import 'package:social_network_application/view/search/seach.dart';
 
 import 'tabs/home.dart';
-import 'tabs/profile.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -27,16 +26,16 @@ class _MyAppState extends State<MyApp> {
           const Home(),
           // const Trending(),
           // const Calendar(),
-          const Profile(),
+          //const Profile(),
         ];
         return Scaffold(
           appBar: AppBar(
-            elevation: 1.0,
+            elevation: 0.0,
             title: Text(
               "Bundle",
               style: TextStyle(
                 color: theme.title,
-                fontSize: theme.sizeAppBar,
+                fontSize: 24,
                 letterSpacing: theme.letterSpacingAppBar,
                 fontWeight: FontWeight.normal,
               ),
@@ -45,16 +44,16 @@ class _MyAppState extends State<MyApp> {
               IconButton(
                 onPressed: () {},
                 icon: Container(
-                  decoration: BoxDecoration(
-                    color: theme.shadow,
-                    shape: BoxShape.circle,
-                  ),
+                  decoration: const BoxDecoration(
+                      //color: theme.shadow,
+                      //shape: BoxShape.circle,
+                      ),
                   height: 50.0,
                   width: 50.0,
                   child: Icon(
                     Icons.notifications,
                     color: theme.title,
-                    //size: 30.0,
+                    size: 28.0,
                   ),
                 ),
               ),
@@ -63,16 +62,16 @@ class _MyAppState extends State<MyApp> {
                     showSearch(context: context, delegate: Search());
                   },
                   icon: Container(
-                    decoration: BoxDecoration(
-                      color: theme.shadow,
-                      shape: BoxShape.circle,
-                    ),
+                    decoration: const BoxDecoration(
+                        //color: theme.shadow,
+                        //shape: BoxShape.circle,
+                        ),
                     height: 50.0,
                     width: 50.0,
                     child: Icon(
                       Icons.search,
                       color: theme.title,
-                      //size: 30.0,
+                      size: 28.0,
                     ),
                   )),
               IconButton(
@@ -81,16 +80,16 @@ class _MyAppState extends State<MyApp> {
                       MaterialPageRoute(builder: (context) => const Menu()));
                 },
                 icon: Container(
-                  decoration: BoxDecoration(
-                    color: theme.shadow,
-                    shape: BoxShape.circle,
-                  ),
+                  decoration: const BoxDecoration(
+                      // color: theme.shadow,
+                      // shape: BoxShape.circle,
+                      ),
                   height: 50.0,
                   width: 50.0,
                   child: Icon(
                     Icons.dehaze_rounded,
                     color: theme.title,
-                    //size: 30.0,
+                    size: 28.0,
                   ),
                 ),
               )

@@ -157,7 +157,9 @@ class UserModel extends Model {
   getMyPosts({required BuildContext context}) async {
     load = true;
     notifyListeners();
-    var url = Uri.parse(base + 'users/get/user/${userMini.id}/posts/my');
+    String idUser = await getId();
+    var url =
+        Uri.parse(base + 'users/get/user/${userMini.id}/posts/my/$idUser');
     var response = await http.get(url, headers: {
       "Accept": "application/json; charset=utf-8",
       "content-type": "application/json; charset=utf-8"

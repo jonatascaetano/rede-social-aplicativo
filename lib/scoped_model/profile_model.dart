@@ -143,10 +143,10 @@ class ProfileModel extends Model {
           .then((value) async {
         // ignore: avoid_print
         print('value: ' + value);
-        userDTO.image = value;
+        userDTO.imageProfile = value;
 
         //--save image api -/
-        var url = Uri.parse(base + 'users/put/add/image');
+        var url = Uri.parse(base + 'users/put/add/image/profile');
         var response =
             await http.put(url, body: json.encode(userDTO.toMap()), headers: {
           "Accept": "application/json; charset=utf-8",
@@ -196,7 +196,7 @@ class ProfileModel extends Model {
       await FirebaseStorage.instance
           .ref()
           .child('profile')
-          .child(userDTO.image!)
+          .child(userDTO.imageProfile!)
           // ignore: avoid_print
           .delete()
           .onError((error, stackTrace) {
@@ -204,7 +204,7 @@ class ProfileModel extends Model {
         print(error.toString() + ' : ' + stackTrace.toString());
       }).then((_) async {
         //--save image api -/
-        var url = Uri.parse(base + 'users/put/remove/image');
+        var url = Uri.parse(base + 'users/put/remove/image/profile');
         var response =
             await http.put(url, body: json.encode(userDTO.toMap()), headers: {
           "Accept": "application/json; charset=utf-8",
@@ -449,7 +449,7 @@ class ProfileModel extends Model {
     load = true;
     notifyListeners();
     String id = await getId();
-    var url = Uri.parse(base + 'users/get/user/$id/posts/my');
+    var url = Uri.parse(base + 'users/get/user/$id/posts/my/$id');
     var response = await http.get(url, headers: {
       "Accept": "application/json; charset=utf-8",
       "content-type": "application/json; charset=utf-8"

@@ -4,16 +4,18 @@ class CommentMini {
   late String id;
   late String release;
   late String body;
-  late UserMini user;
+  late UserMini author;
   late String typeObject;
   late int likeQuantity = 0;
+  late bool liked;
 
   CommentMini.fromMap({required Map map}) {
     id = map["id"];
     release = map["release"];
     body = map["body"];
-    user = UserMini.fromMap(map: map["user"]);
+    author = UserMini.fromMap(map: map["author"]);
     typeObject = map["typeObject"];
     likeQuantity = map["likeQuantity"];
+    liked = map["liked"] ?? false;
   }
 }

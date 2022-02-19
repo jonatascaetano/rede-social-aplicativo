@@ -47,7 +47,7 @@ class _WorkerMiniEntityState extends State<WorkerMiniEntity> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    widget.workerMini.user.image != null
+                    widget.workerMini.user.imageProfile != null
                         ? Container(
                             height: 150,
                             width: 200,
@@ -57,8 +57,8 @@ class _WorkerMiniEntityState extends State<WorkerMiniEntity> {
                                   topLeft: Radius.circular(10.0),
                                   topRight: Radius.circular(10.0)),
                               image: DecorationImage(
-                                image:
-                                    NetworkImage(widget.workerMini.user.image!),
+                                image: NetworkImage(
+                                    widget.workerMini.user.imageProfile!),
                                 fit: BoxFit.fitHeight,
                               ),
                             ),

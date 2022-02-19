@@ -153,10 +153,11 @@ class _InvitationState extends State<Invitation> {
                               password: password.text,
                               description: null,
                               idUser: null,
-                              image: null,
+                              imageProfile: null,
                               place: null,
                               privacy: null,
                               status: null,
+                              release: DateTime.now().toString(),
                             );
                             register.checkInvitation(
                                 userDTO: userDTO, context: context);
@@ -166,8 +167,8 @@ class _InvitationState extends State<Invitation> {
                           "Confirm",
                           style: TextStyle(
                             color: theme.buttonMainText,
-                            fontSize: 16,
-                            letterSpacing: 1.0,
+                            fontSize: theme.sizeButton,
+                            letterSpacing: theme.letterSpacingButton,
                             fontWeight: FontWeight.normal,
                           ),
                         ),
@@ -178,23 +179,18 @@ class _InvitationState extends State<Invitation> {
                           text:
                               'By clicking confirm you declare that you agree with our ',
                           style: TextStyle(
-                            fontSize:
-                                ScopedModel.of<ThemeModel>(context).sizeText,
-                            color: ScopedModel.of<ThemeModel>(context).title,
-                            letterSpacing: ScopedModel.of<ThemeModel>(context)
-                                .letterSpacingText,
+                            color: theme.subtitle,
+                            fontSize: theme.sizeText,
+                            letterSpacing: theme.letterSpacingText,
                             fontWeight: FontWeight.normal,
                           ),
                         ),
                         TextSpan(
                             text: 'terms of use ',
                             style: TextStyle(
-                              fontSize:
-                                  ScopedModel.of<ThemeModel>(context).sizeText,
-                              color:
-                                  ScopedModel.of<ThemeModel>(context).emphasis,
-                              letterSpacing: ScopedModel.of<ThemeModel>(context)
-                                  .letterSpacingText,
+                              color: theme.emphasis,
+                              fontSize: theme.sizeText,
+                              letterSpacing: theme.letterSpacingText,
                               fontWeight: FontWeight.normal,
                             ),
                             recognizer: TapGestureRecognizer()
@@ -210,23 +206,18 @@ class _InvitationState extends State<Invitation> {
                         TextSpan(
                           text: 'and our ',
                           style: TextStyle(
-                            fontSize:
-                                ScopedModel.of<ThemeModel>(context).sizeText,
-                            color: ScopedModel.of<ThemeModel>(context).title,
-                            letterSpacing: ScopedModel.of<ThemeModel>(context)
-                                .letterSpacingText,
+                            color: theme.subtitle,
+                            fontSize: theme.sizeText,
+                            letterSpacing: theme.letterSpacingText,
                             fontWeight: FontWeight.normal,
                           ),
                         ),
                         TextSpan(
                             text: 'privacy policy',
                             style: TextStyle(
-                              fontSize:
-                                  ScopedModel.of<ThemeModel>(context).sizeText,
-                              color:
-                                  ScopedModel.of<ThemeModel>(context).emphasis,
-                              letterSpacing: ScopedModel.of<ThemeModel>(context)
-                                  .letterSpacingText,
+                              color: theme.emphasis,
+                              fontSize: theme.sizeText,
+                              letterSpacing: theme.letterSpacingText,
                               fontWeight: FontWeight.normal,
                             ),
                             recognizer: TapGestureRecognizer()

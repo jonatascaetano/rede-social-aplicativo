@@ -38,8 +38,8 @@ class _UpdateReviewEntityState extends State<UpdateReviewEntity> {
                 "Review",
                 style: TextStyle(
                   color: theme.title,
-                  fontSize: 24.0,
-                  letterSpacing: 1.0,
+                  fontSize: theme.sizeAppBar,
+                  letterSpacing: theme.letterSpacingAppBar,
                   fontWeight: FontWeight.normal,
                 ),
               ),
@@ -57,10 +57,9 @@ class _UpdateReviewEntityState extends State<UpdateReviewEntity> {
                             child: Text(
                               "Contains spoiler?",
                               style: TextStyle(
-                                fontSize: 16,
-                                letterSpacing: 1.0,
-                                color:
-                                    ScopedModel.of<ThemeModel>(context).title,
+                                color: theme.title,
+                                fontSize: theme.sizeTitle,
+                                letterSpacing: theme.letterSpacingTitle,
                                 fontWeight: FontWeight.normal,
                               ),
                             ),
@@ -126,9 +125,9 @@ class _UpdateReviewEntityState extends State<UpdateReviewEntity> {
                         child: Text(
                           "Confirm",
                           style: TextStyle(
-                            fontSize: 16,
-                            letterSpacing: 1.0,
                             color: theme.buttonMainText,
+                            fontSize: theme.sizeButton,
+                            letterSpacing: theme.letterSpacingButton,
                             fontWeight: FontWeight.normal,
                           ),
                         ),

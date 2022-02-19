@@ -38,8 +38,8 @@ class _UpdateReviewEpisodeState extends State<UpdateReviewEpisode> {
                 "Review",
                 style: TextStyle(
                   color: theme.title,
-                  fontSize: 24.0,
-                  letterSpacing: 1.0,
+                  fontSize: theme.sizeAppBar,
+                  letterSpacing: theme.letterSpacingAppBar,
                   fontWeight: FontWeight.normal,
                 ),
               ),
@@ -127,9 +127,9 @@ class _UpdateReviewEpisodeState extends State<UpdateReviewEpisode> {
                         child: Text(
                           "Confirm",
                           style: TextStyle(
-                            fontSize: 16,
-                            letterSpacing: 1.0,
                             color: theme.buttonMainText,
+                            fontSize: theme.sizeButton,
+                            letterSpacing: theme.letterSpacingButton,
                             fontWeight: FontWeight.normal,
                           ),
                         ),

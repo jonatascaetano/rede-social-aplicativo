@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:social_network_application/converts/convert_to_enum.dart';
 import 'package:social_network_application/entities/mini_dto/season_mini.dart';
 import 'package:social_network_application/scoped_model/season_mini_entity_model.dart';
-import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/objects/season.dart';
 
@@ -66,7 +64,7 @@ class _SeasonMiniEntityState extends State<SeasonMiniEntity> {
                               child: Center(
                                 child: Icon(
                                   Icons.image,
-                                  color: theme.emphasis,
+                                  color: theme.buttonMainText,
                                   size: 150,
                                 ),
                               ),
@@ -95,9 +93,10 @@ class _SeasonMiniEntityState extends State<SeasonMiniEntity> {
                         maxLines: 1,
                         softWrap: false,
                         style: TextStyle(
-                          fontSize: 16,
-                          letterSpacing: 1.0,
                           color: theme.title,
+                          fontSize: theme.sizeTitle,
+                          letterSpacing: theme.letterSpacingTitle,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
                       const SizedBox(
@@ -108,23 +107,35 @@ class _SeasonMiniEntityState extends State<SeasonMiniEntity> {
                             widget.seasonMini.episodeQuantity.toString(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 16,
-                          letterSpacing: 1.0,
-                          color: theme.subtitle,
+                          color: theme.title,
+                          fontSize: theme.sizeText,
+                          letterSpacing: theme.letterSpacingText,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
                       const SizedBox(
                         height: 4.0,
                       ),
                       seasonMiniEntity.entitySaveMiniIsNull
-                          ? Container()
-                          : Text(
-                              LanguageModel().entitiesCategories[
-                                  ConvertToEnum.convertTypeEntityToValue(
-                                      typeEntity: widget
-                                          .seasonMini.entity.typeEntity)][1],
-                              textAlign: TextAlign.center,
-                            ),
+                          ? Center(
+                              child: Icon(
+                                Icons.highlight_remove_sharp,
+                                color: theme.detail,
+                              ),
+                            )
+                          : Center(
+                              child: Icon(
+                                Icons.check_circle_outline,
+                                color: theme.emphasis,
+                              ),
+                            )
+                      // Text(
+                      //     LanguageModel().entitiesCategories[
+                      //         ConvertToEnum.convertTypeEntityToValue(
+                      //             typeEntity: widget
+                      //                 .seasonMini.entity.typeEntity)][1],
+                      //     textAlign: TextAlign.center,
+                      //   ),
                     ],
                   )),
 
@@ -153,9 +164,10 @@ class _SeasonMiniEntityState extends State<SeasonMiniEntity> {
                     child: Text(
                       "view",
                       style: TextStyle(
-                        fontSize: 16,
-                        letterSpacing: 1.0,
                         color: theme.buttonMainText,
+                        fontSize: theme.sizeButton,
+                        letterSpacing: theme.letterSpacingButton,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                   )
