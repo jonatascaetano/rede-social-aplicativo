@@ -311,7 +311,7 @@ class _MenuState extends State<Menu> {
                                   width: 8,
                                 ),
                                 Text(
-                                  "Register new",
+                                  "New register",
                                   style: TextStyle(
                                     fontSize: theme.sizeText,
                                     letterSpacing: theme.letterSpacingText,

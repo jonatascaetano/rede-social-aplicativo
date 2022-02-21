@@ -16,6 +16,8 @@ import 'package:social_network_application/enuns/type_report.dart';
 import 'dart:io';
 
 import 'package:social_network_application/view/authentication/login.dart';
+import 'package:social_network_application/view/post/new_post_quest.dart';
+import 'package:social_network_application/view/post/new_post_talk.dart';
 import 'package:social_network_application/widgets/post/update_post_widget.dart';
 
 import 'support/language_model.dart';
@@ -870,6 +872,92 @@ class ProfileModel extends Model {
           const SnackBar(content: Text('Try again later')),
         );
     }
+  }
+
+  showOptionsAddPostBottomSheet({required BuildContext contextAncestor}) {
+    showModalBottomSheet<dynamic>(
+        //isScrollControlled: true,
+        context: contextAncestor,
+        builder: (context) {
+          return ScopedModelDescendant<ThemeModel>(
+              builder: (context, child, theme) {
+            return BottomSheet(
+                backgroundColor: theme.background,
+                onClosing: () {},
+                builder: (context) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(
+                        height: 16.0,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const NewPostTalk()));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.question_answer_outlined),
+                              const SizedBox(
+                                width: 8.0,
+                              ),
+                              Text(
+                                'New Talk',
+                                style: TextStyle(
+                                  fontSize: theme.sizeText,
+                                  letterSpacing: theme.letterSpacingText,
+                                  color: theme.title,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const NewPostQuest()));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.quiz_outlined),
+                              const SizedBox(
+                                width: 8.0,
+                              ),
+                              Text(
+                                'New Quest',
+                                style: TextStyle(
+                                  fontSize: theme.sizeText,
+                                  letterSpacing: theme.letterSpacingText,
+                                  color: theme.title,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 16.0,
+                      )
+                    ],
+                  );
+                });
+          });
+        });
   }
 }
 

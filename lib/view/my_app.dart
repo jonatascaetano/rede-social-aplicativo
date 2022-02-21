@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/menu.dart';
@@ -42,6 +43,7 @@ class _MyAppState extends State<MyApp> {
             ),
             actions: [
               IconButton(
+                padding: EdgeInsets.zero,
                 onPressed: () {},
                 icon: Container(
                   decoration: const BoxDecoration(
@@ -58,6 +60,27 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
               IconButton(
+                  padding: EdgeInsets.zero,
+                  onPressed: () {
+                    ScopedModel.of<ProfileModel>(context)
+                        .showOptionsAddPostBottomSheet(
+                            contextAncestor: context);
+                  },
+                  icon: Container(
+                    decoration: const BoxDecoration(
+                        //color: theme.shadow,
+                        //shape: BoxShape.circle,
+                        ),
+                    height: 50.0,
+                    width: 50.0,
+                    child: Icon(
+                      Icons.add_circle_outline,
+                      color: theme.title,
+                      size: 28.0,
+                    ),
+                  )),
+              IconButton(
+                  padding: EdgeInsets.zero,
                   onPressed: () {
                     showSearch(context: context, delegate: Search());
                   },
@@ -75,6 +98,7 @@ class _MyAppState extends State<MyApp> {
                     ),
                   )),
               IconButton(
+                padding: EdgeInsets.zero,
                 onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const Menu()));

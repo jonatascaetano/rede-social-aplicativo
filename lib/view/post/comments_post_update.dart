@@ -805,7 +805,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                           style: TextStyle(
                             fontSize: theme.sizeText,
                             letterSpacing: theme.letterSpacingText,
-                            color: ScopedModel.of<ThemeModel>(context).subtitle,
+                            color: theme.subtitle,
                             fontWeight: FontWeight.normal,
                           ),
                         ),
@@ -819,7 +819,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                             letterSpacing: theme.letterSpacingText,
                             color: widget.commentMini.liked
                                 ? theme.emphasis
-                                : theme.title,
+                                : theme.subtitle,
                             fontWeight: FontWeight.normal,
                           ),
                         ),
@@ -838,7 +838,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                             size: theme.sizeTitle,
                             color: widget.commentMini.liked
                                 ? theme.emphasis
-                                : theme.title,
+                                : theme.subtitle,
                           ),
                         ),
                         IconButton(
@@ -896,7 +896,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                           icon: Icon(
                             Icons.more_vert_sharp,
                             size: theme.sizeTitle,
-                            color: ScopedModel.of<ThemeModel>(context).subtitle,
+                            color: theme.subtitle,
                           ),
                         ),
                       ],

@@ -3,4 +3,6 @@ class TypePost {
   static const String TALK = 'TALK';
   // ignore: constant_identifier_names
   static const String UPDATE = 'UPDATE';
+  // ignore: constant_identifier_names
+  static const String QUEST = 'QUEST';
 }

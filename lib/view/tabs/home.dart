@@ -56,6 +56,7 @@ class _HomeState extends State<Home> {
               profile.postsAreNull
                   ? Container()
                   : ListView(
+                      padding: EdgeInsets.zero,
                       shrinkWrap: true,
                       children: [
                         Divider(
@@ -64,12 +65,13 @@ class _HomeState extends State<Home> {
                           color: theme.shadow,
                         ),
                         ListView.separated(
+                            padding: EdgeInsets.zero,
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             separatorBuilder: (context, index) {
                               return Divider(
-                                height: 10.0,
-                                thickness: 10.0,
+                                height: 5.0,
+                                thickness: 5.0,
                                 color: theme.shadow,
                               );
                             },
@@ -87,8 +89,8 @@ class _HomeState extends State<Home> {
                                           AdmobBannerSize.MEDIUM_RECTANGLE),
                                     ),
                                     Divider(
-                                      height: 10.0,
-                                      thickness: 10.0,
+                                      height: 5.0,
+                                      thickness: 5.0,
                                       color: theme.shadow,
                                     ),
                                     profile.returnPostWidget(
