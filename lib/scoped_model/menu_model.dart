@@ -10,7 +10,7 @@ import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/authentication/login.dart';
-import 'package:social_network_application/view/new_entity.dart';
+import 'package:social_network_application/view/tabs/home/new_entity.dart';
 
 class MenuModel extends Model {
   static const String base =

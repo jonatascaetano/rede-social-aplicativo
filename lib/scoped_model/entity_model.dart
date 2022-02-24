@@ -198,6 +198,7 @@ class EntityModel extends Model {
         // ignore: avoid_print
         print(item.toString());
         entitySaveMini = EntitySaveMini.fromMap(map: item);
+        getEntity(entityId: entitySaveMini!.entity!.id);
         newPost(
             entitySaveMini: entitySaveMini!,
             category: entitySaveMini!.category!,
@@ -231,6 +232,7 @@ class EntityModel extends Model {
         var item = json.decode(response.body);
         // ignore: avoid_print
         print(item.toString());
+        getEntity(entityId: entitySaveMini!.entity!.id);
         entitySaveMini = EntitySaveMini.fromMap(map: item);
         newPost(
             entitySaveMini: entitySaveMini!,

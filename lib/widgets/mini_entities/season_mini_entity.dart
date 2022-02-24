@@ -116,19 +116,19 @@ class _SeasonMiniEntityState extends State<SeasonMiniEntity> {
                       const SizedBox(
                         height: 4.0,
                       ),
-                      seasonMiniEntity.entitySaveMiniIsNull
-                          ? Center(
-                              child: Icon(
-                                Icons.highlight_remove_sharp,
-                                color: theme.detail,
-                              ),
-                            )
-                          : Center(
-                              child: Icon(
-                                Icons.check_circle_outline,
-                                color: theme.emphasis,
-                              ),
-                            )
+                      // seasonMiniEntity.entitySaveMiniIsNull
+                      //     ? Center(
+                      //         child: Icon(
+                      //           Icons.highlight_remove_sharp,
+                      //           color: theme.detail,
+                      //         ),
+                      //       )
+                      //     : Center(
+                      //         child: Icon(
+                      //           Icons.check_circle_outline,
+                      //           color: theme.emphasis,
+                      //         ),
+                      //       )
                       // Text(
                       //     LanguageModel().entitiesCategories[
                       //         ConvertToEnum.convertTypeEntityToValue(

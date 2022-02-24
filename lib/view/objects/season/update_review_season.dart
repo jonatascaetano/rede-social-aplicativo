@@ -118,6 +118,7 @@ class _UpdateReviewSeasonState extends State<UpdateReviewSeason> {
                               review: controller.text,
                               level: null,
                               spoiler: spoiler,
+                              release: DateTime.now().toString(),
                             );
                             season.updateReviewEntitySave(
                                 entitySaveDTO: entitySaveDTO, context: context);

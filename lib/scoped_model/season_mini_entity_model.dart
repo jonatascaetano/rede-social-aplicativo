@@ -10,7 +10,7 @@ class SeasonMiniEntityModel extends Model {
   bool load = true;
   late String idUser;
   SeasonMiniEntityModel({required String seasonId}) {
-    getEntitySaveSeasonMini(seasonId: seasonId);
+    //getEntitySaveSeasonMini(seasonId: seasonId);
   }
 
   static const String base =

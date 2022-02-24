@@ -1,9 +1,11 @@
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:social_network_application/converts/convert_to_enum.dart';
 import 'package:social_network_application/entities/dto/entity_save_dto.dart';
 import 'package:social_network_application/entities/mini_dto/season_mini.dart';
 import 'package:social_network_application/scoped_model/season_model.dart';
+import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/objects/season/update_season.dart';
 import 'package:social_network_application/widgets/mini_seasons/episode_mini_season.dart';
@@ -179,7 +181,174 @@ class _SeasonState extends State<Season> {
                               ),
                             ),
                             const SizedBox(
-                              height: 16.0,
+                              height: 8.0,
+                            ),
+                            Divider(
+                              color: theme.shadow,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        season.seasonMini.category1.toString(),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: theme.sizeTitle,
+                                          letterSpacing:
+                                              theme.letterSpacingText,
+                                          color: theme.title,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 4.0,
+                                      ),
+                                      Text(
+                                        LanguageModel()
+                                            .entitiesCategories[ConvertToEnum
+                                                .convertTypeEntityToValue(
+                                                    typeEntity: season
+                                                        .seasonMini
+                                                        .entity
+                                                        .typeEntity)][1]
+                                            .toString(),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: theme.sizeTextMini,
+                                          letterSpacing:
+                                              theme.letterSpacingText,
+                                          color: theme.subtitle,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        season.seasonMini.category2.toString(),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: theme.sizeTitle,
+                                          letterSpacing:
+                                              theme.letterSpacingText,
+                                          color: theme.title,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 4.0,
+                                      ),
+                                      Text(
+                                        LanguageModel()
+                                            .entitiesCategories[ConvertToEnum
+                                                .convertTypeEntityToValue(
+                                                    typeEntity: season
+                                                        .seasonMini
+                                                        .entity
+                                                        .typeEntity)][2]
+                                            .toString(),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: theme.sizeTextMini,
+                                          letterSpacing:
+                                              theme.letterSpacingText,
+                                          color: theme.subtitle,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        season.seasonMini.category3.toString(),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: theme.sizeTitle,
+                                          letterSpacing:
+                                              theme.letterSpacingText,
+                                          color: theme.title,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 4.0,
+                                      ),
+                                      Text(
+                                        LanguageModel()
+                                            .entitiesCategories[ConvertToEnum
+                                                .convertTypeEntityToValue(
+                                                    typeEntity: season
+                                                        .seasonMini
+                                                        .entity
+                                                        .typeEntity)][3]
+                                            .toString(),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: theme.sizeTextMini,
+                                          letterSpacing:
+                                              theme.letterSpacingText,
+                                          color: theme.subtitle,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        season.seasonMini.category4.toString(),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: theme.sizeTitle,
+                                          letterSpacing:
+                                              theme.letterSpacingText,
+                                          color: theme.title,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 4.0,
+                                      ),
+                                      Text(
+                                        LanguageModel()
+                                            .entitiesCategories[ConvertToEnum
+                                                .convertTypeEntityToValue(
+                                                    typeEntity: season
+                                                        .seasonMini
+                                                        .entity
+                                                        .typeEntity)][4]
+                                            .toString(),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: theme.sizeTextMini,
+                                          letterSpacing:
+                                              theme.letterSpacingText,
+                                          color: theme.subtitle,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                            Divider(
+                              color: theme.shadow,
                             ),
 
                             Padding(
@@ -245,8 +414,7 @@ class _SeasonState extends State<Season> {
                                 : Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Evaluation(
                                           value: 1,
@@ -351,6 +519,7 @@ class _SeasonState extends State<Season> {
                                     review: null,
                                     level: null,
                                     spoiler: false,
+                                    release: null,
                                   );
                                   if (season.entitySaveMini == null) {
                                     season.newEntitySave(

@@ -20,6 +20,7 @@ class EntitySaveMini {
   late String typeObject;
   late List<dynamic>? historic = [];
   late bool spoiler;
+  late String? release;
 
   EntitySaveMini.fromMap({required Map map}) {
     id = map["id"];
@@ -43,5 +44,6 @@ class EntitySaveMini {
     typeObject = map["typeObject"];
     historic = map["historic"];
     spoiler = map["spoiler"];
+    release = map["release"];
   }
 }

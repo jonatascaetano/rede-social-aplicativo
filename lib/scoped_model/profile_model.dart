@@ -16,8 +16,10 @@ import 'package:social_network_application/enuns/type_report.dart';
 import 'dart:io';
 
 import 'package:social_network_application/view/authentication/login.dart';
-import 'package:social_network_application/view/post/new_post_quest.dart';
-import 'package:social_network_application/view/post/new_post_talk.dart';
+import 'package:social_network_application/view/tabs/home/new_entity.dart';
+import 'package:social_network_application/view/tabs/home/new_group.dart';
+import 'package:social_network_application/view/tabs/home/new_post_quest.dart';
+import 'package:social_network_application/view/tabs/home/new_post_talk.dart';
 import 'package:social_network_application/widgets/post/update_post_widget.dart';
 
 import 'support/language_model.dart';
@@ -904,7 +906,10 @@ class ProfileModel extends Model {
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
                             children: [
-                              const Icon(Icons.question_answer_outlined),
+                              Icon(
+                                Icons.question_answer_outlined,
+                                color: theme.emphasis,
+                              ),
                               const SizedBox(
                                 width: 8.0,
                               ),
@@ -933,7 +938,10 @@ class ProfileModel extends Model {
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
                             children: [
-                              const Icon(Icons.quiz_outlined),
+                              Icon(
+                                Icons.quiz_outlined,
+                                color: theme.emphasis,
+                              ),
                               const SizedBox(
                                 width: 8.0,
                               ),
@@ -950,10 +958,135 @@ class ProfileModel extends Model {
                           ),
                         ),
                       ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const NewGroup()));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.group_add,
+                                color: theme.emphasis,
+                              ),
+                              const SizedBox(
+                                width: 8.0,
+                              ),
+                              Text(
+                                'New Group',
+                                style: TextStyle(
+                                  fontSize: theme.sizeText,
+                                  letterSpacing: theme.letterSpacingText,
+                                  color: theme.title,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                          showListEntitiesBottomSheet(context);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.add_circle,
+                                color: theme.emphasis,
+                              ),
+                              const SizedBox(
+                                width: 8.0,
+                              ),
+                              Text(
+                                'New Register',
+                                style: TextStyle(
+                                  fontSize: theme.sizeText,
+                                  letterSpacing: theme.letterSpacingText,
+                                  color: theme.title,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                       const SizedBox(
                         height: 16.0,
                       )
                     ],
+                  );
+                });
+          });
+        });
+  }
+
+  showListEntitiesBottomSheet(BuildContext context) {
+    showModalBottomSheet<dynamic>(
+        //isScrollControlled: true,
+        context: context,
+        builder: (context) {
+          return ScopedModelDescendant<ThemeModel>(
+              builder: (context, child, theme) {
+            return BottomSheet(
+                backgroundColor: theme.background,
+                onClosing: () {},
+                builder: (context) {
+                  return GridView.count(
+                    childAspectRatio: 1.0 / 1.6,
+                    crossAxisCount: 3,
+                    children: LanguageModel().typeEntities.map((e) {
+                      return GestureDetector(
+                        child: Container(
+                          color: Colors.transparent,
+                          margin: const EdgeInsets.all(4.0),
+                          padding: const EdgeInsets.only(top: 18.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              CircleAvatar(
+                                child: Icon(
+                                  LanguageModel().typeEntitiesIcon[
+                                      LanguageModel().typeEntities.indexOf(e)],
+                                  size: 30.0,
+                                  color: theme.buttonText,
+                                ),
+                                backgroundColor: theme.button,
+                                radius: 40.0,
+                              ),
+                              const SizedBox(height: 8.0),
+                              Text(
+                                e,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: theme.buttonText,
+                                ),
+                                maxLines: 2,
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 8.0),
+                            ],
+                          ),
+                        ),
+                        onTap: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => NewEntity(
+                                        typeEntity: e,
+                                      )));
+                        },
+                      );
+                    }).toList(),
                   );
                 });
           });

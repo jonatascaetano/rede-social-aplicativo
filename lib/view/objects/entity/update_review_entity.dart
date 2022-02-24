@@ -117,6 +117,7 @@ class _UpdateReviewEntityState extends State<UpdateReviewEntity> {
                               review: controller.text,
                               level: null,
                               spoiler: spoiler,
+                              release: DateTime.now().toString(),
                             );
                             entity.updateReviewEntitySave(
                                 entitySaveDTO: entitySaveDTO, context: context);

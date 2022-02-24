@@ -30,8 +30,8 @@ class _FollowingState extends State<Following> {
                     "Following",
                     style: TextStyle(
                       color: theme.title,
-                      fontSize: 24.0,
-                      letterSpacing: 1.0,
+                      fontSize: theme.sizeAppBar,
+                      letterSpacing: theme.letterSpacingAppBar,
                       fontWeight: FontWeight.normal,
                     ),
                   ),
@@ -55,8 +55,9 @@ class _FollowingState extends State<Following> {
                                       'following',
                                       style: TextStyle(
                                         color: theme.title,
-                                        fontSize: 24.0,
-                                        letterSpacing: 1.0,
+                                        fontSize: theme.sizeAppBar,
+                                        letterSpacing:
+                                            theme.letterSpacingAppBar,
                                         fontWeight: FontWeight.normal,
                                       ),
                                     ),

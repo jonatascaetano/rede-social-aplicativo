@@ -13,6 +13,8 @@ import 'package:social_network_application/view/objects/episode.dart';
 import 'package:social_network_application/view/objects/season.dart';
 import 'package:social_network_application/view/objects/user.dart';
 import 'package:social_network_application/view/post/comments_post_update.dart';
+import 'package:social_network_application/view/post/likes_post.dart';
+import 'package:social_network_application/widgets/post/likes_names_post_widget.dart';
 
 // ignore: must_be_immutable
 class UpdatePostWidget extends StatefulWidget {
@@ -184,42 +186,57 @@ class _UpdatePostWidgetState extends State<UpdatePostWidget> {
                   margin: EdgeInsets.zero,
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
-                        Icons.star,
-                        size: 50,
-                        color: widget.postUpdateMini.evaluation >= 1
-                            ? Colors.yellow[700]
-                            : theme.icon,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.star,
+                          size: 40,
+                          color: widget.postUpdateMini.evaluation >= 1
+                              ? Colors.yellow[700]
+                              : theme.icon,
+                        ),
                       ),
-                      Icon(
-                        Icons.star,
-                        size: 50,
-                        color: widget.postUpdateMini.evaluation >= 2
-                            ? Colors.yellow[700]
-                            : theme.icon,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.star,
+                          size: 40,
+                          color: widget.postUpdateMini.evaluation >= 2
+                              ? Colors.yellow[700]
+                              : theme.icon,
+                        ),
                       ),
-                      Icon(
-                        Icons.star,
-                        size: 50,
-                        color: widget.postUpdateMini.evaluation >= 3
-                            ? Colors.yellow[700]
-                            : theme.icon,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.star,
+                          size: 40,
+                          color: widget.postUpdateMini.evaluation >= 3
+                              ? Colors.yellow[700]
+                              : theme.icon,
+                        ),
                       ),
-                      Icon(
-                        Icons.star,
-                        size: 50,
-                        color: widget.postUpdateMini.evaluation >= 4
-                            ? Colors.yellow[700]
-                            : theme.icon,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.star,
+                          size: 40,
+                          color: widget.postUpdateMini.evaluation >= 4
+                              ? Colors.yellow[700]
+                              : theme.icon,
+                        ),
                       ),
-                      Icon(
-                        Icons.star,
-                        size: 50,
-                        color: widget.postUpdateMini.evaluation >= 5
-                            ? Colors.yellow[700]
-                            : theme.icon,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.star,
+                          size: 40,
+                          color: widget.postUpdateMini.evaluation >= 5
+                              ? Colors.yellow[700]
+                              : theme.icon,
+                        ),
                       ),
                     ],
                   ),
@@ -240,7 +257,7 @@ class _UpdatePostWidgetState extends State<UpdatePostWidget> {
                           widget.postUpdateMini.body!,
                           textAlign: TextAlign.left,
                           style: TextStyle(
-                            fontSize: theme.sizeText,
+                            fontSize: theme.sizeTitle,
                             letterSpacing: theme.letterSpacingText,
                             color: theme.title,
                             fontWeight: FontWeight.normal,
@@ -271,7 +288,7 @@ class _UpdatePostWidgetState extends State<UpdatePostWidget> {
                           widget.postUpdateMini.body!,
                           textAlign: TextAlign.left,
                           style: TextStyle(
-                            fontSize: theme.sizeText,
+                            fontSize: theme.sizeTitle,
                             letterSpacing: theme.letterSpacingText,
                             color: theme.title,
                             fontWeight: FontWeight.normal,
@@ -368,7 +385,24 @@ class _UpdatePostWidgetState extends State<UpdatePostWidget> {
                 */
 
           const SizedBox(
-            height: 16.0,
+            height: 8.0,
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => LikesPost(
+                                idPost: widget.postUpdateMini.id!,
+                              )));
+                },
+                child: LikesNamesPostWidget.returnLikes(
+                    postUpdateMini: widget.postUpdateMini, context: context)),
+          ),
+          const SizedBox(
+            height: 8.0,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -7,6 +7,7 @@ class ThemeModel extends Model {
   double sizeAppBar = 18;
   double sizeTitle = 18;
   double sizeText = 15;
+  double sizeTextMini = 13;
   double sizeButton = 18;
   double letterSpacingAppBar = 1.0;
   double letterSpacingTitle = 1.0;

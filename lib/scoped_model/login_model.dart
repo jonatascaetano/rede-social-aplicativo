@@ -7,8 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_network_application/entities/dto/user_dto.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/view/authentication/login.dart';
-import 'package:social_network_application/view/my_app.dart';
 import 'package:http/http.dart' as http;
+import 'package:social_network_application/view/tabs/home/my_app.dart';
 
 class LoginModel extends Model {
   static const String base =

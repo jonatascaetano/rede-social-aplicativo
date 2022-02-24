@@ -306,7 +306,7 @@ class _UserState extends State<User> {
                                                   children: [
                                                     Icon(
                                                       Icons.person_remove,
-                                                      color: theme.buttonMain,
+                                                      color: theme.detail,
                                                     ),
                                                     const SizedBox(
                                                       width: 4.0,
@@ -344,7 +344,7 @@ class _UserState extends State<User> {
                                                   children: [
                                                     Icon(
                                                       Icons.person_add,
-                                                      color: theme.buttonMain,
+                                                      color: theme.emphasis,
                                                     ),
                                                     const SizedBox(
                                                       width: 4.0,

@@ -30,8 +30,8 @@ class _FollowersState extends State<Followers> {
                     "Followers",
                     style: TextStyle(
                       color: theme.title,
-                      fontSize: 24.0,
-                      letterSpacing: 1.0,
+                      fontSize: theme.sizeAppBar,
+                      letterSpacing: theme.letterSpacingAppBar,
                       fontWeight: FontWeight.normal,
                     ),
                   ),
@@ -57,8 +57,9 @@ class _FollowersState extends State<Followers> {
                                       'followers',
                                       style: TextStyle(
                                         color: theme.title,
-                                        fontSize: 24.0,
-                                        letterSpacing: 1.0,
+                                        fontSize: theme.sizeAppBar,
+                                        letterSpacing:
+                                            theme.letterSpacingAppBar,
                                         fontWeight: FontWeight.normal,
                                       ),
                                     ),

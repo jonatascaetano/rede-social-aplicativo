@@ -19,6 +19,7 @@ class PostUpdateMini {
   late bool spoiler;
   late String typePost;
   late bool liked;
+  late UserMini? like;
 
   PostUpdateMini.fromMap({required Map map}) {
     id = map["id"];
@@ -40,5 +41,6 @@ class PostUpdateMini {
     spoiler = map["spoiler"] ?? false;
     typePost = map["typePost"];
     liked = map["liked"] ?? false;
+    like = map["like"] != null ? UserMini.fromMap(map: map["like"]) : null;
   }
 }

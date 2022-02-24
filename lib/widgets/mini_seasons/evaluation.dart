@@ -39,6 +39,7 @@ class _EvaluationState extends State<Evaluation> {
                   review: null,
                   level: null,
                   spoiler: false,
+                  release: null,
                 );
                 season.updateEvaluationEntitySave(
                     entitySaveDTO: entitySaveDTO, context: context);
@@ -46,7 +47,7 @@ class _EvaluationState extends State<Evaluation> {
             },
             icon: Icon(
               Icons.star,
-              size: 60,
+              size: 40,
               color: widget.evaluation >= widget.value
                   ? Colors.yellow[700]
                   : theme.icon,

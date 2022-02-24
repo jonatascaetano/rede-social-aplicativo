@@ -101,24 +101,24 @@ class EpisodeModel extends Model {
               typeEntity: episodeMini.season.entity.typeEntity)][1]),
       value: 1,
     ));
-    // dropdownList.add(DropdownMenuItem(
-    //   child: Text(LanguageModel().entitiesCategories[
-    //       ConvertToEnum.convertTypeEntityToValue(
-    //           typeEntity: entityMini.typeEntity)][2]),
-    //   value: 2,
-    // ));
-    // dropdownList.add(DropdownMenuItem(
-    //   child: Text(LanguageModel().entitiesCategories[
-    //       ConvertToEnum.convertTypeEntityToValue(
-    //           typeEntity: entityMini.typeEntity)][3]),
-    //   value: 3,
-    // ));
-    // dropdownList.add(DropdownMenuItem(
-    //   child: Text(LanguageModel().entitiesCategories[
-    //       ConvertToEnum.convertTypeEntityToValue(
-    //           typeEntity: entityMini.typeEntity)][4]),
-    //   value: 4,
-    // ));
+    dropdownList.add(DropdownMenuItem(
+      child: Text(LanguageModel().entitiesCategories[
+          ConvertToEnum.convertTypeEntityToValue(
+              typeEntity: episodeMini.season.entity.typeEntity)][2]),
+      value: 2,
+    ));
+    dropdownList.add(DropdownMenuItem(
+      child: Text(LanguageModel().entitiesCategories[
+          ConvertToEnum.convertTypeEntityToValue(
+              typeEntity: episodeMini.season.entity.typeEntity)][3]),
+      value: 3,
+    ));
+    dropdownList.add(DropdownMenuItem(
+      child: Text(LanguageModel().entitiesCategories[
+          ConvertToEnum.convertTypeEntityToValue(
+              typeEntity: episodeMini.season.entity.typeEntity)][4]),
+      value: 4,
+    ));
     notifyListeners();
   }
 
@@ -141,6 +141,7 @@ class EpisodeModel extends Model {
         // ignore: avoid_print
         print(item.toString());
         entitySaveMini = EntitySaveMini.fromMap(map: item);
+        getEpisode(episodeId: entitySaveMini!.episode!.id);
         newPost(
             entitySaveMini: entitySaveMini!,
             category: entitySaveMini!.category!,
@@ -175,6 +176,7 @@ class EpisodeModel extends Model {
         // ignore: avoid_print
         print(item.toString());
         entitySaveMini = EntitySaveMini.fromMap(map: item);
+        getEpisode(episodeId: entitySaveMini!.episode!.id);
         newPost(
             entitySaveMini: entitySaveMini!,
             category: entitySaveMini!.category!,

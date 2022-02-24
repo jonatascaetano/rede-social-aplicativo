@@ -10,12 +10,11 @@ import 'package:social_network_application/scoped_model/support/language_model.d
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/widgets/mini_entities/evaluation.dart';
 import 'package:social_network_application/widgets/mini_entities/season_mini_entity.dart';
-import 'package:social_network_application/widgets/mini_entities/worker_mini_entity.dart';
 
 import 'entity/all_seasons_entity.dart';
-import 'entity/all_workers_entity.dart';
+
 import 'entity/new_season_entity.dart';
-import 'entity/new_worker_entity.dart';
+
 import 'entity/update_entity.dart';
 import 'entity/update_review_entity.dart';
 
@@ -110,36 +109,71 @@ class _EntityState extends State<Entity> {
                       ? ListView(
                           padding: EdgeInsets.zero,
                           children: [
-                            entity.entityMini.image != null
-                                ? Container(
-                                    margin: EdgeInsets.zero,
-                                    padding: EdgeInsets.zero,
-                                    height: (MediaQuery.of(context).size.width /
-                                            16) *
-                                        9,
-                                    width: MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(
-                                      color: theme.shadow,
-                                      image: DecorationImage(
-                                        image: NetworkImage(
-                                            entity.entityMini.image!),
-                                        fit: BoxFit.fitHeight,
+                            Stack(
+                              children: [
+                                entity.entityMini.image != null
+                                    ? Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 40),
+                                        child: Container(
+                                          margin: EdgeInsets.zero,
+                                          padding: EdgeInsets.zero,
+                                          height: (MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  16) *
+                                              9,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          decoration: BoxDecoration(
+                                            color: theme.shadow,
+                                            image: DecorationImage(
+                                              image: NetworkImage(
+                                                  entity.entityMini.image!),
+                                              fit: BoxFit.fitHeight,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 40),
+                                        child: Container(
+                                            color: theme.shadow,
+                                            height: (MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    16) *
+                                                9,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            child: Center(
+                                              child: Icon(
+                                                Icons.image,
+                                                size: 100,
+                                                color: theme.emphasis,
+                                              ),
+                                            )),
                                       ),
-                                    ),
-                                  )
-                                : Container(
-                                    color: theme.shadow,
-                                    height: (MediaQuery.of(context).size.width /
-                                            16) *
-                                        9,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.image,
-                                        size: 100,
-                                        color: theme.emphasis,
+                                entity.entityMiniIsNull
+                                    ? Container()
+                                    : Positioned(
+                                        bottom: -10.0,
+                                        right: 8.0,
+                                        child: IconButton(
+                                          onPressed: () {},
+                                          icon: Icon(
+                                            Icons.add_circle_rounded,
+                                            size: 30,
+                                            color: ScopedModel.of<ThemeModel>(
+                                                    context)
+                                                .emphasis,
+                                          ),
+                                        ),
                                       ),
-                                    )),
+                              ],
+                            ),
                             const SizedBox(
                               height: 16.0,
                             ),
@@ -173,9 +207,259 @@ class _EntityState extends State<Entity> {
                               ),
                             ),
 
-                            // const SizedBox(
-                            //   height: 16.0,
-                            // ),
+                            //update evaluation
+                            entity.entitySaveMini == null
+                                ? Container()
+                                : Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Evaluation(
+                                          value: 1,
+                                          evaluation:
+                                              entity.entitySaveMini != null
+                                                  ? entity.entitySaveMini!
+                                                      .evaluation!
+                                                  : 0),
+                                      Evaluation(
+                                          value: 2,
+                                          evaluation:
+                                              entity.entitySaveMini != null
+                                                  ? entity.entitySaveMini!
+                                                      .evaluation!
+                                                  : 0),
+                                      Evaluation(
+                                          value: 3,
+                                          evaluation:
+                                              entity.entitySaveMini != null
+                                                  ? entity.entitySaveMini!
+                                                      .evaluation!
+                                                  : 0),
+                                      Evaluation(
+                                          value: 4,
+                                          evaluation:
+                                              entity.entitySaveMini != null
+                                                  ? entity.entitySaveMini!
+                                                      .evaluation!
+                                                  : 3),
+                                      Evaluation(
+                                          value: 5,
+                                          evaluation:
+                                              entity.entitySaveMini != null
+                                                  ? entity.entitySaveMini!
+                                                      .evaluation!
+                                                  : 0),
+                                    ],
+                                  ),
+
+                            //*update evaluation
+
+                            entity.entitySaveMini == null
+                                ? Container()
+                                : const SizedBox(
+                                    height: 8.0,
+                                  ),
+
+                            Text(
+                              entity.entityMini.evaluationAverage
+                                  .toStringAsPrecision(2),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 30,
+                                letterSpacing: theme.letterSpacingAppBar,
+                                color: theme.emphasis,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 2.0,
+                            ),
+                            Text(
+                              '( ' +
+                                  entity.entityMini.evaluationQuantity
+                                      .toString() +
+                                  ' evaluations)',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: theme.sizeText,
+                                letterSpacing: theme.letterSpacingText,
+                                color: theme.subtitle,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+
+                            const SizedBox(
+                              height: 8.0,
+                            ),
+                            Divider(
+                              color: theme.shadow,
+                            ),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          entity.entityMini.category1
+                                              .toString(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: theme.sizeTitle,
+                                            letterSpacing:
+                                                theme.letterSpacingText,
+                                            color: theme.title,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 4.0,
+                                        ),
+                                        Text(
+                                          LanguageModel()
+                                              .entitiesCategories[ConvertToEnum
+                                                  .convertTypeEntityToValue(
+                                                      typeEntity: entity
+                                                          .entityMini
+                                                          .typeEntity)][1]
+                                              .toString(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: theme.sizeText,
+                                            letterSpacing:
+                                                theme.letterSpacingText,
+                                            color: theme.subtitle,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          entity.entityMini.category2
+                                              .toString(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: theme.sizeTitle,
+                                            letterSpacing:
+                                                theme.letterSpacingText,
+                                            color: theme.title,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 4.0,
+                                        ),
+                                        Text(
+                                          LanguageModel()
+                                              .entitiesCategories[ConvertToEnum
+                                                  .convertTypeEntityToValue(
+                                                      typeEntity: entity
+                                                          .entityMini
+                                                          .typeEntity)][2]
+                                              .toString(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: theme.sizeText,
+                                            letterSpacing:
+                                                theme.letterSpacingText,
+                                            color: theme.subtitle,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          entity.entityMini.category3
+                                              .toString(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: theme.sizeTitle,
+                                            letterSpacing:
+                                                theme.letterSpacingText,
+                                            color: theme.title,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 4.0,
+                                        ),
+                                        Text(
+                                          LanguageModel()
+                                              .entitiesCategories[ConvertToEnum
+                                                  .convertTypeEntityToValue(
+                                                      typeEntity: entity
+                                                          .entityMini
+                                                          .typeEntity)][3]
+                                              .toString(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: theme.sizeText,
+                                            letterSpacing:
+                                                theme.letterSpacingText,
+                                            color: theme.subtitle,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          entity.entityMini.category4
+                                              .toString(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: theme.sizeTitle,
+                                            letterSpacing:
+                                                theme.letterSpacingText,
+                                            color: theme.title,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 4.0,
+                                        ),
+                                        Text(
+                                          LanguageModel()
+                                              .entitiesCategories[ConvertToEnum
+                                                  .convertTypeEntityToValue(
+                                                      typeEntity: entity
+                                                          .entityMini
+                                                          .typeEntity)][4]
+                                              .toString(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: theme.sizeText,
+                                            letterSpacing:
+                                                theme.letterSpacingText,
+                                            color: theme.subtitle,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Divider(
+                              color: theme.shadow,
+                            ),
 
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -243,88 +527,6 @@ class _EntityState extends State<Entity> {
                               ),
                             ),
 
-                            //update evaluation
-                            entity.entitySaveMini == null
-                                ? Container()
-                                : Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Evaluation(
-                                          value: 1,
-                                          evaluation:
-                                              entity.entitySaveMini != null
-                                                  ? entity.entitySaveMini!
-                                                      .evaluation!
-                                                  : 0),
-                                      Evaluation(
-                                          value: 2,
-                                          evaluation:
-                                              entity.entitySaveMini != null
-                                                  ? entity.entitySaveMini!
-                                                      .evaluation!
-                                                  : 0),
-                                      Evaluation(
-                                          value: 3,
-                                          evaluation:
-                                              entity.entitySaveMini != null
-                                                  ? entity.entitySaveMini!
-                                                      .evaluation!
-                                                  : 0),
-                                      Evaluation(
-                                          value: 4,
-                                          evaluation:
-                                              entity.entitySaveMini != null
-                                                  ? entity.entitySaveMini!
-                                                      .evaluation!
-                                                  : 3),
-                                      Evaluation(
-                                          value: 5,
-                                          evaluation:
-                                              entity.entitySaveMini != null
-                                                  ? entity.entitySaveMini!
-                                                      .evaluation!
-                                                  : 0),
-                                    ],
-                                  ),
-                            //*update evaluation
-                            entity.entitySaveMini == null
-                                ? Container()
-                                : const SizedBox(
-                                    height: 16.0,
-                                  ),
-
-                            Text(
-                              entity.entityMini.evaluationAverage
-                                  .toStringAsPrecision(2),
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: theme.sizeAppBar,
-                                letterSpacing: theme.letterSpacingAppBar,
-                                color: theme.emphasis,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 2.0,
-                            ),
-                            Text(
-                              '( ' +
-                                  entity.entityMini.evaluationQuantity
-                                      .toString() +
-                                  ' evaluations)',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: theme.sizeText,
-                                letterSpacing: theme.letterSpacingText,
-                                color: theme.subtitle,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 8.0,
-                            ),
-
                             //categoty update
                             Align(
                               alignment: Alignment.bottomCenter,
@@ -357,6 +559,7 @@ class _EntityState extends State<Entity> {
                                     review: null,
                                     level: null,
                                     spoiler: false,
+                                    release: null,
                                   );
                                   if (entity.entitySaveMini == null) {
                                     entity.newEntitySave(
@@ -478,6 +681,7 @@ class _EntityState extends State<Entity> {
                                               review: null,
                                               level: null,
                                               spoiler: false,
+                                              release: null,
                                             );
                                             entity.updateGoalEntitySave(
                                                 entitySaveDTO: entitySaveDTO,
@@ -490,7 +694,7 @@ class _EntityState extends State<Entity> {
                                           color: entity.entitySaveMini != null
                                               ? entity.entitySaveMini!.goal
                                                   ? theme.emphasis
-                                                  : theme.button
+                                                  : theme.icon
                                               : theme.button,
                                         ),
                                       ),
@@ -585,7 +789,7 @@ class _EntityState extends State<Entity> {
                                     entity.entityMini.typeEntity ==
                                         TypeEntity.PLACES
                                 ? SizedBox(
-                                    height: 290,
+                                    height: 270,
                                     child: ListView.builder(
                                         scrollDirection: Axis.horizontal,
                                         itemCount: entity.seasons.length + 1,
@@ -672,127 +876,127 @@ class _EntityState extends State<Entity> {
                                   )
                                 : Container(),
 
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      'View all cast',
-                                      style: TextStyle(
-                                        fontSize: theme.sizeText,
-                                        letterSpacing: theme.letterSpacingText,
-                                        color: theme.title,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                    ),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const AllWorkersEntity(),
-                                        ),
-                                      );
-                                    },
-                                    icon: Icon(
-                                      Icons.arrow_forward,
-                                      color: theme.subtitle,
-                                      size: 24.0,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            // Padding(
+                            //   padding: const EdgeInsets.all(8.0),
+                            //   child: Row(
+                            //     children: [
+                            //       Expanded(
+                            //         child: Text(
+                            //           'View all cast',
+                            //           style: TextStyle(
+                            //             fontSize: theme.sizeText,
+                            //             letterSpacing: theme.letterSpacingText,
+                            //             color: theme.title,
+                            //             fontWeight: FontWeight.normal,
+                            //           ),
+                            //         ),
+                            //       ),
+                            //       IconButton(
+                            //         onPressed: () {
+                            //           Navigator.push(
+                            //             context,
+                            //             MaterialPageRoute(
+                            //               builder: (context) =>
+                            //                   const AllWorkersEntity(),
+                            //             ),
+                            //           );
+                            //         },
+                            //         icon: Icon(
+                            //           Icons.arrow_forward,
+                            //           color: theme.subtitle,
+                            //           size: 24.0,
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
 
-                            SizedBox(
-                              height: 260,
-                              child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: entity.workers.length + 1,
-                                  itemBuilder: (context, index) {
-                                    if (index == entity.workers.length) {
-                                      return Padding(
-                                        padding: const EdgeInsets.all(4.0),
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    NewWorkerEntity(
-                                                        entityMini:
-                                                            entity.entityMini,
-                                                        context: context),
-                                              ),
-                                            );
-                                            // if (ScopedModel.of<ProfileModel>(
-                                            //         context)
-                                            //     .userMini
-                                            //     .checked) {
-                                            //   Navigator.push(
-                                            //     context,
-                                            //     MaterialPageRoute(
-                                            //       builder: (context) =>
-                                            //           NewWorkerEntity(
-                                            //               entityMini:
-                                            //                   entity.entityMini,
-                                            //               context: context),
-                                            //     ),
-                                            //   );
-                                            // } else {
-                                            //   ScaffoldMessenger.of(context)
-                                            //       .showSnackBar(const SnackBar(
-                                            //           content: Text(
-                                            //               'only released to verified users')));
-                                            // }
-                                          },
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              color: theme.shadow,
-                                              border: Border.all(
-                                                color: theme.shadow,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                            width: 200,
-                                            child: Center(
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Icon(
-                                                    Icons.add_box_outlined,
-                                                    color: theme.emphasis,
-                                                  ),
-                                                  Text(
-                                                    'add worker',
-                                                    style: TextStyle(
-                                                      fontSize: theme.sizeText,
-                                                      letterSpacing: theme
-                                                          .letterSpacingText,
-                                                      color: theme.title,
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    } else {
-                                      return WorkerMiniEntity(
-                                        workerMini: entity.workers[index],
-                                        idUser: entity.idUser,
-                                      );
-                                    }
-                                  }),
-                            ),
+                            // SizedBox(
+                            //   height: 260,
+                            //   child: ListView.builder(
+                            //       scrollDirection: Axis.horizontal,
+                            //       itemCount: entity.workers.length + 1,
+                            //       itemBuilder: (context, index) {
+                            //         if (index == entity.workers.length) {
+                            //           return Padding(
+                            //             padding: const EdgeInsets.all(4.0),
+                            //             child: GestureDetector(
+                            //               onTap: () {
+                            //                 Navigator.push(
+                            //                   context,
+                            //                   MaterialPageRoute(
+                            //                     builder: (context) =>
+                            //                         NewWorkerEntity(
+                            //                             entityMini:
+                            //                                 entity.entityMini,
+                            //                             context: context),
+                            //                   ),
+                            //                 );
+                            //                 // if (ScopedModel.of<ProfileModel>(
+                            //                 //         context)
+                            //                 //     .userMini
+                            //                 //     .checked) {
+                            //                 //   Navigator.push(
+                            //                 //     context,
+                            //                 //     MaterialPageRoute(
+                            //                 //       builder: (context) =>
+                            //                 //           NewWorkerEntity(
+                            //                 //               entityMini:
+                            //                 //                   entity.entityMini,
+                            //                 //               context: context),
+                            //                 //     ),
+                            //                 //   );
+                            //                 // } else {
+                            //                 //   ScaffoldMessenger.of(context)
+                            //                 //       .showSnackBar(const SnackBar(
+                            //                 //           content: Text(
+                            //                 //               'only released to verified users')));
+                            //                 // }
+                            //               },
+                            //               child: Container(
+                            //                 decoration: BoxDecoration(
+                            //                   color: theme.shadow,
+                            //                   border: Border.all(
+                            //                     color: theme.shadow,
+                            //                   ),
+                            //                   borderRadius:
+                            //                       BorderRadius.circular(8.0),
+                            //                 ),
+                            //                 width: 200,
+                            //                 child: Center(
+                            //                   child: Column(
+                            //                     mainAxisAlignment:
+                            //                         MainAxisAlignment.center,
+                            //                     children: [
+                            //                       Icon(
+                            //                         Icons.add_box_outlined,
+                            //                         color: theme.emphasis,
+                            //                       ),
+                            //                       Text(
+                            //                         'add worker',
+                            //                         style: TextStyle(
+                            //                           fontSize: theme.sizeText,
+                            //                           letterSpacing: theme
+                            //                               .letterSpacingText,
+                            //                           color: theme.title,
+                            //                           fontWeight:
+                            //                               FontWeight.normal,
+                            //                         ),
+                            //                       ),
+                            //                     ],
+                            //                   ),
+                            //                 ),
+                            //               ),
+                            //             ),
+                            //           );
+                            //         } else {
+                            //           return WorkerMiniEntity(
+                            //             workerMini: entity.workers[index],
+                            //             idUser: entity.idUser,
+                            //           );
+                            //         }
+                            //       }),
+                            // ),
                             const SizedBox(
                               height: 16.0,
                             )

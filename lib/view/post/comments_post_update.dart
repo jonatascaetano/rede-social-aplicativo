@@ -13,6 +13,9 @@ import 'package:social_network_application/view/objects/entity.dart';
 import 'package:social_network_application/view/objects/episode.dart';
 import 'package:social_network_application/view/objects/season.dart';
 import 'package:social_network_application/view/objects/user.dart';
+import 'package:social_network_application/widgets/post/likes_names_post_widget.dart';
+
+import 'likes_post.dart';
 
 // ignore: must_be_immutable
 class CommentsPostUpdate extends StatefulWidget {
@@ -254,53 +257,82 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                                       vertical: 4.0),
                                               child: Row(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
+                                                    MainAxisAlignment.center,
                                                 children: [
-                                                  Icon(
-                                                    Icons.star,
-                                                    size: 50,
-                                                    color: widget.postUpdateMini
-                                                                .evaluation >=
-                                                            1
-                                                        ? Colors.yellow[700]
-                                                        : theme.icon,
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Icon(
+                                                      Icons.star,
+                                                      size: 40,
+                                                      color: widget
+                                                                  .postUpdateMini
+                                                                  .evaluation >=
+                                                              1
+                                                          ? Colors.yellow[700]
+                                                          : theme.icon,
+                                                    ),
                                                   ),
-                                                  Icon(
-                                                    Icons.star,
-                                                    size: 50,
-                                                    color: widget.postUpdateMini
-                                                                .evaluation >=
-                                                            2
-                                                        ? Colors.yellow[700]
-                                                        : theme.icon,
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Icon(
+                                                      Icons.star,
+                                                      size: 40,
+                                                      color: widget
+                                                                  .postUpdateMini
+                                                                  .evaluation >=
+                                                              2
+                                                          ? Colors.yellow[700]
+                                                          : theme.icon,
+                                                    ),
                                                   ),
-                                                  Icon(
-                                                    Icons.star,
-                                                    size: 50,
-                                                    color: widget.postUpdateMini
-                                                                .evaluation >=
-                                                            3
-                                                        ? Colors.yellow[700]
-                                                        : theme.icon,
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Icon(
+                                                      Icons.star,
+                                                      size: 40,
+                                                      color: widget
+                                                                  .postUpdateMini
+                                                                  .evaluation >=
+                                                              3
+                                                          ? Colors.yellow[700]
+                                                          : theme.icon,
+                                                    ),
                                                   ),
-                                                  Icon(
-                                                    Icons.star,
-                                                    size: 50,
-                                                    color: widget.postUpdateMini
-                                                                .evaluation >=
-                                                            4
-                                                        ? Colors.yellow[700]
-                                                        : theme.icon,
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Icon(
+                                                      Icons.star,
+                                                      size: 40,
+                                                      color: widget
+                                                                  .postUpdateMini
+                                                                  .evaluation >=
+                                                              4
+                                                          ? Colors.yellow[700]
+                                                          : theme.icon,
+                                                    ),
                                                   ),
-                                                  Icon(
-                                                    Icons.star,
-                                                    size: 50,
-                                                    color: widget.postUpdateMini
-                                                                .evaluation >=
-                                                            5
-                                                        ? Colors.yellow[700]
-                                                        : theme.icon,
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Icon(
+                                                      Icons.star,
+                                                      size: 40,
+                                                      color: widget
+                                                                  .postUpdateMini
+                                                                  .evaluation >=
+                                                              5
+                                                          ? Colors.yellow[700]
+                                                          : theme.icon,
+                                                    ),
                                                   ),
                                                 ],
                                               ),
@@ -454,8 +486,32 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                         ),
                                       ),
                                       */
+
                                       const SizedBox(
-                                        height: 16.0,
+                                        height: 8.0,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          LikesPost(
+                                                            idPost: widget
+                                                                .postUpdateMini
+                                                                .id!,
+                                                          )));
+                                            },
+                                            child: LikesNamesPostWidget
+                                                .returnLikes(
+                                                    postUpdateMini:
+                                                        comment.postUpdateMini,
+                                                    context: context)),
+                                      ),
+                                      const SizedBox(
+                                        height: 8.0,
                                       ),
                                       Row(
                                         mainAxisAlignment:

@@ -39,6 +39,7 @@ class _EvaluationState extends State<Evaluation> {
                   review: null,
                   level: null,
                   spoiler: false,
+                  release: null,
                 );
                 episode.updateEvaluationEntitySave(
                     entitySaveDTO: entitySaveDTO, context: context);

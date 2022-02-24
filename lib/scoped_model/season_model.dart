@@ -128,24 +128,24 @@ class SeasonModel extends Model {
               typeEntity: seasonMini.entity.typeEntity)][1]),
       value: 1,
     ));
-    // dropdownList.add(DropdownMenuItem(
-    //   child: Text(LanguageModel().entitiesCategories[
-    //       ConvertToEnum.convertTypeEntityToValue(
-    //           typeEntity: entityMini.typeEntity)][2]),
-    //   value: 2,
-    // ));
-    // dropdownList.add(DropdownMenuItem(
-    //   child: Text(LanguageModel().entitiesCategories[
-    //       ConvertToEnum.convertTypeEntityToValue(
-    //           typeEntity: entityMini.typeEntity)][3]),
-    //   value: 3,
-    // ));
-    // dropdownList.add(DropdownMenuItem(
-    //   child: Text(LanguageModel().entitiesCategories[
-    //       ConvertToEnum.convertTypeEntityToValue(
-    //           typeEntity: entityMini.typeEntity)][4]),
-    //   value: 4,
-    // ));
+    dropdownList.add(DropdownMenuItem(
+      child: Text(LanguageModel().entitiesCategories[
+          ConvertToEnum.convertTypeEntityToValue(
+              typeEntity: seasonMini.entity.typeEntity)][2]),
+      value: 2,
+    ));
+    dropdownList.add(DropdownMenuItem(
+      child: Text(LanguageModel().entitiesCategories[
+          ConvertToEnum.convertTypeEntityToValue(
+              typeEntity: seasonMini.entity.typeEntity)][3]),
+      value: 3,
+    ));
+    dropdownList.add(DropdownMenuItem(
+      child: Text(LanguageModel().entitiesCategories[
+          ConvertToEnum.convertTypeEntityToValue(
+              typeEntity: seasonMini.entity.typeEntity)][4]),
+      value: 4,
+    ));
     notifyListeners();
   }
 
@@ -168,6 +168,7 @@ class SeasonModel extends Model {
         // ignore: avoid_print
         print(item.toString());
         entitySaveMini = EntitySaveMini.fromMap(map: item);
+        getSeason(seasonId: entitySaveMini!.season!.id);
         newPost(
             entitySaveMini: entitySaveMini!,
             category: entitySaveMini!.category!,
@@ -202,6 +203,7 @@ class SeasonModel extends Model {
         // ignore: avoid_print
         print(item.toString());
         entitySaveMini = EntitySaveMini.fromMap(map: item);
+        getSeason(seasonId: entitySaveMini!.season!.id);
         newPost(
             entitySaveMini: entitySaveMini!,
             category: entitySaveMini!.category!,
