@@ -10,10 +10,9 @@ import 'package:social_network_application/scoped_model/support/language_model.d
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/widgets/mini_entities/evaluation.dart';
 import 'package:social_network_application/widgets/mini_entities/season_mini_entity.dart';
+import 'package:social_network_application/widgets/reviews.dart';
 
 import 'entity/all_seasons_entity.dart';
-
-import 'entity/new_season_entity.dart';
 
 import 'entity/update_entity.dart';
 import 'entity/update_review_entity.dart';
@@ -76,7 +75,9 @@ class _EntityState extends State<Entity> {
     ScopedModel.of<EntityModel>(context)
         .getWorkers(entityId: widget.entityMini.id);
     ScopedModel.of<EntityModel>(context)
-        .getSeason(entityId: widget.entityMini.id);
+        .getSeasons(entityId: widget.entityMini.id);
+    ScopedModel.of<EntityModel>(context)
+        .getReviews(entityId: widget.entityMini.id);
     super.initState();
   }
 
@@ -107,70 +108,82 @@ class _EntityState extends State<Entity> {
                 children: [
                   !entity.entityMiniIsNull
                       ? ListView(
+                          shrinkWrap: true,
                           padding: EdgeInsets.zero,
                           children: [
                             Stack(
                               children: [
                                 entity.entityMini.image != null
-                                    ? Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 40),
-                                        child: Container(
-                                          margin: EdgeInsets.zero,
-                                          padding: EdgeInsets.zero,
-                                          height: (MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  16) *
-                                              9,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          decoration: BoxDecoration(
-                                            color: theme.shadow,
-                                            image: DecorationImage(
-                                              image: NetworkImage(
-                                                  entity.entityMini.image!),
-                                              fit: BoxFit.fitHeight,
-                                            ),
+                                    ? Container(
+                                        margin: EdgeInsets.zero,
+                                        padding: EdgeInsets.zero,
+                                        height:
+                                            (MediaQuery.of(context).size.width /
+                                                    16) *
+                                                9,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(
+                                          color: theme.shadow,
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                                entity.entityMini.image!),
+                                            fit: BoxFit.fitHeight,
                                           ),
                                         ),
                                       )
-                                    : Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 40),
-                                        child: Container(
-                                            color: theme.shadow,
-                                            height: (MediaQuery.of(context)
-                                                        .size
-                                                        .width /
+                                    : Container(
+                                        color: theme.shadow,
+                                        height:
+                                            (MediaQuery.of(context).size.width /
                                                     16) *
                                                 9,
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            child: Center(
-                                              child: Icon(
-                                                Icons.image,
-                                                size: 100,
-                                                color: theme.emphasis,
-                                              ),
-                                            )),
-                                      ),
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: Center(
+                                          child: Icon(
+                                            Icons.image,
+                                            size: 100,
+                                            color: theme.emphasis,
+                                          ),
+                                        )),
                                 entity.entityMiniIsNull
                                     ? Container()
                                     : Positioned(
-                                        bottom: -10.0,
+                                        bottom: 8.0,
                                         right: 8.0,
-                                        child: IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            Icons.add_circle_rounded,
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            primary: theme.buttonMain,
+                                            elevation: 0.0,
+                                            fixedSize: const Size(30, 30),
+                                            shape: const CircleBorder(),
+                                          ),
+                                          onPressed: () {
+                                            entity.showOptionsEntityBottomSheet(
+                                              contextAncestor: context,
+                                              entityMini: entity.entityMini,
+                                            );
+                                          },
+                                          child: Icon(
+                                            Icons.add,
                                             size: 30,
                                             color: ScopedModel.of<ThemeModel>(
                                                     context)
-                                                .emphasis,
+                                                .buttonMainText,
                                           ),
                                         ),
+
+                                        // IconButton(
+                                        //   onPressed: () {},
+                                        //   icon: Icon(
+                                        //     Icons.add_circle_rounded,
+                                        //     size: 30,
+                                        //     color: ScopedModel.of<ThemeModel>(
+                                        //             context)
+                                        //         .emphasis,
+                                        //   ),
+                                        // ),
                                       ),
                               ],
                             ),
@@ -749,10 +762,10 @@ class _EntityState extends State<Entity> {
                                           child: Text(
                                             'View all seasons',
                                             style: TextStyle(
-                                              fontSize: theme.sizeText,
+                                              fontSize: theme.sizeAppBar,
                                               letterSpacing:
                                                   theme.letterSpacingText,
-                                              color: theme.title,
+                                              color: theme.emphasis,
                                               fontWeight: FontWeight.normal,
                                             ),
                                           ),
@@ -792,86 +805,89 @@ class _EntityState extends State<Entity> {
                                     height: 270,
                                     child: ListView.builder(
                                         scrollDirection: Axis.horizontal,
-                                        itemCount: entity.seasons.length + 1,
+                                        itemCount: entity.seasons.length,
                                         itemBuilder: (context, index) {
-                                          if (index == entity.seasons.length) {
-                                            return Padding(
-                                              padding:
-                                                  const EdgeInsets.all(4.0),
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              NewSeasonEntity(
-                                                                  entityMini: entity
-                                                                      .entityMini,
-                                                                  context:
-                                                                      context)));
-                                                  // if (ScopedModel.of<ProfileModel>(
-                                                  //         context)
-                                                  //     .userMini
-                                                  //     .checked) {
-                                                  //   Navigator.push(
-                                                  //     context,
-                                                  //     MaterialPageRoute(
-                                                  //         builder: (context) =>
-                                                  //             NewSeasonEntity(
-                                                  //                 entityMini: entity
-                                                  //                     .entityMini,
-                                                  //                 context: context)),
-                                                  //   );
-                                                  // } else {
-                                                  //   ScaffoldMessenger.of(context)
-                                                  //       .showSnackBar(const SnackBar(
-                                                  //           content: Text(
-                                                  //               'only released to verified users')));
-                                                  // }
-                                                },
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    color: theme.shadow,
-                                                    border: Border.all(
-                                                      color: theme.shadow,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                  ),
-                                                  width: 200,
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Icon(
-                                                          Icons
-                                                              .add_box_outlined,
-                                                          color:
-                                                              theme.emphasis),
-                                                      Text(
-                                                        'add season',
-                                                        style: TextStyle(
-                                                          fontSize:
-                                                              theme.sizeText,
-                                                          letterSpacing: theme
-                                                              .letterSpacingText,
-                                                          color: theme.title,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          } else {
-                                            return SeasonMiniEntity(
-                                              seasonMini: entity.seasons[index],
-                                            );
-                                          }
+                                          return SeasonMiniEntity(
+                                            seasonMini: entity.seasons[index],
+                                          );
+                                          // if (index == entity.seasons.length) {
+                                          //   return Padding(
+                                          //     padding:
+                                          //         const EdgeInsets.all(4.0),
+                                          //     child: GestureDetector(
+                                          //       onTap: () {
+                                          //         Navigator.push(
+                                          //             context,
+                                          //             MaterialPageRoute(
+                                          //                 builder: (context) =>
+                                          //                     NewSeasonEntity(
+                                          //                         entityMini: entity
+                                          //                             .entityMini,
+                                          //                         context:
+                                          //                             context)));
+                                          //         // if (ScopedModel.of<ProfileModel>(
+                                          //         //         context)
+                                          //         //     .userMini
+                                          //         //     .checked) {
+                                          //         //   Navigator.push(
+                                          //         //     context,
+                                          //         //     MaterialPageRoute(
+                                          //         //         builder: (context) =>
+                                          //         //             NewSeasonEntity(
+                                          //         //                 entityMini: entity
+                                          //         //                     .entityMini,
+                                          //         //                 context: context)),
+                                          //         //   );
+                                          //         // } else {
+                                          //         //   ScaffoldMessenger.of(context)
+                                          //         //       .showSnackBar(const SnackBar(
+                                          //         //           content: Text(
+                                          //         //               'only released to verified users')));
+                                          //         // }
+                                          //       },
+                                          //       child: Container(
+                                          //         decoration: BoxDecoration(
+                                          //           color: theme.shadow,
+                                          //           border: Border.all(
+                                          //             color: theme.shadow,
+                                          //           ),
+                                          //           borderRadius:
+                                          //               BorderRadius.circular(
+                                          //                   8.0),
+                                          //         ),
+                                          //         width: 200,
+                                          //         child: Column(
+                                          //           mainAxisAlignment:
+                                          //               MainAxisAlignment
+                                          //                   .center,
+                                          //           children: [
+                                          //             Icon(
+                                          //                 Icons
+                                          //                     .add_box_outlined,
+                                          //                 color:
+                                          //                     theme.emphasis),
+                                          //             Text(
+                                          //               'add season',
+                                          //               style: TextStyle(
+                                          //                 fontSize:
+                                          //                     theme.sizeText,
+                                          //                 letterSpacing: theme
+                                          //                     .letterSpacingText,
+                                          //                 color: theme.title,
+                                          //                 fontWeight:
+                                          //                     FontWeight.normal,
+                                          //               ),
+                                          //             ),
+                                          //           ],
+                                          //         ),
+                                          //       ),
+                                          //     ),
+                                          //   );
+                                          // } else {
+                                          //   return SeasonMiniEntity(
+                                          //     seasonMini: entity.seasons[index],
+                                          //   );
+                                          // }
                                         }),
                                   )
                                 : Container(),
@@ -999,7 +1015,47 @@ class _EntityState extends State<Entity> {
                             // ),
                             const SizedBox(
                               height: 16.0,
-                            )
+                            ),
+
+                            Divider(
+                              height: 5.0,
+                              thickness: 5.0,
+                              color: theme.shadow,
+                            ),
+
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0, vertical: 30.0),
+                              child: Text(
+                                'Reviews',
+                                style: TextStyle(
+                                  fontSize: theme.sizeAppBar,
+                                  letterSpacing: theme.letterSpacingText,
+                                  color: theme.emphasis,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ),
+
+                            entity.reviews.isEmpty
+                                ? Container()
+                                : ListView.separated(
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    separatorBuilder: (context, index) {
+                                      return Divider(
+                                        height: 5.0,
+                                        thickness: 5.0,
+                                        color: theme.shadow,
+                                      );
+                                    },
+                                    itemCount: entity.reviews.length,
+                                    itemBuilder: (context, index) {
+                                      return Reviews(
+                                          entitySaveMini:
+                                              entity.reviews[index]);
+                                    })
                           ],
                         )
                       : Container(),

@@ -280,8 +280,7 @@ class _UpdatePostWidgetState extends State<UpdatePostWidget> {
                   ),
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 2.0, horizontal: 8.0),
+                      padding: const EdgeInsets.fromLTRB(8, 2, 8, 16),
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(

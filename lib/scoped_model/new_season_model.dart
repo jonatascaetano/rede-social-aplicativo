@@ -38,7 +38,7 @@ class NewSeasonModel extends Model {
     print('createSeason: ' + response.statusCode.toString());
     switch (response.statusCode) {
       case 201:
-        ScopedModel.of<EntityModel>(context).getSeason(entityId: idEntity);
+        ScopedModel.of<EntityModel>(context).getSeasons(entityId: idEntity);
         load = false;
         notifyListeners();
         Navigator.pop(context);

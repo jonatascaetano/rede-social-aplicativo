@@ -16,6 +16,9 @@ import 'package:social_network_application/enuns/level.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/view/objects/entity/add_body_post_entity.dart';
+import 'package:social_network_application/view/objects/entity/new_season_entity.dart';
+
+import 'support/theme_model.dart';
 
 class EntityModel extends Model {
   static const String base =
@@ -31,6 +34,7 @@ class EntityModel extends Model {
   int maxLine = 5;
   List<DropdownMenuItem<int>> dropdownList = [];
   bool spoiler = false;
+  List<EntitySaveMini> reviews = [];
 
   Future<String> getId() async {
     final prefs = await SharedPreferences.getInstance();
@@ -62,7 +66,7 @@ class EntityModel extends Model {
     }
   }
 
-  getSeason({required String entityId}) async {
+  getSeasons({required String entityId}) async {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'entities/get/entity/$entityId/seasons');
@@ -71,7 +75,7 @@ class EntityModel extends Model {
       "content-type": "application/json; charset=utf-8"
     });
 // ignore: avoid_print
-    print("getSeason: " + response.statusCode.toString());
+    print("getSeasons: " + response.statusCode.toString());
     switch (response.statusCode) {
       case 200:
         seasons = [];
@@ -79,7 +83,31 @@ class EntityModel extends Model {
         for (var item in itens) {
           SeasonMini seasonMini = SeasonMini.fromMap(map: item as Map);
           seasons.add(seasonMini);
-          notifyListeners();
+        }
+        load = false;
+        notifyListeners();
+        break;
+    }
+  }
+
+  getReviews({required String entityId}) async {
+    load = true;
+    notifyListeners();
+    var url = Uri.parse(base + 'entities/get/reviews/$entityId');
+    var response = await http.get(url, headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
+// ignore: avoid_print
+    print("getReviews: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 200:
+        reviews = [];
+        var itens = json.decode(response.body);
+        for (var item in itens) {
+          EntitySaveMini entitySaveMini =
+              EntitySaveMini.fromMap(map: item as Map);
+          reviews.add(entitySaveMini);
         }
         load = false;
         notifyListeners();
@@ -270,6 +298,7 @@ class EntityModel extends Model {
         entitySaveMini = EntitySaveMini.fromMap(map: item);
         getEntity(entityId: entitySaveMini!.entity!.id);
         newPost(entitySaveMini: entitySaveMini!, category: 6, context: context);
+        getReviews(entityId: entitySaveMini!.entity!.id);
         break;
       default:
         load = false;
@@ -322,6 +351,7 @@ class EntityModel extends Model {
       required BuildContext context}) async {
     load = true;
     notifyListeners();
+    entitySaveDTO.release = DateTime.now().toString();
     var url = Uri.parse(base + 'entitysaves/put/review');
     var response =
         await http.put(url, body: json.encode(entitySaveDTO.toMap()), headers: {
@@ -337,6 +367,7 @@ class EntityModel extends Model {
         print(item.toString());
         entitySaveMini = EntitySaveMini.fromMap(map: item);
         newPost(entitySaveMini: entitySaveMini!, category: 7, context: context);
+        getReviews(entityId: entitySaveMini!.entity!.id);
         break;
       default:
         load = false;
@@ -443,5 +474,71 @@ class EntityModel extends Model {
         );
         break;
     }
+  }
+
+  showOptionsEntityBottomSheet(
+      {required BuildContext contextAncestor, required EntityMini entityMini}) {
+    showModalBottomSheet<dynamic>(
+
+        //isScrollControlled: true,
+        context: contextAncestor,
+        builder: (context) {
+          return ScopedModelDescendant<ThemeModel>(
+              builder: (context, child, theme) {
+            return BottomSheet(
+                backgroundColor: theme.background,
+                onClosing: () {},
+                builder: (context) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(
+                        height: 16.0,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => NewSeasonEntity(
+                                  entityMini: entityMini,
+                                  context: contextAncestor),
+                            ),
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.add_box_rounded,
+                                color: theme.emphasis,
+                              ),
+                              const SizedBox(
+                                width: 8.0,
+                              ),
+                              Text(
+                                'New Season',
+                                style: TextStyle(
+                                  fontSize: theme.sizeText,
+                                  letterSpacing: theme.letterSpacingText,
+                                  color: theme.title,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 16.0,
+                      )
+                    ],
+                  );
+                });
+          });
+        });
   }
 }
