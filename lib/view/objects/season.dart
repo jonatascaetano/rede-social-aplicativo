@@ -10,6 +10,7 @@ import 'package:social_network_application/scoped_model/support/theme_model.dart
 import 'package:social_network_application/view/objects/season/update_season.dart';
 import 'package:social_network_application/widgets/mini_seasons/episode_mini_season.dart';
 import 'package:social_network_application/widgets/mini_seasons/evaluation.dart';
+import 'package:social_network_application/widgets/reviews.dart';
 
 import 'season/all_episodes_season.dart';
 import 'season/new_episode_season.dart';
@@ -53,7 +54,7 @@ class _SeasonState extends State<Season> {
       adUnitId: "ca-app-pub-3940256099942544/6300978111",
       adSize: size,
       listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
-        handleEvent(event, args!, 'Banner');
+        //handleEvent(event, args!, 'Banner');
       },
     );
   }
@@ -73,6 +74,8 @@ class _SeasonState extends State<Season> {
     //     .getWorkers(entityId: widget.entityMini.id);
     ScopedModel.of<SeasonModel>(context)
         .getEpisodes(seasonId: widget.seasonMini.id);
+    ScopedModel.of<SeasonModel>(context)
+        .getReviews(entityId: widget.seasonMini.id);
     super.initState();
   }
 
@@ -682,123 +685,135 @@ class _SeasonState extends State<Season> {
                             const SizedBox(
                               height: 16.0,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      'View all episodes',
-                                      style: TextStyle(
-                                        fontSize: theme.sizeText,
-                                        letterSpacing: theme.letterSpacingText,
-                                        color: theme.title,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                    ),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const AllEpisodesSeason(),
-                                        ),
-                                      );
-                                    },
-                                    icon: Icon(
-                                      Icons.arrow_forward,
-                                      color: theme.subtitle,
-                                      size: 24.0,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
 
-                            SizedBox(
-                              height: 270,
-                              child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: season.episodes.length + 1,
-                                  itemBuilder: (context, index) {
-                                    if (index == season.episodes.length) {
-                                      return Padding(
-                                        padding: const EdgeInsets.all(4.0),
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      NewEpisodeSeason(
-                                                          seasonMini:
-                                                              season.seasonMini,
-                                                          context: context)),
-                                            );
-                                            // if (ScopedModel.of<ProfileModel>(
-                                            //         context)
-                                            //     .userMini
-                                            //     .checked) {
-                                            //   Navigator.push(
-                                            //     context,
-                                            //     MaterialPageRoute(
-                                            //         builder: (context) =>
-                                            //             NewEpisodeSeason(
-                                            //                 seasonMini: season
-                                            //                     .seasonMini,
-                                            //                 context: context)),
-                                            //   );
-                                            // } else {
-                                            //   ScaffoldMessenger.of(context)
-                                            //       .showSnackBar(const SnackBar(
-                                            //           content: Text(
-                                            //               'only released to verified users')));
-                                            // }
-                                          },
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              color: theme.shadow,
-                                              border: Border.all(
-                                                color: theme.shadow,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                            width: 200,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(Icons.add_box_outlined,
-                                                    color: theme.emphasis),
-                                                Text(
-                                                  'add episode',
-                                                  style: TextStyle(
-                                                    fontSize: theme.sizeText,
-                                                    letterSpacing:
-                                                        theme.letterSpacingText,
-                                                    color: theme.title,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                  ),
-                                                ),
-                                              ],
+                            season.episodes.isEmpty
+                                ? Container()
+                                : Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            'View all episodes',
+                                            style: TextStyle(
+                                              fontSize: theme.sizeText,
+                                              letterSpacing:
+                                                  theme.letterSpacingText,
+                                              color: theme.title,
+                                              fontWeight: FontWeight.normal,
                                             ),
                                           ),
                                         ),
-                                      );
-                                    } else {
-                                      return EpisodeMiniSeason(
-                                          episodeMini: season.episodes[index]);
-                                    }
-                                  }),
-                            ),
+                                        IconButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const AllEpisodesSeason(),
+                                              ),
+                                            );
+                                          },
+                                          icon: Icon(
+                                            Icons.arrow_forward,
+                                            color: theme.subtitle,
+                                            size: 24.0,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
 
-                            const SizedBox(
-                              height: 16.0,
-                            ),
+                            season.episodes.isEmpty
+                                ? Container()
+                                : SizedBox(
+                                    height: 270,
+                                    child: ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: season.episodes.length + 1,
+                                        itemBuilder: (context, index) {
+                                          if (index == season.episodes.length) {
+                                            return Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            NewEpisodeSeason(
+                                                                seasonMini: season
+                                                                    .seasonMini,
+                                                                context:
+                                                                    context)),
+                                                  );
+                                                  // if (ScopedModel.of<ProfileModel>(
+                                                  //         context)
+                                                  //     .userMini
+                                                  //     .checked) {
+                                                  //   Navigator.push(
+                                                  //     context,
+                                                  //     MaterialPageRoute(
+                                                  //         builder: (context) =>
+                                                  //             NewEpisodeSeason(
+                                                  //                 seasonMini: season
+                                                  //                     .seasonMini,
+                                                  //                 context: context)),
+                                                  //   );
+                                                  // } else {
+                                                  //   ScaffoldMessenger.of(context)
+                                                  //       .showSnackBar(const SnackBar(
+                                                  //           content: Text(
+                                                  //               'only released to verified users')));
+                                                  // }
+                                                },
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    color: theme.shadow,
+                                                    border: Border.all(
+                                                      color: theme.shadow,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  width: 200,
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Icon(
+                                                          Icons
+                                                              .add_box_outlined,
+                                                          color:
+                                                              theme.emphasis),
+                                                      Text(
+                                                        'add episode',
+                                                        style: TextStyle(
+                                                          fontSize:
+                                                              theme.sizeText,
+                                                          letterSpacing: theme
+                                                              .letterSpacingText,
+                                                          color: theme.title,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          } else {
+                                            return EpisodeMiniSeason(
+                                                episodeMini:
+                                                    season.episodes[index]);
+                                          }
+                                        }),
+                                  ),
+
                             // SizedBox(
                             //   height: 150,
                             //   child: ListView.builder(
@@ -851,6 +866,50 @@ class _SeasonState extends State<Season> {
                             // const SizedBox(
                             //   height: 16.0,
                             // )
+                            const SizedBox(
+                              height: 16.0,
+                            ),
+
+                            Divider(
+                              height: 5.0,
+                              thickness: 5.0,
+                              color: theme.shadow,
+                            ),
+
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0, vertical: 30.0),
+                              child: Text(
+                                'Reviews',
+                                style: TextStyle(
+                                  fontSize: theme.sizeAppBar,
+                                  letterSpacing: theme.letterSpacingText,
+                                  color: theme.emphasis,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ),
+
+                            season.reviews.isEmpty
+                                ? Container()
+                                : ListView.separated(
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    separatorBuilder: (context, index) {
+                                      return Divider(
+                                        height: 5.0,
+                                        thickness: 5.0,
+                                        color: theme.shadow,
+                                      );
+                                    },
+                                    itemCount: season.reviews.length,
+                                    itemBuilder: (context, index) {
+                                      return Reviews(
+                                        entitySaveMini: season.reviews[index],
+                                        contextAncestor: context,
+                                      );
+                                    })
                           ],
                         )
                       : Container(),

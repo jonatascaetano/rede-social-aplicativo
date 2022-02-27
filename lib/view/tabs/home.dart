@@ -40,7 +40,7 @@ class _HomeState extends State<Home> {
       adUnitId: "ca-app-pub-3940256099942544/6300978111",
       adSize: size,
       listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
-        handleEvent(event, args!, 'Banner');
+        //handleEvent(event, args!, 'Banner');
       },
     );
   }

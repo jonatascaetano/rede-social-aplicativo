@@ -107,7 +107,7 @@ class _SeasonMiniEntityState extends State<SeasonMiniEntity> {
                             widget.seasonMini.episodeQuantity.toString(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: theme.title,
+                          color: theme.subtitle,
                           fontSize: theme.sizeText,
                           letterSpacing: theme.letterSpacingText,
                           fontWeight: FontWeight.normal,

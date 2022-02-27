@@ -17,6 +17,7 @@ import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/view/objects/entity/add_body_post_entity.dart';
 import 'package:social_network_application/view/objects/entity/new_season_entity.dart';
+import 'package:social_network_application/view/objects/entity/update_entity.dart';
 
 import 'support/theme_model.dart';
 
@@ -33,7 +34,6 @@ class EntityModel extends Model {
   EntitySaveMini? entitySaveMini;
   int maxLine = 5;
   List<DropdownMenuItem<int>> dropdownList = [];
-  bool spoiler = false;
   List<EntitySaveMini> reviews = [];
 
   Future<String> getId() async {
@@ -172,10 +172,6 @@ class EntityModel extends Model {
       maxLine = 5;
       notifyListeners();
     }
-  }
-
-  updateSpoiler() {
-    spoiler = !spoiler;
   }
 
   loadDropdownList() {
@@ -521,6 +517,48 @@ class EntityModel extends Model {
                               ),
                               Text(
                                 'New Season',
+                                style: TextStyle(
+                                  fontSize: theme.sizeText,
+                                  letterSpacing: theme.letterSpacingText,
+                                  color: theme.title,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => UpdateEntity(
+                                        context: context,
+                                        entityMini: entityMini,
+                                      )));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.edit,
+                                color: theme.emphasis,
+                              ),
+                              const SizedBox(
+                                width: 8.0,
+                              ),
+                              Text(
+                                'edit ' +
+                                    LanguageModel()
+                                        .typeEntities[ConvertToEnum
+                                            .convertTypeEntityToValue(
+                                                typeEntity:
+                                                    entityMini.typeEntity)]
+                                        .toString()
+                                        .toLowerCase(),
                                 style: TextStyle(
                                   fontSize: theme.sizeText,
                                   letterSpacing: theme.letterSpacingText,

@@ -39,7 +39,7 @@ class ThemeModel extends Model {
   Color emphasis = Colors.blue.shade800;
   Color detail = Colors.red.shade700;
   Color title = Colors.black;
-  Color subtitle = Colors.grey.shade800;
+  Color subtitle = const Color(0xff393e45); //393e45
   Color icon = Colors.grey.shade700;
   Color background = Colors.white;
   Color shadow = Colors.grey.shade200;
@@ -89,7 +89,7 @@ class ThemeModel extends Model {
       emphasis = Colors.blue.shade500;
       detail = Colors.red.shade700;
       title = Colors.white;
-      subtitle = Colors.grey.shade400;
+      subtitle = const Color(0xff90a0b5);
       icon = Colors.grey.shade400;
       background = const Color(0xff1d1f27); //Color(0xff1f1f1f);
       shadow = const Color(0xff17191f); //Colors.grey.shade800;
@@ -123,7 +123,7 @@ class ThemeModel extends Model {
       emphasis = Colors.blue.shade800;
       detail = Colors.red.shade700;
       title = Colors.black;
-      subtitle = Colors.grey.shade800;
+      subtitle = const Color(0xff393e45); //393e45
       icon = Colors.grey.shade700;
       background = Colors.white;
       shadow = Colors.grey.shade200;

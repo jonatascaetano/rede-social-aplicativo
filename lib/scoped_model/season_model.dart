@@ -16,6 +16,9 @@ import 'package:social_network_application/enuns/level.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/view/objects/season/add_body_post_season.dart';
+import 'package:social_network_application/view/objects/season/new_episode_season.dart';
+
+import 'support/theme_model.dart';
 
 class SeasonModel extends Model {
   static const String base =
@@ -30,6 +33,8 @@ class SeasonModel extends Model {
   int maxLine = 5;
   List<DropdownMenuItem<int>> dropdownList = [];
   late String idUser;
+  bool spoiler = false;
+  List<EntitySaveMini> reviews = [];
 
   updateMaxLine() {
     if (maxLine == 5) {
@@ -118,6 +123,98 @@ class SeasonModel extends Model {
         notifyListeners();
         break;
     }
+  }
+
+  getReviews({required String entityId}) async {
+    load = true;
+    notifyListeners();
+    var url = Uri.parse(base + 'entities/get/reviews/$entityId');
+    var response = await http.get(url, headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
+// ignore: avoid_print
+    print("getReviews: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 200:
+        reviews = [];
+        var itens = json.decode(response.body);
+        for (var item in itens) {
+          EntitySaveMini entitySaveMini =
+              EntitySaveMini.fromMap(map: item as Map);
+          reviews.add(entitySaveMini);
+        }
+        load = false;
+        notifyListeners();
+        break;
+    }
+  }
+
+  showOptionsEntityBottomSheet(
+      {required BuildContext contextAncestor, required SeasonMini seasonMini}) {
+    showModalBottomSheet<dynamic>(
+
+        //isScrollControlled: true,
+        context: contextAncestor,
+        builder: (context) {
+          return ScopedModelDescendant<ThemeModel>(
+              builder: (context, child, theme) {
+            return BottomSheet(
+                backgroundColor: theme.background,
+                onClosing: () {},
+                builder: (context) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(
+                        height: 16.0,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => NewEpisodeSeason(
+                                seasonMini: seasonMini,
+                                context: context,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.add_box_rounded,
+                                color: theme.emphasis,
+                              ),
+                              const SizedBox(
+                                width: 8.0,
+                              ),
+                              Text(
+                                'New Episode',
+                                style: TextStyle(
+                                  fontSize: theme.sizeText,
+                                  letterSpacing: theme.letterSpacingText,
+                                  color: theme.title,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 16.0,
+                      )
+                    ],
+                  );
+                });
+          });
+        });
   }
 
   loadDropdownList() {
@@ -240,6 +337,7 @@ class SeasonModel extends Model {
         entitySaveMini = EntitySaveMini.fromMap(map: item);
         getSeason(seasonId: entitySaveMini!.season!.id);
         newPost(entitySaveMini: entitySaveMini!, category: 6, context: context);
+        getReviews(entityId: entitySaveMini!.entity!.id);
         break;
       default:
         load = false;
@@ -303,6 +401,7 @@ class SeasonModel extends Model {
         print(item.toString());
         entitySaveMini = EntitySaveMini.fromMap(map: item);
         newPost(entitySaveMini: entitySaveMini!, category: 7, context: context);
+        getReviews(entityId: entitySaveMini!.entity!.id);
         break;
       default:
         load = false;

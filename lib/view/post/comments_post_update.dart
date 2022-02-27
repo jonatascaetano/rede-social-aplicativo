@@ -775,18 +775,37 @@ class _CommentWidgetState extends State<CommentWidget> {
               width: 8.0,
             ),
             widget.commentMini.author.imageProfile != null
-                ? CircleAvatar(
-                    backgroundImage:
-                        NetworkImage(widget.commentMini.author.imageProfile!),
-                    radius: 30.0,
-                  )
-                : CircleAvatar(
-                    backgroundColor: ScopedModel.of<ThemeModel>(context).shadow,
-                    child: Icon(
-                      Icons.image,
-                      color: ScopedModel.of<ThemeModel>(context).emphasis,
+                ? GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  User(userMini: widget.commentMini.author)));
+                    },
+                    child: CircleAvatar(
+                      backgroundImage:
+                          NetworkImage(widget.commentMini.author.imageProfile!),
+                      radius: 30.0,
                     ),
-                    radius: 30.0,
+                  )
+                : GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  User(userMini: widget.commentMini.author)));
+                    },
+                    child: CircleAvatar(
+                      backgroundColor:
+                          ScopedModel.of<ThemeModel>(context).shadow,
+                      child: Icon(
+                        Icons.image,
+                        color: ScopedModel.of<ThemeModel>(context).emphasis,
+                      ),
+                      radius: 30.0,
+                    ),
                   ),
             const SizedBox(
               width: 8.0,

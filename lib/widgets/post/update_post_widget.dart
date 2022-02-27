@@ -257,7 +257,7 @@ class _UpdatePostWidgetState extends State<UpdatePostWidget> {
                           widget.postUpdateMini.body!,
                           textAlign: TextAlign.left,
                           style: TextStyle(
-                            fontSize: theme.sizeTitle,
+                            fontSize: theme.sizeText,
                             letterSpacing: theme.letterSpacingText,
                             color: theme.title,
                             fontWeight: FontWeight.normal,
@@ -287,7 +287,7 @@ class _UpdatePostWidgetState extends State<UpdatePostWidget> {
                           widget.postUpdateMini.body!,
                           textAlign: TextAlign.left,
                           style: TextStyle(
-                            fontSize: theme.sizeTitle,
+                            fontSize: theme.sizeText,
                             letterSpacing: theme.letterSpacingText,
                             color: theme.title,
                             fontWeight: FontWeight.normal,
