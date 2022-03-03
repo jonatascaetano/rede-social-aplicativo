@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:social_network_application/entities/dto/comment_dto.dart';
 import 'package:social_network_application/entities/mini_dto/comment_mini.dart';
 import 'package:social_network_application/entities/mini_dto/post_update_mini.dart';
+import 'package:social_network_application/enuns/type_comment.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/user_model.dart';
 
@@ -149,6 +150,8 @@ class CommentModel extends Model {
       body: body,
       release: DateTime.now().toString(),
       idAuthor: id,
+      idEntitySave: null,
+      typeComment: TypeComment.POST,
     );
     var url = Uri.parse(base + 'comments/post/comment');
     var response = await http.post(
@@ -191,11 +194,14 @@ class CommentModel extends Model {
     notifyListeners();
     String id = await getId();
     CommentDTO commentDTO = CommentDTO(
-        idComment: idComment,
-        idAuthor: id,
-        idPost: idPost,
-        body: null,
-        release: DateTime.now().toString());
+      idComment: idComment,
+      idAuthor: id,
+      idPost: idPost,
+      body: null,
+      release: DateTime.now().toString(),
+      typeComment: TypeComment.POST,
+      idEntitySave: null,
+    );
     var url = Uri.parse(base + 'comments/delete/comment');
     var response = await http.delete(
       url,

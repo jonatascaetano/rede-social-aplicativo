@@ -90,10 +90,13 @@ class EntityModel extends Model {
     }
   }
 
+  //reviews
+
   getReviews({required String entityId}) async {
     load = true;
     notifyListeners();
-    var url = Uri.parse(base + 'entities/get/reviews/$entityId');
+    String idUser = await getId();
+    var url = Uri.parse(base + 'entities/get/reviews/$entityId/user/$idUser');
     var response = await http.get(url, headers: {
       "Accept": "application/json; charset=utf-8",
       "content-type": "application/json; charset=utf-8"
@@ -114,6 +117,34 @@ class EntityModel extends Model {
         break;
     }
   }
+
+  updateLikeReview(
+      {required BuildContext context, required String idReview}) async {
+    load = true;
+    notifyListeners();
+    var url = Uri.parse(
+        base + 'entitysaves/put/like/entitysave/$idReview/user/$idUser');
+    var response = await http.put(url, headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
+    // ignore: avoid_print
+    print("updateLikePost: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 202:
+        getReviews(entityId: entityMini.id);
+        break;
+      default:
+        load = false;
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Try again later')),
+        );
+        break;
+    }
+  }
+
+  //and reviews
 
   getEntitySave({required String entityId}) async {
     load = true;

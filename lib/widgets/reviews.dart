@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/converts/convert_date.dart';
+import 'package:social_network_application/converts/convert_like_names.dart';
 import 'package:social_network_application/entities/mini_dto/entity_save_mini.dart';
+import 'package:social_network_application/scoped_model/entity_model.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/objects/user.dart';
+import 'package:social_network_application/view/review/likes_review.dart';
 import 'package:social_network_application/view/review_screen.dart';
 import 'package:social_network_application/view/tabs/profile.dart';
 
@@ -163,22 +166,22 @@ class _ReviewsState extends State<Reviews> {
 
                 //and name
 
-                const SizedBox(
-                  width: 4.0,
-                ),
-                IconButton(
-                  padding: EdgeInsets.zero,
-                  onPressed: () {
-                    if (widget.entitySaveMini.user!.id ==
-                        ScopedModel.of<ProfileModel>(context).userMini.id) {
-                    } else {}
-                  },
-                  icon: Icon(
-                    Icons.more_vert_sharp,
-                    size: 21,
-                    color: ScopedModel.of<ThemeModel>(context).subtitle,
-                  ),
-                ),
+                // const SizedBox(
+                //   width: 4.0,
+                // ),
+                // IconButton(
+                //   padding: EdgeInsets.zero,
+                //   onPressed: () {
+                //     if (widget.entitySaveMini.user!.id ==
+                //         ScopedModel.of<ProfileModel>(context).userMini.id) {
+                //     } else {}
+                //   },
+                //   icon: Icon(
+                //     Icons.more_vert_sharp,
+                //     size: 21,
+                //     color: ScopedModel.of<ThemeModel>(context).subtitle,
+                //   ),
+                // ),
               ],
             ),
             const SizedBox(
@@ -295,6 +298,30 @@ class _ReviewsState extends State<Reviews> {
                     ],
                   ),
             const SizedBox(
+              height: 16.0,
+            ),
+
+            Align(
+              alignment: Alignment.centerLeft,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          LikesReview(idReview: widget.entitySaveMini.id),
+                    ),
+                  );
+                },
+                child: ConvertLikeNames.returnLikes(
+                  liked: widget.entitySaveMini.liked,
+                  likeQuantity: widget.entitySaveMini.likeQuantity,
+                  like: widget.entitySaveMini.like,
+                  context: context,
+                ),
+              ),
+            ),
+            const SizedBox(
               height: 8.0,
             ),
 
@@ -310,15 +337,11 @@ class _ReviewsState extends State<Reviews> {
                   flex: 1,
                   child: GestureDetector(
                     onTap: () {
-                      // if (!widget.screenComment && !widget.screenUser) {
-                      //   ScopedModel.of<ProfileModel>(context).updateLikePost(
-                      //       context: context, idPost: widget.postUpdateMini.id!);
-                      // } else if (widget.screenUser && !widget.screenComment) {
-                      //   ScopedModel.of<UserModel>(widget.contextPage)
-                      //       .updateLikePost(
-                      //           context: widget.contextPage,
-                      //           idPost: widget.postUpdateMini.id!);
-                      // }
+                      ScopedModel.of<EntityModel>(widget.contextAncestor)
+                          .updateLikeReview(
+                        context: widget.contextAncestor,
+                        idReview: widget.entitySaveMini.id,
+                      );
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -338,22 +361,21 @@ class _ReviewsState extends State<Reviews> {
                               Icon(
                                 Icons.thumb_up_alt_outlined,
                                 size: theme.sizeTitle,
-                                // color: widget.postUpdateMini.liked
-                                //     ? theme.emphasis
-                                //     : theme.title,
+                                color: widget.entitySaveMini.liked
+                                    ? theme.emphasis
+                                    : theme.title,
                               ),
                               const SizedBox(
                                 width: 6.0,
                               ),
                               Text(
-                                '37',
-                                //widget.postUpdateMini.likeQuantity.toString(),
+                                widget.entitySaveMini.likeQuantity.toString(),
                                 style: TextStyle(
                                   fontSize: theme.sizeTitle,
                                   letterSpacing: theme.letterSpacingText,
-                                  // color: widget.entitySaveMini.liked
-                                  //     ? theme.emphasis
-                                  //     : theme.title,
+                                  color: widget.entitySaveMini.liked
+                                      ? theme.emphasis
+                                      : theme.title,
                                   fontWeight: FontWeight.normal,
                                 ),
                               ),
@@ -392,7 +414,7 @@ class _ReviewsState extends State<Reviews> {
                               width: 6.0,
                             ),
                             Text(
-                              '123',
+                              widget.entitySaveMini.commentQuantity.toString(),
                               style: TextStyle(
                                 fontSize: theme.sizeTitle,
                                 letterSpacing: theme.letterSpacingText,

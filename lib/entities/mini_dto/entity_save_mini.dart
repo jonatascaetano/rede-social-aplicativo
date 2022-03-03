@@ -21,6 +21,10 @@ class EntitySaveMini {
   late List<dynamic>? historic = [];
   late bool spoiler;
   late String? release;
+  late int likeQuantity = 0;
+  late int commentQuantity = 0;
+  late bool liked;
+  late UserMini? like;
 
   EntitySaveMini.fromMap({required Map map}) {
     id = map["id"];
@@ -45,5 +49,9 @@ class EntitySaveMini {
     historic = map["historic"];
     spoiler = map["spoiler"];
     release = map["release"];
+    likeQuantity = map["likeQuantity"];
+    commentQuantity = map["commentQuantity"];
+    liked = map["liked"] ?? false;
+    like = map["like"] != null ? UserMini.fromMap(map: map["like"]) : null;
   }
 }

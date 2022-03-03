@@ -13,7 +13,8 @@ import 'package:social_network_application/view/objects/entity.dart';
 import 'package:social_network_application/view/objects/episode.dart';
 import 'package:social_network_application/view/objects/season.dart';
 import 'package:social_network_application/view/objects/user.dart';
-import 'package:social_network_application/widgets/post/likes_names_post_widget.dart';
+import 'package:social_network_application/converts/convert_like_names.dart';
+import 'package:social_network_application/view/tabs/profile.dart';
 
 import 'likes_post.dart';
 
@@ -440,52 +441,52 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                                   screenUser:
                                                       widget.screenUser),
                                       /*
-                                widget.postUpdateMini.entity!.image != null
-                                    ? GestureDetector(
-                                        onTap: () {},
-                                        child: Container(
-                                          margin: EdgeInsets.zero,
-                                          padding: EdgeInsets.zero,
-                                          height: (MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  16) *
-                                              9,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          decoration: BoxDecoration(
-                                            color: theme.shadow,
-                                            image: DecorationImage(
-                                              image: NetworkImage(widget
-                                                  .postUpdateMini
-                                                  .entity!
-                                                  .image!),
-                                              fit: BoxFit.fitHeight,
+                                    widget.postUpdateMini.entity!.image != null
+                                        ? GestureDetector(
+                                            onTap: () {},
+                                            child: Container(
+                                              margin: EdgeInsets.zero,
+                                              padding: EdgeInsets.zero,
+                                              height: (MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      16) *
+                                                  9,
+                                              width:
+                                                  MediaQuery.of(context).size.width,
+                                              decoration: BoxDecoration(
+                                                color: theme.shadow,
+                                                image: DecorationImage(
+                                                  image: NetworkImage(widget
+                                                      .postUpdateMini
+                                                      .entity!
+                                                      .image!),
+                                                  fit: BoxFit.fitHeight,
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        : GestureDetector(
+                                            onTap: () {},
+                                            child: Container(
+                                              color: theme.shadow,
+                                              height: (MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      16) *
+                                                  9,
+                                              width:
+                                                  MediaQuery.of(context).size.width,
+                                              child: Center(
+                                                child: Icon(
+                                                  Icons.image,
+                                                  size: 100,
+                                                  color: theme.emphasis,
+                                                ),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      )
-                                    : GestureDetector(
-                                        onTap: () {},
-                                        child: Container(
-                                          color: theme.shadow,
-                                          height: (MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  16) *
-                                              9,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          child: Center(
-                                            child: Icon(
-                                              Icons.image,
-                                              size: 100,
-                                              color: theme.emphasis,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      */
+                                          */
 
                                       const SizedBox(
                                         height: 8.0,
@@ -493,22 +494,25 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                       Align(
                                         alignment: Alignment.centerLeft,
                                         child: GestureDetector(
-                                            onTap: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          LikesPost(
-                                                            idPost: widget
-                                                                .postUpdateMini
-                                                                .id!,
-                                                          )));
-                                            },
-                                            child: LikesNamesPostWidget
-                                                .returnLikes(
-                                                    postUpdateMini:
-                                                        comment.postUpdateMini,
-                                                    context: context)),
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        LikesPost(
+                                                          idPost: widget
+                                                              .postUpdateMini
+                                                              .id!,
+                                                        )));
+                                          },
+                                          child: ConvertLikeNames.returnLikes(
+                                            liked: widget.postUpdateMini.liked,
+                                            likeQuantity: widget
+                                                .postUpdateMini.likeQuantity,
+                                            like: widget.postUpdateMini.like,
+                                            context: context,
+                                          ),
+                                        ),
                                       ),
                                       const SizedBox(
                                         height: 8.0,
@@ -777,11 +781,19 @@ class _CommentWidgetState extends State<CommentWidget> {
             widget.commentMini.author.imageProfile != null
                 ? GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  User(userMini: widget.commentMini.author)));
+                      if (widget.commentMini.author.id !=
+                          ScopedModel.of<ProfileModel>(context).userMini.id) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    User(userMini: widget.commentMini.author)));
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Profile()));
+                      }
                     },
                     child: CircleAvatar(
                       backgroundImage:
@@ -791,11 +803,19 @@ class _CommentWidgetState extends State<CommentWidget> {
                   )
                 : GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  User(userMini: widget.commentMini.author)));
+                      if (widget.commentMini.author.id !=
+                          ScopedModel.of<ProfileModel>(context).userMini.id) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    User(userMini: widget.commentMini.author)));
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Profile()));
+                      }
                     },
                     child: CircleAvatar(
                       backgroundColor:
@@ -830,11 +850,22 @@ class _CommentWidgetState extends State<CommentWidget> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => User(
-                                        userMini: widget.commentMini.author)));
+                            if (widget.commentMini.author.id !=
+                                ScopedModel.of<ProfileModel>(context)
+                                    .userMini
+                                    .id) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => User(
+                                          userMini:
+                                              widget.commentMini.author)));
+                            } else {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Profile()));
+                            }
                           },
                           child: Text(
                             widget.commentMini.author.name,
@@ -873,17 +904,19 @@ class _CommentWidgetState extends State<CommentWidget> {
                         const SizedBox(
                           width: 8.0,
                         ),
-                        Text(
-                          ConvertDate.convertToDatePost(
-                                  release: widget.commentMini.release) +
-                              " • ",
-                          style: TextStyle(
-                            fontSize: theme.sizeText,
-                            letterSpacing: theme.letterSpacingText,
-                            color: theme.subtitle,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
+                        widget.commentMini.release == null
+                            ? Container()
+                            : Text(
+                                ConvertDate.convertToDatePost(
+                                        release: widget.commentMini.release!) +
+                                    " • ",
+                                style: TextStyle(
+                                  fontSize: theme.sizeText,
+                                  letterSpacing: theme.letterSpacingText,
+                                  color: theme.subtitle,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
                         const SizedBox(
                           width: 8.0,
                         ),

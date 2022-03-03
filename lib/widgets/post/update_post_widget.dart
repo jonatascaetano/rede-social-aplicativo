@@ -14,7 +14,7 @@ import 'package:social_network_application/view/objects/season.dart';
 import 'package:social_network_application/view/objects/user.dart';
 import 'package:social_network_application/view/post/comments_post_update.dart';
 import 'package:social_network_application/view/post/likes_post.dart';
-import 'package:social_network_application/widgets/post/likes_names_post_widget.dart';
+import 'package:social_network_application/converts/convert_like_names.dart';
 
 // ignore: must_be_immutable
 class UpdatePostWidget extends StatefulWidget {
@@ -389,16 +389,21 @@ class _UpdatePostWidgetState extends State<UpdatePostWidget> {
           Align(
             alignment: Alignment.centerLeft,
             child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => LikesPost(
-                                idPost: widget.postUpdateMini.id!,
-                              )));
-                },
-                child: LikesNamesPostWidget.returnLikes(
-                    postUpdateMini: widget.postUpdateMini, context: context)),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => LikesPost(
+                              idPost: widget.postUpdateMini.id!,
+                            )));
+              },
+              child: ConvertLikeNames.returnLikes(
+                liked: widget.postUpdateMini.liked,
+                likeQuantity: widget.postUpdateMini.likeQuantity,
+                like: widget.postUpdateMini.like,
+                context: context,
+              ),
+            ),
           ),
           const SizedBox(
             height: 8.0,
