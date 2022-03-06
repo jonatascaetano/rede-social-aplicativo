@@ -11,7 +11,7 @@ import 'package:social_network_application/enuns/level_report.dart';
 import 'package:social_network_application/enuns/type_post.dart';
 import 'package:social_network_application/enuns/type_report.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
-import 'package:social_network_application/widgets/post/update_post_widget.dart';
+import 'package:social_network_application/widgets/post/update_post_widget_2.dart';
 
 import 'support/language_model.dart';
 import 'support/theme_model.dart';
@@ -264,7 +264,7 @@ class UserModel extends Model {
     // ignore: avoid_print
     switch (post["typePost"]) {
       case TypePost.UPDATE:
-        return UpdatePostWidget(
+        return UpdatePostWidget2(
           postUpdateMini: PostUpdateMini.fromMap(map: post),
           screenComment: screenComment,
           screenUser: true,

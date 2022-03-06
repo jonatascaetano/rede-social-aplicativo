@@ -15,526 +15,499 @@ class ConvertLikeNames {
 
     ///
     if (liked && likeQuantity == 1) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Wrap(
-          children: [
-            const SizedBox(
-              width: 4.0,
+      return Wrap(
+        children: [
+          Icon(Icons.thumb_up_alt_outlined,
+              size: ScopedModel.of<ThemeModel>(context).sizeTitle,
+              color: ScopedModel.of<ThemeModel>(context).emphasis),
+          const SizedBox(
+            width: 4.0,
+          ),
+          Text(
+            "liked by ",
+            maxLines: 3,
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              color: ScopedModel.of<ThemeModel>(context).title,
+              fontWeight: FontWeight.normal,
             ),
-            Icon(Icons.thumb_up_alt_outlined,
-                size: ScopedModel.of<ThemeModel>(context).sizeTitle,
-                color: ScopedModel.of<ThemeModel>(context).emphasis),
-            const SizedBox(
-              width: 4.0,
-            ),
-            Text(
-              "liked by ",
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Profile(),
+                ),
+              );
+            },
+            child: Text(
+              "You ",
               maxLines: 3,
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
                 letterSpacing:
                     ScopedModel.of<ThemeModel>(context).letterSpacingText,
-                color: ScopedModel.of<ThemeModel>(context).title,
+                color: ScopedModel.of<ThemeModel>(context).emphasis,
                 fontWeight: FontWeight.normal,
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const Profile(),
-                  ),
-                );
-              },
-              child: Text(
-                "You ",
-                maxLines: 3,
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-                  letterSpacing:
-                      ScopedModel.of<ThemeModel>(context).letterSpacingText,
-                  color: ScopedModel.of<ThemeModel>(context).emphasis,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       );
     } else if (liked && likeQuantity == 2) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Wrap(
-          children: [
-            const SizedBox(
-              width: 4.0,
+      return Wrap(
+        children: [
+          Icon(Icons.thumb_up_alt_outlined,
+              size: ScopedModel.of<ThemeModel>(context).sizeTitle,
+              color: ScopedModel.of<ThemeModel>(context).emphasis),
+          const SizedBox(
+            width: 4.0,
+          ),
+          Text(
+            "liked by ",
+            maxLines: 3,
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              color: ScopedModel.of<ThemeModel>(context).title,
+              fontWeight: FontWeight.normal,
             ),
-            Icon(Icons.thumb_up_alt_outlined,
-                size: ScopedModel.of<ThemeModel>(context).sizeTitle,
-                color: ScopedModel.of<ThemeModel>(context).emphasis),
-            const SizedBox(
-              width: 4.0,
-            ),
-            Text(
-              "liked by ",
-              maxLines: 3,
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-                letterSpacing:
-                    ScopedModel.of<ThemeModel>(context).letterSpacingText,
-                color: ScopedModel.of<ThemeModel>(context).title,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-            like == null
-                ? const Text("like null option 2")
-                : GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Profile(),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      "You ",
-                      maxLines: 3,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-                        letterSpacing: ScopedModel.of<ThemeModel>(context)
-                            .letterSpacingText,
-                        color: ScopedModel.of<ThemeModel>(context).emphasis,
-                        fontWeight: FontWeight.normal,
+          ),
+          like == null
+              ? const Text("like null option 2")
+              : GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Profile(),
                       ),
+                    );
+                  },
+                  child: Text(
+                    "You ",
+                    maxLines: 3,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+                      letterSpacing:
+                          ScopedModel.of<ThemeModel>(context).letterSpacingText,
+                      color: ScopedModel.of<ThemeModel>(context).emphasis,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
-            Text(
-              "and ",
+                ),
+          Text(
+            "and ",
+            maxLines: 3,
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              color: ScopedModel.of<ThemeModel>(context).title,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => User(userMini: like!),
+                ),
+              );
+            },
+            child: Text(
+              "${like!.name} ",
               maxLines: 3,
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
                 letterSpacing:
                     ScopedModel.of<ThemeModel>(context).letterSpacingText,
-                color: ScopedModel.of<ThemeModel>(context).title,
+                color: ScopedModel.of<ThemeModel>(context).emphasis,
                 fontWeight: FontWeight.normal,
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => User(userMini: like!),
-                  ),
-                );
-              },
-              child: Text(
-                "${like!.name} ",
-                maxLines: 3,
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-                  letterSpacing:
-                      ScopedModel.of<ThemeModel>(context).letterSpacingText,
-                  color: ScopedModel.of<ThemeModel>(context).emphasis,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       );
     } else if (liked && likeQuantity > 2) {
       value = value - 1;
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Wrap(
-          children: [
-            Icon(Icons.thumb_up_alt_outlined,
-                size: ScopedModel.of<ThemeModel>(context).sizeTitle,
-                color: ScopedModel.of<ThemeModel>(context).emphasis),
-            const SizedBox(
-              width: 4.0,
+      return Wrap(
+        children: [
+          Icon(Icons.thumb_up_alt_outlined,
+              size: ScopedModel.of<ThemeModel>(context).sizeTitle,
+              color: ScopedModel.of<ThemeModel>(context).emphasis),
+          const SizedBox(
+            width: 4.0,
+          ),
+          Text(
+            "liked by ",
+            maxLines: 3,
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              color: ScopedModel.of<ThemeModel>(context).title,
+              fontWeight: FontWeight.normal,
             ),
-            Text(
-              "liked by ",
-              maxLines: 3,
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-                letterSpacing:
-                    ScopedModel.of<ThemeModel>(context).letterSpacingText,
-                color: ScopedModel.of<ThemeModel>(context).title,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-            like == null
-                ? const Text("like null option 3")
-                : GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Profile(),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      "You",
-                      maxLines: 3,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-                        letterSpacing: ScopedModel.of<ThemeModel>(context)
-                            .letterSpacingText,
-                        color: ScopedModel.of<ThemeModel>(context).emphasis,
-                        fontWeight: FontWeight.normal,
+          ),
+          like == null
+              ? const Text("like null option 3")
+              : GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Profile(),
                       ),
+                    );
+                  },
+                  child: Text(
+                    "You",
+                    maxLines: 3,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+                      letterSpacing:
+                          ScopedModel.of<ThemeModel>(context).letterSpacingText,
+                      color: ScopedModel.of<ThemeModel>(context).emphasis,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
-            Text(
-              ", ",
-              maxLines: 3,
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-                letterSpacing:
-                    ScopedModel.of<ThemeModel>(context).letterSpacingText,
-                color: ScopedModel.of<ThemeModel>(context).title,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => User(userMini: like!),
-                  ),
-                );
-              },
-              child: Text(
-                like!.name + " ",
-                maxLines: 3,
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-                  letterSpacing:
-                      ScopedModel.of<ThemeModel>(context).letterSpacingText,
-                  color: ScopedModel.of<ThemeModel>(context).emphasis,
-                  fontWeight: FontWeight.normal,
                 ),
-              ),
+          Text(
+            ", ",
+            maxLines: 3,
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              color: ScopedModel.of<ThemeModel>(context).title,
+              fontWeight: FontWeight.normal,
             ),
-            Text(
-              "and ",
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => User(userMini: like!),
+                ),
+              );
+            },
+            child: Text(
+              like!.name + " ",
               maxLines: 3,
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
                 letterSpacing:
                     ScopedModel.of<ThemeModel>(context).letterSpacingText,
-                color: ScopedModel.of<ThemeModel>(context).title,
+                color: ScopedModel.of<ThemeModel>(context).emphasis,
                 fontWeight: FontWeight.normal,
               ),
             ),
-            Text(
-              "$value ",
-              maxLines: 3,
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-                letterSpacing:
-                    ScopedModel.of<ThemeModel>(context).letterSpacingText,
-                color: ScopedModel.of<ThemeModel>(context).title,
-                fontWeight: FontWeight.normal,
-              ),
+          ),
+          Text(
+            "and ",
+            maxLines: 3,
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              color: ScopedModel.of<ThemeModel>(context).title,
+              fontWeight: FontWeight.normal,
             ),
-            Text(
-              "others",
-              maxLines: 3,
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-                letterSpacing:
-                    ScopedModel.of<ThemeModel>(context).letterSpacingText,
-                color: ScopedModel.of<ThemeModel>(context).title,
-                fontWeight: FontWeight.normal,
-              ),
+          ),
+          Text(
+            "$value ",
+            maxLines: 3,
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              color: ScopedModel.of<ThemeModel>(context).title,
+              fontWeight: FontWeight.normal,
             ),
-            // Text(
-            //   "liked ",
-            //   maxLines: 3,
-            //   textAlign: TextAlign.left,
-            //   style: TextStyle(
-            //     fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-            //     letterSpacing:
-            //         ScopedModel.of<ThemeModel>(context).letterSpacingText,
-            //     color: ScopedModel.of<ThemeModel>(context).title,
-            //     fontWeight: FontWeight.normal,
-            //   ),
-            // ),
-            // Text(
-            //   "this ",
-            //   maxLines: 3,
-            //   textAlign: TextAlign.left,
-            //   style: TextStyle(
-            //     fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-            //     letterSpacing:
-            //         ScopedModel.of<ThemeModel>(context).letterSpacingText,
-            //     color: ScopedModel.of<ThemeModel>(context).title,
-            //     fontWeight: FontWeight.normal,
-            //   ),
-            // ),
-            // Text(
-            //   "post",
-            //   maxLines: 3,
-            //   textAlign: TextAlign.left,
-            //   style: TextStyle(
-            //     fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-            //     letterSpacing:
-            //         ScopedModel.of<ThemeModel>(context).letterSpacingText,
-            //     color: ScopedModel.of<ThemeModel>(context).title,
-            //     fontWeight: FontWeight.normal,
-            //   ),
-            // ),
-          ],
-        ),
+          ),
+          Text(
+            "others",
+            maxLines: 3,
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              color: ScopedModel.of<ThemeModel>(context).title,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+          // Text(
+          //   "liked ",
+          //   maxLines: 3,
+          //   textAlign: TextAlign.left,
+          //   style: TextStyle(
+          //     fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+          //     letterSpacing:
+          //         ScopedModel.of<ThemeModel>(context).letterSpacingText,
+          //     color: ScopedModel.of<ThemeModel>(context).title,
+          //     fontWeight: FontWeight.normal,
+          //   ),
+          // ),
+          // Text(
+          //   "this ",
+          //   maxLines: 3,
+          //   textAlign: TextAlign.left,
+          //   style: TextStyle(
+          //     fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+          //     letterSpacing:
+          //         ScopedModel.of<ThemeModel>(context).letterSpacingText,
+          //     color: ScopedModel.of<ThemeModel>(context).title,
+          //     fontWeight: FontWeight.normal,
+          //   ),
+          // ),
+          // Text(
+          //   "post",
+          //   maxLines: 3,
+          //   textAlign: TextAlign.left,
+          //   style: TextStyle(
+          //     fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+          //     letterSpacing:
+          //         ScopedModel.of<ThemeModel>(context).letterSpacingText,
+          //     color: ScopedModel.of<ThemeModel>(context).title,
+          //     fontWeight: FontWeight.normal,
+          //   ),
+          // ),
+        ],
       );
     } else if (!liked && likeQuantity > 1) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Wrap(
-          children: [
-            const SizedBox(
-              width: 4.0,
+      return Wrap(
+        children: [
+          Icon(Icons.thumb_up_alt_outlined,
+              size: ScopedModel.of<ThemeModel>(context).sizeTitle,
+              color: ScopedModel.of<ThemeModel>(context).emphasis),
+          const SizedBox(
+            width: 4.0,
+          ),
+          Text(
+            "liked by ",
+            maxLines: 3,
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              color: ScopedModel.of<ThemeModel>(context).title,
+              fontWeight: FontWeight.normal,
             ),
-            Icon(Icons.thumb_up_alt_outlined,
-                size: ScopedModel.of<ThemeModel>(context).sizeTitle,
-                color: ScopedModel.of<ThemeModel>(context).emphasis),
-            const SizedBox(
-              width: 4.0,
-            ),
-            Text(
-              "liked by ",
-              maxLines: 3,
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-                letterSpacing:
-                    ScopedModel.of<ThemeModel>(context).letterSpacingText,
-                color: ScopedModel.of<ThemeModel>(context).title,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-            like == null
-                ? const Text("like null option 4")
-                : GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => User(userMini: like),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      "${like.name} ",
-                      maxLines: 3,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-                        letterSpacing: ScopedModel.of<ThemeModel>(context)
-                            .letterSpacingText,
-                        color: ScopedModel.of<ThemeModel>(context).emphasis,
-                        fontWeight: FontWeight.normal,
+          ),
+          like == null
+              ? const Text("like null option 4")
+              : GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => User(userMini: like),
                       ),
+                    );
+                  },
+                  child: Text(
+                    "${like.name} ",
+                    maxLines: 3,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+                      letterSpacing:
+                          ScopedModel.of<ThemeModel>(context).letterSpacingText,
+                      color: ScopedModel.of<ThemeModel>(context).emphasis,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
-            Text(
-              "and ",
-              maxLines: 3,
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-                letterSpacing:
-                    ScopedModel.of<ThemeModel>(context).letterSpacingText,
-                color: ScopedModel.of<ThemeModel>(context).title,
-                fontWeight: FontWeight.normal,
-              ),
+                ),
+          Text(
+            "and ",
+            maxLines: 3,
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              color: ScopedModel.of<ThemeModel>(context).title,
+              fontWeight: FontWeight.normal,
             ),
-            Text(
-              "$value ",
-              maxLines: 3,
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-                letterSpacing:
-                    ScopedModel.of<ThemeModel>(context).letterSpacingText,
-                color: ScopedModel.of<ThemeModel>(context).title,
-                fontWeight: FontWeight.normal,
-              ),
+          ),
+          Text(
+            "$value ",
+            maxLines: 3,
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              color: ScopedModel.of<ThemeModel>(context).title,
+              fontWeight: FontWeight.normal,
             ),
-            Text(
-              "others ",
-              maxLines: 3,
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-                letterSpacing:
-                    ScopedModel.of<ThemeModel>(context).letterSpacingText,
-                color: ScopedModel.of<ThemeModel>(context).title,
-                fontWeight: FontWeight.normal,
-              ),
+          ),
+          Text(
+            "others ",
+            maxLines: 3,
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              color: ScopedModel.of<ThemeModel>(context).title,
+              fontWeight: FontWeight.normal,
             ),
+          ),
 
-            // Text(
-            //   "people ",
-            //   maxLines: 3,
-            //   textAlign: TextAlign.left,
-            //   style: TextStyle(
-            //     fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-            //     letterSpacing:
-            //         ScopedModel.of<ThemeModel>(context).letterSpacingText,
-            //     color: ScopedModel.of<ThemeModel>(context).title,
-            //     fontWeight: FontWeight.normal,
-            //   ),
-            // ),
-            // Text(
-            //   "liked ",
-            //   maxLines: 3,
-            //   textAlign: TextAlign.left,
-            //   style: TextStyle(
-            //     fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-            //     letterSpacing:
-            //         ScopedModel.of<ThemeModel>(context).letterSpacingText,
-            //     color: ScopedModel.of<ThemeModel>(context).title,
-            //     fontWeight: FontWeight.normal,
-            //   ),
-            // ),
-            // Text(
-            //   "this ",
-            //   maxLines: 3,
-            //   textAlign: TextAlign.left,
-            //   style: TextStyle(
-            //     fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-            //     letterSpacing:
-            //         ScopedModel.of<ThemeModel>(context).letterSpacingText,
-            //     color: ScopedModel.of<ThemeModel>(context).title,
-            //     fontWeight: FontWeight.normal,
-            //   ),
-            // ),
-            // Text(
-            //   "post",
-            //   maxLines: 3,
-            //   textAlign: TextAlign.left,
-            //   style: TextStyle(
-            //     fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-            //     letterSpacing:
-            //         ScopedModel.of<ThemeModel>(context).letterSpacingText,
-            //     color: ScopedModel.of<ThemeModel>(context).title,
-            //     fontWeight: FontWeight.normal,
-            //   ),
-            // ),
-          ],
-        ),
+          // Text(
+          //   "people ",
+          //   maxLines: 3,
+          //   textAlign: TextAlign.left,
+          //   style: TextStyle(
+          //     fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+          //     letterSpacing:
+          //         ScopedModel.of<ThemeModel>(context).letterSpacingText,
+          //     color: ScopedModel.of<ThemeModel>(context).title,
+          //     fontWeight: FontWeight.normal,
+          //   ),
+          // ),
+          // Text(
+          //   "liked ",
+          //   maxLines: 3,
+          //   textAlign: TextAlign.left,
+          //   style: TextStyle(
+          //     fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+          //     letterSpacing:
+          //         ScopedModel.of<ThemeModel>(context).letterSpacingText,
+          //     color: ScopedModel.of<ThemeModel>(context).title,
+          //     fontWeight: FontWeight.normal,
+          //   ),
+          // ),
+          // Text(
+          //   "this ",
+          //   maxLines: 3,
+          //   textAlign: TextAlign.left,
+          //   style: TextStyle(
+          //     fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+          //     letterSpacing:
+          //         ScopedModel.of<ThemeModel>(context).letterSpacingText,
+          //     color: ScopedModel.of<ThemeModel>(context).title,
+          //     fontWeight: FontWeight.normal,
+          //   ),
+          // ),
+          // Text(
+          //   "post",
+          //   maxLines: 3,
+          //   textAlign: TextAlign.left,
+          //   style: TextStyle(
+          //     fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+          //     letterSpacing:
+          //         ScopedModel.of<ThemeModel>(context).letterSpacingText,
+          //     color: ScopedModel.of<ThemeModel>(context).title,
+          //     fontWeight: FontWeight.normal,
+          //   ),
+          // ),
+        ],
       );
     } else if (!liked && likeQuantity == 1) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Wrap(
-          children: [
-            const SizedBox(
-              width: 4.0,
+      return Wrap(
+        children: [
+          Icon(Icons.thumb_up_alt_outlined,
+              size: ScopedModel.of<ThemeModel>(context).sizeTitle,
+              color: ScopedModel.of<ThemeModel>(context).emphasis),
+          const SizedBox(
+            width: 4.0,
+          ),
+          Text(
+            "liked by ",
+            maxLines: 3,
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              color: ScopedModel.of<ThemeModel>(context).title,
+              fontWeight: FontWeight.normal,
             ),
-            Icon(Icons.thumb_up_alt_outlined,
-                size: ScopedModel.of<ThemeModel>(context).sizeTitle,
-                color: ScopedModel.of<ThemeModel>(context).emphasis),
-            const SizedBox(
-              width: 4.0,
-            ),
-            Text(
-              "liked by ",
-              maxLines: 3,
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-                letterSpacing:
-                    ScopedModel.of<ThemeModel>(context).letterSpacingText,
-                color: ScopedModel.of<ThemeModel>(context).title,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-            like == null
-                ? const Text("like null option 5")
-                : GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => User(userMini: like),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      "${like.name} ",
-                      maxLines: 3,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-                        letterSpacing: ScopedModel.of<ThemeModel>(context)
-                            .letterSpacingText,
-                        color: ScopedModel.of<ThemeModel>(context).emphasis,
-                        fontWeight: FontWeight.normal,
+          ),
+          like == null
+              ? const Text("like null option 5")
+              : GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => User(userMini: like),
                       ),
+                    );
+                  },
+                  child: Text(
+                    "${like.name} ",
+                    maxLines: 3,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+                      letterSpacing:
+                          ScopedModel.of<ThemeModel>(context).letterSpacingText,
+                      color: ScopedModel.of<ThemeModel>(context).emphasis,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
-            // Text(
-            //   "liked ",
-            //   maxLines: 3,
-            //   textAlign: TextAlign.left,
-            //   style: TextStyle(
-            //     fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-            //     letterSpacing:
-            //         ScopedModel.of<ThemeModel>(context).letterSpacingText,
-            //     color: ScopedModel.of<ThemeModel>(context).title,
-            //     fontWeight: FontWeight.normal,
-            //   ),
-            // ),
-            // Text(
-            //   "this ",
-            //   maxLines: 3,
-            //   textAlign: TextAlign.left,
-            //   style: TextStyle(
-            //     fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-            //     letterSpacing:
-            //         ScopedModel.of<ThemeModel>(context).letterSpacingText,
-            //     color: ScopedModel.of<ThemeModel>(context).title,
-            //     fontWeight: FontWeight.normal,
-            //   ),
-            // ),
-            // Text(
-            //   "post",
-            //   maxLines: 3,
-            //   textAlign: TextAlign.left,
-            //   style: TextStyle(
-            //     fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-            //     letterSpacing:
-            //         ScopedModel.of<ThemeModel>(context).letterSpacingText,
-            //     color: ScopedModel.of<ThemeModel>(context).title,
-            //     fontWeight: FontWeight.normal,
-            //   ),
-            // ),
-          ],
-        ),
+                ),
+          // Text(
+          //   "liked ",
+          //   maxLines: 3,
+          //   textAlign: TextAlign.left,
+          //   style: TextStyle(
+          //     fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+          //     letterSpacing:
+          //         ScopedModel.of<ThemeModel>(context).letterSpacingText,
+          //     color: ScopedModel.of<ThemeModel>(context).title,
+          //     fontWeight: FontWeight.normal,
+          //   ),
+          // ),
+          // Text(
+          //   "this ",
+          //   maxLines: 3,
+          //   textAlign: TextAlign.left,
+          //   style: TextStyle(
+          //     fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+          //     letterSpacing:
+          //         ScopedModel.of<ThemeModel>(context).letterSpacingText,
+          //     color: ScopedModel.of<ThemeModel>(context).title,
+          //     fontWeight: FontWeight.normal,
+          //   ),
+          // ),
+          // Text(
+          //   "post",
+          //   maxLines: 3,
+          //   textAlign: TextAlign.left,
+          //   style: TextStyle(
+          //     fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+          //     letterSpacing:
+          //         ScopedModel.of<ThemeModel>(context).letterSpacingText,
+          //     color: ScopedModel.of<ThemeModel>(context).title,
+          //     fontWeight: FontWeight.normal,
+          //   ),
+          // ),
+        ],
       );
     } else {
       return Container();

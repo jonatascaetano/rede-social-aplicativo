@@ -144,6 +144,9 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                           const SizedBox(
                                             width: 4.0,
                                           ),
+
+                                          //init
+
                                           Expanded(
                                               child: widget.postUpdateMini
                                                           .level ==

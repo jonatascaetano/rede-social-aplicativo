@@ -62,7 +62,7 @@ class _HomeState extends State<Home> {
                         Divider(
                           height: 5.0,
                           thickness: 5.0,
-                          color: theme.shadow,
+                          color: theme.button,
                         ),
                         ListView.separated(
                             padding: EdgeInsets.zero,
@@ -70,9 +70,9 @@ class _HomeState extends State<Home> {
                             physics: const NeverScrollableScrollPhysics(),
                             separatorBuilder: (context, index) {
                               return Divider(
-                                height: 5.0,
-                                thickness: 5.0,
-                                color: theme.shadow,
+                                height: 1.0,
+                                thickness: 1.0,
+                                color: theme.button,
                               );
                             },
                             itemCount: profile.allPosts.length,
@@ -89,9 +89,9 @@ class _HomeState extends State<Home> {
                                           AdmobBannerSize.MEDIUM_RECTANGLE),
                                     ),
                                     Divider(
-                                      height: 5.0,
-                                      thickness: 5.0,
-                                      color: theme.shadow,
+                                      height: 1.0,
+                                      thickness: 1.0,
+                                      color: theme.button,
                                     ),
                                     profile.returnPostWidget(
                                         post: profile.allPosts[index],
