@@ -9,8 +9,11 @@ import 'package:social_network_application/entities/dto/comment_dto.dart';
 import 'package:social_network_application/entities/mini_dto/comment_mini.dart';
 import 'package:social_network_application/entities/mini_dto/entity_save_mini.dart';
 import 'package:social_network_application/enuns/type_comment.dart';
+import 'package:social_network_application/enuns/type_object.dart';
 import 'package:social_network_application/scoped_model/entity_model.dart';
+import 'package:social_network_application/scoped_model/season_model.dart';
 
+import 'episode_model.dart';
 import 'support/theme_model.dart';
 
 class ReviewModel extends Model {
@@ -21,8 +24,12 @@ class ReviewModel extends Model {
   EntitySaveMini? entitySaveMini;
   List<CommentMini> comments = [];
   TextEditingController controller = TextEditingController();
+  late String typeObject;
 
-  ReviewModel({required this.idReview, required this.contextAncestor}) {
+  ReviewModel(
+      {required this.idReview,
+      required this.contextAncestor,
+      required this.typeObject}) {
     getReview();
     getAllCommentReview(idReview: idReview, context: contextAncestor);
   }
@@ -83,8 +90,21 @@ class ReviewModel extends Model {
     switch (response.statusCode) {
       case 202:
         getReview();
-        ScopedModel.of<EntityModel>(context)
-            .getReviews(entityId: entitySaveMini!.entity!.id);
+        switch (typeObject) {
+          case TypeObject.ENTITY:
+            ScopedModel.of<EntityModel>(context)
+                .getReviews(entityId: entitySaveMini!.entity!.id);
+            break;
+          case TypeObject.SEASON:
+            ScopedModel.of<SeasonModel>(context)
+                .getReviews(seasonId: entitySaveMini!.season!.id);
+            break;
+          case TypeObject.EPISODE:
+            ScopedModel.of<EpisodeModel>(context)
+                .getReviews(episodeId: entitySaveMini!.episode!.id);
+            break;
+          default:
+        }
         break;
       default:
         load = false;
@@ -164,8 +184,21 @@ class ReviewModel extends Model {
         controller.clear();
         getReview();
         getAllCommentReview(idReview: idReview, context: context);
-        ScopedModel.of<EntityModel>(context)
-            .getReviews(entityId: entitySaveMini!.entity!.id);
+        switch (typeObject) {
+          case TypeObject.ENTITY:
+            ScopedModel.of<EntityModel>(context)
+                .getReviews(entityId: entitySaveMini!.entity!.id);
+            break;
+          case TypeObject.SEASON:
+            ScopedModel.of<SeasonModel>(context)
+                .getReviews(seasonId: entitySaveMini!.season!.id);
+            break;
+          case TypeObject.EPISODE:
+            ScopedModel.of<EpisodeModel>(context)
+                .getReviews(episodeId: entitySaveMini!.episode!.id);
+            break;
+          default:
+        }
         break;
       default:
         load = false;
@@ -209,8 +242,21 @@ class ReviewModel extends Model {
       case 200:
         getReview();
         getAllCommentReview(idReview: idReview, context: context);
-        ScopedModel.of<EntityModel>(context)
-            .getReviews(entityId: entitySaveMini!.entity!.id);
+        switch (typeObject) {
+          case TypeObject.ENTITY:
+            ScopedModel.of<EntityModel>(context)
+                .getReviews(entityId: entitySaveMini!.entity!.id);
+            break;
+          case TypeObject.SEASON:
+            ScopedModel.of<SeasonModel>(context)
+                .getReviews(seasonId: entitySaveMini!.season!.id);
+            break;
+          case TypeObject.EPISODE:
+            ScopedModel.of<EpisodeModel>(context)
+                .getReviews(episodeId: entitySaveMini!.episode!.id);
+            break;
+          default:
+        }
         break;
       default:
         load = false;

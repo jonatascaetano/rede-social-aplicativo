@@ -3,8 +3,11 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/converts/convert_date.dart';
 import 'package:social_network_application/converts/convert_like_names.dart';
 import 'package:social_network_application/entities/mini_dto/entity_save_mini.dart';
+import 'package:social_network_application/enuns/type_object.dart';
 import 'package:social_network_application/scoped_model/entity_model.dart';
+import 'package:social_network_application/scoped_model/episode_model.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
+import 'package:social_network_application/scoped_model/season_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/objects/user.dart';
 import 'package:social_network_application/view/review/likes_review.dart';
@@ -15,8 +18,12 @@ import 'package:social_network_application/view/tabs/profile.dart';
 class Reviews extends StatefulWidget {
   EntitySaveMini entitySaveMini;
   BuildContext contextAncestor;
+  String typeObject;
   Reviews(
-      {required this.entitySaveMini, required this.contextAncestor, Key? key})
+      {required this.entitySaveMini,
+      required this.contextAncestor,
+      required this.typeObject,
+      Key? key})
       : super(key: key);
 
   @override
@@ -35,6 +42,7 @@ class _ReviewsState extends State<Reviews> {
               builder: (context) => ReviewScreen(
                 idReview: widget.entitySaveMini.id,
                 contextAncestor: widget.contextAncestor,
+                typeObject: widget.typeObject,
               ),
             ),
           );
@@ -337,11 +345,30 @@ class _ReviewsState extends State<Reviews> {
                   flex: 1,
                   child: GestureDetector(
                     onTap: () {
-                      ScopedModel.of<EntityModel>(widget.contextAncestor)
-                          .updateLikeReview(
-                        context: widget.contextAncestor,
-                        idReview: widget.entitySaveMini.id,
-                      );
+                      switch (widget.typeObject) {
+                        case TypeObject.ENTITY:
+                          ScopedModel.of<EntityModel>(widget.contextAncestor)
+                              .updateLikeReview(
+                            context: widget.contextAncestor,
+                            idReview: widget.entitySaveMini.id,
+                          );
+                          break;
+                        case TypeObject.SEASON:
+                          ScopedModel.of<SeasonModel>(widget.contextAncestor)
+                              .updateLikeReview(
+                            context: widget.contextAncestor,
+                            idReview: widget.entitySaveMini.id,
+                          );
+                          break;
+                        case TypeObject.EPISODE:
+                          ScopedModel.of<EpisodeModel>(widget.contextAncestor)
+                              .updateLikeReview(
+                            context: widget.contextAncestor,
+                            idReview: widget.entitySaveMini.id,
+                          );
+                          break;
+                        default:
+                      }
                     },
                     child: Container(
                       decoration: BoxDecoration(

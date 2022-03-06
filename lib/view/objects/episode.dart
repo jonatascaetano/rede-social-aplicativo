@@ -68,6 +68,8 @@ class _EpisodeState extends State<Episode> {
         .getEntitySave(episodeId: widget.episodeMini.id);
     // ScopedModel.of<SeasonModel>(context)
     //     .getWorkers(entityId: widget.entityMini.id);
+    ScopedModel.of<EpisodeModel>(context)
+        .getReviews(episodeId: widget.episodeMini.id);
     super.initState();
   }
 

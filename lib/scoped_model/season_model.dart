@@ -17,6 +17,7 @@ import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/view/objects/season/add_body_post_season.dart';
 import 'package:social_network_application/view/objects/season/new_episode_season.dart';
+import 'package:social_network_application/view/objects/season/update_season.dart';
 
 import 'support/theme_model.dart';
 
@@ -32,7 +33,6 @@ class SeasonModel extends Model {
   late List<WorkerMini> workers = [];
   int maxLine = 5;
   List<DropdownMenuItem<int>> dropdownList = [];
-  late String idUser;
   bool spoiler = false;
   List<EntitySaveMini> reviews = [];
 
@@ -48,8 +48,6 @@ class SeasonModel extends Model {
 
   Future<String> getId() async {
     final prefs = await SharedPreferences.getInstance();
-    idUser = prefs.getString("id")!;
-    notifyListeners();
     return prefs.getString("id")!;
   }
 
@@ -125,10 +123,11 @@ class SeasonModel extends Model {
     }
   }
 
-  getReviews({required String entityId}) async {
+  getReviews({required String seasonId}) async {
     load = true;
     notifyListeners();
-    var url = Uri.parse(base + 'entities/get/reviews/$entityId');
+    String idUser = await getId();
+    var url = Uri.parse(base + 'seasons/get/reviews/$seasonId/user/$idUser');
     var response = await http.get(url, headers: {
       "Accept": "application/json; charset=utf-8",
       "content-type": "application/json; charset=utf-8"
@@ -150,7 +149,7 @@ class SeasonModel extends Model {
     }
   }
 
-  showOptionsEntityBottomSheet(
+  showOptionsSeasonBottomSheet(
       {required BuildContext contextAncestor, required SeasonMini seasonMini}) {
     showModalBottomSheet<dynamic>(
 
@@ -195,7 +194,44 @@ class SeasonModel extends Model {
                                 width: 8.0,
                               ),
                               Text(
-                                'New Episode',
+                                'New episode',
+                                style: TextStyle(
+                                  fontSize: theme.sizeText,
+                                  letterSpacing: theme.letterSpacingText,
+                                  color: theme.title,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UpdateSeason(
+                                context: context,
+                                seasonMini: seasonMini,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.edit,
+                                color: theme.emphasis,
+                              ),
+                              const SizedBox(
+                                width: 8.0,
+                              ),
+                              Text(
+                                'Edit season',
                                 style: TextStyle(
                                   fontSize: theme.sizeText,
                                   letterSpacing: theme.letterSpacingText,
@@ -215,6 +251,33 @@ class SeasonModel extends Model {
                 });
           });
         });
+  }
+
+  updateLikeReview(
+      {required BuildContext context, required String idReview}) async {
+    load = true;
+    notifyListeners();
+    String idUser = await getId();
+    var url = Uri.parse(
+        base + 'entitysaves/put/like/entitysave/$idReview/user/$idUser');
+    var response = await http.put(url, headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
+    // ignore: avoid_print
+    print("updateLikeReview: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 202:
+        getReviews(seasonId: seasonMini.id);
+        break;
+      default:
+        load = false;
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Try again later')),
+        );
+        break;
+    }
   }
 
   loadDropdownList() {
@@ -337,7 +400,7 @@ class SeasonModel extends Model {
         entitySaveMini = EntitySaveMini.fromMap(map: item);
         getSeason(seasonId: entitySaveMini!.season!.id);
         newPost(entitySaveMini: entitySaveMini!, category: 6, context: context);
-        getReviews(entityId: entitySaveMini!.entity!.id);
+        getReviews(seasonId: entitySaveMini!.season!.id);
         break;
       default:
         load = false;
@@ -401,7 +464,7 @@ class SeasonModel extends Model {
         print(item.toString());
         entitySaveMini = EntitySaveMini.fromMap(map: item);
         newPost(entitySaveMini: entitySaveMini!, category: 7, context: context);
-        getReviews(entityId: entitySaveMini!.entity!.id);
+        getReviews(seasonId: entitySaveMini!.season!.id);
         break;
       default:
         load = false;
@@ -419,6 +482,7 @@ class SeasonModel extends Model {
       required BuildContext context}) async {
     load = true;
     notifyListeners();
+    String idUser = await getId();
     PostUpdateDTO postUpdateDTO = PostUpdateDTO(
       idPost: null,
       level: entitySaveMini.level,

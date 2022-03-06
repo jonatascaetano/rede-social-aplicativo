@@ -11,7 +11,7 @@ class EpisodeMiniSeasonModel extends Model {
   late String idUser;
 
   EpisodeMiniSeasonModel({required String episodeId}) {
-    getEntitySaveEpisodeMini(episodeId: episodeId);
+    //getEntitySaveEpisodeMini(episodeId: episodeId);
   }
   static const String base =
       "https://jonatas-social-network-api.herokuapp.com/";

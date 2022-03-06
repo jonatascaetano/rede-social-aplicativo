@@ -129,7 +129,7 @@ class EntityModel extends Model {
       "content-type": "application/json; charset=utf-8"
     });
     // ignore: avoid_print
-    print("updateLikePost: " + response.statusCode.toString());
+    print("updateLikeReview: " + response.statusCode.toString());
     switch (response.statusCode) {
       case 202:
         getReviews(entityId: entityMini.id);
@@ -547,7 +547,7 @@ class EntityModel extends Model {
                                 width: 8.0,
                               ),
                               Text(
-                                'New Season',
+                                'New season',
                                 style: TextStyle(
                                   fontSize: theme.sizeText,
                                   letterSpacing: theme.letterSpacingText,
@@ -582,7 +582,7 @@ class EntityModel extends Model {
                                 width: 8.0,
                               ),
                               Text(
-                                'edit ' +
+                                'Edit ' +
                                     LanguageModel()
                                         .typeEntities[ConvertToEnum
                                             .convertTypeEntityToValue(

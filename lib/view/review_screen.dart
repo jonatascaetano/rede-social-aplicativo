@@ -15,8 +15,12 @@ import 'objects/user.dart';
 class ReviewScreen extends StatefulWidget {
   String idReview;
   BuildContext contextAncestor;
+  String typeObject;
   ReviewScreen(
-      {required this.idReview, required this.contextAncestor, Key? key})
+      {required this.idReview,
+      required this.contextAncestor,
+      required this.typeObject,
+      Key? key})
       : super(key: key);
 
   @override
@@ -29,8 +33,10 @@ class _ReviewScreenState extends State<ReviewScreen> {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<ReviewModel>(
           model: ReviewModel(
-              contextAncestor: widget.contextAncestor,
-              idReview: widget.idReview),
+            contextAncestor: widget.contextAncestor,
+            idReview: widget.idReview,
+            typeObject: widget.typeObject,
+          ),
           child: ScopedModelDescendant<ReviewModel>(
               builder: (context, child, review) {
             return Scaffold(

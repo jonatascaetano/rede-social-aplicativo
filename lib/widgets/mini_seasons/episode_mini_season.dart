@@ -91,19 +91,19 @@ class _EpisodeMiniSeasonState extends State<EpisodeMiniSeason> {
                           const SizedBox(
                             height: 4.0,
                           ),
-                          episodeMiniSeason.entitySaveMiniIsNull
-                              ? Center(
-                                  child: Icon(
-                                    Icons.highlight_remove_sharp,
-                                    color: theme.detail,
-                                  ),
-                                )
-                              : Center(
-                                  child: Icon(
-                                    Icons.check_circle_outline,
-                                    color: theme.emphasis,
-                                  ),
-                                )
+                          // episodeMiniSeason.entitySaveMiniIsNull
+                          //     ? Center(
+                          //         child: Icon(
+                          //           Icons.highlight_remove_sharp,
+                          //           color: theme.detail,
+                          //         ),
+                          //       )
+                          //     : Center(
+                          //         child: Icon(
+                          //           Icons.check_circle_outline,
+                          //           color: theme.emphasis,
+                          //         ),
+                          //       )
                           // Text(
                           //     LanguageModel().entitiesCategories[
                           //         ConvertToEnum.convertTypeEntityToValue(
