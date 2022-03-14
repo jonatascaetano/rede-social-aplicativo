@@ -53,7 +53,7 @@ class _MyAppState extends State<MyApp> {
                   height: 50.0,
                   width: 50.0,
                   child: Icon(
-                    Icons.notifications,
+                    Icons.notifications_none,
                     color: theme.title,
                     size: 28.0,
                   ),
@@ -74,7 +74,7 @@ class _MyAppState extends State<MyApp> {
                     height: 50.0,
                     width: 50.0,
                     child: Icon(
-                      Icons.add_circle_outline,
+                      Icons.add_outlined,
                       color: theme.title,
                       size: 28.0,
                     ),

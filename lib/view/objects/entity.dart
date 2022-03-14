@@ -11,7 +11,7 @@ import 'package:social_network_application/scoped_model/support/language_model.d
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/widgets/mini_entities/evaluation.dart';
 import 'package:social_network_application/widgets/mini_entities/season_mini_entity.dart';
-import 'package:social_network_application/widgets/reviews.dart';
+import 'package:social_network_application/widgets/reviews_2.dart';
 
 import 'entity/all_seasons_entity.dart';
 
@@ -1057,14 +1057,14 @@ class _EntityState extends State<Entity> {
                                         const NeverScrollableScrollPhysics(),
                                     separatorBuilder: (context, index) {
                                       return Divider(
-                                        height: 5.0,
-                                        thickness: 5.0,
+                                        height: 1.0,
+                                        thickness: 1.0,
                                         color: theme.shadow,
                                       );
                                     },
                                     itemCount: entity.reviews.length,
                                     itemBuilder: (context, index) {
-                                      return Reviews(
+                                      return Reviews2(
                                         entitySaveMini: entity.reviews[index],
                                         contextAncestor: context,
                                         typeObject: TypeObject.ENTITY,

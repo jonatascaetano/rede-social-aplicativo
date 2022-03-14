@@ -117,15 +117,16 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                   width: 8.0,
                 ),
 
+                // ignore: sized_box_for_whitespace
                 Container(
                   //color: Colors.transparent,
-                  decoration: BoxDecoration(
-                    //color: theme.button,
-                    border: Border.all(
-                      color: theme.button,
-                    ),
-                    borderRadius: const BorderRadius.all(Radius.circular(16.0)),
-                  ),
+                  // decoration: BoxDecoration(
+                  //   //color: theme.button,
+                  //   border: Border.all(
+                  //     color: theme.button,
+                  //   ),
+                  //   borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+                  // ),
                   width: MediaQuery.of(context).size.width - 84,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
@@ -316,9 +317,9 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                         const SizedBox(
                           height: 2.0,
                         ),
-                        Divider(
-                          color: theme.button,
-                        ),
+                        // Divider(
+                        //   color: theme.button,
+                        // ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

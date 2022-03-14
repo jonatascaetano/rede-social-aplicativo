@@ -10,7 +10,7 @@ import 'package:social_network_application/scoped_model/support/language_model.d
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/widgets/mini_seasons/episode_mini_season.dart';
 import 'package:social_network_application/widgets/mini_seasons/evaluation.dart';
-import 'package:social_network_application/widgets/reviews.dart';
+import 'package:social_network_application/widgets/reviews_2.dart';
 
 import 'season/all_episodes_season.dart';
 import 'season/update_review_season.dart';
@@ -954,7 +954,7 @@ class _SeasonState extends State<Season> {
                                     },
                                     itemCount: season.reviews.length,
                                     itemBuilder: (context, index) {
-                                      return Reviews(
+                                      return Reviews2(
                                         entitySaveMini: season.reviews[index],
                                         contextAncestor: context,
                                         typeObject: TypeObject.SEASON,

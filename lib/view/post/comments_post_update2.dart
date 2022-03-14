@@ -147,17 +147,18 @@ class _CommentsPostUpdate2State extends State<CommentsPostUpdate2> {
                                           ),
 
                                           //init
+                                          // ignore: sized_box_for_whitespace
                                           Container(
-                                            //color: Colors.transparent,
-                                            decoration: BoxDecoration(
-                                              //color: theme.button,
-                                              border: Border.all(
-                                                color: theme.button,
-                                              ),
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                      Radius.circular(16.0)),
-                                            ),
+                                            // //color: Colors.transparent,
+                                            // decoration: BoxDecoration(
+                                            //   //color: theme.button,
+                                            //   border: Border.all(
+                                            //     color: theme.button,
+                                            //   ),
+                                            //   borderRadius:
+                                            //       const BorderRadius.all(
+                                            //           Radius.circular(16.0)),
+                                            // ),
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width -
@@ -460,9 +461,9 @@ class _CommentsPostUpdate2State extends State<CommentsPostUpdate2> {
                                                   const SizedBox(
                                                     height: 2.0,
                                                   ),
-                                                  Divider(
-                                                    color: theme.button,
-                                                  ),
+                                                  // Divider(
+                                                  //   color: theme.button,
+                                                  // ),
                                                   Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -1281,6 +1282,9 @@ class _CommentsPostUpdate2State extends State<CommentsPostUpdate2> {
                                   Divider(
                                     color: theme.button,
                                   ),
+                                  const SizedBox(
+                                    height: 16.0,
+                                  ),
                                   ListView.builder(
                                       shrinkWrap: true,
                                       physics:
@@ -1432,20 +1436,22 @@ class _CommentWidgetState extends State<CommentWidget> {
             const SizedBox(
               width: 8.0,
             ),
+            // ignore: sized_box_for_whitespace
             Column(
               children: [
+                // ignore: sized_box_for_whitespace
                 Container(
-                  width: MediaQuery.of(context).size.width - 80,
-                  decoration: BoxDecoration(
-                    color: ScopedModel.of<ThemeModel>(context).button,
-                    border: Border.all(
-                      color: ScopedModel.of<ThemeModel>(context).button,
-                    ),
-                    borderRadius: const BorderRadius.all(Radius.circular(16.0)),
-                  ),
+                  width: MediaQuery.of(context).size.width - 84,
+                  // decoration: BoxDecoration(
+                  //   //color: ScopedModel.of<ThemeModel>(context).button,
+                  //   border: Border.all(
+                  //     color: ScopedModel.of<ThemeModel>(context).button,
+                  //   ),
+                  //   borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+                  // ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 16.0),
+                        horizontal: 8.0, vertical: 1.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1499,117 +1505,121 @@ class _CommentWidgetState extends State<CommentWidget> {
                 ),
                 Center(
                   child: SizedBox(
-                    width: MediaQuery.of(context).size.width - 80,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          width: 8.0,
-                        ),
-                        widget.commentMini.release == null
-                            ? Container()
-                            : Text(
-                                ConvertDate.convertToDatePost(
-                                        release: widget.commentMini.release!) +
-                                    " • ",
+                    width: MediaQuery.of(context).size.width - 84,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 0.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          widget.commentMini.release == null
+                              ? Container()
+                              : Text(
+                                  ConvertDate.convertToDatePost(
+                                      release: widget.commentMini.release!),
+                                  style: TextStyle(
+                                    fontSize: theme.sizeText,
+                                    letterSpacing: theme.letterSpacingText,
+                                    color: theme.subtitle,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                          // const SizedBox(
+                          //   width: 8.0,
+                          // ),
+                          Row(
+                            children: [
+                              Text(
+                                widget.commentMini.likeQuantity.toString(),
                                 style: TextStyle(
                                   fontSize: theme.sizeText,
                                   letterSpacing: theme.letterSpacingText,
-                                  color: theme.subtitle,
+                                  color: widget.commentMini.liked
+                                      ? theme.emphasis
+                                      : theme.subtitle,
                                   fontWeight: FontWeight.normal,
                                 ),
                               ),
-                        const SizedBox(
-                          width: 8.0,
-                        ),
-                        Text(
-                          widget.commentMini.likeQuantity.toString(),
-                          style: TextStyle(
-                            fontSize: theme.sizeText,
-                            letterSpacing: theme.letterSpacingText,
-                            color: widget.commentMini.liked
-                                ? theme.emphasis
-                                : theme.subtitle,
-                            fontWeight: FontWeight.normal,
+                              IconButton(
+                                padding: EdgeInsets.zero,
+                                onPressed: () {
+                                  ScopedModel.of<CommentModel>(context)
+                                      .updateLikeComment(
+                                    context: context,
+                                    idComment: widget.commentMini.id,
+                                    idPost: widget.idPost,
+                                  );
+                                },
+                                icon: Icon(
+                                  Icons.thumb_up_alt_outlined,
+                                  size: theme.sizeTitle,
+                                  color: widget.commentMini.liked
+                                      ? theme.emphasis
+                                      : theme.subtitle,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {
-                            ScopedModel.of<CommentModel>(context)
-                                .updateLikeComment(
-                              context: context,
-                              idComment: widget.commentMini.id,
-                              idPost: widget.idPost,
-                            );
-                          },
-                          icon: Icon(
-                            Icons.thumb_up_alt_outlined,
-                            size: theme.sizeTitle,
-                            color: widget.commentMini.liked
-                                ? theme.emphasis
-                                : theme.subtitle,
-                          ),
-                        ),
-                        IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {
-                            if (widget.commentMini.author.id ==
-                                ScopedModel.of<ProfileModel>(context)
-                                    .userMini
-                                    .id) {
-                              ScopedModel.of<CommentModel>(context)
-                                  .showDeleteCommentBottomSheet(
-                                contextCommentPage: context,
-                                idPost: widget.idPost,
-                                idComment: widget.commentMini.id,
-                                screenComment: true,
-                                screenUser: widget.screenUser,
-                                contextPage: widget.contextPage,
-                              );
-                              // ScaffoldMessenger.of(context).showSnackBar(
-                              //   SnackBar(
-                              //     backgroundColor:
-                              //         ScopedModel.of<ThemeModel>(context)
-                              //             .background,
-                              //     content: Text('delete comment?',
-                              //         style: TextStyle(
-                              //           color:
-                              //               ScopedModel.of<ThemeModel>(context)
-                              //                   .subtitle,
-                              //         )),
-                              //     action: SnackBarAction(
-                              //         label: 'yes',
-                              //         textColor:
-                              //             ScopedModel.of<ThemeModel>(context)
-                              //                 .emphasis,
-                              //         onPressed: () {
-                              //           ScopedModel.of<CommentModel>(context)
-                              //               .removeCommentPost(
-                              //             context: widget.contextPage,
-                              //             idComment: widget.commentMini.id,
-                              //             idPost: widget.idPost,
-                              //             screenUser: widget.screenUser,
-                              //           );
-                              //         }),
-                              //   ),
-                              // );
+                          IconButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () {
+                              if (widget.commentMini.author.id ==
+                                  ScopedModel.of<ProfileModel>(context)
+                                      .userMini
+                                      .id) {
+                                ScopedModel.of<CommentModel>(context)
+                                    .showDeleteCommentBottomSheet(
+                                  contextCommentPage: context,
+                                  idPost: widget.idPost,
+                                  idComment: widget.commentMini.id,
+                                  screenComment: true,
+                                  screenUser: widget.screenUser,
+                                  contextPage: widget.contextPage,
+                                );
+                                // ScaffoldMessenger.of(context).showSnackBar(
+                                //   SnackBar(
+                                //     backgroundColor:
+                                //         ScopedModel.of<ThemeModel>(context)
+                                //             .background,
+                                //     content: Text('delete comment?',
+                                //         style: TextStyle(
+                                //           color:
+                                //               ScopedModel.of<ThemeModel>(context)
+                                //                   .subtitle,
+                                //         )),
+                                //     action: SnackBarAction(
+                                //         label: 'yes',
+                                //         textColor:
+                                //             ScopedModel.of<ThemeModel>(context)
+                                //                 .emphasis,
+                                //         onPressed: () {
+                                //           ScopedModel.of<CommentModel>(context)
+                                //               .removeCommentPost(
+                                //             context: widget.contextPage,
+                                //             idComment: widget.commentMini.id,
+                                //             idPost: widget.idPost,
+                                //             screenUser: widget.screenUser,
+                                //           );
+                                //         }),
+                                //   ),
+                                // );
 
-                            } else {
-                              ScopedModel.of<ProfileModel>(context)
-                                  .showOptionsCommentBottomSheet(
-                                contextAncestor: context,
-                                idComment: widget.commentMini.id,
-                              );
-                            }
-                          },
-                          icon: Icon(
-                            Icons.more_vert_sharp,
-                            size: theme.sizeTitle,
-                            color: theme.subtitle,
+                              } else {
+                                ScopedModel.of<ProfileModel>(context)
+                                    .showOptionsCommentBottomSheet(
+                                  contextAncestor: context,
+                                  idComment: widget.commentMini.id,
+                                );
+                              }
+                            },
+                            icon: Icon(
+                              Icons.more_vert_sharp,
+                              size: theme.sizeTitle,
+                              color: theme.subtitle,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
