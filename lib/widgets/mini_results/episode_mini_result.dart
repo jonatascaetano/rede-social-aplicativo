@@ -19,23 +19,17 @@ class _EpisodeMiniResultState extends State<EpisodeMiniResult> {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return GestureDetector(
         onTap: () {
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      Episode(episodeMini: widget.episodeMini)));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Episode(episodeMini: widget.episodeMini)));
         },
         child: Container(
           color: Colors.transparent,
           child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
             child: Row(
               children: [
                 widget.episodeMini.image != null
                     ? CircleAvatar(
-                        backgroundImage:
-                            NetworkImage(widget.episodeMini.image!),
+                        backgroundImage: NetworkImage(widget.episodeMini.image!),
                         radius: 30.0,
                       )
                     : CircleAvatar(

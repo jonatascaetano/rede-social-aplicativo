@@ -21,16 +21,14 @@ import 'entity/update_review_entity.dart';
 class Entity extends StatefulWidget {
   EntityMini entityMini;
   bool datasheetIsOpen;
-  Entity({required this.entityMini, required this.datasheetIsOpen, Key? key})
-      : super(key: key);
+  Entity({required this.entityMini, required this.datasheetIsOpen, Key? key}) : super(key: key);
 
   @override
   _EntityState createState() => _EntityState();
 }
 
 class _EntityState extends State<Entity> {
-  void handleEvent(
-      AdmobAdEvent event, Map<String, dynamic> args, String adType) {
+  void handleEvent(AdmobAdEvent event, Map<String, dynamic> args, String adType) {
     switch (event) {
       case AdmobAdEvent.loaded:
         // ignore: avoid_print
@@ -68,24 +66,18 @@ class _EntityState extends State<Entity> {
     ScopedModel.of<EntityModel>(context).dropdownList = [];
     ScopedModel.of<EntityModel>(context).entitySaveMini = null;
     ScopedModel.of<EntityModel>(context).getId();
-    ScopedModel.of<EntityModel>(context)
-        .getEntity(entityId: widget.entityMini.id);
-    ScopedModel.of<EntityModel>(context)
-        .getEntitySave(entityId: widget.entityMini.id);
-    ScopedModel.of<EntityModel>(context)
-        .getWorkers(entityId: widget.entityMini.id);
-    ScopedModel.of<EntityModel>(context)
-        .getSeasons(entityId: widget.entityMini.id);
-    ScopedModel.of<EntityModel>(context)
-        .getReviews(entityId: widget.entityMini.id);
+    ScopedModel.of<EntityModel>(context).getEntity(entityId: widget.entityMini.id);
+    ScopedModel.of<EntityModel>(context).getEntitySave(entityId: widget.entityMini.id);
+    ScopedModel.of<EntityModel>(context).getWorkers(entityId: widget.entityMini.id);
+    ScopedModel.of<EntityModel>(context).getSeasons(entityId: widget.entityMini.id);
+    ScopedModel.of<EntityModel>(context).getReviews(entityId: widget.entityMini.id);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<EntityModel>(
-          builder: (context, child, entity) {
+      return ScopedModelDescendant<EntityModel>(builder: (context, child, entity) {
         return Scaffold(
             appBar: AppBar(
               elevation: 0.0,
@@ -117,29 +109,20 @@ class _EntityState extends State<Entity> {
                                     ? Container(
                                         margin: EdgeInsets.zero,
                                         padding: EdgeInsets.zero,
-                                        height:
-                                            (MediaQuery.of(context).size.width /
-                                                    16) *
-                                                9,
-                                        width:
-                                            MediaQuery.of(context).size.width,
+                                        height: (MediaQuery.of(context).size.width / 16) * 9,
+                                        width: MediaQuery.of(context).size.width,
                                         decoration: BoxDecoration(
                                           color: theme.shadow,
                                           image: DecorationImage(
-                                            image: NetworkImage(
-                                                entity.entityMini.image!),
+                                            image: NetworkImage(entity.entityMini.image!),
                                             fit: BoxFit.fitHeight,
                                           ),
                                         ),
                                       )
                                     : Container(
                                         color: theme.shadow,
-                                        height:
-                                            (MediaQuery.of(context).size.width /
-                                                    16) *
-                                                9,
-                                        width:
-                                            MediaQuery.of(context).size.width,
+                                        height: (MediaQuery.of(context).size.width / 16) * 9,
+                                        width: MediaQuery.of(context).size.width,
                                         child: Center(
                                           child: Icon(
                                             Icons.image,
@@ -168,9 +151,7 @@ class _EntityState extends State<Entity> {
                                           child: Icon(
                                             Icons.add,
                                             size: 30,
-                                            color: ScopedModel.of<ThemeModel>(
-                                                    context)
-                                                .buttonMainText,
+                                            color: ScopedModel.of<ThemeModel>(context).buttonMainText,
                                           ),
                                         ),
 
@@ -205,12 +186,7 @@ class _EntityState extends State<Entity> {
                               height: 4.0,
                             ),
                             Text(
-                              LanguageModel()
-                                  .typeEntities[
-                                      ConvertToEnum.convertTypeEntityToValue(
-                                          typeEntity:
-                                              entity.entityMini.typeEntity)]
-                                  .toString(),
+                              LanguageModel().typeEntities[ConvertToEnum.convertTypeEntityToValue(typeEntity: entity.entityMini.typeEntity)].toString(),
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: theme.sizeText,
@@ -236,13 +212,11 @@ class _EntityState extends State<Entity> {
                                     child: Column(
                                       children: [
                                         Text(
-                                          entity.entityMini.category1
-                                              .toString(),
+                                          entity.entityMini.category1.toString(),
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: theme.sizeTitle,
-                                            letterSpacing:
-                                                theme.letterSpacingText,
+                                            letterSpacing: theme.letterSpacingText,
                                             color: theme.title,
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -251,18 +225,11 @@ class _EntityState extends State<Entity> {
                                           height: 4.0,
                                         ),
                                         Text(
-                                          LanguageModel()
-                                              .entitiesCategories[ConvertToEnum
-                                                  .convertTypeEntityToValue(
-                                                      typeEntity: entity
-                                                          .entityMini
-                                                          .typeEntity)][1]
-                                              .toString(),
+                                          LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: entity.entityMini.typeEntity)][1].toString(),
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: theme.sizeText,
-                                            letterSpacing:
-                                                theme.letterSpacingText,
+                                            letterSpacing: theme.letterSpacingText,
                                             color: theme.subtitle,
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -275,13 +242,11 @@ class _EntityState extends State<Entity> {
                                     child: Column(
                                       children: [
                                         Text(
-                                          entity.entityMini.category2
-                                              .toString(),
+                                          entity.entityMini.category2.toString(),
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: theme.sizeTitle,
-                                            letterSpacing:
-                                                theme.letterSpacingText,
+                                            letterSpacing: theme.letterSpacingText,
                                             color: theme.title,
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -290,18 +255,11 @@ class _EntityState extends State<Entity> {
                                           height: 4.0,
                                         ),
                                         Text(
-                                          LanguageModel()
-                                              .entitiesCategories[ConvertToEnum
-                                                  .convertTypeEntityToValue(
-                                                      typeEntity: entity
-                                                          .entityMini
-                                                          .typeEntity)][2]
-                                              .toString(),
+                                          LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: entity.entityMini.typeEntity)][2].toString(),
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: theme.sizeText,
-                                            letterSpacing:
-                                                theme.letterSpacingText,
+                                            letterSpacing: theme.letterSpacingText,
                                             color: theme.subtitle,
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -314,13 +272,11 @@ class _EntityState extends State<Entity> {
                                     child: Column(
                                       children: [
                                         Text(
-                                          entity.entityMini.category3
-                                              .toString(),
+                                          entity.entityMini.category3.toString(),
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: theme.sizeTitle,
-                                            letterSpacing:
-                                                theme.letterSpacingText,
+                                            letterSpacing: theme.letterSpacingText,
                                             color: theme.title,
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -329,18 +285,11 @@ class _EntityState extends State<Entity> {
                                           height: 4.0,
                                         ),
                                         Text(
-                                          LanguageModel()
-                                              .entitiesCategories[ConvertToEnum
-                                                  .convertTypeEntityToValue(
-                                                      typeEntity: entity
-                                                          .entityMini
-                                                          .typeEntity)][3]
-                                              .toString(),
+                                          LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: entity.entityMini.typeEntity)][3].toString(),
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: theme.sizeText,
-                                            letterSpacing:
-                                                theme.letterSpacingText,
+                                            letterSpacing: theme.letterSpacingText,
                                             color: theme.subtitle,
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -353,13 +302,11 @@ class _EntityState extends State<Entity> {
                                     child: Column(
                                       children: [
                                         Text(
-                                          entity.entityMini.category4
-                                              .toString(),
+                                          entity.entityMini.category4.toString(),
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: theme.sizeTitle,
-                                            letterSpacing:
-                                                theme.letterSpacingText,
+                                            letterSpacing: theme.letterSpacingText,
                                             color: theme.title,
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -368,18 +315,11 @@ class _EntityState extends State<Entity> {
                                           height: 4.0,
                                         ),
                                         Text(
-                                          LanguageModel()
-                                              .entitiesCategories[ConvertToEnum
-                                                  .convertTypeEntityToValue(
-                                                      typeEntity: entity
-                                                          .entityMini
-                                                          .typeEntity)][4]
-                                              .toString(),
+                                          LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: entity.entityMini.typeEntity)][4].toString(),
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: theme.sizeText,
-                                            letterSpacing:
-                                                theme.letterSpacingText,
+                                            letterSpacing: theme.letterSpacingText,
                                             color: theme.subtitle,
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -400,41 +340,11 @@ class _EntityState extends State<Entity> {
                                 : Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Evaluation(
-                                          value: 1,
-                                          evaluation:
-                                              entity.entitySaveMini != null
-                                                  ? entity.entitySaveMini!
-                                                      .evaluation!
-                                                  : 0),
-                                      Evaluation(
-                                          value: 2,
-                                          evaluation:
-                                              entity.entitySaveMini != null
-                                                  ? entity.entitySaveMini!
-                                                      .evaluation!
-                                                  : 0),
-                                      Evaluation(
-                                          value: 3,
-                                          evaluation:
-                                              entity.entitySaveMini != null
-                                                  ? entity.entitySaveMini!
-                                                      .evaluation!
-                                                  : 0),
-                                      Evaluation(
-                                          value: 4,
-                                          evaluation:
-                                              entity.entitySaveMini != null
-                                                  ? entity.entitySaveMini!
-                                                      .evaluation!
-                                                  : 3),
-                                      Evaluation(
-                                          value: 5,
-                                          evaluation:
-                                              entity.entitySaveMini != null
-                                                  ? entity.entitySaveMini!
-                                                      .evaluation!
-                                                  : 0),
+                                      Evaluation(value: 1, evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 0),
+                                      Evaluation(value: 2, evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 0),
+                                      Evaluation(value: 3, evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 0),
+                                      Evaluation(value: 4, evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 3),
+                                      Evaluation(value: 5, evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 0),
                                     ],
                                   ),
 
@@ -447,8 +357,7 @@ class _EntityState extends State<Entity> {
                                   ),
 
                             Text(
-                              entity.entityMini.evaluationAverage
-                                  .toStringAsPrecision(2),
+                              entity.entityMini.evaluationAverage.toStringAsPrecision(2),
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: theme.sizeAppBar,
@@ -461,10 +370,7 @@ class _EntityState extends State<Entity> {
                               height: 2.0,
                             ),
                             Text(
-                              '( ' +
-                                  entity.entityMini.evaluationQuantity
-                                      .toString() +
-                                  ' evaluations)',
+                              '( ' + entity.entityMini.evaluationQuantity.toString() + ' evaluations)',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: theme.sizeText,
@@ -553,8 +459,7 @@ class _EntityState extends State<Entity> {
                                     ? const Text(
                                         'category',
                                       )
-                                    : entity.dropdownList[
-                                        entity.entitySaveMini!.category! - 1],
+                                    : entity.dropdownList[entity.entitySaveMini!.category! - 1],
                                 items: entity.dropdownList,
                                 onChanged: (value) {
                                   // ignore: avoid_print
@@ -575,17 +480,11 @@ class _EntityState extends State<Entity> {
                                     release: null,
                                   );
                                   if (entity.entitySaveMini == null) {
-                                    entity.newEntitySave(
-                                        entitySaveDTO: entitySaveDTO,
-                                        context: context);
+                                    entity.newEntitySave(entitySaveDTO: entitySaveDTO, context: context);
                                   } else {
-                                    if (value !=
-                                        entity.entitySaveMini!.category!) {
-                                      entitySaveDTO.idEntitySave =
-                                          entity.entitySaveMini!.id;
-                                      entity.updateCategoryEntitySave(
-                                          entitySaveDTO: entitySaveDTO,
-                                          context: context);
+                                    if (value != entity.entitySaveMini!.category!) {
+                                      entitySaveDTO.idEntitySave = entity.entitySaveMini!.id;
+                                      entity.updateCategoryEntitySave(entitySaveDTO: entitySaveDTO, context: context);
                                     }
                                   }
                                 },
@@ -608,24 +507,10 @@ class _EntityState extends State<Entity> {
                                           elevation: 1.0,
                                         ),
                                         onPressed: () {
-                                          if (entity.entitySaveMini != null &&
-                                              entity.entitySaveMini!.reviewed) {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        UpdateReviewEntity(
-                                                            review: entity
-                                                                .entitySaveMini!
-                                                                .review!)));
-                                          } else if (entity.entitySaveMini !=
-                                              null) {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        UpdateReviewEntity(
-                                                            review: '')));
+                                          if (entity.entitySaveMini != null && entity.entitySaveMini!.reviewed) {
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => UpdateReviewEntity(review: entity.entitySaveMini!.review!)));
+                                          } else if (entity.entitySaveMini != null) {
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => UpdateReviewEntity(review: '')));
                                           }
                                         },
                                         child: entity.entitySaveMini != null
@@ -633,35 +518,26 @@ class _EntityState extends State<Entity> {
                                                 ? Text(
                                                     'update review',
                                                     style: TextStyle(
-                                                      fontSize:
-                                                          theme.sizeButton,
-                                                      letterSpacing: theme
-                                                          .letterSpacingButton,
-                                                      color:
-                                                          theme.buttonMainText,
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                                      fontSize: theme.sizeButton,
+                                                      letterSpacing: theme.letterSpacingButton,
+                                                      color: theme.buttonMainText,
+                                                      fontWeight: FontWeight.normal,
                                                     ),
                                                   )
                                                 : Text(
                                                     'add review',
                                                     style: TextStyle(
-                                                      fontSize:
-                                                          theme.sizeButton,
-                                                      letterSpacing: theme
-                                                          .letterSpacingButton,
-                                                      color:
-                                                          theme.buttonMainText,
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                                      fontSize: theme.sizeButton,
+                                                      letterSpacing: theme.letterSpacingButton,
+                                                      color: theme.buttonMainText,
+                                                      fontWeight: FontWeight.normal,
                                                     ),
                                                   )
                                             : Text(
                                                 'add review',
                                                 style: TextStyle(
                                                   fontSize: theme.sizeButton,
-                                                  letterSpacing:
-                                                      theme.letterSpacingButton,
+                                                  letterSpacing: theme.letterSpacingButton,
                                                   color: theme.buttonMainText,
                                                   fontWeight: FontWeight.normal,
                                                 ),
@@ -677,17 +553,14 @@ class _EntityState extends State<Entity> {
                                       IconButton(
                                         onPressed: () {
                                           if (entity.entitySaveMini != null) {
-                                            EntitySaveDTO entitySaveDTO =
-                                                EntitySaveDTO(
-                                              idEntitySave:
-                                                  entity.entitySaveMini!.id,
+                                            EntitySaveDTO entitySaveDTO = EntitySaveDTO(
+                                              idEntitySave: entity.entitySaveMini!.id,
                                               idUser: entity.idUser,
                                               idEntity: entity.entityMini.id,
                                               idSeason: null,
                                               idEpisode: null,
                                               category: null,
-                                              goal:
-                                                  !entity.entitySaveMini!.goal,
+                                              goal: !entity.entitySaveMini!.goal,
                                               rated: null,
                                               reviewed: null,
                                               evaluation: null,
@@ -696,9 +569,7 @@ class _EntityState extends State<Entity> {
                                               spoiler: false,
                                               release: null,
                                             );
-                                            entity.updateGoalEntitySave(
-                                                entitySaveDTO: entitySaveDTO,
-                                                context: context);
+                                            entity.updateGoalEntitySave(entitySaveDTO: entitySaveDTO, context: context);
                                           }
                                         },
                                         icon: Icon(
@@ -745,18 +616,12 @@ class _EntityState extends State<Entity> {
 
                             entity.seasons.isEmpty
                                 ? Container()
-                                : entity.entityMini.typeEntity ==
-                                            TypeEntity.SERIES ||
-                                        entity.entityMini.typeEntity ==
-                                            TypeEntity.ANIMES ||
-                                        entity.entityMini.typeEntity ==
-                                            TypeEntity.NOVELS ||
-                                        entity.entityMini.typeEntity ==
-                                            TypeEntity.TV_SHOWS ||
-                                        entity.entityMini.typeEntity ==
-                                            TypeEntity.WEB_PROGRAMS ||
-                                        entity.entityMini.typeEntity ==
-                                            TypeEntity.PLACES
+                                : entity.entityMini.typeEntity == TypeEntity.SERIES ||
+                                        entity.entityMini.typeEntity == TypeEntity.ANIMES ||
+                                        entity.entityMini.typeEntity == TypeEntity.NOVELS ||
+                                        entity.entityMini.typeEntity == TypeEntity.TV_SHOWS ||
+                                        entity.entityMini.typeEntity == TypeEntity.WEB_PROGRAMS ||
+                                        entity.entityMini.typeEntity == TypeEntity.PLACES
                                     ? Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Row(
@@ -766,8 +631,7 @@ class _EntityState extends State<Entity> {
                                                 'View all seasons',
                                                 style: TextStyle(
                                                   fontSize: theme.sizeAppBar,
-                                                  letterSpacing:
-                                                      theme.letterSpacingText,
+                                                  letterSpacing: theme.letterSpacingText,
                                                   color: theme.emphasis,
                                                   fontWeight: FontWeight.normal,
                                                 ),
@@ -778,8 +642,7 @@ class _EntityState extends State<Entity> {
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const AllSeasonsEntity(),
+                                                    builder: (context) => const AllSeasonsEntity(),
                                                   ),
                                                 );
                                               },
@@ -796,18 +659,12 @@ class _EntityState extends State<Entity> {
 
                             entity.seasons.isEmpty
                                 ? Container()
-                                : entity.entityMini.typeEntity ==
-                                            TypeEntity.SERIES ||
-                                        entity.entityMini.typeEntity ==
-                                            TypeEntity.ANIMES ||
-                                        entity.entityMini.typeEntity ==
-                                            TypeEntity.NOVELS ||
-                                        entity.entityMini.typeEntity ==
-                                            TypeEntity.TV_SHOWS ||
-                                        entity.entityMini.typeEntity ==
-                                            TypeEntity.WEB_PROGRAMS ||
-                                        entity.entityMini.typeEntity ==
-                                            TypeEntity.PLACES
+                                : entity.entityMini.typeEntity == TypeEntity.SERIES ||
+                                        entity.entityMini.typeEntity == TypeEntity.ANIMES ||
+                                        entity.entityMini.typeEntity == TypeEntity.NOVELS ||
+                                        entity.entityMini.typeEntity == TypeEntity.TV_SHOWS ||
+                                        entity.entityMini.typeEntity == TypeEntity.WEB_PROGRAMS ||
+                                        entity.entityMini.typeEntity == TypeEntity.PLACES
                                     ? SizedBox(
                                         height: 270,
                                         child: ListView.builder(
@@ -815,8 +672,7 @@ class _EntityState extends State<Entity> {
                                             itemCount: entity.seasons.length,
                                             itemBuilder: (context, index) {
                                               return SeasonMiniEntity(
-                                                seasonMini:
-                                                    entity.seasons[index],
+                                                seasonMini: entity.seasons[index],
                                               );
                                               // if (index == entity.seasons.length) {
                                               //   return Padding(
@@ -1036,8 +892,7 @@ class _EntityState extends State<Entity> {
                             entity.reviews.isEmpty
                                 ? Container()
                                 : Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0, vertical: 30.0),
+                                    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
                                     child: Text(
                                       'Reviews',
                                       style: TextStyle(
@@ -1053,8 +908,7 @@ class _EntityState extends State<Entity> {
                                 ? Container()
                                 : ListView.separated(
                                     shrinkWrap: true,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
+                                    physics: const NeverScrollableScrollPhysics(),
                                     separatorBuilder: (context, index) {
                                       return Divider(
                                         height: 1.0,

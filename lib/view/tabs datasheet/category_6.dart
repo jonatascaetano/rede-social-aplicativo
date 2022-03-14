@@ -19,10 +19,8 @@ class _Category6State extends State<Category6> {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<CategoryModel>(
-          model: CategoryModel(
-              entitySaveMinis: widget.entitySaveMini, category: 6),
-          child: ScopedModelDescendant<CategoryModel>(
-              builder: (context, child, category) {
+          model: CategoryModel(entitySaveMinis: widget.entitySaveMini, category: 6),
+          child: ScopedModelDescendant<CategoryModel>(builder: (context, child, category) {
             return Stack(
               children: [
                 Scaffold(
@@ -33,8 +31,7 @@ class _Category6State extends State<Category6> {
                           childAspectRatio: 1.0 / 1.7,
                           crossAxisCount: 2,
                           children: category.entitySaves.map((e) {
-                            return EntityMiniDatasheetEvaluated(
-                                entitySaveMini: e);
+                            return EntityMiniDatasheetEvaluated(entitySaveMini: e);
                           }).toList(),
                         ),
                 ),

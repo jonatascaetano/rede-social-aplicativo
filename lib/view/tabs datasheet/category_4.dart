@@ -19,10 +19,8 @@ class _Category4State extends State<Category4> {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<CategoryModel>(
-          model: CategoryModel(
-              entitySaveMinis: widget.entitySaveMini, category: 4),
-          child: ScopedModelDescendant<CategoryModel>(
-              builder: (context, child, category) {
+          model: CategoryModel(entitySaveMinis: widget.entitySaveMini, category: 4),
+          child: ScopedModelDescendant<CategoryModel>(builder: (context, child, category) {
             return Stack(
               children: [
                 Scaffold(

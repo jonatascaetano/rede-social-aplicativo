@@ -20,16 +20,13 @@ class _SeasonMiniEntityState extends State<SeasonMiniEntity> {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<SeasonMiniEntityModel>(
           model: SeasonMiniEntityModel(seasonId: widget.seasonMini.id),
-          child: ScopedModelDescendant<SeasonMiniEntityModel>(
-              builder: (context, child, seasonMiniEntity) {
+          child: ScopedModelDescendant<SeasonMiniEntityModel>(builder: (context, child, seasonMiniEntity) {
             return Container(
               width: 200.0,
               margin: const EdgeInsets.all(4.0),
               decoration: BoxDecoration(
                 border: Border.all(color: theme.shadow),
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(10.0),
-                    topRight: Radius.circular(10.0)),
+                borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -43,9 +40,7 @@ class _SeasonMiniEntityState extends State<SeasonMiniEntity> {
                               width: 200,
                               decoration: BoxDecoration(
                                 color: theme.shadow,
-                                borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(10.0),
-                                    topRight: Radius.circular(10.0)),
+                                borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
                                 image: DecorationImage(
                                   image: NetworkImage(widget.seasonMini.image!),
                                   fit: BoxFit.fitHeight,
@@ -54,9 +49,7 @@ class _SeasonMiniEntityState extends State<SeasonMiniEntity> {
                             )
                           : Container(
                               decoration: BoxDecoration(
-                                borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(10.0),
-                                    topRight: Radius.circular(10.0)),
+                                borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
                                 color: theme.shadow,
                               ),
                               height: 150,
@@ -103,8 +96,7 @@ class _SeasonMiniEntityState extends State<SeasonMiniEntity> {
                         height: 4.0,
                       ),
                       Text(
-                        'Episodes ' +
-                            widget.seasonMini.episodeQuantity.toString(),
+                        'Episodes ' + widget.seasonMini.episodeQuantity.toString(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: theme.subtitle,
@@ -155,11 +147,7 @@ class _SeasonMiniEntityState extends State<SeasonMiniEntity> {
                       primary: theme.buttonMain,
                     ),
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  Season(seasonMini: widget.seasonMini)));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Season(seasonMini: widget.seasonMini)));
                     },
                     child: Text(
                       "view",

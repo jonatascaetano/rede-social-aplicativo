@@ -9,8 +9,7 @@ import 'package:social_network_application/scoped_model/support/theme_model.dart
 // ignore: must_be_immutable
 class AddBodyPostEpisode extends StatefulWidget {
   PostUpdateMini postUpdateMini;
-  AddBodyPostEpisode({required this.postUpdateMini, Key? key})
-      : super(key: key);
+  AddBodyPostEpisode({required this.postUpdateMini, Key? key}) : super(key: key);
 
   @override
   _AddBodyPostEpisodeState createState() => _AddBodyPostEpisodeState();
@@ -24,8 +23,7 @@ class _AddBodyPostEpisodeState extends State<AddBodyPostEpisode> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<EntityModel>(
-          builder: (context, child, entity) {
+      return ScopedModelDescendant<EntityModel>(builder: (context, child, entity) {
         return Form(
           key: _globalKey,
           child: Scaffold(
@@ -42,8 +40,7 @@ class _AddBodyPostEpisodeState extends State<AddBodyPostEpisode> {
                 )),
             body: Stack(children: [
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
                 child: ListView(
                   children: [
                     Row(
@@ -112,8 +109,7 @@ class _AddBodyPostEpisodeState extends State<AddBodyPostEpisode> {
                             evaluation: 0,
                             spoiler: spoiler,
                           );
-                          ScopedModel.of<EpisodeModel>(context).addBodyPost(
-                              postUpdateDTO: postUpdateDTO, context: context);
+                          ScopedModel.of<EpisodeModel>(context).addBodyPost(postUpdateDTO: postUpdateDTO, context: context);
                         }
                       },
                       child: Text(

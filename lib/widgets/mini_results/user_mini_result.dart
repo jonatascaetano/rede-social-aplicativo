@@ -35,8 +35,7 @@ class _UserMiniResultState extends State<UserMiniResult> {
               children: [
                 widget.userMini.imageProfile != null
                     ? CircleAvatar(
-                        backgroundImage:
-                            NetworkImage(widget.userMini.imageProfile!),
+                        backgroundImage: NetworkImage(widget.userMini.imageProfile!),
                         radius: 30.0,
                       )
                     : CircleAvatar(

@@ -21,8 +21,7 @@ class User extends StatefulWidget {
 }
 
 class _UserState extends State<User> {
-  void handleEvent(
-      AdmobAdEvent event, Map<String, dynamic> args, String adType) {
+  void handleEvent(AdmobAdEvent event, Map<String, dynamic> args, String adType) {
     switch (event) {
       case AdmobAdEvent.loaded:
         // ignore: avoid_print
@@ -59,8 +58,7 @@ class _UserState extends State<User> {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<UserModel>(
         model: UserModel(idUser: widget.userMini.id, context: context),
-        child:
-            ScopedModelDescendant<UserModel>(builder: (context, child, user) {
+        child: ScopedModelDescendant<UserModel>(builder: (context, child, user) {
           return Scaffold(
             appBar: AppBar(
               elevation: 0.0,
@@ -93,17 +91,12 @@ class _UserState extends State<User> {
                                       Container(
                                         margin: EdgeInsets.zero,
                                         padding: EdgeInsets.zero,
-                                        height:
-                                            (MediaQuery.of(context).size.width /
-                                                    16) *
-                                                9,
-                                        width:
-                                            MediaQuery.of(context).size.width,
+                                        height: (MediaQuery.of(context).size.width / 16) * 9,
+                                        width: MediaQuery.of(context).size.width,
                                         decoration: BoxDecoration(
                                           color: theme.shadow,
                                           image: DecorationImage(
-                                            image: NetworkImage(
-                                                user.userMini.imageProfile!),
+                                            image: NetworkImage(user.userMini.imageProfile!),
                                             fit: BoxFit.fitHeight,
                                           ),
                                         ),
@@ -123,9 +116,7 @@ class _UserState extends State<User> {
                                                 icon: Icon(
                                                   Icons.more_vert_sharp,
                                                   size: 21,
-                                                  color: ScopedModel.of<
-                                                          ThemeModel>(context)
-                                                      .subtitle,
+                                                  color: ScopedModel.of<ThemeModel>(context).subtitle,
                                                 ),
                                               ),
                                             ),
@@ -135,13 +126,8 @@ class _UserState extends State<User> {
                                     children: [
                                       Container(
                                           color: theme.shadow,
-                                          height: (MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  16) *
-                                              9,
-                                          width:
-                                              MediaQuery.of(context).size.width,
+                                          height: (MediaQuery.of(context).size.width / 16) * 9,
+                                          width: MediaQuery.of(context).size.width,
                                           child: Center(
                                             child: Icon(
                                               Icons.image,
@@ -164,9 +150,7 @@ class _UserState extends State<User> {
                                                 icon: Icon(
                                                   Icons.more_vert_sharp,
                                                   size: 21,
-                                                  color: ScopedModel.of<
-                                                          ThemeModel>(context)
-                                                      .subtitle,
+                                                  color: ScopedModel.of<ThemeModel>(context).subtitle,
                                                 ),
                                               ),
                                             ),
@@ -201,8 +185,7 @@ class _UserState extends State<User> {
                             //   height: 16.0,
                             // ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 0.0, vertical: 8.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 8.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
@@ -210,15 +193,13 @@ class _UserState extends State<User> {
                                     scrollDirection: Axis.horizontal,
                                     child: Center(
                                       child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             user.userMini.name,
                                             style: TextStyle(
                                               fontSize: theme.sizeTitle,
-                                              letterSpacing:
-                                                  theme.letterSpacingTitle,
+                                              letterSpacing: theme.letterSpacingTitle,
                                               color: theme.title,
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -240,8 +221,7 @@ class _UserState extends State<User> {
                               ),
                             ),
 
-                            user.userMini.description != null &&
-                                    user.userMini.description!.isNotEmpty
+                            user.userMini.description != null && user.userMini.description!.isNotEmpty
                                 ? Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
@@ -261,8 +241,7 @@ class _UserState extends State<User> {
                                 ? Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Icon(
                                           Icons.block,
@@ -275,8 +254,7 @@ class _UserState extends State<User> {
                                           'User blocked',
                                           style: TextStyle(
                                             fontSize: theme.sizeText,
-                                            letterSpacing:
-                                                theme.letterSpacingText,
+                                            letterSpacing: theme.letterSpacingText,
                                             color: theme.detail,
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -295,14 +273,12 @@ class _UserState extends State<User> {
                                                 ),
                                                 onPressed: () {
                                                   user.removeFollowing(
-                                                    idFollowing:
-                                                        user.userMini.id,
+                                                    idFollowing: user.userMini.id,
                                                     context: context,
                                                   );
                                                 },
                                                 child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
+                                                  mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
                                                     Icon(
                                                       Icons.person_remove,
@@ -314,13 +290,10 @@ class _UserState extends State<User> {
                                                     Text(
                                                       'Unfollow',
                                                       style: TextStyle(
-                                                        fontSize:
-                                                            theme.sizeButton,
-                                                        letterSpacing: theme
-                                                            .letterSpacingButton,
+                                                        fontSize: theme.sizeButton,
+                                                        letterSpacing: theme.letterSpacingButton,
                                                         color: theme.buttonText,
-                                                        fontWeight:
-                                                            FontWeight.normal,
+                                                        fontWeight: FontWeight.normal,
                                                       ),
                                                     ),
                                                   ],
@@ -333,14 +306,12 @@ class _UserState extends State<User> {
                                                 ),
                                                 onPressed: () {
                                                   user.addFollowing(
-                                                    idFollowing:
-                                                        user.userMini.id,
+                                                    idFollowing: user.userMini.id,
                                                     context: context,
                                                   );
                                                 },
                                                 child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
+                                                  mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
                                                     Icon(
                                                       Icons.person_add,
@@ -352,13 +323,10 @@ class _UserState extends State<User> {
                                                     Text(
                                                       'Follow',
                                                       style: TextStyle(
-                                                        fontSize:
-                                                            theme.sizeButton,
-                                                        letterSpacing: theme
-                                                            .letterSpacingButton,
+                                                        fontSize: theme.sizeButton,
+                                                        letterSpacing: theme.letterSpacingButton,
                                                         color: theme.buttonText,
-                                                        fontWeight:
-                                                            FontWeight.normal,
+                                                        fontWeight: FontWeight.normal,
                                                       ),
                                                     ),
                                                   ],
@@ -384,10 +352,8 @@ class _UserState extends State<User> {
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      Followers(
-                                                        idUser:
-                                                            user.userMini.id,
+                                                  builder: (context) => Followers(
+                                                        idUser: user.userMini.id,
                                                         isUser: false,
                                                       )));
                                         },
@@ -397,8 +363,7 @@ class _UserState extends State<User> {
                                               'Followers',
                                               style: TextStyle(
                                                 fontSize: theme.sizeText,
-                                                letterSpacing:
-                                                    theme.letterSpacingText,
+                                                letterSpacing: theme.letterSpacingText,
                                                 color: theme.subtitle,
                                                 fontWeight: FontWeight.normal,
                                               ),
@@ -407,12 +372,10 @@ class _UserState extends State<User> {
                                               width: 4.0,
                                             ),
                                             Text(
-                                              user.userMini.quantityFollowers
-                                                  .toString(),
+                                              user.userMini.quantityFollowers.toString(),
                                               style: TextStyle(
                                                 fontSize: theme.sizeText,
-                                                letterSpacing:
-                                                    theme.letterSpacingText,
+                                                letterSpacing: theme.letterSpacingText,
                                                 color: theme.subtitle,
                                                 fontWeight: FontWeight.normal,
                                               ),
@@ -428,10 +391,8 @@ class _UserState extends State<User> {
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        Following(
-                                                          idUser:
-                                                              user.userMini.id,
+                                                    builder: (context) => Following(
+                                                          idUser: user.userMini.id,
                                                           isUser: false,
                                                         )));
                                           },
@@ -441,8 +402,7 @@ class _UserState extends State<User> {
                                                 'Following',
                                                 style: TextStyle(
                                                   fontSize: theme.sizeText,
-                                                  letterSpacing:
-                                                      theme.letterSpacingText,
+                                                  letterSpacing: theme.letterSpacingText,
                                                   color: theme.subtitle,
                                                   fontWeight: FontWeight.normal,
                                                 ),
@@ -451,12 +411,10 @@ class _UserState extends State<User> {
                                                 width: 4.0,
                                               ),
                                               Text(
-                                                user.userMini.quantityFollowing
-                                                    .toString(),
+                                                user.userMini.quantityFollowing.toString(),
                                                 style: TextStyle(
                                                   fontSize: theme.sizeText,
-                                                  letterSpacing:
-                                                      theme.letterSpacingText,
+                                                  letterSpacing: theme.letterSpacingText,
                                                   color: theme.subtitle,
                                                   fontWeight: FontWeight.normal,
                                                 ),
@@ -503,8 +461,7 @@ class _UserState extends State<User> {
                                             'View all works',
                                             style: TextStyle(
                                               fontSize: theme.sizeText,
-                                              letterSpacing:
-                                                  theme.letterSpacingText,
+                                              letterSpacing: theme.letterSpacingText,
                                               color: theme.subtitle,
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -515,8 +472,7 @@ class _UserState extends State<User> {
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) =>
-                                                    AllWorkersUser(
+                                                builder: (context) => AllWorkersUser(
                                                   isUser: false,
                                                   userMini: user.userMini,
                                                   workers: user.workers,
@@ -562,9 +518,7 @@ class _UserState extends State<User> {
                                     .typeEntitiesMini
                                     .map(
                                       (e) => EntityMiniProfile(
-                                        index: LanguageModel()
-                                            .typeEntitiesMini
-                                            .indexOf(e),
+                                        index: LanguageModel().typeEntitiesMini.indexOf(e),
                                         isUser: false,
                                         idUser: widget.userMini.id,
                                       ),
@@ -597,13 +551,11 @@ class _UserState extends State<User> {
                                     return Column(
                                       children: [
                                         Container(
-                                          width:
-                                              MediaQuery.of(context).size.width,
+                                          width: MediaQuery.of(context).size.width,
                                           decoration: BoxDecoration(
                                             color: theme.shadow,
                                           ),
-                                          child: getBanner(
-                                              AdmobBannerSize.MEDIUM_RECTANGLE),
+                                          child: getBanner(AdmobBannerSize.MEDIUM_RECTANGLE),
                                         ),
                                         Divider(
                                           height: 10.0,

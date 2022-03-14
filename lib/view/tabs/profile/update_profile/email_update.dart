@@ -26,8 +26,7 @@ class _EmailUpdateState extends State<EmailUpdate> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<ProfileModel>(
-          builder: (context, child, profile) {
+      return ScopedModelDescendant<ProfileModel>(builder: (context, child, profile) {
         return Form(
           key: _globalKey,
           child: Scaffold(
@@ -46,8 +45,7 @@ class _EmailUpdateState extends State<EmailUpdate> {
             body: Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0, vertical: 30.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
                   child: ListView(
                     children: [
                       TextFormField(
@@ -92,8 +90,7 @@ class _EmailUpdateState extends State<EmailUpdate> {
                               invitation: null,
                               release: '',
                             );
-                            profile.updateEmail(
-                                userDTO: userDTO, context: context);
+                            profile.updateEmail(userDTO: userDTO, context: context);
                           }
                         },
                         child: Text(

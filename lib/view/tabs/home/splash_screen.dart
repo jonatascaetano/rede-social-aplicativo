@@ -15,10 +15,8 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return ScopedModel<SplashScreenModel>(
       model: SplashScreenModel(context: context),
-      child: ScopedModelDescendant<SplashScreenModel>(
-          builder: (context, child, splashScreen) {
-        return ScopedModelDescendant<ThemeModel>(
-            builder: (context, child, theme) {
+      child: ScopedModelDescendant<SplashScreenModel>(builder: (context, child, splashScreen) {
+        return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
           return Scaffold(
               body: Stack(
             children: [

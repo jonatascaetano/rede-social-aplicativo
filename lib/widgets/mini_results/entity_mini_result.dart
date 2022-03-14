@@ -70,10 +70,7 @@ class _EntityMiniResultState extends State<EntityMiniResult> {
                       ),
                     ),
                     Text(
-                      LanguageModel().typeEntities[
-                          ConvertToEnum.convertTypeEntityToValue(
-                              typeEntity:
-                                  widget.entityMini.typeEntity.toString())],
+                      LanguageModel().typeEntities[ConvertToEnum.convertTypeEntityToValue(typeEntity: widget.entityMini.typeEntity.toString())],
                       overflow: TextOverflow.fade,
                       maxLines: 1,
                       softWrap: false,

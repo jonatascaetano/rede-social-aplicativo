@@ -8,8 +8,7 @@ import 'package:social_network_application/scoped_model/support/theme_model.dart
 class UpdateEntity extends StatefulWidget {
   EntityMini entityMini;
   BuildContext context;
-  UpdateEntity({required this.entityMini, required this.context, Key? key})
-      : super(key: key);
+  UpdateEntity({required this.entityMini, required this.context, Key? key}) : super(key: key);
 
   @override
   _UpdateEntityState createState() => _UpdateEntityState();
@@ -19,8 +18,7 @@ class _UpdateEntityState extends State<UpdateEntity> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<EntityModel>(
-          builder: (context, child, entity) {
+      return ScopedModelDescendant<EntityModel>(builder: (context, child, entity) {
         return Scaffold(
           appBar: AppBar(
             elevation: 0.0,

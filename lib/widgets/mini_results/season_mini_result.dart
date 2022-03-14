@@ -19,10 +19,7 @@ class _SeasonMiniResultState extends State<SeasonMiniResult> {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return GestureDetector(
         onTap: () {
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => Season(seasonMini: widget.seasonMini)));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Season(seasonMini: widget.seasonMini)));
         },
         child: Container(
           color: Colors.transparent,

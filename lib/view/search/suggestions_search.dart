@@ -19,8 +19,7 @@ class _SuggestionsSearchState extends State<SuggestionsSearch> {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<SearchModel>(
         model: SearchModel(),
-        child: ScopedModelDescendant<SearchModel>(
-            builder: (context, child, search) {
+        child: ScopedModelDescendant<SearchModel>(builder: (context, child, search) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: FutureBuilder<Set<String>>(
@@ -45,8 +44,7 @@ class _SuggestionsSearchState extends State<SuggestionsSearch> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => ResultSearch(
-                                                  query: snapshot.data!
-                                                      .toList()[index],
+                                                  query: snapshot.data!.toList()[index],
                                                   result: false,
                                                 )));
                                   },

@@ -7,8 +7,7 @@ import 'package:social_network_application/view/objects/entity.dart';
 // ignore: must_be_immutable
 class EntityMiniDatasheet extends StatefulWidget {
   EntitySaveMini entitySaveMini;
-  EntityMiniDatasheet({required this.entitySaveMini, Key? key})
-      : super(key: key);
+  EntityMiniDatasheet({required this.entitySaveMini, Key? key}) : super(key: key);
 
   @override
   _EntityMiniDatasheetState createState() => _EntityMiniDatasheetState();
@@ -26,9 +25,7 @@ class _EntityMiniDatasheetState extends State<EntityMiniDatasheet> {
             border: Border.all(
               color: theme.shadow,
             ), //  const Color(0xffce93d8)),
-            borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(10.0),
-                topRight: Radius.circular(10.0)),
+            borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -42,21 +39,16 @@ class _EntityMiniDatasheetState extends State<EntityMiniDatasheet> {
                           width: 200,
                           decoration: BoxDecoration(
                             color: theme.shadow,
-                            borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(10.0),
-                                topRight: Radius.circular(10.0)),
+                            borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
                             image: DecorationImage(
-                              image: NetworkImage(
-                                  widget.entitySaveMini.entity!.image!),
+                              image: NetworkImage(widget.entitySaveMini.entity!.image!),
                               fit: BoxFit.fitHeight,
                             ),
                           ),
                         )
                       : Container(
                           decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(10.0),
-                                topRight: Radius.circular(10.0)),
+                            borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
                             color: theme.shadow,
                           ),
                           height: 150,
@@ -87,8 +79,7 @@ class _EntityMiniDatasheetState extends State<EntityMiniDatasheet> {
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 4.0, vertical: 0.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 0.0),
                     child: Text(
                       widget.entitySaveMini.entity!.name,
                       overflow: TextOverflow.fade,
@@ -109,8 +100,7 @@ class _EntityMiniDatasheetState extends State<EntityMiniDatasheet> {
                 height: 2.0,
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 4.0, vertical: 0.0),
+                padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 0.0),
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(

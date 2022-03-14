@@ -7,8 +7,7 @@ import 'package:social_network_application/scoped_model/support/theme_model.dart
 // ignore: must_be_immutable
 class Evaluation extends StatefulWidget {
   int value, evaluation;
-  Evaluation({required this.value, required this.evaluation, Key? key})
-      : super(key: key);
+  Evaluation({required this.value, required this.evaluation, Key? key}) : super(key: key);
 
   @override
   _EvaluationState createState() => _EvaluationState();
@@ -18,16 +17,14 @@ class _EvaluationState extends State<Evaluation> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<EntityModel>(
-          builder: (context, child, entity) {
+      return ScopedModelDescendant<EntityModel>(builder: (context, child, entity) {
         return Container(
           margin: EdgeInsets.zero,
           padding: EdgeInsets.zero,
           child: IconButton(
               padding: EdgeInsets.zero,
               onPressed: () {
-                if (widget.evaluation != widget.value &&
-                    entity.entitySaveMini != null) {
+                if (widget.evaluation != widget.value && entity.entitySaveMini != null) {
                   EntitySaveDTO entitySaveDTO = EntitySaveDTO(
                     idEntitySave: entity.entitySaveMini!.id,
                     idUser: null,
@@ -44,16 +41,13 @@ class _EvaluationState extends State<Evaluation> {
                     spoiler: false,
                     release: null,
                   );
-                  entity.updateEvaluationEntitySave(
-                      entitySaveDTO: entitySaveDTO, context: context);
+                  entity.updateEvaluationEntitySave(entitySaveDTO: entitySaveDTO, context: context);
                 }
               },
               icon: Icon(
                 Icons.star,
                 size: 40,
-                color: widget.evaluation >= widget.value
-                    ? Colors.yellow[700]
-                    : theme.icon,
+                color: widget.evaluation >= widget.value ? Colors.yellow[700] : theme.icon,
               )),
         );
       });

@@ -12,8 +12,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  void handleEvent(
-      AdmobAdEvent event, Map<String, dynamic> args, String adType) {
+  void handleEvent(AdmobAdEvent event, Map<String, dynamic> args, String adType) {
     switch (event) {
       case AdmobAdEvent.loaded:
         // ignore: avoid_print
@@ -48,8 +47,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<ProfileModel>(
-          builder: (context, child, profile) {
+      return ScopedModelDescendant<ProfileModel>(builder: (context, child, profile) {
         return Scaffold(
           body: Stack(
             children: [
@@ -85,18 +83,14 @@ class _HomeState extends State<Home> {
                                       decoration: BoxDecoration(
                                         color: theme.shadow,
                                       ),
-                                      child: getBanner(
-                                          AdmobBannerSize.MEDIUM_RECTANGLE),
+                                      child: getBanner(AdmobBannerSize.MEDIUM_RECTANGLE),
                                     ),
                                     Divider(
                                       height: 1.0,
                                       thickness: 1.0,
                                       color: theme.button,
                                     ),
-                                    profile.returnPostWidget(
-                                        post: profile.allPosts[index],
-                                        screenComment: false,
-                                        contextPage: context),
+                                    profile.returnPostWidget(post: profile.allPosts[index], screenComment: false, contextPage: context),
                                     // UpdatePostEntityWidget(
                                     //   postUpdateMini: profile.posts[index],
                                     //   screenComment: false,

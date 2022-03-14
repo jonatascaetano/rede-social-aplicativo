@@ -10,8 +10,7 @@ import 'package:social_network_application/scoped_model/support/theme_model.dart
 class NewWorkerEntity extends StatefulWidget {
   EntityMini entityMini;
   BuildContext context;
-  NewWorkerEntity({required this.entityMini, required this.context, Key? key})
-      : super(key: key);
+  NewWorkerEntity({required this.entityMini, required this.context, Key? key}) : super(key: key);
 
   @override
   _NewWorkerEntityState createState() => _NewWorkerEntityState();
@@ -26,8 +25,7 @@ class _NewWorkerEntityState extends State<NewWorkerEntity> {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<NewWorkerModel>(
           model: NewWorkerModel(),
-          child: ScopedModelDescendant<NewWorkerModel>(
-              builder: (context, child, worker) {
+          child: ScopedModelDescendant<NewWorkerModel>(builder: (context, child, worker) {
             return Form(
               key: _globalKey,
               child: Scaffold(
@@ -46,8 +44,7 @@ class _NewWorkerEntityState extends State<NewWorkerEntity> {
                 body: Stack(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0, vertical: 30.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
                       child: ListView(
                         children: [
                           TextFormField(
@@ -74,14 +71,8 @@ class _NewWorkerEntityState extends State<NewWorkerEntity> {
                             ),
                             onPressed: () {
                               if (_globalKey.currentState!.validate()) {
-                                WorkerDTO workerDTO = WorkerDTO(
-                                    idUser: worker.id,
-                                    idEntity: widget.entityMini.id,
-                                    role: controller.text,
-                                    level: Level.ENTITY);
-                                worker.createWorker(
-                                    workerDTO: workerDTO,
-                                    context: widget.context);
+                                WorkerDTO workerDTO = WorkerDTO(idUser: worker.id, idEntity: widget.entityMini.id, role: controller.text, level: Level.ENTITY);
+                                worker.createWorker(workerDTO: workerDTO, context: widget.context);
                               }
                             },
                             child: Text(

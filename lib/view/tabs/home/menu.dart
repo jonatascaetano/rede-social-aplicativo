@@ -21,8 +21,7 @@ class _MenuState extends State<Menu> {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<MenuModel>(
           model: MenuModel(context: context),
-          child:
-              ScopedModelDescendant<MenuModel>(builder: (context, child, menu) {
+          child: ScopedModelDescendant<MenuModel>(builder: (context, child, menu) {
             return Scaffold(
               appBar: AppBar(
                 elevation: 0.0,
@@ -59,20 +58,10 @@ class _MenuState extends State<Menu> {
                                   color: Colors.transparent,
                                   child: Row(
                                     children: [
-                                      !ScopedModel.of<ProfileModel>(context)
-                                              .profileNull
-                                          ? ScopedModel.of<ProfileModel>(
-                                                          context)
-                                                      .userMini
-                                                      .imageProfile !=
-                                                  null
+                                      !ScopedModel.of<ProfileModel>(context).profileNull
+                                          ? ScopedModel.of<ProfileModel>(context).userMini.imageProfile != null
                                               ? CircleAvatar(
-                                                  backgroundImage: NetworkImage(
-                                                      ScopedModel.of<
-                                                                  ProfileModel>(
-                                                              context)
-                                                          .userMini
-                                                          .imageProfile!),
+                                                  backgroundImage: NetworkImage(ScopedModel.of<ProfileModel>(context).userMini.imageProfile!),
                                                   radius: 30.0,
                                                 )
                                               : CircleAvatar(
@@ -88,42 +77,29 @@ class _MenuState extends State<Menu> {
                                         width: 8,
                                       ),
                                       SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width -
-                                                120,
+                                        width: MediaQuery.of(context).size.width - 120,
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
-                                            !ScopedModel.of<ProfileModel>(
-                                                        context)
-                                                    .profileNull
+                                            !ScopedModel.of<ProfileModel>(context).profileNull
                                                 ? Text(
                                                     // ignore: unnecessary_null_comparison
-                                                    ScopedModel.of<
-                                                                ProfileModel>(
-                                                            context)
-                                                        .userMini
-                                                        .name,
+                                                    ScopedModel.of<ProfileModel>(context).userMini.name,
                                                     maxLines: 2,
                                                     style: TextStyle(
                                                       fontSize: theme.sizeTitle,
-                                                      letterSpacing: theme
-                                                          .letterSpacingTitle,
+                                                      letterSpacing: theme.letterSpacingTitle,
                                                       color: theme.title,
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                                      fontWeight: FontWeight.normal,
                                                     ),
                                                   )
                                                 : Text(
                                                     'Profile',
                                                     style: TextStyle(
                                                       fontSize: theme.sizeTitle,
-                                                      letterSpacing: theme
-                                                          .letterSpacingTitle,
+                                                      letterSpacing: theme.letterSpacingTitle,
                                                       color: theme.title,
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                                      fontWeight: FontWeight.normal,
                                                     ),
                                                   ),
                                             const SizedBox(
@@ -133,8 +109,7 @@ class _MenuState extends State<Menu> {
                                               "View your profile",
                                               style: TextStyle(
                                                 fontSize: theme.sizeText,
-                                                letterSpacing:
-                                                    theme.letterSpacingText,
+                                                letterSpacing: theme.letterSpacingText,
                                                 color: theme.subtitle,
                                                 fontWeight: FontWeight.normal,
                                               ),
@@ -290,8 +265,7 @@ class _MenuState extends State<Menu> {
                                 child: Switch.adaptive(
                                     value: menu.isDark,
                                     onChanged: (value) {
-                                      menu.saveDarkMode(
-                                          dark: value, context: context);
+                                      menu.saveDarkMode(dark: value, context: context);
                                     }),
                               )
                             ],
@@ -378,18 +352,14 @@ class _MenuState extends State<Menu> {
                         TextSpan(
                             text: 'terms of use ',
                             style: TextStyle(
-                              fontSize:
-                                  ScopedModel.of<ThemeModel>(context).sizeText,
-                              color:
-                                  ScopedModel.of<ThemeModel>(context).emphasis,
-                              letterSpacing: ScopedModel.of<ThemeModel>(context)
-                                  .letterSpacingText,
+                              fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+                              color: ScopedModel.of<ThemeModel>(context).emphasis,
+                              letterSpacing: ScopedModel.of<ThemeModel>(context).letterSpacingText,
                               fontWeight: FontWeight.normal,
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () async {
-                                const url =
-                                    'https://euteconto-app.blogspot.com/2020/12/termos-de-uso_29.html';
+                                const url = 'https://euteconto-app.blogspot.com/2020/12/termos-de-uso_29.html';
                                 if (await canLaunch(url)) {
                                   await launch(url);
                                 } else {
@@ -399,29 +369,23 @@ class _MenuState extends State<Menu> {
                         TextSpan(
                           text: 'and ',
                           style: TextStyle(
-                            fontSize:
-                                ScopedModel.of<ThemeModel>(context).sizeText,
+                            fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
                             color: ScopedModel.of<ThemeModel>(context).title,
-                            letterSpacing: ScopedModel.of<ThemeModel>(context)
-                                .letterSpacingText,
+                            letterSpacing: ScopedModel.of<ThemeModel>(context).letterSpacingText,
                             fontWeight: FontWeight.normal,
                           ),
                         ),
                         TextSpan(
                             text: 'privacy policy ',
                             style: TextStyle(
-                              fontSize:
-                                  ScopedModel.of<ThemeModel>(context).sizeText,
-                              color:
-                                  ScopedModel.of<ThemeModel>(context).emphasis,
-                              letterSpacing: ScopedModel.of<ThemeModel>(context)
-                                  .letterSpacingText,
+                              fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
+                              color: ScopedModel.of<ThemeModel>(context).emphasis,
+                              letterSpacing: ScopedModel.of<ThemeModel>(context).letterSpacingText,
                               fontWeight: FontWeight.normal,
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () async {
-                                const url =
-                                    'https://euteconto-app.blogspot.com/2021/01/politica-de-privacidade.html';
+                                const url = 'https://euteconto-app.blogspot.com/2021/01/politica-de-privacidade.html';
                                 if (await canLaunch(url)) {
                                   await launch(url);
                                 } else {

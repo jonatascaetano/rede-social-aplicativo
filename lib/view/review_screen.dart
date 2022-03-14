@@ -16,12 +16,7 @@ class ReviewScreen extends StatefulWidget {
   String idReview;
   BuildContext contextAncestor;
   String typeObject;
-  ReviewScreen(
-      {required this.idReview,
-      required this.contextAncestor,
-      required this.typeObject,
-      Key? key})
-      : super(key: key);
+  ReviewScreen({required this.idReview, required this.contextAncestor, required this.typeObject, Key? key}) : super(key: key);
 
   @override
   _ReviewScreenState createState() => _ReviewScreenState();
@@ -37,8 +32,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
             idReview: widget.idReview,
             typeObject: widget.typeObject,
           ),
-          child: ScopedModelDescendant<ReviewModel>(
-              builder: (context, child, review) {
+          child: ScopedModelDescendant<ReviewModel>(builder: (context, child, review) {
             return Scaffold(
               appBar: AppBar(
                   elevation: 0.0,
@@ -76,73 +70,42 @@ class _ReviewScreenState extends State<ReviewScreen> {
 
                                           //**/ first imageProfile
 
-                                          review.entitySaveMini!.user!
-                                                      .imageProfile !=
-                                                  null
+                                          review.entitySaveMini!.user!.imageProfile != null
                                               ? GestureDetector(
                                                   onTap: () {
-                                                    if (review.entitySaveMini!
-                                                            .user!.id !=
-                                                        ScopedModel.of<
-                                                                    ProfileModel>(
-                                                                context)
-                                                            .userMini
-                                                            .id) {
+                                                    if (review.entitySaveMini!.user!.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
                                                       Navigator.push(
                                                         context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) => User(
-                                                                userMini: review
-                                                                    .entitySaveMini!
-                                                                    .user!)),
+                                                        MaterialPageRoute(builder: (context) => User(userMini: review.entitySaveMini!.user!)),
                                                       );
                                                     } else {
                                                       Navigator.push(
                                                         context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                const Profile()),
+                                                        MaterialPageRoute(builder: (context) => const Profile()),
                                                       );
                                                     }
                                                   },
                                                   child: CircleAvatar(
-                                                    backgroundImage:
-                                                        NetworkImage(review
-                                                            .entitySaveMini!
-                                                            .user!
-                                                            .imageProfile!),
+                                                    backgroundImage: NetworkImage(review.entitySaveMini!.user!.imageProfile!),
                                                     radius: 30.0,
                                                   ),
                                                 )
                                               : GestureDetector(
                                                   onTap: () {
-                                                    if (review.entitySaveMini!
-                                                            .user!.id !=
-                                                        ScopedModel.of<
-                                                                    ProfileModel>(
-                                                                context)
-                                                            .userMini
-                                                            .id) {
+                                                    if (review.entitySaveMini!.user!.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
                                                       Navigator.push(
                                                         context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) => User(
-                                                                userMini: review
-                                                                    .entitySaveMini!
-                                                                    .user!)),
+                                                        MaterialPageRoute(builder: (context) => User(userMini: review.entitySaveMini!.user!)),
                                                       );
                                                     } else {
                                                       Navigator.push(
                                                         context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                const Profile()),
+                                                        MaterialPageRoute(builder: (context) => const Profile()),
                                                       );
                                                     }
                                                   },
                                                   child: CircleAvatar(
-                                                    backgroundColor:
-                                                        theme.shadow,
+                                                    backgroundColor: theme.shadow,
                                                     child: Icon(
                                                       Icons.image,
                                                       color: theme.emphasis,
@@ -161,60 +124,37 @@ class _ReviewScreenState extends State<ReviewScreen> {
                                             children: [
                                               GestureDetector(
                                                 onTap: () {
-                                                  if (review.entitySaveMini!
-                                                          .user!.id !=
-                                                      ScopedModel.of<
-                                                                  ProfileModel>(
-                                                              context)
-                                                          .userMini
-                                                          .id) {
+                                                  if (review.entitySaveMini!.user!.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
                                                     Navigator.push(
                                                       context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) => User(
-                                                              userMini: review
-                                                                  .entitySaveMini!
-                                                                  .user!)),
+                                                      MaterialPageRoute(builder: (context) => User(userMini: review.entitySaveMini!.user!)),
                                                     );
                                                   } else {
                                                     Navigator.push(
                                                       context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              const Profile()),
+                                                      MaterialPageRoute(builder: (context) => const Profile()),
                                                     );
                                                   }
                                                 },
                                                 child: Text(
-                                                  review.entitySaveMini!.user!
-                                                      .name,
+                                                  review.entitySaveMini!.user!.name,
                                                   style: TextStyle(
                                                     fontSize: theme.sizeText,
-                                                    letterSpacing:
-                                                        theme.letterSpacingText,
+                                                    letterSpacing: theme.letterSpacingText,
                                                     color: theme.title,
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
                                               ),
-                                              review.entitySaveMini!.release ==
-                                                      null
+                                              review.entitySaveMini!.release == null
                                                   ? Container()
                                                   : Text(
-                                                      " • " +
-                                                          ConvertDate
-                                                              .convertToDatePost(
-                                                                  release: review
-                                                                      .entitySaveMini!
-                                                                      .release!),
+                                                      " • " + ConvertDate.convertToDatePost(release: review.entitySaveMini!.release!),
                                                       style: TextStyle(
-                                                        fontSize:
-                                                            theme.sizeText,
-                                                        letterSpacing: theme
-                                                            .letterSpacingText,
+                                                        fontSize: theme.sizeText,
+                                                        letterSpacing: theme.letterSpacingText,
                                                         color: theme.title,
-                                                        fontWeight:
-                                                            FontWeight.normal,
+                                                        fontWeight: FontWeight.normal,
                                                       ),
                                                     ),
                                             ],
@@ -250,86 +190,48 @@ class _ReviewScreenState extends State<ReviewScreen> {
                                           ? Container()
                                           : Container(
                                               margin: EdgeInsets.zero,
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 4.0),
+                                              padding: const EdgeInsets.symmetric(vertical: 4.0),
                                               child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.start,
                                                 children: [
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            4.0),
+                                                    padding: const EdgeInsets.all(4.0),
                                                     child: Icon(
                                                       Icons.star,
                                                       size: 40,
-                                                      color: review
-                                                                  .entitySaveMini!
-                                                                  .evaluation! >=
-                                                              1
-                                                          ? Colors.yellow[700]
-                                                          : theme.icon,
+                                                      color: review.entitySaveMini!.evaluation! >= 1 ? Colors.yellow[700] : theme.icon,
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            4.0),
+                                                    padding: const EdgeInsets.all(4.0),
                                                     child: Icon(
                                                       Icons.star,
                                                       size: 40,
-                                                      color: review
-                                                                  .entitySaveMini!
-                                                                  .evaluation! >=
-                                                              2
-                                                          ? Colors.yellow[700]
-                                                          : theme.icon,
+                                                      color: review.entitySaveMini!.evaluation! >= 2 ? Colors.yellow[700] : theme.icon,
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            4.0),
+                                                    padding: const EdgeInsets.all(4.0),
                                                     child: Icon(
                                                       Icons.star,
                                                       size: 40,
-                                                      color: review
-                                                                  .entitySaveMini!
-                                                                  .evaluation! >=
-                                                              3
-                                                          ? Colors.yellow[700]
-                                                          : theme.icon,
+                                                      color: review.entitySaveMini!.evaluation! >= 3 ? Colors.yellow[700] : theme.icon,
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            4.0),
+                                                    padding: const EdgeInsets.all(4.0),
                                                     child: Icon(
                                                       Icons.star,
                                                       size: 40,
-                                                      color: review
-                                                                  .entitySaveMini!
-                                                                  .evaluation! >=
-                                                              4
-                                                          ? Colors.yellow[700]
-                                                          : theme.icon,
+                                                      color: review.entitySaveMini!.evaluation! >= 4 ? Colors.yellow[700] : theme.icon,
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            4.0),
+                                                    padding: const EdgeInsets.all(4.0),
                                                     child: Icon(
                                                       Icons.star,
                                                       size: 40,
-                                                      color: review
-                                                                  .entitySaveMini!
-                                                                  .evaluation! >=
-                                                              5
-                                                          ? Colors.yellow[700]
-                                                          : theme.icon,
+                                                      color: review.entitySaveMini!.evaluation! >= 5 ? Colors.yellow[700] : theme.icon,
                                                     ),
                                                   ),
                                                 ],
@@ -339,60 +241,43 @@ class _ReviewScreenState extends State<ReviewScreen> {
                                           ? Align(
                                               alignment: Alignment.centerLeft,
                                               child: Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 2.0,
-                                                        horizontal: 8.0),
+                                                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
                                                 child: Text(
-                                                  review
-                                                      .entitySaveMini!.review!,
+                                                  review.entitySaveMini!.review!,
                                                   textAlign: TextAlign.left,
                                                   style: TextStyle(
                                                     fontSize: theme.sizeText,
-                                                    letterSpacing:
-                                                        theme.letterSpacingText,
+                                                    letterSpacing: theme.letterSpacingText,
                                                     color: theme.title,
-                                                    fontWeight:
-                                                        FontWeight.normal,
+                                                    fontWeight: FontWeight.normal,
                                                   ),
                                                 ),
                                               ),
                                             )
                                           : ExpansionTile(
-                                              tilePadding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 2.0,
-                                                      horizontal: 8.0),
+                                              tilePadding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
                                               title: Text(
                                                 'Spoiler',
                                                 style: TextStyle(
                                                   fontSize: theme.sizeText,
-                                                  letterSpacing:
-                                                      theme.letterSpacingText,
+                                                  letterSpacing: theme.letterSpacingText,
                                                   color: theme.title,
                                                   fontWeight: FontWeight.normal,
                                                 ),
                                               ),
                                               children: [
                                                 Padding(
-                                                  padding:
-                                                      const EdgeInsets.fromLTRB(
-                                                          8, 2, 8, 16),
+                                                  padding: const EdgeInsets.fromLTRB(8, 2, 8, 16),
                                                   child: Align(
-                                                    alignment:
-                                                        Alignment.centerLeft,
+                                                    alignment: Alignment.centerLeft,
                                                     child: Text(
-                                                      review.entitySaveMini!
-                                                          .review!,
+                                                      review.entitySaveMini!.review!,
                                                       textAlign: TextAlign.left,
                                                       style: TextStyle(
-                                                        fontSize:
-                                                            theme.sizeText,
-                                                        letterSpacing: theme
-                                                            .letterSpacingText,
+                                                        fontSize: theme.sizeText,
+                                                        letterSpacing: theme.letterSpacingText,
                                                         color: theme.title,
-                                                        fontWeight:
-                                                            FontWeight.normal,
+                                                        fontWeight: FontWeight.normal,
                                                       ),
                                                     ),
                                                   ),
@@ -410,17 +295,13 @@ class _ReviewScreenState extends State<ReviewScreen> {
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) =>
-                                                    LikesReview(
-                                                        idReview:
-                                                            widget.idReview),
+                                                builder: (context) => LikesReview(idReview: widget.idReview),
                                               ),
                                             );
                                           },
                                           child: ConvertLikeNames.returnLikes(
                                             liked: review.entitySaveMini!.liked,
-                                            likeQuantity: review
-                                                .entitySaveMini!.likeQuantity,
+                                            likeQuantity: review.entitySaveMini!.likeQuantity,
                                             like: review.entitySaveMini!.like,
                                             context: context,
                                           ),
@@ -433,8 +314,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                                       //first row comments and likes
 
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                                         children: [
                                           const SizedBox(
                                             width: 8.0,
@@ -444,10 +324,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
                                             child: GestureDetector(
                                               onTap: () {
                                                 review.updateLikeReview(
-                                                  context:
-                                                      widget.contextAncestor,
-                                                  idReview:
-                                                      review.entitySaveMini!.id,
+                                                  context: widget.contextAncestor,
+                                                  idReview: review.entitySaveMini!.id,
                                                 );
                                               },
                                               child: Container(
@@ -456,50 +334,29 @@ class _ReviewScreenState extends State<ReviewScreen> {
                                                   border: Border.all(
                                                     color: theme.button,
                                                   ),
-                                                  borderRadius:
-                                                      const BorderRadius.all(
-                                                          Radius.circular(
-                                                              16.0)),
+                                                  borderRadius: const BorderRadius.all(Radius.circular(16.0)),
                                                 ),
                                                 child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
+                                                  padding: const EdgeInsets.all(8.0),
                                                   child: Center(
                                                     child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
+                                                      mainAxisAlignment: MainAxisAlignment.center,
                                                       children: [
                                                         Icon(
-                                                          Icons
-                                                              .thumb_up_alt_outlined,
+                                                          Icons.thumb_up_alt_outlined,
                                                           size: theme.sizeTitle,
-                                                          color: review
-                                                                  .entitySaveMini!
-                                                                  .liked
-                                                              ? theme.emphasis
-                                                              : theme.title,
+                                                          color: review.entitySaveMini!.liked ? theme.emphasis : theme.title,
                                                         ),
                                                         const SizedBox(
                                                           width: 6.0,
                                                         ),
                                                         Text(
-                                                          review.entitySaveMini!
-                                                              .likeQuantity
-                                                              .toString(),
+                                                          review.entitySaveMini!.likeQuantity.toString(),
                                                           style: TextStyle(
-                                                            fontSize:
-                                                                theme.sizeTitle,
-                                                            letterSpacing: theme
-                                                                .letterSpacingText,
-                                                            color: review
-                                                                    .entitySaveMini!
-                                                                    .liked
-                                                                ? theme.emphasis
-                                                                : theme.title,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .normal,
+                                                            fontSize: theme.sizeTitle,
+                                                            letterSpacing: theme.letterSpacingText,
+                                                            color: review.entitySaveMini!.liked ? theme.emphasis : theme.title,
+                                                            fontWeight: FontWeight.normal,
                                                           ),
                                                         ),
                                                       ],
@@ -520,18 +377,13 @@ class _ReviewScreenState extends State<ReviewScreen> {
                                                 border: Border.all(
                                                   color: theme.button,
                                                 ),
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(16.0)),
+                                                borderRadius: const BorderRadius.all(Radius.circular(16.0)),
                                               ),
                                               child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
+                                                padding: const EdgeInsets.all(8.0),
                                                 child: Center(
                                                   child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
                                                     children: [
                                                       Icon(
                                                         Icons.messenger_outline,
@@ -541,17 +393,12 @@ class _ReviewScreenState extends State<ReviewScreen> {
                                                         width: 6.0,
                                                       ),
                                                       Text(
-                                                        review.entitySaveMini!
-                                                            .commentQuantity
-                                                            .toString(),
+                                                        review.entitySaveMini!.commentQuantity.toString(),
                                                         style: TextStyle(
-                                                          fontSize:
-                                                              theme.sizeTitle,
-                                                          letterSpacing: theme
-                                                              .letterSpacingText,
+                                                          fontSize: theme.sizeTitle,
+                                                          letterSpacing: theme.letterSpacingText,
                                                           color: theme.title,
-                                                          fontWeight:
-                                                              FontWeight.normal,
+                                                          fontWeight: FontWeight.normal,
                                                         ),
                                                       ),
                                                     ],
@@ -576,8 +423,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                                   ),
                                   ListView.builder(
                                       shrinkWrap: true,
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
+                                      physics: const NeverScrollableScrollPhysics(),
                                       itemCount: review.comments.length,
                                       itemBuilder: (context, index) {
                                         return CommentWidget(
@@ -607,13 +453,11 @@ class _ReviewScreenState extends State<ReviewScreen> {
                                     onPressed: () {
                                       if (review.controller.text.isNotEmpty) {
                                         review.addCommentPost(
-                                          idEntitySave:
-                                              review.entitySaveMini!.id,
+                                          idEntitySave: review.entitySaveMini!.id,
                                           context: widget.contextAncestor,
                                           body: review.controller.text,
                                         );
-                                        FocusScopeNode currentFocus =
-                                            FocusScope.of(context);
+                                        FocusScopeNode currentFocus = FocusScope.of(context);
 
                                         if (!currentFocus.hasPrimaryFocus) {
                                           currentFocus.unfocus();
@@ -650,12 +494,7 @@ class CommentWidget extends StatefulWidget {
   CommentMini commentMini;
   String idReview;
   BuildContext contextPage;
-  CommentWidget(
-      {required this.commentMini,
-      required this.idReview,
-      required this.contextPage,
-      Key? key})
-      : super(key: key);
+  CommentWidget({required this.commentMini, required this.idReview, required this.contextPage, Key? key}) : super(key: key);
 
   @override
   _CommentWidgetState createState() => _CommentWidgetState();
@@ -676,45 +515,27 @@ class _CommentWidgetState extends State<CommentWidget> {
             widget.commentMini.author.imageProfile != null
                 ? GestureDetector(
                     onTap: () {
-                      if (widget.commentMini.author.id !=
-                          ScopedModel.of<ProfileModel>(context).userMini.id) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    User(userMini: widget.commentMini.author)));
+                      if (widget.commentMini.author.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => User(userMini: widget.commentMini.author)));
                       } else {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Profile()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                       }
                     },
                     child: CircleAvatar(
-                      backgroundImage:
-                          NetworkImage(widget.commentMini.author.imageProfile!),
+                      backgroundImage: NetworkImage(widget.commentMini.author.imageProfile!),
                       radius: 30.0,
                     ),
                   )
                 : GestureDetector(
                     onTap: () {
-                      if (widget.commentMini.author.id !=
-                          ScopedModel.of<ProfileModel>(context).userMini.id) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    User(userMini: widget.commentMini.author)));
+                      if (widget.commentMini.author.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => User(userMini: widget.commentMini.author)));
                       } else {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Profile()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                       }
                     },
                     child: CircleAvatar(
-                      backgroundColor:
-                          ScopedModel.of<ThemeModel>(context).shadow,
+                      backgroundColor: ScopedModel.of<ThemeModel>(context).shadow,
                       child: Icon(
                         Icons.image,
                         color: ScopedModel.of<ThemeModel>(context).emphasis,
@@ -737,29 +558,17 @@ class _CommentWidgetState extends State<CommentWidget> {
                     borderRadius: const BorderRadius.all(Radius.circular(16.0)),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 16.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         GestureDetector(
                           onTap: () {
-                            if (widget.commentMini.author.id !=
-                                ScopedModel.of<ProfileModel>(context)
-                                    .userMini
-                                    .id) {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => User(
-                                          userMini:
-                                              widget.commentMini.author)));
+                            if (widget.commentMini.author.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => User(userMini: widget.commentMini.author)));
                             } else {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Profile()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                             }
                           },
                           child: Text(
@@ -802,9 +611,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                         widget.commentMini.release == null
                             ? Container()
                             : Text(
-                                ConvertDate.convertToDatePost(
-                                        release: widget.commentMini.release!) +
-                                    " • ",
+                                ConvertDate.convertToDatePost(release: widget.commentMini.release!) + " • ",
                                 style: TextStyle(
                                   fontSize: theme.sizeText,
                                   letterSpacing: theme.letterSpacingText,
@@ -820,38 +627,26 @@ class _CommentWidgetState extends State<CommentWidget> {
                           style: TextStyle(
                             fontSize: theme.sizeText,
                             letterSpacing: theme.letterSpacingText,
-                            color: widget.commentMini.liked
-                                ? theme.emphasis
-                                : theme.subtitle,
+                            color: widget.commentMini.liked ? theme.emphasis : theme.subtitle,
                             fontWeight: FontWeight.normal,
                           ),
                         ),
                         IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
-                            ScopedModel.of<ReviewModel>(context)
-                                .updateLikeComment(
-                                    context: context,
-                                    idComment: widget.commentMini.id,
-                                    idReview: widget.idReview);
+                            ScopedModel.of<ReviewModel>(context).updateLikeComment(context: context, idComment: widget.commentMini.id, idReview: widget.idReview);
                           },
                           icon: Icon(
                             Icons.thumb_up_alt_outlined,
                             size: theme.sizeTitle,
-                            color: widget.commentMini.liked
-                                ? theme.emphasis
-                                : theme.subtitle,
+                            color: widget.commentMini.liked ? theme.emphasis : theme.subtitle,
                           ),
                         ),
                         IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
-                            if (widget.commentMini.author.id ==
-                                ScopedModel.of<ProfileModel>(context)
-                                    .userMini
-                                    .id) {
-                              ScopedModel.of<ReviewModel>(context)
-                                  .showDeleteCommentBottomSheet(
+                            if (widget.commentMini.author.id == ScopedModel.of<ProfileModel>(context).userMini.id) {
+                              ScopedModel.of<ReviewModel>(context).showDeleteCommentBottomSheet(
                                 contextCommentPage: context,
                                 idReview: widget.idReview,
                                 idComment: widget.commentMini.id,
@@ -886,8 +681,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                               // );
 
                             } else {
-                              ScopedModel.of<ProfileModel>(context)
-                                  .showOptionsCommentBottomSheet(
+                              ScopedModel.of<ProfileModel>(context).showOptionsCommentBottomSheet(
                                 contextAncestor: context,
                                 idComment: widget.commentMini.id,
                               );

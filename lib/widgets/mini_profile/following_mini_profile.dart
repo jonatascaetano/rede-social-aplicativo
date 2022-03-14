@@ -9,8 +9,7 @@ import 'package:social_network_application/view/objects/user.dart';
 class FollowingMiniProfile extends StatefulWidget {
   UserMini userMini;
   bool isUser;
-  FollowingMiniProfile({required this.userMini, required this.isUser, Key? key})
-      : super(key: key);
+  FollowingMiniProfile({required this.userMini, required this.isUser, Key? key}) : super(key: key);
 
   @override
   _FollowingMiniProfileState createState() => _FollowingMiniProfileState();
@@ -20,8 +19,7 @@ class _FollowingMiniProfileState extends State<FollowingMiniProfile> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<FollowingModel>(
-          builder: (context, child, following) {
+      return ScopedModelDescendant<FollowingModel>(builder: (context, child, following) {
         return GestureDetector(
           onTap: () {
             if (widget.userMini.id != following.id) {
@@ -54,21 +52,16 @@ class _FollowingMiniProfileState extends State<FollowingMiniProfile> {
                             width: 200,
                             decoration: BoxDecoration(
                               color: theme.shadow,
-                              borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(10.0),
-                                  topRight: Radius.circular(10.0)),
+                              borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
                               image: DecorationImage(
-                                image:
-                                    NetworkImage(widget.userMini.imageProfile!),
+                                image: NetworkImage(widget.userMini.imageProfile!),
                                 fit: BoxFit.fitHeight,
                               ),
                             ),
                           )
                         : Container(
                             decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(10.0),
-                                  topRight: Radius.circular(10.0)),
+                              borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
                               color: theme.shadow,
                             ),
                             height: 150,
@@ -99,8 +92,7 @@ class _FollowingMiniProfileState extends State<FollowingMiniProfile> {
                     ),
 
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 4.0, vertical: 0.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 0.0),
                       child: Text(
                         widget.userMini.name,
                         overflow: TextOverflow.fade,
@@ -123,13 +115,10 @@ class _FollowingMiniProfileState extends State<FollowingMiniProfile> {
                 !widget.isUser
                     ? Container()
                     : Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 4.0, vertical: 0.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 0.0),
                         child: ElevatedButton(
                           onPressed: () {
-                            following.removeFollowing(
-                                idFollowing: widget.userMini.id,
-                                context: context);
+                            following.removeFollowing(idFollowing: widget.userMini.id, context: context);
                           },
                           child: Text(
                             'remove',

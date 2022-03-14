@@ -23,8 +23,7 @@ class _AddBodyPostSeasonState extends State<AddBodyPostSeason> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<EntityModel>(
-          builder: (context, child, entity) {
+      return ScopedModelDescendant<EntityModel>(builder: (context, child, entity) {
         return Form(
           key: _globalKey,
           child: Scaffold(
@@ -41,8 +40,7 @@ class _AddBodyPostSeasonState extends State<AddBodyPostSeason> {
                 )),
             body: Stack(children: [
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
                 child: ListView(
                   children: [
                     Row(
@@ -111,8 +109,7 @@ class _AddBodyPostSeasonState extends State<AddBodyPostSeason> {
                             evaluation: 0,
                             spoiler: spoiler,
                           );
-                          ScopedModel.of<SeasonModel>(context).addBodyPost(
-                              postUpdateDTO: postUpdateDTO, context: context);
+                          ScopedModel.of<SeasonModel>(context).addBodyPost(postUpdateDTO: postUpdateDTO, context: context);
                         }
                       },
                       child: Text(

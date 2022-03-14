@@ -25,8 +25,7 @@ class Season extends StatefulWidget {
 }
 
 class _SeasonState extends State<Season> {
-  void handleEvent(
-      AdmobAdEvent event, Map<String, dynamic> args, String adType) {
+  void handleEvent(AdmobAdEvent event, Map<String, dynamic> args, String adType) {
     switch (event) {
       case AdmobAdEvent.loaded:
         // ignore: avoid_print
@@ -65,24 +64,19 @@ class _SeasonState extends State<Season> {
     ScopedModel.of<SeasonModel>(context).entitySaveMini = null;
     //ScopedModel.of<SeasonModel>(context).getId();
     ScopedModel.of<SeasonModel>(context).getId();
-    ScopedModel.of<SeasonModel>(context)
-        .getSeason(seasonId: widget.seasonMini.id);
-    ScopedModel.of<SeasonModel>(context)
-        .getEntitySave(seasonId: widget.seasonMini.id);
+    ScopedModel.of<SeasonModel>(context).getSeason(seasonId: widget.seasonMini.id);
+    ScopedModel.of<SeasonModel>(context).getEntitySave(seasonId: widget.seasonMini.id);
     // ScopedModel.of<SeasonModel>(context)
     //     .getWorkers(entityId: widget.entityMini.id);
-    ScopedModel.of<SeasonModel>(context)
-        .getEpisodes(seasonId: widget.seasonMini.id);
-    ScopedModel.of<SeasonModel>(context)
-        .getReviews(seasonId: widget.seasonMini.id);
+    ScopedModel.of<SeasonModel>(context).getEpisodes(seasonId: widget.seasonMini.id);
+    ScopedModel.of<SeasonModel>(context).getReviews(seasonId: widget.seasonMini.id);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<SeasonModel>(
-          builder: (context, child, season) {
+      return ScopedModelDescendant<SeasonModel>(builder: (context, child, season) {
         return Scaffold(
             appBar: AppBar(
               elevation: 0.0,
@@ -113,29 +107,20 @@ class _SeasonState extends State<Season> {
                                     ? Container(
                                         margin: EdgeInsets.zero,
                                         padding: EdgeInsets.zero,
-                                        height:
-                                            (MediaQuery.of(context).size.width /
-                                                    16) *
-                                                9,
-                                        width:
-                                            MediaQuery.of(context).size.width,
+                                        height: (MediaQuery.of(context).size.width / 16) * 9,
+                                        width: MediaQuery.of(context).size.width,
                                         decoration: BoxDecoration(
                                           color: theme.shadow,
                                           image: DecorationImage(
-                                            image: NetworkImage(
-                                                season.seasonMini.image!),
+                                            image: NetworkImage(season.seasonMini.image!),
                                             fit: BoxFit.fitHeight,
                                           ),
                                         ),
                                       )
                                     : Container(
                                         color: theme.shadow,
-                                        height:
-                                            (MediaQuery.of(context).size.width /
-                                                    16) *
-                                                9,
-                                        width:
-                                            MediaQuery.of(context).size.width,
+                                        height: (MediaQuery.of(context).size.width / 16) * 9,
+                                        width: MediaQuery.of(context).size.width,
                                         child: Center(
                                           child: Icon(
                                             Icons.image,
@@ -164,9 +149,7 @@ class _SeasonState extends State<Season> {
                                           child: Icon(
                                             Icons.add,
                                             size: 30,
-                                            color: ScopedModel.of<ThemeModel>(
-                                                    context)
-                                                .buttonMainText,
+                                            color: ScopedModel.of<ThemeModel>(context).buttonMainText,
                                           ),
                                         ),
                                       ),
@@ -191,8 +174,7 @@ class _SeasonState extends State<Season> {
                             ),
 
                             Text(
-                              'Season ' +
-                                  season.seasonMini.numberSeason.toString(),
+                              'Season ' + season.seasonMini.numberSeason.toString(),
                               textAlign: TextAlign.center,
                               maxLines: 2,
                               style: TextStyle(
@@ -233,13 +215,11 @@ class _SeasonState extends State<Season> {
                                     child: Column(
                                       children: [
                                         Text(
-                                          season.seasonMini.category1
-                                              .toString(),
+                                          season.seasonMini.category1.toString(),
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: theme.sizeTitle,
-                                            letterSpacing:
-                                                theme.letterSpacingText,
+                                            letterSpacing: theme.letterSpacingText,
                                             color: theme.title,
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -248,19 +228,11 @@ class _SeasonState extends State<Season> {
                                           height: 4.0,
                                         ),
                                         Text(
-                                          LanguageModel()
-                                              .entitiesCategories[ConvertToEnum
-                                                  .convertTypeEntityToValue(
-                                                      typeEntity: season
-                                                          .seasonMini
-                                                          .entity
-                                                          .typeEntity)][1]
-                                              .toString(),
+                                          LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: season.seasonMini.entity.typeEntity)][1].toString(),
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: theme.sizeText,
-                                            letterSpacing:
-                                                theme.letterSpacingText,
+                                            letterSpacing: theme.letterSpacingText,
                                             color: theme.subtitle,
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -273,13 +245,11 @@ class _SeasonState extends State<Season> {
                                     child: Column(
                                       children: [
                                         Text(
-                                          season.seasonMini.category2
-                                              .toString(),
+                                          season.seasonMini.category2.toString(),
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: theme.sizeTitle,
-                                            letterSpacing:
-                                                theme.letterSpacingText,
+                                            letterSpacing: theme.letterSpacingText,
                                             color: theme.title,
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -288,19 +258,11 @@ class _SeasonState extends State<Season> {
                                           height: 4.0,
                                         ),
                                         Text(
-                                          LanguageModel()
-                                              .entitiesCategories[ConvertToEnum
-                                                  .convertTypeEntityToValue(
-                                                      typeEntity: season
-                                                          .seasonMini
-                                                          .entity
-                                                          .typeEntity)][2]
-                                              .toString(),
+                                          LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: season.seasonMini.entity.typeEntity)][2].toString(),
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: theme.sizeText,
-                                            letterSpacing:
-                                                theme.letterSpacingText,
+                                            letterSpacing: theme.letterSpacingText,
                                             color: theme.subtitle,
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -313,13 +275,11 @@ class _SeasonState extends State<Season> {
                                     child: Column(
                                       children: [
                                         Text(
-                                          season.seasonMini.category3
-                                              .toString(),
+                                          season.seasonMini.category3.toString(),
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: theme.sizeTitle,
-                                            letterSpacing:
-                                                theme.letterSpacingText,
+                                            letterSpacing: theme.letterSpacingText,
                                             color: theme.title,
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -328,19 +288,11 @@ class _SeasonState extends State<Season> {
                                           height: 4.0,
                                         ),
                                         Text(
-                                          LanguageModel()
-                                              .entitiesCategories[ConvertToEnum
-                                                  .convertTypeEntityToValue(
-                                                      typeEntity: season
-                                                          .seasonMini
-                                                          .entity
-                                                          .typeEntity)][3]
-                                              .toString(),
+                                          LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: season.seasonMini.entity.typeEntity)][3].toString(),
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: theme.sizeText,
-                                            letterSpacing:
-                                                theme.letterSpacingText,
+                                            letterSpacing: theme.letterSpacingText,
                                             color: theme.subtitle,
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -353,13 +305,11 @@ class _SeasonState extends State<Season> {
                                     child: Column(
                                       children: [
                                         Text(
-                                          season.seasonMini.category4
-                                              .toString(),
+                                          season.seasonMini.category4.toString(),
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: theme.sizeTitle,
-                                            letterSpacing:
-                                                theme.letterSpacingText,
+                                            letterSpacing: theme.letterSpacingText,
                                             color: theme.title,
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -368,19 +318,11 @@ class _SeasonState extends State<Season> {
                                           height: 4.0,
                                         ),
                                         Text(
-                                          LanguageModel()
-                                              .entitiesCategories[ConvertToEnum
-                                                  .convertTypeEntityToValue(
-                                                      typeEntity: season
-                                                          .seasonMini
-                                                          .entity
-                                                          .typeEntity)][4]
-                                              .toString(),
+                                          LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: season.seasonMini.entity.typeEntity)][4].toString(),
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: theme.sizeText,
-                                            letterSpacing:
-                                                theme.letterSpacingText,
+                                            letterSpacing: theme.letterSpacingText,
                                             color: theme.subtitle,
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -456,45 +398,14 @@ class _SeasonState extends State<Season> {
                             season.entitySaveMini == null
                                 ? Container()
                                 : Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Evaluation(
-                                          value: 1,
-                                          evaluation:
-                                              season.entitySaveMini != null
-                                                  ? season.entitySaveMini!
-                                                      .evaluation!
-                                                  : 0),
-                                      Evaluation(
-                                          value: 2,
-                                          evaluation:
-                                              season.entitySaveMini != null
-                                                  ? season.entitySaveMini!
-                                                      .evaluation!
-                                                  : 0),
-                                      Evaluation(
-                                          value: 3,
-                                          evaluation:
-                                              season.entitySaveMini != null
-                                                  ? season.entitySaveMini!
-                                                      .evaluation!
-                                                  : 0),
-                                      Evaluation(
-                                          value: 4,
-                                          evaluation:
-                                              season.entitySaveMini != null
-                                                  ? season.entitySaveMini!
-                                                      .evaluation!
-                                                  : 3),
-                                      Evaluation(
-                                          value: 5,
-                                          evaluation:
-                                              season.entitySaveMini != null
-                                                  ? season.entitySaveMini!
-                                                      .evaluation!
-                                                  : 0),
+                                      Evaluation(value: 1, evaluation: season.entitySaveMini != null ? season.entitySaveMini!.evaluation! : 0),
+                                      Evaluation(value: 2, evaluation: season.entitySaveMini != null ? season.entitySaveMini!.evaluation! : 0),
+                                      Evaluation(value: 3, evaluation: season.entitySaveMini != null ? season.entitySaveMini!.evaluation! : 0),
+                                      Evaluation(value: 4, evaluation: season.entitySaveMini != null ? season.entitySaveMini!.evaluation! : 3),
+                                      Evaluation(value: 5, evaluation: season.entitySaveMini != null ? season.entitySaveMini!.evaluation! : 0),
                                     ],
                                   ),
 
@@ -507,8 +418,7 @@ class _SeasonState extends State<Season> {
                             //*update evaluation
 
                             Text(
-                              season.seasonMini.evaluationAverage
-                                  .toStringAsPrecision(2),
+                              season.seasonMini.evaluationAverage.toStringAsPrecision(2),
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: theme.sizeAppBar,
@@ -521,10 +431,7 @@ class _SeasonState extends State<Season> {
                               height: 2.0,
                             ),
                             Text(
-                              '( ' +
-                                  season.seasonMini.evaluationQuantity
-                                      .toString() +
-                                  ' evaluations)',
+                              '( ' + season.seasonMini.evaluationQuantity.toString() + ' evaluations)',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: theme.sizeText,
@@ -542,10 +449,7 @@ class _SeasonState extends State<Season> {
                             Align(
                               alignment: Alignment.bottomCenter,
                               child: DropdownButton<int>(
-                                hint: season.entitySaveMini == null
-                                    ? const Text('category')
-                                    : season.dropdownList[
-                                        season.entitySaveMini!.category! - 1],
+                                hint: season.entitySaveMini == null ? const Text('category') : season.dropdownList[season.entitySaveMini!.category! - 1],
                                 items: season.dropdownList,
                                 onChanged: (value) async {
                                   String idUser = await season.getId();
@@ -567,17 +471,11 @@ class _SeasonState extends State<Season> {
                                     release: null,
                                   );
                                   if (season.entitySaveMini == null) {
-                                    season.newEntitySave(
-                                        entitySaveDTO: entitySaveDTO,
-                                        context: context);
+                                    season.newEntitySave(entitySaveDTO: entitySaveDTO, context: context);
                                   } else {
-                                    if (value !=
-                                        season.entitySaveMini!.category!) {
-                                      entitySaveDTO.idEntitySave =
-                                          season.entitySaveMini!.id;
-                                      season.updateCategoryEntitySave(
-                                          entitySaveDTO: entitySaveDTO,
-                                          context: context);
+                                    if (value != season.entitySaveMini!.category!) {
+                                      entitySaveDTO.idEntitySave = season.entitySaveMini!.id;
+                                      season.updateCategoryEntitySave(entitySaveDTO: entitySaveDTO, context: context);
                                     }
                                   }
                                 },
@@ -601,24 +499,10 @@ class _SeasonState extends State<Season> {
                                           elevation: 1.0,
                                         ),
                                         onPressed: () {
-                                          if (season.entitySaveMini != null &&
-                                              season.entitySaveMini!.reviewed) {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        UpdateReviewSeason(
-                                                            review: season
-                                                                .entitySaveMini!
-                                                                .review!)));
-                                          } else if (season.entitySaveMini !=
-                                              null) {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        UpdateReviewSeason(
-                                                            review: '')));
+                                          if (season.entitySaveMini != null && season.entitySaveMini!.reviewed) {
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => UpdateReviewSeason(review: season.entitySaveMini!.review!)));
+                                          } else if (season.entitySaveMini != null) {
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => UpdateReviewSeason(review: '')));
                                           }
                                         },
                                         child: season.entitySaveMini != null
@@ -626,35 +510,26 @@ class _SeasonState extends State<Season> {
                                                 ? Text(
                                                     'update review',
                                                     style: TextStyle(
-                                                      fontSize:
-                                                          theme.sizeButton,
-                                                      letterSpacing: theme
-                                                          .letterSpacingButton,
-                                                      color:
-                                                          theme.buttonMainText,
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                                      fontSize: theme.sizeButton,
+                                                      letterSpacing: theme.letterSpacingButton,
+                                                      color: theme.buttonMainText,
+                                                      fontWeight: FontWeight.normal,
                                                     ),
                                                   )
                                                 : Text(
                                                     'add review',
                                                     style: TextStyle(
-                                                      fontSize:
-                                                          theme.sizeButton,
-                                                      letterSpacing: theme
-                                                          .letterSpacingButton,
-                                                      color:
-                                                          theme.buttonMainText,
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                                      fontSize: theme.sizeButton,
+                                                      letterSpacing: theme.letterSpacingButton,
+                                                      color: theme.buttonMainText,
+                                                      fontWeight: FontWeight.normal,
                                                     ),
                                                   )
                                             : Text(
                                                 'add review',
                                                 style: TextStyle(
                                                   fontSize: theme.sizeButton,
-                                                  letterSpacing:
-                                                      theme.letterSpacingButton,
+                                                  letterSpacing: theme.letterSpacingButton,
                                                   color: theme.buttonMainText,
                                                   fontWeight: FontWeight.normal,
                                                 ),
@@ -739,8 +614,7 @@ class _SeasonState extends State<Season> {
                                             'View all episodes',
                                             style: TextStyle(
                                               fontSize: theme.sizeAppBar,
-                                              letterSpacing:
-                                                  theme.letterSpacingText,
+                                              letterSpacing: theme.letterSpacingText,
                                               color: theme.emphasis,
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -751,8 +625,7 @@ class _SeasonState extends State<Season> {
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const AllEpisodesSeason(),
+                                                builder: (context) => const AllEpisodesSeason(),
                                               ),
                                             );
                                           },
@@ -774,9 +647,7 @@ class _SeasonState extends State<Season> {
                                         scrollDirection: Axis.horizontal,
                                         itemCount: season.episodes.length,
                                         itemBuilder: (context, index) {
-                                          return EpisodeMiniSeason(
-                                              episodeMini:
-                                                  season.episodes[index]);
+                                          return EpisodeMiniSeason(episodeMini: season.episodes[index]);
                                           // if (index == season.episodes.length) {
                                           //   return Padding(
                                           //     padding:
@@ -926,8 +797,7 @@ class _SeasonState extends State<Season> {
                             season.reviews.isEmpty
                                 ? Container()
                                 : Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0, vertical: 30.0),
+                                    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
                                     child: Text(
                                       'Reviews',
                                       style: TextStyle(
@@ -943,8 +813,7 @@ class _SeasonState extends State<Season> {
                                 ? Container()
                                 : ListView.separated(
                                     shrinkWrap: true,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
+                                    physics: const NeverScrollableScrollPhysics(),
                                     separatorBuilder: (context, index) {
                                       return Divider(
                                         height: 5.0,

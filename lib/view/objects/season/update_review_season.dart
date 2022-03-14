@@ -27,8 +27,7 @@ class _UpdateReviewSeasonState extends State<UpdateReviewSeason> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<SeasonModel>(
-          builder: (context, child, season) {
+      return ScopedModelDescendant<SeasonModel>(builder: (context, child, season) {
         return Form(
           key: _globalKey,
           child: Scaffold(
@@ -47,8 +46,7 @@ class _UpdateReviewSeasonState extends State<UpdateReviewSeason> {
             body: Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0, vertical: 30.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
                   child: ListView(
                     children: [
                       Row(
@@ -59,8 +57,7 @@ class _UpdateReviewSeasonState extends State<UpdateReviewSeason> {
                               style: TextStyle(
                                 fontSize: 16,
                                 letterSpacing: 1.0,
-                                color:
-                                    ScopedModel.of<ThemeModel>(context).title,
+                                color: ScopedModel.of<ThemeModel>(context).title,
                                 fontWeight: FontWeight.normal,
                               ),
                             ),
@@ -120,8 +117,7 @@ class _UpdateReviewSeasonState extends State<UpdateReviewSeason> {
                               spoiler: spoiler,
                               release: DateTime.now().toString(),
                             );
-                            season.updateReviewEntitySave(
-                                entitySaveDTO: entitySaveDTO, context: context);
+                            season.updateReviewEntitySave(entitySaveDTO: entitySaveDTO, context: context);
                           }
                         },
                         child: Text(

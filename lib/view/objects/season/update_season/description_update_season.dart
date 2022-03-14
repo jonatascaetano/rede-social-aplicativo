@@ -4,8 +4,7 @@ class DescriptionUpdateSeason extends StatefulWidget {
   const DescriptionUpdateSeason({Key? key}) : super(key: key);
 
   @override
-  _DescriptionUpdateSeasonState createState() =>
-      _DescriptionUpdateSeasonState();
+  _DescriptionUpdateSeasonState createState() => _DescriptionUpdateSeasonState();
 }
 
 class _DescriptionUpdateSeasonState extends State<DescriptionUpdateSeason> {

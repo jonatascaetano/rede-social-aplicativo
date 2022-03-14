@@ -18,19 +18,13 @@ class Datasheet extends StatefulWidget {
   int index;
   bool isUser;
   String idUser;
-  Datasheet(
-      {required this.index,
-      required this.isUser,
-      required this.idUser,
-      Key? key})
-      : super(key: key);
+  Datasheet({required this.index, required this.isUser, required this.idUser, Key? key}) : super(key: key);
 
   @override
   _DatasheetState createState() => _DatasheetState();
 }
 
-class _DatasheetState extends State<Datasheet>
-    with AutomaticKeepAliveClientMixin<Datasheet> {
+class _DatasheetState extends State<Datasheet> with AutomaticKeepAliveClientMixin<Datasheet> {
   @override
   // ignore: must_call_super
   Widget build(BuildContext context) {
@@ -38,12 +32,10 @@ class _DatasheetState extends State<Datasheet>
       return ScopedModel<DatasheetModel>(
           model: DatasheetModel(
             context: context,
-            typeEntity:
-                ConvertToEnum.convertValueToTypeEntity(index: widget.index),
+            typeEntity: ConvertToEnum.convertValueToTypeEntity(index: widget.index),
             idUser: widget.idUser,
           ),
-          child: ScopedModelDescendant<DatasheetModel>(
-              builder: (context, child, datasheet) {
+          child: ScopedModelDescendant<DatasheetModel>(builder: (context, child, datasheet) {
             return Scaffold(
                 //backgroundColor: Colors.black,
                 body: Container(
@@ -51,8 +43,7 @@ class _DatasheetState extends State<Datasheet>
               child: DefaultTabController(
                 length: 8,
                 child: NestedScrollView(
-                    headerSliverBuilder:
-                        (BuildContext context, bool innerBoxIsScrolled) {
+                    headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
                       return <Widget>[
                         SliverAppBar(
                           //backgroundColor: Color(0xff0f1b1b),
@@ -61,15 +52,11 @@ class _DatasheetState extends State<Datasheet>
                           pinned: false,
                           snap: false,
                           flexibleSpace: FlexibleSpaceBar(
-                              titlePadding: const EdgeInsets.symmetric(
-                                  horizontal: 32.0, vertical: 0.0),
+                              titlePadding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 0.0),
                               title: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 16, bottom: 8),
+                                padding: const EdgeInsets.only(left: 16, bottom: 8),
                                 child: Text(
-                                  LanguageModel()
-                                      .typeEntitiesMini[widget.index]
-                                      .toString(),
+                                  LanguageModel().typeEntitiesMini[widget.index].toString(),
                                   style: TextStyle(
                                     color: theme.title,
                                     fontSize: theme.sizeAppBar,
@@ -90,8 +77,7 @@ class _DatasheetState extends State<Datasheet>
                               tabs: [
                                 Tab(
                                   child: Text(
-                                    LanguageModel()
-                                        .entitiesCategories[widget.index][0],
+                                    LanguageModel().entitiesCategories[widget.index][0],
                                     style: TextStyle(
                                       fontSize: theme.sizeText,
                                       letterSpacing: theme.letterSpacingText,
@@ -102,8 +88,7 @@ class _DatasheetState extends State<Datasheet>
                                 ),
                                 Tab(
                                   child: Text(
-                                    LanguageModel()
-                                        .entitiesCategories[widget.index][1],
+                                    LanguageModel().entitiesCategories[widget.index][1],
                                     style: TextStyle(
                                       fontSize: theme.sizeText,
                                       letterSpacing: theme.letterSpacingText,
@@ -114,8 +99,7 @@ class _DatasheetState extends State<Datasheet>
                                 ),
                                 Tab(
                                   child: Text(
-                                    LanguageModel()
-                                        .entitiesCategories[widget.index][2],
+                                    LanguageModel().entitiesCategories[widget.index][2],
                                     style: TextStyle(
                                       fontSize: theme.sizeText,
                                       letterSpacing: theme.letterSpacingText,
@@ -126,8 +110,7 @@ class _DatasheetState extends State<Datasheet>
                                 ),
                                 Tab(
                                   child: Text(
-                                    LanguageModel()
-                                        .entitiesCategories[widget.index][3],
+                                    LanguageModel().entitiesCategories[widget.index][3],
                                     style: TextStyle(
                                       fontSize: theme.sizeText,
                                       letterSpacing: theme.letterSpacingText,
@@ -138,8 +121,7 @@ class _DatasheetState extends State<Datasheet>
                                 ),
                                 Tab(
                                   child: Text(
-                                    LanguageModel()
-                                        .entitiesCategories[widget.index][4],
+                                    LanguageModel().entitiesCategories[widget.index][4],
                                     style: TextStyle(
                                       fontSize: theme.sizeText,
                                       letterSpacing: theme.letterSpacingText,
@@ -150,8 +132,7 @@ class _DatasheetState extends State<Datasheet>
                                 ),
                                 Tab(
                                   child: Text(
-                                    LanguageModel()
-                                        .entitiesCategories[widget.index][5],
+                                    LanguageModel().entitiesCategories[widget.index][5],
                                     style: TextStyle(
                                       fontSize: theme.sizeText,
                                       letterSpacing: theme.letterSpacingText,
@@ -162,8 +143,7 @@ class _DatasheetState extends State<Datasheet>
                                 ),
                                 Tab(
                                   child: Text(
-                                    LanguageModel()
-                                        .entitiesCategories[widget.index][6],
+                                    LanguageModel().entitiesCategories[widget.index][6],
                                     style: TextStyle(
                                       fontSize: theme.sizeText,
                                       letterSpacing: theme.letterSpacingText,
@@ -174,8 +154,7 @@ class _DatasheetState extends State<Datasheet>
                                 ),
                                 Tab(
                                   child: Text(
-                                    LanguageModel()
-                                        .entitiesCategories[widget.index][7],
+                                    LanguageModel().entitiesCategories[widget.index][7],
                                     style: TextStyle(
                                       fontSize: theme.sizeText,
                                       letterSpacing: theme.letterSpacingText,
@@ -216,39 +195,25 @@ class _DatasheetState extends State<Datasheet>
                                   )
                                 : Container(),
                             Category1(
-                              entitySaveMini: datasheet.entitySaveMinisIsNull
-                                  ? []
-                                  : datasheet.entitySaveMinis,
+                              entitySaveMini: datasheet.entitySaveMinisIsNull ? [] : datasheet.entitySaveMinis,
                             ),
                             Category2(
-                              entitySaveMini: datasheet.entitySaveMinisIsNull
-                                  ? []
-                                  : datasheet.entitySaveMinis,
+                              entitySaveMini: datasheet.entitySaveMinisIsNull ? [] : datasheet.entitySaveMinis,
                             ),
                             Category3(
-                              entitySaveMini: datasheet.entitySaveMinisIsNull
-                                  ? []
-                                  : datasheet.entitySaveMinis,
+                              entitySaveMini: datasheet.entitySaveMinisIsNull ? [] : datasheet.entitySaveMinis,
                             ),
                             Category4(
-                              entitySaveMini: datasheet.entitySaveMinisIsNull
-                                  ? []
-                                  : datasheet.entitySaveMinis,
+                              entitySaveMini: datasheet.entitySaveMinisIsNull ? [] : datasheet.entitySaveMinis,
                             ),
                             Category5(
-                              entitySaveMini: datasheet.entitySaveMinisIsNull
-                                  ? []
-                                  : datasheet.entitySaveMinis,
+                              entitySaveMini: datasheet.entitySaveMinisIsNull ? [] : datasheet.entitySaveMinis,
                             ),
                             Category6(
-                              entitySaveMini: datasheet.entitySaveMinisIsNull
-                                  ? []
-                                  : datasheet.entitySaveMinis,
+                              entitySaveMini: datasheet.entitySaveMinisIsNull ? [] : datasheet.entitySaveMinis,
                             ),
                             Category7(
-                              entitySaveMini: datasheet.entitySaveMinisIsNull
-                                  ? []
-                                  : datasheet.entitySaveMinis,
+                              entitySaveMini: datasheet.entitySaveMinisIsNull ? [] : datasheet.entitySaveMinis,
                             ),
                             //Category8(entitySaveMini: datasheet.entitySaveMinisIsNull ? [] : datasheet.entitySaveMinis,),
                           ]),
@@ -287,8 +252,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   double get maxExtent => _tabBar.preferredSize.height;
 
   @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
         // decoration: const BoxDecoration(
         //   border: Border(

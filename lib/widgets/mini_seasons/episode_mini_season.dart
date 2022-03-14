@@ -20,8 +20,7 @@ class _EpisodeMiniSeasonState extends State<EpisodeMiniSeason> {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<EpisodeMiniSeasonModel>(
           model: EpisodeMiniSeasonModel(episodeId: widget.episodeMini.id),
-          child: ScopedModelDescendant<EpisodeMiniSeasonModel>(
-              builder: (context, child, episodeMiniSeason) {
+          child: ScopedModelDescendant<EpisodeMiniSeasonModel>(builder: (context, child, episodeMiniSeason) {
             return Padding(
               padding: const EdgeInsets.all(4.0),
               child: Container(
@@ -29,9 +28,7 @@ class _EpisodeMiniSeasonState extends State<EpisodeMiniSeason> {
                 decoration: BoxDecoration(
                   border: Border.all(color: theme.shadow),
                   //borderRadius: BorderRadius.circular(8.0),
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10.0),
-                      topRight: Radius.circular(10.0)),
+                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -45,21 +42,16 @@ class _EpisodeMiniSeasonState extends State<EpisodeMiniSeason> {
                                   width: 200,
                                   decoration: BoxDecoration(
                                     color: theme.shadow,
-                                    borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(10.0),
-                                        topRight: Radius.circular(10.0)),
+                                    borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
                                     image: DecorationImage(
-                                      image: NetworkImage(
-                                          widget.episodeMini.image!),
+                                      image: NetworkImage(widget.episodeMini.image!),
                                       fit: BoxFit.fitHeight,
                                     ),
                                   ),
                                 )
                               : Container(
                                   decoration: BoxDecoration(
-                                    borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(10.0),
-                                        topRight: Radius.circular(10.0)),
+                                    borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
                                     color: theme.shadow,
                                   ),
                                   height: 150,
@@ -137,8 +129,7 @@ class _EpisodeMiniSeasonState extends State<EpisodeMiniSeason> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                Episode(episodeMini: widget.episodeMini),
+                            builder: (context) => Episode(episodeMini: widget.episodeMini),
                           ),
                         );
                       },

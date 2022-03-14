@@ -38,8 +38,7 @@ class _AddBodyPostEntityState extends State<AddBodyPostEntity> {
               )),
           body: Stack(children: [
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
               child: ListView(
                 children: [
                   Row(
@@ -108,8 +107,7 @@ class _AddBodyPostEntityState extends State<AddBodyPostEntity> {
                           evaluation: 0,
                           spoiler: spoiler,
                         );
-                        ScopedModel.of<EntityModel>(context).addBodyPost(
-                            postUpdateDTO: postUpdateDTO, context: context);
+                        ScopedModel.of<EntityModel>(context).addBodyPost(postUpdateDTO: postUpdateDTO, context: context);
                       }
                     },
                     child: Text(

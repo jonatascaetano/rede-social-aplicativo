@@ -14,14 +14,10 @@ class Search extends SearchDelegate {
         ? theme.copyWith(
             primaryColor: const Color(0xff1d1f27),
             inputDecorationTheme: const InputDecorationTheme(
-              focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xff1d1f27))),
-              disabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xff1d1f27))),
-              border: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xff1d1f27))),
-              enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xff1d1f27))),
+              focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff1d1f27))),
+              disabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff1d1f27))),
+              border: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff1d1f27))),
+              enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff1d1f27))),
             ),
             textTheme: const TextTheme(
               headline6: TextStyle(
@@ -35,14 +31,10 @@ class Search extends SearchDelegate {
         : theme.copyWith(
             primaryColor: Colors.white,
             inputDecorationTheme: const InputDecorationTheme(
-              focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white)),
-              disabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white)),
-              border: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white)),
-              enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white)),
+              focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+              disabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+              border: UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+              enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
             ),
             textTheme: const TextTheme(
               headline6: TextStyle(

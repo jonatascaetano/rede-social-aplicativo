@@ -9,8 +9,7 @@ import 'package:social_network_application/view/objects/entity.dart';
 class WorkerMiniProfile extends StatefulWidget {
   WorkerMini workerMini;
   bool isUser;
-  WorkerMiniProfile({required this.workerMini, required this.isUser, Key? key})
-      : super(key: key);
+  WorkerMiniProfile({required this.workerMini, required this.isUser, Key? key}) : super(key: key);
 
   @override
   _WorkerMiniProfileState createState() => _WorkerMiniProfileState();
@@ -22,8 +21,7 @@ class _WorkerMiniProfileState extends State<WorkerMiniProfile> {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<WorkerModel>(
           model: WorkerModel(),
-          child: ScopedModelDescendant<WorkerModel>(
-              builder: (context, child, worker) {
+          child: ScopedModelDescendant<WorkerModel>(builder: (context, child, worker) {
             return Stack(children: [
               Container(
                 margin: const EdgeInsets.all(4.0),
@@ -32,9 +30,7 @@ class _WorkerMiniProfileState extends State<WorkerMiniProfile> {
                   border: Border.all(
                     color: theme.shadow,
                   ), //  const Color(0xffce93d8)),
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10.0),
-                      topRight: Radius.circular(10.0)),
+                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -48,21 +44,16 @@ class _WorkerMiniProfileState extends State<WorkerMiniProfile> {
                                 width: 200,
                                 decoration: BoxDecoration(
                                   color: theme.shadow,
-                                  borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(10.0),
-                                      topRight: Radius.circular(10.0)),
+                                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
                                   image: DecorationImage(
-                                    image: NetworkImage(
-                                        widget.workerMini.entity.image!),
+                                    image: NetworkImage(widget.workerMini.entity.image!),
                                     fit: BoxFit.fitHeight,
                                   ),
                                 ),
                               )
                             : Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(10.0),
-                                      topRight: Radius.circular(10.0)),
+                                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
                                   color: theme.shadow,
                                 ),
                                 height: 150,
@@ -93,8 +84,7 @@ class _WorkerMiniProfileState extends State<WorkerMiniProfile> {
                         ),
 
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 4.0, vertical: 0.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 0.0),
                           child: Text(
                             widget.workerMini.entity.name,
                             overflow: TextOverflow.fade,
@@ -111,8 +101,7 @@ class _WorkerMiniProfileState extends State<WorkerMiniProfile> {
                         ),
 
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 4.0, vertical: 0.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 0.0),
                           child: Text(
                             widget.workerMini.role.toLowerCase(),
                             overflow: TextOverflow.fade,
@@ -136,8 +125,7 @@ class _WorkerMiniProfileState extends State<WorkerMiniProfile> {
                       height: 2.0,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 4.0, vertical: 0.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 0.0),
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.push(
@@ -172,8 +160,7 @@ class _WorkerMiniProfileState extends State<WorkerMiniProfile> {
                       right: 2.0,
                       child: IconButton(
                         onPressed: () {
-                          worker.deleteWorker(
-                              workerMini: widget.workerMini, context: context);
+                          worker.deleteWorker(workerMini: widget.workerMini, context: context);
                         },
                         icon: Icon(
                           Icons.clear_rounded,

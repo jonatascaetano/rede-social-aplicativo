@@ -8,8 +8,7 @@ import 'package:social_network_application/widgets/mini_profile/following_mini_p
 class Following extends StatefulWidget {
   String idUser;
   bool isUser;
-  Following({required this.idUser, required this.isUser, Key? key})
-      : super(key: key);
+  Following({required this.idUser, required this.isUser, Key? key}) : super(key: key);
 
   @override
   _FollowingState createState() => _FollowingState();
@@ -20,10 +19,8 @@ class _FollowingState extends State<Following> {
   Widget build(BuildContext context) {
     return ScopedModel<FollowingModel>(
         model: FollowingModel(idUser: widget.idUser),
-        child: ScopedModelDescendant<FollowingModel>(
-            builder: (context, child, following) {
-          return ScopedModelDescendant<ThemeModel>(
-              builder: (context, child, theme) {
+        child: ScopedModelDescendant<FollowingModel>(builder: (context, child, following) {
+          return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
             return Scaffold(
                 appBar: AppBar(
                   title: Text(
@@ -56,8 +53,7 @@ class _FollowingState extends State<Following> {
                                       style: TextStyle(
                                         color: theme.title,
                                         fontSize: theme.sizeAppBar,
-                                        letterSpacing:
-                                            theme.letterSpacingAppBar,
+                                        letterSpacing: theme.letterSpacingAppBar,
                                         fontWeight: FontWeight.normal,
                                       ),
                                     ),

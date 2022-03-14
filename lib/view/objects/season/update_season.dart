@@ -8,8 +8,7 @@ import 'package:social_network_application/scoped_model/support/theme_model.dart
 class UpdateSeason extends StatefulWidget {
   SeasonMini seasonMini;
   BuildContext context;
-  UpdateSeason({required this.seasonMini, required this.context, Key? key})
-      : super(key: key);
+  UpdateSeason({required this.seasonMini, required this.context, Key? key}) : super(key: key);
 
   @override
   _UpdateSeasonState createState() => _UpdateSeasonState();
@@ -19,8 +18,7 @@ class _UpdateSeasonState extends State<UpdateSeason> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<SeasonModel>(
-          builder: (context, child, season) {
+      return ScopedModelDescendant<SeasonModel>(builder: (context, child, season) {
         return Scaffold(
           appBar: AppBar(
             elevation: 0.0,

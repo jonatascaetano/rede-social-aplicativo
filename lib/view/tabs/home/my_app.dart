@@ -21,8 +21,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<LanguageModel>(
-          builder: (context, child, language) {
+      return ScopedModelDescendant<LanguageModel>(builder: (context, child, language) {
         List<Widget> select = [
           const Home(),
           // const Trending(),
@@ -62,9 +61,7 @@ class _MyAppState extends State<MyApp> {
               IconButton(
                   padding: EdgeInsets.zero,
                   onPressed: () {
-                    ScopedModel.of<ProfileModel>(context)
-                        .showOptionsAddPostBottomSheet(
-                            contextAncestor: context);
+                    ScopedModel.of<ProfileModel>(context).showOptionsAddPostBottomSheet(contextAncestor: context);
                   },
                   icon: Container(
                     decoration: const BoxDecoration(
@@ -100,8 +97,7 @@ class _MyAppState extends State<MyApp> {
               IconButton(
                 padding: EdgeInsets.zero,
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Menu()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const Menu()));
                 },
                 icon: Container(
                   decoration: const BoxDecoration(

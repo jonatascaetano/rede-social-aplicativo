@@ -7,8 +7,7 @@ import 'package:social_network_application/scoped_model/support/theme_model.dart
 // ignore: must_be_immutable
 class Evaluation extends StatefulWidget {
   int value, evaluation;
-  Evaluation({required this.value, required this.evaluation, Key? key})
-      : super(key: key);
+  Evaluation({required this.value, required this.evaluation, Key? key}) : super(key: key);
 
   @override
   _EvaluationState createState() => _EvaluationState();
@@ -18,13 +17,11 @@ class _EvaluationState extends State<Evaluation> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<SeasonModel>(
-          builder: (context, child, season) {
+      return ScopedModelDescendant<SeasonModel>(builder: (context, child, season) {
         return IconButton(
             padding: EdgeInsets.zero,
             onPressed: () {
-              if (widget.evaluation != widget.value &&
-                  season.entitySaveMini != null) {
+              if (widget.evaluation != widget.value && season.entitySaveMini != null) {
                 EntitySaveDTO entitySaveDTO = EntitySaveDTO(
                   idEntitySave: season.entitySaveMini!.id,
                   idUser: null,
@@ -41,16 +38,13 @@ class _EvaluationState extends State<Evaluation> {
                   spoiler: false,
                   release: null,
                 );
-                season.updateEvaluationEntitySave(
-                    entitySaveDTO: entitySaveDTO, context: context);
+                season.updateEvaluationEntitySave(entitySaveDTO: entitySaveDTO, context: context);
               }
             },
             icon: Icon(
               Icons.star,
               size: 40,
-              color: widget.evaluation >= widget.value
-                  ? Colors.yellow[700]
-                  : theme.icon,
+              color: widget.evaluation >= widget.value ? Colors.yellow[700] : theme.icon,
             ));
       });
     });

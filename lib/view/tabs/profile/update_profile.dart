@@ -21,8 +21,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<ProfileModel>(
-          builder: (context, child, profile) {
+      return ScopedModelDescendant<ProfileModel>(builder: (context, child, profile) {
         return Scaffold(
             appBar: AppBar(
               elevation: 0.0,
@@ -59,8 +58,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                             onPressed: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(
-                                    builder: (context) => const ImageUpdate()),
+                                MaterialPageRoute(builder: (context) => const ImageUpdate()),
                               );
                             },
                             child: Text(
@@ -88,8 +86,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                   decoration: BoxDecoration(
                                     color: theme.shadow,
                                     image: DecorationImage(
-                                      image: NetworkImage(
-                                          profile.userMini.imageProfile!),
+                                      image: NetworkImage(profile.userMini.imageProfile!),
                                       fit: BoxFit.fitHeight,
                                     ),
                                   ),
@@ -100,24 +97,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                   right: 2.0,
                                   child: IconButton(
                                       onPressed: () {
-                                        UserDTO userDTO = UserDTO(
-                                            idUser: profile.userMini.id,
-                                            name: null,
-                                            email: null,
-                                            password: null,
-                                            imageProfile:
-                                                profile.userMini.imageProfile!,
-                                            description: null,
-                                            place: null,
-                                            privacy: null,
-                                            status: null,
-                                            invitation: null,
-                                            release: DateTime.now().toString());
-                                        profile.removeImageProfile(
-                                            userDTO: userDTO, context: context);
+                                        UserDTO userDTO = UserDTO(idUser: profile.userMini.id, name: null, email: null, password: null, imageProfile: profile.userMini.imageProfile!, description: null, place: null, privacy: null, status: null, invitation: null, release: DateTime.now().toString());
+                                        profile.removeImageProfile(userDTO: userDTO, context: context);
                                       },
-                                      icon: Icon(Icons.clear_rounded,
-                                          color: theme.subtitle))),
+                                      icon: Icon(Icons.clear_rounded, color: theme.subtitle))),
                             ])
                           : Container(
                               color: theme.shadow,
@@ -326,8 +309,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => DescriptionUpdate(
-                                          description:
-                                              profile.userMini.description,
+                                          description: profile.userMini.description,
                                         )),
                               );
                             },
@@ -481,9 +463,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                             onPressed: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const PasswordUpdate()),
+                                MaterialPageRoute(builder: (context) => const PasswordUpdate()),
                               );
                             },
                             child: Text(

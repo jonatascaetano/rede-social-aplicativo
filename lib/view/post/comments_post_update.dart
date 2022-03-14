@@ -23,12 +23,7 @@ class CommentsPostUpdate extends StatefulWidget {
   PostUpdateMini postUpdateMini;
   bool screenUser;
   BuildContext contextPage;
-  CommentsPostUpdate(
-      {required this.postUpdateMini,
-      required this.screenUser,
-      required this.contextPage,
-      Key? key})
-      : super(key: key);
+  CommentsPostUpdate({required this.postUpdateMini, required this.screenUser, required this.contextPage, Key? key}) : super(key: key);
 
   @override
   _CommentsPostUpdateState createState() => _CommentsPostUpdateState();
@@ -45,8 +40,7 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
             comments: widget.postUpdateMini.commentQuantity,
             likes: widget.postUpdateMini.likeQuantity,
           ),
-          child: ScopedModelDescendant<CommentModel>(
-              builder: (context, child, comment) {
+          child: ScopedModelDescendant<CommentModel>(builder: (context, child, comment) {
             return Scaffold(
               appBar: AppBar(
                 elevation: 0.0,
@@ -81,59 +75,32 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                           const SizedBox(
                                             width: 8.0,
                                           ),
-                                          widget.postUpdateMini.author!
-                                                      .imageProfile !=
-                                                  null
+                                          widget.postUpdateMini.author!.imageProfile != null
                                               ? GestureDetector(
                                                   onTap: () {
-                                                    if (widget.postUpdateMini
-                                                            .author!.id !=
-                                                        ScopedModel.of<
-                                                                    ProfileModel>(
-                                                                context)
-                                                            .userMini
-                                                            .id) {
+                                                    if (widget.postUpdateMini.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
                                                       Navigator.push(
                                                         context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) => User(
-                                                                userMini: widget
-                                                                    .postUpdateMini
-                                                                    .author!)),
+                                                        MaterialPageRoute(builder: (context) => User(userMini: widget.postUpdateMini.author!)),
                                                       );
                                                     }
                                                   },
                                                   child: CircleAvatar(
-                                                    backgroundImage:
-                                                        NetworkImage(widget
-                                                            .postUpdateMini
-                                                            .author!
-                                                            .imageProfile!),
+                                                    backgroundImage: NetworkImage(widget.postUpdateMini.author!.imageProfile!),
                                                     radius: 30.0,
                                                   ),
                                                 )
                                               : GestureDetector(
                                                   onTap: () {
-                                                    if (widget.postUpdateMini
-                                                            .author!.id !=
-                                                        ScopedModel.of<
-                                                                    ProfileModel>(
-                                                                context)
-                                                            .userMini
-                                                            .id) {
+                                                    if (widget.postUpdateMini.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
                                                       Navigator.push(
                                                         context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) => User(
-                                                                userMini: widget
-                                                                    .postUpdateMini
-                                                                    .author!)),
+                                                        MaterialPageRoute(builder: (context) => User(userMini: widget.postUpdateMini.author!)),
                                                       );
                                                     }
                                                   },
                                                   child: CircleAvatar(
-                                                    backgroundColor:
-                                                        theme.shadow,
+                                                    backgroundColor: theme.shadow,
                                                     child: Icon(
                                                       Icons.image,
                                                       color: theme.emphasis,
@@ -148,32 +115,22 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                           //init
 
                                           Expanded(
-                                              child: widget.postUpdateMini
-                                                          .level ==
-                                                      Level.ENTITY
+                                              child: widget.postUpdateMini.level == Level.ENTITY
                                                   ? entity(
                                                       context: context,
-                                                      postUpdateMini:
-                                                          widget.postUpdateMini,
-                                                      screenUser:
-                                                          widget.screenUser,
+                                                      postUpdateMini: widget.postUpdateMini,
+                                                      screenUser: widget.screenUser,
                                                     )
-                                                  : widget.postUpdateMini
-                                                              .level ==
-                                                          Level.SEASON
+                                                  : widget.postUpdateMini.level == Level.SEASON
                                                       ? season(
-                                                          postUpdateMini: widget
-                                                              .postUpdateMini,
+                                                          postUpdateMini: widget.postUpdateMini,
                                                           context: context,
-                                                          screenUser:
-                                                              widget.screenUser,
+                                                          screenUser: widget.screenUser,
                                                         )
                                                       : episode(
-                                                          postUpdateMini: widget
-                                                              .postUpdateMini,
+                                                          postUpdateMini: widget.postUpdateMini,
                                                           context: context,
-                                                          screenUser:
-                                                              widget.screenUser,
+                                                          screenUser: widget.screenUser,
                                                         )),
                                           const SizedBox(
                                             width: 4.0,
@@ -181,20 +138,12 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                           IconButton(
                                             padding: EdgeInsets.zero,
                                             onPressed: () async {
-                                              if (widget.postUpdateMini.author!
-                                                      .id ==
-                                                  ScopedModel.of<ProfileModel>(
-                                                          context)
-                                                      .userMini
-                                                      .id) {
-                                                comment
-                                                    .showDeletePostBottomSheet(
-                                                  idPost:
-                                                      widget.postUpdateMini.id!,
+                                              if (widget.postUpdateMini.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id) {
+                                                comment.showDeletePostBottomSheet(
+                                                  idPost: widget.postUpdateMini.id!,
                                                   screenComment: true,
                                                   screenUser: widget.screenUser,
-                                                  contextPage:
-                                                      widget.contextPage,
+                                                  contextPage: widget.contextPage,
                                                   contextCommentPage: context,
                                                 );
                                                 // ScaffoldMessenger.of(context)
@@ -230,21 +179,16 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                                 //   ),
                                                 // );
                                               } else {
-                                                ScopedModel.of<ProfileModel>(
-                                                        widget.contextPage)
-                                                    .showOptionsPostBottomSheet(
+                                                ScopedModel.of<ProfileModel>(widget.contextPage).showOptionsPostBottomSheet(
                                                   contextAncestor: context,
-                                                  idPost:
-                                                      widget.postUpdateMini.id!,
+                                                  idPost: widget.postUpdateMini.id!,
                                                 );
                                               }
                                             },
                                             icon: Icon(
                                               Icons.more_vert_sharp,
                                               size: 21,
-                                              color: ScopedModel.of<ThemeModel>(
-                                                      context)
-                                                  .subtitle,
+                                              color: ScopedModel.of<ThemeModel>(context).subtitle,
                                             ),
                                           ),
                                         ],
@@ -256,86 +200,48 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                           ? Container()
                                           : Container(
                                               margin: EdgeInsets.zero,
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 4.0),
+                                              padding: const EdgeInsets.symmetric(vertical: 4.0),
                                               child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
+                                                mainAxisAlignment: MainAxisAlignment.center,
                                                 children: [
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
+                                                    padding: const EdgeInsets.all(8.0),
                                                     child: Icon(
                                                       Icons.star,
                                                       size: 40,
-                                                      color: widget
-                                                                  .postUpdateMini
-                                                                  .evaluation >=
-                                                              1
-                                                          ? Colors.yellow[700]
-                                                          : theme.icon,
+                                                      color: widget.postUpdateMini.evaluation >= 1 ? Colors.yellow[700] : theme.icon,
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
+                                                    padding: const EdgeInsets.all(8.0),
                                                     child: Icon(
                                                       Icons.star,
                                                       size: 40,
-                                                      color: widget
-                                                                  .postUpdateMini
-                                                                  .evaluation >=
-                                                              2
-                                                          ? Colors.yellow[700]
-                                                          : theme.icon,
+                                                      color: widget.postUpdateMini.evaluation >= 2 ? Colors.yellow[700] : theme.icon,
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
+                                                    padding: const EdgeInsets.all(8.0),
                                                     child: Icon(
                                                       Icons.star,
                                                       size: 40,
-                                                      color: widget
-                                                                  .postUpdateMini
-                                                                  .evaluation >=
-                                                              3
-                                                          ? Colors.yellow[700]
-                                                          : theme.icon,
+                                                      color: widget.postUpdateMini.evaluation >= 3 ? Colors.yellow[700] : theme.icon,
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
+                                                    padding: const EdgeInsets.all(8.0),
                                                     child: Icon(
                                                       Icons.star,
                                                       size: 40,
-                                                      color: widget
-                                                                  .postUpdateMini
-                                                                  .evaluation >=
-                                                              4
-                                                          ? Colors.yellow[700]
-                                                          : theme.icon,
+                                                      color: widget.postUpdateMini.evaluation >= 4 ? Colors.yellow[700] : theme.icon,
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
+                                                    padding: const EdgeInsets.all(8.0),
                                                     child: Icon(
                                                       Icons.star,
                                                       size: 40,
-                                                      color: widget
-                                                                  .postUpdateMini
-                                                                  .evaluation >=
-                                                              5
-                                                          ? Colors.yellow[700]
-                                                          : theme.icon,
+                                                      color: widget.postUpdateMini.evaluation >= 5 ? Colors.yellow[700] : theme.icon,
                                                     ),
                                                   ),
                                                 ],
@@ -349,66 +255,46 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                       !widget.postUpdateMini.spoiler
                                           ? widget.postUpdateMini.body != null
                                               ? Align(
-                                                  alignment:
-                                                      Alignment.centerLeft,
+                                                  alignment: Alignment.centerLeft,
                                                   child: Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        vertical: 2.0,
-                                                        horizontal: 8.0),
+                                                    padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
                                                     child: Text(
-                                                      widget
-                                                          .postUpdateMini.body!,
+                                                      widget.postUpdateMini.body!,
                                                       textAlign: TextAlign.left,
                                                       style: TextStyle(
-                                                        fontSize:
-                                                            theme.sizeText,
-                                                        letterSpacing: theme
-                                                            .letterSpacingText,
+                                                        fontSize: theme.sizeText,
+                                                        letterSpacing: theme.letterSpacingText,
                                                         color: theme.title,
-                                                        fontWeight:
-                                                            FontWeight.normal,
+                                                        fontWeight: FontWeight.normal,
                                                       ),
                                                     ),
                                                   ),
                                                 )
                                               : Container()
                                           : ExpansionTile(
-                                              tilePadding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 2.0,
-                                                      horizontal: 8.0),
+                                              tilePadding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
                                               title: Text(
                                                 'Spoiler',
                                                 style: TextStyle(
                                                   fontSize: theme.sizeText,
-                                                  letterSpacing:
-                                                      theme.letterSpacingText,
+                                                  letterSpacing: theme.letterSpacingText,
                                                   color: theme.title,
                                                   fontWeight: FontWeight.normal,
                                                 ),
                                               ),
                                               children: [
                                                 Padding(
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      vertical: 2.0,
-                                                      horizontal: 8.0),
+                                                  padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
                                                   child: Align(
-                                                    alignment:
-                                                        Alignment.centerLeft,
+                                                    alignment: Alignment.centerLeft,
                                                     child: Text(
-                                                      widget
-                                                          .postUpdateMini.body!,
+                                                      widget.postUpdateMini.body!,
                                                       textAlign: TextAlign.left,
                                                       style: TextStyle(
-                                                        fontSize:
-                                                            theme.sizeText,
-                                                        letterSpacing: theme
-                                                            .letterSpacingText,
+                                                        fontSize: theme.sizeText,
+                                                        letterSpacing: theme.letterSpacingText,
                                                         color: theme.title,
-                                                        fontWeight:
-                                                            FontWeight.normal,
+                                                        fontWeight: FontWeight.normal,
                                                       ),
                                                     ),
                                                   ),
@@ -418,31 +304,23 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                       const SizedBox(
                                         height: 8.0,
                                       ),
-                                      widget.postUpdateMini.level ==
-                                              Level.ENTITY
+                                      widget.postUpdateMini.level == Level.ENTITY
                                           ? entityImage(
-                                              postUpdateMini:
-                                                  widget.postUpdateMini,
+                                              postUpdateMini: widget.postUpdateMini,
                                               contextPage: widget.contextPage,
                                               //screenComment: widget.screenComment,
                                               screenUser: widget.screenUser)
-                                          : widget.postUpdateMini.level ==
-                                                  Level.SEASON
+                                          : widget.postUpdateMini.level == Level.SEASON
                                               ? seasonImage(
-                                                  postUpdateMini:
-                                                      widget.postUpdateMini,
-                                                  contextPage:
-                                                      widget.contextPage,
+                                                  postUpdateMini: widget.postUpdateMini,
+                                                  contextPage: widget.contextPage,
                                                   //screenComment: widget.screenComment,
                                                   screenUser: widget.screenUser)
                                               : episodeImage(
-                                                  postUpdateMini:
-                                                      widget.postUpdateMini,
-                                                  contextPage:
-                                                      widget.contextPage,
+                                                  postUpdateMini: widget.postUpdateMini,
+                                                  contextPage: widget.contextPage,
                                                   //screenComment: widget.screenComment,
-                                                  screenUser:
-                                                      widget.screenUser),
+                                                  screenUser: widget.screenUser),
                                       /*
                                     widget.postUpdateMini.entity!.image != null
                                         ? GestureDetector(
@@ -501,17 +379,13 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        LikesPost(
-                                                          idPost: widget
-                                                              .postUpdateMini
-                                                              .id!,
+                                                    builder: (context) => LikesPost(
+                                                          idPost: widget.postUpdateMini.id!,
                                                         )));
                                           },
                                           child: ConvertLikeNames.returnLikes(
                                             liked: widget.postUpdateMini.liked,
-                                            likeQuantity: widget
-                                                .postUpdateMini.likeQuantity,
+                                            likeQuantity: widget.postUpdateMini.likeQuantity,
                                             like: widget.postUpdateMini.like,
                                             context: context,
                                           ),
@@ -521,8 +395,7 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                         height: 8.0,
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                                         children: [
                                           const SizedBox(
                                             width: 8.0,
@@ -533,8 +406,7 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                               onTap: () {
                                                 comment.updateLikePost(
                                                   context: widget.contextPage,
-                                                  idPost:
-                                                      widget.postUpdateMini.id!,
+                                                  idPost: widget.postUpdateMini.id!,
                                                 );
                                               },
                                               child: Container(
@@ -543,36 +415,24 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                                   border: Border.all(
                                                     color: theme.button,
                                                   ),
-                                                  borderRadius:
-                                                      const BorderRadius.all(
-                                                          Radius.circular(
-                                                              16.0)),
+                                                  borderRadius: const BorderRadius.all(Radius.circular(16.0)),
                                                 ),
                                                 child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
+                                                  padding: const EdgeInsets.all(8.0),
                                                   child: Center(
                                                     child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
+                                                      mainAxisAlignment: MainAxisAlignment.center,
                                                       children: [
                                                         Icon(
-                                                          Icons
-                                                              .thumb_up_alt_outlined,
+                                                          Icons.thumb_up_alt_outlined,
                                                           size: theme.sizeTitle,
-                                                          color: comment
-                                                                  .postUpdateMini
-                                                                  .liked
-                                                              ? theme.emphasis
-                                                              : theme.title,
+                                                          color: comment.postUpdateMini.liked ? theme.emphasis : theme.title,
                                                         ),
                                                         const SizedBox(
                                                           width: 6.0,
                                                         ),
                                                         Text(
-                                                          comment.likeQuantity
-                                                              .toString(),
+                                                          comment.likeQuantity.toString(),
 
                                                           // widget.screenComment
                                                           //     ? post.likeQuantity == 0
@@ -582,18 +442,10 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                                           //     : widget.postUpdateMini.likeQuantity
                                                           //         .toString(),
                                                           style: TextStyle(
-                                                            fontSize:
-                                                                theme.sizeTitle,
-                                                            letterSpacing: theme
-                                                                .letterSpacingText,
-                                                            color: comment
-                                                                    .postUpdateMini
-                                                                    .liked
-                                                                ? theme.emphasis
-                                                                : theme.title,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .normal,
+                                                            fontSize: theme.sizeTitle,
+                                                            letterSpacing: theme.letterSpacingText,
+                                                            color: comment.postUpdateMini.liked ? theme.emphasis : theme.title,
+                                                            fontWeight: FontWeight.normal,
                                                           ),
                                                         ),
                                                       ],
@@ -616,32 +468,23 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                                   border: Border.all(
                                                     color: theme.button,
                                                   ),
-                                                  borderRadius:
-                                                      const BorderRadius.all(
-                                                          Radius.circular(
-                                                              16.0)),
+                                                  borderRadius: const BorderRadius.all(Radius.circular(16.0)),
                                                 ),
                                                 child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
+                                                  padding: const EdgeInsets.all(8.0),
                                                   child: Center(
                                                     child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
+                                                      mainAxisAlignment: MainAxisAlignment.center,
                                                       children: [
                                                         Icon(
-                                                          Icons
-                                                              .messenger_outline,
+                                                          Icons.messenger_outline,
                                                           size: theme.sizeTitle,
                                                         ),
                                                         const SizedBox(
                                                           width: 6.0,
                                                         ),
                                                         Text(
-                                                          comment
-                                                              .commentQuantity
-                                                              .toString(),
+                                                          comment.commentQuantity.toString(),
 
                                                           // widget.screenComment
                                                           //     ? post.commentQuantity == 0
@@ -652,14 +495,10 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                                           //     : widget.postUpdateMini.commentQuantity
                                                           //         .toString(),
                                                           style: TextStyle(
-                                                            fontSize:
-                                                                theme.sizeTitle,
-                                                            letterSpacing: theme
-                                                                .letterSpacingText,
+                                                            fontSize: theme.sizeTitle,
+                                                            letterSpacing: theme.letterSpacingText,
                                                             color: theme.title,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .normal,
+                                                            fontWeight: FontWeight.normal,
                                                           ),
                                                         ),
                                                       ],
@@ -684,8 +523,7 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                   ),
                                   ListView.builder(
                                       shrinkWrap: true,
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
+                                      physics: const NeverScrollableScrollPhysics(),
                                       itemCount: comment.comments.length,
                                       itemBuilder: (context, index) {
                                         return CommentWidget(
@@ -718,8 +556,7 @@ class _CommentsPostUpdateState extends State<CommentsPostUpdate> {
                                           body: comment.controller.text,
                                           screenUser: widget.screenUser,
                                         );
-                                        FocusScopeNode currentFocus =
-                                            FocusScope.of(context);
+                                        FocusScopeNode currentFocus = FocusScope.of(context);
 
                                         if (!currentFocus.hasPrimaryFocus) {
                                           currentFocus.unfocus();
@@ -757,13 +594,7 @@ class CommentWidget extends StatefulWidget {
   String idPost;
   bool screenUser;
   BuildContext contextPage;
-  CommentWidget(
-      {required this.commentMini,
-      required this.idPost,
-      required this.screenUser,
-      required this.contextPage,
-      Key? key})
-      : super(key: key);
+  CommentWidget({required this.commentMini, required this.idPost, required this.screenUser, required this.contextPage, Key? key}) : super(key: key);
 
   @override
   _CommentWidgetState createState() => _CommentWidgetState();
@@ -784,45 +615,27 @@ class _CommentWidgetState extends State<CommentWidget> {
             widget.commentMini.author.imageProfile != null
                 ? GestureDetector(
                     onTap: () {
-                      if (widget.commentMini.author.id !=
-                          ScopedModel.of<ProfileModel>(context).userMini.id) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    User(userMini: widget.commentMini.author)));
+                      if (widget.commentMini.author.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => User(userMini: widget.commentMini.author)));
                       } else {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Profile()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                       }
                     },
                     child: CircleAvatar(
-                      backgroundImage:
-                          NetworkImage(widget.commentMini.author.imageProfile!),
+                      backgroundImage: NetworkImage(widget.commentMini.author.imageProfile!),
                       radius: 30.0,
                     ),
                   )
                 : GestureDetector(
                     onTap: () {
-                      if (widget.commentMini.author.id !=
-                          ScopedModel.of<ProfileModel>(context).userMini.id) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    User(userMini: widget.commentMini.author)));
+                      if (widget.commentMini.author.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => User(userMini: widget.commentMini.author)));
                       } else {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Profile()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                       }
                     },
                     child: CircleAvatar(
-                      backgroundColor:
-                          ScopedModel.of<ThemeModel>(context).shadow,
+                      backgroundColor: ScopedModel.of<ThemeModel>(context).shadow,
                       child: Icon(
                         Icons.image,
                         color: ScopedModel.of<ThemeModel>(context).emphasis,
@@ -845,29 +658,17 @@ class _CommentWidgetState extends State<CommentWidget> {
                     borderRadius: const BorderRadius.all(Radius.circular(16.0)),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 16.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         GestureDetector(
                           onTap: () {
-                            if (widget.commentMini.author.id !=
-                                ScopedModel.of<ProfileModel>(context)
-                                    .userMini
-                                    .id) {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => User(
-                                          userMini:
-                                              widget.commentMini.author)));
+                            if (widget.commentMini.author.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => User(userMini: widget.commentMini.author)));
                             } else {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Profile()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                             }
                           },
                           child: Text(
@@ -910,9 +711,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                         widget.commentMini.release == null
                             ? Container()
                             : Text(
-                                ConvertDate.convertToDatePost(
-                                        release: widget.commentMini.release!) +
-                                    " • ",
+                                ConvertDate.convertToDatePost(release: widget.commentMini.release!) + " • ",
                                 style: TextStyle(
                                   fontSize: theme.sizeText,
                                   letterSpacing: theme.letterSpacingText,
@@ -928,17 +727,14 @@ class _CommentWidgetState extends State<CommentWidget> {
                           style: TextStyle(
                             fontSize: theme.sizeText,
                             letterSpacing: theme.letterSpacingText,
-                            color: widget.commentMini.liked
-                                ? theme.emphasis
-                                : theme.subtitle,
+                            color: widget.commentMini.liked ? theme.emphasis : theme.subtitle,
                             fontWeight: FontWeight.normal,
                           ),
                         ),
                         IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
-                            ScopedModel.of<CommentModel>(context)
-                                .updateLikeComment(
+                            ScopedModel.of<CommentModel>(context).updateLikeComment(
                               context: context,
                               idComment: widget.commentMini.id,
                               idPost: widget.idPost,
@@ -947,20 +743,14 @@ class _CommentWidgetState extends State<CommentWidget> {
                           icon: Icon(
                             Icons.thumb_up_alt_outlined,
                             size: theme.sizeTitle,
-                            color: widget.commentMini.liked
-                                ? theme.emphasis
-                                : theme.subtitle,
+                            color: widget.commentMini.liked ? theme.emphasis : theme.subtitle,
                           ),
                         ),
                         IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
-                            if (widget.commentMini.author.id ==
-                                ScopedModel.of<ProfileModel>(context)
-                                    .userMini
-                                    .id) {
-                              ScopedModel.of<CommentModel>(context)
-                                  .showDeleteCommentBottomSheet(
+                            if (widget.commentMini.author.id == ScopedModel.of<ProfileModel>(context).userMini.id) {
+                              ScopedModel.of<CommentModel>(context).showDeleteCommentBottomSheet(
                                 contextCommentPage: context,
                                 idPost: widget.idPost,
                                 idComment: widget.commentMini.id,
@@ -997,8 +787,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                               // );
 
                             } else {
-                              ScopedModel.of<ProfileModel>(context)
-                                  .showOptionsCommentBottomSheet(
+                              ScopedModel.of<ProfileModel>(context).showOptionsCommentBottomSheet(
                                 contextAncestor: context,
                                 idComment: widget.commentMini.id,
                               );
@@ -1023,23 +812,17 @@ class _CommentWidgetState extends State<CommentWidget> {
   }
 }
 
-Widget entity(
-    {required PostUpdateMini postUpdateMini,
-    required BuildContext context,
-    required bool screenUser}) {
+Widget entity({required PostUpdateMini postUpdateMini, required BuildContext context, required bool screenUser}) {
   return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         GestureDetector(
           onTap: () {
-            if (postUpdateMini.author!.id !=
-                ScopedModel.of<ProfileModel>(context).userMini.id) {
+            if (postUpdateMini.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        User(userMini: postUpdateMini.author!)),
+                MaterialPageRoute(builder: (context) => User(userMini: postUpdateMini.author!)),
               );
             }
           },
@@ -1064,10 +847,7 @@ Widget entity(
         ),
         const Text(" "),
         Text(
-          LanguageModel().entitiesCategoriesPost[
-                  ConvertToEnum.convertTypeEntityToValue(
-                      typeEntity: postUpdateMini.entity!.typeEntity)]
-              [postUpdateMini.category],
+          LanguageModel().entitiesCategoriesPost[ConvertToEnum.convertTypeEntityToValue(typeEntity: postUpdateMini.entity!.typeEntity)][postUpdateMini.category],
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
@@ -1078,12 +858,7 @@ Widget entity(
         const Text(" "),
         GestureDetector(
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => Entity(
-                        entityMini: postUpdateMini.entity!,
-                        datasheetIsOpen: false)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Entity(entityMini: postUpdateMini.entity!, datasheetIsOpen: false)));
           },
           child: Text(
             postUpdateMini.entity!.name,
@@ -1107,8 +882,7 @@ Widget entity(
         //   ),
         // ),
         Text(
-          " • " +
-              ConvertDate.convertToDatePost(release: postUpdateMini.release!),
+          " • " + ConvertDate.convertToDatePost(release: postUpdateMini.release!),
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
@@ -1121,23 +895,17 @@ Widget entity(
   });
 }
 
-Widget season(
-    {required PostUpdateMini postUpdateMini,
-    required BuildContext context,
-    required bool screenUser}) {
+Widget season({required PostUpdateMini postUpdateMini, required BuildContext context, required bool screenUser}) {
   return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         GestureDetector(
           onTap: () {
-            if (postUpdateMini.author!.id !=
-                ScopedModel.of<ProfileModel>(context).userMini.id) {
+            if (postUpdateMini.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        User(userMini: postUpdateMini.author!)),
+                MaterialPageRoute(builder: (context) => User(userMini: postUpdateMini.author!)),
               );
             }
           },
@@ -1162,10 +930,7 @@ Widget season(
         ),
         const Text(" "),
         Text(
-          LanguageModel().entitiesCategoriesPost[
-                  ConvertToEnum.convertTypeEntityToValue(
-                      typeEntity: postUpdateMini.season!.entity.typeEntity)]
-              [postUpdateMini.category],
+          LanguageModel().entitiesCategoriesPost[ConvertToEnum.convertTypeEntityToValue(typeEntity: postUpdateMini.season!.entity.typeEntity)][postUpdateMini.category],
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
@@ -1205,12 +970,7 @@ Widget season(
         ),
         GestureDetector(
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => Entity(
-                        entityMini: postUpdateMini.season!.entity,
-                        datasheetIsOpen: false)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Entity(entityMini: postUpdateMini.season!.entity, datasheetIsOpen: false)));
           },
           child: Text(
             postUpdateMini.season!.entity.name,
@@ -1234,8 +994,7 @@ Widget season(
         //   ),
         // ),
         Text(
-          " • " +
-              ConvertDate.convertToDatePost(release: postUpdateMini.release!),
+          " • " + ConvertDate.convertToDatePost(release: postUpdateMini.release!),
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
@@ -1248,23 +1007,17 @@ Widget season(
   });
 }
 
-Widget episode(
-    {required PostUpdateMini postUpdateMini,
-    required BuildContext context,
-    required bool screenUser}) {
+Widget episode({required PostUpdateMini postUpdateMini, required BuildContext context, required bool screenUser}) {
   return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         GestureDetector(
           onTap: () {
-            if (postUpdateMini.author!.id !=
-                ScopedModel.of<ProfileModel>(context).userMini.id) {
+            if (postUpdateMini.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        User(userMini: postUpdateMini.author!)),
+                MaterialPageRoute(builder: (context) => User(userMini: postUpdateMini.author!)),
               );
             }
           },
@@ -1289,10 +1042,7 @@ Widget episode(
         ),
         const Text(" "),
         Text(
-          LanguageModel().entitiesCategoriesPost[
-              ConvertToEnum.convertTypeEntityToValue(
-                  typeEntity: postUpdateMini.episode!.season.entity
-                      .typeEntity)][postUpdateMini.category],
+          LanguageModel().entitiesCategoriesPost[ConvertToEnum.convertTypeEntityToValue(typeEntity: postUpdateMini.episode!.season.entity.typeEntity)][postUpdateMini.category],
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
@@ -1362,12 +1112,7 @@ Widget episode(
         const Text(" "),
         GestureDetector(
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => Entity(
-                        entityMini: postUpdateMini.episode!.season.entity,
-                        datasheetIsOpen: false)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Entity(entityMini: postUpdateMini.episode!.season.entity, datasheetIsOpen: false)));
           },
           child: Text(
             postUpdateMini.episode!.season.entity.name,
@@ -1391,8 +1136,7 @@ Widget episode(
         //   ),
         // ),
         Text(
-          " • " +
-              ConvertDate.convertToDatePost(release: postUpdateMini.release!),
+          " • " + ConvertDate.convertToDatePost(release: postUpdateMini.release!),
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,

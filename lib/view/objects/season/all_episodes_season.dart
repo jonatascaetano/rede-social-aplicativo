@@ -15,8 +15,7 @@ class _AllEpisodesSeasonState extends State<AllEpisodesSeason> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<SeasonModel>(
-          builder: (context, child, season) {
+      return ScopedModelDescendant<SeasonModel>(builder: (context, child, season) {
         return Scaffold(
           appBar: AppBar(
             elevation: 0.0,

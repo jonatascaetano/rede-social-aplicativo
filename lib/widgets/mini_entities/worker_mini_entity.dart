@@ -9,8 +9,7 @@ import 'package:social_network_application/view/objects/user.dart';
 class WorkerMiniEntity extends StatefulWidget {
   WorkerMini workerMini;
   String idUser;
-  WorkerMiniEntity({required this.workerMini, required this.idUser, Key? key})
-      : super(key: key);
+  WorkerMiniEntity({required this.workerMini, required this.idUser, Key? key}) : super(key: key);
 
   @override
   _WorkerMiniEntityState createState() => _WorkerMiniEntityState();
@@ -22,16 +21,11 @@ class _WorkerMiniEntityState extends State<WorkerMiniEntity> {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<WorkerModel>(
           model: WorkerModel(),
-          child: ScopedModelDescendant<WorkerModel>(
-              builder: (context, child, worker) {
+          child: ScopedModelDescendant<WorkerModel>(builder: (context, child, worker) {
             return GestureDetector(
               onTap: () {
                 if (widget.idUser != widget.workerMini.user.id) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              User(userMini: widget.workerMini.user)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => User(userMini: widget.workerMini.user)));
                 }
               },
               child: Container(
@@ -40,9 +34,7 @@ class _WorkerMiniEntityState extends State<WorkerMiniEntity> {
                 decoration: BoxDecoration(
                   border: Border.all(color: theme.shadow),
                   //borderRadius: BorderRadius.circular(8.0),
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10.0),
-                      topRight: Radius.circular(10.0)),
+                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -53,21 +45,16 @@ class _WorkerMiniEntityState extends State<WorkerMiniEntity> {
                             width: 200,
                             decoration: BoxDecoration(
                               color: theme.shadow,
-                              borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(10.0),
-                                  topRight: Radius.circular(10.0)),
+                              borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
                               image: DecorationImage(
-                                image: NetworkImage(
-                                    widget.workerMini.user.imageProfile!),
+                                image: NetworkImage(widget.workerMini.user.imageProfile!),
                                 fit: BoxFit.fitHeight,
                               ),
                             ),
                           )
                         : Container(
                             decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(10.0),
-                                  topRight: Radius.circular(10.0)),
+                              borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
                               color: theme.shadow,
                             ),
                             height: 150,

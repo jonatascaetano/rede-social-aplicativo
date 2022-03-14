@@ -15,8 +15,7 @@ class _AllSeasonsEntityState extends State<AllSeasonsEntity> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<EntityModel>(
-          builder: (context, child, entity) {
+      return ScopedModelDescendant<EntityModel>(builder: (context, child, entity) {
         return Scaffold(
           appBar: AppBar(
             elevation: 0.0,

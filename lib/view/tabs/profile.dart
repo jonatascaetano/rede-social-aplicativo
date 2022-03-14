@@ -20,8 +20,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  void handleEvent(
-      AdmobAdEvent event, Map<String, dynamic> args, String adType) {
+  void handleEvent(AdmobAdEvent event, Map<String, dynamic> args, String adType) {
     switch (event) {
       case AdmobAdEvent.loaded:
         // ignore: avoid_print
@@ -56,8 +55,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<ProfileModel>(
-          builder: (context, child, profile) {
+      return ScopedModelDescendant<ProfileModel>(builder: (context, child, profile) {
         return Scaffold(
           appBar: AppBar(
             elevation: 0.0,
@@ -80,24 +78,19 @@ class _ProfileState extends State<Profile> {
                       children: [
                         profile.userMini.imageProfile != null
                             ? Container(
-                                height:
-                                    (MediaQuery.of(context).size.width / 16) *
-                                        9,
+                                height: (MediaQuery.of(context).size.width / 16) * 9,
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
                                   color: theme.shadow,
                                   image: DecorationImage(
-                                    image: NetworkImage(
-                                        profile.userMini.imageProfile!),
+                                    image: NetworkImage(profile.userMini.imageProfile!),
                                     fit: BoxFit.fitHeight,
                                   ),
                                 ),
                               )
                             : Container(
                                 color: theme.shadow,
-                                height:
-                                    (MediaQuery.of(context).size.width / 16) *
-                                        9,
+                                height: (MediaQuery.of(context).size.width / 16) * 9,
                                 width: MediaQuery.of(context).size.width,
                                 child: Center(
                                   child: Icon(
@@ -136,8 +129,7 @@ class _ProfileState extends State<Profile> {
                         //   height: 16.0,
                         // ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 0.0, vertical: 8.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 8.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
@@ -151,8 +143,7 @@ class _ProfileState extends State<Profile> {
                                         profile.userMini.name,
                                         style: TextStyle(
                                           fontSize: theme.sizeTitle,
-                                          letterSpacing:
-                                              theme.letterSpacingTitle,
+                                          letterSpacing: theme.letterSpacingTitle,
                                           color: theme.title,
                                           fontWeight: FontWeight.normal,
                                         ),
@@ -173,8 +164,7 @@ class _ProfileState extends State<Profile> {
                             ],
                           ),
                         ),
-                        profile.userMini.description != null &&
-                                profile.userMini.description!.isNotEmpty
+                        profile.userMini.description != null && profile.userMini.description!.isNotEmpty
                             ? Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
@@ -198,11 +188,7 @@ class _ProfileState extends State<Profile> {
                               elevation: 0.0,
                             ),
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const UpdateProfile()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => const UpdateProfile()));
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -252,8 +238,7 @@ class _ProfileState extends State<Profile> {
                                           'Followers',
                                           style: TextStyle(
                                             fontSize: theme.sizeText,
-                                            letterSpacing:
-                                                theme.letterSpacingText,
+                                            letterSpacing: theme.letterSpacingText,
                                             color: theme.subtitle,
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -262,12 +247,10 @@ class _ProfileState extends State<Profile> {
                                           width: 4.0,
                                         ),
                                         Text(
-                                          profile.userMini.quantityFollowers
-                                              .toString(),
+                                          profile.userMini.quantityFollowers.toString(),
                                           style: TextStyle(
                                             fontSize: theme.sizeText,
-                                            letterSpacing:
-                                                theme.letterSpacingText,
+                                            letterSpacing: theme.letterSpacingText,
                                             color: theme.subtitle,
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -284,8 +267,7 @@ class _ProfileState extends State<Profile> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) => Following(
-                                                      idUser:
-                                                          profile.userMini.id,
+                                                      idUser: profile.userMini.id,
                                                       isUser: true,
                                                     )));
                                       },
@@ -295,8 +277,7 @@ class _ProfileState extends State<Profile> {
                                             'Following',
                                             style: TextStyle(
                                               fontSize: theme.sizeText,
-                                              letterSpacing:
-                                                  theme.letterSpacingText,
+                                              letterSpacing: theme.letterSpacingText,
                                               color: theme.subtitle,
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -305,12 +286,10 @@ class _ProfileState extends State<Profile> {
                                             width: 4.0,
                                           ),
                                           Text(
-                                            profile.userMini.quantityFollowing
-                                                .toString(),
+                                            profile.userMini.quantityFollowing.toString(),
                                             style: TextStyle(
                                               fontSize: theme.sizeText,
-                                              letterSpacing:
-                                                  theme.letterSpacingText,
+                                              letterSpacing: theme.letterSpacingText,
                                               color: theme.subtitle,
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -357,8 +336,7 @@ class _ProfileState extends State<Profile> {
                                         'View all works',
                                         style: TextStyle(
                                           fontSize: theme.sizeText,
-                                          letterSpacing:
-                                              theme.letterSpacingText,
+                                          letterSpacing: theme.letterSpacingText,
                                           color: theme.subtitle,
                                           fontWeight: FontWeight.normal,
                                         ),
@@ -369,8 +347,7 @@ class _ProfileState extends State<Profile> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                AllWorkersProfile(
+                                            builder: (context) => AllWorkersProfile(
                                               isUser: true,
                                               userMini: profile.userMini,
                                               workers: profile.workers,
@@ -435,9 +412,7 @@ class _ProfileState extends State<Profile> {
                                 .typeEntitiesMini
                                 .map(
                                   (e) => EntityMiniProfile(
-                                    index: LanguageModel()
-                                        .typeEntitiesMini
-                                        .indexOf(e),
+                                    index: LanguageModel().typeEntitiesMini.indexOf(e),
                                     isUser: true,
                                     idUser: profile.userMini.id,
                                   ),
@@ -472,18 +447,14 @@ class _ProfileState extends State<Profile> {
                                       decoration: BoxDecoration(
                                         color: theme.shadow,
                                       ),
-                                      child: getBanner(
-                                          AdmobBannerSize.MEDIUM_RECTANGLE),
+                                      child: getBanner(AdmobBannerSize.MEDIUM_RECTANGLE),
                                     ),
                                     Divider(
                                       height: 10.0,
                                       thickness: 10.0,
                                       color: theme.shadow,
                                     ),
-                                    profile.returnPostWidget(
-                                        post: profile.myPosts[index],
-                                        screenComment: false,
-                                        contextPage: context),
+                                    profile.returnPostWidget(post: profile.myPosts[index], screenComment: false, contextPage: context),
                                     // UpdatePostEntityWidget(
                                     //   postUpdateMini: profile.posts[index],
                                     //   screenComment: false,

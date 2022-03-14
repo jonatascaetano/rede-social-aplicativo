@@ -18,10 +18,8 @@ class _LikesPostState extends State<LikesPost> {
   Widget build(BuildContext context) {
     return ScopedModel<LikePostModel>(
         model: LikePostModel(idPost: widget.idPost, context: context),
-        child: ScopedModelDescendant<LikePostModel>(
-            builder: (context, child, likes) {
-          return ScopedModelDescendant<ThemeModel>(
-              builder: (context, child, theme) {
+        child: ScopedModelDescendant<LikePostModel>(builder: (context, child, likes) {
+          return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
             return Scaffold(
               appBar: AppBar(
                 elevation: 0.0,
@@ -42,8 +40,7 @@ class _LikesPostState extends State<LikesPost> {
                       : ListView.builder(
                           itemCount: likes.users.length,
                           itemBuilder: (context, index) {
-                            return UserMiniLikePost(
-                                userMini: likes.users[index]);
+                            return UserMiniLikePost(userMini: likes.users[index]);
                           }),
                   likes.load
                       ? Positioned(

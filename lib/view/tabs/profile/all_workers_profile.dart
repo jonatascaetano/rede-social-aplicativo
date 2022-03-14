@@ -10,12 +10,7 @@ class AllWorkersProfile extends StatefulWidget {
   bool isUser;
   UserMini userMini;
   List<WorkerMini> workers;
-  AllWorkersProfile(
-      {required this.isUser,
-      required this.userMini,
-      required this.workers,
-      Key? key})
-      : super(key: key);
+  AllWorkersProfile({required this.isUser, required this.userMini, required this.workers, Key? key}) : super(key: key);
 
   @override
   _AllWorkersProfileState createState() => _AllWorkersProfileState();

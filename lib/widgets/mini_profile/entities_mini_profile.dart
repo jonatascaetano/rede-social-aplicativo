@@ -9,12 +9,7 @@ class EntityMiniProfile extends StatefulWidget {
   int index;
   bool isUser;
   String idUser;
-  EntityMiniProfile(
-      {required this.index,
-      required this.isUser,
-      required this.idUser,
-      Key? key})
-      : super(key: key);
+  EntityMiniProfile({required this.index, required this.isUser, required this.idUser, Key? key}) : super(key: key);
 
   @override
   _EntityMiniProfileState createState() => _EntityMiniProfileState();

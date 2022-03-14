@@ -21,10 +21,8 @@ class _UserMiniLikePostState extends State<UserMiniLikePost> {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return GestureDetector(
         onTap: () {
-          ScopedModel.of<ProfileModel>(context).userMini.id ==
-                  widget.userMini.id
-              ? Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const Profile()))
+          ScopedModel.of<ProfileModel>(context).userMini.id == widget.userMini.id
+              ? Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()))
               : Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -40,8 +38,7 @@ class _UserMiniLikePostState extends State<UserMiniLikePost> {
               children: [
                 widget.userMini.imageProfile != null
                     ? CircleAvatar(
-                        backgroundImage:
-                            NetworkImage(widget.userMini.imageProfile!),
+                        backgroundImage: NetworkImage(widget.userMini.imageProfile!),
                         radius: 30.0,
                       )
                     : CircleAvatar(

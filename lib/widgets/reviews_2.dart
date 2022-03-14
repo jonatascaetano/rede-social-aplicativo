@@ -11,7 +11,7 @@ import 'package:social_network_application/scoped_model/season_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/objects/user.dart';
 import 'package:social_network_application/view/review/likes_review.dart';
-import 'package:social_network_application/view/review_screen.dart';
+import 'package:social_network_application/view/review_screen_2.dart';
 import 'package:social_network_application/view/tabs/profile.dart';
 
 // ignore: must_be_immutable
@@ -19,12 +19,7 @@ class Reviews2 extends StatefulWidget {
   EntitySaveMini entitySaveMini;
   BuildContext contextAncestor;
   String typeObject;
-  Reviews2(
-      {required this.entitySaveMini,
-      required this.contextAncestor,
-      required this.typeObject,
-      Key? key})
-      : super(key: key);
+  Reviews2({required this.entitySaveMini, required this.contextAncestor, required this.typeObject, Key? key}) : super(key: key);
 
   @override
   _Reviews2State createState() => _Reviews2State();
@@ -39,7 +34,7 @@ class _Reviews2State extends State<Reviews2> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ReviewScreen(
+              builder: (context) => ReviewScreen2(
                 idReview: widget.entitySaveMini.id,
                 contextAncestor: widget.contextAncestor,
                 typeObject: widget.typeObject,
@@ -52,7 +47,7 @@ class _Reviews2State extends State<Reviews2> {
           physics: const NeverScrollableScrollPhysics(),
           children: [
             const SizedBox(
-              height: 8.0,
+              height: 16.0,
             ),
             Row(
               //mainAxisAlignment: MainAxisAlignment.start,
@@ -67,47 +62,34 @@ class _Reviews2State extends State<Reviews2> {
                 widget.entitySaveMini.user!.imageProfile != null
                     ? GestureDetector(
                         onTap: () {
-                          if (widget.entitySaveMini.user!.id !=
-                              ScopedModel.of<ProfileModel>(context)
-                                  .userMini
-                                  .id) {
+                          if (widget.entitySaveMini.user!.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => User(
-                                      userMini: widget.entitySaveMini.user!)),
+                              MaterialPageRoute(builder: (context) => User(userMini: widget.entitySaveMini.user!)),
                             );
                           } else {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Profile()),
+                              MaterialPageRoute(builder: (context) => const Profile()),
                             );
                           }
                         },
                         child: CircleAvatar(
-                          backgroundImage: NetworkImage(
-                              widget.entitySaveMini.user!.imageProfile!),
+                          backgroundImage: NetworkImage(widget.entitySaveMini.user!.imageProfile!),
                           radius: 30.0,
                         ),
                       )
                     : GestureDetector(
                         onTap: () {
-                          if (widget.entitySaveMini.user!.id !=
-                              ScopedModel.of<ProfileModel>(context)
-                                  .userMini
-                                  .id) {
+                          if (widget.entitySaveMini.user!.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => User(
-                                      userMini: widget.entitySaveMini.user!)),
+                              MaterialPageRoute(builder: (context) => User(userMini: widget.entitySaveMini.user!)),
                             );
                           } else {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Profile()),
+                              MaterialPageRoute(builder: (context) => const Profile()),
                             );
                           }
                         },
@@ -136,21 +118,15 @@ class _Reviews2State extends State<Reviews2> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            if (widget.entitySaveMini.user!.id !=
-                                ScopedModel.of<ProfileModel>(context)
-                                    .userMini
-                                    .id) {
+                            if (widget.entitySaveMini.user!.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(
-                                    builder: (context) => User(
-                                        userMini: widget.entitySaveMini.user!)),
+                                MaterialPageRoute(builder: (context) => User(userMini: widget.entitySaveMini.user!)),
                               );
                             } else {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(
-                                    builder: (context) => const Profile()),
+                                MaterialPageRoute(builder: (context) => const Profile()),
                               );
                             }
                           },
@@ -177,48 +153,32 @@ class _Reviews2State extends State<Reviews2> {
                                   vertical: 4.0,
                                 ),
                                 child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Icon(
                                       Icons.star,
                                       size: 40,
-                                      color:
-                                          widget.entitySaveMini.evaluation! >= 1
-                                              ? Colors.yellow[700]
-                                              : theme.icon,
+                                      color: widget.entitySaveMini.evaluation! >= 1 ? Colors.yellow[700] : theme.icon,
                                     ),
                                     Icon(
                                       Icons.star,
                                       size: 40,
-                                      color:
-                                          widget.entitySaveMini.evaluation! >= 2
-                                              ? Colors.yellow[700]
-                                              : theme.icon,
+                                      color: widget.entitySaveMini.evaluation! >= 2 ? Colors.yellow[700] : theme.icon,
                                     ),
                                     Icon(
                                       Icons.star,
                                       size: 40,
-                                      color:
-                                          widget.entitySaveMini.evaluation! >= 3
-                                              ? Colors.yellow[700]
-                                              : theme.icon,
+                                      color: widget.entitySaveMini.evaluation! >= 3 ? Colors.yellow[700] : theme.icon,
                                     ),
                                     Icon(
                                       Icons.star,
                                       size: 40,
-                                      color:
-                                          widget.entitySaveMini.evaluation! >= 4
-                                              ? Colors.yellow[700]
-                                              : theme.icon,
+                                      color: widget.entitySaveMini.evaluation! >= 4 ? Colors.yellow[700] : theme.icon,
                                     ),
                                     Icon(
                                       Icons.star,
                                       size: 40,
-                                      color:
-                                          widget.entitySaveMini.evaluation! >= 5
-                                              ? Colors.yellow[700]
-                                              : theme.icon,
+                                      color: widget.entitySaveMini.evaluation! >= 5 ? Colors.yellow[700] : theme.icon,
                                     ),
                                   ],
                                 ),
@@ -228,8 +188,7 @@ class _Reviews2State extends State<Reviews2> {
                             ? Align(
                                 alignment: Alignment.centerLeft,
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 2.0, horizontal: 0.0),
+                                  padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 0.0),
                                   child: Text(
                                     widget.entitySaveMini.review!,
                                     textAlign: TextAlign.left,
@@ -243,8 +202,7 @@ class _Reviews2State extends State<Reviews2> {
                                 ),
                               )
                             : ExpansionTile(
-                                tilePadding: const EdgeInsets.symmetric(
-                                    vertical: 2.0, horizontal: 0.0),
+                                tilePadding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 0.0),
                                 title: Text(
                                   'Spoiler',
                                   style: TextStyle(
@@ -258,15 +216,13 @@ class _Reviews2State extends State<Reviews2> {
                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 8.0),
+                                      padding: const EdgeInsets.only(bottom: 8.0),
                                       child: Text(
                                         widget.entitySaveMini.review!,
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
                                           fontSize: theme.sizeText,
-                                          letterSpacing:
-                                              theme.letterSpacingText,
+                                          letterSpacing: theme.letterSpacingText,
                                           color: theme.title,
                                           fontWeight: FontWeight.normal,
                                         ),
@@ -285,8 +241,7 @@ class _Reviews2State extends State<Reviews2> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => LikesReview(
-                                      idReview: widget.entitySaveMini.id),
+                                  builder: (context) => LikesReview(idReview: widget.entitySaveMini.id),
                                 ),
                               );
                             },
@@ -311,9 +266,7 @@ class _Reviews2State extends State<Reviews2> {
                             widget.entitySaveMini.release == null
                                 ? Container()
                                 : Text(
-                                    ConvertDate.convertToDatePost(
-                                        release:
-                                            widget.entitySaveMini.release!),
+                                    ConvertDate.convertToDatePost(release: widget.entitySaveMini.release!),
                                     style: TextStyle(
                                       fontSize: theme.sizeText,
                                       letterSpacing: theme.letterSpacingText,
@@ -325,25 +278,19 @@ class _Reviews2State extends State<Reviews2> {
                               onTap: () {
                                 switch (widget.typeObject) {
                                   case TypeObject.ENTITY:
-                                    ScopedModel.of<EntityModel>(
-                                            widget.contextAncestor)
-                                        .updateLikeReview(
+                                    ScopedModel.of<EntityModel>(widget.contextAncestor).updateLikeReview(
                                       context: widget.contextAncestor,
                                       idReview: widget.entitySaveMini.id,
                                     );
                                     break;
                                   case TypeObject.SEASON:
-                                    ScopedModel.of<SeasonModel>(
-                                            widget.contextAncestor)
-                                        .updateLikeReview(
+                                    ScopedModel.of<SeasonModel>(widget.contextAncestor).updateLikeReview(
                                       context: widget.contextAncestor,
                                       idReview: widget.entitySaveMini.id,
                                     );
                                     break;
                                   case TypeObject.EPISODE:
-                                    ScopedModel.of<EpisodeModel>(
-                                            widget.contextAncestor)
-                                        .updateLikeReview(
+                                    ScopedModel.of<EpisodeModel>(widget.contextAncestor).updateLikeReview(
                                       context: widget.contextAncestor,
                                       idReview: widget.entitySaveMini.id,
                                     );
@@ -354,24 +301,18 @@ class _Reviews2State extends State<Reviews2> {
                               child: Row(
                                 children: [
                                   Text(
-                                    widget.entitySaveMini.likeQuantity
-                                            .toString() +
-                                        " ",
+                                    widget.entitySaveMini.likeQuantity.toString() + " ",
                                     style: TextStyle(
                                       fontSize: theme.sizeText,
                                       letterSpacing: theme.letterSpacingText,
-                                      color: widget.entitySaveMini.liked
-                                          ? theme.emphasis
-                                          : theme.subtitle,
+                                      color: widget.entitySaveMini.liked ? theme.emphasis : theme.subtitle,
                                       fontWeight: FontWeight.normal,
                                     ),
                                   ),
                                   Icon(
                                     Icons.thumb_up_alt_outlined,
                                     size: theme.sizeText,
-                                    color: widget.entitySaveMini.liked
-                                        ? theme.emphasis
-                                        : theme.subtitle,
+                                    color: widget.entitySaveMini.liked ? theme.emphasis : theme.subtitle,
                                   ),
                                 ],
                               ),
@@ -379,9 +320,7 @@ class _Reviews2State extends State<Reviews2> {
                             Row(
                               children: [
                                 Text(
-                                  widget.entitySaveMini.commentQuantity
-                                          .toString() +
-                                      " ",
+                                  widget.entitySaveMini.commentQuantity.toString() + " ",
                                   style: TextStyle(
                                     fontSize: theme.sizeText,
                                     letterSpacing: theme.letterSpacingText,
@@ -403,35 +342,16 @@ class _Reviews2State extends State<Reviews2> {
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 16.0,
-                        ),
                         //and row comments and likes
                       ],
                     ),
                   ),
                 ),
-
-                //and name
-
-                // const SizedBox(
-                //   width: 4.0,
-                // ),
-                // IconButton(
-                //   padding: EdgeInsets.zero,
-                //   onPressed: () {
-                //     if (widget.entitySaveMini.user!.id ==
-                //         ScopedModel.of<ProfileModel>(context).userMini.id) {
-                //     } else {}
-                //   },
-                //   icon: Icon(
-                //     Icons.more_vert_sharp,
-                //     size: 21,
-                //     color: ScopedModel.of<ThemeModel>(context).subtitle,
-                //   ),
-                // ),
               ],
             ),
+            const SizedBox(
+              height: 16.0,
+            )
           ],
         ),
       );

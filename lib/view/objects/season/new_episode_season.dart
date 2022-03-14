@@ -9,8 +9,7 @@ import 'package:social_network_application/scoped_model/support/theme_model.dart
 class NewEpisodeSeason extends StatefulWidget {
   SeasonMini seasonMini;
   BuildContext context;
-  NewEpisodeSeason({required this.seasonMini, required this.context, Key? key})
-      : super(key: key);
+  NewEpisodeSeason({required this.seasonMini, required this.context, Key? key}) : super(key: key);
 
   @override
   _NewEpisodeSeasonState createState() => _NewEpisodeSeasonState();
@@ -27,8 +26,7 @@ class _NewEpisodeSeasonState extends State<NewEpisodeSeason> {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<NewEpisodeModel>(
           model: NewEpisodeModel(),
-          child: ScopedModelDescendant<NewEpisodeModel>(
-              builder: (context, child, episode) {
+          child: ScopedModelDescendant<NewEpisodeModel>(builder: (context, child, episode) {
             return Form(
               key: _globalKey,
               child: Scaffold(
@@ -47,8 +45,7 @@ class _NewEpisodeSeasonState extends State<NewEpisodeSeason> {
                 body: Stack(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0, vertical: 30.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
                       child: ListView(
                         children: [
                           TextFormField(

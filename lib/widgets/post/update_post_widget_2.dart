@@ -22,13 +22,7 @@ class UpdatePostWidget2 extends StatefulWidget {
   bool screenComment;
   bool screenUser;
   BuildContext contextPage;
-  UpdatePostWidget2(
-      {required this.postUpdateMini,
-      required this.screenComment,
-      required this.screenUser,
-      required this.contextPage,
-      Key? key})
-      : super(key: key);
+  UpdatePostWidget2({required this.postUpdateMini, required this.screenComment, required this.screenUser, required this.contextPage, Key? key}) : super(key: key);
 
   @override
   _UpdatePostWidget2State createState() => _UpdatePostWidget2State();
@@ -48,10 +42,7 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => CommentsPostUpdate2(
-                      postUpdateMini: widget.postUpdateMini,
-                      screenUser: widget.screenUser,
-                      contextPage: context),
+                  builder: (context) => CommentsPostUpdate2(postUpdateMini: widget.postUpdateMini, screenUser: widget.screenUser, contextPage: context),
                 ),
               );
             },
@@ -67,37 +58,24 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                 widget.postUpdateMini.author!.imageProfile != null
                     ? GestureDetector(
                         onTap: () {
-                          if (widget.postUpdateMini.author!.id !=
-                                  ScopedModel.of<ProfileModel>(context)
-                                      .userMini
-                                      .id &&
-                              !widget.screenUser) {
+                          if (widget.postUpdateMini.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => User(
-                                      userMini: widget.postUpdateMini.author!)),
+                              MaterialPageRoute(builder: (context) => User(userMini: widget.postUpdateMini.author!)),
                             );
                           }
                         },
                         child: CircleAvatar(
-                          backgroundImage: NetworkImage(
-                              widget.postUpdateMini.author!.imageProfile!),
+                          backgroundImage: NetworkImage(widget.postUpdateMini.author!.imageProfile!),
                           radius: 30.0,
                         ),
                       )
                     : GestureDetector(
                         onTap: () {
-                          if (widget.postUpdateMini.author!.id !=
-                                  ScopedModel.of<ProfileModel>(context)
-                                      .userMini
-                                      .id &&
-                              !widget.screenUser) {
+                          if (widget.postUpdateMini.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => User(
-                                      userMini: widget.postUpdateMini.author!)),
+                              MaterialPageRoute(builder: (context) => User(userMini: widget.postUpdateMini.author!)),
                             );
                           }
                         },
@@ -129,8 +107,7 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                   // ),
                   width: MediaQuery.of(context).size.width - 84,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 8.0, horizontal: 4.0),
+                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
                     child: Column(
                       children: [
                         Row(
@@ -166,48 +143,32 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                             : Container(
                                 margin: EdgeInsets.zero,
                                 child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Icon(
                                       Icons.star,
                                       size: 40,
-                                      color:
-                                          widget.postUpdateMini.evaluation >= 1
-                                              ? Colors.yellow[700]
-                                              : theme.icon,
+                                      color: widget.postUpdateMini.evaluation >= 1 ? Colors.yellow[700] : theme.icon,
                                     ),
                                     Icon(
                                       Icons.star,
                                       size: 40,
-                                      color:
-                                          widget.postUpdateMini.evaluation >= 2
-                                              ? Colors.yellow[700]
-                                              : theme.icon,
+                                      color: widget.postUpdateMini.evaluation >= 2 ? Colors.yellow[700] : theme.icon,
                                     ),
                                     Icon(
                                       Icons.star,
                                       size: 40,
-                                      color:
-                                          widget.postUpdateMini.evaluation >= 3
-                                              ? Colors.yellow[700]
-                                              : theme.icon,
+                                      color: widget.postUpdateMini.evaluation >= 3 ? Colors.yellow[700] : theme.icon,
                                     ),
                                     Icon(
                                       Icons.star,
                                       size: 40,
-                                      color:
-                                          widget.postUpdateMini.evaluation >= 4
-                                              ? Colors.yellow[700]
-                                              : theme.icon,
+                                      color: widget.postUpdateMini.evaluation >= 4 ? Colors.yellow[700] : theme.icon,
                                     ),
                                     Icon(
                                       Icons.star,
                                       size: 40,
-                                      color:
-                                          widget.postUpdateMini.evaluation >= 5
-                                              ? Colors.yellow[700]
-                                              : theme.icon,
+                                      color: widget.postUpdateMini.evaluation >= 5 ? Colors.yellow[700] : theme.icon,
                                     ),
                                   ],
                                 ),
@@ -223,15 +184,13 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                                 ? Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 4.0, horizontal: 0.0),
+                                      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 0.0),
                                       child: Text(
                                         widget.postUpdateMini.body!,
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
                                           fontSize: theme.sizeText,
-                                          letterSpacing:
-                                              theme.letterSpacingText,
+                                          letterSpacing: theme.letterSpacingText,
                                           color: theme.title,
                                           fontWeight: FontWeight.normal,
                                         ),
@@ -240,8 +199,7 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                                   )
                                 : Container()
                             : ExpansionTile(
-                                tilePadding: const EdgeInsets.symmetric(
-                                    vertical: 4.0, horizontal: 0.0),
+                                tilePadding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 0.0),
                                 title: Text(
                                   'Spoiler',
                                   style: TextStyle(
@@ -255,15 +213,13 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 4.0, horizontal: 0.0),
+                                      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 0.0),
                                       child: Text(
                                         widget.postUpdateMini.body!,
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
                                           fontSize: theme.sizeText,
-                                          letterSpacing:
-                                              theme.letterSpacingText,
+                                          letterSpacing: theme.letterSpacingText,
                                           color: theme.title,
                                           fontWeight: FontWeight.normal,
                                         ),
@@ -276,22 +232,10 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                           height: 8.0,
                         ),
                         widget.postUpdateMini.level == Level.ENTITY
-                            ? entityImage(
-                                postUpdateMini: widget.postUpdateMini,
-                                contextPage: widget.contextPage,
-                                screenComment: widget.screenComment,
-                                screenUser: widget.screenUser)
+                            ? entityImage(postUpdateMini: widget.postUpdateMini, contextPage: widget.contextPage, screenComment: widget.screenComment, screenUser: widget.screenUser)
                             : widget.postUpdateMini.level == Level.SEASON
-                                ? seasonImage(
-                                    postUpdateMini: widget.postUpdateMini,
-                                    contextPage: widget.contextPage,
-                                    screenComment: widget.screenComment,
-                                    screenUser: widget.screenUser)
-                                : episodeImage(
-                                    postUpdateMini: widget.postUpdateMini,
-                                    contextPage: widget.contextPage,
-                                    screenComment: widget.screenComment,
-                                    screenUser: widget.screenUser),
+                                ? seasonImage(postUpdateMini: widget.postUpdateMini, contextPage: widget.contextPage, screenComment: widget.screenComment, screenUser: widget.screenUser)
+                                : episodeImage(postUpdateMini: widget.postUpdateMini, contextPage: widget.contextPage, screenComment: widget.screenComment, screenUser: widget.screenUser),
                         const SizedBox(
                           height: 16.0,
                         ),
@@ -324,11 +268,9 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              padding: const EdgeInsets.symmetric(vertical: 8.0),
                               child: Text(
-                                ConvertDate.convertToDatePost(
-                                    release: widget.postUpdateMini.release!),
+                                ConvertDate.convertToDatePost(release: widget.postUpdateMini.release!),
                                 style: TextStyle(
                                   fontSize: theme.sizeTitle,
                                   letterSpacing: theme.letterSpacingTitle,
@@ -339,18 +281,10 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                if (!widget.screenComment &&
-                                    !widget.screenUser) {
-                                  ScopedModel.of<ProfileModel>(context)
-                                      .updateLikePost(
-                                          context: context,
-                                          idPost: widget.postUpdateMini.id!);
-                                } else if (widget.screenUser &&
-                                    !widget.screenComment) {
-                                  ScopedModel.of<UserModel>(widget.contextPage)
-                                      .updateLikePost(
-                                          context: widget.contextPage,
-                                          idPost: widget.postUpdateMini.id!);
+                                if (!widget.screenComment && !widget.screenUser) {
+                                  ScopedModel.of<ProfileModel>(context).updateLikePost(context: context, idPost: widget.postUpdateMini.id!);
+                                } else if (widget.screenUser && !widget.screenComment) {
+                                  ScopedModel.of<UserModel>(widget.contextPage).updateLikePost(context: widget.contextPage, idPost: widget.postUpdateMini.id!);
                                 }
                               },
                               child: Container(
@@ -364,17 +298,13 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                                 //       Radius.circular(16.0)),
                                 // ),
                                 child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 8.0),
+                                  padding: const EdgeInsets.symmetric(vertical: 8.0),
                                   child: Center(
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          widget.postUpdateMini.likeQuantity
-                                                  .toString() +
-                                              " ",
+                                          widget.postUpdateMini.likeQuantity.toString() + " ",
 
                                           // widget.screenComment
                                           //     ? post.likeQuantity == 0
@@ -385,20 +315,15 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                                           //         .toString(),
                                           style: TextStyle(
                                             fontSize: theme.sizeTitle,
-                                            letterSpacing:
-                                                theme.letterSpacingTitle,
-                                            color: widget.postUpdateMini.liked
-                                                ? theme.emphasis
-                                                : theme.subtitle,
+                                            letterSpacing: theme.letterSpacingTitle,
+                                            color: widget.postUpdateMini.liked ? theme.emphasis : theme.subtitle,
                                             fontWeight: FontWeight.normal,
                                           ),
                                         ),
                                         Icon(
                                           Icons.thumb_up_alt_outlined,
                                           size: theme.sizeTitle,
-                                          color: widget.postUpdateMini.liked
-                                              ? theme.emphasis
-                                              : theme.subtitle,
+                                          color: widget.postUpdateMini.liked ? theme.emphasis : theme.subtitle,
                                         ),
                                         // const SizedBox(
                                         //   width: 8.0,
@@ -435,21 +360,16 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                                 //       Radius.circular(16.0)),
                                 // ),
                                 child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 8.0),
+                                  padding: const EdgeInsets.symmetric(vertical: 8.0),
                                   child: Center(
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          widget.postUpdateMini.commentQuantity
-                                                  .toString() +
-                                              " ",
+                                          widget.postUpdateMini.commentQuantity.toString() + " ",
                                           style: TextStyle(
                                             fontSize: theme.sizeTitle,
-                                            letterSpacing:
-                                                theme.letterSpacingTitle,
+                                            letterSpacing: theme.letterSpacingTitle,
                                             color: theme.subtitle,
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -471,12 +391,8 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                             IconButton(
                               padding: EdgeInsets.zero,
                               onPressed: () {
-                                if (widget.postUpdateMini.author!.id ==
-                                    ScopedModel.of<ProfileModel>(context)
-                                        .userMini
-                                        .id) {
-                                  ScopedModel.of<ProfileModel>(context)
-                                      .showDeletePostBottomSheet(
+                                if (widget.postUpdateMini.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id) {
+                                  ScopedModel.of<ProfileModel>(context).showDeletePostBottomSheet(
                                     context: context,
                                     idPost: widget.postUpdateMini.id!,
                                     screenComment: widget.screenComment,
@@ -484,8 +400,7 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                                     contextPage: widget.contextPage,
                                   );
                                 } else {
-                                  ScopedModel.of<ProfileModel>(context)
-                                      .showOptionsPostBottomSheet(
+                                  ScopedModel.of<ProfileModel>(context).showOptionsPostBottomSheet(
                                     contextAncestor: context,
                                     idPost: widget.postUpdateMini.id!,
                                   );
@@ -518,24 +433,17 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
   }
 }
 
-Widget entity(
-    {required PostUpdateMini postUpdateMini,
-    required BuildContext context,
-    required bool screenUser}) {
+Widget entity({required PostUpdateMini postUpdateMini, required BuildContext context, required bool screenUser}) {
   return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         GestureDetector(
           onTap: () {
-            if (postUpdateMini.author!.id !=
-                    ScopedModel.of<ProfileModel>(context).userMini.id &&
-                !screenUser) {
+            if (postUpdateMini.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !screenUser) {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        User(userMini: postUpdateMini.author!)),
+                MaterialPageRoute(builder: (context) => User(userMini: postUpdateMini.author!)),
               );
             }
           },
@@ -560,10 +468,7 @@ Widget entity(
         ),
         const Text(" "),
         Text(
-          LanguageModel().entitiesCategoriesPost[
-                  ConvertToEnum.convertTypeEntityToValue(
-                      typeEntity: postUpdateMini.entity!.typeEntity)]
-              [postUpdateMini.category],
+          LanguageModel().entitiesCategoriesPost[ConvertToEnum.convertTypeEntityToValue(typeEntity: postUpdateMini.entity!.typeEntity)][postUpdateMini.category],
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
@@ -574,12 +479,7 @@ Widget entity(
         const Text(" "),
         GestureDetector(
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => Entity(
-                        entityMini: postUpdateMini.entity!,
-                        datasheetIsOpen: false)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Entity(entityMini: postUpdateMini.entity!, datasheetIsOpen: false)));
           },
           child: Text(
             postUpdateMini.entity!.name,
@@ -617,24 +517,17 @@ Widget entity(
   });
 }
 
-Widget season(
-    {required PostUpdateMini postUpdateMini,
-    required BuildContext context,
-    required bool screenUser}) {
+Widget season({required PostUpdateMini postUpdateMini, required BuildContext context, required bool screenUser}) {
   return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         GestureDetector(
           onTap: () {
-            if (postUpdateMini.author!.id !=
-                    ScopedModel.of<ProfileModel>(context).userMini.id &&
-                !screenUser) {
+            if (postUpdateMini.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !screenUser) {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        User(userMini: postUpdateMini.author!)),
+                MaterialPageRoute(builder: (context) => User(userMini: postUpdateMini.author!)),
               );
             }
           },
@@ -659,10 +552,7 @@ Widget season(
         ),
         const Text(" "),
         Text(
-          LanguageModel().entitiesCategoriesPost[
-                  ConvertToEnum.convertTypeEntityToValue(
-                      typeEntity: postUpdateMini.season!.entity.typeEntity)]
-              [postUpdateMini.category],
+          LanguageModel().entitiesCategoriesPost[ConvertToEnum.convertTypeEntityToValue(typeEntity: postUpdateMini.season!.entity.typeEntity)][postUpdateMini.category],
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
@@ -702,12 +592,7 @@ Widget season(
         ),
         GestureDetector(
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => Entity(
-                        entityMini: postUpdateMini.season!.entity,
-                        datasheetIsOpen: false)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Entity(entityMini: postUpdateMini.season!.entity, datasheetIsOpen: false)));
           },
           child: Text(
             postUpdateMini.season!.entity.name,
@@ -745,24 +630,17 @@ Widget season(
   });
 }
 
-Widget episode(
-    {required PostUpdateMini postUpdateMini,
-    required BuildContext context,
-    required bool screenUser}) {
+Widget episode({required PostUpdateMini postUpdateMini, required BuildContext context, required bool screenUser}) {
   return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         GestureDetector(
           onTap: () {
-            if (postUpdateMini.author!.id !=
-                    ScopedModel.of<ProfileModel>(context).userMini.id &&
-                !screenUser) {
+            if (postUpdateMini.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !screenUser) {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        User(userMini: postUpdateMini.author!)),
+                MaterialPageRoute(builder: (context) => User(userMini: postUpdateMini.author!)),
               );
             }
           },
@@ -787,10 +665,7 @@ Widget episode(
         ),
         const Text(" "),
         Text(
-          LanguageModel().entitiesCategoriesPost[
-              ConvertToEnum.convertTypeEntityToValue(
-                  typeEntity: postUpdateMini.episode!.season.entity
-                      .typeEntity)][postUpdateMini.category],
+          LanguageModel().entitiesCategoriesPost[ConvertToEnum.convertTypeEntityToValue(typeEntity: postUpdateMini.episode!.season.entity.typeEntity)][postUpdateMini.category],
           style: TextStyle(
             fontSize: theme.sizeText,
             letterSpacing: theme.letterSpacingText,
@@ -860,12 +735,7 @@ Widget episode(
         const Text(" "),
         GestureDetector(
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => Entity(
-                        entityMini: postUpdateMini.episode!.season.entity,
-                        datasheetIsOpen: false)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Entity(entityMini: postUpdateMini.episode!.season.entity, datasheetIsOpen: false)));
           },
           child: Text(
             postUpdateMini.episode!.season.entity.name,

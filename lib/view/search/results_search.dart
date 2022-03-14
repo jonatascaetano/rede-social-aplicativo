@@ -8,8 +8,7 @@ import 'package:social_network_application/scoped_model/support/theme_model.dart
 class ResultSearch extends StatefulWidget {
   String query;
   bool result;
-  ResultSearch({required this.query, required this.result, Key? key})
-      : super(key: key);
+  ResultSearch({required this.query, required this.result, Key? key}) : super(key: key);
 
   @override
   _ResultSearchState createState() => _ResultSearchState();
@@ -21,12 +20,9 @@ class _ResultSearchState extends State<ResultSearch> {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<SearchModel>(
         model: SearchModel(),
-        child: ScopedModelDescendant<SearchModel>(
-            builder: (context, child, search) {
-          return ScopedModelDescendant<LanguageModel>(
-              builder: (context, child, language) {
-            return ScopedModelDescendant<ThemeModel>(
-                builder: (context, child, theme) {
+        child: ScopedModelDescendant<SearchModel>(builder: (context, child, search) {
+          return ScopedModelDescendant<LanguageModel>(builder: (context, child, language) {
+            return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
               return Scaffold(
                 appBar: !widget.result
                     ? AppBar(
@@ -53,8 +49,7 @@ class _ResultSearchState extends State<ResultSearch> {
                               return ListView.builder(
                                   itemCount: snapshot.data!.length,
                                   itemBuilder: (context, index) {
-                                    return search.goToViewMiniResult(
-                                        map: snapshot.data![index]);
+                                    return search.goToViewMiniResult(map: snapshot.data![index]);
                                   });
                             }
                         }

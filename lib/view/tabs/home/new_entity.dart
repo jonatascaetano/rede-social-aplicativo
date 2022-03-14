@@ -24,8 +24,7 @@ class _NewEntityState extends State<NewEntity> {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<NewEntityModel>(
           model: NewEntityModel(),
-          child: ScopedModelDescendant<NewEntityModel>(
-              builder: (context, child, newEntity) {
+          child: ScopedModelDescendant<NewEntityModel>(builder: (context, child, newEntity) {
             return Form(
               key: _globalKey,
               child: Scaffold(
@@ -44,8 +43,7 @@ class _NewEntityState extends State<NewEntity> {
                 body: Stack(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0, vertical: 30.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
                       child: ListView(
                         children: [
                           TextFormField(
@@ -91,14 +89,7 @@ class _NewEntityState extends State<NewEntity> {
                             ),
                             onPressed: () {
                               if (_globalKey.currentState!.validate()) {
-                                EntityDTO entityDTO = EntityDTO(
-                                    name: name.text,
-                                    description: description.text,
-                                    typeEntity: LanguageModel()
-                                        .typeEntitiesMini[LanguageModel()
-                                            .typeEntities
-                                            .indexOf(widget.typeEntity)]
-                                        .toUpperCase());
+                                EntityDTO entityDTO = EntityDTO(name: name.text, description: description.text, typeEntity: LanguageModel().typeEntitiesMini[LanguageModel().typeEntities.indexOf(widget.typeEntity)].toUpperCase());
                                 newEntity.createEntity(
                                   entityDTO: entityDTO,
                                   context: context,

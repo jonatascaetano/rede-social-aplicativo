@@ -4,8 +4,7 @@ class DescriptionUpdateEpisode extends StatefulWidget {
   const DescriptionUpdateEpisode({Key? key}) : super(key: key);
 
   @override
-  _DescriptionUpdateEpisodeState createState() =>
-      _DescriptionUpdateEpisodeState();
+  _DescriptionUpdateEpisodeState createState() => _DescriptionUpdateEpisodeState();
 }
 
 class _DescriptionUpdateEpisodeState extends State<DescriptionUpdateEpisode> {

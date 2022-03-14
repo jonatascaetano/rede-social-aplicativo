@@ -28,8 +28,7 @@ class _PlaceUpdateState extends State<PlaceUpdate> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<ProfileModel>(
-          builder: (context, child, profile) {
+      return ScopedModelDescendant<ProfileModel>(builder: (context, child, profile) {
         return Form(
           key: _globalKey,
           child: Scaffold(
@@ -48,8 +47,7 @@ class _PlaceUpdateState extends State<PlaceUpdate> {
             body: Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0, vertical: 30.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
                   child: ListView(
                     children: [
                       TextFormField(
@@ -83,8 +81,7 @@ class _PlaceUpdateState extends State<PlaceUpdate> {
                               invitation: null,
                               release: '',
                             );
-                            profile.updatePlace(
-                                userDTO: userDTO, context: context);
+                            profile.updatePlace(userDTO: userDTO, context: context);
                           }
                         },
                         child: Text(

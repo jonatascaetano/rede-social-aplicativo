@@ -22,8 +22,7 @@ class Episode extends StatefulWidget {
 }
 
 class _EpisodeState extends State<Episode> {
-  void handleEvent(
-      AdmobAdEvent event, Map<String, dynamic> args, String adType) {
+  void handleEvent(AdmobAdEvent event, Map<String, dynamic> args, String adType) {
     switch (event) {
       case AdmobAdEvent.loaded:
         // ignore: avoid_print
@@ -62,22 +61,18 @@ class _EpisodeState extends State<Episode> {
     ScopedModel.of<EpisodeModel>(context).entitySaveMini = null;
     //ScopedModel.of<SeasonModel>(context).getId();
     ScopedModel.of<EpisodeModel>(context).getId();
-    ScopedModel.of<EpisodeModel>(context)
-        .getEpisode(episodeId: widget.episodeMini.id);
-    ScopedModel.of<EpisodeModel>(context)
-        .getEntitySave(episodeId: widget.episodeMini.id);
+    ScopedModel.of<EpisodeModel>(context).getEpisode(episodeId: widget.episodeMini.id);
+    ScopedModel.of<EpisodeModel>(context).getEntitySave(episodeId: widget.episodeMini.id);
     // ScopedModel.of<SeasonModel>(context)
     //     .getWorkers(entityId: widget.entityMini.id);
-    ScopedModel.of<EpisodeModel>(context)
-        .getReviews(episodeId: widget.episodeMini.id);
+    ScopedModel.of<EpisodeModel>(context).getReviews(episodeId: widget.episodeMini.id);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<EpisodeModel>(
-          builder: (context, child, episode) {
+      return ScopedModelDescendant<EpisodeModel>(builder: (context, child, episode) {
         return Scaffold(
             appBar: AppBar(
               elevation: 0.0,
@@ -106,24 +101,19 @@ class _EpisodeState extends State<Episode> {
                                 ? Container(
                                     margin: EdgeInsets.zero,
                                     padding: EdgeInsets.zero,
-                                    height: (MediaQuery.of(context).size.width /
-                                            16) *
-                                        9,
+                                    height: (MediaQuery.of(context).size.width / 16) * 9,
                                     width: MediaQuery.of(context).size.width,
                                     decoration: BoxDecoration(
                                       color: theme.shadow,
                                       image: DecorationImage(
-                                        image: NetworkImage(
-                                            episode.episodeMini.image!),
+                                        image: NetworkImage(episode.episodeMini.image!),
                                         fit: BoxFit.fitHeight,
                                       ),
                                     ),
                                   )
                                 : Container(
                                     color: theme.shadow,
-                                    height: (MediaQuery.of(context).size.width /
-                                            16) *
-                                        9,
+                                    height: (MediaQuery.of(context).size.width / 16) * 9,
                                     width: MediaQuery.of(context).size.width,
                                     child: Center(
                                       child: Icon(
@@ -151,8 +141,7 @@ class _EpisodeState extends State<Episode> {
                             ),
 
                             Text(
-                              'Episode ' +
-                                  episode.episodeMini.numberEpisode.toString(),
+                              'Episode ' + episode.episodeMini.numberEpisode.toString(),
                               textAlign: TextAlign.center,
                               maxLines: 2,
                               style: TextStyle(
@@ -206,13 +195,11 @@ class _EpisodeState extends State<Episode> {
                                   child: Column(
                                     children: [
                                       Text(
-                                        episode.episodeMini.category1
-                                            .toString(),
+                                        episode.episodeMini.category1.toString(),
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: theme.sizeTitle,
-                                          letterSpacing:
-                                              theme.letterSpacingText,
+                                          letterSpacing: theme.letterSpacingText,
                                           color: theme.title,
                                           fontWeight: FontWeight.normal,
                                         ),
@@ -221,20 +208,11 @@ class _EpisodeState extends State<Episode> {
                                         height: 4.0,
                                       ),
                                       Text(
-                                        LanguageModel()
-                                            .entitiesCategories[ConvertToEnum
-                                                .convertTypeEntityToValue(
-                                                    typeEntity: episode
-                                                        .episodeMini
-                                                        .season
-                                                        .entity
-                                                        .typeEntity)][1]
-                                            .toString(),
+                                        LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: episode.episodeMini.season.entity.typeEntity)][1].toString(),
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: theme.sizeTextMini,
-                                          letterSpacing:
-                                              theme.letterSpacingText,
+                                          letterSpacing: theme.letterSpacingText,
                                           color: theme.subtitle,
                                           fontWeight: FontWeight.normal,
                                         ),
@@ -247,13 +225,11 @@ class _EpisodeState extends State<Episode> {
                                   child: Column(
                                     children: [
                                       Text(
-                                        episode.episodeMini.category2
-                                            .toString(),
+                                        episode.episodeMini.category2.toString(),
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: theme.sizeTitle,
-                                          letterSpacing:
-                                              theme.letterSpacingText,
+                                          letterSpacing: theme.letterSpacingText,
                                           color: theme.title,
                                           fontWeight: FontWeight.normal,
                                         ),
@@ -262,20 +238,11 @@ class _EpisodeState extends State<Episode> {
                                         height: 4.0,
                                       ),
                                       Text(
-                                        LanguageModel()
-                                            .entitiesCategories[ConvertToEnum
-                                                .convertTypeEntityToValue(
-                                                    typeEntity: episode
-                                                        .episodeMini
-                                                        .season
-                                                        .entity
-                                                        .typeEntity)][2]
-                                            .toString(),
+                                        LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: episode.episodeMini.season.entity.typeEntity)][2].toString(),
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: theme.sizeTextMini,
-                                          letterSpacing:
-                                              theme.letterSpacingText,
+                                          letterSpacing: theme.letterSpacingText,
                                           color: theme.subtitle,
                                           fontWeight: FontWeight.normal,
                                         ),
@@ -288,13 +255,11 @@ class _EpisodeState extends State<Episode> {
                                   child: Column(
                                     children: [
                                       Text(
-                                        episode.episodeMini.category3
-                                            .toString(),
+                                        episode.episodeMini.category3.toString(),
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: theme.sizeTitle,
-                                          letterSpacing:
-                                              theme.letterSpacingText,
+                                          letterSpacing: theme.letterSpacingText,
                                           color: theme.title,
                                           fontWeight: FontWeight.normal,
                                         ),
@@ -303,20 +268,11 @@ class _EpisodeState extends State<Episode> {
                                         height: 4.0,
                                       ),
                                       Text(
-                                        LanguageModel()
-                                            .entitiesCategories[ConvertToEnum
-                                                .convertTypeEntityToValue(
-                                                    typeEntity: episode
-                                                        .episodeMini
-                                                        .season
-                                                        .entity
-                                                        .typeEntity)][3]
-                                            .toString(),
+                                        LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: episode.episodeMini.season.entity.typeEntity)][3].toString(),
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: theme.sizeTextMini,
-                                          letterSpacing:
-                                              theme.letterSpacingText,
+                                          letterSpacing: theme.letterSpacingText,
                                           color: theme.subtitle,
                                           fontWeight: FontWeight.normal,
                                         ),
@@ -329,13 +285,11 @@ class _EpisodeState extends State<Episode> {
                                   child: Column(
                                     children: [
                                       Text(
-                                        episode.episodeMini.category4
-                                            .toString(),
+                                        episode.episodeMini.category4.toString(),
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: theme.sizeTitle,
-                                          letterSpacing:
-                                              theme.letterSpacingText,
+                                          letterSpacing: theme.letterSpacingText,
                                           color: theme.title,
                                           fontWeight: FontWeight.normal,
                                         ),
@@ -344,20 +298,11 @@ class _EpisodeState extends State<Episode> {
                                         height: 4.0,
                                       ),
                                       Text(
-                                        LanguageModel()
-                                            .entitiesCategories[ConvertToEnum
-                                                .convertTypeEntityToValue(
-                                                    typeEntity: episode
-                                                        .episodeMini
-                                                        .season
-                                                        .entity
-                                                        .typeEntity)][4]
-                                            .toString(),
+                                        LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: episode.episodeMini.season.entity.typeEntity)][4].toString(),
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: theme.sizeTextMini,
-                                          letterSpacing:
-                                              theme.letterSpacingText,
+                                          letterSpacing: theme.letterSpacingText,
                                           color: theme.subtitle,
                                           fontWeight: FontWeight.normal,
                                         ),
@@ -382,9 +327,7 @@ class _EpisodeState extends State<Episode> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => UpdateEpisode(
-                                          episodeMini: episode.episodeMini,
-                                          context: context),
+                                      builder: (context) => UpdateEpisode(episodeMini: episode.episodeMini, context: context),
                                     ),
                                   );
                                   // if (ScopedModel.of<ProfileModel>(context)
@@ -419,8 +362,7 @@ class _EpisodeState extends State<Episode> {
                                       'edit episode'.toLowerCase(),
                                       style: TextStyle(
                                         fontSize: theme.sizeButton,
-                                        letterSpacing:
-                                            theme.letterSpacingButton,
+                                        letterSpacing: theme.letterSpacingButton,
                                         color: theme.buttonText,
                                         fontWeight: FontWeight.normal,
                                       ),
@@ -434,46 +376,14 @@ class _EpisodeState extends State<Episode> {
                             episode.entitySaveMini == null
                                 ? Container()
                                 : Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Evaluation(
-                                          value: 1,
-                                          evaluation:
-                                              episode.entitySaveMini != null
-                                                  ? episode.entitySaveMini!
-                                                      .evaluation!
-                                                  : 0),
-                                      Evaluation(
-                                          value: 2,
-                                          evaluation:
-                                              episode.entitySaveMini != null
-                                                  ? episode.entitySaveMini!
-                                                      .evaluation!
-                                                  : 0),
-                                      Evaluation(
-                                          value: 3,
-                                          evaluation:
-                                              episode.entitySaveMini != null
-                                                  ? episode.entitySaveMini!
-                                                      .evaluation!
-                                                  : 0),
-                                      Evaluation(
-                                          value: 4,
-                                          evaluation:
-                                              episode.entitySaveMini != null
-                                                  ? episode.entitySaveMini!
-                                                      .evaluation!
-                                                  : 3),
-                                      Evaluation(
-                                          value: 5,
-                                          evaluation:
-                                              episode.entitySaveMini != null
-                                                  ? episode.entitySaveMini!
-                                                      .evaluation!
-                                                  : 0),
+                                      Evaluation(value: 1, evaluation: episode.entitySaveMini != null ? episode.entitySaveMini!.evaluation! : 0),
+                                      Evaluation(value: 2, evaluation: episode.entitySaveMini != null ? episode.entitySaveMini!.evaluation! : 0),
+                                      Evaluation(value: 3, evaluation: episode.entitySaveMini != null ? episode.entitySaveMini!.evaluation! : 0),
+                                      Evaluation(value: 4, evaluation: episode.entitySaveMini != null ? episode.entitySaveMini!.evaluation! : 3),
+                                      Evaluation(value: 5, evaluation: episode.entitySaveMini != null ? episode.entitySaveMini!.evaluation! : 0),
                                     ],
                                   ),
                             //*update evaluation
@@ -487,8 +397,7 @@ class _EpisodeState extends State<Episode> {
                             //*update evaluation
 
                             Text(
-                              episode.episodeMini.evaluationAverage
-                                  .toStringAsPrecision(2),
+                              episode.episodeMini.evaluationAverage.toStringAsPrecision(2),
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: theme.sizeAppBar,
@@ -501,10 +410,7 @@ class _EpisodeState extends State<Episode> {
                               height: 2.0,
                             ),
                             Text(
-                              '( ' +
-                                  episode.episodeMini.evaluationQuantity
-                                      .toString() +
-                                  ' evaluations)',
+                              '( ' + episode.episodeMini.evaluationQuantity.toString() + ' evaluations)',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: theme.sizeText,
@@ -522,10 +428,7 @@ class _EpisodeState extends State<Episode> {
                             Align(
                               alignment: Alignment.bottomCenter,
                               child: DropdownButton<int>(
-                                hint: episode.entitySaveMini == null
-                                    ? const Text('category')
-                                    : episode.dropdownList[
-                                        episode.entitySaveMini!.category! - 1],
+                                hint: episode.entitySaveMini == null ? const Text('category') : episode.dropdownList[episode.entitySaveMini!.category! - 1],
                                 items: episode.dropdownList,
                                 onChanged: (value) {
                                   // ignore: avoid_print
@@ -546,17 +449,11 @@ class _EpisodeState extends State<Episode> {
                                     release: null,
                                   );
                                   if (episode.entitySaveMini == null) {
-                                    episode.newEntitySave(
-                                        entitySaveDTO: entitySaveDTO,
-                                        context: context);
+                                    episode.newEntitySave(entitySaveDTO: entitySaveDTO, context: context);
                                   } else {
-                                    if (value !=
-                                        episode.entitySaveMini!.category!) {
-                                      entitySaveDTO.idEntitySave =
-                                          episode.entitySaveMini!.id;
-                                      episode.updateCategoryEntitySave(
-                                          entitySaveDTO: entitySaveDTO,
-                                          context: context);
+                                    if (value != episode.entitySaveMini!.category!) {
+                                      entitySaveDTO.idEntitySave = episode.entitySaveMini!.id;
+                                      episode.updateCategoryEntitySave(entitySaveDTO: entitySaveDTO, context: context);
                                     }
                                   }
                                 },
@@ -580,25 +477,10 @@ class _EpisodeState extends State<Episode> {
                                           elevation: 1.0,
                                         ),
                                         onPressed: () {
-                                          if (episode.entitySaveMini != null &&
-                                              episode
-                                                  .entitySaveMini!.reviewed) {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        UpdateReviewEpisode(
-                                                            review: episode
-                                                                .entitySaveMini!
-                                                                .review!)));
-                                          } else if (episode.entitySaveMini !=
-                                              null) {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        UpdateReviewEpisode(
-                                                            review: '')));
+                                          if (episode.entitySaveMini != null && episode.entitySaveMini!.reviewed) {
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => UpdateReviewEpisode(review: episode.entitySaveMini!.review!)));
+                                          } else if (episode.entitySaveMini != null) {
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => UpdateReviewEpisode(review: '')));
                                           }
                                         },
                                         child: episode.entitySaveMini != null
@@ -606,35 +488,26 @@ class _EpisodeState extends State<Episode> {
                                                 ? Text(
                                                     'update review',
                                                     style: TextStyle(
-                                                      fontSize:
-                                                          theme.sizeButton,
-                                                      letterSpacing: theme
-                                                          .letterSpacingButton,
-                                                      color:
-                                                          theme.buttonMainText,
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                                      fontSize: theme.sizeButton,
+                                                      letterSpacing: theme.letterSpacingButton,
+                                                      color: theme.buttonMainText,
+                                                      fontWeight: FontWeight.normal,
                                                     ),
                                                   )
                                                 : Text(
                                                     'add review',
                                                     style: TextStyle(
-                                                      fontSize:
-                                                          theme.sizeButton,
-                                                      letterSpacing: theme
-                                                          .letterSpacingButton,
-                                                      color:
-                                                          theme.buttonMainText,
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                                      fontSize: theme.sizeButton,
+                                                      letterSpacing: theme.letterSpacingButton,
+                                                      color: theme.buttonMainText,
+                                                      fontWeight: FontWeight.normal,
                                                     ),
                                                   )
                                             : Text(
                                                 'add review',
                                                 style: TextStyle(
                                                   fontSize: theme.sizeButton,
-                                                  letterSpacing:
-                                                      theme.letterSpacingButton,
+                                                  letterSpacing: theme.letterSpacingButton,
                                                   color: theme.buttonMainText,
                                                   fontWeight: FontWeight.normal,
                                                 ),

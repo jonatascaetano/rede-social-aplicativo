@@ -27,8 +27,7 @@ class _UpdateReviewEntityState extends State<UpdateReviewEntity> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<EntityModel>(
-          builder: (context, child, entity) {
+      return ScopedModelDescendant<EntityModel>(builder: (context, child, entity) {
         return Form(
           key: _globalKey,
           child: Scaffold(
@@ -47,8 +46,7 @@ class _UpdateReviewEntityState extends State<UpdateReviewEntity> {
             body: Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0, vertical: 30.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
                   child: ListView(
                     children: [
                       Row(
@@ -119,8 +117,7 @@ class _UpdateReviewEntityState extends State<UpdateReviewEntity> {
                               spoiler: spoiler,
                               release: DateTime.now().toString(),
                             );
-                            entity.updateReviewEntitySave(
-                                entitySaveDTO: entitySaveDTO, context: context);
+                            entity.updateReviewEntitySave(entitySaveDTO: entitySaveDTO, context: context);
                           }
                         },
                         child: Text(
