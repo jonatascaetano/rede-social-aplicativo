@@ -34,32 +34,72 @@ class _EntityMiniProfileEvaluatedState extends State<EntityMiniProfileEvaluated>
                   child: Column(
                 children: [
                   widget.entitySaveMini.entity!.image != null
-                      ? Container(
-                          height: 150,
-                          width: 200,
-                          decoration: BoxDecoration(
-                            color: theme.shadow,
-                            borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
-                            image: DecorationImage(
-                              image: NetworkImage(widget.entitySaveMini.entity!.image!),
-                              fit: BoxFit.fitHeight,
+                      ? Stack(
+                          children: [
+                            Container(
+                              height: 150,
+                              width: 200,
+                              decoration: BoxDecoration(
+                                color: theme.shadow,
+                                borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
+                                image: DecorationImage(
+                                  image: NetworkImage(widget.entitySaveMini.entity!.image!),
+                                  fit: BoxFit.fitHeight,
+                                ),
+                              ),
                             ),
-                          ),
+                            Positioned(
+                              top: 0.0,
+                              right: 20.0,
+                              child: Icon(
+                                Icons.bookmark_sharp,
+                                color: widget.entitySaveMini.category == 1
+                                    ? Colors.blue.shade800
+                                    : widget.entitySaveMini.category == 2
+                                        ? Colors.yellow
+                                        : widget.entitySaveMini.category == 3
+                                            ? Colors.red.shade800
+                                            : widget.entitySaveMini.category == 4
+                                                ? Colors.black
+                                                : Colors.transparent,
+                              ),
+                            ),
+                          ],
                         )
-                      : Container(
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
-                            color: theme.shadow,
-                          ),
-                          height: 150,
-                          width: 200,
-                          child: Center(
-                            child: Icon(
-                              Icons.image,
-                              color: theme.emphasis,
-                              size: 100,
+                      : Stack(
+                          children: [
+                            Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
+                                  color: theme.shadow,
+                                ),
+                                height: 150,
+                                width: 200,
+                                child: Center(
+                                  child: Icon(
+                                    Icons.image,
+                                    color: theme.emphasis,
+                                    size: 100,
+                                  ),
+                                )),
+                            Positioned(
+                              top: 0.0,
+                              right: 20.0,
+                              child: Icon(
+                                Icons.bookmark_sharp,
+                                color: widget.entitySaveMini.category == 1
+                                    ? Colors.blue.shade800
+                                    : widget.entitySaveMini.category == 2
+                                        ? Colors.yellow
+                                        : widget.entitySaveMini.category == 3
+                                            ? Colors.red.shade800
+                                            : widget.entitySaveMini.category == 4
+                                                ? Colors.black
+                                                : Colors.transparent,
+                              ),
                             ),
-                          )),
+                          ],
+                        ),
                   // ? CircleAvatar(
                   //     backgroundImage: NetworkImage(widget
                   //         .workerMini.entity.images[0]

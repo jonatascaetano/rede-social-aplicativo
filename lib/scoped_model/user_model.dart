@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_network_application/entities/dto/report_dto.dart';
+import 'package:social_network_application/entities/mini_dto/entity_save_mini.dart';
 import 'package:social_network_application/entities/mini_dto/post_update_mini.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 import 'package:social_network_application/entities/mini_dto/worker_mini.dart';
@@ -17,8 +18,7 @@ import 'support/language_model.dart';
 import 'support/theme_model.dart';
 
 class UserModel extends Model {
-  static const String base =
-      "https://jonatas-social-network-api.herokuapp.com/";
+  static const String base = "https://jonatas-social-network-api.herokuapp.com/";
 
   late bool showFollowButton = false;
   late bool isFollowing;
@@ -29,6 +29,7 @@ class UserModel extends Model {
   List<dynamic> myPosts = [];
   late String idUSer;
   bool blocked = false;
+  List<EntitySaveMini> goals = [];
 
   UserModel({required String idUser, required BuildContext context}) {
     getWorkersUser(idUser: idUser);
@@ -46,10 +47,7 @@ class UserModel extends Model {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'users/get/user/$idUser');
-    var response = await http.get(url, headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
     // ignore: avoid_print
     print('getProfile: ' + response.statusCode.toString());
     switch (response.statusCode) {
@@ -59,6 +57,7 @@ class UserModel extends Model {
         print(item);
         userMini = UserMini.fromMap(map: item as Map);
         profileNull = false;
+        getGoalsUser(id: userMini.id);
         load = false;
         notifyListeners();
         getMyPosts(context: context);
@@ -67,10 +66,7 @@ class UserModel extends Model {
 
   getWorkersUser({required String idUser}) async {
     var url = Uri.parse(base + 'users/get/user/$idUser/workers');
-    var response = await http.get(url, headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
     // ignore: avoid_print
     print("getWorkersUser: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -87,12 +83,32 @@ class UserModel extends Model {
     }
   }
 
+  getGoalsUser({required String id}) async {
+    load = true;
+    notifyListeners();
+    var url = Uri.parse(base + 'users/$id/goals');
+    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
+    // ignore: avoid_print
+    print("getGoalsUser: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 200:
+        goals = [];
+        var itens = json.decode(response.body);
+        for (var item in itens) {
+          EntitySaveMini entitySaveMini = EntitySaveMini.fromMap(map: item as Map);
+          goals.add(entitySaveMini);
+        }
+        load = false;
+        notifyListeners();
+        break;
+    }
+  }
+
   checkFollowing({required String idUser}) async {
     load = true;
     notifyListeners();
     String id = await getId();
-    var url = Uri.parse(
-        base + 'followers/get/check/following/user/$id/following/$idUser');
+    var url = Uri.parse(base + 'followers/get/check/following/user/$id/following/$idUser');
     // ignore: avoid_print
     print("follower id: $idUser, following id: $id");
     var response = await http.get(url);
@@ -118,15 +134,13 @@ class UserModel extends Model {
     }
   }
 
-  removeFollowing(
-      {required String idFollowing, required BuildContext context}) async {
+  removeFollowing({required String idFollowing, required BuildContext context}) async {
     load = true;
     notifyListeners();
     String idFollower = await getId();
     // ignore: avoid_print
     print(idFollower);
-    var url = Uri.parse(
-        base + 'followers/delete/follower/$idFollower/following/$idFollowing');
+    var url = Uri.parse(base + 'followers/delete/follower/$idFollower/following/$idFollowing');
     var response = await http.delete(url);
     // ignore: avoid_print
     print('removeFollowing: ' + response.statusCode.toString());
@@ -136,15 +150,13 @@ class UserModel extends Model {
     notifyListeners();
   }
 
-  addFollowing(
-      {required String idFollowing, required BuildContext context}) async {
+  addFollowing({required String idFollowing, required BuildContext context}) async {
     load = true;
     notifyListeners();
     String idFollower = await getId();
     // ignore: avoid_print
     print(idFollower);
-    var url = Uri.parse(
-        base + 'followers/post/follower/$idFollower/following/$idFollowing');
+    var url = Uri.parse(base + 'followers/post/follower/$idFollower/following/$idFollowing');
     var response = await http.post(url);
     // ignore: avoid_print
     print('addFollowing: ' + response.statusCode.toString());
@@ -158,12 +170,8 @@ class UserModel extends Model {
     load = true;
     notifyListeners();
     String idUser = await getId();
-    var url =
-        Uri.parse(base + 'users/get/user/${userMini.id}/posts/my/$idUser');
-    var response = await http.get(url, headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var url = Uri.parse(base + 'users/get/user/${userMini.id}/posts/my/$idUser');
+    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
     // ignore: avoid_print
     print("getMyPostsUser: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -191,16 +199,12 @@ class UserModel extends Model {
     }
   }
 
-  updateLikePost(
-      {required BuildContext context, required String idPost}) async {
+  updateLikePost({required BuildContext context, required String idPost}) async {
     load = true;
     notifyListeners();
     String id = await getId();
     var url = Uri.parse(base + 'posts/put/like/post/$idPost/user/$id');
-    var response = await http.put(url, headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.put(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
     // ignore: avoid_print
     print("updateLikePostUser: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -257,10 +261,7 @@ class UserModel extends Model {
   //   }
   // }
 
-  returnPostWidget(
-      {required Map post,
-      required bool screenComment,
-      required BuildContext contextPage}) {
+  returnPostWidget({required Map post, required bool screenComment, required BuildContext contextPage}) {
     // ignore: avoid_print
     switch (post["typePost"]) {
       case TypePost.UPDATE:
@@ -279,10 +280,7 @@ class UserModel extends Model {
     notifyListeners();
     String id = await getId();
     var url = Uri.parse(base + 'users/check/blocked/user/$id/blocked/$idUser');
-    var response = await http.get(url, headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
     // ignore: avoid_print
     print("isBlocked: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -298,12 +296,8 @@ class UserModel extends Model {
     blocked = false;
     notifyListeners();
     String id = await getId();
-    var url =
-        Uri.parse(base + 'users/put/add/blocked/user/$id/blocked/$idUser');
-    var response = await http.put(url, headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var url = Uri.parse(base + 'users/put/add/blocked/user/$id/blocked/$idUser');
+    var response = await http.put(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
     // ignore: avoid_print
     print("addBlocke: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -320,12 +314,8 @@ class UserModel extends Model {
     blocked = false;
     notifyListeners();
     String id = await getId();
-    var url =
-        Uri.parse(base + 'users/put/remove/blocked/user/$id/blocked/$idUser');
-    var response = await http.put(url, headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var url = Uri.parse(base + 'users/put/remove/blocked/user/$id/blocked/$idUser');
+    var response = await http.put(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
     // ignore: avoid_print
     print("removeBlocke: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -336,15 +326,13 @@ class UserModel extends Model {
     }
   }
 
-  showOptionsUserBottomSheet(
-      {required BuildContext contextPageUser, required String idUser}) async {
+  showOptionsUserBottomSheet({required BuildContext contextPageUser, required String idUser}) async {
     String id = await getId();
     showModalBottomSheet<dynamic>(
         //isScrollControlled: true,
         context: contextPageUser,
         builder: (context) {
-          return ScopedModelDescendant<ThemeModel>(
-              builder: (context, child, theme) {
+          return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
             return BottomSheet(
                 backgroundColor: theme.background,
                 onClosing: () {},
@@ -359,9 +347,7 @@ class UserModel extends Model {
                       GestureDetector(
                         onTap: () {
                           Navigator.pop(context);
-                          blocked
-                              ? removeBlocke(idUser: idUser, context: context)
-                              : addBlocke(idUser: idUser, context: context);
+                          blocked ? removeBlocke(idUser: idUser, context: context) : addBlocke(idUser: idUser, context: context);
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -405,9 +391,7 @@ class UserModel extends Model {
                             idAuthor: id,
                             release: DateTime.now().toString(),
                           );
-                          showOptionsReport(
-                              contextPageUser: contextPageUser,
-                              reportDTO: reportDTO);
+                          showOptionsReport(contextPageUser: contextPageUser, reportDTO: reportDTO);
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -440,8 +424,7 @@ class UserModel extends Model {
         });
   }
 
-  showOptionsReport(
-      {required BuildContext contextPageUser, required ReportDTO reportDTO}) {
+  showOptionsReport({required BuildContext contextPageUser, required ReportDTO reportDTO}) {
     notifyListeners();
     showDialog(
         context: contextPageUser,
@@ -457,11 +440,7 @@ class UserModel extends Model {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'reports/post');
-    var response =
-        await http.post(url, body: json.encode(reportDTO.toMap()), headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.post(url, body: json.encode(reportDTO.toMap()), headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
     // ignore: avoid_print
     print('report: ' + response.statusCode.toString());
     switch (response.statusCode) {
@@ -631,8 +610,7 @@ class _OptionReportState extends State<OptionReport> {
                           onPressed: () {
                             Navigator.pop(context);
                             widget.reportDTO.typeReport = groupValue;
-                            ScopedModel.of<UserModel>(widget.contextAncestor)
-                                .report(
+                            ScopedModel.of<UserModel>(widget.contextAncestor).report(
                               reportDTO: widget.reportDTO,
                               context: widget.contextAncestor,
                             );

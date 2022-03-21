@@ -83,6 +83,8 @@ class _CommentsPostUpdate2State extends State<CommentsPostUpdate2> {
                                                         context,
                                                         MaterialPageRoute(builder: (context) => User(userMini: widget.postUpdateMini.author!)),
                                                       );
+                                                    } else {
+                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                                                     }
                                                   },
                                                   child: CircleAvatar(
@@ -97,6 +99,8 @@ class _CommentsPostUpdate2State extends State<CommentsPostUpdate2> {
                                                         context,
                                                         MaterialPageRoute(builder: (context) => User(userMini: widget.postUpdateMini.author!)),
                                                       );
+                                                    } else {
+                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                                                     }
                                                   },
                                                   child: CircleAvatar(
@@ -301,7 +305,7 @@ class _CommentsPostUpdate2State extends State<CommentsPostUpdate2> {
                                                         child: Text(
                                                           ConvertDate.convertToDatePost(release: widget.postUpdateMini.release!),
                                                           style: TextStyle(
-                                                            fontSize: theme.sizeTitle,
+                                                            fontSize: theme.sizeText,
                                                             letterSpacing: theme.letterSpacingTitle,
                                                             color: theme.subtitle,
                                                             fontWeight: FontWeight.normal,
@@ -342,7 +346,7 @@ class _CommentsPostUpdate2State extends State<CommentsPostUpdate2> {
                                                                     //     : widget.postUpdateMini.likeQuantity
                                                                     //         .toString(),
                                                                     style: TextStyle(
-                                                                      fontSize: theme.sizeTitle,
+                                                                      fontSize: theme.sizeText,
                                                                       letterSpacing: theme.letterSpacingTitle,
                                                                       color: comment.postUpdateMini.liked ? theme.emphasis : theme.subtitle,
                                                                       fontWeight: FontWeight.normal,
@@ -350,7 +354,7 @@ class _CommentsPostUpdate2State extends State<CommentsPostUpdate2> {
                                                                   ),
                                                                   Icon(
                                                                     Icons.thumb_up_alt_outlined,
-                                                                    size: theme.sizeTitle,
+                                                                    size: theme.sizeText,
                                                                     color: comment.postUpdateMini.liked ? theme.emphasis : theme.subtitle,
                                                                   ),
                                                                   // const SizedBox(
@@ -396,7 +400,7 @@ class _CommentsPostUpdate2State extends State<CommentsPostUpdate2> {
                                                                   Text(
                                                                     comment.postUpdateMini.commentQuantity.toString() + " ",
                                                                     style: TextStyle(
-                                                                      fontSize: theme.sizeTitle,
+                                                                      fontSize: theme.sizeText,
                                                                       letterSpacing: theme.letterSpacingTitle,
                                                                       color: theme.subtitle,
                                                                       fontWeight: FontWeight.normal,
@@ -404,7 +408,7 @@ class _CommentsPostUpdate2State extends State<CommentsPostUpdate2> {
                                                                   ),
                                                                   Icon(
                                                                     Icons.messenger_outline,
-                                                                    size: theme.sizeTitle,
+                                                                    size: theme.sizeText,
                                                                     color: theme.subtitle,
                                                                   ),
                                                                   // const SizedBox(
@@ -468,7 +472,7 @@ class _CommentsPostUpdate2State extends State<CommentsPostUpdate2> {
                                                         },
                                                         icon: Icon(
                                                           Icons.more_vert_sharp,
-                                                          size: theme.sizeTitle,
+                                                          size: theme.sizeText,
                                                           color: theme.subtitle,
                                                         ),
                                                       ),
@@ -579,9 +583,9 @@ class _CommentsPostUpdate2State extends State<CommentsPostUpdate2> {
                                           //         .subtitle,
                                           //   ),
                                           // ),
-                                          const SizedBox(
-                                            width: 8.0,
-                                          ),
+                                          // const SizedBox(
+                                          //   width: 8.0,
+                                          // ),
                                         ],
                                       ),
 
@@ -1010,13 +1014,15 @@ class _CommentsPostUpdate2State extends State<CommentsPostUpdate2> {
                                       //     ),
                                       //   ],
                                       // ),
-                                      const SizedBox(
-                                        height: 16.0,
-                                      ),
+                                      // const SizedBox(
+                                      //   height: 16.0,
+                                      // ),
                                     ],
                                   ),
                                   Divider(
-                                    color: theme.button,
+                                    height: 10.0,
+                                    thickness: 10.0,
+                                    color: theme.shadow,
                                   ),
                                   const SizedBox(
                                     height: 16.0,
@@ -1330,6 +1336,8 @@ Widget entity({required PostUpdateMini postUpdateMini, required BuildContext con
                 context,
                 MaterialPageRoute(builder: (context) => User(userMini: postUpdateMini.author!)),
               );
+            } else {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
             }
           },
           child: Text(
@@ -1414,6 +1422,8 @@ Widget season({required PostUpdateMini postUpdateMini, required BuildContext con
                 context,
                 MaterialPageRoute(builder: (context) => User(userMini: postUpdateMini.author!)),
               );
+            } else {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
             }
           },
           child: Text(
@@ -1527,6 +1537,8 @@ Widget episode({required PostUpdateMini postUpdateMini, required BuildContext co
                 context,
                 MaterialPageRoute(builder: (context) => User(userMini: postUpdateMini.author!)),
               );
+            } else {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
             }
           },
           child: Text(

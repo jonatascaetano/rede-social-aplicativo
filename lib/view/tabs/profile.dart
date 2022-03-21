@@ -7,8 +7,6 @@ import 'package:social_network_application/scoped_model/support/theme_model.dart
 import 'package:social_network_application/view/tabs/profile/update_profile.dart';
 import 'package:social_network_application/widgets/mini_profile/entities_mini_profile.dart';
 import 'package:social_network_application/widgets/mini_profile/entity_mini_profile_evaluated.dart';
-import 'package:social_network_application/widgets/mini_profile/worker_mini_profile.dart';
-import 'profile/all_workers_profile.dart';
 import 'profile/followers.dart';
 import 'profile/following.dart';
 
@@ -368,16 +366,28 @@ class _ProfileState extends State<Profile> {
                             : Container(),
 
                         profile.goals.isNotEmpty
-                            ? SizedBox(
-                                height: 280,
-                                child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: profile.goals.length,
-                                    itemBuilder: (context, index) {
-                                      return EntityMiniProfileEvaluated(entitySaveMini: profile.goals[index]);
-                                    }),
+                            ? Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                child: SizedBox(
+                                  height: 280,
+                                  child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      shrinkWrap: true,
+                                      itemCount: profile.goals.length,
+                                      itemBuilder: (context, index) {
+                                        return EntityMiniProfileEvaluated(entitySaveMini: profile.goals[index]);
+                                      }),
+                                ),
                               )
                             : Container(),
+
+                        Divider(
+                          height: 10.0,
+                          thickness: 10.0,
+                          color: theme.shadow,
+                        ),
+
+                        /*
 
                         profile.workers.isNotEmpty
                             ? Padding(
@@ -452,25 +462,32 @@ class _ProfileState extends State<Profile> {
                                     }),
                               )
                             : Container(),
+
                         profile.workers.isNotEmpty
                             ? const SizedBox(
                                 height: 24.0,
                               )
                             : Container(),
+
+                        */
+
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: LanguageModel()
-                                .typeEntitiesMini
-                                .map(
-                                  (e) => EntityMiniProfile(
-                                    index: LanguageModel().typeEntitiesMini.indexOf(e),
-                                    isUser: true,
-                                    idUser: profile.userMini.id,
-                                  ),
-                                )
-                                .toList(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: LanguageModel()
+                                  .typeEntitiesMini
+                                  .map(
+                                    (e) => EntityMiniProfile(
+                                      index: LanguageModel().typeEntitiesMini.indexOf(e),
+                                      isUser: true,
+                                      idUser: profile.userMini.id,
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
                           ),
                         ),
 
@@ -492,7 +509,7 @@ class _ProfileState extends State<Profile> {
                             },
                             itemCount: profile.myPosts.length,
                             itemBuilder: (context, index) {
-                              if (index % 4 == 0 && index != 0) {
+                              if (index % 8 == 0 && index != 0) {
                                 return Column(
                                   children: [
                                     Container(

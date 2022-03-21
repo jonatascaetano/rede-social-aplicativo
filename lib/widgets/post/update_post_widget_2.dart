@@ -15,6 +15,7 @@ import 'package:social_network_application/view/objects/user.dart';
 import 'package:social_network_application/view/post/comments_post_update2.dart';
 import 'package:social_network_application/view/post/likes_post.dart';
 import 'package:social_network_application/converts/convert_like_names.dart';
+import 'package:social_network_application/view/tabs/profile.dart';
 
 // ignore: must_be_immutable
 class UpdatePostWidget2 extends StatefulWidget {
@@ -63,6 +64,8 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                               context,
                               MaterialPageRoute(builder: (context) => User(userMini: widget.postUpdateMini.author!)),
                             );
+                          } else {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                           }
                         },
                         child: CircleAvatar(
@@ -77,6 +80,8 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                               context,
                               MaterialPageRoute(builder: (context) => User(userMini: widget.postUpdateMini.author!)),
                             );
+                          } else {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                           }
                         },
                         child: CircleAvatar(
@@ -272,7 +277,7 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                               child: Text(
                                 ConvertDate.convertToDatePost(release: widget.postUpdateMini.release!),
                                 style: TextStyle(
-                                  fontSize: theme.sizeTitle,
+                                  fontSize: theme.sizeText,
                                   letterSpacing: theme.letterSpacingTitle,
                                   color: theme.subtitle,
                                   fontWeight: FontWeight.normal,
@@ -314,7 +319,7 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                                           //     : widget.postUpdateMini.likeQuantity
                                           //         .toString(),
                                           style: TextStyle(
-                                            fontSize: theme.sizeTitle,
+                                            fontSize: theme.sizeText,
                                             letterSpacing: theme.letterSpacingTitle,
                                             color: widget.postUpdateMini.liked ? theme.emphasis : theme.subtitle,
                                             fontWeight: FontWeight.normal,
@@ -322,7 +327,7 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                                         ),
                                         Icon(
                                           Icons.thumb_up_alt_outlined,
-                                          size: theme.sizeTitle,
+                                          size: theme.sizeText,
                                           color: widget.postUpdateMini.liked ? theme.emphasis : theme.subtitle,
                                         ),
                                         // const SizedBox(
@@ -368,7 +373,7 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                                         Text(
                                           widget.postUpdateMini.commentQuantity.toString() + " ",
                                           style: TextStyle(
-                                            fontSize: theme.sizeTitle,
+                                            fontSize: theme.sizeText,
                                             letterSpacing: theme.letterSpacingTitle,
                                             color: theme.subtitle,
                                             fontWeight: FontWeight.normal,
@@ -376,7 +381,7 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                                         ),
                                         Icon(
                                           Icons.messenger_outline,
-                                          size: theme.sizeTitle,
+                                          size: theme.sizeText,
                                           color: theme.subtitle,
                                         ),
                                         // const SizedBox(
@@ -418,15 +423,15 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  width: 8.0,
-                ),
+                // const SizedBox(
+                //   width: 8.0,
+                // ),
               ],
             ),
           ),
-          const SizedBox(
-            height: 16.0,
-          ),
+          // const SizedBox(
+          //   height: 16.0,
+          // ),
         ],
       );
     });
@@ -445,6 +450,8 @@ Widget entity({required PostUpdateMini postUpdateMini, required BuildContext con
                 context,
                 MaterialPageRoute(builder: (context) => User(userMini: postUpdateMini.author!)),
               );
+            } else {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
             }
           },
           child: Text(
@@ -529,6 +536,8 @@ Widget season({required PostUpdateMini postUpdateMini, required BuildContext con
                 context,
                 MaterialPageRoute(builder: (context) => User(userMini: postUpdateMini.author!)),
               );
+            } else {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
             }
           },
           child: Text(
@@ -642,6 +651,8 @@ Widget episode({required PostUpdateMini postUpdateMini, required BuildContext co
                 context,
                 MaterialPageRoute(builder: (context) => User(userMini: postUpdateMini.author!)),
               );
+            } else {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
             }
           },
           child: Text(

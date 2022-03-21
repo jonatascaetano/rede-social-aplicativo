@@ -22,8 +22,7 @@ import 'package:social_network_application/view/objects/entity/update_entity.dar
 import 'support/theme_model.dart';
 
 class EntityModel extends Model {
-  static const String base =
-      "https://jonatas-social-network-api.herokuapp.com/";
+  static const String base = "https://jonatas-social-network-api.herokuapp.com/";
 
   bool load = false;
   late EntityMini entityMini;
@@ -47,10 +46,7 @@ class EntityModel extends Model {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'entities/get/entity/$entityId');
-    var response = await http.get(url, headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
     // ignore: avoid_print
     print('getEntityById: ' + response.statusCode.toString());
     switch (response.statusCode) {
@@ -70,10 +66,7 @@ class EntityModel extends Model {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'entities/get/entity/$entityId/seasons');
-    var response = await http.get(url, headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
 // ignore: avoid_print
     print("getSeasons: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -97,10 +90,7 @@ class EntityModel extends Model {
     notifyListeners();
     String idUser = await getId();
     var url = Uri.parse(base + 'entities/get/reviews/$entityId/user/$idUser');
-    var response = await http.get(url, headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
 // ignore: avoid_print
     print("getReviews: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -108,8 +98,7 @@ class EntityModel extends Model {
         reviews = [];
         var itens = json.decode(response.body);
         for (var item in itens) {
-          EntitySaveMini entitySaveMini =
-              EntitySaveMini.fromMap(map: item as Map);
+          EntitySaveMini entitySaveMini = EntitySaveMini.fromMap(map: item as Map);
           reviews.add(entitySaveMini);
         }
         load = false;
@@ -118,16 +107,11 @@ class EntityModel extends Model {
     }
   }
 
-  updateLikeReview(
-      {required BuildContext context, required String idReview}) async {
+  updateLikeReview({required BuildContext context, required String idReview}) async {
     load = true;
     notifyListeners();
-    var url = Uri.parse(
-        base + 'entitysaves/put/like/entitysave/$idReview/user/$idUser');
-    var response = await http.put(url, headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var url = Uri.parse(base + 'entitysaves/put/like/entitysave/$idReview/user/$idUser');
+    var response = await http.put(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
     // ignore: avoid_print
     print("updateLikeReview: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -150,12 +134,8 @@ class EntityModel extends Model {
     load = true;
     notifyListeners();
     String idUser = await getId();
-    var url = Uri.parse(
-        base + 'entities/get/entity/$entityId/entitysave/user/$idUser');
-    var response = await http.get(url, headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var url = Uri.parse(base + 'entities/get/entity/$entityId/entitysave/user/$idUser');
+    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
 // ignore: avoid_print
     print("getEntitySave: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -174,10 +154,7 @@ class EntityModel extends Model {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'entities/get/entity/$entityId/workers');
-    var response = await http.get(url, headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
 // ignore: avoid_print
     print("getWorkersEntity: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -208,43 +185,29 @@ class EntityModel extends Model {
   loadDropdownList() {
     dropdownList = [];
     dropdownList.add(DropdownMenuItem(
-      child: Text(LanguageModel().entitiesCategories[
-          ConvertToEnum.convertTypeEntityToValue(
-              typeEntity: entityMini.typeEntity)][1]),
+      child: Text(LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: entityMini.typeEntity)][1]),
       value: 1,
     ));
     dropdownList.add(DropdownMenuItem(
-      child: Text(LanguageModel().entitiesCategories[
-          ConvertToEnum.convertTypeEntityToValue(
-              typeEntity: entityMini.typeEntity)][2]),
+      child: Text(LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: entityMini.typeEntity)][2]),
       value: 2,
     ));
     dropdownList.add(DropdownMenuItem(
-      child: Text(LanguageModel().entitiesCategories[
-          ConvertToEnum.convertTypeEntityToValue(
-              typeEntity: entityMini.typeEntity)][3]),
+      child: Text(LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: entityMini.typeEntity)][3]),
       value: 3,
     ));
     dropdownList.add(DropdownMenuItem(
-      child: Text(LanguageModel().entitiesCategories[
-          ConvertToEnum.convertTypeEntityToValue(
-              typeEntity: entityMini.typeEntity)][4]),
+      child: Text(LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: entityMini.typeEntity)][4]),
       value: 4,
     ));
     notifyListeners();
   }
 
-  newEntitySave(
-      {required EntitySaveDTO entitySaveDTO,
-      required BuildContext context}) async {
+  newEntitySave({required EntitySaveDTO entitySaveDTO, required BuildContext context}) async {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'entitysaves/post/entity');
-    var response = await http
-        .post(url, body: json.encode(entitySaveDTO.toMap()), headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.post(url, body: json.encode(entitySaveDTO.toMap()), headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
 // ignore: avoid_print
     print("newEntitySave: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -254,10 +217,7 @@ class EntityModel extends Model {
         print(item.toString());
         entitySaveMini = EntitySaveMini.fromMap(map: item);
         getEntity(entityId: entitySaveMini!.entity!.id);
-        newPost(
-            entitySaveMini: entitySaveMini!,
-            category: entitySaveMini!.category!,
-            context: context);
+        newPost(entitySaveMini: entitySaveMini!, category: entitySaveMini!.category!, context: context);
         break;
       default:
         load = false;
@@ -269,17 +229,11 @@ class EntityModel extends Model {
     }
   }
 
-  updateCategoryEntitySave(
-      {required EntitySaveDTO entitySaveDTO,
-      required BuildContext context}) async {
+  updateCategoryEntitySave({required EntitySaveDTO entitySaveDTO, required BuildContext context}) async {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'entitysaves/put/category');
-    var response =
-        await http.put(url, body: json.encode(entitySaveDTO.toMap()), headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.put(url, body: json.encode(entitySaveDTO.toMap()), headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
 // ignore: avoid_print
     print("updateCategoryEntitySave: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -288,11 +242,9 @@ class EntityModel extends Model {
         // ignore: avoid_print
         print(item.toString());
         getEntity(entityId: entitySaveMini!.entity!.id);
+        ScopedModel.of<ProfileModel>(context).getGoals();
         entitySaveMini = EntitySaveMini.fromMap(map: item);
-        newPost(
-            entitySaveMini: entitySaveMini!,
-            category: entitySaveMini!.category!,
-            context: context);
+        newPost(entitySaveMini: entitySaveMini!, category: entitySaveMini!.category!, context: context);
         break;
       default:
         load = false;
@@ -304,17 +256,11 @@ class EntityModel extends Model {
     }
   }
 
-  updateEvaluationEntitySave(
-      {required EntitySaveDTO entitySaveDTO,
-      required BuildContext context}) async {
+  updateEvaluationEntitySave({required EntitySaveDTO entitySaveDTO, required BuildContext context}) async {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'entitysaves/put/evaluation');
-    var response =
-        await http.put(url, body: json.encode(entitySaveDTO.toMap()), headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.put(url, body: json.encode(entitySaveDTO.toMap()), headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
 // ignore: avoid_print
     print("updateEvaluationEntitySave: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -324,6 +270,7 @@ class EntityModel extends Model {
         print(item.toString());
         entitySaveMini = EntitySaveMini.fromMap(map: item);
         getEntity(entityId: entitySaveMini!.entity!.id);
+        ScopedModel.of<ProfileModel>(context).getGoals();
         newPost(entitySaveMini: entitySaveMini!, category: 6, context: context);
         getReviews(entityId: entitySaveMini!.entity!.id);
         break;
@@ -337,17 +284,11 @@ class EntityModel extends Model {
     }
   }
 
-  updateGoalEntitySave(
-      {required EntitySaveDTO entitySaveDTO,
-      required BuildContext context}) async {
+  updateGoalEntitySave({required EntitySaveDTO entitySaveDTO, required BuildContext context}) async {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'entitysaves/put/goal');
-    var response =
-        await http.put(url, body: json.encode(entitySaveDTO.toMap()), headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.put(url, body: json.encode(entitySaveDTO.toMap()), headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
 // ignore: avoid_print
     print("updateGoalEntitySave: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -358,9 +299,9 @@ class EntityModel extends Model {
         entitySaveMini = EntitySaveMini.fromMap(map: item);
         load = false;
         notifyListeners();
+        ScopedModel.of<ProfileModel>(context).getGoals();
         if (entitySaveMini!.goal) {
-          newPost(
-              entitySaveMini: entitySaveMini!, category: 5, context: context);
+          newPost(entitySaveMini: entitySaveMini!, category: 5, context: context);
         }
         break;
       default:
@@ -373,18 +314,12 @@ class EntityModel extends Model {
     }
   }
 
-  updateReviewEntitySave(
-      {required EntitySaveDTO entitySaveDTO,
-      required BuildContext context}) async {
+  updateReviewEntitySave({required EntitySaveDTO entitySaveDTO, required BuildContext context}) async {
     load = true;
     notifyListeners();
     entitySaveDTO.release = DateTime.now().toString();
     var url = Uri.parse(base + 'entitysaves/put/review');
-    var response =
-        await http.put(url, body: json.encode(entitySaveDTO.toMap()), headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.put(url, body: json.encode(entitySaveDTO.toMap()), headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
 // ignore: avoid_print
     print("updateReviewEntitySave: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -406,10 +341,7 @@ class EntityModel extends Model {
     }
   }
 
-  newPost(
-      {required EntitySaveMini entitySaveMini,
-      required int category,
-      required BuildContext context}) async {
+  newPost({required EntitySaveMini entitySaveMini, required int category, required BuildContext context}) async {
     load = true;
     notifyListeners();
     PostUpdateDTO postUpdateDTO = PostUpdateDTO(
@@ -419,26 +351,16 @@ class EntityModel extends Model {
       body: category == 7 ? entitySaveMini.review : null,
       category: category,
       idAuthor: idUser,
-      idEntity: entitySaveMini.level == Level.ENTITY
-          ? entitySaveMini.entity!.id
-          : null,
-      idSeason: entitySaveMini.level == Level.SEASON
-          ? entitySaveMini.season!.id
-          : null,
-      idEpisode: entitySaveMini.level == Level.EPISODE
-          ? entitySaveMini.episode!.id
-          : null,
+      idEntity: entitySaveMini.level == Level.ENTITY ? entitySaveMini.entity!.id : null,
+      idSeason: entitySaveMini.level == Level.SEASON ? entitySaveMini.season!.id : null,
+      idEpisode: entitySaveMini.level == Level.EPISODE ? entitySaveMini.episode!.id : null,
       evaluation: category == 6 ? entitySaveMini.evaluation! : 0,
       spoiler: category == 7 ? entitySaveMini.spoiler : false,
     );
     // ignore: avoid_print
     print("postUpdateDTO: " + postUpdateDTO.toMap().toString());
     var url = Uri.parse(base + 'posts/post/update');
-    var response = await http
-        .post(url, body: json.encode(postUpdateDTO.toMap()), headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.post(url, body: json.encode(postUpdateDTO.toMap()), headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
 // ignore: avoid_print
     print("newPost: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -450,11 +372,7 @@ class EntityModel extends Model {
         if (postUpdateMini.category != 7) {
           load = false;
           notifyListeners();
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      AddBodyPostEntity(postUpdateMini: postUpdateMini)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => AddBodyPostEntity(postUpdateMini: postUpdateMini)));
           ScopedModel.of<ProfileModel>(context).getAllPosts(context: context);
         } else {
           ScopedModel.of<ProfileModel>(context).getAllPosts(context: context);
@@ -473,17 +391,11 @@ class EntityModel extends Model {
     }
   }
 
-  addBodyPost(
-      {required PostUpdateDTO postUpdateDTO,
-      required BuildContext context}) async {
+  addBodyPost({required PostUpdateDTO postUpdateDTO, required BuildContext context}) async {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'posts/put/body');
-    var response =
-        await http.put(url, body: json.encode(postUpdateDTO.toMap()), headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.put(url, body: json.encode(postUpdateDTO.toMap()), headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
 // ignore: avoid_print
     print("addBodyPost: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -503,15 +415,13 @@ class EntityModel extends Model {
     }
   }
 
-  showOptionsEntityBottomSheet(
-      {required BuildContext contextAncestor, required EntityMini entityMini}) {
+  showOptionsEntityBottomSheet({required BuildContext contextAncestor, required EntityMini entityMini}) {
     showModalBottomSheet<dynamic>(
 
         //isScrollControlled: true,
         context: contextAncestor,
         builder: (context) {
-          return ScopedModelDescendant<ThemeModel>(
-              builder: (context, child, theme) {
+          return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
             return BottomSheet(
                 backgroundColor: theme.background,
                 onClosing: () {},
@@ -529,9 +439,7 @@ class EntityModel extends Model {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => NewSeasonEntity(
-                                  entityMini: entityMini,
-                                  context: contextAncestor),
+                              builder: (context) => NewSeasonEntity(entityMini: entityMini, context: contextAncestor),
                             ),
                           );
                         },
@@ -582,14 +490,7 @@ class EntityModel extends Model {
                                 width: 8.0,
                               ),
                               Text(
-                                'Edit ' +
-                                    LanguageModel()
-                                        .typeEntities[ConvertToEnum
-                                            .convertTypeEntityToValue(
-                                                typeEntity:
-                                                    entityMini.typeEntity)]
-                                        .toString()
-                                        .toLowerCase(),
+                                'Edit ' + LanguageModel().typeEntities[ConvertToEnum.convertTypeEntityToValue(typeEntity: entityMini.typeEntity)].toString().toLowerCase(),
                                 style: TextStyle(
                                   fontSize: theme.sizeText,
                                   letterSpacing: theme.letterSpacingText,

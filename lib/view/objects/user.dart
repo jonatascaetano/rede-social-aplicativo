@@ -5,11 +5,10 @@ import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/scoped_model/user_model.dart';
-import 'package:social_network_application/view/tabs/profile/all_workers_user.dart';
 import 'package:social_network_application/view/tabs/profile/followers.dart';
 import 'package:social_network_application/view/tabs/profile/following.dart';
 import 'package:social_network_application/widgets/mini_profile/entities_mini_profile.dart';
-import 'package:social_network_application/widgets/mini_profile/worker_mini_profile.dart';
+import 'package:social_network_application/widgets/mini_profile/entity_mini_profile_evaluated.dart';
 
 // ignore: must_be_immutable
 class User extends StatefulWidget {
@@ -451,6 +450,70 @@ class _UserState extends State<User> {
                             //       )
                             //     : Container(),
 
+                            user.goals.isNotEmpty
+                                ? Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            'View all goals',
+                                            style: TextStyle(
+                                              fontSize: theme.sizeTitle,
+                                              letterSpacing: theme.letterSpacingTitle,
+                                              color: theme.emphasis,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                          ),
+                                        ),
+                                        IconButton(
+                                          onPressed: () {
+                                            // Navigator.push(
+                                            //   context,
+                                            //   MaterialPageRoute(
+                                            //     builder: (context) => AllWorkersProfile(
+                                            //       isUser: true,
+                                            //       userMini: profile.userMini,
+                                            //       workers: profile.workers,
+                                            //     ),
+                                            //   ),
+                                            // );
+                                          },
+                                          icon: Icon(
+                                            Icons.arrow_forward,
+                                            color: theme.subtitle,
+                                            size: 24.0,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                : Container(),
+
+                            user.goals.isNotEmpty
+                                ? Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                    child: SizedBox(
+                                      height: 280,
+                                      child: ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          shrinkWrap: true,
+                                          itemCount: user.goals.length,
+                                          itemBuilder: (context, index) {
+                                            return EntityMiniProfileEvaluated(entitySaveMini: user.goals[index]);
+                                          }),
+                                    ),
+                                  )
+                                : Container(),
+
+                            Divider(
+                              height: 10.0,
+                              thickness: 10.0,
+                              color: theme.shadow,
+                            ),
+
+                            /*    
+
                             user.workers.isNotEmpty
                                 ? Padding(
                                     padding: const EdgeInsets.all(8.0),
@@ -510,20 +573,25 @@ class _UserState extends State<User> {
                               height: 16.0,
                             ),
 
+                            */
+
                             SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: LanguageModel()
-                                    .typeEntitiesMini
-                                    .map(
-                                      (e) => EntityMiniProfile(
-                                        index: LanguageModel().typeEntitiesMini.indexOf(e),
-                                        isUser: false,
-                                        idUser: widget.userMini.id,
-                                      ),
-                                    )
-                                    .toList(),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: LanguageModel()
+                                      .typeEntitiesMini
+                                      .map(
+                                        (e) => EntityMiniProfile(
+                                          index: LanguageModel().typeEntitiesMini.indexOf(e),
+                                          isUser: false,
+                                          idUser: widget.userMini.id,
+                                        ),
+                                      )
+                                      .toList(),
+                                ),
                               ),
                             ),
                             //final da area profile
@@ -547,7 +615,7 @@ class _UserState extends State<User> {
                                 },
                                 itemCount: user.myPosts.length,
                                 itemBuilder: (context, index) {
-                                  if (index % 4 == 0 && index != 0) {
+                                  if (index % 8 == 0 && index != 0) {
                                     return Column(
                                       children: [
                                         Container(

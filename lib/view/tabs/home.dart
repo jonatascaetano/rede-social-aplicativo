@@ -58,9 +58,9 @@ class _HomeState extends State<Home> {
                       shrinkWrap: true,
                       children: [
                         Divider(
-                          height: 5.0,
-                          thickness: 5.0,
-                          color: theme.button,
+                          height: 10.0,
+                          thickness: 10.0,
+                          color: theme.shadow,
                         ),
                         ListView.separated(
                             padding: EdgeInsets.zero,
@@ -68,14 +68,14 @@ class _HomeState extends State<Home> {
                             physics: const NeverScrollableScrollPhysics(),
                             separatorBuilder: (context, index) {
                               return Divider(
-                                height: 1.0,
-                                thickness: 1.0,
-                                color: theme.button,
+                                height: 10.0,
+                                thickness: 10.0,
+                                color: theme.shadow,
                               );
                             },
                             itemCount: profile.allPosts.length,
                             itemBuilder: (context, index) {
-                              if (index % 4 == 0 && index != 0) {
+                              if (index % 8 == 0 && index != 0) {
                                 return Column(
                                   children: [
                                     Container(
@@ -86,9 +86,9 @@ class _HomeState extends State<Home> {
                                       child: getBanner(AdmobBannerSize.MEDIUM_RECTANGLE),
                                     ),
                                     Divider(
-                                      height: 1.0,
-                                      thickness: 1.0,
-                                      color: theme.button,
+                                      height: 10.0,
+                                      thickness: 10.0,
+                                      color: theme.shadow,
                                     ),
                                     profile.returnPostWidget(post: profile.allPosts[index], screenComment: false, contextPage: context),
                                     // UpdatePostEntityWidget(
