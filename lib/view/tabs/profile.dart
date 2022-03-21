@@ -6,6 +6,7 @@ import 'package:social_network_application/scoped_model/support/language_model.d
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/tabs/profile/update_profile.dart';
 import 'package:social_network_application/widgets/mini_profile/entities_mini_profile.dart';
+import 'package:social_network_application/widgets/mini_profile/entity_mini_profile_evaluated.dart';
 import 'package:social_network_application/widgets/mini_profile/worker_mini_profile.dart';
 import 'profile/all_workers_profile.dart';
 import 'profile/followers.dart';
@@ -326,6 +327,58 @@ class _ProfileState extends State<Profile> {
                         //       )
                         //     : Container(),
 
+                        profile.goals.isNotEmpty
+                            ? Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        'View all goals',
+                                        style: TextStyle(
+                                          fontSize: theme.sizeTitle,
+                                          letterSpacing: theme.letterSpacingTitle,
+                                          color: theme.emphasis,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      ),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        // Navigator.push(
+                                        //   context,
+                                        //   MaterialPageRoute(
+                                        //     builder: (context) => AllWorkersProfile(
+                                        //       isUser: true,
+                                        //       userMini: profile.userMini,
+                                        //       workers: profile.workers,
+                                        //     ),
+                                        //   ),
+                                        // );
+                                      },
+                                      icon: Icon(
+                                        Icons.arrow_forward,
+                                        color: theme.subtitle,
+                                        size: 24.0,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : Container(),
+
+                        profile.goals.isNotEmpty
+                            ? SizedBox(
+                                height: 280,
+                                child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: profile.goals.length,
+                                    itemBuilder: (context, index) {
+                                      return EntityMiniProfileEvaluated(entitySaveMini: profile.goals[index]);
+                                    }),
+                              )
+                            : Container(),
+
                         profile.workers.isNotEmpty
                             ? Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -335,9 +388,9 @@ class _ProfileState extends State<Profile> {
                                       child: Text(
                                         'View all works',
                                         style: TextStyle(
-                                          fontSize: theme.sizeText,
-                                          letterSpacing: theme.letterSpacingText,
-                                          color: theme.subtitle,
+                                          fontSize: theme.sizeTitle,
+                                          letterSpacing: theme.letterSpacingTitle,
+                                          color: theme.emphasis,
                                           fontWeight: FontWeight.normal,
                                         ),
                                       ),

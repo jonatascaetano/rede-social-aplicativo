@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_network_application/entities/dto/report_dto.dart';
 import 'package:social_network_application/entities/dto/user_dto.dart';
+import 'package:social_network_application/entities/mini_dto/entity_save_mini.dart';
 import 'package:social_network_application/entities/mini_dto/post_update_mini.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 import 'dart:convert';
@@ -26,8 +27,7 @@ import 'support/language_model.dart';
 import 'support/theme_model.dart';
 
 class ProfileModel extends Model {
-  static const String base =
-      "https://jonatas-social-network-api.herokuapp.com/";
+  static const String base = "https://jonatas-social-network-api.herokuapp.com/";
 
   List<WorkerMini> workers = [];
   late UserMini userMini;
@@ -39,6 +39,7 @@ class ProfileModel extends Model {
   List<dynamic> allPosts = [];
   List<dynamic> myPosts = [];
   bool postsAreNull = true;
+  List<EntitySaveMini> goals = [];
 
   //ProfileModel({required BuildContext context}) {
   //   getProfile(context: context);
@@ -56,10 +57,7 @@ class ProfileModel extends Model {
     notifyListeners();
     String id = await getId();
     var url = Uri.parse(base + 'users/get/user/$id');
-    var response = await http.get(url, headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
     // ignore: avoid_print
     print('getProfile: ' + response.statusCode.toString());
     switch (response.statusCode) {
@@ -75,14 +73,12 @@ class ProfileModel extends Model {
         getWorkers();
         getAllPosts(context: context);
         getMyPosts(context: context);
+        getGoals();
         break;
       default:
         load = false;
         notifyListeners();
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => const Login()),
-            (_) => false);
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const Login()), (_) => false);
     }
   }
 
@@ -91,10 +87,7 @@ class ProfileModel extends Model {
     notifyListeners();
     String id = await getId();
     var url = Uri.parse(base + 'users/get/user/$id/workers');
-    var response = await http.get(url, headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
     // ignore: avoid_print
     print("getWorkersUser: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -105,6 +98,28 @@ class ProfileModel extends Model {
           WorkerMini workerMini = WorkerMini.fromMap(map: item as Map);
           workers.add(workerMini);
           notifyListeners();
+        }
+        load = false;
+        notifyListeners();
+        break;
+    }
+  }
+
+  getGoals() async {
+    load = true;
+    notifyListeners();
+    String id = await getId();
+    var url = Uri.parse(base + 'users/$id/goals');
+    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
+    // ignore: avoid_print
+    print("getGoals: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 200:
+        goals = [];
+        var itens = json.decode(response.body);
+        for (var item in itens) {
+          EntitySaveMini entitySaveMini = EntitySaveMini.fromMap(map: item as Map);
+          goals.add(entitySaveMini);
         }
         load = false;
         notifyListeners();
@@ -130,32 +145,19 @@ class ProfileModel extends Model {
     notifyListeners();
   }
 
-  addImageProfile(
-      {required UserDTO userDTO, required BuildContext context}) async {
+  addImageProfile({required UserDTO userDTO, required BuildContext context}) async {
     load = true;
     notifyListeners();
     try {
       //--save image firebase -/
-      await FirebaseStorage.instance
-          .ref()
-          .child('profile')
-          .child(userDTO.idUser! + ".jpg")
-          .putFile(imageFile)
-          .snapshot
-          .ref
-          .getDownloadURL()
-          .then((value) async {
+      await FirebaseStorage.instance.ref().child('profile').child(userDTO.idUser! + ".jpg").putFile(imageFile).snapshot.ref.getDownloadURL().then((value) async {
         // ignore: avoid_print
         print('value: ' + value);
         userDTO.imageProfile = value;
 
         //--save image api -/
         var url = Uri.parse(base + 'users/put/add/image/profile');
-        var response =
-            await http.put(url, body: json.encode(userDTO.toMap()), headers: {
-          "Accept": "application/json; charset=utf-8",
-          "content-type": "application/json; charset=utf-8"
-        });
+        var response = await http.put(url, body: json.encode(userDTO.toMap()), headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
         // ignore: avoid_print
         print("updateImage: " + response.statusCode.toString());
         switch (response.statusCode) {
@@ -190,8 +192,7 @@ class ProfileModel extends Model {
     }
   }
 
-  removeImageProfile(
-      {required UserDTO userDTO, required BuildContext context}) async {
+  removeImageProfile({required UserDTO userDTO, required BuildContext context}) async {
     load = true;
     notifyListeners();
     try {
@@ -209,11 +210,7 @@ class ProfileModel extends Model {
       }).then((_) async {
         //--save image api -/
         var url = Uri.parse(base + 'users/put/remove/image/profile');
-        var response =
-            await http.put(url, body: json.encode(userDTO.toMap()), headers: {
-          "Accept": "application/json; charset=utf-8",
-          "content-type": "application/json; charset=utf-8"
-        });
+        var response = await http.put(url, body: json.encode(userDTO.toMap()), headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
         // ignore: avoid_print
         print("deleteImage: " + response.statusCode.toString());
         switch (response.statusCode) {
@@ -253,11 +250,7 @@ class ProfileModel extends Model {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'users/put/name');
-    var response =
-        await http.put(url, body: json.encode(userDTO.toMap()), headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.put(url, body: json.encode(userDTO.toMap()), headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
     // ignore: avoid_print
     print("updateName: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -287,11 +280,7 @@ class ProfileModel extends Model {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'users/put/place');
-    var response =
-        await http.put(url, body: json.encode(userDTO.toMap()), headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.put(url, body: json.encode(userDTO.toMap()), headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
     // ignore: avoid_print
     print("updateCity: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -311,16 +300,11 @@ class ProfileModel extends Model {
     }
   }
 
-  updateDescription(
-      {required UserDTO userUpdateDTO, required BuildContext context}) async {
+  updateDescription({required UserDTO userUpdateDTO, required BuildContext context}) async {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'users/put/description');
-    var response =
-        await http.put(url, body: json.encode(userUpdateDTO.toMap()), headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.put(url, body: json.encode(userUpdateDTO.toMap()), headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
     // ignore: avoid_print
     print("updateDescription: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -344,11 +328,7 @@ class ProfileModel extends Model {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'users/put/email');
-    var response =
-        await http.put(url, body: json.encode(userDTO.toMap()), headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.put(url, body: json.encode(userDTO.toMap()), headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
     // ignore: avoid_print
     print("updateEmail: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -380,16 +360,11 @@ class ProfileModel extends Model {
     }
   }
 
-  updatePassword(
-      {required UserDTO userDTO, required BuildContext context}) async {
+  updatePassword({required UserDTO userDTO, required BuildContext context}) async {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'users/put/password');
-    var response =
-        await http.put(url, body: json.encode(userDTO.toMap()), headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.put(url, body: json.encode(userDTO.toMap()), headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
     // ignore: avoid_print
     print("updatePassword: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -414,10 +389,7 @@ class ProfileModel extends Model {
     notifyListeners();
     String id = await getId();
     var url = Uri.parse(base + 'posts/get/user/$id/all');
-    var response = await http.get(url, headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
     // ignore: avoid_print
     print("getAllPosts: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -454,10 +426,7 @@ class ProfileModel extends Model {
     notifyListeners();
     String id = await getId();
     var url = Uri.parse(base + 'users/get/user/$id/posts/my/$id');
-    var response = await http.get(url, headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
     // ignore: avoid_print
     print("getMyPosts: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -486,16 +455,12 @@ class ProfileModel extends Model {
     }
   }
 
-  updateLikePost(
-      {required BuildContext context, required String idPost}) async {
+  updateLikePost({required BuildContext context, required String idPost}) async {
     load = true;
     notifyListeners();
     String id = await getId();
     var url = Uri.parse(base + 'posts/put/like/post/$idPost/user/$id');
-    var response = await http.put(url, headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.put(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
     // ignore: avoid_print
     print("updateLikePost: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -512,21 +477,14 @@ class ProfileModel extends Model {
     }
   }
 
-  removePost(
-      {required BuildContext context,
-      required String idPost,
-      required BuildContext contextScreenComment,
-      required bool screenComment}) async {
+  removePost({required BuildContext context, required String idPost, required BuildContext contextScreenComment, required bool screenComment}) async {
     load = true;
     notifyListeners();
     String id = await getId();
     var url = Uri.parse(base + 'posts/delete/post/$idPost/user/$id');
     var response = await http.delete(
       url,
-      headers: {
-        "Accept": "application/json; charset=utf-8",
-        "content-type": "application/json; charset=utf-8"
-      },
+      headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"},
     );
     // ignore: avoid_print
     print("removePost: " + response.statusCode.toString());
@@ -544,10 +502,7 @@ class ProfileModel extends Model {
     }
   }
 
-  returnPostWidget(
-      {required Map post,
-      required bool screenComment,
-      required BuildContext contextPage}) {
+  returnPostWidget({required Map post, required bool screenComment, required BuildContext contextPage}) {
     // ignore: avoid_print
     switch (post["typePost"]) {
       case TypePost.UPDATE:
@@ -561,19 +516,13 @@ class ProfileModel extends Model {
     }
   }
 
-  showDeletePostBottomSheet(
-      {required BuildContext context,
-      required String idPost,
-      required bool screenComment,
-      required bool screenUser,
-      required BuildContext contextPage}) {
+  showDeletePostBottomSheet({required BuildContext context, required String idPost, required bool screenComment, required bool screenUser, required BuildContext contextPage}) {
     showModalBottomSheet<dynamic>(
 
         //isScrollControlled: true,
         context: context,
         builder: (context) {
-          return ScopedModelDescendant<ThemeModel>(
-              builder: (context, child, theme) {
+          return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
             return BottomSheet(
                 backgroundColor: theme.background,
                 onClosing: () {},
@@ -703,15 +652,13 @@ class ProfileModel extends Model {
   //       });
   // }
 
-  showOptionsPostBottomSheet(
-      {required BuildContext contextAncestor, required String idPost}) {
+  showOptionsPostBottomSheet({required BuildContext contextAncestor, required String idPost}) {
     showModalBottomSheet<dynamic>(
 
         //isScrollControlled: true,
         context: contextAncestor,
         builder: (context) {
-          return ScopedModelDescendant<ThemeModel>(
-              builder: (context, child, theme) {
+          return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
             return BottomSheet(
                 backgroundColor: theme.background,
                 onClosing: () {},
@@ -734,9 +681,7 @@ class ProfileModel extends Model {
                             idAuthor: userMini.id,
                             release: DateTime.now().toString(),
                           );
-                          showOptionsReport(
-                              contextAncestor: contextAncestor,
-                              reportDTO: reportDTO);
+                          showOptionsReport(contextAncestor: contextAncestor, reportDTO: reportDTO);
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -769,15 +714,13 @@ class ProfileModel extends Model {
         });
   }
 
-  showOptionsCommentBottomSheet(
-      {required BuildContext contextAncestor, required String idComment}) {
+  showOptionsCommentBottomSheet({required BuildContext contextAncestor, required String idComment}) {
     showModalBottomSheet<dynamic>(
 
         //isScrollControlled: true,
         context: contextAncestor,
         builder: (context) {
-          return ScopedModelDescendant<ThemeModel>(
-              builder: (context, child, theme) {
+          return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
             return BottomSheet(
                 backgroundColor: theme.background,
                 onClosing: () {},
@@ -800,9 +743,7 @@ class ProfileModel extends Model {
                             idAuthor: userMini.id,
                             release: DateTime.now().toString(),
                           );
-                          showOptionsReport(
-                              contextAncestor: contextAncestor,
-                              reportDTO: reportDTO);
+                          showOptionsReport(contextAncestor: contextAncestor, reportDTO: reportDTO);
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -835,8 +776,7 @@ class ProfileModel extends Model {
         });
   }
 
-  showOptionsReport(
-      {required BuildContext contextAncestor, required ReportDTO reportDTO}) {
+  showOptionsReport({required BuildContext contextAncestor, required ReportDTO reportDTO}) {
     notifyListeners();
     showDialog(
         context: contextAncestor,
@@ -852,11 +792,7 @@ class ProfileModel extends Model {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'reports/post');
-    var response =
-        await http.post(url, body: json.encode(reportDTO.toMap()), headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.post(url, body: json.encode(reportDTO.toMap()), headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
     // ignore: avoid_print
     print('report: ' + response.statusCode.toString());
     switch (response.statusCode) {
@@ -881,8 +817,7 @@ class ProfileModel extends Model {
         //isScrollControlled: true,
         context: contextAncestor,
         builder: (context) {
-          return ScopedModelDescendant<ThemeModel>(
-              builder: (context, child, theme) {
+          return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
             return BottomSheet(
                 backgroundColor: theme.background,
                 onClosing: () {},
@@ -897,10 +832,7 @@ class ProfileModel extends Model {
                       GestureDetector(
                         onTap: () {
                           Navigator.pop(context);
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const NewPostTalk()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const NewPostTalk()));
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -929,10 +861,7 @@ class ProfileModel extends Model {
                       GestureDetector(
                         onTap: () {
                           Navigator.pop(context);
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const NewPostQuest()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const NewPostQuest()));
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -961,10 +890,7 @@ class ProfileModel extends Model {
                       GestureDetector(
                         onTap: () {
                           Navigator.pop(context);
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const NewGroup()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const NewGroup()));
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -1034,8 +960,7 @@ class ProfileModel extends Model {
         //isScrollControlled: true,
         context: context,
         builder: (context) {
-          return ScopedModelDescendant<ThemeModel>(
-              builder: (context, child, theme) {
+          return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
             return BottomSheet(
                 backgroundColor: theme.background,
                 onClosing: () {},
@@ -1055,8 +980,7 @@ class ProfileModel extends Model {
                             children: [
                               CircleAvatar(
                                 child: Icon(
-                                  LanguageModel().typeEntitiesIcon[
-                                      LanguageModel().typeEntities.indexOf(e)],
+                                  LanguageModel().typeEntitiesIcon[LanguageModel().typeEntities.indexOf(e)],
                                   size: 30.0,
                                   color: theme.buttonText,
                                 ),
@@ -1243,8 +1167,7 @@ class _OptionReportState extends State<OptionReport> {
                           onPressed: () {
                             Navigator.pop(context);
                             widget.reportDTO.typeReport = groupValue;
-                            ScopedModel.of<ProfileModel>(widget.contextAncestor)
-                                .report(
+                            ScopedModel.of<ProfileModel>(widget.contextAncestor).report(
                               reportDTO: widget.reportDTO,
                               context: widget.contextAncestor,
                             );
