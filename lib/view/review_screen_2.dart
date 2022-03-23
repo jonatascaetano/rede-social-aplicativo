@@ -277,7 +277,7 @@ class _ReviewScreen2State extends State<ReviewScreen2> {
                                                         : Text(
                                                             ConvertDate.convertToDatePost(release: review.entitySaveMini!.release!) + " ",
                                                             style: TextStyle(
-                                                              fontSize: theme.sizeTitle,
+                                                              fontSize: theme.sizeText,
                                                               letterSpacing: theme.letterSpacingText,
                                                               color: theme.subtitle,
                                                               fontWeight: FontWeight.normal,
@@ -296,7 +296,7 @@ class _ReviewScreen2State extends State<ReviewScreen2> {
                                                           Text(
                                                             review.entitySaveMini!.likeQuantity.toString() + " ",
                                                             style: TextStyle(
-                                                              fontSize: theme.sizeTitle,
+                                                              fontSize: theme.sizeText,
                                                               letterSpacing: theme.letterSpacingText,
                                                               color: review.entitySaveMini!.liked ? theme.emphasis : theme.subtitle,
                                                               fontWeight: FontWeight.normal,
@@ -304,7 +304,7 @@ class _ReviewScreen2State extends State<ReviewScreen2> {
                                                           ),
                                                           Icon(
                                                             Icons.thumb_up_alt_outlined,
-                                                            size: theme.sizeTitle,
+                                                            size: theme.sizeText,
                                                             color: review.entitySaveMini!.liked ? theme.emphasis : theme.subtitle,
                                                           ),
                                                         ],
@@ -316,7 +316,7 @@ class _ReviewScreen2State extends State<ReviewScreen2> {
                                                         Text(
                                                           review.entitySaveMini!.commentQuantity.toString() + " ",
                                                           style: TextStyle(
-                                                            fontSize: theme.sizeTitle,
+                                                            fontSize: theme.sizeText,
                                                             letterSpacing: theme.letterSpacingText,
                                                             color: theme.subtitle,
                                                             fontWeight: FontWeight.normal,
@@ -324,14 +324,14 @@ class _ReviewScreen2State extends State<ReviewScreen2> {
                                                         ),
                                                         Icon(
                                                           Icons.messenger_outline,
-                                                          size: theme.sizeTitle,
+                                                          size: theme.sizeText,
                                                           color: theme.subtitle,
                                                         ),
                                                       ],
                                                     ),
                                                     Icon(
                                                       Icons.more_vert_sharp,
-                                                      size: theme.sizeTitle,
+                                                      size: theme.sizeText,
                                                       color: Colors.transparent,
                                                     ),
                                                   ],
@@ -536,15 +536,12 @@ class _CommentWidgetState extends State<CommentWidget> {
                 SizedBox(
                   width: MediaQuery.of(context).size.width - 84,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const SizedBox(
-                        width: 8.0,
-                      ),
                       widget.commentMini.release == null
                           ? Container()
                           : Text(
-                              ConvertDate.convertToDatePost(release: widget.commentMini.release!) + " • ",
+                              ConvertDate.convertToDatePost(release: widget.commentMini.release!),
                               style: TextStyle(
                                 fontSize: theme.sizeText,
                                 letterSpacing: theme.letterSpacingText,
@@ -552,28 +549,29 @@ class _CommentWidgetState extends State<CommentWidget> {
                                 fontWeight: FontWeight.normal,
                               ),
                             ),
-                      const SizedBox(
-                        width: 8.0,
-                      ),
-                      Text(
-                        widget.commentMini.likeQuantity.toString(),
-                        style: TextStyle(
-                          fontSize: theme.sizeText,
-                          letterSpacing: theme.letterSpacingText,
-                          color: widget.commentMini.liked ? theme.emphasis : theme.subtitle,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          ScopedModel.of<ReviewModel>(context).updateLikeComment(context: context, idComment: widget.commentMini.id, idReview: widget.idReview);
-                        },
-                        icon: Icon(
-                          Icons.thumb_up_alt_outlined,
-                          size: theme.sizeTitle,
-                          color: widget.commentMini.liked ? theme.emphasis : theme.subtitle,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            widget.commentMini.likeQuantity.toString(),
+                            style: TextStyle(
+                              fontSize: theme.sizeText,
+                              letterSpacing: theme.letterSpacingText,
+                              color: widget.commentMini.liked ? theme.emphasis : theme.subtitle,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          IconButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () {
+                              ScopedModel.of<ReviewModel>(context).updateLikeComment(context: context, idComment: widget.commentMini.id, idReview: widget.idReview);
+                            },
+                            icon: Icon(
+                              Icons.thumb_up_alt_outlined,
+                              size: theme.sizeText,
+                              color: widget.commentMini.liked ? theme.emphasis : theme.subtitle,
+                            ),
+                          ),
+                        ],
                       ),
                       IconButton(
                         padding: EdgeInsets.zero,
@@ -594,9 +592,14 @@ class _CommentWidgetState extends State<CommentWidget> {
                         },
                         icon: Icon(
                           Icons.more_vert_sharp,
-                          size: theme.sizeTitle,
+                          size: theme.sizeText,
                           color: theme.subtitle,
                         ),
+                      ),
+                      Icon(
+                        Icons.more_vert_sharp,
+                        size: theme.sizeText,
+                        color: Colors.transparent,
                       ),
                     ],
                   ),

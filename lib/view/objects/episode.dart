@@ -4,12 +4,13 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/converts/convert_to_enum.dart';
 import 'package:social_network_application/entities/dto/entity_save_dto.dart';
 import 'package:social_network_application/entities/mini_dto/episode_mini.dart';
+import 'package:social_network_application/enuns/type_object.dart';
 import 'package:social_network_application/scoped_model/episode_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/widgets/mini_episodes/evaluation.dart';
+import 'package:social_network_application/widgets/reviews_2.dart';
 
-import 'episode/update_episode.dart';
 import 'episode/update_review_episode.dart';
 
 // ignore: must_be_immutable
@@ -97,31 +98,60 @@ class _EpisodeState extends State<Episode> {
                       ? ListView(
                           padding: EdgeInsets.zero,
                           children: [
-                            episode.episodeMini.image != null
-                                ? Container(
-                                    margin: EdgeInsets.zero,
-                                    padding: EdgeInsets.zero,
-                                    height: (MediaQuery.of(context).size.width / 16) * 9,
-                                    width: MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(
-                                      color: theme.shadow,
-                                      image: DecorationImage(
-                                        image: NetworkImage(episode.episodeMini.image!),
-                                        fit: BoxFit.fitHeight,
+                            Stack(
+                              children: [
+                                episode.episodeMini.image != null
+                                    ? Container(
+                                        margin: EdgeInsets.zero,
+                                        padding: EdgeInsets.zero,
+                                        height: (MediaQuery.of(context).size.width / 16) * 9,
+                                        width: MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(
+                                          color: theme.shadow,
+                                          image: DecorationImage(
+                                            image: NetworkImage(episode.episodeMini.image!),
+                                            fit: BoxFit.fitHeight,
+                                          ),
+                                        ),
+                                      )
+                                    : Container(
+                                        color: theme.shadow,
+                                        height: (MediaQuery.of(context).size.width / 16) * 9,
+                                        width: MediaQuery.of(context).size.width,
+                                        child: Center(
+                                          child: Icon(
+                                            Icons.image,
+                                            size: 100,
+                                            color: theme.emphasis,
+                                          ),
+                                        )),
+                                episode.episodeMiniIsNull
+                                    ? Container()
+                                    : Positioned(
+                                        bottom: 8.0,
+                                        right: 8.0,
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            primary: theme.buttonMain,
+                                            elevation: 0.0,
+                                            fixedSize: const Size(30, 30),
+                                            shape: const CircleBorder(),
+                                          ),
+                                          onPressed: () {
+                                            episode.showOptionsEpisodeBottomSheet(
+                                              contextAncestor: context,
+                                              episodeMini: episode.episodeMini,
+                                            );
+                                          },
+                                          child: Icon(
+                                            Icons.add,
+                                            size: 30,
+                                            color: ScopedModel.of<ThemeModel>(context).buttonMainText,
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  )
-                                : Container(
-                                    color: theme.shadow,
-                                    height: (MediaQuery.of(context).size.width / 16) * 9,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.image,
-                                        size: 100,
-                                        color: theme.emphasis,
-                                      ),
-                                    )),
+                              ],
+                            ),
                             const SizedBox(
                               height: 16.0,
                             ),
@@ -141,7 +171,7 @@ class _EpisodeState extends State<Episode> {
                             ),
 
                             Text(
-                              'Episode ' + episode.episodeMini.numberEpisode.toString(),
+                              'Episode number ' + episode.episodeMini.numberEpisode.toString(),
                               textAlign: TextAlign.center,
                               maxLines: 2,
                               style: TextStyle(
@@ -187,202 +217,205 @@ class _EpisodeState extends State<Episode> {
                             Divider(
                               color: theme.shadow,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        episode.episodeMini.category1.toString(),
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: theme.sizeTitle,
-                                          letterSpacing: theme.letterSpacingText,
-                                          color: theme.title,
-                                          fontWeight: FontWeight.normal,
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          episode.episodeMini.category1.toString(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: theme.sizeTitle,
+                                            letterSpacing: theme.letterSpacingText,
+                                            color: theme.title,
+                                            fontWeight: FontWeight.normal,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(
-                                        height: 4.0,
-                                      ),
-                                      Text(
-                                        LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: episode.episodeMini.season.entity.typeEntity)][1].toString(),
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: theme.sizeTextMini,
-                                          letterSpacing: theme.letterSpacingText,
-                                          color: theme.subtitle,
-                                          fontWeight: FontWeight.normal,
+                                        const SizedBox(
+                                          height: 4.0,
                                         ),
-                                      )
-                                    ],
+                                        Text(
+                                          LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: episode.episodeMini.season.entity.typeEntity)][1].toString(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: theme.sizeText,
+                                            letterSpacing: theme.letterSpacingText,
+                                            color: theme.subtitle,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        episode.episodeMini.category2.toString(),
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: theme.sizeTitle,
-                                          letterSpacing: theme.letterSpacingText,
-                                          color: theme.title,
-                                          fontWeight: FontWeight.normal,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          episode.episodeMini.category2.toString(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: theme.sizeTitle,
+                                            letterSpacing: theme.letterSpacingText,
+                                            color: theme.title,
+                                            fontWeight: FontWeight.normal,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(
-                                        height: 4.0,
-                                      ),
-                                      Text(
-                                        LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: episode.episodeMini.season.entity.typeEntity)][2].toString(),
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: theme.sizeTextMini,
-                                          letterSpacing: theme.letterSpacingText,
-                                          color: theme.subtitle,
-                                          fontWeight: FontWeight.normal,
+                                        const SizedBox(
+                                          height: 4.0,
                                         ),
-                                      )
-                                    ],
+                                        Text(
+                                          LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: episode.episodeMini.season.entity.typeEntity)][2].toString(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: theme.sizeText,
+                                            letterSpacing: theme.letterSpacingText,
+                                            color: theme.subtitle,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        episode.episodeMini.category3.toString(),
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: theme.sizeTitle,
-                                          letterSpacing: theme.letterSpacingText,
-                                          color: theme.title,
-                                          fontWeight: FontWeight.normal,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          episode.episodeMini.category3.toString(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: theme.sizeTitle,
+                                            letterSpacing: theme.letterSpacingText,
+                                            color: theme.title,
+                                            fontWeight: FontWeight.normal,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(
-                                        height: 4.0,
-                                      ),
-                                      Text(
-                                        LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: episode.episodeMini.season.entity.typeEntity)][3].toString(),
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: theme.sizeTextMini,
-                                          letterSpacing: theme.letterSpacingText,
-                                          color: theme.subtitle,
-                                          fontWeight: FontWeight.normal,
+                                        const SizedBox(
+                                          height: 4.0,
                                         ),
-                                      )
-                                    ],
+                                        Text(
+                                          LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: episode.episodeMini.season.entity.typeEntity)][3].toString(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: theme.sizeText,
+                                            letterSpacing: theme.letterSpacingText,
+                                            color: theme.subtitle,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        episode.episodeMini.category4.toString(),
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: theme.sizeTitle,
-                                          letterSpacing: theme.letterSpacingText,
-                                          color: theme.title,
-                                          fontWeight: FontWeight.normal,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          episode.episodeMini.category4.toString(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: theme.sizeTitle,
+                                            letterSpacing: theme.letterSpacingText,
+                                            color: theme.title,
+                                            fontWeight: FontWeight.normal,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(
-                                        height: 4.0,
-                                      ),
-                                      Text(
-                                        LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: episode.episodeMini.season.entity.typeEntity)][4].toString(),
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: theme.sizeTextMini,
-                                          letterSpacing: theme.letterSpacingText,
-                                          color: theme.subtitle,
-                                          fontWeight: FontWeight.normal,
+                                        const SizedBox(
+                                          height: 4.0,
                                         ),
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
+                                        Text(
+                                          LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: episode.episodeMini.season.entity.typeEntity)][4].toString(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: theme.sizeText,
+                                            letterSpacing: theme.letterSpacingText,
+                                            color: theme.subtitle,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                             Divider(
                               color: theme.shadow,
                             ),
 
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  primary: theme.button,
-                                  elevation: 0.0,
-                                ),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => UpdateEpisode(episodeMini: episode.episodeMini, context: context),
-                                    ),
-                                  );
-                                  // if (ScopedModel.of<ProfileModel>(context)
-                                  //     .userMini
-                                  //     .checked) {
-                                  //   Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //       builder: (context) => UpdateEpisode(
-                                  //           episodeMini: episode.episodeMini,
-                                  //           context: context),
-                                  //     ),
-                                  //   );
-                                  // } else {
-                                  //   ScaffoldMessenger.of(context).showSnackBar(
-                                  //       const SnackBar(
-                                  //           content: Text(
-                                  //               'only released to verified users')));
-                                  // }
-                                },
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.edit,
-                                      color: theme.buttonMain,
-                                    ),
-                                    const SizedBox(
-                                      width: 4.0,
-                                    ),
-                                    Text(
-                                      'edit episode'.toLowerCase(),
-                                      style: TextStyle(
-                                        fontSize: theme.sizeButton,
-                                        letterSpacing: theme.letterSpacingButton,
-                                        color: theme.buttonText,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+                            // Padding(
+                            //   padding: const EdgeInsets.all(8.0),
+                            //   child: ElevatedButton(
+                            //     style: ElevatedButton.styleFrom(
+                            //       primary: theme.button,
+                            //       elevation: 0.0,
+                            //     ),
+                            //     onPressed: () {
+                            //       Navigator.push(
+                            //         context,
+                            //         MaterialPageRoute(
+                            //           builder: (context) => UpdateEpisode(episodeMini: episode.episodeMini, context: context),
+                            //         ),
+                            //       );
+                            //       // if (ScopedModel.of<ProfileModel>(context)
+                            //       //     .userMini
+                            //       //     .checked) {
+                            //       //   Navigator.push(
+                            //       //     context,
+                            //       //     MaterialPageRoute(
+                            //       //       builder: (context) => UpdateEpisode(
+                            //       //           episodeMini: episode.episodeMini,
+                            //       //           context: context),
+                            //       //     ),
+                            //       //   );
+                            //       // } else {
+                            //       //   ScaffoldMessenger.of(context).showSnackBar(
+                            //       //       const SnackBar(
+                            //       //           content: Text(
+                            //       //               'only released to verified users')));
+                            //       // }
+                            //     },
+                            //     child: Row(
+                            //       mainAxisAlignment: MainAxisAlignment.center,
+                            //       children: [
+                            //         Icon(
+                            //           Icons.edit,
+                            //           color: theme.buttonMain,
+                            //         ),
+                            //         const SizedBox(
+                            //           width: 4.0,
+                            //         ),
+                            //         Text(
+                            //           'edit episode'.toLowerCase(),
+                            //           style: TextStyle(
+                            //             fontSize: theme.sizeButton,
+                            //             letterSpacing: theme.letterSpacingButton,
+                            //             color: theme.buttonText,
+                            //             fontWeight: FontWeight.normal,
+                            //           ),
+                            //         ),
+                            //       ],
+                            //     ),
+                            //   ),
+                            // ),
 
                             //update evaluation
                             episode.entitySaveMini == null
                                 ? Container()
                                 : Row(
                                     crossAxisAlignment: CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Evaluation(value: 1, evaluation: episode.entitySaveMini != null ? episode.entitySaveMini!.evaluation! : 0),
                                       Evaluation(value: 2, evaluation: episode.entitySaveMini != null ? episode.entitySaveMini!.evaluation! : 0),
                                       Evaluation(value: 3, evaluation: episode.entitySaveMini != null ? episode.entitySaveMini!.evaluation! : 0),
-                                      Evaluation(value: 4, evaluation: episode.entitySaveMini != null ? episode.entitySaveMini!.evaluation! : 3),
+                                      Evaluation(value: 4, evaluation: episode.entitySaveMini != null ? episode.entitySaveMini!.evaluation! : 0),
                                       Evaluation(value: 5, evaluation: episode.entitySaveMini != null ? episode.entitySaveMini!.evaluation! : 0),
                                     ],
                                   ),
@@ -392,7 +425,7 @@ class _EpisodeState extends State<Episode> {
                             episode.entitySaveMini == null
                                 ? Container()
                                 : const SizedBox(
-                                    height: 16.0,
+                                    height: 8.0,
                                   ),
                             //*update evaluation
 
@@ -419,9 +452,9 @@ class _EpisodeState extends State<Episode> {
                                 fontWeight: FontWeight.normal,
                               ),
                             ),
-                            const SizedBox(
-                              height: 8.0,
-                            ),
+                            // const SizedBox(
+                            //   height: 8.0,
+                            // ),
 
                             //categoty update
 
@@ -611,6 +644,7 @@ class _EpisodeState extends State<Episode> {
 
                             episode.episodeMini.description != null
                                 ? ExpansionTile(
+                                    tilePadding: const EdgeInsets.all(8.0),
                                     onExpansionChanged: (_) {
                                       episode.updateMaxLine();
                                     },
@@ -636,6 +670,50 @@ class _EpisodeState extends State<Episode> {
                             const SizedBox(
                               height: 16.0,
                             ),
+
+                            episode.reviews.isEmpty
+                                ? Container()
+                                : Divider(
+                                    height: 5.0,
+                                    thickness: 5.0,
+                                    color: theme.shadow,
+                                  ),
+
+                            episode.reviews.isEmpty
+                                ? Container()
+                                : Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
+                                    child: Text(
+                                      'Reviews',
+                                      style: TextStyle(
+                                        fontSize: theme.sizeAppBar,
+                                        letterSpacing: theme.letterSpacingText,
+                                        color: theme.emphasis,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                  ),
+
+                            episode.reviews.isEmpty
+                                ? Container()
+                                : ListView.separated(
+                                    shrinkWrap: true,
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    separatorBuilder: (context, index) {
+                                      return Divider(
+                                        height: 5.0,
+                                        thickness: 5.0,
+                                        color: theme.shadow,
+                                      );
+                                    },
+                                    itemCount: episode.reviews.length,
+                                    itemBuilder: (context, index) {
+                                      return Reviews2(
+                                        entitySaveMini: episode.reviews[index],
+                                        contextAncestor: context,
+                                        typeObject: TypeObject.EPISODE,
+                                      );
+                                    })
 
                             // SizedBox(
                             //   height: 150,

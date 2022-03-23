@@ -343,7 +343,7 @@ class _EntityState extends State<Entity> {
                                       Evaluation(value: 1, evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 0),
                                       Evaluation(value: 2, evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 0),
                                       Evaluation(value: 3, evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 0),
-                                      Evaluation(value: 4, evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 3),
+                                      Evaluation(value: 4, evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 0),
                                       Evaluation(value: 5, evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 0),
                                     ],
                                   ),

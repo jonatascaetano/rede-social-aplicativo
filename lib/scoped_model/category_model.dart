@@ -5,8 +5,7 @@ class CategoryModel extends Model {
   List<EntitySaveMini> entitySaves = [];
   bool load = true;
 
-  CategoryModel(
-      {required List<EntitySaveMini> entitySaveMinis, required int category}) {
+  CategoryModel({required List<EntitySaveMini> entitySaveMinis, required int category}) {
     switch (category) {
       case 1:
         getCategory1(entitySaveMinis: entitySaveMinis);
@@ -32,6 +31,20 @@ class CategoryModel extends Model {
 
       default:
     }
+  }
+
+  static getQuantityEvalued({
+    required List<EntitySaveMini>? entitySaveMinis,
+  }) {
+    int value = 0;
+    if (entitySaveMinis != null) {
+      for (EntitySaveMini entitySaveMini in entitySaveMinis) {
+        if (entitySaveMini.rated) {
+          value++;
+        }
+      }
+    }
+    return value;
   }
 
   getCategory1({required List<EntitySaveMini> entitySaveMinis}) {

@@ -174,7 +174,7 @@ class _SeasonState extends State<Season> {
                             ),
 
                             Text(
-                              'Season ' + season.seasonMini.numberSeason.toString(),
+                              'Season number ' + season.seasonMini.numberSeason.toString(),
                               textAlign: TextAlign.center,
                               maxLines: 2,
                               style: TextStyle(
@@ -404,7 +404,7 @@ class _SeasonState extends State<Season> {
                                       Evaluation(value: 1, evaluation: season.entitySaveMini != null ? season.entitySaveMini!.evaluation! : 0),
                                       Evaluation(value: 2, evaluation: season.entitySaveMini != null ? season.entitySaveMini!.evaluation! : 0),
                                       Evaluation(value: 3, evaluation: season.entitySaveMini != null ? season.entitySaveMini!.evaluation! : 0),
-                                      Evaluation(value: 4, evaluation: season.entitySaveMini != null ? season.entitySaveMini!.evaluation! : 3),
+                                      Evaluation(value: 4, evaluation: season.entitySaveMini != null ? season.entitySaveMini!.evaluation! : 0),
                                       Evaluation(value: 5, evaluation: season.entitySaveMini != null ? season.entitySaveMini!.evaluation! : 0),
                                     ],
                                   ),
