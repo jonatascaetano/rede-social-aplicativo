@@ -587,19 +587,22 @@ class _EntityState extends State<Entity> {
                                   ),
 
                             entity.entityMini.description != null
-                                ? ExpansionTile(
-                                    tilePadding: const EdgeInsets.all(8.0),
-                                    onExpansionChanged: (_) {
-                                      entity.updateMaxLine();
-                                    },
-                                    title: Text(
-                                      entity.entityMini.description!,
-                                      maxLines: entity.maxLine,
-                                      style: TextStyle(
-                                        fontSize: theme.sizeText,
-                                        letterSpacing: theme.letterSpacingText,
-                                        color: theme.title,
-                                        fontWeight: FontWeight.normal,
+                                ? Theme(
+                                    data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                                    child: ExpansionTile(
+                                      tilePadding: const EdgeInsets.all(8.0),
+                                      onExpansionChanged: (_) {
+                                        entity.updateMaxLine();
+                                      },
+                                      title: Text(
+                                        entity.entityMini.description!,
+                                        maxLines: entity.maxLine,
+                                        style: TextStyle(
+                                          fontSize: theme.sizeText,
+                                          letterSpacing: theme.letterSpacingText,
+                                          color: theme.title,
+                                          fontWeight: FontWeight.normal,
+                                        ),
                                       ),
                                     ),
                                   )

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:social_network_application/converts/convert_to_enum.dart';
 import 'package:social_network_application/entities/dto/entity_dto.dart';
 import 'package:social_network_application/scoped_model/new_entity_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
@@ -34,8 +35,8 @@ class _NewEntityState extends State<NewEntity> {
                     "New " + widget.typeEntity.toLowerCase(),
                     style: TextStyle(
                       color: theme.title,
-                      fontSize: 24.0,
-                      letterSpacing: 1.0,
+                      fontSize: theme.sizeAppBar,
+                      letterSpacing: theme.letterSpacingAppBar,
                       fontWeight: FontWeight.normal,
                     ),
                   ),
@@ -89,7 +90,7 @@ class _NewEntityState extends State<NewEntity> {
                             ),
                             onPressed: () {
                               if (_globalKey.currentState!.validate()) {
-                                EntityDTO entityDTO = EntityDTO(name: name.text, description: description.text, typeEntity: LanguageModel().typeEntitiesMini[LanguageModel().typeEntities.indexOf(widget.typeEntity)].toUpperCase());
+                                EntityDTO entityDTO = EntityDTO(name: name.text, description: description.text, typeEntity: ConvertToEnum.convertValueToTypeEntity(index: LanguageModel().typeEntities.indexOf(widget.typeEntity)));
                                 newEntity.createEntity(
                                   entityDTO: entityDTO,
                                   context: context,

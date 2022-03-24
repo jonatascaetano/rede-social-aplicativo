@@ -104,28 +104,28 @@ class ConvertToEnum {
         value = TypeEntity.NOVELS;
         break;
       case 4:
-        value = TypeEntity.NOVELS;
+        value = TypeEntity.TV_SHOWS;
         break;
       case 5:
-        value = TypeEntity.NOVELS;
+        value = TypeEntity.BOOKS;
         break;
       case 6:
-        value = TypeEntity.NOVELS;
+        value = TypeEntity.GAMES;
         break;
       case 7:
-        value = TypeEntity.NOVELS;
+        value = TypeEntity.WEB_PROGRAMS;
         break;
       case 8:
-        value = TypeEntity.NOVELS;
+        value = TypeEntity.SONGS;
         break;
       case 9:
-        value = TypeEntity.NOVELS;
+        value = TypeEntity.MUSIC_ALBUMS;
         break;
       case 10:
-        value = TypeEntity.NOVELS;
+        value = TypeEntity.PLACES;
         break;
       case 11:
-        value = TypeEntity.NOVELS;
+        value = TypeEntity.RECIPES;
         break;
     }
     return value;

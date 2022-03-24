@@ -576,19 +576,22 @@ class _SeasonState extends State<Season> {
                                   ),
 
                             season.seasonMini.description != null
-                                ? ExpansionTile(
-                                    tilePadding: const EdgeInsets.all(8.0),
-                                    onExpansionChanged: (_) {
-                                      season.updateMaxLine();
-                                    },
-                                    title: Text(
-                                      season.seasonMini.description!,
-                                      maxLines: season.maxLine,
-                                      style: TextStyle(
-                                        fontSize: theme.sizeText,
-                                        letterSpacing: theme.letterSpacingText,
-                                        color: theme.title,
-                                        fontWeight: FontWeight.normal,
+                                ? Theme(
+                                    data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                                    child: ExpansionTile(
+                                      tilePadding: const EdgeInsets.all(8.0),
+                                      onExpansionChanged: (_) {
+                                        season.updateMaxLine();
+                                      },
+                                      title: Text(
+                                        season.seasonMini.description!,
+                                        maxLines: season.maxLine,
+                                        style: TextStyle(
+                                          fontSize: theme.sizeText,
+                                          letterSpacing: theme.letterSpacingText,
+                                          color: theme.title,
+                                          fontWeight: FontWeight.normal,
+                                        ),
                                       ),
                                     ),
                                   )

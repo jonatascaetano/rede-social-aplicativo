@@ -78,7 +78,7 @@ class _UserState extends State<User> {
               padding: EdgeInsets.zero,
               child: Stack(
                 children: [
-                  user.profileNull
+                  user.profileNull || user.goalsIsNull
                       ? Container()
                       : ListView(
                           padding: EdgeInsets.zero,

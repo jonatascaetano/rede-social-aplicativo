@@ -643,19 +643,22 @@ class _EpisodeState extends State<Episode> {
                             // ),
 
                             episode.episodeMini.description != null
-                                ? ExpansionTile(
-                                    tilePadding: const EdgeInsets.all(8.0),
-                                    onExpansionChanged: (_) {
-                                      episode.updateMaxLine();
-                                    },
-                                    title: Text(
-                                      episode.episodeMini.description!,
-                                      maxLines: episode.maxLine,
-                                      style: TextStyle(
-                                        fontSize: theme.sizeText,
-                                        letterSpacing: theme.letterSpacingText,
-                                        color: theme.title,
-                                        fontWeight: FontWeight.normal,
+                                ? Theme(
+                                    data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                                    child: ExpansionTile(
+                                      tilePadding: const EdgeInsets.all(8.0),
+                                      onExpansionChanged: (_) {
+                                        episode.updateMaxLine();
+                                      },
+                                      title: Text(
+                                        episode.episodeMini.description!,
+                                        maxLines: episode.maxLine,
+                                        style: TextStyle(
+                                          fontSize: theme.sizeText,
+                                          letterSpacing: theme.letterSpacingText,
+                                          color: theme.title,
+                                          fontWeight: FontWeight.normal,
+                                        ),
                                       ),
                                     ),
                                   )

@@ -210,35 +210,38 @@ class _ReviewScreen2State extends State<ReviewScreen2> {
                                                           ),
                                                         ),
                                                       )
-                                                    : ExpansionTile(
-                                                        tilePadding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 0.0),
-                                                        title: Text(
-                                                          'Spoiler',
-                                                          style: TextStyle(
-                                                            fontSize: theme.sizeText,
-                                                            letterSpacing: theme.letterSpacingText,
-                                                            color: theme.title,
-                                                            fontWeight: FontWeight.normal,
+                                                    : Theme(
+                                                        data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                                                        child: ExpansionTile(
+                                                          tilePadding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 0.0),
+                                                          title: Text(
+                                                            'Spoiler',
+                                                            style: TextStyle(
+                                                              fontSize: theme.sizeText,
+                                                              letterSpacing: theme.letterSpacingText,
+                                                              color: theme.title,
+                                                              fontWeight: FontWeight.normal,
+                                                            ),
                                                           ),
-                                                        ),
-                                                        children: [
-                                                          Padding(
-                                                            padding: const EdgeInsets.fromLTRB(0, 2, 0, 16),
-                                                            child: Align(
-                                                              alignment: Alignment.centerLeft,
-                                                              child: Text(
-                                                                review.entitySaveMini!.review!,
-                                                                textAlign: TextAlign.left,
-                                                                style: TextStyle(
-                                                                  fontSize: theme.sizeText,
-                                                                  letterSpacing: theme.letterSpacingText,
-                                                                  color: theme.title,
-                                                                  fontWeight: FontWeight.normal,
+                                                          children: [
+                                                            Padding(
+                                                              padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 0.0),
+                                                              child: Align(
+                                                                alignment: Alignment.centerLeft,
+                                                                child: Text(
+                                                                  review.entitySaveMini!.review!,
+                                                                  textAlign: TextAlign.left,
+                                                                  style: TextStyle(
+                                                                    fontSize: theme.sizeText,
+                                                                    letterSpacing: theme.letterSpacingText,
+                                                                    color: theme.title,
+                                                                    fontWeight: FontWeight.normal,
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ),
-                                                          ),
-                                                        ],
+                                                          ],
+                                                        ),
                                                       ),
                                                 const SizedBox(
                                                   height: 16.0,

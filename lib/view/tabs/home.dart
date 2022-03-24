@@ -53,64 +53,90 @@ class _HomeState extends State<Home> {
             children: [
               profile.postsAreNull
                   ? Container()
-                  : ListView(
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      children: [
-                        Divider(
-                          height: 10.0,
-                          thickness: 10.0,
-                          color: theme.shadow,
-                        ),
-                        ListView.separated(
-                            padding: EdgeInsets.zero,
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            separatorBuilder: (context, index) {
-                              return Divider(
-                                height: 10.0,
-                                thickness: 10.0,
-                                color: theme.shadow,
-                              );
-                            },
-                            itemCount: profile.allPosts.length,
-                            itemBuilder: (context, index) {
-                              if (index % 8 == 0 && index != 0) {
-                                return Column(
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      decoration: BoxDecoration(
-                                        color: theme.shadow,
-                                      ),
-                                      child: getBanner(AdmobBannerSize.MEDIUM_RECTANGLE),
+                  : profile.allPosts.isEmpty
+                      ? Center(
+                          child: Container(
+                              width: 250,
+                              height: 250,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: theme.shadow,
+                                ),
+                              ),
+                              child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'Posts',
+                                    style: TextStyle(
+                                      color: theme.title,
+                                      fontSize: theme.sizeAppBar,
+                                      letterSpacing: theme.letterSpacingAppBar,
+                                      fontWeight: FontWeight.normal,
                                     ),
-                                    Divider(
-                                      height: 10.0,
-                                      thickness: 10.0,
-                                      color: theme.shadow,
-                                    ),
-                                    profile.returnPostWidget(post: profile.allPosts[index], screenComment: false, contextPage: context),
+                                  ),
+                                ),
+                              )),
+                        )
+                      : ListView(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          children: [
+                            Divider(
+                              height: 10.0,
+                              thickness: 10.0,
+                              color: theme.shadow,
+                            ),
+                            ListView.separated(
+                                padding: EdgeInsets.zero,
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                separatorBuilder: (context, index) {
+                                  return Divider(
+                                    height: 10.0,
+                                    thickness: 10.0,
+                                    color: theme.shadow,
+                                  );
+                                },
+                                itemCount: profile.allPosts.length,
+                                itemBuilder: (context, index) {
+                                  if (index % 8 == 0 && index != 0) {
+                                    return Column(
+                                      children: [
+                                        Container(
+                                          width: MediaQuery.of(context).size.width,
+                                          decoration: BoxDecoration(
+                                            color: theme.shadow,
+                                          ),
+                                          child: getBanner(AdmobBannerSize.MEDIUM_RECTANGLE),
+                                        ),
+                                        Divider(
+                                          height: 10.0,
+                                          thickness: 10.0,
+                                          color: theme.shadow,
+                                        ),
+                                        profile.returnPostWidget(post: profile.allPosts[index], screenComment: false, contextPage: context),
+                                        // UpdatePostEntityWidget(
+                                        //   postUpdateMini: profile.posts[index],
+                                        //   screenComment: false,
+                                        // ),
+                                      ],
+                                    );
+                                  } else {
+                                    return profile.returnPostWidget(
+                                      post: profile.allPosts[index],
+                                      screenComment: false,
+                                      contextPage: context,
+                                    );
                                     // UpdatePostEntityWidget(
                                     //   postUpdateMini: profile.posts[index],
                                     //   screenComment: false,
-                                    // ),
-                                  ],
-                                );
-                              } else {
-                                return profile.returnPostWidget(
-                                  post: profile.allPosts[index],
-                                  screenComment: false,
-                                  contextPage: context,
-                                );
-                                // UpdatePostEntityWidget(
-                                //   postUpdateMini: profile.posts[index],
-                                //   screenComment: false,
-                                // );
-                              }
-                            }),
-                      ],
-                    ),
+                                    // );
+                                  }
+                                }),
+                          ],
+                        ),
               profile.load
                   ? Positioned(
                       bottom: 0.0,

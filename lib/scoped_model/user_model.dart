@@ -30,6 +30,7 @@ class UserModel extends Model {
   late String idUSer;
   bool blocked = false;
   List<EntitySaveMini> goals = [];
+  bool goalsIsNull = true;
 
   UserModel({required String idUser, required BuildContext context}) {
     getWorkersUser(idUser: idUser);
@@ -100,7 +101,12 @@ class UserModel extends Model {
         }
         load = false;
         notifyListeners();
+        goalsIsNull = false;
+        notifyListeners();
         break;
+      default:
+        goalsIsNull = false;
+        notifyListeners();
     }
   }
 

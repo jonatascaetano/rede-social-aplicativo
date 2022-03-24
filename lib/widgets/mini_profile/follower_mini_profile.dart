@@ -130,7 +130,7 @@ class _FollowerMiniProfileState extends State<FollowerMiniProfile> {
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                            primary: theme.buttonMain,
+                            primary: theme.detail,
                             elevation: 1.0,
                           ),
                         ),

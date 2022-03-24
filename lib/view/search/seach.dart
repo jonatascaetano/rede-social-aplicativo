@@ -21,6 +21,7 @@ class Search extends SearchDelegate {
             ),
             textTheme: const TextTheme(
               headline6: TextStyle(
+                color: Colors.white,
                 fontSize: 21,
                 //decoration:TextDecoration.none,
                 decorationThickness: 0.0000001,
@@ -38,6 +39,7 @@ class Search extends SearchDelegate {
             ),
             textTheme: const TextTheme(
               headline6: TextStyle(
+                color: Colors.black,
                 fontSize: 21,
                 //decoration:TextDecoration.none,
                 decorationThickness: 0.0000001,

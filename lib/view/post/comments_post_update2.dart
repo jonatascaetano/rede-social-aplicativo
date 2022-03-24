@@ -219,35 +219,38 @@ class _CommentsPostUpdate2State extends State<CommentsPostUpdate2> {
                                                               ),
                                                             )
                                                           : Container()
-                                                      : ExpansionTile(
-                                                          tilePadding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 0.0),
-                                                          title: Text(
-                                                            'Spoiler',
-                                                            style: TextStyle(
-                                                              fontSize: theme.sizeText,
-                                                              letterSpacing: theme.letterSpacingText,
-                                                              color: theme.title,
-                                                              fontWeight: FontWeight.normal,
+                                                      : Theme(
+                                                          data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                                                          child: ExpansionTile(
+                                                            tilePadding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 0.0),
+                                                            title: Text(
+                                                              'Spoiler',
+                                                              style: TextStyle(
+                                                                fontSize: theme.sizeText,
+                                                                letterSpacing: theme.letterSpacingText,
+                                                                color: theme.title,
+                                                                fontWeight: FontWeight.normal,
+                                                              ),
                                                             ),
-                                                          ),
-                                                          children: [
-                                                            Align(
-                                                              alignment: Alignment.centerLeft,
-                                                              child: Padding(
-                                                                padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 0.0),
-                                                                child: Text(
-                                                                  widget.postUpdateMini.body!,
-                                                                  textAlign: TextAlign.left,
-                                                                  style: TextStyle(
-                                                                    fontSize: theme.sizeText,
-                                                                    letterSpacing: theme.letterSpacingText,
-                                                                    color: theme.title,
-                                                                    fontWeight: FontWeight.normal,
+                                                            children: [
+                                                              Align(
+                                                                alignment: Alignment.centerLeft,
+                                                                child: Padding(
+                                                                  padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 0.0),
+                                                                  child: Text(
+                                                                    widget.postUpdateMini.body!,
+                                                                    textAlign: TextAlign.left,
+                                                                    style: TextStyle(
+                                                                      fontSize: theme.sizeText,
+                                                                      letterSpacing: theme.letterSpacingText,
+                                                                      color: theme.title,
+                                                                      fontWeight: FontWeight.normal,
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                          ],
+                                                            ],
+                                                          ),
                                                         ),
                                                   const SizedBox(
                                                     height: 8.0,
