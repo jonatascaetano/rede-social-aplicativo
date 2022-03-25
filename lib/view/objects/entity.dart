@@ -68,7 +68,6 @@ class _EntityState extends State<Entity> {
     ScopedModel.of<EntityModel>(context).getId();
     ScopedModel.of<EntityModel>(context).getEntity(entityId: widget.entityMini.id);
     ScopedModel.of<EntityModel>(context).getEntitySave(entityId: widget.entityMini.id);
-    ScopedModel.of<EntityModel>(context).getWorkers(entityId: widget.entityMini.id);
     ScopedModel.of<EntityModel>(context).getSeasons(entityId: widget.entityMini.id);
     ScopedModel.of<EntityModel>(context).getReviews(entityId: widget.entityMini.id);
     super.initState();

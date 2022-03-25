@@ -11,7 +11,6 @@ import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
 import 'package:social_network_application/entities/mini_dto/entity_save_mini.dart';
 import 'package:social_network_application/entities/mini_dto/post_update_mini.dart';
 import 'package:social_network_application/entities/mini_dto/season_mini.dart';
-import 'package:social_network_application/entities/mini_dto/worker_mini.dart';
 import 'package:social_network_application/enuns/level.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
@@ -27,7 +26,6 @@ class EntityModel extends Model {
   bool load = false;
   late EntityMini entityMini;
   bool entityMiniIsNull = true;
-  List<WorkerMini> workers = [];
   List<SeasonMini> seasons = [];
   late String idUser;
   EntitySaveMini? entitySaveMini;
@@ -144,28 +142,6 @@ class EntityModel extends Model {
         // ignore: avoid_print
         print(item.toString());
         entitySaveMini = EntitySaveMini.fromMap(map: item);
-        load = false;
-        notifyListeners();
-        break;
-    }
-  }
-
-  getWorkers({required String entityId}) async {
-    load = true;
-    notifyListeners();
-    var url = Uri.parse(base + 'entities/get/entity/$entityId/workers');
-    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
-// ignore: avoid_print
-    print("getWorkersEntity: " + response.statusCode.toString());
-    switch (response.statusCode) {
-      case 200:
-        workers = [];
-        var itens = json.decode(response.body);
-        for (var item in itens) {
-          WorkerMini workerMini = WorkerMini.fromMap(map: item as Map);
-          workers.add(workerMini);
-          notifyListeners();
-        }
         load = false;
         notifyListeners();
         break;

@@ -9,7 +9,6 @@ import 'package:social_network_application/entities/dto/post_update_dto.dart';
 import 'package:social_network_application/entities/mini_dto/entity_save_mini.dart';
 import 'package:social_network_application/entities/mini_dto/episode_mini.dart';
 import 'package:social_network_application/entities/mini_dto/post_update_mini.dart';
-import 'package:social_network_application/entities/mini_dto/worker_mini.dart';
 import 'package:http/http.dart' as http;
 import 'package:social_network_application/enuns/level.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
@@ -25,7 +24,6 @@ class EpisodeModel extends Model {
   bool episodeMiniIsNull = true;
   late EpisodeMini episodeMini;
   late EntitySaveMini? entitySaveMini;
-  late List<WorkerMini> workers = [];
   int maxLine = 5;
   List<DropdownMenuItem<int>> dropdownList = [];
   late String idUser;

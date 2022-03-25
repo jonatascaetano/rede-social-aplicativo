@@ -7,7 +7,6 @@ import 'package:social_network_application/entities/dto/report_dto.dart';
 import 'package:social_network_application/entities/mini_dto/entity_save_mini.dart';
 import 'package:social_network_application/entities/mini_dto/post_update_mini.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
-import 'package:social_network_application/entities/mini_dto/worker_mini.dart';
 import 'package:social_network_application/enuns/level_report.dart';
 import 'package:social_network_application/enuns/type_post.dart';
 import 'package:social_network_application/enuns/type_report.dart';
@@ -22,7 +21,6 @@ class UserModel extends Model {
 
   late bool showFollowButton = false;
   late bool isFollowing;
-  List<WorkerMini> workers = [];
   bool profileNull = true;
   late UserMini userMini;
   bool load = false;
@@ -33,7 +31,6 @@ class UserModel extends Model {
   bool goalsIsNull = true;
 
   UserModel({required String idUser, required BuildContext context}) {
-    getWorkersUser(idUser: idUser);
     getProfile(idUser: idUser, context: context);
     checkFollowing(idUser: idUser);
     isBlocked(idUser: idUser);
@@ -62,25 +59,6 @@ class UserModel extends Model {
         load = false;
         notifyListeners();
         getMyPosts(context: context);
-    }
-  }
-
-  getWorkersUser({required String idUser}) async {
-    var url = Uri.parse(base + 'users/get/user/$idUser/workers');
-    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
-    // ignore: avoid_print
-    print("getWorkersUser: " + response.statusCode.toString());
-    switch (response.statusCode) {
-      case 200:
-        workers = [];
-        var itens = json.decode(response.body);
-        for (var item in itens) {
-          WorkerMini workerMini = WorkerMini.fromMap(map: item as Map);
-          workers.add(workerMini);
-          notifyListeners();
-        }
-        notifyListeners();
-        break;
     }
   }
 

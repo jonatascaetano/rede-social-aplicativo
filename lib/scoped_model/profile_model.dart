@@ -9,7 +9,6 @@ import 'package:social_network_application/entities/mini_dto/entity_save_mini.da
 import 'package:social_network_application/entities/mini_dto/post_update_mini.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 import 'dart:convert';
-import 'package:social_network_application/entities/mini_dto/worker_mini.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_network_application/enuns/level_report.dart';
 import 'package:social_network_application/enuns/type_post.dart';
@@ -29,7 +28,6 @@ import 'support/theme_model.dart';
 class ProfileModel extends Model {
   static const String base = "https://jonatas-social-network-api.herokuapp.com/";
 
-  List<WorkerMini> workers = [];
   late UserMini userMini;
   bool profileNull = true;
   bool load = false;
@@ -70,7 +68,6 @@ class ProfileModel extends Model {
         notifyListeners();
         load = false;
         notifyListeners();
-        getWorkers();
         getAllPosts(context: context);
         getMyPosts(context: context);
         getGoals();
@@ -79,29 +76,6 @@ class ProfileModel extends Model {
         load = false;
         notifyListeners();
         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const Login()), (_) => false);
-    }
-  }
-
-  getWorkers() async {
-    load = true;
-    notifyListeners();
-    String id = await getId();
-    var url = Uri.parse(base + 'users/get/user/$id/workers');
-    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
-    // ignore: avoid_print
-    print("getWorkersUser: " + response.statusCode.toString());
-    switch (response.statusCode) {
-      case 200:
-        workers = [];
-        var itens = json.decode(response.body);
-        for (var item in itens) {
-          WorkerMini workerMini = WorkerMini.fromMap(map: item as Map);
-          workers.add(workerMini);
-          notifyListeners();
-        }
-        load = false;
-        notifyListeners();
-        break;
     }
   }
 
