@@ -86,8 +86,6 @@ class SearchModel extends Model {
     try {
       var url = Uri.parse(base + 'groups/name?name=$text');
       var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
-      // ignore: avoid_print
-      print("find sugestions group: " + response.statusCode.toString());
       switch (response.statusCode) {
         case 200:
           List<dynamic> list = json.decode(response.body);
@@ -168,7 +166,6 @@ class SearchModel extends Model {
       var url = Uri.parse(base + 'groups/name?name=$text');
       var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
       // ignore: avoid_print
-      print("find group: " + response.statusCode.toString());
       switch (response.statusCode) {
         case 200:
           List<dynamic> list = json.decode(response.body);

@@ -68,9 +68,9 @@ class ProfileModel extends Model {
         notifyListeners();
         load = false;
         notifyListeners();
-        getAllPosts(context: context);
-        getMyPosts(context: context);
-        getGoals();
+        await getAllPosts(context: context);
+        await getMyPosts(context: context);
+        await getGoals();
         break;
       default:
         load = false;
