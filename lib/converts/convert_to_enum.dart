@@ -17,9 +17,6 @@ class ConvertToEnum {
       case TypeObject.EPISODE:
         value = 3;
         break;
-      case TypeObject.WORKER:
-        value = 4;
-        break;
       case TypeObject.POST:
         value = 5;
         break;
@@ -40,6 +37,9 @@ class ConvertToEnum {
         break;
       case TypeObject.COMMENT:
         value = 11;
+        break;
+      case TypeObject.GROUP:
+        value = 12;
         break;
     }
     return value;

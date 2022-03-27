@@ -8,8 +8,6 @@ class TypeObject {
   // ignore: constant_identifier_names
   static const String EPISODE = 'EPISODE';
   // ignore: constant_identifier_names
-  static const String WORKER = 'WORKER';
-  // ignore: constant_identifier_names
   static const String POST = 'POST';
   // ignore: constant_identifier_names
   static const String INVITATION = 'INVITATION';
@@ -23,4 +21,6 @@ class TypeObject {
   static const String EDITION = 'EDITION';
   // ignore: constant_identifier_names
   static const String COMMENT = 'COMMENT';
+  // ignore: constant_identifier_names
+  static const String GROUP = 'GROUP';
 }

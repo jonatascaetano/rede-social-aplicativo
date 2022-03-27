@@ -1,4 +1,5 @@
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
+import 'package:social_network_application/enuns/type_object.dart';
 
 class GroupMini {
   late String id;
@@ -6,14 +7,15 @@ class GroupMini {
   late String description;
   late UserMini? creator;
   late String creationDate;
-  late String image;
+  late String? image;
   late int quantityMembers;
-  late int quantityModerator;
+  late int quantityModerators;
   late int quantitySilenced;
   late int quantityPosts;
   late bool userIsMember;
   late bool userIsModerator;
   late bool userIsSilenced;
+  late String typeObject = TypeObject.GROUP;
 
   GroupMini.fromMap({required Map map}) {
     id = map["id"];
@@ -23,11 +25,12 @@ class GroupMini {
     creationDate = map["creationDate"];
     image = map["image"];
     quantityMembers = map["quantityMembers"];
-    quantityModerator = map["quantityModerator"];
+    quantityModerators = map["quantityModerators"];
     quantitySilenced = map["quantitySilenced"];
     quantityPosts = map["quantityPosts"];
     userIsMember = map["userIsMember"];
     userIsModerator = map["userIsModerator"];
     userIsSilenced = map['userIsSilenced'];
+    typeObject = map['typeObject'];
   }
 }
