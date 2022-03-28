@@ -4,7 +4,7 @@ import 'package:social_network_application/converts/convert_to_enum.dart';
 import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
-import 'package:social_network_application/view/objects/entity.dart';
+import 'package:social_network_application/view/objects/entity2.dart';
 
 // ignore: must_be_immutable
 class EntityMiniResult extends StatefulWidget {
@@ -24,7 +24,7 @@ class _EntityMiniResultState extends State<EntityMiniResult> {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                  builder: (context) => Entity(
+                  builder: (context) => Entity2(
                         entityMini: widget.entityMini,
                         datasheetIsOpen: false,
                       )));

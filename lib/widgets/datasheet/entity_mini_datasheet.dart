@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/entities/mini_dto/entity_save_mini.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
-import 'package:social_network_application/view/objects/entity.dart';
+import 'package:social_network_application/view/objects/entity2.dart';
 
 // ignore: must_be_immutable
 class EntityMiniDatasheet extends StatefulWidget {
@@ -106,7 +106,7 @@ class _EntityMiniDatasheetState extends State<EntityMiniDatasheet> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Entity(
+                            builder: (context) => Entity2(
                                   entityMini: widget.entitySaveMini.entity!,
                                   datasheetIsOpen: true,
                                 )));

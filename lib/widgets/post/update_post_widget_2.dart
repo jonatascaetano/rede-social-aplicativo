@@ -8,7 +8,7 @@ import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/scoped_model/user_model.dart';
-import 'package:social_network_application/view/objects/entity.dart';
+import 'package:social_network_application/view/objects/entity2.dart';
 import 'package:social_network_application/view/objects/user.dart';
 import 'package:social_network_application/view/post/comments_post_update2.dart';
 import 'package:social_network_application/view/post/likes_post.dart';
@@ -487,7 +487,7 @@ Widget entity({required PostUpdateMini postUpdateMini, required BuildContext con
         const Text(" "),
         GestureDetector(
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Entity(entityMini: postUpdateMini.entity!, datasheetIsOpen: false)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Entity2(entityMini: postUpdateMini.entity!, datasheetIsOpen: false)));
           },
           child: Text(
             postUpdateMini.entity!.name,
