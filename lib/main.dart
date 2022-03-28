@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/scoped_model/entity_model.dart';
-import 'package:social_network_application/scoped_model/episode_model.dart';
 import 'package:social_network_application/scoped_model/login_model.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/registe_model.dart';
-import 'package:social_network_application/scoped_model/season_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'scoped_model/support/language_model.dart';
@@ -18,8 +16,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Admob.initialize();
   await Firebase.initializeApp();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
     runApp(const Model());
   });
 }
@@ -46,21 +43,14 @@ class _ModelState extends State<Model> {
                 model: LoginModel(),
                 child: ScopedModel<EntityModel>(
                   model: EntityModel(),
-                  child: ScopedModel<SeasonModel>(
-                    model: SeasonModel(),
-                    child: ScopedModel<EpisodeModel>(
-                      model: EpisodeModel(),
-                      child: ScopedModelDescendant<ThemeModel>(
-                          builder: (context, child, theme) {
-                        return MaterialApp(
-                          theme: theme.themeData,
-                          themeMode: theme.themeMode,
-                          debugShowCheckedModeBanner: false,
-                          home: const SplashScreen(),
-                        );
-                      }),
-                    ),
-                  ),
+                  child: ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
+                    return MaterialApp(
+                      theme: theme.themeData,
+                      themeMode: theme.themeMode,
+                      debugShowCheckedModeBanner: false,
+                      home: const SplashScreen(),
+                    );
+                  }),
                 ),
               ),
             )),

@@ -1,3 +1,5 @@
+/*
+
 import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
 
 class SeasonMini {
@@ -33,3 +35,5 @@ class SeasonMini {
     category4 = map["category4"];
   }
 }
+
+*/

@@ -11,9 +11,6 @@ import 'package:social_network_application/entities/mini_dto/entity_save_mini.da
 import 'package:social_network_application/enuns/type_comment.dart';
 import 'package:social_network_application/enuns/type_object.dart';
 import 'package:social_network_application/scoped_model/entity_model.dart';
-import 'package:social_network_application/scoped_model/season_model.dart';
-
-import 'episode_model.dart';
 import 'support/theme_model.dart';
 
 class ReviewModel extends Model {
@@ -26,16 +23,12 @@ class ReviewModel extends Model {
   TextEditingController controller = TextEditingController();
   late String typeObject;
 
-  ReviewModel(
-      {required this.idReview,
-      required this.contextAncestor,
-      required this.typeObject}) {
+  ReviewModel({required this.idReview, required this.contextAncestor, required this.typeObject}) {
     getReview();
     getAllCommentReview(idReview: idReview, context: contextAncestor);
   }
 
-  static const String base =
-      "https://jonatas-social-network-api.herokuapp.com/";
+  static const String base = "https://jonatas-social-network-api.herokuapp.com/";
 
   Future<String> getId() async {
     final prefs = await SharedPreferences.getInstance();
@@ -46,12 +39,8 @@ class ReviewModel extends Model {
     load = true;
     notifyListeners();
     String idUser = await getId();
-    var url =
-        Uri.parse(base + 'entitysaves/get/entitysave/$idReview/user/$idUser');
-    var response = await http.get(url, headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var url = Uri.parse(base + 'entitysaves/get/entitysave/$idReview/user/$idUser');
+    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
 // ignore: avoid_print
     print("getReview: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -74,17 +63,12 @@ class ReviewModel extends Model {
     }
   }
 
-  updateLikeReview(
-      {required BuildContext context, required String idReview}) async {
+  updateLikeReview({required BuildContext context, required String idReview}) async {
     load = true;
     notifyListeners();
     String idUser = await getId();
-    var url = Uri.parse(
-        base + 'entitysaves/put/like/entitysave/$idReview/user/$idUser');
-    var response = await http.put(url, headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var url = Uri.parse(base + 'entitysaves/put/like/entitysave/$idReview/user/$idUser');
+    var response = await http.put(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
     // ignore: avoid_print
     print("updateLikePost: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -92,18 +76,17 @@ class ReviewModel extends Model {
         getReview();
         switch (typeObject) {
           case TypeObject.ENTITY:
-            ScopedModel.of<EntityModel>(context)
-                .getReviews(entityId: entitySaveMini!.entity!.id);
+            ScopedModel.of<EntityModel>(context).getReviews(entityId: entitySaveMini!.entity!.id);
             break;
-          case TypeObject.SEASON:
-            ScopedModel.of<SeasonModel>(context)
-                .getReviews(seasonId: entitySaveMini!.season!.id);
-            break;
-          case TypeObject.EPISODE:
-            ScopedModel.of<EpisodeModel>(context)
-                .getReviews(episodeId: entitySaveMini!.episode!.id);
-            break;
-          default:
+          // case TypeObject.SEASON:
+          //   ScopedModel.of<SeasonModel>(context)
+          //       .getReviews(seasonId: entitySaveMini!.season!.id);
+          //   break;
+          // case TypeObject.EPISODE:
+          //   ScopedModel.of<EpisodeModel>(context)
+          //       .getReviews(episodeId: entitySaveMini!.episode!.id);
+          //   break;
+          // default:
         }
         break;
       default:
@@ -116,17 +99,12 @@ class ReviewModel extends Model {
     }
   }
 
-  getAllCommentReview(
-      {required String idReview, required BuildContext context}) async {
+  getAllCommentReview({required String idReview, required BuildContext context}) async {
     load = true;
     notifyListeners();
     String idUser = await getId();
-    var url =
-        Uri.parse(base + 'entitysaves/get/comments/$idReview/user/$idUser');
-    var response = await http.get(url, headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var url = Uri.parse(base + 'entitysaves/get/comments/$idReview/user/$idUser');
+    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
     // ignore: avoid_print
     print("getAllCommentReview: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -171,10 +149,7 @@ class ReviewModel extends Model {
     var url = Uri.parse(base + 'comments/post/comment/entitysave');
     var response = await http.post(
       url,
-      headers: {
-        "Accept": "application/json; charset=utf-8",
-        "content-type": "application/json; charset=utf-8"
-      },
+      headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"},
       body: json.encode(commentDTO.toMap()),
     );
     // ignore: avoid_print
@@ -186,17 +161,16 @@ class ReviewModel extends Model {
         getAllCommentReview(idReview: idReview, context: context);
         switch (typeObject) {
           case TypeObject.ENTITY:
-            ScopedModel.of<EntityModel>(context)
-                .getReviews(entityId: entitySaveMini!.entity!.id);
+            ScopedModel.of<EntityModel>(context).getReviews(entityId: entitySaveMini!.entity!.id);
             break;
-          case TypeObject.SEASON:
-            ScopedModel.of<SeasonModel>(context)
-                .getReviews(seasonId: entitySaveMini!.season!.id);
-            break;
-          case TypeObject.EPISODE:
-            ScopedModel.of<EpisodeModel>(context)
-                .getReviews(episodeId: entitySaveMini!.episode!.id);
-            break;
+          // case TypeObject.SEASON:
+          //   ScopedModel.of<SeasonModel>(context)
+          //       .getReviews(seasonId: entitySaveMini!.season!.id);
+          //   break;
+          // case TypeObject.EPISODE:
+          //   ScopedModel.of<EpisodeModel>(context)
+          //       .getReviews(episodeId: entitySaveMini!.episode!.id);
+          //   break;
           default:
         }
         break;
@@ -230,10 +204,7 @@ class ReviewModel extends Model {
     var url = Uri.parse(base + 'comments/delete/comment/entitysave');
     var response = await http.delete(
       url,
-      headers: {
-        "Accept": "application/json; charset=utf-8",
-        "content-type": "application/json; charset=utf-8"
-      },
+      headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"},
       body: json.encode(commentDTO.toMap()),
     );
     // ignore: avoid_print
@@ -244,17 +215,16 @@ class ReviewModel extends Model {
         getAllCommentReview(idReview: idReview, context: context);
         switch (typeObject) {
           case TypeObject.ENTITY:
-            ScopedModel.of<EntityModel>(context)
-                .getReviews(entityId: entitySaveMini!.entity!.id);
+            ScopedModel.of<EntityModel>(context).getReviews(entityId: entitySaveMini!.entity!.id);
             break;
-          case TypeObject.SEASON:
-            ScopedModel.of<SeasonModel>(context)
-                .getReviews(seasonId: entitySaveMini!.season!.id);
-            break;
-          case TypeObject.EPISODE:
-            ScopedModel.of<EpisodeModel>(context)
-                .getReviews(episodeId: entitySaveMini!.episode!.id);
-            break;
+          // case TypeObject.SEASON:
+          //   ScopedModel.of<SeasonModel>(context)
+          //       .getReviews(seasonId: entitySaveMini!.season!.id);
+          //   break;
+          // case TypeObject.EPISODE:
+          //   ScopedModel.of<EpisodeModel>(context)
+          //       .getReviews(episodeId: entitySaveMini!.episode!.id);
+          //   break;
           default:
         }
         break;
@@ -268,17 +238,11 @@ class ReviewModel extends Model {
     }
   }
 
-  updateLikeComment(
-      {required BuildContext context,
-      required String idComment,
-      required String idReview}) async {
+  updateLikeComment({required BuildContext context, required String idComment, required String idReview}) async {
     notifyListeners();
     String id = await getId();
     var url = Uri.parse(base + 'comments/put/like/comment/$idComment/user/$id');
-    var response = await http.put(url, headers: {
-      "Accept": "application/json; charset=utf-8",
-      "content-type": "application/json; charset=utf-8"
-    });
+    var response = await http.put(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
     // ignore: avoid_print
     print("updateLikePost: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -295,18 +259,13 @@ class ReviewModel extends Model {
     }
   }
 
-  showDeleteCommentBottomSheet(
-      {required BuildContext contextCommentPage,
-      required String idReview,
-      required String idComment,
-      required BuildContext contextPage}) {
+  showDeleteCommentBottomSheet({required BuildContext contextCommentPage, required String idReview, required String idComment, required BuildContext contextPage}) {
     showModalBottomSheet<dynamic>(
 
         //isScrollControlled: true,
         context: contextCommentPage,
         builder: (context) {
-          return ScopedModelDescendant<ThemeModel>(
-              builder: (context, child, theme) {
+          return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
             return BottomSheet(
                 backgroundColor: theme.background,
                 onClosing: () {},

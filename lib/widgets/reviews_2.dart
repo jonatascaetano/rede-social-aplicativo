@@ -5,9 +5,7 @@ import 'package:social_network_application/converts/convert_like_names.dart';
 import 'package:social_network_application/entities/mini_dto/entity_save_mini.dart';
 import 'package:social_network_application/enuns/type_object.dart';
 import 'package:social_network_application/scoped_model/entity_model.dart';
-import 'package:social_network_application/scoped_model/episode_model.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
-import 'package:social_network_application/scoped_model/season_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/objects/user.dart';
 import 'package:social_network_application/view/review/likes_review.dart';
@@ -286,18 +284,18 @@ class _Reviews2State extends State<Reviews2> {
                                       idReview: widget.entitySaveMini.id,
                                     );
                                     break;
-                                  case TypeObject.SEASON:
-                                    ScopedModel.of<SeasonModel>(widget.contextAncestor).updateLikeReview(
-                                      context: widget.contextAncestor,
-                                      idReview: widget.entitySaveMini.id,
-                                    );
-                                    break;
-                                  case TypeObject.EPISODE:
-                                    ScopedModel.of<EpisodeModel>(widget.contextAncestor).updateLikeReview(
-                                      context: widget.contextAncestor,
-                                      idReview: widget.entitySaveMini.id,
-                                    );
-                                    break;
+                                  // case TypeObject.SEASON:
+                                  //   ScopedModel.of<SeasonModel>(widget.contextAncestor).updateLikeReview(
+                                  //     context: widget.contextAncestor,
+                                  //     idReview: widget.entitySaveMini.id,
+                                  //   );
+                                  //   break;
+                                  // case TypeObject.EPISODE:
+                                  //   ScopedModel.of<EpisodeModel>(widget.contextAncestor).updateLikeReview(
+                                  //     context: widget.contextAncestor,
+                                  //     idReview: widget.entitySaveMini.id,
+                                  //   );
+                                  //   break;
                                   default:
                                 }
                               },

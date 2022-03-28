@@ -1,3 +1,5 @@
+/*
+
 import 'package:social_network_application/entities/mini_dto/season_mini.dart';
 
 class EpisodeMini {
@@ -31,3 +33,5 @@ class EpisodeMini {
     category4 = map["category4"];
   }
 }
+
+*/

@@ -4,15 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
-import 'package:social_network_application/entities/mini_dto/episode_mini.dart';
 import 'package:social_network_application/entities/mini_dto/group_mini.dart';
-import 'package:social_network_application/entities/mini_dto/season_mini.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 import 'package:social_network_application/enuns/type_object.dart';
 import 'package:social_network_application/widgets/mini_results/entity_mini_result.dart';
-import 'package:social_network_application/widgets/mini_results/episode_mini_result.dart';
 import 'package:social_network_application/widgets/mini_results/group_mini_result.dart';
-import 'package:social_network_application/widgets/mini_results/season_mini_result.dart';
 import 'package:social_network_application/widgets/mini_results/user_mini_result.dart';
 import 'package:http/http.dart' as http;
 
@@ -55,34 +51,34 @@ class SearchModel extends Model {
       // ignore: avoid_print
       print(e);
     }
-    try {
-      var url = Uri.parse(base + 'seasons/get/seasons/name?name=$text');
-      var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
-      switch (response.statusCode) {
-        case 200:
-          List<dynamic> list = json.decode(response.body);
-          for (var object in list) {
-            found.add(object["name"]!);
-          }
-      }
-    } catch (e) {
-      // ignore: avoid_print
-      print(e);
-    }
-    try {
-      var url = Uri.parse(base + 'episodes/get/episodes/name?name=$text');
-      var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
-      switch (response.statusCode) {
-        case 200:
-          List<dynamic> list = json.decode(response.body);
-          for (var object in list) {
-            found.add(object["name"]!);
-          }
-      }
-    } catch (e) {
-      // ignore: avoid_print
-      print(e);
-    }
+    // try {
+    //   var url = Uri.parse(base + 'seasons/get/seasons/name?name=$text');
+    //   var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
+    //   switch (response.statusCode) {
+    //     case 200:
+    //       List<dynamic> list = json.decode(response.body);
+    //       for (var object in list) {
+    //         found.add(object["name"]!);
+    //       }
+    //   }
+    // } catch (e) {
+    //   // ignore: avoid_print
+    //   print(e);
+    // }
+    // try {
+    //   var url = Uri.parse(base + 'episodes/get/episodes/name?name=$text');
+    //   var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
+    //   switch (response.statusCode) {
+    //     case 200:
+    //       List<dynamic> list = json.decode(response.body);
+    //       for (var object in list) {
+    //         found.add(object["name"]!);
+    //       }
+    //   }
+    // } catch (e) {
+    //   // ignore: avoid_print
+    //   print(e);
+    // }
     try {
       var url = Uri.parse(base + 'groups/name?name=$text');
       var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
@@ -134,34 +130,34 @@ class SearchModel extends Model {
       // ignore: avoid_print
       print(e);
     }
-    try {
-      var url = Uri.parse(base + 'seasons/get/seasons/name?name=$text');
-      var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
-      switch (response.statusCode) {
-        case 200:
-          List<dynamic> list = json.decode(response.body);
-          for (Map map in list) {
-            found.add(map);
-          }
-      }
-    } catch (e) {
-      // ignore: avoid_print
-      print(e);
-    }
-    try {
-      var url = Uri.parse(base + 'episodes/get/episodes/name?name=$text');
-      var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
-      switch (response.statusCode) {
-        case 200:
-          List<dynamic> list = json.decode(response.body);
-          for (Map map in list) {
-            found.add(map);
-          }
-      }
-    } catch (e) {
-      // ignore: avoid_print
-      print(e);
-    }
+    // try {
+    //   var url = Uri.parse(base + 'seasons/get/seasons/name?name=$text');
+    //   var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
+    //   switch (response.statusCode) {
+    //     case 200:
+    //       List<dynamic> list = json.decode(response.body);
+    //       for (Map map in list) {
+    //         found.add(map);
+    //       }
+    //   }
+    // } catch (e) {
+    //   // ignore: avoid_print
+    //   print(e);
+    // }
+    // try {
+    //   var url = Uri.parse(base + 'episodes/get/episodes/name?name=$text');
+    //   var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
+    //   switch (response.statusCode) {
+    //     case 200:
+    //       List<dynamic> list = json.decode(response.body);
+    //       for (Map map in list) {
+    //         found.add(map);
+    //       }
+    //   }
+    // } catch (e) {
+    //   // ignore: avoid_print
+    //   print(e);
+    // }
     try {
       var url = Uri.parse(base + 'groups/name?name=$text');
       var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
@@ -189,12 +185,12 @@ class SearchModel extends Model {
       case TypeObject.ENTITY:
         EntityMini entityMini = EntityMini.fromMap(map: map);
         return EntityMiniResult(entityMini: entityMini);
-      case TypeObject.SEASON:
-        SeasonMini seasonMini = SeasonMini.fromMap(map: map);
-        return SeasonMiniResult(seasonMini: seasonMini);
-      case TypeObject.EPISODE:
-        EpisodeMini episodeMini = EpisodeMini.fromMap(map: map);
-        return EpisodeMiniResult(episodeMini: episodeMini);
+      // case TypeObject.SEASON:
+      //   SeasonMini seasonMini = SeasonMini.fromMap(map: map);
+      //   return SeasonMiniResult(seasonMini: seasonMini);
+      // case TypeObject.EPISODE:
+      //   EpisodeMini episodeMini = EpisodeMini.fromMap(map: map);
+      //   return EpisodeMiniResult(episodeMini: episodeMini);
       case TypeObject.GROUP:
         GroupMini groupMini = GroupMini.fromMap(map: map);
         return GroupMiniResult(groupMini: groupMini);

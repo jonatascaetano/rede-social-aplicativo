@@ -11,8 +11,8 @@ class PostUpdateDTO {
   late int category;
   late String idAuthor;
   late String? idEntity;
-  late String? idSeason;
-  late String? idEpisode;
+  // late String? idSeason;
+  // late String? idEpisode;
   late int evaluation;
   late bool spoiler;
 
@@ -27,8 +27,8 @@ class PostUpdateDTO {
     map["category"] = category;
     map["idAuthor"] = idAuthor;
     map["idEntity"] = idEntity;
-    map["idSeason"] = idSeason;
-    map["idEpisode"] = idEpisode;
+    // map["idSeason"] = idSeason;
+    // map["idEpisode"] = idEpisode;
     map["evaluation"] = evaluation;
     map["spoiler"] = spoiler;
     return map;
@@ -44,8 +44,8 @@ class PostUpdateDTO {
     required this.category,
     required this.idAuthor,
     required this.idEntity,
-    required this.idSeason,
-    required this.idEpisode,
+    // required this.idSeason,
+    // required this.idEpisode,
     required this.evaluation,
     required this.spoiler,
   });

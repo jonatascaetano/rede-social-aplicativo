@@ -10,12 +10,10 @@ import 'package:social_network_application/entities/dto/post_update_dto.dart';
 import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
 import 'package:social_network_application/entities/mini_dto/entity_save_mini.dart';
 import 'package:social_network_application/entities/mini_dto/post_update_mini.dart';
-import 'package:social_network_application/entities/mini_dto/season_mini.dart';
 import 'package:social_network_application/enuns/level.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/view/objects/entity/add_body_post_entity.dart';
-import 'package:social_network_application/view/objects/entity/new_season_entity.dart';
 import 'package:social_network_application/view/objects/entity/update_entity.dart';
 
 import 'support/theme_model.dart';
@@ -26,7 +24,7 @@ class EntityModel extends Model {
   bool load = false;
   late EntityMini entityMini;
   bool entityMiniIsNull = true;
-  List<SeasonMini> seasons = [];
+  // List<SeasonMini> seasons = [];
   late String idUser;
   EntitySaveMini? entitySaveMini;
   int maxLine = 5;
@@ -60,26 +58,26 @@ class EntityModel extends Model {
     }
   }
 
-  getSeasons({required String entityId}) async {
-    load = true;
-    notifyListeners();
-    var url = Uri.parse(base + 'entities/get/entity/$entityId/seasons');
-    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
-// ignore: avoid_print
-    print("getSeasons: " + response.statusCode.toString());
-    switch (response.statusCode) {
-      case 200:
-        seasons = [];
-        var itens = json.decode(response.body);
-        for (var item in itens) {
-          SeasonMini seasonMini = SeasonMini.fromMap(map: item as Map);
-          seasons.add(seasonMini);
-        }
-        load = false;
-        notifyListeners();
-        break;
-    }
-  }
+//   getSeasons({required String entityId}) async {
+//     load = true;
+//     notifyListeners();
+//     var url = Uri.parse(base + 'entities/get/entity/$entityId/seasons');
+//     var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
+// // ignore: avoid_print
+//     print("getSeasons: " + response.statusCode.toString());
+//     switch (response.statusCode) {
+//       case 200:
+//         seasons = [];
+//         var itens = json.decode(response.body);
+//         for (var item in itens) {
+//           SeasonMini seasonMini = SeasonMini.fromMap(map: item as Map);
+//           seasons.add(seasonMini);
+//         }
+//         load = false;
+//         notifyListeners();
+//         break;
+//     }
+//   }
 
   //reviews
 
@@ -328,8 +326,8 @@ class EntityModel extends Model {
       category: category,
       idAuthor: idUser,
       idEntity: entitySaveMini.level == Level.ENTITY ? entitySaveMini.entity!.id : null,
-      idSeason: entitySaveMini.level == Level.SEASON ? entitySaveMini.season!.id : null,
-      idEpisode: entitySaveMini.level == Level.EPISODE ? entitySaveMini.episode!.id : null,
+      // idSeason: entitySaveMini.level == Level.SEASON ? entitySaveMini.season!.id : null,
+      // idEpisode: entitySaveMini.level == Level.EPISODE ? entitySaveMini.episode!.id : null,
       evaluation: category == 6 ? entitySaveMini.evaluation! : 0,
       spoiler: category == 7 ? entitySaveMini.spoiler : false,
     );
@@ -409,40 +407,40 @@ class EntityModel extends Model {
                       const SizedBox(
                         height: 16.0,
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => NewSeasonEntity(entityMini: entityMini, context: contextAncestor),
-                            ),
-                          );
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.add_box_rounded,
-                                color: theme.emphasis,
-                              ),
-                              const SizedBox(
-                                width: 8.0,
-                              ),
-                              Text(
-                                'New season',
-                                style: TextStyle(
-                                  fontSize: theme.sizeText,
-                                  letterSpacing: theme.letterSpacingText,
-                                  color: theme.title,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      // GestureDetector(
+                      //   onTap: () {
+                      //     Navigator.pop(context);
+                      //     Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //         builder: (context) => NewSeasonEntity(entityMini: entityMini, context: contextAncestor),
+                      //       ),
+                      //     );
+                      //   },
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.all(8.0),
+                      //     child: Row(
+                      //       children: [
+                      //         Icon(
+                      //           Icons.add_box_rounded,
+                      //           color: theme.emphasis,
+                      //         ),
+                      //         const SizedBox(
+                      //           width: 8.0,
+                      //         ),
+                      //         Text(
+                      //           'New season',
+                      //           style: TextStyle(
+                      //             fontSize: theme.sizeText,
+                      //             letterSpacing: theme.letterSpacingText,
+                      //             color: theme.title,
+                      //             fontWeight: FontWeight.normal,
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
                       GestureDetector(
                         onTap: () {
                           Navigator.pop(context);

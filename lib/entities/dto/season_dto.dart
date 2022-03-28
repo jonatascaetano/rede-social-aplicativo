@@ -1,3 +1,4 @@
+/*
 class SeasonDTO {
   late String name;
   late String description;
@@ -17,3 +18,5 @@ class SeasonDTO {
     //required this.numberSeason,
   });
 }
+
+*/

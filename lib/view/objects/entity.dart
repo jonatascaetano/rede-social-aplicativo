@@ -4,16 +4,12 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/converts/convert_to_enum.dart';
 import 'package:social_network_application/entities/dto/entity_save_dto.dart';
 import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
-import 'package:social_network_application/enuns/type_entity.dart';
 import 'package:social_network_application/enuns/type_object.dart';
 import 'package:social_network_application/scoped_model/entity_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/widgets/mini_entities/evaluation.dart';
-import 'package:social_network_application/widgets/mini_entities/season_mini_entity.dart';
 import 'package:social_network_application/widgets/reviews_2.dart';
-
-import 'entity/all_seasons_entity.dart';
 
 import 'entity/update_review_entity.dart';
 
@@ -68,7 +64,6 @@ class _EntityState extends State<Entity> {
     ScopedModel.of<EntityModel>(context).getId();
     ScopedModel.of<EntityModel>(context).getEntity(entityId: widget.entityMini.id);
     ScopedModel.of<EntityModel>(context).getEntitySave(entityId: widget.entityMini.id);
-    ScopedModel.of<EntityModel>(context).getSeasons(entityId: widget.entityMini.id);
     ScopedModel.of<EntityModel>(context).getReviews(entityId: widget.entityMini.id);
     super.initState();
   }
@@ -616,147 +611,147 @@ class _EntityState extends State<Entity> {
                               height: 16.0,
                             ),
 
-                            entity.seasons.isEmpty
-                                ? Container()
-                                : entity.entityMini.typeEntity == TypeEntity.SERIES ||
-                                        entity.entityMini.typeEntity == TypeEntity.ANIMES ||
-                                        entity.entityMini.typeEntity == TypeEntity.NOVELS ||
-                                        entity.entityMini.typeEntity == TypeEntity.TV_SHOWS ||
-                                        entity.entityMini.typeEntity == TypeEntity.WEB_PROGRAMS ||
-                                        entity.entityMini.typeEntity == TypeEntity.PLACES
-                                    ? Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                'View all seasons',
-                                                style: TextStyle(
-                                                  fontSize: theme.sizeAppBar,
-                                                  letterSpacing: theme.letterSpacingText,
-                                                  color: theme.emphasis,
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                              ),
-                                            ),
-                                            IconButton(
-                                              onPressed: () {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) => const AllSeasonsEntity(),
-                                                  ),
-                                                );
-                                              },
-                                              icon: Icon(
-                                                Icons.arrow_forward,
-                                                color: theme.emphasis,
-                                                size: 24.0,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    : Container(),
+                            // entity.seasons.isEmpty
+                            //     ? Container()
+                            //     : entity.entityMini.typeEntity == TypeEntity.SERIES ||
+                            //             entity.entityMini.typeEntity == TypeEntity.ANIMES ||
+                            //             entity.entityMini.typeEntity == TypeEntity.NOVELS ||
+                            //             entity.entityMini.typeEntity == TypeEntity.TV_SHOWS ||
+                            //             entity.entityMini.typeEntity == TypeEntity.WEB_PROGRAMS ||
+                            //             entity.entityMini.typeEntity == TypeEntity.PLACES
+                            //         ? Padding(
+                            //             padding: const EdgeInsets.all(8.0),
+                            //             child: Row(
+                            //               children: [
+                            //                 Expanded(
+                            //                   child: Text(
+                            //                     'View all seasons',
+                            //                     style: TextStyle(
+                            //                       fontSize: theme.sizeAppBar,
+                            //                       letterSpacing: theme.letterSpacingText,
+                            //                       color: theme.emphasis,
+                            //                       fontWeight: FontWeight.normal,
+                            //                     ),
+                            //                   ),
+                            //                 ),
+                            //                 IconButton(
+                            //                   onPressed: () {
+                            //                     Navigator.push(
+                            //                       context,
+                            //                       MaterialPageRoute(
+                            //                         builder: (context) => const AllSeasonsEntity(),
+                            //                       ),
+                            //                     );
+                            //                   },
+                            //                   icon: Icon(
+                            //                     Icons.arrow_forward,
+                            //                     color: theme.emphasis,
+                            //                     size: 24.0,
+                            //                   ),
+                            //                 ),
+                            //               ],
+                            //             ),
+                            //           )
+                            //         : Container(),
 
-                            entity.seasons.isEmpty
-                                ? Container()
-                                : entity.entityMini.typeEntity == TypeEntity.SERIES ||
-                                        entity.entityMini.typeEntity == TypeEntity.ANIMES ||
-                                        entity.entityMini.typeEntity == TypeEntity.NOVELS ||
-                                        entity.entityMini.typeEntity == TypeEntity.TV_SHOWS ||
-                                        entity.entityMini.typeEntity == TypeEntity.WEB_PROGRAMS ||
-                                        entity.entityMini.typeEntity == TypeEntity.PLACES
-                                    ? SizedBox(
-                                        height: 270,
-                                        child: ListView.builder(
-                                            scrollDirection: Axis.horizontal,
-                                            itemCount: entity.seasons.length,
-                                            itemBuilder: (context, index) {
-                                              return SeasonMiniEntity(
-                                                seasonMini: entity.seasons[index],
-                                              );
-                                              // if (index == entity.seasons.length) {
-                                              //   return Padding(
-                                              //     padding:
-                                              //         const EdgeInsets.all(4.0),
-                                              //     child: GestureDetector(
-                                              //       onTap: () {
-                                              //         Navigator.push(
-                                              //             context,
-                                              //             MaterialPageRoute(
-                                              //                 builder: (context) =>
-                                              //                     NewSeasonEntity(
-                                              //                         entityMini: entity
-                                              //                             .entityMini,
-                                              //                         context:
-                                              //                             context)));
-                                              //         // if (ScopedModel.of<ProfileModel>(
-                                              //         //         context)
-                                              //         //     .userMini
-                                              //         //     .checked) {
-                                              //         //   Navigator.push(
-                                              //         //     context,
-                                              //         //     MaterialPageRoute(
-                                              //         //         builder: (context) =>
-                                              //         //             NewSeasonEntity(
-                                              //         //                 entityMini: entity
-                                              //         //                     .entityMini,
-                                              //         //                 context: context)),
-                                              //         //   );
-                                              //         // } else {
-                                              //         //   ScaffoldMessenger.of(context)
-                                              //         //       .showSnackBar(const SnackBar(
-                                              //         //           content: Text(
-                                              //         //               'only released to verified users')));
-                                              //         // }
-                                              //       },
-                                              //       child: Container(
-                                              //         decoration: BoxDecoration(
-                                              //           color: theme.shadow,
-                                              //           border: Border.all(
-                                              //             color: theme.shadow,
-                                              //           ),
-                                              //           borderRadius:
-                                              //               BorderRadius.circular(
-                                              //                   8.0),
-                                              //         ),
-                                              //         width: 200,
-                                              //         child: Column(
-                                              //           mainAxisAlignment:
-                                              //               MainAxisAlignment
-                                              //                   .center,
-                                              //           children: [
-                                              //             Icon(
-                                              //                 Icons
-                                              //                     .add_box_outlined,
-                                              //                 color:
-                                              //                     theme.emphasis),
-                                              //             Text(
-                                              //               'add season',
-                                              //               style: TextStyle(
-                                              //                 fontSize:
-                                              //                     theme.sizeText,
-                                              //                 letterSpacing: theme
-                                              //                     .letterSpacingText,
-                                              //                 color: theme.title,
-                                              //                 fontWeight:
-                                              //                     FontWeight.normal,
-                                              //               ),
-                                              //             ),
-                                              //           ],
-                                              //         ),
-                                              //       ),
-                                              //     ),
-                                              //   );
-                                              // } else {
-                                              //   return SeasonMiniEntity(
-                                              //     seasonMini: entity.seasons[index],
-                                              //   );
-                                              // }
-                                            }),
-                                      )
-                                    : Container(),
+                            // entity.seasons.isEmpty
+                            //     ? Container()
+                            //     : entity.entityMini.typeEntity == TypeEntity.SERIES ||
+                            //             entity.entityMini.typeEntity == TypeEntity.ANIMES ||
+                            //             entity.entityMini.typeEntity == TypeEntity.NOVELS ||
+                            //             entity.entityMini.typeEntity == TypeEntity.TV_SHOWS ||
+                            //             entity.entityMini.typeEntity == TypeEntity.WEB_PROGRAMS ||
+                            //             entity.entityMini.typeEntity == TypeEntity.PLACES
+                            //         ? SizedBox(
+                            //             height: 270,
+                            //             child: ListView.builder(
+                            //                 scrollDirection: Axis.horizontal,
+                            //                 itemCount: entity.seasons.length,
+                            //                 itemBuilder: (context, index) {
+                            //                   return SeasonMiniEntity(
+                            //                     seasonMini: entity.seasons[index],
+                            //                   );
+                            //                   // if (index == entity.seasons.length) {
+                            //                   //   return Padding(
+                            //                   //     padding:
+                            //                   //         const EdgeInsets.all(4.0),
+                            //                   //     child: GestureDetector(
+                            //                   //       onTap: () {
+                            //                   //         Navigator.push(
+                            //                   //             context,
+                            //                   //             MaterialPageRoute(
+                            //                   //                 builder: (context) =>
+                            //                   //                     NewSeasonEntity(
+                            //                   //                         entityMini: entity
+                            //                   //                             .entityMini,
+                            //                   //                         context:
+                            //                   //                             context)));
+                            //                   //         // if (ScopedModel.of<ProfileModel>(
+                            //                   //         //         context)
+                            //                   //         //     .userMini
+                            //                   //         //     .checked) {
+                            //                   //         //   Navigator.push(
+                            //                   //         //     context,
+                            //                   //         //     MaterialPageRoute(
+                            //                   //         //         builder: (context) =>
+                            //                   //         //             NewSeasonEntity(
+                            //                   //         //                 entityMini: entity
+                            //                   //         //                     .entityMini,
+                            //                   //         //                 context: context)),
+                            //                   //         //   );
+                            //                   //         // } else {
+                            //                   //         //   ScaffoldMessenger.of(context)
+                            //                   //         //       .showSnackBar(const SnackBar(
+                            //                   //         //           content: Text(
+                            //                   //         //               'only released to verified users')));
+                            //                   //         // }
+                            //                   //       },
+                            //                   //       child: Container(
+                            //                   //         decoration: BoxDecoration(
+                            //                   //           color: theme.shadow,
+                            //                   //           border: Border.all(
+                            //                   //             color: theme.shadow,
+                            //                   //           ),
+                            //                   //           borderRadius:
+                            //                   //               BorderRadius.circular(
+                            //                   //                   8.0),
+                            //                   //         ),
+                            //                   //         width: 200,
+                            //                   //         child: Column(
+                            //                   //           mainAxisAlignment:
+                            //                   //               MainAxisAlignment
+                            //                   //                   .center,
+                            //                   //           children: [
+                            //                   //             Icon(
+                            //                   //                 Icons
+                            //                   //                     .add_box_outlined,
+                            //                   //                 color:
+                            //                   //                     theme.emphasis),
+                            //                   //             Text(
+                            //                   //               'add season',
+                            //                   //               style: TextStyle(
+                            //                   //                 fontSize:
+                            //                   //                     theme.sizeText,
+                            //                   //                 letterSpacing: theme
+                            //                   //                     .letterSpacingText,
+                            //                   //                 color: theme.title,
+                            //                   //                 fontWeight:
+                            //                   //                     FontWeight.normal,
+                            //                   //               ),
+                            //                   //             ),
+                            //                   //           ],
+                            //                   //         ),
+                            //                   //       ),
+                            //                   //     ),
+                            //                   //   );
+                            //                   // } else {
+                            //                   //   return SeasonMiniEntity(
+                            //                   //     seasonMini: entity.seasons[index],
+                            //                   //   );
+                            //                   // }
+                            //                 }),
+                            //           )
+                            //         : Container(),
 
                             // Padding(
                             //   padding: const EdgeInsets.all(8.0),
