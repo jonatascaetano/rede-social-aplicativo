@@ -4,7 +4,7 @@ class EntityMini {
   late String? description;
   late int evaluationQuantity;
   late double evaluationAverage;
-  late int seasonQuantity;
+  // late int seasonQuantity;
   late String typeObject;
   late String typeEntity;
   late String? image;
@@ -19,7 +19,7 @@ class EntityMini {
     description = map["description"];
     evaluationQuantity = map["evaluationQuantity"];
     evaluationAverage = map["evaluationAverage"];
-    seasonQuantity = map["seasonQuantity"];
+    // seasonQuantity = map["seasonQuantity"];
     typeObject = map['typeObject'];
     typeEntity = map['typeEntity'];
     image = map["image"];

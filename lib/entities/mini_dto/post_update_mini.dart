@@ -1,6 +1,4 @@
 import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
-import 'package:social_network_application/entities/mini_dto/episode_mini.dart';
-import 'package:social_network_application/entities/mini_dto/season_mini.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 
 class PostUpdateMini {
@@ -10,8 +8,8 @@ class PostUpdateMini {
   late int category;
   late UserMini? author;
   late EntityMini? entity;
-  late SeasonMini? season;
-  late EpisodeMini? episode;
+  // late SeasonMini? season;
+  // late EpisodeMini? episode;
   late int likeQuantity = 0;
   late int commentQuantity = 0;
   late String level;
@@ -27,13 +25,12 @@ class PostUpdateMini {
     body = map["body"];
     category = map["category"];
     author = UserMini.fromMap(map: map["author"]);
-    entity =
-        map["entity"] != null ? EntityMini.fromMap(map: map["entity"]) : null;
-    season =
-        map["season"] != null ? SeasonMini.fromMap(map: map["season"]) : null;
-    episode = map["episode"] != null
-        ? EpisodeMini.fromMap(map: map["episode"])
-        : null;
+    entity = map["entity"] != null ? EntityMini.fromMap(map: map["entity"]) : null;
+    // season =
+    //     map["season"] != null ? SeasonMini.fromMap(map: map["season"]) : null;
+    // episode = map["episode"] != null
+    //     ? EpisodeMini.fromMap(map: map["episode"])
+    //     : null;
     likeQuantity = map["likeQuantity"];
     commentQuantity = map["commentQuantity"];
     level = map["level"];

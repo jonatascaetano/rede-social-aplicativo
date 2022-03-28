@@ -9,8 +9,6 @@ import 'package:social_network_application/scoped_model/support/language_model.d
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/scoped_model/user_model.dart';
 import 'package:social_network_application/view/objects/entity.dart';
-import 'package:social_network_application/view/objects/episode.dart';
-import 'package:social_network_application/view/objects/season.dart';
 import 'package:social_network_application/view/objects/user.dart';
 import 'package:social_network_application/view/post/comments_post_update2.dart';
 import 'package:social_network_application/view/post/likes_post.dart';
@@ -126,21 +124,22 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                                       screenUser: widget.screenUser,
                                     ),
                                   )
-                                : widget.postUpdateMini.level == Level.SEASON
-                                    ? Expanded(
-                                        child: season(
-                                          postUpdateMini: widget.postUpdateMini,
-                                          context: context,
-                                          screenUser: widget.screenUser,
-                                        ),
-                                      )
-                                    : Expanded(
-                                        child: episode(
-                                          postUpdateMini: widget.postUpdateMini,
-                                          context: context,
-                                          screenUser: widget.screenUser,
-                                        ),
-                                      ),
+                                : Container(),
+                            //  widget.postUpdateMini.level == Level.SEASON
+                            //     ? Expanded(
+                            //         child: season(
+                            //           postUpdateMini: widget.postUpdateMini,
+                            //           context: context,
+                            //           screenUser: widget.screenUser,
+                            //         ),
+                            //       )
+                            //     : Expanded(
+                            //         child: episode(
+                            //           postUpdateMini: widget.postUpdateMini,
+                            //           context: context,
+                            //           screenUser: widget.screenUser,
+                            //         ),
+                            //       ),
                           ],
                         ),
                         widget.postUpdateMini.category != 6
@@ -239,11 +238,10 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                         const SizedBox(
                           height: 8.0,
                         ),
-                        widget.postUpdateMini.level == Level.ENTITY
-                            ? entityImage(postUpdateMini: widget.postUpdateMini, contextPage: widget.contextPage, screenComment: widget.screenComment, screenUser: widget.screenUser)
-                            : widget.postUpdateMini.level == Level.SEASON
-                                ? seasonImage(postUpdateMini: widget.postUpdateMini, contextPage: widget.contextPage, screenComment: widget.screenComment, screenUser: widget.screenUser)
-                                : episodeImage(postUpdateMini: widget.postUpdateMini, contextPage: widget.contextPage, screenComment: widget.screenComment, screenUser: widget.screenUser),
+                        widget.postUpdateMini.level == Level.ENTITY ? entityImage(postUpdateMini: widget.postUpdateMini, contextPage: widget.contextPage, screenComment: widget.screenComment, screenUser: widget.screenUser) : Container(),
+                        // widget.postUpdateMini.level == Level.SEASON
+                        //     ? seasonImage(postUpdateMini: widget.postUpdateMini, contextPage: widget.contextPage, screenComment: widget.screenComment, screenUser: widget.screenUser)
+                        //     : episodeImage(postUpdateMini: widget.postUpdateMini, contextPage: widget.contextPage, screenComment: widget.screenComment, screenUser: widget.screenUser),
                         const SizedBox(
                           height: 16.0,
                         ),
@@ -527,6 +525,7 @@ Widget entity({required PostUpdateMini postUpdateMini, required BuildContext con
   });
 }
 
+/*
 Widget season({required PostUpdateMini postUpdateMini, required BuildContext context, required bool screenUser}) {
   return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
     return Wrap(
@@ -786,7 +785,7 @@ Widget episode({required PostUpdateMini postUpdateMini, required BuildContext co
     );
   });
 }
-
+*/
 Widget entityImage({
   required PostUpdateMini postUpdateMini,
   required BuildContext contextPage,
@@ -858,6 +857,8 @@ Widget entityImage({
           );
   });
 }
+
+/*
 
 Widget seasonImage({
   required PostUpdateMini postUpdateMini,
@@ -1001,4 +1002,6 @@ Widget episodeImage({
             ),
           );
   });
+  
 }
+*/
