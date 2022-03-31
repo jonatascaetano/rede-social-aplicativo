@@ -11,11 +11,13 @@ import 'package:social_network_application/entities/mini_dto/entity_save_mini.da
 import 'package:social_network_application/enuns/type_comment.dart';
 import 'package:social_network_application/enuns/type_object.dart';
 import 'package:social_network_application/scoped_model/entity_model.dart';
+import 'package:social_network_application/scoped_model/entity_model2.dart';
 import 'support/theme_model.dart';
 
 class ReviewModel extends Model {
   String idReview;
-  BuildContext contextAncestor;
+  BuildContext contextEntityPage;
+  BuildContext contextReviewPage;
   bool entitySaveMiniIsNull = true;
   bool load = true;
   EntitySaveMini? entitySaveMini;
@@ -23,9 +25,12 @@ class ReviewModel extends Model {
   TextEditingController controller = TextEditingController();
   late String typeObject;
 
-  ReviewModel({required this.idReview, required this.contextAncestor, required this.typeObject}) {
+  ReviewModel({required this.idReview, required this.contextEntityPage, required this.contextReviewPage, required this.typeObject}) {
     getReview();
-    getAllCommentReview(idReview: idReview, context: contextAncestor);
+    getAllCommentReview(
+      idReview: idReview,
+      context: contextEntityPage,
+    );
   }
 
   static const String base = "https://jonatas-social-network-api.herokuapp.com/";
@@ -56,14 +61,14 @@ class ReviewModel extends Model {
       default:
         load = false;
         notifyListeners();
-        ScaffoldMessenger.of(contextAncestor).showSnackBar(
+        ScaffoldMessenger.of(contextReviewPage).showSnackBar(
           const SnackBar(content: Text('Try again later')),
         );
         break;
     }
   }
 
-  updateLikeReview({required BuildContext context, required String idReview}) async {
+  updateLikeReview({required BuildContext contextEntityPage, required BuildContext contextReviewPage, required String idReview}) async {
     load = true;
     notifyListeners();
     String idUser = await getId();
@@ -74,25 +79,26 @@ class ReviewModel extends Model {
     switch (response.statusCode) {
       case 202:
         getReview();
-        switch (typeObject) {
-          case TypeObject.ENTITY:
-            ScopedModel.of<EntityModel>(context).getReviews(entityId: entitySaveMini!.entity!.id);
-            break;
-          // case TypeObject.SEASON:
-          //   ScopedModel.of<SeasonModel>(context)
-          //       .getReviews(seasonId: entitySaveMini!.season!.id);
-          //   break;
-          // case TypeObject.EPISODE:
-          //   ScopedModel.of<EpisodeModel>(context)
-          //       .getReviews(episodeId: entitySaveMini!.episode!.id);
-          //   break;
-          // default:
-        }
+        ScopedModel.of<EntityModel2>(contextEntityPage).getReviews(entityId: entitySaveMini!.entity!.id);
+        // switch (typeObject) {
+        //   case TypeObject.ENTITY:
+        //     ScopedModel.of<EntityModel>(contextEntityPage).getReviews(entityId: entitySaveMini!.entity!.id);
+        //     break;
+        //   // case TypeObject.SEASON:
+        //   //   ScopedModel.of<SeasonModel>(context)
+        //   //       .getReviews(seasonId: entitySaveMini!.season!.id);
+        //   //   break;
+        //   // case TypeObject.EPISODE:
+        //   //   ScopedModel.of<EpisodeModel>(context)
+        //   //       .getReviews(episodeId: entitySaveMini!.episode!.id);
+        //   //   break;
+        //   // default:
+        // }
         break;
       default:
         load = false;
         notifyListeners();
-        ScaffoldMessenger.of(context).showSnackBar(
+        ScaffoldMessenger.of(contextReviewPage).showSnackBar(
           const SnackBar(content: Text('Try again later')),
         );
         break;
@@ -131,7 +137,8 @@ class ReviewModel extends Model {
 
   addCommentPost({
     required String idEntitySave,
-    required BuildContext context,
+    required BuildContext contextEntityPage,
+    required BuildContext contextReviewPage,
     required String body,
   }) async {
     load = true;
@@ -158,10 +165,10 @@ class ReviewModel extends Model {
       case 201:
         controller.clear();
         getReview();
-        getAllCommentReview(idReview: idReview, context: context);
+        getAllCommentReview(idReview: idReview, context: contextReviewPage);
         switch (typeObject) {
           case TypeObject.ENTITY:
-            ScopedModel.of<EntityModel>(context).getReviews(entityId: entitySaveMini!.entity!.id);
+            ScopedModel.of<EntityModel2>(contextEntityPage).getReviews(entityId: entitySaveMini!.entity!.id);
             break;
           // case TypeObject.SEASON:
           //   ScopedModel.of<SeasonModel>(context)
@@ -177,7 +184,7 @@ class ReviewModel extends Model {
       default:
         load = false;
         notifyListeners();
-        ScaffoldMessenger.of(context).showSnackBar(
+        ScaffoldMessenger.of(contextReviewPage).showSnackBar(
           const SnackBar(content: Text('Try again later')),
         );
         break;

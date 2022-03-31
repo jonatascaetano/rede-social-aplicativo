@@ -97,6 +97,8 @@ class EntityModel2 extends Model {
     print("getReviews: " + response.statusCode.toString());
     switch (response.statusCode) {
       case 200:
+        // ignore: avoid_print
+        print("chamado o metodo getReviews da classe Entity");
         reviews = [];
         var itens = json.decode(response.body);
         for (var item in itens) {

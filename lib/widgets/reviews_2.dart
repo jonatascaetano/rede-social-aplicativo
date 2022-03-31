@@ -4,7 +4,7 @@ import 'package:social_network_application/converts/convert_date.dart';
 import 'package:social_network_application/converts/convert_like_names.dart';
 import 'package:social_network_application/entities/mini_dto/entity_save_mini.dart';
 import 'package:social_network_application/enuns/type_object.dart';
-import 'package:social_network_application/scoped_model/entity_model.dart';
+import 'package:social_network_application/scoped_model/entity_model2.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/objects/user.dart';
@@ -15,15 +15,29 @@ import 'package:social_network_application/view/tabs/profile.dart';
 // ignore: must_be_immutable
 class Reviews2 extends StatefulWidget {
   EntitySaveMini entitySaveMini;
-  BuildContext contextAncestor;
+  BuildContext contextEntityPage;
   String typeObject;
-  Reviews2({required this.entitySaveMini, required this.contextAncestor, required this.typeObject, Key? key}) : super(key: key);
+  Reviews2({required this.entitySaveMini, required this.contextEntityPage, required this.typeObject, Key? key}) : super(key: key);
 
   @override
   _Reviews2State createState() => _Reviews2State();
 }
 
 class _Reviews2State extends State<Reviews2> {
+  int maxLine = 5;
+
+  updateMaxLine() {
+    if (maxLine == 5) {
+      setState(() {
+        maxLine = 500;
+      });
+    } else {
+      setState(() {
+        maxLine = 5;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
@@ -34,7 +48,7 @@ class _Reviews2State extends State<Reviews2> {
             MaterialPageRoute(
               builder: (context) => ReviewScreen2(
                 idReview: widget.entitySaveMini.id,
-                contextAncestor: widget.contextAncestor,
+                contextEntityPage: widget.contextEntityPage,
                 typeObject: widget.typeObject,
               ),
             ),
@@ -147,35 +161,33 @@ class _Reviews2State extends State<Reviews2> {
                         !widget.entitySaveMini.rated
                             ? Container()
                             : Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 4.0,
-                                ),
+                                padding: const EdgeInsets.all(8.0),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Icon(
                                       Icons.star,
-                                      size: 40,
+                                      size: 30,
                                       color: widget.entitySaveMini.evaluation! >= 1 ? Colors.yellow[700] : theme.icon,
                                     ),
                                     Icon(
                                       Icons.star,
-                                      size: 40,
+                                      size: 30,
                                       color: widget.entitySaveMini.evaluation! >= 2 ? Colors.yellow[700] : theme.icon,
                                     ),
                                     Icon(
                                       Icons.star,
-                                      size: 40,
+                                      size: 30,
                                       color: widget.entitySaveMini.evaluation! >= 3 ? Colors.yellow[700] : theme.icon,
                                     ),
                                     Icon(
                                       Icons.star,
-                                      size: 40,
+                                      size: 30,
                                       color: widget.entitySaveMini.evaluation! >= 4 ? Colors.yellow[700] : theme.icon,
                                     ),
                                     Icon(
                                       Icons.star,
-                                      size: 40,
+                                      size: 30,
                                       color: widget.entitySaveMini.evaluation! >= 5 ? Colors.yellow[700] : theme.icon,
                                     ),
                                   ],
@@ -183,12 +195,34 @@ class _Reviews2State extends State<Reviews2> {
                               ),
 
                         !widget.entitySaveMini.spoiler
-                            ? Align(
+                            ?
+                            //  Theme(
+                            //     data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                            //     child: ExpansionTile(
+                            //       //tilePadding: const EdgeInsets.all(8.0),
+                            //       onExpansionChanged: (_) {
+                            //         updateMaxLine();
+                            //       },
+                            //       title: Text(
+                            //         widget.entitySaveMini.review!,
+                            //         maxLines: maxLine,
+                            //         style: TextStyle(
+                            //           fontSize: theme.sizeText,
+                            //           letterSpacing: theme.letterSpacingText,
+                            //           color: theme.title,
+                            //           fontWeight: FontWeight.normal,
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   )
+                            Align(
                                 alignment: Alignment.centerLeft,
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 0.0),
                                   child: Text(
                                     widget.entitySaveMini.review!,
+                                    maxLines: 5,
+                                    overflow: TextOverflow.ellipsis,
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                       fontSize: theme.sizeText,
@@ -279,8 +313,8 @@ class _Reviews2State extends State<Reviews2> {
                               onTap: () {
                                 switch (widget.typeObject) {
                                   case TypeObject.ENTITY:
-                                    ScopedModel.of<EntityModel>(widget.contextAncestor).updateLikeReview(
-                                      context: widget.contextAncestor,
+                                    ScopedModel.of<EntityModel2>(widget.contextEntityPage).updateLikeReview(
+                                      context: widget.contextEntityPage,
                                       idReview: widget.entitySaveMini.id,
                                     );
                                     break;

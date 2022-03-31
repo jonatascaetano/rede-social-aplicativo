@@ -77,6 +77,7 @@ class _AddBodyPostEntityState extends State<AddBodyPostEntity> {
                     },
                     minLines: 10,
                     maxLines: 10,
+                    maxLength: 280,
                     controller: body,
                     keyboardType: TextInputType.text,
                     decoration: const InputDecoration(

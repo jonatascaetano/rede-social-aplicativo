@@ -335,11 +335,31 @@ class _Entity2State extends State<Entity2> {
                                   : Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Evaluation(value: 1, evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 0),
-                                        Evaluation(value: 2, evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 0),
-                                        Evaluation(value: 3, evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 0),
-                                        Evaluation(value: 4, evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 0),
-                                        Evaluation(value: 5, evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 0),
+                                        Evaluation(
+                                          value: 1,
+                                          evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 0,
+                                          contextEntityPage: context,
+                                        ),
+                                        Evaluation(
+                                          value: 2,
+                                          evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 0,
+                                          contextEntityPage: context,
+                                        ),
+                                        Evaluation(
+                                          value: 3,
+                                          evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 0,
+                                          contextEntityPage: context,
+                                        ),
+                                        Evaluation(
+                                          value: 4,
+                                          evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 0,
+                                          contextEntityPage: context,
+                                        ),
+                                        Evaluation(
+                                          value: 5,
+                                          evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 0,
+                                          contextEntityPage: context,
+                                        ),
                                       ],
                                     ),
 
@@ -891,14 +911,30 @@ class _Entity2State extends State<Entity2> {
                                   ? Container()
                                   : Padding(
                                       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
-                                      child: Text(
-                                        'Reviews',
-                                        style: TextStyle(
-                                          fontSize: theme.sizeAppBar,
-                                          letterSpacing: theme.letterSpacingText,
-                                          color: theme.emphasis,
-                                          fontWeight: FontWeight.normal,
-                                        ),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'Reviews',
+                                            style: TextStyle(
+                                              fontSize: theme.sizeAppBar,
+                                              letterSpacing: theme.letterSpacingText,
+                                              color: theme.emphasis,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 8.0,
+                                          ),
+                                          Text(
+                                            entity.reviews.length.toString(),
+                                            style: TextStyle(
+                                              fontSize: theme.sizeAppBar,
+                                              letterSpacing: theme.letterSpacingText,
+                                              color: theme.emphasis,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
 
@@ -915,10 +951,10 @@ class _Entity2State extends State<Entity2> {
                                         );
                                       },
                                       itemCount: entity.reviews.length,
-                                      itemBuilder: (context, index) {
+                                      itemBuilder: (contextItemBuilder, index) {
                                         return Reviews2(
                                           entitySaveMini: entity.reviews[index],
-                                          contextAncestor: context,
+                                          contextEntityPage: context,
                                           typeObject: TypeObject.ENTITY,
                                         );
                                       })

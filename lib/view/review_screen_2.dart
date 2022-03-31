@@ -1,3 +1,4 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/converts/convert_date.dart';
@@ -14,23 +15,56 @@ import 'objects/user.dart';
 // ignore: must_be_immutable
 class ReviewScreen2 extends StatefulWidget {
   String idReview;
-  BuildContext contextAncestor;
+  BuildContext contextEntityPage;
   String typeObject;
-  ReviewScreen2({required this.idReview, required this.contextAncestor, required this.typeObject, Key? key}) : super(key: key);
+  ReviewScreen2({required this.idReview, required this.contextEntityPage, required this.typeObject, Key? key}) : super(key: key);
 
   @override
   _ReviewScreen2State createState() => _ReviewScreen2State();
 }
 
 class _ReviewScreen2State extends State<ReviewScreen2> {
+  void handleEvent(AdmobAdEvent event, Map<String, dynamic> args, String adType) {
+    switch (event) {
+      case AdmobAdEvent.loaded:
+        // ignore: avoid_print
+        print('Novo $adType Ad carregado!');
+        break;
+      case AdmobAdEvent.opened:
+        // ignore: avoid_print
+        print('Admob $adType Ad aberto!');
+        break;
+      case AdmobAdEvent.closed:
+        // ignore: avoid_print
+        print('Admob $adType Ad fechado!');
+        break;
+      case AdmobAdEvent.failedToLoad:
+        // ignore: avoid_print
+        print('Admob $adType falhou ao carregar. :(');
+        break;
+      default:
+    }
+  }
+
+  AdmobBanner getBanner(AdmobBannerSize size) {
+    return AdmobBanner(
+      adUnitId: "ca-app-pub-3940256099942544/6300978111",
+      adSize: size,
+      listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
+        // handleEvent(event, args!, 'Banner');
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<ReviewModel>(
           model: ReviewModel(
-            contextAncestor: widget.contextAncestor,
+            contextEntityPage: widget.contextEntityPage,
             idReview: widget.idReview,
             typeObject: widget.typeObject,
+            contextReviewPage: context,
           ),
           child: ScopedModelDescendant<ReviewModel>(builder: (context, child, review) {
             return Scaffold(
@@ -160,33 +194,33 @@ class _ReviewScreen2State extends State<ReviewScreen2> {
                                                     : Container(
                                                         margin: EdgeInsets.zero,
                                                         child: Padding(
-                                                          padding: const EdgeInsets.only(bottom: 8.0),
+                                                          padding: const EdgeInsets.all(8.0),
                                                           child: Row(
                                                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                             children: [
                                                               Icon(
                                                                 Icons.star,
-                                                                size: 40,
+                                                                size: 30,
                                                                 color: review.entitySaveMini!.evaluation! >= 1 ? Colors.yellow[700] : theme.icon,
                                                               ),
                                                               Icon(
                                                                 Icons.star,
-                                                                size: 40,
+                                                                size: 30,
                                                                 color: review.entitySaveMini!.evaluation! >= 2 ? Colors.yellow[700] : theme.icon,
                                                               ),
                                                               Icon(
                                                                 Icons.star,
-                                                                size: 40,
+                                                                size: 30,
                                                                 color: review.entitySaveMini!.evaluation! >= 3 ? Colors.yellow[700] : theme.icon,
                                                               ),
                                                               Icon(
                                                                 Icons.star,
-                                                                size: 40,
+                                                                size: 30,
                                                                 color: review.entitySaveMini!.evaluation! >= 4 ? Colors.yellow[700] : theme.icon,
                                                               ),
                                                               Icon(
                                                                 Icons.star,
-                                                                size: 40,
+                                                                size: 30,
                                                                 color: review.entitySaveMini!.evaluation! >= 5 ? Colors.yellow[700] : theme.icon,
                                                               ),
                                                             ],
@@ -289,8 +323,9 @@ class _ReviewScreen2State extends State<ReviewScreen2> {
                                                     GestureDetector(
                                                       onTap: () {
                                                         review.updateLikeReview(
-                                                          context: widget.contextAncestor,
                                                           idReview: review.entitySaveMini!.id,
+                                                          contextEntityPage: widget.contextEntityPage,
+                                                          contextReviewPage: context,
                                                         );
                                                       },
                                                       child: Row(
@@ -351,8 +386,17 @@ class _ReviewScreen2State extends State<ReviewScreen2> {
                                   const SizedBox(
                                     height: 16.0,
                                   ),
-                                  Divider(
-                                    color: theme.button,
+                                  // Divider(
+                                  //   height: 10.0,
+                                  //   thickness: 10.0,
+                                  //   color: theme.shadow,
+                                  // ),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    decoration: BoxDecoration(
+                                      color: theme.shadow,
+                                    ),
+                                    child: getBanner(AdmobBannerSize.MEDIUM_RECTANGLE),
                                   ),
                                   const SizedBox(
                                     height: 16.0,
@@ -361,11 +405,12 @@ class _ReviewScreen2State extends State<ReviewScreen2> {
                                       shrinkWrap: true,
                                       physics: const NeverScrollableScrollPhysics(),
                                       itemCount: review.comments.length,
-                                      itemBuilder: (context, index) {
+                                      itemBuilder: (contextListBuilder, index) {
                                         return CommentWidget(
                                           commentMini: review.comments[index],
                                           idReview: review.entitySaveMini!.id,
-                                          contextPage: widget.contextAncestor,
+                                          contextEntityPage: widget.contextEntityPage,
+                                          contextReviewPage: context,
                                         );
                                       }),
                                 ],
@@ -378,6 +423,7 @@ class _ReviewScreen2State extends State<ReviewScreen2> {
                               width: MediaQuery.of(context).size.width,
                               color: ScopedModel.of<ThemeModel>(context).button,
                               child: TextField(
+                                maxLength: 280,
                                 controller: review.controller,
                                 minLines: 1,
                                 maxLines: 5,
@@ -390,8 +436,9 @@ class _ReviewScreen2State extends State<ReviewScreen2> {
                                       if (review.controller.text.isNotEmpty) {
                                         review.addCommentPost(
                                           idEntitySave: review.entitySaveMini!.id,
-                                          context: widget.contextAncestor,
                                           body: review.controller.text,
+                                          contextEntityPage: widget.contextEntityPage,
+                                          contextReviewPage: context,
                                         );
                                         FocusScopeNode currentFocus = FocusScope.of(context);
 
@@ -429,8 +476,9 @@ class _ReviewScreen2State extends State<ReviewScreen2> {
 class CommentWidget extends StatefulWidget {
   CommentMini commentMini;
   String idReview;
-  BuildContext contextPage;
-  CommentWidget({required this.commentMini, required this.idReview, required this.contextPage, Key? key}) : super(key: key);
+  BuildContext contextReviewPage;
+  BuildContext contextEntityPage;
+  CommentWidget({required this.commentMini, required this.idReview, required this.contextReviewPage, required this.contextEntityPage, Key? key}) : super(key: key);
 
   @override
   _CommentWidgetState createState() => _CommentWidgetState();
@@ -495,7 +543,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                   //   borderRadius: const BorderRadius.all(Radius.circular(16.0)),
                   // ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 0.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -580,11 +628,11 @@ class _CommentWidgetState extends State<CommentWidget> {
                         padding: EdgeInsets.zero,
                         onPressed: () {
                           if (widget.commentMini.author.id == ScopedModel.of<ProfileModel>(context).userMini.id) {
-                            ScopedModel.of<ReviewModel>(context).showDeleteCommentBottomSheet(
+                            ScopedModel.of<ReviewModel>(widget.contextReviewPage).showDeleteCommentBottomSheet(
                               contextCommentPage: context,
                               idReview: widget.idReview,
                               idComment: widget.commentMini.id,
-                              contextPage: widget.contextPage,
+                              contextPage: widget.contextReviewPage,
                             );
                           } else {
                             ScopedModel.of<ProfileModel>(context).showOptionsCommentBottomSheet(

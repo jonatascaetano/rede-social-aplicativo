@@ -28,6 +28,20 @@ class UpdatePostWidget2 extends StatefulWidget {
 }
 
 class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
+  int maxLine = 5;
+
+  updateMaxLine() {
+    if (maxLine == 5) {
+      setState(() {
+        maxLine = 500;
+      });
+    } else {
+      setState(() {
+        maxLine = 5;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
@@ -146,35 +160,38 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                             ? Container()
                             : Container(
                                 margin: EdgeInsets.zero,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Icon(
-                                      Icons.star,
-                                      size: 40,
-                                      color: widget.postUpdateMini.evaluation >= 1 ? Colors.yellow[700] : theme.icon,
-                                    ),
-                                    Icon(
-                                      Icons.star,
-                                      size: 40,
-                                      color: widget.postUpdateMini.evaluation >= 2 ? Colors.yellow[700] : theme.icon,
-                                    ),
-                                    Icon(
-                                      Icons.star,
-                                      size: 40,
-                                      color: widget.postUpdateMini.evaluation >= 3 ? Colors.yellow[700] : theme.icon,
-                                    ),
-                                    Icon(
-                                      Icons.star,
-                                      size: 40,
-                                      color: widget.postUpdateMini.evaluation >= 4 ? Colors.yellow[700] : theme.icon,
-                                    ),
-                                    Icon(
-                                      Icons.star,
-                                      size: 40,
-                                      color: widget.postUpdateMini.evaluation >= 5 ? Colors.yellow[700] : theme.icon,
-                                    ),
-                                  ],
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Icon(
+                                        Icons.star,
+                                        size: 30,
+                                        color: widget.postUpdateMini.evaluation >= 1 ? Colors.yellow[700] : theme.icon,
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        size: 30,
+                                        color: widget.postUpdateMini.evaluation >= 2 ? Colors.yellow[700] : theme.icon,
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        size: 30,
+                                        color: widget.postUpdateMini.evaluation >= 3 ? Colors.yellow[700] : theme.icon,
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        size: 30,
+                                        color: widget.postUpdateMini.evaluation >= 4 ? Colors.yellow[700] : theme.icon,
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        size: 30,
+                                        color: widget.postUpdateMini.evaluation >= 5 ? Colors.yellow[700] : theme.icon,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                         // widget.postUpdateMini.category != 6
@@ -184,13 +201,37 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                           height: 2.0,
                         ),
                         !widget.postUpdateMini.spoiler
-                            ? widget.postUpdateMini.body != null
+                            ?
+                            //  widget.postUpdateMini.body != null
+                            //     ? Theme(
+                            //         data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                            //         child: ExpansionTile(
+                            //           //tilePadding: const EdgeInsets.all(8.0),
+                            //           onExpansionChanged: (_) {
+                            //             updateMaxLine();
+                            //           },
+                            //           title: Text(
+                            //             widget.postUpdateMini.body!,
+                            //             maxLines: maxLine,
+                            //             style: TextStyle(
+                            //               fontSize: theme.sizeText,
+                            //               letterSpacing: theme.letterSpacingText,
+                            //               color: theme.title,
+                            //               fontWeight: FontWeight.normal,
+                            //             ),
+                            //           ),
+                            //         ),
+                            //       )
+                            //     : Container()
+                            widget.postUpdateMini.body != null
                                 ? Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 0.0),
                                       child: Text(
                                         widget.postUpdateMini.body!,
+                                        maxLines: 5,
+                                        overflow: TextOverflow.ellipsis,
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
                                           fontSize: theme.sizeText,
