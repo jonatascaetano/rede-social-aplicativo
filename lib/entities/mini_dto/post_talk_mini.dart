@@ -13,6 +13,7 @@ class PostTalkMini {
   late UserMini? author;
   late bool liked;
   late UserMini? like;
+  late String? title;
 
   PostTalkMini.fromMap({required Map map}) {
     id = map["id"];
@@ -27,5 +28,6 @@ class PostTalkMini {
     author = map["author"] != null ? UserMini.fromMap(map: map["author"]) : null;
     liked = map["liked"] ?? false;
     like = map["like"] != null ? UserMini.fromMap(map: map["like"]) : null;
+    title = map["title"];
   }
 }

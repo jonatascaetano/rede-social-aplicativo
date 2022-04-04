@@ -482,10 +482,6 @@ class ProfileModel extends Model {
   }
 
   returnPostWidget({required Map post, required bool screenComment, required BuildContext contextPage}) {
-    // ignore: avoid_print
-    print("***" + post.toString() + "***");
-    // ignore: avoid_print
-    print("***" + post["typePostVisibility"] + "***");
     switch (post["typePostVisibility"]) {
       case TypePostVisibility.USER:
         // ignore: avoid_print

@@ -70,9 +70,21 @@ class _TalkGroupPostWidgetState extends State<TalkGroupPostWidget> {
                         //     Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                         //   }
                         // },
-                        child: CircleAvatar(
-                          backgroundImage: NetworkImage(widget.post.group!.image!),
-                          radius: 30.0,
+                        child: Stack(
+                          children: [
+                            CircleAvatar(
+                              backgroundImage: NetworkImage(widget.post.group!.image!),
+                              radius: 30.0,
+                            ),
+                            Positioned(
+                              bottom: 0.0,
+                              right: 0.0,
+                              child: CircleAvatar(
+                                backgroundImage: NetworkImage(widget.post.author!.imageProfile!),
+                                radius: 15.0,
+                              ),
+                            ),
+                          ],
                         ),
                       )
                     : GestureDetector(
@@ -94,13 +106,25 @@ class _TalkGroupPostWidgetState extends State<TalkGroupPostWidget> {
                         //     Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                         //   }
                         // },
-                        child: CircleAvatar(
-                          backgroundColor: theme.shadow,
-                          child: Icon(
-                            Icons.image,
-                            color: theme.emphasis,
-                          ),
-                          radius: 30.0,
+                        child: Stack(
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: theme.shadow,
+                              child: Icon(
+                                Icons.image,
+                                color: theme.emphasis,
+                              ),
+                              radius: 30.0,
+                            ),
+                            Positioned(
+                              bottom: 0.0,
+                              right: 0.0,
+                              child: CircleAvatar(
+                                backgroundImage: NetworkImage(widget.post.author!.imageProfile!),
+                                radius: 15.0,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
 
@@ -340,7 +364,7 @@ class _TalkGroupPostWidgetState extends State<TalkGroupPostWidget> {
                                 child: ExpansionTile(
                                   tilePadding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 0.0),
                                   title: Text(
-                                    'Spoiler',
+                                    widget.post.title!,
                                     style: TextStyle(
                                       fontSize: theme.sizeText,
                                       letterSpacing: theme.letterSpacingText,

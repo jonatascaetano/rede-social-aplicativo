@@ -17,6 +17,7 @@ class PostTalkGroupMini {
   late bool close;
   late UserMini? closedBy;
   late GroupMini? group;
+  late String? title;
 
   PostTalkGroupMini.fromMap({required Map map}) {
     id = map["id"];
@@ -34,5 +35,6 @@ class PostTalkGroupMini {
     close = map["close"] ?? false;
     closedBy = map["closedBy"] != null ? UserMini.fromMap(map: map["closedBy"]) : null;
     group = map["group"] != null ? GroupMini.fromMap(map: map["group"]) : null;
+    title = map["title"];
   }
 }

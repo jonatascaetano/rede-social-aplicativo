@@ -240,7 +240,7 @@ class _TalkUserPostWidgetState extends State<TalkUserPostWidget> {
                                 child: ExpansionTile(
                                   tilePadding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 0.0),
                                   title: Text(
-                                    'Spoiler',
+                                    widget.post.title!,
                                     style: TextStyle(
                                       fontSize: theme.sizeText,
                                       letterSpacing: theme.letterSpacingText,
