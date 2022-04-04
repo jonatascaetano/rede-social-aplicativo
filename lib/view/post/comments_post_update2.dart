@@ -20,9 +20,22 @@ import 'likes_post.dart';
 // ignore: must_be_immutable
 class CommentsPostUpdate2 extends StatefulWidget {
   PostUpdateMini postUpdateMini;
-  bool screenUser;
-  BuildContext contextPage;
-  CommentsPostUpdate2({required this.postUpdateMini, required this.screenUser, required this.contextPage, Key? key}) : super(key: key);
+  BuildContext? contextUserPage;
+  BuildContext? contextGroupPage;
+  BuildContext? contextProfilePage;
+  bool userPageIsOpen;
+  bool profilePageIsOpen;
+  bool groupPageIsOpen;
+  CommentsPostUpdate2({
+    required this.postUpdateMini,
+    required this.userPageIsOpen,
+    required this.profilePageIsOpen,
+    required this.groupPageIsOpen,
+    required this.contextUserPage,
+    required this.contextGroupPage,
+    required this.contextProfilePage,
+    Key? key,
+  }) : super(key: key);
 
   @override
   _CommentsPostUpdate2State createState() => _CommentsPostUpdate2State();
@@ -173,7 +186,7 @@ class _CommentsPostUpdate2State extends State<CommentsPostUpdate2> {
                                                               child: entity(
                                                                 context: context,
                                                                 postUpdateMini: widget.postUpdateMini,
-                                                                screenUser: widget.screenUser,
+                                                                screenUser: widget.userPageIsOpen,
                                                               ),
                                                             )
                                                           : Container(),
@@ -293,9 +306,10 @@ class _CommentsPostUpdate2State extends State<CommentsPostUpdate2> {
                                                   widget.postUpdateMini.level == Level.ENTITY
                                                       ? entityImage(
                                                           postUpdateMini: widget.postUpdateMini,
-                                                          contextPage: widget.contextPage,
+                                                          //contextPage: widget.contextPage,
                                                           //screenComment: widget.screenComment,
-                                                          screenUser: widget.screenUser)
+                                                          //screenUser: widget.screenUser,
+                                                        )
                                                       : Container(),
                                                   // widget.postUpdateMini.level == Level.SEASON
                                                   //     ? seasonImage(
@@ -354,7 +368,7 @@ class _CommentsPostUpdate2State extends State<CommentsPostUpdate2> {
                                                       GestureDetector(
                                                         onTap: () {
                                                           comment.updateLikePost(
-                                                            context: widget.contextPage,
+                                                            context: context,
                                                             idPost: widget.postUpdateMini.id!,
                                                           );
                                                         },
@@ -463,50 +477,24 @@ class _CommentsPostUpdate2State extends State<CommentsPostUpdate2> {
                                                         padding: EdgeInsets.zero,
                                                         onPressed: () async {
                                                           if (widget.postUpdateMini.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id) {
-                                                            comment.showDeletePostBottomSheet(
-                                                              idPost: widget.postUpdateMini.id!,
-                                                              screenComment: true,
-                                                              screenUser: widget.screenUser,
-                                                              contextPage: widget.contextPage,
-                                                              contextCommentPage: context,
-                                                            );
-                                                            // ScaffoldMessenger.of(context)
-                                                            //     .showSnackBar(
-                                                            //   SnackBar(
-                                                            //     backgroundColor:
-                                                            //         ScopedModel.of<ThemeModel>(
-                                                            //                 context)
-                                                            //             .background,
-                                                            //     content: Text('delete post?',
-                                                            //         style: TextStyle(
-                                                            //           color: ScopedModel.of<
-                                                            //                   ThemeModel>(context)
-                                                            //               .subtitle,
-                                                            //         )),
-                                                            //     action: SnackBarAction(
-                                                            //         label: 'yes',
-                                                            //         textColor: ScopedModel.of<
-                                                            //                 ThemeModel>(context)
-                                                            //             .emphasis,
-                                                            //         onPressed: () {
-                                                            //           comment.removePost(
-                                                            //             context:
-                                                            //                 widget.contextPage,
-                                                            //             idPost: widget
-                                                            //                 .postUpdateMini.id!,
-                                                            //             contextPage:
-                                                            //                 widget.contextPage,
-                                                            //             screenUser:
-                                                            //                 widget.screenUser,
-                                                            //           );
-                                                            //         }),
-                                                            //   ),
+                                                            //*Arrumar este metodo neste mesmo model*//
+
+                                                            // comment.showDeletePostBottomSheet(
+                                                            //   idPost: widget.postUpdateMini.id!,
+                                                            //   screenComment: true,
+                                                            //   screenUser: widget.screenUser,
+                                                            //   contextPage: widget.contextPage,
+                                                            //   contextCommentPage: context,
                                                             // );
+
                                                           } else {
-                                                            ScopedModel.of<ProfileModel>(widget.contextPage).showOptionsPostBottomSheet(
-                                                              contextAncestor: context,
-                                                              idPost: widget.postUpdateMini.id!,
-                                                            );
+                                                            //*Trocar este metodo para um de uma classe separada*//
+
+                                                            // ScopedModel.of<ProfileModel>(widget.contextPage).showOptionsPostBottomSheet(
+                                                            //   contextAncestor: context,
+                                                            //   idPost: widget.postUpdateMini.id!,
+                                                            // );
+
                                                           }
                                                         },
                                                         icon: Icon(
@@ -1084,8 +1072,8 @@ class _CommentsPostUpdate2State extends State<CommentsPostUpdate2> {
                                         return CommentWidget(
                                           commentMini: comment.comments[index],
                                           idPost: widget.postUpdateMini.id!,
-                                          contextPage: widget.contextPage,
-                                          screenUser: widget.screenUser,
+                                          contextPage: context,
+                                          screenUser: widget.userPageIsOpen,
                                         );
                                       }),
                                 ],
@@ -1094,32 +1082,35 @@ class _CommentsPostUpdate2State extends State<CommentsPostUpdate2> {
                             Container(
                               width: MediaQuery.of(context).size.width,
                               color: ScopedModel.of<ThemeModel>(context).button,
-                              child: TextField(
-                                maxLength: 280,
-                                controller: comment.controller,
-                                minLines: 1,
-                                maxLines: 5,
-                                keyboardType: TextInputType.emailAddress,
-                                decoration: InputDecoration(
-                                  label: const Text("comment"),
-                                  //border: OutlineInputBorder(),
-                                  suffixIcon: IconButton(
-                                    onPressed: () {
-                                      if (comment.controller.text.isNotEmpty) {
-                                        comment.addCommentPost(
-                                          idPost: widget.postUpdateMini.id!,
-                                          context: widget.contextPage,
-                                          body: comment.controller.text,
-                                          screenUser: widget.screenUser,
-                                        );
-                                        FocusScopeNode currentFocus = FocusScope.of(context);
+                              child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: TextField(
+                                  maxLength: 280,
+                                  controller: comment.controller,
+                                  minLines: 1,
+                                  maxLines: 5,
+                                  keyboardType: TextInputType.emailAddress,
+                                  decoration: InputDecoration(
+                                    label: const Text("comment"),
+                                    //border: OutlineInputBorder(),
+                                    suffixIcon: IconButton(
+                                      onPressed: () {
+                                        if (comment.controller.text.isNotEmpty) {
+                                          comment.addCommentPost(
+                                            idPost: widget.postUpdateMini.id!,
+                                            context: context,
+                                            body: comment.controller.text,
+                                            screenUser: widget.userPageIsOpen,
+                                          );
+                                          FocusScopeNode currentFocus = FocusScope.of(context);
 
-                                        if (!currentFocus.hasPrimaryFocus) {
-                                          currentFocus.unfocus();
+                                          if (!currentFocus.hasPrimaryFocus) {
+                                            currentFocus.unfocus();
+                                          }
                                         }
-                                      }
-                                    },
-                                    icon: const Icon(Icons.send),
+                                      },
+                                      icon: const Icon(Icons.send),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -1731,9 +1722,9 @@ Widget episode({required PostUpdateMini postUpdateMini, required BuildContext co
 
 Widget entityImage({
   required PostUpdateMini postUpdateMini,
-  required BuildContext contextPage,
+  //required BuildContext contextPage,
   //required bool screenComment,
-  required bool screenUser,
+  //required bool screenUser,
 }) {
   return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
     return postUpdateMini.entity!.image != null

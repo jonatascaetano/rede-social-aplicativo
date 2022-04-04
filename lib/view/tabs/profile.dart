@@ -1,6 +1,7 @@
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:social_network_application/helper/return_widget_post.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
@@ -500,7 +501,7 @@ class _ProfileState extends State<Profile> {
                         ListView.separated(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
-                            separatorBuilder: (context, index) {
+                            separatorBuilder: (contextListViewSeparated, index) {
                               return Divider(
                                 height: 10.0,
                                 thickness: 10.0,
@@ -508,7 +509,7 @@ class _ProfileState extends State<Profile> {
                               );
                             },
                             itemCount: profile.myPosts.length,
-                            itemBuilder: (context, index) {
+                            itemBuilder: (contextItemBuilder, index) {
                               if (index % 8 == 0 && index != 0) {
                                 return Column(
                                   children: [
@@ -524,7 +525,17 @@ class _ProfileState extends State<Profile> {
                                       thickness: 10.0,
                                       color: theme.shadow,
                                     ),
-                                    profile.returnPostWidget(post: profile.myPosts[index], screenComment: false, contextPage: context),
+                                    ReturnWidgetPost.returnPostWidget(
+                                      post: profile.myPosts[index],
+                                      screenComment: false,
+                                      contextUserPage: null,
+                                      contextGroupPage: null,
+                                      contextProfilePage: context,
+                                      userPageIsOpen: false,
+                                      profilePageIsOpen: true,
+                                      groupPageIsOpen: false,
+                                    )
+                                    //profile.returnPostWidget(post: profile.myPosts[index], screenComment: false, contextPage: context),
                                     // UpdatePostEntityWidget(
                                     //   postUpdateMini: profile.posts[index],
                                     //   screenComment: false,
@@ -532,10 +543,15 @@ class _ProfileState extends State<Profile> {
                                   ],
                                 );
                               } else {
-                                return profile.returnPostWidget(
+                                return ReturnWidgetPost.returnPostWidget(
                                   post: profile.myPosts[index],
                                   screenComment: false,
-                                  contextPage: context,
+                                  contextUserPage: null,
+                                  contextGroupPage: null,
+                                  contextProfilePage: context,
+                                  userPageIsOpen: false,
+                                  profilePageIsOpen: true,
+                                  groupPageIsOpen: false,
                                 );
                                 // UpdatePostEntityWidget(
                                 //   postUpdateMini: profile.posts[index],

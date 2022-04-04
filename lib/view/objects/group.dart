@@ -1,6 +1,8 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/entities/mini_dto/group_mini.dart';
+import 'package:social_network_application/helper/return_widget_post.dart';
 import 'package:social_network_application/scoped_model/group_mode.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 
@@ -14,6 +16,38 @@ class Group extends StatefulWidget {
 }
 
 class _GroupState extends State<Group> {
+  void handleEvent(AdmobAdEvent event, Map<String, dynamic> args, String adType) {
+    switch (event) {
+      case AdmobAdEvent.loaded:
+        // ignore: avoid_print
+        print('Novo $adType Ad carregado!');
+        break;
+      case AdmobAdEvent.opened:
+        // ignore: avoid_print
+        print('Admob $adType Ad aberto!');
+        break;
+      case AdmobAdEvent.closed:
+        // ignore: avoid_print
+        print('Admob $adType Ad fechado!');
+        break;
+      case AdmobAdEvent.failedToLoad:
+        // ignore: avoid_print
+        print('Admob $adType falhou ao carregar. :(');
+        break;
+      default:
+    }
+  }
+
+  AdmobBanner getBanner(AdmobBannerSize size) {
+    return AdmobBanner(
+      adUnitId: "ca-app-pub-3940256099942544/6300978111",
+      adSize: size,
+      listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
+        handleEvent(event, args!, 'Banner');
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
@@ -257,6 +291,66 @@ class _GroupState extends State<Group> {
                                     thickness: 5.0,
                                     color: theme.shadow,
                                   ),
+                            ListView.separated(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                separatorBuilder: (context, index) {
+                                  return Divider(
+                                    height: 10.0,
+                                    thickness: 10.0,
+                                    color: theme.shadow,
+                                  );
+                                },
+                                itemCount: group.posts.length,
+                                itemBuilder: (context, index) {
+                                  if (index % 8 == 0 && index != 0) {
+                                    return Column(
+                                      children: [
+                                        Container(
+                                          width: MediaQuery.of(context).size.width,
+                                          decoration: BoxDecoration(
+                                            color: theme.shadow,
+                                          ),
+                                          child: getBanner(AdmobBannerSize.MEDIUM_RECTANGLE),
+                                        ),
+                                        Divider(
+                                          height: 10.0,
+                                          thickness: 10.0,
+                                          color: theme.shadow,
+                                        ),
+                                        ReturnWidgetPost.returnPostWidget(
+                                          post: group.posts[index],
+                                          screenComment: false,
+                                          contextGroupPage: null,
+                                          contextProfilePage: null,
+                                          contextUserPage: null,
+                                          groupPageIsOpen: true,
+                                          profilePageIsOpen: false,
+                                          userPageIsOpen: false,
+                                        ),
+                                        // UpdatePostEntityWidget(
+                                        //   postUpdateMini: profile.posts[index],
+                                        //   screenComment: false,
+                                        // ),
+                                      ],
+                                    );
+                                  } else {
+                                    return ReturnWidgetPost.returnPostWidget(
+                                      post: group.posts[index],
+                                      screenComment: false,
+                                      contextGroupPage: context,
+                                      contextProfilePage: null,
+                                      contextUserPage: null,
+                                      groupPageIsOpen: true,
+                                      profilePageIsOpen: false,
+                                      userPageIsOpen: false,
+                                    );
+                                    // UpdatePostEntityWidget(
+                                    //   postUpdateMini: profile.posts[index],
+                                    //   screenComment: false,
+                                    // );
+                                  }
+                                }),
                           ],
                         ),
                   group.load

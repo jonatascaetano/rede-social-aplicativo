@@ -6,15 +6,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_network_application/entities/dto/report_dto.dart';
 import 'package:social_network_application/entities/dto/user_dto.dart';
 import 'package:social_network_application/entities/mini_dto/entity_save_mini.dart';
-import 'package:social_network_application/entities/mini_dto/post_talk_group_mini.dart';
-import 'package:social_network_application/entities/mini_dto/post_talk_mini.dart';
 import 'package:social_network_application/entities/mini_dto/post_update_mini.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 import 'dart:convert';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_network_application/enuns/level_report.dart';
-import 'package:social_network_application/enuns/type_post.dart';
-import 'package:social_network_application/enuns/type_post_visibility.dart';
 import 'package:social_network_application/enuns/type_report.dart';
 import 'dart:io';
 
@@ -23,9 +19,6 @@ import 'package:social_network_application/view/tabs/home/new_entity.dart';
 import 'package:social_network_application/view/tabs/home/new_group.dart';
 import 'package:social_network_application/view/tabs/home/new_post_quest.dart';
 import 'package:social_network_application/view/tabs/home/new_post_talk.dart';
-import 'package:social_network_application/widgets/post/talk_group_post_widget.dart';
-import 'package:social_network_application/widgets/post/talk_user_post_widget.dart';
-import 'package:social_network_application/widgets/post/update_post_widget_2.dart';
 
 import 'support/language_model.dart';
 import 'support/theme_model.dart';
@@ -53,6 +46,11 @@ class ProfileModel extends Model {
   Future<String> getId() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString("id")!;
+  }
+
+  changeLoad() {
+    load = !load;
+    notifyListeners();
   }
 
   getProfile({required BuildContext context}) async {
@@ -481,46 +479,46 @@ class ProfileModel extends Model {
     }
   }
 
-  returnPostWidget({required Map post, required bool screenComment, required BuildContext contextPage}) {
-    switch (post["typePostVisibility"]) {
-      case TypePostVisibility.USER:
-        // ignore: avoid_print
-        switch (post["typePost"]) {
-          case TypePost.UPDATE:
-            return UpdatePostWidget2(
-              postUpdateMini: PostUpdateMini.fromMap(map: post),
-              screenComment: screenComment,
-              screenUser: false,
-              contextPage: contextPage,
-            );
-          case TypePost.TALK_USER:
-            return TalkUserPostWidget(
-              post: PostTalkMini.fromMap(map: post),
-              screenComment: screenComment,
-              screenUser: false,
-              contextPage: contextPage,
-            );
-          default:
-            return Container();
-        }
+  // returnPostWidget({required Map post, required bool screenComment, required BuildContext contextPage}) {
+  //   switch (post["typePostVisibility"]) {
+  //     case TypePostVisibility.USER:
+  //       // ignore: avoid_print
+  //       switch (post["typePost"]) {
+  //         case TypePost.UPDATE:
+  //           return UpdatePostWidget2(
+  //             postUpdateMini: PostUpdateMini.fromMap(map: post),
+  //             screenComment: screenComment,
+  //             screenUser: false,
+  //             contextPage: contextPage,
+  //           );
+  //         case TypePost.TALK_USER:
+  //           return TalkUserPostWidget(
+  //             post: PostTalkMini.fromMap(map: post),
+  //             screenComment: screenComment,
+  //             screenUser: false,
+  //             contextPage: contextPage,
+  //           );
+  //         default:
+  //           return Container();
+  //       }
 
-      case TypePostVisibility.GROUP:
-        // ignore: avoid_print
-        switch (post["typePost"]) {
-          case TypePost.TALK_GROUP:
-            return TalkGroupPostWidget(
-              post: PostTalkGroupMini.fromMap(map: post),
-              screenComment: screenComment,
-              screenUser: false,
-              contextPage: contextPage,
-            );
-          default:
-            return Container();
-        }
-      default:
-        return Container();
-    }
-  }
+  //     case TypePostVisibility.GROUP:
+  //       // ignore: avoid_print
+  //       switch (post["typePost"]) {
+  //         case TypePost.TALK_GROUP:
+  //           return TalkGroupPostWidget(
+  //             post: PostTalkGroupMini.fromMap(map: post),
+  //             screenComment: screenComment,
+  //             screenUser: false,
+  //             contextPage: contextPage,
+  //           );
+  //         default:
+  //           return Container();
+  //       }
+  //     default:
+  //       return Container();
+  //   }
+  // }
 
   showDeletePostBottomSheet({required BuildContext context, required String idPost, required bool screenComment, required bool screenUser, required BuildContext contextPage}) {
     showModalBottomSheet<dynamic>(

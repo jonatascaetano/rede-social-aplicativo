@@ -4,10 +4,10 @@ import 'package:social_network_application/converts/convert_date.dart';
 import 'package:social_network_application/converts/convert_to_enum.dart';
 import 'package:social_network_application/entities/mini_dto/post_update_mini.dart';
 import 'package:social_network_application/enuns/level.dart';
+import 'package:social_network_application/helper/widget_post_methods.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
-import 'package:social_network_application/scoped_model/user_model.dart';
 import 'package:social_network_application/view/objects/entity2.dart';
 import 'package:social_network_application/view/objects/user.dart';
 import 'package:social_network_application/view/post/comments_post_update2.dart';
@@ -19,29 +19,30 @@ import 'package:social_network_application/view/tabs/profile.dart';
 class UpdatePostWidget2 extends StatefulWidget {
   PostUpdateMini postUpdateMini;
   bool screenComment;
-  bool screenUser;
-  BuildContext contextPage;
-  UpdatePostWidget2({required this.postUpdateMini, required this.screenComment, required this.screenUser, required this.contextPage, Key? key}) : super(key: key);
+  BuildContext? contextUserPage;
+  BuildContext? contextGroupPage;
+  BuildContext? contextProfilePage;
+  bool userPageIsOpen;
+  bool profilePageIsOpen;
+  bool groupPageIsOpen;
+
+  UpdatePostWidget2({
+    required this.postUpdateMini,
+    required this.screenComment,
+    required this.userPageIsOpen,
+    required this.profilePageIsOpen,
+    required this.groupPageIsOpen,
+    this.contextUserPage,
+    this.contextGroupPage,
+    this.contextProfilePage,
+    Key? key,
+  }) : super(key: key);
 
   @override
   _UpdatePostWidget2State createState() => _UpdatePostWidget2State();
 }
 
 class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
-  int maxLine = 5;
-
-  updateMaxLine() {
-    if (maxLine == 5) {
-      setState(() {
-        maxLine = 500;
-      });
-    } else {
-      setState(() {
-        maxLine = 5;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
@@ -55,8 +56,15 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => CommentsPostUpdate2(postUpdateMini: widget.postUpdateMini, screenUser: widget.screenUser, contextPage: context),
-                ),
+                    builder: (context) => CommentsPostUpdate2(
+                          postUpdateMini: widget.postUpdateMini,
+                          userPageIsOpen: widget.userPageIsOpen,
+                          profilePageIsOpen: widget.profilePageIsOpen,
+                          groupPageIsOpen: widget.groupPageIsOpen,
+                          contextUserPage: widget.contextUserPage,
+                          contextGroupPage: widget.contextGroupPage,
+                          contextProfilePage: widget.contextProfilePage,
+                        )),
               );
             },
             child: Row(
@@ -71,7 +79,7 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                 widget.postUpdateMini.author!.imageProfile != null
                     ? GestureDetector(
                         onTap: () {
-                          if (widget.postUpdateMini.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
+                          if (widget.postUpdateMini.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.userPageIsOpen) {
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => User(userMini: widget.postUpdateMini.author!)),
@@ -87,7 +95,7 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                       )
                     : GestureDetector(
                         onTap: () {
-                          if (widget.postUpdateMini.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
+                          if (widget.postUpdateMini.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.userPageIsOpen) {
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => User(userMini: widget.postUpdateMini.author!)),
@@ -135,7 +143,7 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                                     child: entity(
                                       context: context,
                                       postUpdateMini: widget.postUpdateMini,
-                                      screenUser: widget.screenUser,
+                                      screenUser: widget.userPageIsOpen,
                                     ),
                                   )
                                 : Container(),
@@ -279,7 +287,43 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                         const SizedBox(
                           height: 8.0,
                         ),
-                        widget.postUpdateMini.level == Level.ENTITY ? entityImage(postUpdateMini: widget.postUpdateMini, contextPage: widget.contextPage, screenComment: widget.screenComment, screenUser: widget.screenUser) : Container(),
+
+                        widget.postUpdateMini.entity!.image != null
+                            ? Container(
+                                margin: EdgeInsets.zero,
+                                padding: EdgeInsets.zero,
+                                height: (MediaQuery.of(context).size.width / 16) * 9,
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                  color: theme.shadow,
+                                  border: Border.all(
+                                    color: Colors.transparent,
+                                  ),
+                                  borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+                                  image: DecorationImage(
+                                    image: NetworkImage(widget.postUpdateMini.entity!.image!),
+                                    fit: BoxFit.fitHeight,
+                                  ),
+                                ),
+                              )
+                            : Container(
+                                color: theme.shadow,
+                                height: (MediaQuery.of(context).size.width / 16) * 9,
+                                width: MediaQuery.of(context).size.width,
+                                child: Center(
+                                  child: Icon(
+                                    Icons.image,
+                                    size: 100,
+                                    color: theme.emphasis,
+                                  ),
+                                ),
+                              ),
+
+                        // widget.postUpdateMini.level == Level.ENTITY
+                        //     ? entityImage(
+                        //         postUpdateMini: widget.postUpdateMini,
+                        //       )
+                        //     : Container(),
                         // widget.postUpdateMini.level == Level.SEASON
                         //     ? seasonImage(postUpdateMini: widget.postUpdateMini, contextPage: widget.contextPage, screenComment: widget.screenComment, screenUser: widget.screenUser)
                         //     : episodeImage(postUpdateMini: widget.postUpdateMini, contextPage: widget.contextPage, screenComment: widget.screenComment, screenUser: widget.screenUser),
@@ -328,11 +372,27 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                if (!widget.screenComment && !widget.screenUser) {
-                                  ScopedModel.of<ProfileModel>(context).updateLikePost(context: context, idPost: widget.postUpdateMini.id!);
-                                } else if (widget.screenUser && !widget.screenComment) {
-                                  ScopedModel.of<UserModel>(widget.contextPage).updateLikePost(context: widget.contextPage, idPost: widget.postUpdateMini.id!);
+                                WidgetPostMethods.updateLikePost(
+                                  idPost: widget.postUpdateMini.id!,
+                                  contextUserPage: widget.contextUserPage,
+                                  contextGroupPage: widget.contextGroupPage,
+                                  contextProfilePage: widget.contextProfilePage,
+                                  userPageIsOpen: widget.userPageIsOpen,
+                                  profilePageIsOpen: widget.profilePageIsOpen,
+                                  groupPageIsOpen: widget.groupPageIsOpen,
+                                );
+
+                                /*
+                                if (!widget.screenComment && !widget.userPageIsOpen) {
+                                  //ALTERAR ESTE METODO PARA CLASSE SEPARADA
+
+                                  //ScopedModel.of<ProfileModel>(context).updateLikePost(context: context, idPost: widget.postUpdateMini.id!);
+                                } else if (widget.userPageIsOpen && !widget.screenComment) {
+                                  //ALTERAR ESTE METODO PARA CLASSE SEPARADA
+
+                                  // ScopedModel.of<UserModel>(widget.contextUserPage!).updateLikePost(context: widget.contextUserPage!, idPost: widget.postUpdateMini.id!);
                                 }
+                                */
                               },
                               child: Container(
                                 color: Colors.transparent,
@@ -389,8 +449,12 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                                     MaterialPageRoute(
                                       builder: (context) => CommentsPostUpdate2(
                                         postUpdateMini: widget.postUpdateMini,
-                                        screenUser: widget.screenUser,
-                                        contextPage: widget.contextPage,
+                                        userPageIsOpen: widget.userPageIsOpen,
+                                        profilePageIsOpen: widget.profilePageIsOpen,
+                                        groupPageIsOpen: widget.groupPageIsOpen,
+                                        contextUserPage: widget.contextUserPage,
+                                        contextGroupPage: widget.contextGroupPage,
+                                        contextProfilePage: widget.contextProfilePage,
                                       ),
                                     ),
                                   );
@@ -439,18 +503,22 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                               padding: EdgeInsets.zero,
                               onPressed: () {
                                 if (widget.postUpdateMini.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id) {
-                                  ScopedModel.of<ProfileModel>(context).showDeletePostBottomSheet(
-                                    context: context,
-                                    idPost: widget.postUpdateMini.id!,
-                                    screenComment: widget.screenComment,
-                                    screenUser: widget.screenUser,
-                                    contextPage: widget.contextPage,
-                                  );
+                                  //ALTERAR ESTE METODO PARA CLASSE SEPARADA
+
+                                  // ScopedModel.of<ProfileModel>(context).showDeletePostBottomSheet(
+                                  //   context: context,
+                                  //   idPost: widget.postUpdateMini.id!,
+                                  //   screenComment: widget.screenComment,
+                                  //   screenUser: widget.screenUser,
+                                  //   contextPage: widget.contextPage,
+                                  // );
                                 } else {
-                                  ScopedModel.of<ProfileModel>(context).showOptionsPostBottomSheet(
-                                    contextAncestor: context,
-                                    idPost: widget.postUpdateMini.id!,
-                                  );
+                                  //ALTERAR ESTE METODO PARA CLASSE SEPARADA
+
+                                  // ScopedModel.of<ProfileModel>(context).showOptionsPostBottomSheet(
+                                  //   contextAncestor: context,
+                                  //   idPost: widget.postUpdateMini.id!,
+                                  // );
                                 }
                               },
                               icon: Icon(
@@ -827,28 +895,28 @@ Widget episode({required PostUpdateMini postUpdateMini, required BuildContext co
   });
 }
 */
+
+/*
+
 Widget entityImage({
   required PostUpdateMini postUpdateMini,
-  required BuildContext contextPage,
-  required bool screenComment,
-  required bool screenUser,
 }) {
   return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
     return postUpdateMini.entity!.image != null
         ? GestureDetector(
             onTap: () {
-              if (!screenComment) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CommentsPostUpdate2(
-                      postUpdateMini: postUpdateMini,
-                      screenUser: screenUser,
-                      contextPage: contextPage,
-                    ),
-                  ),
-                );
-              }
+              // if (!screenComment) {
+              //   Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => CommentsPostUpdate2(
+              //         postUpdateMini: postUpdateMini,
+              //         screenUser: screenUser,
+              //         contextPage: contextPage,
+              //       ),
+              //     ),
+              //   );
+              // }
             },
             child: Container(
               margin: EdgeInsets.zero,
@@ -870,18 +938,18 @@ Widget entityImage({
           )
         : GestureDetector(
             onTap: () {
-              if (!screenComment) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CommentsPostUpdate2(
-                      postUpdateMini: postUpdateMini,
-                      screenUser: screenUser,
-                      contextPage: contextPage,
-                    ),
-                  ),
-                );
-              }
+              // if (!screenComment) {
+              //   Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => CommentsPostUpdate2(
+              //         postUpdateMini: postUpdateMini,
+              //         screenUser: screenUser,
+              //         contextPage: contextPage,
+              //       ),
+              //     ),
+              //   );
+              // }
             },
             child: Container(
               color: theme.shadow,
@@ -898,6 +966,8 @@ Widget entityImage({
           );
   });
 }
+
+*/
 
 /*
 

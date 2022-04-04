@@ -7,19 +7,29 @@ import 'package:http/http.dart' as http;
 import 'package:social_network_application/entities/mini_dto/group_mini.dart';
 
 class GroupModel extends Model {
+  bool groupIsNull = true;
+  late String idGroup;
+  bool load = true;
+  late GroupMini groupMini;
+  List<dynamic> posts = [];
+
   GroupModel({required String idGroup, required BuildContext contextPageGroup}) {
+    // ignore: prefer_initializing_formals
+    this.idGroup = idGroup;
     getGroup(idGroup: idGroup, contextPageGroup: contextPageGroup);
+    getAllPosts(context: contextPageGroup);
   }
 
   static const String base = "https://jonatas-social-network-api.herokuapp.com/";
 
-  bool groupIsNull = true;
-  bool load = true;
-  late GroupMini groupMini;
-
   Future<String> getId() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString("id")!;
+  }
+
+  changeLoad() {
+    load = !load;
+    notifyListeners();
   }
 
   getGroup({required String idGroup, required BuildContext contextPageGroup}) async {
@@ -44,6 +54,33 @@ class GroupModel extends Model {
         groupIsNull = true;
         notifyListeners();
         ScaffoldMessenger.of(contextPageGroup).showSnackBar(
+          const SnackBar(content: Text('Try again later')),
+        );
+        break;
+    }
+  }
+
+  getAllPosts({required BuildContext context}) async {
+    load = true;
+    notifyListeners();
+    String id = await getId();
+    var url = Uri.parse(base + 'groups/group/$idGroup/user/$id/posts');
+    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
+    // ignore: avoid_print
+    print("getAllPosts: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 200:
+        posts = [];
+        var itens = json.decode(response.body);
+        posts = itens;
+        notifyListeners();
+        load = false;
+        notifyListeners();
+        break;
+      default:
+        load = false;
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Try again later')),
         );
         break;
