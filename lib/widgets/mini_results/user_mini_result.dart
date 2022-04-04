@@ -67,7 +67,7 @@ class _UserMiniResultState extends State<UserMiniResult> {
                     Text(
                       LanguageModel().typeObject[0],
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: theme.sizeText,
                         color: theme.subtitle,
                         fontWeight: FontWeight.normal,
                       ),

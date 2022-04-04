@@ -75,9 +75,8 @@ class _EntityMiniResultState extends State<EntityMiniResult> {
                       maxLines: 1,
                       softWrap: false,
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: theme.sizeText,
                         color: theme.subtitle,
-                        letterSpacing: 1.0,
                         fontWeight: FontWeight.normal,
                       ),
                     ),

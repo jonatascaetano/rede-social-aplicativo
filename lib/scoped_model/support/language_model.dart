@@ -4,7 +4,7 @@ import 'package:scoped_model/scoped_model.dart';
 class LanguageModel extends Model {
   String language = 'English';
 
-  List<String> typeObject = ['user', 'entity', 'season', 'episode', 'group'];
+  List<String> typeObject = ['User', 'Entity', 'Season', 'Episode', 'Group'];
 
   List<String> typeEntities = [
     'Movie',

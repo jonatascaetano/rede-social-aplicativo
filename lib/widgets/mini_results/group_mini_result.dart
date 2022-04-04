@@ -67,7 +67,7 @@ class _GroupMiniResultState extends State<GroupMiniResult> {
                     Text(
                       LanguageModel().typeObject[4],
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: theme.sizeText,
                         color: theme.subtitle,
                         fontWeight: FontWeight.normal,
                       ),

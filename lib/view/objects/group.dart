@@ -112,6 +112,31 @@ class _GroupState extends State<Group> {
                             const SizedBox(
                               height: 4.0,
                             ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  group.groupMini.quantityMembers.toString() + ' members ',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: theme.sizeText,
+                                    letterSpacing: theme.letterSpacingText,
+                                    color: theme.detail,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                                // const SizedBox(
+                                //   width: 8.0,
+                                // ),
+                                // Icon(
+                                //   Icons.groups_rounded,
+                                //   color: theme.detail,
+                                // )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 4.0,
+                            ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 8.0),
                               child: Text(
@@ -128,83 +153,103 @@ class _GroupState extends State<Group> {
                             const SizedBox(
                               height: 8.0,
                             ),
+
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: [
+                            //     Text(
+                            //       'Posts ' + group.groupMini.quantityPosts.toString(),
+                            //       textAlign: TextAlign.center,
+                            //       style: TextStyle(
+                            //         fontSize: theme.sizeText,
+                            //         letterSpacing: theme.letterSpacingText,
+                            //         color: theme.subtitle,
+                            //         fontWeight: FontWeight.normal,
+                            //       ),
+                            //     ),
+                            //     const SizedBox(
+                            //       width: 8.0,
+                            //     ),
+                            //     Icon(
+                            //       Icons.assistant_photo_sharp,
+                            //       color: theme.detail,
+                            //     )
+                            //   ],
+                            // ),
+                            // const SizedBox(
+                            //   height: 8.0,
+                            // ),
+                            // Padding(
+                            //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            //   child: Text(
+                            //     'Created by ' + group.groupMini.creator!.name,
+                            //     style: TextStyle(
+                            //       fontSize: theme.sizeText,
+                            //       letterSpacing: theme.letterSpacingText,
+                            //       color: theme.subtitle,
+                            //       fontWeight: FontWeight.normal,
+                            //     ),
+                            //   ),
+                            // ),
+                            // const SizedBox(
+                            //   height: 4.0,
+                            // ),
+                            // Padding(
+                            //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            //   child: Text(
+                            //     'Created in ' + group.groupMini.creationDate,
+                            //     style: TextStyle(
+                            //       fontSize: theme.sizeText,
+                            //       letterSpacing: theme.letterSpacingText,
+                            //       color: theme.subtitle,
+                            //       fontWeight: FontWeight.normal,
+                            //     ),
+                            //   ),
+                            // ),
+
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
-                                  'Members ' + group.groupMini.quantityMembers.toString(),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: theme.sizeText,
-                                    letterSpacing: theme.letterSpacingText,
-                                    color: theme.subtitle,
-                                    fontWeight: FontWeight.normal,
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: group.groupMini.userIsMember ? Colors.red : theme.buttonMain,
+                                    elevation: 0.0,
+                                    //fixedSize: const Size(30, 30),
+                                    //shape: const CircleBorder(),
                                   ),
+                                  onPressed: () {
+                                    // season.showOptionsSeasonBottomSheet(
+                                    //   contextAncestor: context,
+                                    //   seasonMini: season.seasonMini,
+                                    // );
+                                  },
+                                  child: group.groupMini.userIsMember
+                                      ? Text(
+                                          "Exit",
+                                          style: TextStyle(
+                                            fontSize: theme.sizeButton,
+                                            letterSpacing: theme.letterSpacingButton,
+                                            color: theme.buttonMainText,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        )
+                                      : Text(
+                                          "Enter",
+                                          style: TextStyle(
+                                            fontSize: theme.sizeButton,
+                                            letterSpacing: theme.letterSpacingButton,
+                                            color: theme.buttonMainText,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
                                 ),
-                                const SizedBox(
-                                  width: 8.0,
-                                ),
-                                Icon(
-                                  Icons.groups_rounded,
-                                  color: theme.detail,
-                                )
                               ],
                             ),
+
                             const SizedBox(
-                              height: 2.0,
+                              height: 16.0,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Posts ' + group.groupMini.quantityPosts.toString(),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: theme.sizeText,
-                                    letterSpacing: theme.letterSpacingText,
-                                    color: theme.subtitle,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 8.0,
-                                ),
-                                Icon(
-                                  Icons.assistant_photo_sharp,
-                                  color: theme.detail,
-                                )
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 8.0,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Text(
-                                'Created by ' + group.groupMini.creator!.name,
-                                style: TextStyle(
-                                  fontSize: theme.sizeText,
-                                  letterSpacing: theme.letterSpacingText,
-                                  color: theme.subtitle,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 4.0,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Text(
-                                'Created in ' + group.groupMini.creationDate,
-                                style: TextStyle(
-                                  fontSize: theme.sizeText,
-                                  letterSpacing: theme.letterSpacingText,
-                                  color: theme.subtitle,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              ),
-                            ),
+
                             group.groupMini.quantityPosts == 0
                                 ? Container()
                                 : Divider(
