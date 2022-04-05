@@ -93,6 +93,7 @@ class _HomeState extends State<Home> {
                             AddedPost(
                               user: true,
                               idGroup: null,
+                              contextScreenGroup: null,
                             ),
                             Divider(
                               height: 10.0,

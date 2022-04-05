@@ -294,6 +294,7 @@ class _GroupState extends State<Group> {
                             AddedPost(
                               user: false,
                               idGroup: group.groupMini.id,
+                              contextScreenGroup: context,
                             ),
 
                             group.groupMini.quantityPosts == 0

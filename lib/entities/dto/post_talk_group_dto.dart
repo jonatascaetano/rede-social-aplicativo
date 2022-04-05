@@ -1,10 +1,11 @@
 class PostTalkGroupDTO {
-  late String idPost;
+  late String? idPost;
   late String release;
   late String body;
   late bool spoiler;
   late String idAuthor;
   late String idGroup;
+  late String? title;
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
@@ -14,6 +15,7 @@ class PostTalkGroupDTO {
     map["spoiler"] = spoiler;
     map["idAuthor"] = idAuthor;
     map["idGroup"] = idGroup;
+    map["title"] = title;
     return map;
   }
 
@@ -24,5 +26,6 @@ class PostTalkGroupDTO {
     required this.spoiler,
     required this.idAuthor,
     required this.idGroup,
+    required this.title,
   });
 }

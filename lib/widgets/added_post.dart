@@ -8,7 +8,8 @@ import 'package:social_network_application/view/post/new_talk_user.dart';
 class AddedPost extends StatelessWidget {
   bool user;
   String? idGroup;
-  AddedPost({required this.user, required this.idGroup, Key? key}) : super(key: key);
+  BuildContext? contextScreenGroup;
+  AddedPost({required this.user, required this.idGroup, required this.contextScreenGroup, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,7 @@ class AddedPost extends StatelessWidget {
                   MaterialPageRoute(
                       builder: (context) => NewTalkGroup(
                             idGroup: idGroup!,
+                            contextScreenGroup: contextScreenGroup!,
                           )));
             }
           },
