@@ -895,17 +895,17 @@ class _Entity2State extends State<Entity2> {
                               //         }
                               //       }),
                               // ),
-                              const SizedBox(
-                                height: 16.0,
-                              ),
+                              // const SizedBox(
+                              //   height: 16.0,
+                              // ),
 
-                              entity.reviews.isEmpty
-                                  ? Container()
-                                  : Divider(
-                                      height: 5.0,
-                                      thickness: 5.0,
-                                      color: theme.shadow,
-                                    ),
+                              // entity.reviews.isEmpty
+                              //     ? Container()
+                              //     : Divider(
+                              //         height: 10.0,
+                              //         thickness: 10.0,
+                              //         color: theme.shadow,
+                              //       ),
 
                               entity.reviews.isEmpty
                                   ? Container()
@@ -937,6 +937,13 @@ class _Entity2State extends State<Entity2> {
                                         ],
                                       ),
                                     ),
+                              entity.reviews.isEmpty
+                                  ? Container()
+                                  : Divider(
+                                      height: 10.0,
+                                      thickness: 10.0,
+                                      color: theme.shadow,
+                                    ),
 
                               entity.reviews.isEmpty
                                   ? Container()
@@ -945,8 +952,8 @@ class _Entity2State extends State<Entity2> {
                                       physics: const NeverScrollableScrollPhysics(),
                                       separatorBuilder: (context, index) {
                                         return Divider(
-                                          height: 1.0,
-                                          thickness: 1.0,
+                                          height: 10.0,
+                                          thickness: 10.0,
                                           color: theme.shadow,
                                         );
                                       },

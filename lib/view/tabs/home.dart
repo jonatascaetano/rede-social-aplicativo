@@ -90,7 +90,10 @@ class _HomeState extends State<Home> {
                               thickness: 10.0,
                               color: theme.shadow,
                             ),
-                            const AddedPost(),
+                            AddedPost(
+                              user: true,
+                              idGroup: null,
+                            ),
                             Divider(
                               height: 10.0,
                               thickness: 10.0,

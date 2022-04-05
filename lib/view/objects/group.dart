@@ -291,7 +291,10 @@ class _GroupState extends State<Group> {
                               color: theme.shadow,
                             ),
 
-                            const AddedPost(),
+                            AddedPost(
+                              user: false,
+                              idGroup: group.groupMini.id,
+                            ),
 
                             group.groupMini.quantityPosts == 0
                                 ? Container()

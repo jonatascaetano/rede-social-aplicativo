@@ -422,32 +422,35 @@ class _ReviewScreen2State extends State<ReviewScreen2> {
                             Container(
                               width: MediaQuery.of(context).size.width,
                               color: ScopedModel.of<ThemeModel>(context).button,
-                              child: TextField(
-                                maxLength: 280,
-                                controller: review.controller,
-                                minLines: 1,
-                                maxLines: 5,
-                                keyboardType: TextInputType.emailAddress,
-                                decoration: InputDecoration(
-                                  label: const Text("comment"),
-                                  //border: OutlineInputBorder(),
-                                  suffixIcon: IconButton(
-                                    onPressed: () {
-                                      if (review.controller.text.isNotEmpty) {
-                                        review.addCommentPost(
-                                          idEntitySave: review.entitySaveMini!.id,
-                                          body: review.controller.text,
-                                          contextEntityPage: widget.contextEntityPage,
-                                          contextReviewPage: context,
-                                        );
-                                        FocusScopeNode currentFocus = FocusScope.of(context);
+                              child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: TextField(
+                                  maxLength: 280,
+                                  controller: review.controller,
+                                  minLines: 1,
+                                  maxLines: 5,
+                                  keyboardType: TextInputType.text,
+                                  decoration: InputDecoration(
+                                    label: const Text("comment"),
+                                    //border: OutlineInputBorder(),
+                                    suffixIcon: IconButton(
+                                      onPressed: () {
+                                        if (review.controller.text.isNotEmpty) {
+                                          review.addCommentPost(
+                                            idEntitySave: review.entitySaveMini!.id,
+                                            body: review.controller.text,
+                                            contextEntityPage: widget.contextEntityPage,
+                                            contextReviewPage: context,
+                                          );
+                                          FocusScopeNode currentFocus = FocusScope.of(context);
 
-                                        if (!currentFocus.hasPrimaryFocus) {
-                                          currentFocus.unfocus();
+                                          if (!currentFocus.hasPrimaryFocus) {
+                                            currentFocus.unfocus();
+                                          }
                                         }
-                                      }
-                                    },
-                                    icon: const Icon(Icons.send),
+                                      },
+                                      icon: const Icon(Icons.send),
+                                    ),
                                   ),
                                 ),
                               ),

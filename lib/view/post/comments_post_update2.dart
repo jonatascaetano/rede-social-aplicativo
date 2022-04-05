@@ -1101,7 +1101,7 @@ class _CommentsPostUpdate2State extends State<CommentsPostUpdate2> {
                                   controller: comment.controller,
                                   minLines: 1,
                                   maxLines: 5,
-                                  keyboardType: TextInputType.emailAddress,
+                                  keyboardType: TextInputType.text,
                                   decoration: InputDecoration(
                                     label: const Text("comment"),
                                     //border: OutlineInputBorder(),
