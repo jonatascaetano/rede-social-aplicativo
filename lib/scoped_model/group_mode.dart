@@ -7,12 +7,6 @@ import 'package:http/http.dart' as http;
 import 'package:social_network_application/entities/mini_dto/group_mini.dart';
 
 class GroupModel extends Model {
-  bool groupIsNull = true;
-  late String idGroup;
-  bool load = true;
-  late GroupMini groupMini;
-  List<dynamic> posts = [];
-
   GroupModel({required String idGroup, required BuildContext contextPageGroup}) {
     // ignore: prefer_initializing_formals
     this.idGroup = idGroup;
@@ -22,14 +16,15 @@ class GroupModel extends Model {
 
   static const String base = "https://jonatas-social-network-api.herokuapp.com/";
 
+  bool groupIsNull = true;
+  bool load = true;
+  late GroupMini groupMini;
+  late String idGroup;
+  List<dynamic> posts = [];
+
   Future<String> getId() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString("id")!;
-  }
-
-  changeLoad() {
-    load = !load;
-    notifyListeners();
   }
 
   getGroup({required String idGroup, required BuildContext contextPageGroup}) async {

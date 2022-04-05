@@ -4,6 +4,7 @@ import 'package:social_network_application/converts/convert_date.dart';
 import 'package:social_network_application/entities/mini_dto/post_talk_mini.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
+import 'package:social_network_application/scoped_model/user_model.dart';
 import 'package:social_network_application/view/objects/user.dart';
 import 'package:social_network_application/view/post/likes_post.dart';
 import 'package:social_network_application/converts/convert_like_names.dart';
@@ -13,23 +14,10 @@ import 'package:social_network_application/view/tabs/profile.dart';
 class TalkUserPostWidget extends StatefulWidget {
   PostTalkMini post;
   bool screenComment;
-  BuildContext? contextUserPage;
-  BuildContext? contextGroupPage;
-  BuildContext? contextProfilePage;
-  bool userPageIsOpen;
-  bool profilePageIsOpen;
-  bool groupPageIsOpen;
-  TalkUserPostWidget({
-    required this.post,
-    required this.screenComment,
-    required this.userPageIsOpen,
-    required this.profilePageIsOpen,
-    required this.groupPageIsOpen,
-    this.contextUserPage,
-    this.contextGroupPage,
-    this.contextProfilePage,
-    Key? key,
-  }) : super(key: key);
+  bool screenUser;
+  bool screenGroup;
+  BuildContext contextPage;
+  TalkUserPostWidget({required this.post, required this.screenComment, required this.screenUser, required this.screenGroup, required this.contextPage, Key? key}) : super(key: key);
 
   @override
   _TalkUserPostWidgetState createState() => _TalkUserPostWidgetState();
@@ -65,7 +53,7 @@ class _TalkUserPostWidgetState extends State<TalkUserPostWidget> {
                 widget.post.author!.imageProfile != null
                     ? GestureDetector(
                         onTap: () {
-                          if (widget.post.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.userPageIsOpen) {
+                          if (widget.post.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => User(userMini: widget.post.author!)),
@@ -81,7 +69,7 @@ class _TalkUserPostWidgetState extends State<TalkUserPostWidget> {
                       )
                     : GestureDetector(
                         onTap: () {
-                          if (widget.post.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.userPageIsOpen) {
+                          if (widget.post.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => User(userMini: widget.post.author!)),
@@ -333,15 +321,10 @@ class _TalkUserPostWidgetState extends State<TalkUserPostWidget> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                if (!widget.screenComment && !widget.userPageIsOpen) {
-                                  //Trocar por um metodo em outra classe//
-
-                                  //ScopedModel.of<ProfileModel>(context).updateLikePost(context: context, idPost: widget.post.id!);
-
-                                } else if (widget.userPageIsOpen && !widget.screenComment) {
-                                  //Trocar por um metodo em outra classe//
-
-                                  //ScopedModel.of<UserModel>(widget.contextPage).updateLikePost(context: widget.contextPage, idPost: widget.post.id!);
+                                if (!widget.screenComment && !widget.screenUser) {
+                                  ScopedModel.of<ProfileModel>(context).updateLikePost(context: context, idPost: widget.post.id!);
+                                } else if (widget.screenUser && !widget.screenComment) {
+                                  ScopedModel.of<UserModel>(widget.contextPage).updateLikePost(context: widget.contextPage, idPost: widget.post.id!);
                                 }
                               },
                               child: Container(
@@ -449,22 +432,19 @@ class _TalkUserPostWidgetState extends State<TalkUserPostWidget> {
                               padding: EdgeInsets.zero,
                               onPressed: () {
                                 if (widget.post.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id) {
-                                  //Trocar para um metodo de outra classe//
-
-                                  // ScopedModel.of<ProfileModel>(context).showDeletePostBottomSheet(
-                                  //   context: context,
-                                  //   idPost: widget.post.id!,
-                                  //   screenComment: widget.screenComment,
-                                  //   screenUser: widget.screenUser,
-                                  //   contextPage: widget.contextPage,
-                                  // );
+                                  ScopedModel.of<ProfileModel>(context).showDeletePostBottomSheet(
+                                    context: context,
+                                    idPost: widget.post.id!,
+                                    screenComment: widget.screenComment,
+                                    screenUser: widget.screenUser,
+                                    contextPage: widget.contextPage,
+                                    screenGroup: widget.screenGroup,
+                                  );
                                 } else {
-                                  //Trocar para um metodo de outra classe//
-
-                                  // ScopedModel.of<ProfileModel>(context).showOptionsPostBottomSheet(
-                                  //   contextAncestor: context,
-                                  //   idPost: widget.post.id!,
-                                  // );
+                                  ScopedModel.of<ProfileModel>(context).showOptionsPostBottomSheet(
+                                    contextAncestor: context,
+                                    idPost: widget.post.id!,
+                                  );
                                 }
                               },
                               icon: Icon(

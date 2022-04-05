@@ -4,6 +4,7 @@ import 'package:social_network_application/helper/return_widget_post.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:admob_flutter/admob_flutter.dart';
+import 'package:social_network_application/widgets/added_post.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -89,11 +90,17 @@ class _HomeState extends State<Home> {
                               thickness: 10.0,
                               color: theme.shadow,
                             ),
+                            const AddedPost(),
+                            Divider(
+                              height: 10.0,
+                              thickness: 10.0,
+                              color: theme.shadow,
+                            ),
                             ListView.separated(
                                 padding: EdgeInsets.zero,
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
-                                separatorBuilder: (contextListView, index) {
+                                separatorBuilder: (context, index) {
                                   return Divider(
                                     height: 10.0,
                                     thickness: 10.0,
@@ -101,7 +108,7 @@ class _HomeState extends State<Home> {
                                   );
                                 },
                                 itemCount: profile.allPosts.length,
-                                itemBuilder: (contextItemBuilder, index) {
+                                itemBuilder: (context, index) {
                                   if (index % 8 == 0 && index != 0) {
                                     return Column(
                                       children: [
@@ -120,14 +127,10 @@ class _HomeState extends State<Home> {
                                         ReturnWidgetPost.returnPostWidget(
                                           post: profile.allPosts[index],
                                           screenComment: false,
-                                          contextUserPage: null,
-                                          contextGroupPage: null,
-                                          contextProfilePage: context,
-                                          userPageIsOpen: false,
-                                          profilePageIsOpen: true,
-                                          groupPageIsOpen: false,
-                                        )
-                                        //profile.returnPostWidget(post: profile.allPosts[index], screenComment: false, contextPage: context),
+                                          contextPage: context,
+                                          screenGroup: false,
+                                          screenUser: false,
+                                        ),
                                         // UpdatePostEntityWidget(
                                         //   postUpdateMini: profile.posts[index],
                                         //   screenComment: false,
@@ -138,12 +141,9 @@ class _HomeState extends State<Home> {
                                     return ReturnWidgetPost.returnPostWidget(
                                       post: profile.allPosts[index],
                                       screenComment: false,
-                                      contextUserPage: null,
-                                      contextGroupPage: null,
-                                      contextProfilePage: context,
-                                      userPageIsOpen: false,
-                                      profilePageIsOpen: true,
-                                      groupPageIsOpen: false,
+                                      contextPage: context,
+                                      screenGroup: false,
+                                      screenUser: false,
                                     );
                                     // UpdatePostEntityWidget(
                                     //   postUpdateMini: profile.posts[index],

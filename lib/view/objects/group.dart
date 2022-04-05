@@ -5,6 +5,7 @@ import 'package:social_network_application/entities/mini_dto/group_mini.dart';
 import 'package:social_network_application/helper/return_widget_post.dart';
 import 'package:social_network_application/scoped_model/group_mode.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
+import 'package:social_network_application/widgets/added_post.dart';
 
 // ignore: must_be_immutable
 class Group extends StatefulWidget {
@@ -284,6 +285,14 @@ class _GroupState extends State<Group> {
                               height: 16.0,
                             ),
 
+                            Divider(
+                              height: 5.0,
+                              thickness: 5.0,
+                              color: theme.shadow,
+                            ),
+
+                            const AddedPost(),
+
                             group.groupMini.quantityPosts == 0
                                 ? Container()
                                 : Divider(
@@ -291,6 +300,7 @@ class _GroupState extends State<Group> {
                                     thickness: 5.0,
                                     color: theme.shadow,
                                   ),
+
                             ListView.separated(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
@@ -318,16 +328,7 @@ class _GroupState extends State<Group> {
                                           thickness: 10.0,
                                           color: theme.shadow,
                                         ),
-                                        ReturnWidgetPost.returnPostWidget(
-                                          post: group.posts[index],
-                                          screenComment: false,
-                                          contextGroupPage: null,
-                                          contextProfilePage: null,
-                                          contextUserPage: null,
-                                          groupPageIsOpen: true,
-                                          profilePageIsOpen: false,
-                                          userPageIsOpen: false,
-                                        ),
+                                        ReturnWidgetPost.returnPostWidget(post: group.posts[index], screenComment: false, contextPage: context, screenGroup: true, screenUser: false),
                                         // UpdatePostEntityWidget(
                                         //   postUpdateMini: profile.posts[index],
                                         //   screenComment: false,
@@ -335,16 +336,7 @@ class _GroupState extends State<Group> {
                                       ],
                                     );
                                   } else {
-                                    return ReturnWidgetPost.returnPostWidget(
-                                      post: group.posts[index],
-                                      screenComment: false,
-                                      contextGroupPage: context,
-                                      contextProfilePage: null,
-                                      contextUserPage: null,
-                                      groupPageIsOpen: true,
-                                      profilePageIsOpen: false,
-                                      userPageIsOpen: false,
-                                    );
+                                    return ReturnWidgetPost.returnPostWidget(post: group.posts[index], screenComment: false, contextPage: context, screenGroup: true, screenUser: false);
                                     // UpdatePostEntityWidget(
                                     //   postUpdateMini: profile.posts[index],
                                     //   screenComment: false,

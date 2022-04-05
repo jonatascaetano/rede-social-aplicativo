@@ -12,12 +12,9 @@ class ReturnWidgetPost {
   static returnPostWidget({
     required Map post,
     required bool screenComment,
-    required BuildContext? contextUserPage,
-    required BuildContext? contextGroupPage,
-    required BuildContext? contextProfilePage,
-    required bool userPageIsOpen,
-    required bool profilePageIsOpen,
-    required bool groupPageIsOpen,
+    required BuildContext contextPage,
+    required bool screenUser,
+    required bool screenGroup,
   }) {
     switch (post["typePostVisibility"]) {
       case TypePostVisibility.USER:
@@ -27,18 +24,17 @@ class ReturnWidgetPost {
             return UpdatePostWidget2(
               postUpdateMini: PostUpdateMini.fromMap(map: post),
               screenComment: screenComment,
-              userPageIsOpen: userPageIsOpen,
-              profilePageIsOpen: profilePageIsOpen,
-              groupPageIsOpen: groupPageIsOpen,
+              screenUser: screenUser,
+              contextPage: contextPage,
+              screenGroup: screenGroup,
             );
-
           case TypePost.TALK_USER:
             return TalkUserPostWidget(
               post: PostTalkMini.fromMap(map: post),
               screenComment: screenComment,
-              userPageIsOpen: userPageIsOpen,
-              profilePageIsOpen: profilePageIsOpen,
-              groupPageIsOpen: groupPageIsOpen,
+              screenUser: screenUser,
+              contextPage: contextPage,
+              screenGroup: screenGroup,
             );
           default:
             return Container();
@@ -51,9 +47,9 @@ class ReturnWidgetPost {
             return TalkGroupPostWidget(
               post: PostTalkGroupMini.fromMap(map: post),
               screenComment: screenComment,
-              userPageIsOpen: userPageIsOpen,
-              profilePageIsOpen: profilePageIsOpen,
-              groupPageIsOpen: groupPageIsOpen,
+              screenUser: screenUser,
+              contextPage: contextPage,
+              screenGroup: screenGroup,
             );
           default:
             return Container();

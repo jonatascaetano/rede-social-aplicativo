@@ -607,7 +607,7 @@ class _UserState extends State<User> {
                             ListView.separated(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
-                                separatorBuilder: (contextListViewSeparated, index) {
+                                separatorBuilder: (context, index) {
                                   return Divider(
                                     height: 10.0,
                                     thickness: 10.0,
@@ -615,7 +615,7 @@ class _UserState extends State<User> {
                                   );
                                 },
                                 itemCount: user.myPosts.length,
-                                itemBuilder: (contextItemBuilder, index) {
+                                itemBuilder: (context, index) {
                                   if (index % 8 == 0 && index != 0) {
                                     return Column(
                                       children: [
@@ -634,18 +634,10 @@ class _UserState extends State<User> {
                                         ReturnWidgetPost.returnPostWidget(
                                           post: user.myPosts[index],
                                           screenComment: false,
-                                          contextUserPage: context,
-                                          contextGroupPage: null,
-                                          contextProfilePage: null,
-                                          userPageIsOpen: true,
-                                          profilePageIsOpen: false,
-                                          groupPageIsOpen: false,
-                                        )
-                                        // user.returnPostWidget(
-                                        //   post: user.myPosts[index],
-                                        //   screenComment: false,
-                                        //   contextPage: context,
-                                        // ),
+                                          contextPage: context,
+                                          screenGroup: false,
+                                          screenUser: true,
+                                        ),
                                         // UpdatePostEntityWidget(
                                         //   postUpdateMini: profile.posts[index],
                                         //   screenComment: false,
@@ -656,12 +648,9 @@ class _UserState extends State<User> {
                                     return ReturnWidgetPost.returnPostWidget(
                                       post: user.myPosts[index],
                                       screenComment: false,
-                                      contextUserPage: context,
-                                      contextGroupPage: null,
-                                      contextProfilePage: null,
-                                      userPageIsOpen: true,
-                                      profilePageIsOpen: false,
-                                      groupPageIsOpen: false,
+                                      contextPage: context,
+                                      screenGroup: false,
+                                      screenUser: true,
                                     );
                                     // UpdatePostEntityWidget(
                                     //   postUpdateMini: profile.posts[index],

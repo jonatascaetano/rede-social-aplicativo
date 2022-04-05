@@ -501,7 +501,7 @@ class _ProfileState extends State<Profile> {
                         ListView.separated(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
-                            separatorBuilder: (contextListViewSeparated, index) {
+                            separatorBuilder: (context, index) {
                               return Divider(
                                 height: 10.0,
                                 thickness: 10.0,
@@ -509,7 +509,7 @@ class _ProfileState extends State<Profile> {
                               );
                             },
                             itemCount: profile.myPosts.length,
-                            itemBuilder: (contextItemBuilder, index) {
+                            itemBuilder: (context, index) {
                               if (index % 8 == 0 && index != 0) {
                                 return Column(
                                   children: [
@@ -528,14 +528,10 @@ class _ProfileState extends State<Profile> {
                                     ReturnWidgetPost.returnPostWidget(
                                       post: profile.myPosts[index],
                                       screenComment: false,
-                                      contextUserPage: null,
-                                      contextGroupPage: null,
-                                      contextProfilePage: context,
-                                      userPageIsOpen: false,
-                                      profilePageIsOpen: true,
-                                      groupPageIsOpen: false,
-                                    )
-                                    //profile.returnPostWidget(post: profile.myPosts[index], screenComment: false, contextPage: context),
+                                      contextPage: context,
+                                      screenGroup: false,
+                                      screenUser: false,
+                                    ),
                                     // UpdatePostEntityWidget(
                                     //   postUpdateMini: profile.posts[index],
                                     //   screenComment: false,
@@ -546,12 +542,9 @@ class _ProfileState extends State<Profile> {
                                 return ReturnWidgetPost.returnPostWidget(
                                   post: profile.myPosts[index],
                                   screenComment: false,
-                                  contextUserPage: null,
-                                  contextGroupPage: null,
-                                  contextProfilePage: context,
-                                  userPageIsOpen: false,
-                                  profilePageIsOpen: true,
-                                  groupPageIsOpen: false,
+                                  contextPage: context,
+                                  screenGroup: false,
+                                  screenUser: false,
                                 );
                                 // UpdatePostEntityWidget(
                                 //   postUpdateMini: profile.posts[index],

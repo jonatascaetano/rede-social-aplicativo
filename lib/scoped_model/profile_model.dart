@@ -12,6 +12,7 @@ import 'dart:convert';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_network_application/enuns/level_report.dart';
 import 'package:social_network_application/enuns/type_report.dart';
+import 'package:social_network_application/scoped_model/group_mode.dart';
 import 'dart:io';
 
 import 'package:social_network_application/view/authentication/login.dart';
@@ -46,11 +47,6 @@ class ProfileModel extends Model {
   Future<String> getId() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString("id")!;
-  }
-
-  changeLoad() {
-    load = !load;
-    notifyListeners();
   }
 
   getProfile({required BuildContext context}) async {
@@ -454,7 +450,13 @@ class ProfileModel extends Model {
     }
   }
 
-  removePost({required BuildContext context, required String idPost, required BuildContext contextScreenComment, required bool screenComment}) async {
+  removePost({
+    required BuildContext context,
+    required String idPost,
+    required BuildContext contextScreenComment,
+    required bool screenComment,
+    required bool screenGroup,
+  }) async {
     load = true;
     notifyListeners();
     String id = await getId();
@@ -467,7 +469,10 @@ class ProfileModel extends Model {
     print("removePost: " + response.statusCode.toString());
     switch (response.statusCode) {
       case 200:
-        getAllPosts(context: context);
+        await getAllPosts(context: context);
+        if (screenGroup) {
+          ScopedModel.of<GroupModel>(context).getAllPosts(context: context);
+        }
         break;
       default:
         load = false;
@@ -520,7 +525,7 @@ class ProfileModel extends Model {
   //   }
   // }
 
-  showDeletePostBottomSheet({required BuildContext context, required String idPost, required bool screenComment, required bool screenUser, required BuildContext contextPage}) {
+  showDeletePostBottomSheet({required BuildContext context, required String idPost, required bool screenComment, required bool screenUser, required bool screenGroup, required BuildContext contextPage}) {
     showModalBottomSheet<dynamic>(
 
         //isScrollControlled: true,
@@ -543,10 +548,11 @@ class ProfileModel extends Model {
                           Navigator.pop(context);
                           if (!screenComment && !screenUser) {
                             removePost(
-                              context: context,
+                              context: contextPage,
                               idPost: idPost,
-                              contextScreenComment: context,
+                              contextScreenComment: contextPage,
                               screenComment: screenComment,
+                              screenGroup: screenGroup,
                             );
                           }
                           // else if (screenUser && !screenComment) {
@@ -656,7 +662,10 @@ class ProfileModel extends Model {
   //       });
   // }
 
-  showOptionsPostBottomSheet({required BuildContext contextAncestor, required String idPost}) {
+  showOptionsPostBottomSheet({
+    required BuildContext contextAncestor,
+    required String idPost,
+  }) {
     showModalBottomSheet<dynamic>(
 
         //isScrollControlled: true,
@@ -685,7 +694,10 @@ class ProfileModel extends Model {
                             idAuthor: userMini.id,
                             release: DateTime.now().toString(),
                           );
-                          showOptionsReport(contextAncestor: contextAncestor, reportDTO: reportDTO);
+                          showOptionsReport(
+                            contextAncestor: contextAncestor,
+                            reportDTO: reportDTO,
+                          );
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -780,7 +792,7 @@ class ProfileModel extends Model {
         });
   }
 
-  showOptionsReport({required BuildContext contextAncestor, required ReportDTO reportDTO}) {
+  showOptionsReport({required BuildContext contextAncestor, required ReportDTO reportDTO, requi}) {
     notifyListeners();
     showDialog(
         context: contextAncestor,

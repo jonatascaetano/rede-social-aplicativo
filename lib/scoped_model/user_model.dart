@@ -38,11 +38,6 @@ class UserModel extends Model {
     return prefs.getString("id")!;
   }
 
-  changeLoad() {
-    load = !load;
-    notifyListeners();
-  }
-
   getProfile({required String idUser, required BuildContext context}) async {
     load = true;
     notifyListeners();
