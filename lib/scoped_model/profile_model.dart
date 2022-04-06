@@ -18,8 +18,6 @@ import 'dart:io';
 import 'package:social_network_application/view/authentication/login.dart';
 import 'package:social_network_application/view/tabs/home/new_entity.dart';
 import 'package:social_network_application/view/tabs/home/new_group.dart';
-import 'package:social_network_application/view/tabs/home/new_post_quest.dart';
-import 'package:social_network_application/view/tabs/home/new_post_talk.dart';
 
 import 'support/language_model.dart';
 import 'support/theme_model.dart';
@@ -845,64 +843,64 @@ class ProfileModel extends Model {
                       const SizedBox(
                         height: 16.0,
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const NewPostTalk()));
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.question_answer_outlined,
-                                color: theme.emphasis,
-                              ),
-                              const SizedBox(
-                                width: 8.0,
-                              ),
-                              Text(
-                                'New Talk',
-                                style: TextStyle(
-                                  fontSize: theme.sizeText,
-                                  letterSpacing: theme.letterSpacingText,
-                                  color: theme.title,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const NewPostQuest()));
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.quiz_outlined,
-                                color: theme.emphasis,
-                              ),
-                              const SizedBox(
-                                width: 8.0,
-                              ),
-                              Text(
-                                'New Quest',
-                                style: TextStyle(
-                                  fontSize: theme.sizeText,
-                                  letterSpacing: theme.letterSpacingText,
-                                  color: theme.title,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      // GestureDetector(
+                      //   onTap: () {
+                      //     Navigator.pop(context);
+                      //     Navigator.push(context, MaterialPageRoute(builder: (context) => const NewPostTalk()));
+                      //   },
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.all(8.0),
+                      //     child: Row(
+                      //       children: [
+                      //         Icon(
+                      //           Icons.question_answer_outlined,
+                      //           color: theme.emphasis,
+                      //         ),
+                      //         const SizedBox(
+                      //           width: 8.0,
+                      //         ),
+                      //         Text(
+                      //           'New Talk',
+                      //           style: TextStyle(
+                      //             fontSize: theme.sizeText,
+                      //             letterSpacing: theme.letterSpacingText,
+                      //             color: theme.title,
+                      //             fontWeight: FontWeight.normal,
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+                      // GestureDetector(
+                      //   onTap: () {
+                      //     Navigator.pop(context);
+                      //     Navigator.push(context, MaterialPageRoute(builder: (context) => const NewPostQuest()));
+                      //   },
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.all(8.0),
+                      //     child: Row(
+                      //       children: [
+                      //         Icon(
+                      //           Icons.quiz_outlined,
+                      //           color: theme.emphasis,
+                      //         ),
+                      //         const SizedBox(
+                      //           width: 8.0,
+                      //         ),
+                      //         Text(
+                      //           'New Quest',
+                      //           style: TextStyle(
+                      //             fontSize: theme.sizeText,
+                      //             letterSpacing: theme.letterSpacingText,
+                      //             color: theme.title,
+                      //             fontWeight: FontWeight.normal,
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
                       GestureDetector(
                         onTap: () {
                           Navigator.pop(context);

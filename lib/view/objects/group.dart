@@ -332,7 +332,14 @@ class _GroupState extends State<Group> {
                                           thickness: 10.0,
                                           color: theme.shadow,
                                         ),
-                                        ReturnWidgetPost.returnPostWidget(post: group.posts[index], screenComment: false, contextPage: context, screenGroup: true, screenUser: false),
+                                        ReturnWidgetPost.returnPostWidget(
+                                          post: group.posts[index],
+                                          screenComment: false,
+                                          contextPage: context,
+                                          screenGroup: true,
+                                          screenUser: false,
+                                          screenProfile: false,
+                                        ),
                                         // UpdatePostEntityWidget(
                                         //   postUpdateMini: profile.posts[index],
                                         //   screenComment: false,
@@ -340,7 +347,14 @@ class _GroupState extends State<Group> {
                                       ],
                                     );
                                   } else {
-                                    return ReturnWidgetPost.returnPostWidget(post: group.posts[index], screenComment: false, contextPage: context, screenGroup: true, screenUser: false);
+                                    return ReturnWidgetPost.returnPostWidget(
+                                      post: group.posts[index],
+                                      screenComment: false,
+                                      contextPage: context,
+                                      screenGroup: true,
+                                      screenUser: false,
+                                      screenProfile: false,
+                                    );
                                     // UpdatePostEntityWidget(
                                     //   postUpdateMini: profile.posts[index],
                                     //   screenComment: false,

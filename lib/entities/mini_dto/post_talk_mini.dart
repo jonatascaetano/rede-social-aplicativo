@@ -17,7 +17,7 @@ class PostTalkMini {
 
   PostTalkMini.fromMap({required Map map}) {
     id = map["id"];
-    release = DateTime.now().toString();
+    release = map["release"];
     body = map["body"];
     typePost = map["typePost"];
     typePostVisibility = map["typePostVisibility"];

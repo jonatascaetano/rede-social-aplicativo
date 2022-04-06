@@ -15,6 +15,7 @@ class ReturnWidgetPost {
     required BuildContext contextPage,
     required bool screenUser,
     required bool screenGroup,
+    required bool screenProfile,
   }) {
     switch (post["typePostVisibility"]) {
       case TypePostVisibility.USER:
@@ -27,6 +28,7 @@ class ReturnWidgetPost {
               screenUser: screenUser,
               contextPage: contextPage,
               screenGroup: screenGroup,
+              screenProfile: screenProfile,
             );
           case TypePost.TALK_USER:
             return TalkUserPostWidget(
@@ -35,6 +37,7 @@ class ReturnWidgetPost {
               screenUser: screenUser,
               contextPage: contextPage,
               screenGroup: screenGroup,
+              screenProfile: screenProfile,
             );
           default:
             return Container();
@@ -50,6 +53,7 @@ class ReturnWidgetPost {
               screenUser: screenUser,
               contextPage: contextPage,
               screenGroup: screenGroup,
+              screenProfile: screenProfile,
             );
           default:
             return Container();

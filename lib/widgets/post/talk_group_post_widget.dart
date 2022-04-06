@@ -18,8 +18,9 @@ class TalkGroupPostWidget extends StatefulWidget {
   bool screenComment;
   bool screenUser;
   bool screenGroup;
+  bool screenProfile;
   BuildContext contextPage;
-  TalkGroupPostWidget({required this.post, required this.screenComment, required this.screenUser, required this.screenGroup, required this.contextPage, Key? key}) : super(key: key);
+  TalkGroupPostWidget({required this.post, required this.screenComment, required this.screenUser, required this.screenProfile, required this.screenGroup, required this.contextPage, Key? key}) : super(key: key);
 
   @override
   _TalkGroupPostWidgetState createState() => _TalkGroupPostWidgetState();
@@ -55,12 +56,14 @@ class _TalkGroupPostWidgetState extends State<TalkGroupPostWidget> {
                 widget.post.group!.image != null
                     ? GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Group(groupMini: widget.post.group!),
-                            ),
-                          );
+                          if (!widget.screenGroup) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Group(groupMini: widget.post.group!),
+                              ),
+                            );
+                          }
                         },
                         // onTap: () {
                         //   if (widget.post.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
@@ -81,22 +84,33 @@ class _TalkGroupPostWidgetState extends State<TalkGroupPostWidget> {
                             Positioned(
                               bottom: 0.0,
                               right: 0.0,
-                              child: CircleAvatar(
-                                backgroundImage: NetworkImage(widget.post.author!.imageProfile!),
-                                radius: 15.0,
-                              ),
+                              child: widget.post.author!.imageProfile != null
+                                  ? CircleAvatar(
+                                      backgroundImage: NetworkImage(widget.post.author!.imageProfile!),
+                                      radius: 15.0,
+                                    )
+                                  : CircleAvatar(
+                                      backgroundColor: theme.shadow,
+                                      child: Icon(
+                                        Icons.image,
+                                        color: theme.emphasis,
+                                      ),
+                                      radius: 15.0,
+                                    ),
                             ),
                           ],
                         ),
                       )
                     : GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Group(groupMini: widget.post.group!),
-                            ),
-                          );
+                          if (!widget.screenGroup) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Group(groupMini: widget.post.group!),
+                              ),
+                            );
+                          }
                         },
                         // onTap: () {
                         //   if (widget.post.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
@@ -121,10 +135,19 @@ class _TalkGroupPostWidgetState extends State<TalkGroupPostWidget> {
                             Positioned(
                               bottom: 0.0,
                               right: 0.0,
-                              child: CircleAvatar(
-                                backgroundImage: NetworkImage(widget.post.author!.imageProfile!),
-                                radius: 15.0,
-                              ),
+                              child: widget.post.author!.imageProfile != null
+                                  ? CircleAvatar(
+                                      backgroundImage: NetworkImage(widget.post.author!.imageProfile!),
+                                      radius: 15.0,
+                                    )
+                                  : CircleAvatar(
+                                      backgroundColor: theme.shadow,
+                                      child: Icon(
+                                        Icons.image,
+                                        color: theme.emphasis,
+                                      ),
+                                      radius: 15.0,
+                                    ),
                             ),
                           ],
                         ),
@@ -154,12 +177,14 @@ class _TalkGroupPostWidgetState extends State<TalkGroupPostWidget> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Group(groupMini: widget.post.group!),
-                              ),
-                            );
+                            if (!widget.screenGroup) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Group(groupMini: widget.post.group!),
+                                ),
+                              );
+                            }
                           },
                           child: Text(
                             widget.post.group!.name,
@@ -184,7 +209,7 @@ class _TalkGroupPostWidgetState extends State<TalkGroupPostWidget> {
                                     context,
                                     MaterialPageRoute(builder: (context) => User(userMini: widget.post.author!)),
                                   );
-                                } else {
+                                } else if (widget.post.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenProfile) {
                                   Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                                 }
                               },

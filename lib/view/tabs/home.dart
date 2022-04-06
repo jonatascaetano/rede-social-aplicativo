@@ -134,6 +134,7 @@ class _HomeState extends State<Home> {
                                           contextPage: context,
                                           screenGroup: false,
                                           screenUser: false,
+                                          screenProfile: false,
                                         ),
                                         // UpdatePostEntityWidget(
                                         //   postUpdateMini: profile.posts[index],
@@ -148,6 +149,7 @@ class _HomeState extends State<Home> {
                                       contextPage: context,
                                       screenGroup: false,
                                       screenUser: false,
+                                      screenProfile: false,
                                     );
                                     // UpdatePostEntityWidget(
                                     //   postUpdateMini: profile.posts[index],

@@ -531,6 +531,7 @@ class _ProfileState extends State<Profile> {
                                       contextPage: context,
                                       screenGroup: false,
                                       screenUser: false,
+                                      screenProfile: true,
                                     ),
                                     // UpdatePostEntityWidget(
                                     //   postUpdateMini: profile.posts[index],
@@ -545,6 +546,7 @@ class _ProfileState extends State<Profile> {
                                   contextPage: context,
                                   screenGroup: false,
                                   screenUser: false,
+                                  screenProfile: true,
                                 );
                                 // UpdatePostEntityWidget(
                                 //   postUpdateMini: profile.posts[index],

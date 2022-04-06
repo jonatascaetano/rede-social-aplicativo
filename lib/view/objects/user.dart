@@ -637,6 +637,7 @@ class _UserState extends State<User> {
                                           contextPage: context,
                                           screenGroup: false,
                                           screenUser: true,
+                                          screenProfile: false,
                                         ),
                                         // UpdatePostEntityWidget(
                                         //   postUpdateMini: profile.posts[index],
@@ -651,6 +652,7 @@ class _UserState extends State<User> {
                                       contextPage: context,
                                       screenGroup: false,
                                       screenUser: true,
+                                      screenProfile: false,
                                     );
                                     // UpdatePostEntityWidget(
                                     //   postUpdateMini: profile.posts[index],

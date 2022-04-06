@@ -21,8 +21,9 @@ class UpdatePostWidget2 extends StatefulWidget {
   bool screenComment;
   bool screenUser;
   bool screenGroup;
+  bool screenProfile;
   BuildContext contextPage;
-  UpdatePostWidget2({required this.postUpdateMini, required this.screenComment, required this.screenUser, required this.screenGroup, required this.contextPage, Key? key}) : super(key: key);
+  UpdatePostWidget2({required this.postUpdateMini, required this.screenComment, required this.screenUser, required this.screenGroup, required this.screenProfile, required this.contextPage, Key? key}) : super(key: key);
 
   @override
   _UpdatePostWidget2State createState() => _UpdatePostWidget2State();
@@ -77,7 +78,7 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                               context,
                               MaterialPageRoute(builder: (context) => User(userMini: widget.postUpdateMini.author!)),
                             );
-                          } else {
+                          } else if (widget.postUpdateMini.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenProfile) {
                             Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                           }
                         },
@@ -93,7 +94,7 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                               context,
                               MaterialPageRoute(builder: (context) => User(userMini: widget.postUpdateMini.author!)),
                             );
-                          } else {
+                          } else if (widget.postUpdateMini.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenProfile) {
                             Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                           }
                         },
@@ -137,6 +138,7 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                                       context: context,
                                       postUpdateMini: widget.postUpdateMini,
                                       screenUser: widget.screenUser,
+                                      screenProfile: widget.screenProfile,
                                     ),
                                   )
                                 : Container(),
@@ -482,7 +484,7 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
   }
 }
 
-Widget entity({required PostUpdateMini postUpdateMini, required BuildContext context, required bool screenUser}) {
+Widget entity({required PostUpdateMini postUpdateMini, required BuildContext context, required bool screenUser, required bool screenProfile}) {
   return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
@@ -494,7 +496,7 @@ Widget entity({required PostUpdateMini postUpdateMini, required BuildContext con
                 context,
                 MaterialPageRoute(builder: (context) => User(userMini: postUpdateMini.author!)),
               );
-            } else {
+            } else if (postUpdateMini.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id && !screenProfile) {
               Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
             }
           },

@@ -16,8 +16,9 @@ class TalkUserPostWidget extends StatefulWidget {
   bool screenComment;
   bool screenUser;
   bool screenGroup;
+  bool screenProfile;
   BuildContext contextPage;
-  TalkUserPostWidget({required this.post, required this.screenComment, required this.screenUser, required this.screenGroup, required this.contextPage, Key? key}) : super(key: key);
+  TalkUserPostWidget({required this.post, required this.screenComment, required this.screenUser, required this.screenGroup, required this.screenProfile, required this.contextPage, Key? key}) : super(key: key);
 
   @override
   _TalkUserPostWidgetState createState() => _TalkUserPostWidgetState();
@@ -58,7 +59,7 @@ class _TalkUserPostWidgetState extends State<TalkUserPostWidget> {
                               context,
                               MaterialPageRoute(builder: (context) => User(userMini: widget.post.author!)),
                             );
-                          } else {
+                          } else if (widget.post.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenProfile) {
                             Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                           }
                         },
@@ -74,7 +75,7 @@ class _TalkUserPostWidgetState extends State<TalkUserPostWidget> {
                               context,
                               MaterialPageRoute(builder: (context) => User(userMini: widget.post.author!)),
                             );
-                          } else {
+                          } else if (widget.post.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenProfile) {
                             Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                           }
                         },
@@ -110,14 +111,26 @@ class _TalkUserPostWidgetState extends State<TalkUserPostWidget> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          widget.post.author!.name,
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                            fontSize: theme.sizeText,
-                            letterSpacing: theme.letterSpacingText,
-                            color: theme.title,
-                            fontWeight: FontWeight.bold,
+                        GestureDetector(
+                          onTap: () {
+                            if (widget.post.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => User(userMini: widget.post.author!)),
+                              );
+                            } else if (widget.post.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenProfile) {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
+                            }
+                          },
+                          child: Text(
+                            widget.post.author!.name,
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontSize: theme.sizeText,
+                              letterSpacing: theme.letterSpacingText,
+                              color: theme.title,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                         // Row(
