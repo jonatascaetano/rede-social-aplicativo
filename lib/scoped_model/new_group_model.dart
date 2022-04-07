@@ -19,7 +19,10 @@ class NewGroupModel extends Model {
   bool load = false;
   late GroupMini groupMini;
 
-  newGroup({required GroupDTO groupDTO, required BuildContext context}) async {
+  newGroup({
+    required GroupDTO groupDTO,
+    required BuildContext contextNewGroup,
+  }) async {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'groups');
@@ -34,16 +37,14 @@ class NewGroupModel extends Model {
       case 201:
         var map = json.decode(response.body);
         groupMini = GroupMini.fromMap(map: map);
-        Navigator.pop;
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Group(groupMini: groupMini)));
         load = false;
         notifyListeners();
-        Navigator.pop(context);
+        Navigator.pushReplacement(contextNewGroup, MaterialPageRoute(builder: (contextNewGroup) => Group(groupMini: groupMini)));
         break;
       default:
         load = false;
         notifyListeners();
-        ScaffoldMessenger.of(context).showSnackBar(
+        ScaffoldMessenger.of(contextNewGroup).showSnackBar(
           const SnackBar(content: Text('Try again later')),
         );
         break;

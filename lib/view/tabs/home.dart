@@ -56,30 +56,54 @@ class _HomeState extends State<Home> {
               profile.postsAreNull
                   ? Container()
                   : profile.allPosts.isEmpty
-                      ? Center(
-                          child: Container(
-                              width: 250,
-                              height: 250,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  color: theme.shadow,
-                                ),
-                              ),
-                              child: Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    'Posts',
-                                    style: TextStyle(
-                                      color: theme.title,
-                                      fontSize: theme.sizeAppBar,
-                                      letterSpacing: theme.letterSpacingAppBar,
-                                      fontWeight: FontWeight.normal,
+                      ? ListView(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          children: [
+                            Divider(
+                              height: 10.0,
+                              thickness: 10.0,
+                              color: theme.shadow,
+                            ),
+                            AddedPost(
+                              user: true,
+                              idGroup: null,
+                              contextScreenGroup: null,
+                            ),
+                            Divider(
+                              height: 10.0,
+                              thickness: 10.0,
+                              color: theme.shadow,
+                            ),
+                            const SizedBox(
+                              height: 16.0,
+                            ),
+                            Center(
+                              child: Container(
+                                  width: 250,
+                                  height: 250,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: theme.shadow,
                                     ),
                                   ),
-                                ),
-                              )),
+                                  child: Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        'Posts',
+                                        style: TextStyle(
+                                          color: theme.title,
+                                          fontSize: theme.sizeAppBar,
+                                          letterSpacing: theme.letterSpacingAppBar,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      ),
+                                    ),
+                                  )),
+                            ),
+                          ],
                         )
                       : ListView(
                           padding: EdgeInsets.zero,

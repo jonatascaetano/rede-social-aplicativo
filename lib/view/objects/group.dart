@@ -286,8 +286,8 @@ class _GroupState extends State<Group> {
                             ),
 
                             Divider(
-                              height: 5.0,
-                              thickness: 5.0,
+                              height: 10.0,
+                              thickness: 10.0,
                               color: theme.shadow,
                             ),
 
@@ -297,13 +297,14 @@ class _GroupState extends State<Group> {
                               contextScreenGroup: context,
                             ),
 
-                            group.groupMini.quantityPosts == 0
-                                ? Container()
-                                : Divider(
-                                    height: 5.0,
-                                    thickness: 5.0,
-                                    color: theme.shadow,
-                                  ),
+                            // group.groupMini.quantityPosts == 0
+                            //     ? Container()
+                            //     :
+                            Divider(
+                              height: 10.0,
+                              thickness: 10.0,
+                              color: theme.shadow,
+                            ),
 
                             ListView.separated(
                                 shrinkWrap: true,

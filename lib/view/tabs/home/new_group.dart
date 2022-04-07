@@ -94,7 +94,7 @@ class _NewGroupState extends State<NewGroup> {
                                   image: null,
                                   creationDate: DateTime.now().toString(),
                                 );
-                                group.newGroup(groupDTO: groupDTO, context: context);
+                                group.newGroup(groupDTO: groupDTO, contextNewGroup: context);
                               }
                             },
                             child: Text(
