@@ -5,9 +5,12 @@ import 'package:social_network_application/helper/return_widget_post.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
+import 'package:social_network_application/view/tabs/profile/all_goals_profile.dart';
+import 'package:social_network_application/view/tabs/profile/all_groups_profile.dart';
 import 'package:social_network_application/view/tabs/profile/update_profile.dart';
 import 'package:social_network_application/widgets/mini_profile/entities_mini_profile.dart';
 import 'package:social_network_application/widgets/mini_profile/entity_mini_profile_evaluated.dart';
+import 'package:social_network_application/widgets/mini_profile/group_mini_profile.dart';
 import 'profile/followers.dart';
 import 'profile/following.dart';
 
@@ -344,16 +347,12 @@ class _ProfileState extends State<Profile> {
                                     ),
                                     IconButton(
                                       onPressed: () {
-                                        // Navigator.push(
-                                        //   context,
-                                        //   MaterialPageRoute(
-                                        //     builder: (context) => AllWorkersProfile(
-                                        //       isUser: true,
-                                        //       userMini: profile.userMini,
-                                        //       workers: profile.workers,
-                                        //     ),
-                                        //   ),
-                                        // );
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => const AllGoalsProfile(),
+                                          ),
+                                        );
                                       },
                                       icon: Icon(
                                         Icons.arrow_forward,
@@ -377,6 +376,58 @@ class _ProfileState extends State<Profile> {
                                       itemCount: profile.goals.length,
                                       itemBuilder: (context, index) {
                                         return EntityMiniProfileEvaluated(entitySaveMini: profile.goals[index]);
+                                      }),
+                                ),
+                              )
+                            : Container(),
+
+                        profile.groups.isNotEmpty
+                            ? Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        'View all groups',
+                                        style: TextStyle(
+                                          fontSize: theme.sizeTitle,
+                                          letterSpacing: theme.letterSpacingTitle,
+                                          color: theme.emphasis,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      ),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => const AllGroupsProfile(),
+                                          ),
+                                        );
+                                      },
+                                      icon: Icon(
+                                        Icons.arrow_forward,
+                                        color: theme.subtitle,
+                                        size: 24.0,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : Container(),
+
+                        profile.groups.isNotEmpty
+                            ? Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                child: SizedBox(
+                                  height: 260,
+                                  child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      shrinkWrap: true,
+                                      itemCount: profile.groups.length,
+                                      itemBuilder: (context, index) {
+                                        return GroupMiniProfile(group: profile.groups[index]);
                                       }),
                                 ),
                               )

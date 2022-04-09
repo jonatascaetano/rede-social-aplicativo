@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_network_application/entities/dto/report_dto.dart';
 import 'package:social_network_application/entities/dto/user_dto.dart';
 import 'package:social_network_application/entities/mini_dto/entity_save_mini.dart';
+import 'package:social_network_application/entities/mini_dto/group_mini.dart';
 import 'package:social_network_application/entities/mini_dto/post_update_mini.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 import 'dart:convert';
@@ -35,6 +36,7 @@ class ProfileModel extends Model {
   List<dynamic> myPosts = [];
   bool postsAreNull = true;
   List<EntitySaveMini> goals = [];
+  List<GroupMini> groups = [];
 
   //ProfileModel({required BuildContext context}) {
   //   getProfile(context: context);
@@ -68,6 +70,7 @@ class ProfileModel extends Model {
         await getAllPosts(context: context);
         await getMyPosts(context: context);
         await getGoals();
+        await getGroups(context: context);
         break;
       default:
         load = false;
@@ -344,6 +347,35 @@ class ProfileModel extends Model {
         load = false;
         notifyListeners();
         Navigator.pop(context);
+        break;
+      default:
+        load = false;
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Try again later')),
+        );
+        break;
+    }
+  }
+
+  getGroups({required BuildContext context}) async {
+    load = true;
+    notifyListeners();
+    String id = await getId();
+    var url = Uri.parse(base + 'users/$id/groups');
+    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
+    // ignore: avoid_print
+    print("getGroups: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 200:
+        groups = [];
+        var itens = json.decode(response.body);
+        for (var item in itens) {
+          GroupMini groupMini = GroupMini.fromMap(map: item);
+          groups.add(groupMini);
+        }
+        load = false;
+        notifyListeners();
         break;
       default:
         load = false;

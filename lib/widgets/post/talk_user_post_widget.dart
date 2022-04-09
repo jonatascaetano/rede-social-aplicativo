@@ -6,6 +6,7 @@ import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/scoped_model/user_model.dart';
 import 'package:social_network_application/view/objects/user.dart';
+import 'package:social_network_application/view/post/comments_post_talk_user.dart';
 import 'package:social_network_application/view/post/likes_post.dart';
 import 'package:social_network_application/converts/convert_like_names.dart';
 import 'package:social_network_application/view/tabs/profile.dart';
@@ -35,83 +36,31 @@ class _TalkUserPostWidgetState extends State<TalkUserPostWidget> {
           ),
           GestureDetector(
             onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => CommentsPostUpdate2(postUpdateMini: widget.postUpdateMini, screenUser: widget.screenUser, contextPage: context),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CommentPostTalkUser(
+                    post: widget.post,
+                    screenUser: widget.screenUser,
+                    contextPage: widget.contextPage,
+                    screenProfile: widget.screenProfile,
+                  ),
+                ),
+              );
             },
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  width: 4.0,
-                ),
+            child: Container(
+              color: Colors.transparent,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    width: 4.0,
+                  ),
 
-                //image profile user
+                  //image profile user
 
-                widget.post.author!.imageProfile != null
-                    ? GestureDetector(
-                        onTap: () {
-                          if (widget.post.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => User(userMini: widget.post.author!)),
-                            );
-                          } else if (widget.post.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenProfile) {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
-                          }
-                        },
-                        child: CircleAvatar(
-                          backgroundImage: NetworkImage(widget.post.author!.imageProfile!),
-                          radius: 30.0,
-                        ),
-                      )
-                    : GestureDetector(
-                        onTap: () {
-                          if (widget.post.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => User(userMini: widget.post.author!)),
-                            );
-                          } else if (widget.post.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenProfile) {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
-                          }
-                        },
-                        child: CircleAvatar(
-                          backgroundColor: theme.shadow,
-                          child: Icon(
-                            Icons.image,
-                            color: theme.emphasis,
-                          ),
-                          radius: 30.0,
-                        ),
-                      ),
-
-                //**image profile user */
-
-                const SizedBox(
-                  width: 8.0,
-                ),
-
-                // ignore: sized_box_for_whitespace
-                Container(
-                  //color: Colors.transparent,
-                  // decoration: BoxDecoration(
-                  //   //color: theme.button,
-                  //   border: Border.all(
-                  //     color: theme.button,
-                  //   ),
-                  //   borderRadius: const BorderRadius.all(Radius.circular(16.0)),
-                  // ),
-                  width: MediaQuery.of(context).size.width - 84,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        GestureDetector(
+                  widget.post.author!.imageProfile != null
+                      ? GestureDetector(
                           onTap: () {
                             if (widget.post.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
                               Navigator.push(
@@ -122,153 +71,181 @@ class _TalkUserPostWidgetState extends State<TalkUserPostWidget> {
                               Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                             }
                           },
-                          child: Text(
-                            widget.post.author!.name,
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                              fontSize: theme.sizeText,
-                              letterSpacing: theme.letterSpacingText,
-                              color: theme.title,
-                              fontWeight: FontWeight.bold,
+                          child: CircleAvatar(
+                            backgroundImage: NetworkImage(widget.post.author!.imageProfile!),
+                            radius: 30.0,
+                          ),
+                        )
+                      : GestureDetector(
+                          onTap: () {
+                            if (widget.post.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => User(userMini: widget.post.author!)),
+                              );
+                            } else if (widget.post.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenProfile) {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
+                            }
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: theme.shadow,
+                            child: Icon(
+                              Icons.image,
+                              color: theme.emphasis,
                             ),
+                            radius: 30.0,
                           ),
                         ),
-                        // Row(
-                        //   crossAxisAlignment: CrossAxisAlignment.start,
-                        //   children: [
-                        //     widget.post.level == Level.ENTITY
-                        //         ? Expanded(
-                        //             child: entity(
-                        //               context: context,
-                        //               postUpdateMini: widget.postUpdateMini,
-                        //               screenUser: widget.screenUser,
-                        //             ),
-                        //           )
-                        //         : Container(),
-                        //     //  widget.postUpdateMini.level == Level.SEASON
-                        //     //     ? Expanded(
-                        //     //         child: season(
-                        //     //           postUpdateMini: widget.postUpdateMini,
-                        //     //           context: context,
-                        //     //           screenUser: widget.screenUser,
-                        //     //         ),
-                        //     //       )
-                        //     //     : Expanded(
-                        //     //         child: episode(
-                        //     //           postUpdateMini: widget.postUpdateMini,
-                        //     //           context: context,
-                        //     //           screenUser: widget.screenUser,
-                        //     //         ),
-                        //     //       ),
-                        //   ],
-                        // ),
-                        // widget.postUpdateMini.category != 6
-                        //     ? Container()
-                        //     : Container(
-                        //         margin: EdgeInsets.zero,
-                        //         child: Padding(
-                        //           padding: const EdgeInsets.all(8.0),
-                        //           child: Row(
-                        //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //             children: [
-                        //               Icon(
-                        //                 Icons.star,
-                        //                 size: 30,
-                        //                 color: widget.postUpdateMini.evaluation >= 1 ? Colors.yellow[700] : theme.icon,
-                        //               ),
-                        //               Icon(
-                        //                 Icons.star,
-                        //                 size: 30,
-                        //                 color: widget.postUpdateMini.evaluation >= 2 ? Colors.yellow[700] : theme.icon,
-                        //               ),
-                        //               Icon(
-                        //                 Icons.star,
-                        //                 size: 30,
-                        //                 color: widget.postUpdateMini.evaluation >= 3 ? Colors.yellow[700] : theme.icon,
-                        //               ),
-                        //               Icon(
-                        //                 Icons.star,
-                        //                 size: 30,
-                        //                 color: widget.postUpdateMini.evaluation >= 4 ? Colors.yellow[700] : theme.icon,
-                        //               ),
-                        //               Icon(
-                        //                 Icons.star,
-                        //                 size: 30,
-                        //                 color: widget.postUpdateMini.evaluation >= 5 ? Colors.yellow[700] : theme.icon,
-                        //               ),
-                        //             ],
-                        //           ),
-                        //         ),
-                        //       ),
-                        // widget.postUpdateMini.category != 6
-                        //     ? Container()
-                        //     :
-                        const SizedBox(
-                          height: 2.0,
-                        ),
-                        !widget.post.spoiler
-                            ?
-                            //  widget.postUpdateMini.body != null
-                            //     ? Theme(
-                            //         data: ThemeData().copyWith(dividerColor: Colors.transparent),
-                            //         child: ExpansionTile(
-                            //           //tilePadding: const EdgeInsets.all(8.0),
-                            //           onExpansionChanged: (_) {
-                            //             updateMaxLine();
-                            //           },
-                            //           title: Text(
-                            //             widget.postUpdateMini.body!,
-                            //             maxLines: maxLine,
-                            //             style: TextStyle(
-                            //               fontSize: theme.sizeText,
-                            //               letterSpacing: theme.letterSpacingText,
-                            //               color: theme.title,
-                            //               fontWeight: FontWeight.normal,
-                            //             ),
-                            //           ),
-                            //         ),
-                            //       )
-                            //     : Container()
-                            widget.post.body != null
-                                ? Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 0.0),
-                                      child: Text(
-                                        widget.post.body!,
-                                        maxLines: 5,
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                          fontSize: theme.sizeText,
-                                          letterSpacing: theme.letterSpacingText,
-                                          color: theme.title,
-                                          fontWeight: FontWeight.normal,
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                : Container()
-                            : Theme(
-                                data: ThemeData().copyWith(dividerColor: Colors.transparent),
-                                child: ExpansionTile(
-                                  tilePadding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 0.0),
-                                  title: Text(
-                                    widget.post.title!,
-                                    style: TextStyle(
-                                      fontSize: theme.sizeText,
-                                      letterSpacing: theme.letterSpacingText,
-                                      color: theme.title,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                  ),
-                                  children: [
-                                    Align(
+
+                  //**image profile user */
+
+                  const SizedBox(
+                    width: 8.0,
+                  ),
+
+                  // ignore: sized_box_for_whitespace
+                  Container(
+                    //color: Colors.transparent,
+                    // decoration: BoxDecoration(
+                    //   //color: theme.button,
+                    //   border: Border.all(
+                    //     color: theme.button,
+                    //   ),
+                    //   borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+                    // ),
+                    width: MediaQuery.of(context).size.width - 84,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              if (widget.post.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => User(userMini: widget.post.author!)),
+                                );
+                              } else if (widget.post.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenProfile) {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
+                              }
+                            },
+                            child: Text(
+                              widget.post.author!.name,
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                fontSize: theme.sizeText,
+                                letterSpacing: theme.letterSpacingText,
+                                color: theme.title,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          // Row(
+                          //   crossAxisAlignment: CrossAxisAlignment.start,
+                          //   children: [
+                          //     widget.post.level == Level.ENTITY
+                          //         ? Expanded(
+                          //             child: entity(
+                          //               context: context,
+                          //               postUpdateMini: widget.postUpdateMini,
+                          //               screenUser: widget.screenUser,
+                          //             ),
+                          //           )
+                          //         : Container(),
+                          //     //  widget.postUpdateMini.level == Level.SEASON
+                          //     //     ? Expanded(
+                          //     //         child: season(
+                          //     //           postUpdateMini: widget.postUpdateMini,
+                          //     //           context: context,
+                          //     //           screenUser: widget.screenUser,
+                          //     //         ),
+                          //     //       )
+                          //     //     : Expanded(
+                          //     //         child: episode(
+                          //     //           postUpdateMini: widget.postUpdateMini,
+                          //     //           context: context,
+                          //     //           screenUser: widget.screenUser,
+                          //     //         ),
+                          //     //       ),
+                          //   ],
+                          // ),
+                          // widget.postUpdateMini.category != 6
+                          //     ? Container()
+                          //     : Container(
+                          //         margin: EdgeInsets.zero,
+                          //         child: Padding(
+                          //           padding: const EdgeInsets.all(8.0),
+                          //           child: Row(
+                          //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //             children: [
+                          //               Icon(
+                          //                 Icons.star,
+                          //                 size: 30,
+                          //                 color: widget.postUpdateMini.evaluation >= 1 ? Colors.yellow[700] : theme.icon,
+                          //               ),
+                          //               Icon(
+                          //                 Icons.star,
+                          //                 size: 30,
+                          //                 color: widget.postUpdateMini.evaluation >= 2 ? Colors.yellow[700] : theme.icon,
+                          //               ),
+                          //               Icon(
+                          //                 Icons.star,
+                          //                 size: 30,
+                          //                 color: widget.postUpdateMini.evaluation >= 3 ? Colors.yellow[700] : theme.icon,
+                          //               ),
+                          //               Icon(
+                          //                 Icons.star,
+                          //                 size: 30,
+                          //                 color: widget.postUpdateMini.evaluation >= 4 ? Colors.yellow[700] : theme.icon,
+                          //               ),
+                          //               Icon(
+                          //                 Icons.star,
+                          //                 size: 30,
+                          //                 color: widget.postUpdateMini.evaluation >= 5 ? Colors.yellow[700] : theme.icon,
+                          //               ),
+                          //             ],
+                          //           ),
+                          //         ),
+                          //       ),
+                          // widget.postUpdateMini.category != 6
+                          //     ? Container()
+                          //     :
+                          const SizedBox(
+                            height: 2.0,
+                          ),
+                          !widget.post.spoiler
+                              ?
+                              //  widget.postUpdateMini.body != null
+                              //     ? Theme(
+                              //         data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                              //         child: ExpansionTile(
+                              //           //tilePadding: const EdgeInsets.all(8.0),
+                              //           onExpansionChanged: (_) {
+                              //             updateMaxLine();
+                              //           },
+                              //           title: Text(
+                              //             widget.postUpdateMini.body!,
+                              //             maxLines: maxLine,
+                              //             style: TextStyle(
+                              //               fontSize: theme.sizeText,
+                              //               letterSpacing: theme.letterSpacingText,
+                              //               color: theme.title,
+                              //               fontWeight: FontWeight.normal,
+                              //             ),
+                              //           ),
+                              //         ),
+                              //       )
+                              //     : Container()
+                              widget.post.body != null
+                                  ? Align(
                                       alignment: Alignment.centerLeft,
                                       child: Padding(
-                                        padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 0.0),
+                                        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 0.0),
                                         child: Text(
                                           widget.post.body!,
+                                          maxLines: 5,
+                                          overflow: TextOverflow.ellipsis,
                                           textAlign: TextAlign.left,
                                           style: TextStyle(
                                             fontSize: theme.sizeText,
@@ -278,204 +255,236 @@ class _TalkUserPostWidgetState extends State<TalkUserPostWidget> {
                                           ),
                                         ),
                                       ),
+                                    )
+                                  : Container()
+                              : Theme(
+                                  data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                                  child: ExpansionTile(
+                                    tilePadding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 0.0),
+                                    title: Text(
+                                      widget.post.title!,
+                                      style: TextStyle(
+                                        fontSize: theme.sizeText,
+                                        letterSpacing: theme.letterSpacingText,
+                                        color: theme.title,
+                                        fontWeight: FontWeight.normal,
+                                      ),
                                     ),
-                                  ],
+                                    children: [
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 0.0),
+                                          child: Text(
+                                            widget.post.body!,
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                              fontSize: theme.sizeText,
+                                              letterSpacing: theme.letterSpacingText,
+                                              color: theme.title,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
+                          const SizedBox(
+                            height: 8.0,
+                          ),
+                          // widget.postUpdateMini.level == Level.ENTITY ? entityImage(postUpdateMini: widget.postUpdateMini, contextPage: widget.contextPage, screenComment: widget.screenComment, screenUser: widget.screenUser) : Container(),
+                          // // widget.postUpdateMini.level == Level.SEASON
+                          // //     ? seasonImage(postUpdateMini: widget.postUpdateMini, contextPage: widget.contextPage, screenComment: widget.screenComment, screenUser: widget.screenUser)
+                          // //     : episodeImage(postUpdateMini: widget.postUpdateMini, contextPage: widget.contextPage, screenComment: widget.screenComment, screenUser: widget.screenUser),
+                          // const SizedBox(
+                          //   height: 16.0,
+                          // ),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => LikesPost(
+                                              idPost: widget.post.id!,
+                                            )));
+                              },
+                              child: ConvertLikeNames.returnLikes(
+                                liked: widget.post.liked,
+                                likeQuantity: widget.post.likeQuantity,
+                                like: widget.post.like,
+                                context: context,
                               ),
-                        const SizedBox(
-                          height: 8.0,
-                        ),
-                        // widget.postUpdateMini.level == Level.ENTITY ? entityImage(postUpdateMini: widget.postUpdateMini, contextPage: widget.contextPage, screenComment: widget.screenComment, screenUser: widget.screenUser) : Container(),
-                        // // widget.postUpdateMini.level == Level.SEASON
-                        // //     ? seasonImage(postUpdateMini: widget.postUpdateMini, contextPage: widget.contextPage, screenComment: widget.screenComment, screenUser: widget.screenUser)
-                        // //     : episodeImage(postUpdateMini: widget.postUpdateMini, contextPage: widget.contextPage, screenComment: widget.screenComment, screenUser: widget.screenUser),
-                        // const SizedBox(
-                        //   height: 16.0,
-                        // ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LikesPost(
-                                            idPost: widget.post.id!,
-                                          )));
-                            },
-                            child: ConvertLikeNames.returnLikes(
-                              liked: widget.post.liked,
-                              likeQuantity: widget.post.likeQuantity,
-                              like: widget.post.like,
-                              context: context,
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 2.0,
-                        ),
-                        // Divider(
-                        //   color: theme.button,
-                        // ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8.0),
-                              child: Text(
-                                ConvertDate.convertToDatePost(release: widget.post.release!),
-                                style: TextStyle(
-                                  fontSize: theme.sizeText,
-                                  letterSpacing: theme.letterSpacingTitle,
-                                  color: theme.subtitle,
-                                  fontWeight: FontWeight.normal,
+                          const SizedBox(
+                            height: 2.0,
+                          ),
+                          // Divider(
+                          //   color: theme.button,
+                          // ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                child: Text(
+                                  ConvertDate.convertToDatePost(release: widget.post.release!),
+                                  style: TextStyle(
+                                    fontSize: theme.sizeText,
+                                    letterSpacing: theme.letterSpacingTitle,
+                                    color: theme.subtitle,
+                                    fontWeight: FontWeight.normal,
+                                  ),
                                 ),
                               ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                if (!widget.screenComment && !widget.screenUser) {
-                                  ScopedModel.of<ProfileModel>(context).updateLikePost(context: context, idPost: widget.post.id!);
-                                } else if (widget.screenUser && !widget.screenComment) {
-                                  ScopedModel.of<UserModel>(widget.contextPage).updateLikePost(context: widget.contextPage, idPost: widget.post.id!);
-                                }
-                              },
-                              child: Container(
-                                color: Colors.transparent,
-                                // decoration: BoxDecoration(
-                                //   color: theme.button,
-                                //   border: Border.all(
-                                //       color: theme.button,
-                                //       ),
-                                //   borderRadius: const BorderRadius.all(
-                                //       Radius.circular(16.0)),
-                                // ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: Center(
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          widget.post.likeQuantity.toString() + " ",
+                              GestureDetector(
+                                onTap: () {
+                                  if (!widget.screenComment && !widget.screenUser) {
+                                    ScopedModel.of<ProfileModel>(context).updateLikePost(context: context, idPost: widget.post.id!);
+                                  } else if (widget.screenUser && !widget.screenComment) {
+                                    ScopedModel.of<UserModel>(widget.contextPage).updateLikePost(context: widget.contextPage, idPost: widget.post.id!);
+                                  }
+                                },
+                                child: Container(
+                                  color: Colors.transparent,
+                                  // decoration: BoxDecoration(
+                                  //   color: theme.button,
+                                  //   border: Border.all(
+                                  //       color: theme.button,
+                                  //       ),
+                                  //   borderRadius: const BorderRadius.all(
+                                  //       Radius.circular(16.0)),
+                                  // ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                    child: Center(
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            widget.post.likeQuantity.toString() + " ",
 
-                                          // widget.screenComment
-                                          //     ? post.likeQuantity == 0
-                                          //         ? widget.postUpdateMini.likeQuantity
-                                          //             .toString()
-                                          //         : post.likeQuantity.toString()
-                                          //     : widget.postUpdateMini.likeQuantity
-                                          //         .toString(),
-                                          style: TextStyle(
-                                            fontSize: theme.sizeText,
-                                            letterSpacing: theme.letterSpacingTitle,
+                                            // widget.screenComment
+                                            //     ? post.likeQuantity == 0
+                                            //         ? widget.postUpdateMini.likeQuantity
+                                            //             .toString()
+                                            //         : post.likeQuantity.toString()
+                                            //     : widget.postUpdateMini.likeQuantity
+                                            //         .toString(),
+                                            style: TextStyle(
+                                              fontSize: theme.sizeText,
+                                              letterSpacing: theme.letterSpacingTitle,
+                                              color: widget.post.liked ? theme.emphasis : theme.subtitle,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                          ),
+                                          Icon(
+                                            Icons.thumb_up_alt_outlined,
+                                            size: theme.sizeText,
                                             color: widget.post.liked ? theme.emphasis : theme.subtitle,
-                                            fontWeight: FontWeight.normal,
                                           ),
-                                        ),
-                                        Icon(
-                                          Icons.thumb_up_alt_outlined,
-                                          size: theme.sizeText,
-                                          color: widget.post.liked ? theme.emphasis : theme.subtitle,
-                                        ),
-                                        // const SizedBox(
-                                        //   width: 8.0,
-                                        // ),
-                                      ],
+                                          // const SizedBox(
+                                          //   width: 8.0,
+                                          // ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                // if (!widget.screenComment) {
-                                //   Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //       builder: (context) => CommentsPostUpdate2(
-                                //         postUpdateMini: widget.post,
-                                //         screenUser: widget.screenUser,
-                                //         contextPage: widget.contextPage,
-                                //       ),
-                                //     ),
-                                //   );
-                                // }
-                              },
-                              child: Container(
-                                color: Colors.transparent,
-                                // decoration: BoxDecoration(
-                                //   color: theme.button,
-                                //   border: Border.all(
-                                //       color: theme.button,
-                                //       ),
-                                //   borderRadius: const BorderRadius.all(
-                                //       Radius.circular(16.0)),
-                                // ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: Center(
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          widget.post.commentQuantity.toString() + " ",
-                                          style: TextStyle(
-                                            fontSize: theme.sizeText,
-                                            letterSpacing: theme.letterSpacingTitle,
+                              GestureDetector(
+                                onTap: () {
+                                  // if (!widget.screenComment) {
+                                  //   Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //       builder: (context) => CommentsPostUpdate2(
+                                  //         postUpdateMini: widget.post,
+                                  //         screenUser: widget.screenUser,
+                                  //         contextPage: widget.contextPage,
+                                  //       ),
+                                  //     ),
+                                  //   );
+                                  // }
+                                },
+                                child: Container(
+                                  color: Colors.transparent,
+                                  // decoration: BoxDecoration(
+                                  //   color: theme.button,
+                                  //   border: Border.all(
+                                  //       color: theme.button,
+                                  //       ),
+                                  //   borderRadius: const BorderRadius.all(
+                                  //       Radius.circular(16.0)),
+                                  // ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                    child: Center(
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            widget.post.commentQuantity.toString() + " ",
+                                            style: TextStyle(
+                                              fontSize: theme.sizeText,
+                                              letterSpacing: theme.letterSpacingTitle,
+                                              color: theme.subtitle,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                          ),
+                                          Icon(
+                                            Icons.messenger_outline,
+                                            size: theme.sizeText,
                                             color: theme.subtitle,
-                                            fontWeight: FontWeight.normal,
                                           ),
-                                        ),
-                                        Icon(
-                                          Icons.messenger_outline,
-                                          size: theme.sizeText,
-                                          color: theme.subtitle,
-                                        ),
-                                        // const SizedBox(
-                                        //   width: 6.0,
-                                        // ),
-                                      ],
+                                          // const SizedBox(
+                                          //   width: 6.0,
+                                          // ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                            IconButton(
-                              padding: EdgeInsets.zero,
-                              onPressed: () {
-                                if (widget.post.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id) {
-                                  ScopedModel.of<ProfileModel>(context).showDeletePostBottomSheet(
-                                    context: context,
-                                    idPost: widget.post.id!,
-                                    screenComment: widget.screenComment,
-                                    screenUser: widget.screenUser,
-                                    contextPage: widget.contextPage,
-                                    screenGroup: widget.screenGroup,
-                                  );
-                                } else {
-                                  ScopedModel.of<ProfileModel>(context).showOptionsPostBottomSheet(
-                                    contextAncestor: context,
-                                    idPost: widget.post.id!,
-                                  );
-                                }
-                              },
-                              icon: Icon(
-                                Icons.more_vert_sharp,
-                                size: theme.sizeTitle,
-                                color: theme.subtitle,
+                              IconButton(
+                                padding: EdgeInsets.zero,
+                                onPressed: () {
+                                  if (widget.post.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id) {
+                                    ScopedModel.of<ProfileModel>(context).showDeletePostBottomSheet(
+                                      context: context,
+                                      idPost: widget.post.id!,
+                                      screenComment: widget.screenComment,
+                                      screenUser: widget.screenUser,
+                                      contextPage: widget.contextPage,
+                                      screenGroup: widget.screenGroup,
+                                    );
+                                  } else {
+                                    ScopedModel.of<ProfileModel>(context).showOptionsPostBottomSheet(
+                                      contextAncestor: context,
+                                      idPost: widget.post.id!,
+                                    );
+                                  }
+                                },
+                                icon: Icon(
+                                  Icons.more_vert_sharp,
+                                  size: theme.sizeTitle,
+                                  color: theme.subtitle,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                // const SizedBox(
-                //   width: 8.0,
-                // ),
-              ],
+                  // const SizedBox(
+                  //   width: 8.0,
+                  // ),
+                ],
+              ),
             ),
           ),
           // const SizedBox(
