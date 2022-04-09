@@ -41,7 +41,7 @@ class _EvaluationState extends State<Evaluation> {
                   spoiler: false,
                   release: null,
                 );
-                ScopedModel.of<EntityModel2>(widget.contextEntityPage).updateEvaluationEntitySave(entitySaveDTO: entitySaveDTO, context: context);
+                ScopedModel.of<EntityModel2>(widget.contextEntityPage).updateEvaluationEntitySave(entitySaveDTO: entitySaveDTO, context: context, contextEntityPage: widget.contextEntityPage);
               }
             },
             icon: Icon(

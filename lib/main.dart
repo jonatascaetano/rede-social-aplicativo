@@ -2,7 +2,6 @@ import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:social_network_application/scoped_model/entity_model.dart';
 import 'package:social_network_application/scoped_model/login_model.dart';
 import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/scoped_model/registe_model.dart';
@@ -41,17 +40,14 @@ class _ModelState extends State<Model> {
               model: RegisterModel(),
               child: ScopedModel<LoginModel>(
                 model: LoginModel(),
-                child: ScopedModel<EntityModel>(
-                  model: EntityModel(),
-                  child: ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-                    return MaterialApp(
-                      theme: theme.themeData,
-                      themeMode: theme.themeMode,
-                      debugShowCheckedModeBanner: false,
-                      home: const SplashScreen(),
-                    );
-                  }),
-                ),
+                child: ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
+                  return MaterialApp(
+                    theme: theme.themeData,
+                    themeMode: theme.themeMode,
+                    debugShowCheckedModeBanner: false,
+                    home: const SplashScreen(),
+                  );
+                }),
               ),
             )),
       ),

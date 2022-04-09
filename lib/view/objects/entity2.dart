@@ -495,11 +495,11 @@ class _Entity2State extends State<Entity2> {
                                       release: null,
                                     );
                                     if (entity.entitySaveMini == null) {
-                                      entity.newEntitySave(entitySaveDTO: entitySaveDTO, context: context);
+                                      entity.newEntitySave(entitySaveDTO: entitySaveDTO, context: context, contextEntityPage: context);
                                     } else {
                                       if (value != entity.entitySaveMini!.category!) {
                                         entitySaveDTO.idEntitySave = entity.entitySaveMini!.id;
-                                        entity.updateCategoryEntitySave(entitySaveDTO: entitySaveDTO, context: context);
+                                        entity.updateCategoryEntitySave(entitySaveDTO: entitySaveDTO, context: context, contextEntityPage: context);
                                       }
                                     }
                                   },
@@ -584,7 +584,7 @@ class _Entity2State extends State<Entity2> {
                                                 spoiler: false,
                                                 release: null,
                                               );
-                                              entity.updateGoalEntitySave(entitySaveDTO: entitySaveDTO, context: context);
+                                              entity.updateGoalEntitySave(entitySaveDTO: entitySaveDTO, context: context, contextEntityPage: context);
                                             }
                                           },
                                           icon: Icon(

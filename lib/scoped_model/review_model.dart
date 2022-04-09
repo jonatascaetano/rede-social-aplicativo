@@ -10,7 +10,6 @@ import 'package:social_network_application/entities/mini_dto/comment_mini.dart';
 import 'package:social_network_application/entities/mini_dto/entity_save_mini.dart';
 import 'package:social_network_application/enuns/type_comment.dart';
 import 'package:social_network_application/enuns/type_object.dart';
-import 'package:social_network_application/scoped_model/entity_model.dart';
 import 'package:social_network_application/scoped_model/entity_model2.dart';
 import 'support/theme_model.dart';
 
@@ -191,11 +190,7 @@ class ReviewModel extends Model {
     }
   }
 
-  removeCommentReview({
-    required String idReview,
-    required BuildContext context,
-    required String idComment,
-  }) async {
+  removeCommentReview({required String idReview, required BuildContext context, required String idComment, required contextEntityPage}) async {
     load = true;
     notifyListeners();
     String id = await getId();
@@ -222,7 +217,7 @@ class ReviewModel extends Model {
         getAllCommentReview(idReview: idReview, context: context);
         switch (typeObject) {
           case TypeObject.ENTITY:
-            ScopedModel.of<EntityModel>(context).getReviews(entityId: entitySaveMini!.entity!.id);
+            ScopedModel.of<EntityModel2>(contextEntityPage).getReviews(entityId: entitySaveMini!.entity!.id);
             break;
           // case TypeObject.SEASON:
           //   ScopedModel.of<SeasonModel>(context)
@@ -266,6 +261,8 @@ class ReviewModel extends Model {
     }
   }
 
+  //verificar se o contextPage é o contextPage da tela entity
+
   showDeleteCommentBottomSheet({required BuildContext contextCommentPage, required String idReview, required String idComment, required BuildContext contextPage}) {
     showModalBottomSheet<dynamic>(
 
@@ -291,6 +288,7 @@ class ReviewModel extends Model {
                             idReview: idReview,
                             context: contextCommentPage,
                             idComment: idComment,
+                            contextEntityPage: contextPage,
                           );
                         },
                         child: Padding(

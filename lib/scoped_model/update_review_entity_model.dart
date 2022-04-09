@@ -9,6 +9,6 @@ class UpdateReviewEntityModel extends Model {
   updateReview({required entitySaveDTO, required BuildContext contextEntityPage, required BuildContext contextUpdateReviewPage}) async {
     load = true;
     notifyListeners();
-    ScopedModel.of<EntityModel2>(contextEntityPage).updateReviewEntitySave(entitySaveDTO: entitySaveDTO, context: contextEntityPage, contextUpdateReviewPage: contextUpdateReviewPage);
+    ScopedModel.of<EntityModel2>(contextEntityPage).updateReviewEntitySave(entitySaveDTO: entitySaveDTO, context: contextEntityPage, contextUpdateReviewPage: contextUpdateReviewPage, contextEntityPage: contextEntityPage);
   }
 }

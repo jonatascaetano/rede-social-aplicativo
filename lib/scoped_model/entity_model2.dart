@@ -185,7 +185,7 @@ class EntityModel2 extends Model {
     notifyListeners();
   }
 
-  newEntitySave({required EntitySaveDTO entitySaveDTO, required BuildContext context}) async {
+  newEntitySave({required EntitySaveDTO entitySaveDTO, required BuildContext context, required BuildContext contextEntityPage}) async {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'entitysaves/post/entity');
@@ -199,7 +199,7 @@ class EntityModel2 extends Model {
         print(item.toString());
         entitySaveMini = EntitySaveMini.fromMap(map: item);
         getEntity(entityId: entitySaveMini!.entity!.id);
-        newPost(entitySaveMini: entitySaveMini!, category: entitySaveMini!.category!, context: context);
+        newPost(entitySaveMini: entitySaveMini!, category: entitySaveMini!.category!, context: context, contextEntityPage: contextEntityPage);
         break;
       default:
         load = false;
@@ -211,7 +211,11 @@ class EntityModel2 extends Model {
     }
   }
 
-  updateCategoryEntitySave({required EntitySaveDTO entitySaveDTO, required BuildContext context}) async {
+  updateCategoryEntitySave({
+    required EntitySaveDTO entitySaveDTO,
+    required BuildContext context,
+    required BuildContext contextEntityPage,
+  }) async {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'entitysaves/put/category');
@@ -226,7 +230,7 @@ class EntityModel2 extends Model {
         getEntity(entityId: entitySaveMini!.entity!.id);
         ScopedModel.of<ProfileModel>(context).getGoals();
         entitySaveMini = EntitySaveMini.fromMap(map: item);
-        newPost(entitySaveMini: entitySaveMini!, category: entitySaveMini!.category!, context: context);
+        newPost(entitySaveMini: entitySaveMini!, category: entitySaveMini!.category!, context: context, contextEntityPage: contextEntityPage);
         break;
       default:
         load = false;
@@ -238,7 +242,7 @@ class EntityModel2 extends Model {
     }
   }
 
-  updateEvaluationEntitySave({required EntitySaveDTO entitySaveDTO, required BuildContext context}) async {
+  updateEvaluationEntitySave({required EntitySaveDTO entitySaveDTO, required BuildContext context, required BuildContext contextEntityPage}) async {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'entitysaves/put/evaluation');
@@ -253,7 +257,7 @@ class EntityModel2 extends Model {
         entitySaveMini = EntitySaveMini.fromMap(map: item);
         getEntity(entityId: entitySaveMini!.entity!.id);
         ScopedModel.of<ProfileModel>(context).getGoals();
-        newPost(entitySaveMini: entitySaveMini!, category: 6, context: context);
+        newPost(entitySaveMini: entitySaveMini!, category: 6, context: context, contextEntityPage: contextEntityPage);
         getReviews(entityId: entitySaveMini!.entity!.id);
         break;
       default:
@@ -266,7 +270,11 @@ class EntityModel2 extends Model {
     }
   }
 
-  updateGoalEntitySave({required EntitySaveDTO entitySaveDTO, required BuildContext context}) async {
+  updateGoalEntitySave({
+    required EntitySaveDTO entitySaveDTO,
+    required BuildContext context,
+    required BuildContext contextEntityPage,
+  }) async {
     load = true;
     notifyListeners();
     var url = Uri.parse(base + 'entitysaves/put/goal');
@@ -283,7 +291,7 @@ class EntityModel2 extends Model {
         notifyListeners();
         ScopedModel.of<ProfileModel>(context).getGoals();
         if (entitySaveMini!.goal) {
-          newPost(entitySaveMini: entitySaveMini!, category: 5, context: context);
+          newPost(entitySaveMini: entitySaveMini!, category: 5, context: context, contextEntityPage: contextEntityPage);
         }
         break;
       default:
@@ -296,7 +304,12 @@ class EntityModel2 extends Model {
     }
   }
 
-  updateReviewEntitySave({required EntitySaveDTO entitySaveDTO, required BuildContext context, required BuildContext contextUpdateReviewPage}) async {
+  updateReviewEntitySave({
+    required EntitySaveDTO entitySaveDTO,
+    required BuildContext context,
+    required BuildContext contextEntityPage,
+    required BuildContext contextUpdateReviewPage,
+  }) async {
     load = true;
     notifyListeners();
     entitySaveDTO.release = DateTime.now().toString();
@@ -310,7 +323,7 @@ class EntityModel2 extends Model {
         // ignore: avoid_print
         print(item.toString());
         entitySaveMini = EntitySaveMini.fromMap(map: item);
-        newPost(entitySaveMini: entitySaveMini!, category: 7, context: context, contextUpdateReviewPage: contextUpdateReviewPage);
+        newPost(entitySaveMini: entitySaveMini!, category: 7, context: context, contextUpdateReviewPage: contextUpdateReviewPage, contextEntityPage: contextEntityPage);
         getReviews(entityId: entitySaveMini!.entity!.id);
         break;
       default:
@@ -323,7 +336,15 @@ class EntityModel2 extends Model {
     }
   }
 
-  newPost({required EntitySaveMini entitySaveMini, required int category, required BuildContext context, BuildContext? contextUpdateReviewPage}) async {
+  //verificar se o contextPage é o contextPage da tela entity
+
+  newPost({
+    required EntitySaveMini entitySaveMini,
+    required int category,
+    required BuildContext context,
+    BuildContext? contextUpdateReviewPage,
+    required BuildContext contextEntityPage,
+  }) async {
     load = true;
     notifyListeners();
     PostUpdateDTO postUpdateDTO = PostUpdateDTO(
@@ -354,7 +375,13 @@ class EntityModel2 extends Model {
         if (postUpdateMini.category != 7) {
           load = false;
           notifyListeners();
-          Navigator.push(context, MaterialPageRoute(builder: (context) => AddBodyPostEntity(postUpdateMini: postUpdateMini)));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AddBodyPostEntity(
+                        postUpdateMini: postUpdateMini,
+                        contextEntityPage: contextEntityPage,
+                      )));
           ScopedModel.of<ProfileModel>(context).getAllPosts(context: context);
         } else {
           ScopedModel.of<ProfileModel>(context).getAllPosts(context: context);
@@ -455,8 +482,8 @@ class EntityModel2 extends Model {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => UpdateEntity(
-                                        context: context,
+                                  builder: (contextNavigator) => UpdateEntity(
+                                        contextEntityPage: contextAncestor,
                                         entityMini: entityMini,
                                       )));
                         },
