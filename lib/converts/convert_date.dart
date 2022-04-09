@@ -2,7 +2,7 @@ class ConvertDate {
   static convertToDatePost({required String release}) {
     String date = '';
     DateTime now = DateTime.now();
-    var difference = now.difference(DateTime.parse(release)).inMinutes;
+    var difference = now.difference(DateTime.parse(release).toLocal()).inMinutes;
     if (difference < 1) {
       date = "now";
     } else if (difference < 60) {

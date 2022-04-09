@@ -838,7 +838,111 @@ Widget entityImage({
   required bool screenUser,
 }) {
   return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-    return postUpdateMini.entity!.image != null
+    return Container(
+      decoration: BoxDecoration(
+        color: theme.shadow,
+        border: Border.all(
+          color: Colors.transparent,
+        ),
+        borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+      ),
+      //color: theme.shadow,
+      width: MediaQuery.of(context).size.width - 84,
+      height: (60 / 9) * 16,
+      child: Row(
+        children: [
+          postUpdateMini.entity!.image != null
+              ? Container(
+                  margin: EdgeInsets.zero,
+                  padding: EdgeInsets.zero,
+                  height: (60 / 9) * 16,
+                  width: 60,
+                  decoration: BoxDecoration(
+                    color: theme.shadow,
+                    border: Border.all(
+                      color: Colors.transparent,
+                    ),
+                    borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+                    image: DecorationImage(
+                      image: NetworkImage(postUpdateMini.entity!.image!),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                )
+              : Container(
+                  color: theme.shadow,
+                  height: (60 / 9) * 16,
+                  width: 60,
+                  decoration: BoxDecoration(
+                    color: theme.shadow,
+                    border: Border.all(
+                      color: Colors.transparent,
+                    ),
+                    borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+                  ),
+                  child: Center(
+                    child: Icon(
+                      Icons.image,
+                      size: 100,
+                      color: theme.emphasis,
+                    ),
+                  ),
+                ),
+          const SizedBox(
+            width: 4.0,
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width - (84 + 60 + 4 + 8 + 2),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  postUpdateMini.entity!.name,
+                  overflow: TextOverflow.fade,
+                  maxLines: 1,
+                  softWrap: false,
+                  //textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: theme.sizeTextMini,
+                    letterSpacing: theme.letterSpacingText,
+                    color: theme.subtitle,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+                Text(
+                  "rating: " + postUpdateMini.entity!.evaluationAverage.toString(),
+                  overflow: TextOverflow.fade,
+                  maxLines: 1,
+                  softWrap: false,
+                  //textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: theme.sizeTextMini,
+                    letterSpacing: theme.letterSpacingText,
+                    color: theme.subtitle,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+                Text(
+                  postUpdateMini.entity!.description!,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 3,
+                  //softWrap: false,
+                  //textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: theme.sizeTextMini,
+                    letterSpacing: theme.letterSpacingText,
+                    color: theme.subtitle,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+    /* postUpdateMini.entity!.image != null
         ? GestureDetector(
             onTap: () {
               if (!screenComment) {
@@ -900,6 +1004,7 @@ Widget entityImage({
               ),
             ),
           );
+          */
   });
 }
 

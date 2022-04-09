@@ -121,7 +121,7 @@ class _NewTalkGroupState extends State<NewTalkGroup> {
                                 String id = await post.getId();
                                 PostTalkGroupDTO postTalkGroupDTO = PostTalkGroupDTO(
                                   idPost: null,
-                                  release: DateTime.now().toString(),
+                                  release: DateTime.now().toUtc().toString(),
                                   body: controller.text,
                                   spoiler: spoiler,
                                   idAuthor: id,

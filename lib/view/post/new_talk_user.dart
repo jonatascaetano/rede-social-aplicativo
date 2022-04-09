@@ -118,7 +118,7 @@ class _NewTalkUserState extends State<NewTalkUser> {
                                 String id = await post.getId();
                                 PostTalkDTO postTalkDTO = PostTalkDTO(
                                   idPost: null,
-                                  release: DateTime.now().toString(),
+                                  release: DateTime.now().toUtc().toString(),
                                   body: controller.text,
                                   spoiler: spoiler,
                                   idAuthor: id,

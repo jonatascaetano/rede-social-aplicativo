@@ -350,7 +350,7 @@ class EntityModel2 extends Model {
     PostUpdateDTO postUpdateDTO = PostUpdateDTO(
       idPost: null,
       level: entitySaveMini.level,
-      release: DateTime.now().toString(),
+      release: DateTime.now().toUtc().toString(),
       body: category == 7 ? entitySaveMini.review : null,
       category: category,
       idAuthor: idUser,
