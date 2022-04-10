@@ -185,35 +185,40 @@ class _ProfileState extends State<Profile> {
 
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: theme.button,
-                              elevation: 0.0,
-                            ),
-                            onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => const UpdateProfile()));
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.edit,
-                                  color: theme.buttonMain,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: theme.buttonMain,
+                                  elevation: 0.0,
                                 ),
-                                const SizedBox(
-                                  width: 4.0,
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const UpdateProfile()));
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.edit,
+                                      color: theme.buttonMainText,
+                                    ),
+                                    const SizedBox(
+                                      width: 4.0,
+                                    ),
+                                    Text(
+                                      'edit profile',
+                                      style: TextStyle(
+                                        fontSize: theme.sizeButton,
+                                        letterSpacing: theme.letterSpacingButton,
+                                        color: theme.buttonMainText,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  'edit profile',
-                                  style: TextStyle(
-                                    fontSize: theme.sizeButton,
-                                    letterSpacing: theme.letterSpacingButton,
-                                    color: theme.buttonText,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
 
@@ -338,10 +343,10 @@ class _ProfileState extends State<Profile> {
                                       child: Text(
                                         'View all goals',
                                         style: TextStyle(
-                                          fontSize: theme.sizeTitle,
-                                          letterSpacing: theme.letterSpacingTitle,
+                                          fontSize: theme.sizeText,
+                                          letterSpacing: theme.letterSpacingText,
                                           color: theme.emphasis,
-                                          fontWeight: FontWeight.normal,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                     ),
@@ -350,7 +355,9 @@ class _ProfileState extends State<Profile> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => const AllGoalsProfile(),
+                                            builder: (context) => AllGoalsProfile(
+                                              goals: profile.goals,
+                                            ),
                                           ),
                                         );
                                       },
@@ -369,7 +376,7 @@ class _ProfileState extends State<Profile> {
                             ? Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                                 child: SizedBox(
-                                  height: 280,
+                                  height: 135,
                                   child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
                                       shrinkWrap: true,
@@ -390,10 +397,10 @@ class _ProfileState extends State<Profile> {
                                       child: Text(
                                         'View all groups',
                                         style: TextStyle(
-                                          fontSize: theme.sizeTitle,
-                                          letterSpacing: theme.letterSpacingTitle,
+                                          fontSize: theme.sizeText,
+                                          letterSpacing: theme.letterSpacingText,
                                           color: theme.emphasis,
-                                          fontWeight: FontWeight.normal,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                     ),
@@ -402,7 +409,9 @@ class _ProfileState extends State<Profile> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => const AllGroupsProfile(),
+                                            builder: (context) => AllGroupsProfile(
+                                              groups: profile.groups,
+                                            ),
                                           ),
                                         );
                                       },
@@ -421,7 +430,7 @@ class _ProfileState extends State<Profile> {
                             ? Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                                 child: SizedBox(
-                                  height: 260,
+                                  height: 140,
                                   child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
                                       shrinkWrap: true,

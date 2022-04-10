@@ -6,10 +6,13 @@ import 'package:social_network_application/helper/return_widget_post.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/scoped_model/user_model.dart';
+import 'package:social_network_application/view/tabs/profile/all_goals_profile.dart';
+import 'package:social_network_application/view/tabs/profile/all_groups_profile.dart';
 import 'package:social_network_application/view/tabs/profile/followers.dart';
 import 'package:social_network_application/view/tabs/profile/following.dart';
 import 'package:social_network_application/widgets/mini_profile/entities_mini_profile.dart';
 import 'package:social_network_application/widgets/mini_profile/entity_mini_profile_evaluated.dart';
+import 'package:social_network_application/widgets/mini_profile/group_mini_profile.dart';
 
 // ignore: must_be_immutable
 class User extends StatefulWidget {
@@ -266,71 +269,81 @@ class _UserState extends State<User> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: user.showFollowButton
                                         ? user.isFollowing
-                                            ? ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  primary: theme.button,
-                                                  elevation: 0.0,
-                                                ),
-                                                onPressed: () {
-                                                  user.removeFollowing(
-                                                    idFollowing: user.userMini.id,
-                                                    context: context,
-                                                  );
-                                                },
-                                                child: Row(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  children: [
-                                                    Icon(
-                                                      Icons.person_remove,
-                                                      color: theme.detail,
+                                            ? Row(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                children: [
+                                                  ElevatedButton(
+                                                    style: ElevatedButton.styleFrom(
+                                                      primary: theme.buttonMain,
+                                                      elevation: 0.0,
                                                     ),
-                                                    const SizedBox(
-                                                      width: 4.0,
+                                                    onPressed: () {
+                                                      user.removeFollowing(
+                                                        idFollowing: user.userMini.id,
+                                                        context: context,
+                                                      );
+                                                    },
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: [
+                                                        Icon(
+                                                          Icons.person_remove,
+                                                          color: theme.buttonMainText,
+                                                        ),
+                                                        const SizedBox(
+                                                          width: 4.0,
+                                                        ),
+                                                        Text(
+                                                          'Unfollow',
+                                                          style: TextStyle(
+                                                            fontSize: theme.sizeButton,
+                                                            letterSpacing: theme.letterSpacingButton,
+                                                            color: theme.buttonMainText,
+                                                            fontWeight: FontWeight.normal,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                    Text(
-                                                      'Unfollow',
-                                                      style: TextStyle(
-                                                        fontSize: theme.sizeButton,
-                                                        letterSpacing: theme.letterSpacingButton,
-                                                        color: theme.buttonText,
-                                                        fontWeight: FontWeight.normal,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+                                                  ),
+                                                ],
                                               )
-                                            : ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  primary: theme.button,
-                                                  elevation: 0.0,
-                                                ),
-                                                onPressed: () {
-                                                  user.addFollowing(
-                                                    idFollowing: user.userMini.id,
-                                                    context: context,
-                                                  );
-                                                },
-                                                child: Row(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  children: [
-                                                    Icon(
-                                                      Icons.person_add,
-                                                      color: theme.emphasis,
+                                            : Row(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                children: [
+                                                  ElevatedButton(
+                                                    style: ElevatedButton.styleFrom(
+                                                      primary: theme.buttonMain,
+                                                      elevation: 0.0,
                                                     ),
-                                                    const SizedBox(
-                                                      width: 4.0,
+                                                    onPressed: () {
+                                                      user.addFollowing(
+                                                        idFollowing: user.userMini.id,
+                                                        context: context,
+                                                      );
+                                                    },
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: [
+                                                        Icon(
+                                                          Icons.person_add,
+                                                          color: theme.buttonMainText,
+                                                        ),
+                                                        const SizedBox(
+                                                          width: 4.0,
+                                                        ),
+                                                        Text(
+                                                          'Follow',
+                                                          style: TextStyle(
+                                                            fontSize: theme.sizeButton,
+                                                            letterSpacing: theme.letterSpacingButton,
+                                                            color: theme.buttonMainText,
+                                                            fontWeight: FontWeight.normal,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                    Text(
-                                                      'Follow',
-                                                      style: TextStyle(
-                                                        fontSize: theme.sizeButton,
-                                                        letterSpacing: theme.letterSpacingButton,
-                                                        color: theme.buttonText,
-                                                        fontWeight: FontWeight.normal,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+                                                  ),
+                                                ],
                                               )
                                         : Container(),
                                   ),
@@ -460,25 +473,21 @@ class _UserState extends State<User> {
                                           child: Text(
                                             'View all goals',
                                             style: TextStyle(
-                                              fontSize: theme.sizeTitle,
-                                              letterSpacing: theme.letterSpacingTitle,
+                                              fontSize: theme.sizeText,
+                                              letterSpacing: theme.letterSpacingText,
                                               color: theme.emphasis,
-                                              fontWeight: FontWeight.normal,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                         ),
                                         IconButton(
                                           onPressed: () {
-                                            // Navigator.push(
-                                            //   context,
-                                            //   MaterialPageRoute(
-                                            //     builder: (context) => AllWorkersProfile(
-                                            //       isUser: true,
-                                            //       userMini: profile.userMini,
-                                            //       workers: profile.workers,
-                                            //     ),
-                                            //   ),
-                                            // );
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => AllGoalsProfile(goals: user.goals),
+                                              ),
+                                            );
                                           },
                                           icon: Icon(
                                             Icons.arrow_forward,
@@ -495,7 +504,7 @@ class _UserState extends State<User> {
                                 ? Padding(
                                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                                     child: SizedBox(
-                                      height: 280,
+                                      height: 135,
                                       child: ListView.builder(
                                           scrollDirection: Axis.horizontal,
                                           shrinkWrap: true,
@@ -507,12 +516,65 @@ class _UserState extends State<User> {
                                   )
                                 : Container(),
 
+                            user.groups.isNotEmpty
+                                ? Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            'View all groups',
+                                            style: TextStyle(
+                                              fontSize: theme.sizeText,
+                                              letterSpacing: theme.letterSpacingText,
+                                              color: theme.emphasis,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                        IconButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => AllGroupsProfile(
+                                                  groups: user.groups,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          icon: Icon(
+                                            Icons.arrow_forward,
+                                            color: theme.subtitle,
+                                            size: 24.0,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                : Container(),
+
+                            user.groups.isNotEmpty
+                                ? Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                    child: SizedBox(
+                                      height: 140,
+                                      child: ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          shrinkWrap: true,
+                                          itemCount: user.groups.length,
+                                          itemBuilder: (context, index) {
+                                            return GroupMiniProfile(group: user.groups[index]);
+                                          }),
+                                    ),
+                                  )
+                                : Container(),
+
                             Divider(
                               height: 10.0,
                               thickness: 10.0,
                               color: theme.shadow,
                             ),
-
                             /*    
 
                             user.workers.isNotEmpty

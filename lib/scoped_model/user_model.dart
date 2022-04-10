@@ -5,6 +5,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_network_application/entities/dto/report_dto.dart';
 import 'package:social_network_application/entities/mini_dto/entity_save_mini.dart';
+import 'package:social_network_application/entities/mini_dto/group_mini.dart';
 import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 import 'package:social_network_application/enuns/level_report.dart';
 import 'package:social_network_application/enuns/type_report.dart';
@@ -22,15 +23,17 @@ class UserModel extends Model {
   late UserMini userMini;
   bool load = false;
   List<dynamic> myPosts = [];
-  late String idUSer;
+  //late String idUser;
   bool blocked = false;
   List<EntitySaveMini> goals = [];
   bool goalsIsNull = true;
+  List<GroupMini> groups = [];
 
   UserModel({required String idUser, required BuildContext context}) {
     getProfile(idUser: idUser, context: context);
     checkFollowing(idUser: idUser);
     isBlocked(idUser: idUser);
+    getGroups(context: context, idUser: idUser);
   }
 
   Future<String> getId() async {
@@ -145,6 +148,34 @@ class UserModel extends Model {
     getProfile(idUser: idFollowing, context: context);
     checkFollowing(idUser: idFollowing);
     notifyListeners();
+  }
+
+  getGroups({required BuildContext context, required String idUser}) async {
+    load = true;
+    notifyListeners();
+    var url = Uri.parse(base + 'users/$idUser/groups');
+    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
+    // ignore: avoid_print
+    print("getGroups: " + response.statusCode.toString());
+    switch (response.statusCode) {
+      case 200:
+        groups = [];
+        var itens = json.decode(response.body);
+        for (var item in itens) {
+          GroupMini groupMini = GroupMini.fromMap(map: item);
+          groups.add(groupMini);
+        }
+        load = false;
+        notifyListeners();
+        break;
+      default:
+        load = false;
+        notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Try again later')),
+        );
+        break;
+    }
   }
 
   getMyPosts({required BuildContext context}) async {

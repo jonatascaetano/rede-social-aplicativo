@@ -1752,6 +1752,7 @@ Widget entityImage({
       width: MediaQuery.of(context).size.width - 84,
       height: (60 / 9) * 16,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           postUpdateMini.entity!.image != null
               ? Container(
@@ -1760,7 +1761,7 @@ Widget entityImage({
                   height: (60 / 9) * 16,
                   width: 60,
                   decoration: BoxDecoration(
-                    color: theme.shadow,
+                    color: theme.background,
                     border: Border.all(
                       color: Colors.transparent,
                     ),
@@ -1772,11 +1773,10 @@ Widget entityImage({
                   ),
                 )
               : Container(
-                  color: theme.shadow,
                   height: (60 / 9) * 16,
                   width: 60,
                   decoration: BoxDecoration(
-                    color: theme.shadow,
+                    color: theme.background,
                     border: Border.all(
                       color: Colors.transparent,
                     ),
@@ -1785,7 +1785,7 @@ Widget entityImage({
                   child: Center(
                     child: Icon(
                       Icons.image,
-                      size: 100,
+                      size: 40,
                       color: theme.emphasis,
                     ),
                   ),
@@ -1808,8 +1808,8 @@ Widget entityImage({
                   style: TextStyle(
                     fontSize: theme.sizeTextMini,
                     letterSpacing: theme.letterSpacingText,
-                    color: theme.subtitle,
-                    fontWeight: FontWeight.normal,
+                    color: theme.emphasis,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(

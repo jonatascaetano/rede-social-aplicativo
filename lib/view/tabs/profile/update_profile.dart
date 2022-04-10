@@ -329,7 +329,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                         height: 8,
                       ),
                       profile.userMini.description != null
-                          ? profile.userMini.description!.isEmpty
+                          ? profile.userMini.description!.isNotEmpty
                               ? Text(
                                   profile.userMini.description!,
                                   style: TextStyle(
