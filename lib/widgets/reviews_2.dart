@@ -71,13 +71,16 @@ class _Reviews2State extends State<Reviews2> {
 
                 //**/ first imageProfile
 
-                widget.entitySaveMini.user!.imageProfile != null
+                widget.entitySaveMini.user.imageProfile != null
                     ? GestureDetector(
                         onTap: () {
-                          if (widget.entitySaveMini.user!.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
+                          if (widget.entitySaveMini.user.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => User(userMini: widget.entitySaveMini.user!)),
+                              MaterialPageRoute(
+                                  builder: (context) => User(
+                                        idUser: widget.entitySaveMini.user.id,
+                                      )),
                             );
                           } else {
                             Navigator.push(
@@ -87,16 +90,19 @@ class _Reviews2State extends State<Reviews2> {
                           }
                         },
                         child: CircleAvatar(
-                          backgroundImage: NetworkImage(widget.entitySaveMini.user!.imageProfile!),
+                          backgroundImage: NetworkImage(widget.entitySaveMini.user.imageProfile!),
                           radius: 30.0,
                         ),
                       )
                     : GestureDetector(
                         onTap: () {
-                          if (widget.entitySaveMini.user!.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
+                          if (widget.entitySaveMini.user.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => User(userMini: widget.entitySaveMini.user!)),
+                              MaterialPageRoute(
+                                  builder: (context) => User(
+                                        idUser: widget.entitySaveMini.user.id,
+                                      )),
                             );
                           } else {
                             Navigator.push(
@@ -130,10 +136,13 @@ class _Reviews2State extends State<Reviews2> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            if (widget.entitySaveMini.user!.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
+                            if (widget.entitySaveMini.user.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => User(userMini: widget.entitySaveMini.user!)),
+                                MaterialPageRoute(
+                                    builder: (context) => User(
+                                          idUser: widget.entitySaveMini.user.id,
+                                        )),
                               );
                             } else {
                               Navigator.push(
@@ -147,7 +156,7 @@ class _Reviews2State extends State<Reviews2> {
                               vertical: 0.0,
                             ),
                             child: Text(
-                              widget.entitySaveMini.user!.name,
+                              widget.entitySaveMini.user.name,
                               style: TextStyle(
                                 fontSize: theme.sizeText,
                                 letterSpacing: theme.letterSpacingText,

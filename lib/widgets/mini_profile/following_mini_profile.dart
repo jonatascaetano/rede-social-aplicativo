@@ -27,7 +27,7 @@ class _FollowingMiniProfileState extends State<FollowingMiniProfile> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => User(
-                            userMini: widget.userMini,
+                            idUser: widget.userMini.id,
                           )));
             }
           },

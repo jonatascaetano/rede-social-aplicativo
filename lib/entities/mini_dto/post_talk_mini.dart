@@ -1,4 +1,4 @@
-import 'package:social_network_application/entities/mini_dto/user_mini.dart';
+import 'package:social_network_application/entities/mini_dto/user_micro_widget.dart';
 
 class PostTalkMini {
   late String? id;
@@ -10,9 +10,9 @@ class PostTalkMini {
   late int commentQuantity = 0;
   late String typeObject;
   late bool spoiler;
-  late UserMini? author;
+  late UserMicroWidget? author;
   late bool liked;
-  late UserMini? like;
+  late UserMicroWidget? like;
   late String? title;
 
   PostTalkMini.fromMap({required Map map}) {
@@ -25,9 +25,9 @@ class PostTalkMini {
     commentQuantity = map["commentQuantity"];
     typeObject = map["typeObject"];
     spoiler = map["spoiler"] ?? false;
-    author = map["author"] != null ? UserMini.fromMap(map: map["author"]) : null;
+    author = map["author"] != null ? UserMicroWidget.fromMap(map: map["author"]) : null;
     liked = map["liked"] ?? false;
-    like = map["like"] != null ? UserMini.fromMap(map: map["like"]) : null;
+    like = map["like"] != null ? UserMicroWidget.fromMap(map: map["like"]) : null;
     title = map["title"];
   }
 }

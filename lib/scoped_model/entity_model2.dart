@@ -198,7 +198,7 @@ class EntityModel2 extends Model {
         // ignore: avoid_print
         print(item.toString());
         entitySaveMini = EntitySaveMini.fromMap(map: item);
-        getEntity(entityId: entitySaveMini!.entity!.id);
+        getEntity(entityId: entitySaveMini!.entity.id);
         newPost(entitySaveMini: entitySaveMini!, category: entitySaveMini!.category!, context: context, contextEntityPage: contextEntityPage);
         break;
       default:
@@ -227,7 +227,7 @@ class EntityModel2 extends Model {
         var item = json.decode(response.body);
         // ignore: avoid_print
         print(item.toString());
-        getEntity(entityId: entitySaveMini!.entity!.id);
+        getEntity(entityId: entitySaveMini!.entity.id);
         ScopedModel.of<ProfileModel>(context).getGoals();
         entitySaveMini = EntitySaveMini.fromMap(map: item);
         newPost(entitySaveMini: entitySaveMini!, category: entitySaveMini!.category!, context: context, contextEntityPage: contextEntityPage);
@@ -255,10 +255,10 @@ class EntityModel2 extends Model {
         // ignore: avoid_print
         print(item.toString());
         entitySaveMini = EntitySaveMini.fromMap(map: item);
-        getEntity(entityId: entitySaveMini!.entity!.id);
+        getEntity(entityId: entitySaveMini!.entity.id);
         ScopedModel.of<ProfileModel>(context).getGoals();
         newPost(entitySaveMini: entitySaveMini!, category: 6, context: context, contextEntityPage: contextEntityPage);
-        getReviews(entityId: entitySaveMini!.entity!.id);
+        getReviews(entityId: entitySaveMini!.entity.id);
         break;
       default:
         load = false;
@@ -324,7 +324,7 @@ class EntityModel2 extends Model {
         print(item.toString());
         entitySaveMini = EntitySaveMini.fromMap(map: item);
         newPost(entitySaveMini: entitySaveMini!, category: 7, context: context, contextUpdateReviewPage: contextUpdateReviewPage, contextEntityPage: contextEntityPage);
-        getReviews(entityId: entitySaveMini!.entity!.id);
+        getReviews(entityId: entitySaveMini!.entity.id);
         break;
       default:
         load = false;
@@ -354,7 +354,7 @@ class EntityModel2 extends Model {
       body: category == 7 ? entitySaveMini.review : null,
       category: category,
       idAuthor: idUser,
-      idEntity: entitySaveMini.level == Level.ENTITY ? entitySaveMini.entity!.id : null,
+      idEntity: entitySaveMini.level == Level.ENTITY ? entitySaveMini.entity.id : null,
       // idSeason: entitySaveMini.level == Level.SEASON ? entitySaveMini.season!.id : null,
       // idEpisode: entitySaveMini.level == Level.EPISODE ? entitySaveMini.episode!.id : null,
       evaluation: category == 6 ? entitySaveMini.evaluation! : 0,

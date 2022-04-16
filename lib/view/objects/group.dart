@@ -1,7 +1,6 @@
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:social_network_application/entities/mini_dto/group_mini.dart';
 import 'package:social_network_application/helper/return_widget_post.dart';
 import 'package:social_network_application/scoped_model/group_mode.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
@@ -9,8 +8,8 @@ import 'package:social_network_application/widgets/added_post.dart';
 
 // ignore: must_be_immutable
 class Group extends StatefulWidget {
-  GroupMini groupMini;
-  Group({required this.groupMini, Key? key}) : super(key: key);
+  String idGroup;
+  Group({required this.idGroup, Key? key}) : super(key: key);
 
   @override
   State<Group> createState() => _GroupState();
@@ -53,7 +52,7 @@ class _GroupState extends State<Group> {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel(
-        model: GroupModel(idGroup: widget.groupMini.id, contextPageGroup: context),
+        model: GroupModel(idGroup: widget.idGroup, contextPageGroup: context),
         child: ScopedModelDescendant<GroupModel>(builder: (context, child, group) {
           return Scaffold(
             appBar: AppBar(

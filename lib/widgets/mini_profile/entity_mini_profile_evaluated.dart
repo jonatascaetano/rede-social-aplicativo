@@ -24,7 +24,7 @@ class _EntityMiniProfileEvaluatedState extends State<EntityMiniProfileEvaluated>
                 context,
                 MaterialPageRoute(
                     builder: (context) => Entity2(
-                          entityMini: widget.entitySaveMini.entity!,
+                          idEntity: widget.entitySaveMini.entity.id,
                           datasheetIsOpen: true,
                         )));
           },
@@ -32,7 +32,7 @@ class _EntityMiniProfileEvaluatedState extends State<EntityMiniProfileEvaluated>
             width: 120.0,
             child: Column(
               children: [
-                widget.entitySaveMini.entity!.image != null
+                widget.entitySaveMini.entity.image != null
                     ? Stack(
                         children: [
                           Container(
@@ -43,7 +43,7 @@ class _EntityMiniProfileEvaluatedState extends State<EntityMiniProfileEvaluated>
                               // borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
                               borderRadius: const BorderRadius.all(Radius.circular(16.0)),
                               image: DecorationImage(
-                                image: NetworkImage(widget.entitySaveMini.entity!.image!),
+                                image: NetworkImage(widget.entitySaveMini.entity.image!),
                                 fit: BoxFit.fitHeight,
                               ),
                             ),
@@ -105,7 +105,7 @@ class _EntityMiniProfileEvaluatedState extends State<EntityMiniProfileEvaluated>
                   height: 2.0,
                 ),
                 Text(
-                  widget.entitySaveMini.entity!.name,
+                  widget.entitySaveMini.entity.name,
                   overflow: TextOverflow.fade,
                   maxLines: 1,
                   softWrap: false,

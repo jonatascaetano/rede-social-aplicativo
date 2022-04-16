@@ -37,7 +37,7 @@ class NewEntityModel extends Model {
         notifyListeners();
         var map = json.decode(response.body);
         EntityMini entityMini = EntityMini.fromMap(map: map);
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Entity2(entityMini: entityMini, datasheetIsOpen: false)));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Entity2(idEntity: entityMini.id, datasheetIsOpen: false)));
         break;
       default:
         ScaffoldMessenger.of(context).showSnackBar(

@@ -78,7 +78,7 @@ class ReviewModel extends Model {
     switch (response.statusCode) {
       case 202:
         getReview();
-        ScopedModel.of<EntityModel2>(contextEntityPage).getReviews(entityId: entitySaveMini!.entity!.id);
+        ScopedModel.of<EntityModel2>(contextEntityPage).getReviews(entityId: entitySaveMini!.entity.id);
         // switch (typeObject) {
         //   case TypeObject.ENTITY:
         //     ScopedModel.of<EntityModel>(contextEntityPage).getReviews(entityId: entitySaveMini!.entity!.id);
@@ -167,7 +167,7 @@ class ReviewModel extends Model {
         getAllCommentReview(idReview: idReview, context: contextReviewPage);
         switch (typeObject) {
           case TypeObject.ENTITY:
-            ScopedModel.of<EntityModel2>(contextEntityPage).getReviews(entityId: entitySaveMini!.entity!.id);
+            ScopedModel.of<EntityModel2>(contextEntityPage).getReviews(entityId: entitySaveMini!.entity.id);
             break;
           // case TypeObject.SEASON:
           //   ScopedModel.of<SeasonModel>(context)
@@ -217,7 +217,7 @@ class ReviewModel extends Model {
         getAllCommentReview(idReview: idReview, context: context);
         switch (typeObject) {
           case TypeObject.ENTITY:
-            ScopedModel.of<EntityModel2>(contextEntityPage).getReviews(entityId: entitySaveMini!.entity!.id);
+            ScopedModel.of<EntityModel2>(contextEntityPage).getReviews(entityId: entitySaveMini!.entity.id);
             break;
           // case TypeObject.SEASON:
           //   ScopedModel.of<SeasonModel>(context)

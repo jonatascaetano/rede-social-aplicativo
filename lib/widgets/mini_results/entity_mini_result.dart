@@ -25,7 +25,7 @@ class _EntityMiniResultState extends State<EntityMiniResult> {
               context,
               MaterialPageRoute(
                   builder: (context) => Entity2(
-                        entityMini: widget.entityMini,
+                        idEntity: widget.entityMini.id,
                         datasheetIsOpen: false,
                       )));
         },

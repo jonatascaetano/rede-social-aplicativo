@@ -65,7 +65,10 @@ class _TalkUserPostWidgetState extends State<TalkUserPostWidget> {
                             if (widget.post.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => User(userMini: widget.post.author!)),
+                                MaterialPageRoute(
+                                    builder: (context) => User(
+                                          idUser: widget.post.author!.id,
+                                        )),
                               );
                             } else if (widget.post.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenProfile) {
                               Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
@@ -81,7 +84,10 @@ class _TalkUserPostWidgetState extends State<TalkUserPostWidget> {
                             if (widget.post.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => User(userMini: widget.post.author!)),
+                                MaterialPageRoute(
+                                    builder: (context) => User(
+                                          idUser: widget.post.author!.id,
+                                        )),
                               );
                             } else if (widget.post.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenProfile) {
                               Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
@@ -124,7 +130,10 @@ class _TalkUserPostWidgetState extends State<TalkUserPostWidget> {
                               if (widget.post.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => User(userMini: widget.post.author!)),
+                                  MaterialPageRoute(
+                                      builder: (context) => User(
+                                            idUser: widget.post.author!.id,
+                                          )),
                                 );
                               } else if (widget.post.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenProfile) {
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));

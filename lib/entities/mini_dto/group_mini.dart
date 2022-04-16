@@ -1,13 +1,13 @@
-import 'package:social_network_application/entities/mini_dto/user_mini.dart';
+import 'package:social_network_application/entities/mini_dto/user_micro_widget.dart';
 import 'package:social_network_application/enuns/type_object.dart';
 
 class GroupMini {
   late String id;
   late String name;
-  late String description;
-  late UserMini? creator;
-  late String creationDate;
   late String? image;
+  late String description;
+  late UserMicroWidget? creator;
+  late String creationDate;
   late int quantityMembers;
   late int quantityModerators;
   late int quantitySilenced;
@@ -21,7 +21,7 @@ class GroupMini {
     id = map["id"];
     name = map["name"];
     description = map["description"];
-    creator = map["creator"] != null ? UserMini.fromMap(map: map["creator"]) : null;
+    creator = map["creator"] != null ? UserMicroWidget.fromMap(map: map["creator"]) : null;
     creationDate = map["creationDate"];
     image = map["image"];
     quantityMembers = map["quantityMembers"];

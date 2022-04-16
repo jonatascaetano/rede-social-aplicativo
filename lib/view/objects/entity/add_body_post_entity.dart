@@ -102,10 +102,8 @@ class _AddBodyPostEntityState extends State<AddBodyPostEntity> {
                           release: null,
                           body: body.text,
                           category: 0,
-                          idAuthor: widget.postUpdateMini.author!.id,
+                          idAuthor: widget.postUpdateMini.author.id,
                           idEntity: null,
-                          // idSeason: null,
-                          // idEpisode: null,
                           evaluation: 0,
                           spoiler: spoiler,
                         );

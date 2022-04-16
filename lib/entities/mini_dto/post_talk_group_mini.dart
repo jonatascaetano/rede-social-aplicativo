@@ -1,5 +1,5 @@
-import 'package:social_network_application/entities/mini_dto/group_mini.dart';
-import 'package:social_network_application/entities/mini_dto/user_mini.dart';
+import 'package:social_network_application/entities/mini_dto/group_micro.dart';
+import 'package:social_network_application/entities/mini_dto/user_micro_widget.dart';
 
 class PostTalkGroupMini {
   late String? id;
@@ -11,12 +11,12 @@ class PostTalkGroupMini {
   late int commentQuantity = 0;
   late String typeObject;
   late bool spoiler;
-  late UserMini? author;
+  late UserMicroWidget? author;
   late bool liked;
-  late UserMini? like;
+  late UserMicroWidget? like;
   late bool close;
-  late UserMini? closedBy;
-  late GroupMini? group;
+  late UserMicroWidget? closedBy;
+  late GroupMicro? group;
   late String? title;
 
   PostTalkGroupMini.fromMap({required Map map}) {
@@ -29,12 +29,12 @@ class PostTalkGroupMini {
     commentQuantity = map["commentQuantity"];
     typeObject = map["typeObject"];
     spoiler = map["spoiler"] ?? false;
-    author = map["author"] != null ? UserMini.fromMap(map: map["author"]) : null;
+    author = map["author"] != null ? UserMicroWidget.fromMap(map: map["author"]) : null;
     liked = map["liked"] ?? false;
-    like = map["like"] != null ? UserMini.fromMap(map: map["like"]) : null;
+    like = map["like"] != null ? UserMicroWidget.fromMap(map: map["like"]) : null;
     close = map["close"] ?? false;
-    closedBy = map["closedBy"] != null ? UserMini.fromMap(map: map["closedBy"]) : null;
-    group = map["group"] != null ? GroupMini.fromMap(map: map["group"]) : null;
+    closedBy = map["closedBy"] != null ? UserMicroWidget.fromMap(map: map["closedBy"]) : null;
+    group = map["group"] != null ? GroupMicro.fromMap(map: map["group"]) : null;
     title = map["title"];
   }
 }

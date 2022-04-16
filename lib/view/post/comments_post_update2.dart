@@ -76,7 +76,7 @@ class _CommentsPostUpdate2State extends State<CommentsPostUpdate2> {
               appBar: AppBar(
                 elevation: 0.0,
                 title: Text(
-                  'Post of ' + widget.postUpdateMini.author!.name,
+                  'Post of ' + widget.postUpdateMini.author.name,
                   style: TextStyle(
                     color: theme.title,
                     fontSize: theme.sizeAppBar,
@@ -106,29 +106,29 @@ class _CommentsPostUpdate2State extends State<CommentsPostUpdate2> {
                                           const SizedBox(
                                             width: 4.0,
                                           ),
-                                          widget.postUpdateMini.author!.imageProfile != null
+                                          widget.postUpdateMini.author.imageProfile != null
                                               ? GestureDetector(
                                                   onTap: () {
-                                                    if (widget.postUpdateMini.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
+                                                    if (widget.postUpdateMini.author.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
                                                       Navigator.push(
                                                         context,
-                                                        MaterialPageRoute(builder: (context) => User(userMini: widget.postUpdateMini.author!)),
+                                                        MaterialPageRoute(builder: (context) => User(idUser: widget.postUpdateMini.author.id)),
                                                       );
                                                     } else {
                                                       Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                                                     }
                                                   },
                                                   child: CircleAvatar(
-                                                    backgroundImage: NetworkImage(widget.postUpdateMini.author!.imageProfile!),
+                                                    backgroundImage: NetworkImage(widget.postUpdateMini.author.imageProfile!),
                                                     radius: 30.0,
                                                   ),
                                                 )
                                               : GestureDetector(
                                                   onTap: () {
-                                                    if (widget.postUpdateMini.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
+                                                    if (widget.postUpdateMini.author.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
                                                       Navigator.push(
                                                         context,
-                                                        MaterialPageRoute(builder: (context) => User(userMini: widget.postUpdateMini.author!)),
+                                                        MaterialPageRoute(builder: (context) => User(idUser: widget.postUpdateMini.author.id)),
                                                       );
                                                     } else {
                                                       Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
@@ -462,7 +462,7 @@ class _CommentsPostUpdate2State extends State<CommentsPostUpdate2> {
                                                       IconButton(
                                                         padding: EdgeInsets.zero,
                                                         onPressed: () async {
-                                                          if (widget.postUpdateMini.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id) {
+                                                          if (widget.postUpdateMini.author.id == ScopedModel.of<ProfileModel>(context).userMini.id) {
                                                             comment.showDeletePostBottomSheet(
                                                               idPost: widget.postUpdateMini.id!,
                                                               screenComment: true,
@@ -1175,7 +1175,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                 ? GestureDetector(
                     onTap: () {
                       if (widget.commentMini.author.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => User(userMini: widget.commentMini.author)));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => User(idUser: widget.commentMini.author.id)));
                       } else {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                       }
@@ -1188,7 +1188,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                 : GestureDetector(
                     onTap: () {
                       if (widget.commentMini.author.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => User(userMini: widget.commentMini.author)));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => User(idUser: widget.commentMini.author.id)));
                       } else {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                       }
@@ -1227,7 +1227,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                         GestureDetector(
                           onTap: () {
                             if (widget.commentMini.author.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => User(userMini: widget.commentMini.author)));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => User(idUser: widget.commentMini.author.id)));
                             } else {
                               Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                             }
@@ -1268,17 +1268,15 @@ class _CommentWidgetState extends State<CommentWidget> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          widget.commentMini.release == null
-                              ? Container()
-                              : Text(
-                                  ConvertDate.convertToDatePost(release: widget.commentMini.release!),
-                                  style: TextStyle(
-                                    fontSize: theme.sizeText,
-                                    letterSpacing: theme.letterSpacingText,
-                                    color: theme.subtitle,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                ),
+                          Text(
+                            ConvertDate.convertToDatePost(release: widget.commentMini.release),
+                            style: TextStyle(
+                              fontSize: theme.sizeText,
+                              letterSpacing: theme.letterSpacingText,
+                              color: theme.subtitle,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
                           // const SizedBox(
                           //   width: 8.0,
                           // ),
@@ -1389,17 +1387,17 @@ Widget entity({required PostUpdateMini postUpdateMini, required BuildContext con
       children: [
         GestureDetector(
           onTap: () {
-            if (postUpdateMini.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
+            if (postUpdateMini.author.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => User(userMini: postUpdateMini.author!)),
+                MaterialPageRoute(builder: (context) => User(idUser: postUpdateMini.author.id)),
               );
             } else {
               Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
             }
           },
           child: Text(
-            postUpdateMini.author!.name,
+            postUpdateMini.author.name,
             // +
             // " " +
             // LanguageModel().entitiesCategories[
@@ -1430,7 +1428,7 @@ Widget entity({required PostUpdateMini postUpdateMini, required BuildContext con
         const Text(" "),
         GestureDetector(
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Entity2(entityMini: postUpdateMini.entity!, datasheetIsOpen: false)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Entity2(idEntity: postUpdateMini.entity!.id, datasheetIsOpen: false)));
           },
           child: Text(
             postUpdateMini.entity!.name,
@@ -1826,7 +1824,7 @@ Widget entityImage({
                   ),
                 ),
                 Text(
-                  postUpdateMini.entity!.description!,
+                  postUpdateMini.entity!.description,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 3,
                   //softWrap: false,
