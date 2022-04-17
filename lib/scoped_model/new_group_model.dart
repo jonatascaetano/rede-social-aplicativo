@@ -6,7 +6,6 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_network_application/entities/dto/group_dto.dart';
 import 'package:social_network_application/entities/mini_dto/group_mini.dart';
-import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/view/objects/group.dart';
 
 class NewGroupModel extends Model {
@@ -40,13 +39,7 @@ class NewGroupModel extends Model {
         groupMini = GroupMini.fromMap(map: map);
         load = false;
         notifyListeners();
-        ScopedModel.of<ProfileModel>(contextNewGroup).getGroups(context: contextNewGroup);
-        Navigator.pushReplacement(
-            contextNewGroup,
-            MaterialPageRoute(
-                builder: (contextNewGroup) => Group(
-                      idGroup: groupMini.id,
-                    )));
+        Navigator.pushReplacement(contextNewGroup, MaterialPageRoute(builder: (contextNewGroup) => Group(groupMini: groupMini)));
         break;
       default:
         load = false;

@@ -33,7 +33,7 @@ class _EntityMiniDatasheetEvaluatedState extends State<EntityMiniDatasheetEvalua
               Expanded(
                   child: Column(
                 children: [
-                  widget.entitySaveMini.entity.image != null
+                  widget.entitySaveMini.entity!.image != null
                       ? Container(
                           height: 150,
                           width: 200,
@@ -41,7 +41,7 @@ class _EntityMiniDatasheetEvaluatedState extends State<EntityMiniDatasheetEvalua
                             color: theme.shadow,
                             borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
                             image: DecorationImage(
-                              image: NetworkImage(widget.entitySaveMini.entity.image!),
+                              image: NetworkImage(widget.entitySaveMini.entity!.image!),
                               fit: BoxFit.fitHeight,
                             ),
                           ),
@@ -81,7 +81,7 @@ class _EntityMiniDatasheetEvaluatedState extends State<EntityMiniDatasheetEvalua
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 0.0),
                     child: Text(
-                      widget.entitySaveMini.entity.name,
+                      widget.entitySaveMini.entity!.name,
                       overflow: TextOverflow.fade,
                       maxLines: 1,
                       softWrap: false,
@@ -144,7 +144,7 @@ class _EntityMiniDatasheetEvaluatedState extends State<EntityMiniDatasheetEvalua
                         context,
                         MaterialPageRoute(
                             builder: (context) => Entity2(
-                                  idEntity: widget.entitySaveMini.entity.id,
+                                  entityMini: widget.entitySaveMini.entity!,
                                   datasheetIsOpen: true,
                                 )));
                   },

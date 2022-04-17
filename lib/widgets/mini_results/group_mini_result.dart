@@ -24,7 +24,7 @@ class _GroupMiniResultState extends State<GroupMiniResult> {
               context,
               MaterialPageRoute(
                   builder: (context) => Group(
-                        idGroup: widget.groupMini.id,
+                        groupMini: widget.groupMini,
                       )));
         },
         child: Container(

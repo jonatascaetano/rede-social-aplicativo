@@ -112,10 +112,7 @@ class _CommentPostTalkUserState extends State<CommentPostTalkUser> {
                                                     if (widget.post.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
                                                       Navigator.push(
                                                         context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) => User(
-                                                                  idUser: widget.post.author!.id,
-                                                                )),
+                                                        MaterialPageRoute(builder: (context) => User(userMini: widget.post.author!)),
                                                       );
                                                     } else if (widget.post.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenProfile) {
                                                       Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
@@ -131,10 +128,7 @@ class _CommentPostTalkUserState extends State<CommentPostTalkUser> {
                                                     if (widget.post.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
                                                       Navigator.push(
                                                         context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) => User(
-                                                                  idUser: widget.post.author!.id,
-                                                                )),
+                                                        MaterialPageRoute(builder: (context) => User(userMini: widget.post.author!)),
                                                       );
                                                     } else if (widget.post.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenProfile) {
                                                       Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
@@ -168,10 +162,7 @@ class _CommentPostTalkUserState extends State<CommentPostTalkUser> {
                                                     if (widget.post.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
                                                       Navigator.push(
                                                         context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) => User(
-                                                                  idUser: widget.post.author!.id,
-                                                                )),
+                                                        MaterialPageRoute(builder: (context) => User(userMini: widget.post.author!)),
                                                       );
                                                     } else if (widget.post.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenProfile) {
                                                       Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
@@ -499,12 +490,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                 ? GestureDetector(
                     onTap: () {
                       if (widget.commentMini.author.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => User(
-                                      idUser: widget.commentMini.author.id,
-                                    )));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => User(userMini: widget.commentMini.author)));
                       } else {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                       }
@@ -517,12 +503,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                 : GestureDetector(
                     onTap: () {
                       if (widget.commentMini.author.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => User(
-                                      idUser: widget.commentMini.author.id,
-                                    )));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => User(userMini: widget.commentMini.author)));
                       } else {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                       }
@@ -561,12 +542,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                         GestureDetector(
                           onTap: () {
                             if (widget.commentMini.author.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => User(
-                                            idUser: widget.commentMini.author.id,
-                                          )));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => User(userMini: widget.commentMini.author)));
                             } else {
                               Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                             }
@@ -607,15 +583,17 @@ class _CommentWidgetState extends State<CommentWidget> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            ConvertDate.convertToDatePost(release: widget.commentMini.release),
-                            style: TextStyle(
-                              fontSize: theme.sizeText,
-                              letterSpacing: theme.letterSpacingText,
-                              color: theme.subtitle,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
+                          widget.commentMini.release == null
+                              ? Container()
+                              : Text(
+                                  ConvertDate.convertToDatePost(release: widget.commentMini.release!),
+                                  style: TextStyle(
+                                    fontSize: theme.sizeText,
+                                    letterSpacing: theme.letterSpacingText,
+                                    color: theme.subtitle,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
                           // const SizedBox(
                           //   width: 8.0,
                           // ),

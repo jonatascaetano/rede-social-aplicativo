@@ -24,7 +24,7 @@ class _UserMiniResultState extends State<UserMiniResult> {
               context,
               MaterialPageRoute(
                   builder: (context) => User(
-                        idUser: widget.userMini.id,
+                        userMini: widget.userMini,
                       )));
         },
         child: Container(

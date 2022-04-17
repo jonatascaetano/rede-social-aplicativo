@@ -27,7 +27,7 @@ class _UserMiniLikePostState extends State<UserMiniLikePost> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => User(
-                            idUser: widget.userMini.id,
+                            userMini: widget.userMini,
                           )));
         },
         child: Container(

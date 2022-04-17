@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:social_network_application/entities/mini_dto/user_micro_widget.dart';
+import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
 import 'package:social_network_application/view/objects/user.dart';
 import 'package:social_network_application/view/tabs/profile.dart';
 
 class ConvertLikeNames {
-  static returnLikes({required bool liked, required int likeQuantity, required UserMicroWidget? like, required BuildContext context}) {
+  static returnLikes(
+      {required bool liked,
+      required int likeQuantity,
+      required UserMini? like,
+      required BuildContext context}) {
     int value = likeQuantity - 1;
 
     ///
     if (liked && likeQuantity == 1) {
       return Wrap(
         children: [
-          Icon(Icons.thumb_up_alt_outlined, size: ScopedModel.of<ThemeModel>(context).sizeTitle, color: ScopedModel.of<ThemeModel>(context).emphasis),
+          Icon(Icons.thumb_up_alt_outlined,
+              size: ScopedModel.of<ThemeModel>(context).sizeTitle,
+              color: ScopedModel.of<ThemeModel>(context).emphasis),
           const SizedBox(
             width: 4.0,
           ),
@@ -23,7 +29,8 @@ class ConvertLikeNames {
             textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-              letterSpacing: ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
               color: ScopedModel.of<ThemeModel>(context).title,
               fontWeight: FontWeight.normal,
             ),
@@ -43,7 +50,8 @@ class ConvertLikeNames {
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-                letterSpacing: ScopedModel.of<ThemeModel>(context).letterSpacingText,
+                letterSpacing:
+                    ScopedModel.of<ThemeModel>(context).letterSpacingText,
                 color: ScopedModel.of<ThemeModel>(context).emphasis,
                 fontWeight: FontWeight.normal,
               ),
@@ -54,7 +62,9 @@ class ConvertLikeNames {
     } else if (liked && likeQuantity == 2) {
       return Wrap(
         children: [
-          Icon(Icons.thumb_up_alt_outlined, size: ScopedModel.of<ThemeModel>(context).sizeTitle, color: ScopedModel.of<ThemeModel>(context).emphasis),
+          Icon(Icons.thumb_up_alt_outlined,
+              size: ScopedModel.of<ThemeModel>(context).sizeTitle,
+              color: ScopedModel.of<ThemeModel>(context).emphasis),
           const SizedBox(
             width: 4.0,
           ),
@@ -64,7 +74,8 @@ class ConvertLikeNames {
             textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-              letterSpacing: ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
               color: ScopedModel.of<ThemeModel>(context).title,
               fontWeight: FontWeight.normal,
             ),
@@ -86,7 +97,8 @@ class ConvertLikeNames {
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-                      letterSpacing: ScopedModel.of<ThemeModel>(context).letterSpacingText,
+                      letterSpacing:
+                          ScopedModel.of<ThemeModel>(context).letterSpacingText,
                       color: ScopedModel.of<ThemeModel>(context).emphasis,
                       fontWeight: FontWeight.normal,
                     ),
@@ -98,7 +110,8 @@ class ConvertLikeNames {
             textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-              letterSpacing: ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
               color: ScopedModel.of<ThemeModel>(context).title,
               fontWeight: FontWeight.normal,
             ),
@@ -108,9 +121,7 @@ class ConvertLikeNames {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => User(
-                    idUser: like!.id,
-                  ),
+                  builder: (context) => User(userMini: like!),
                 ),
               );
             },
@@ -120,7 +131,8 @@ class ConvertLikeNames {
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-                letterSpacing: ScopedModel.of<ThemeModel>(context).letterSpacingText,
+                letterSpacing:
+                    ScopedModel.of<ThemeModel>(context).letterSpacingText,
                 color: ScopedModel.of<ThemeModel>(context).emphasis,
                 fontWeight: FontWeight.normal,
               ),
@@ -132,7 +144,9 @@ class ConvertLikeNames {
       value = value - 1;
       return Wrap(
         children: [
-          Icon(Icons.thumb_up_alt_outlined, size: ScopedModel.of<ThemeModel>(context).sizeTitle, color: ScopedModel.of<ThemeModel>(context).emphasis),
+          Icon(Icons.thumb_up_alt_outlined,
+              size: ScopedModel.of<ThemeModel>(context).sizeTitle,
+              color: ScopedModel.of<ThemeModel>(context).emphasis),
           const SizedBox(
             width: 4.0,
           ),
@@ -142,7 +156,8 @@ class ConvertLikeNames {
             textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-              letterSpacing: ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
               color: ScopedModel.of<ThemeModel>(context).title,
               fontWeight: FontWeight.normal,
             ),
@@ -164,7 +179,8 @@ class ConvertLikeNames {
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-                      letterSpacing: ScopedModel.of<ThemeModel>(context).letterSpacingText,
+                      letterSpacing:
+                          ScopedModel.of<ThemeModel>(context).letterSpacingText,
                       color: ScopedModel.of<ThemeModel>(context).emphasis,
                       fontWeight: FontWeight.normal,
                     ),
@@ -176,7 +192,8 @@ class ConvertLikeNames {
             textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-              letterSpacing: ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
               color: ScopedModel.of<ThemeModel>(context).title,
               fontWeight: FontWeight.normal,
             ),
@@ -186,9 +203,7 @@ class ConvertLikeNames {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => User(
-                    idUser: like!.id,
-                  ),
+                  builder: (context) => User(userMini: like!),
                 ),
               );
             },
@@ -198,7 +213,8 @@ class ConvertLikeNames {
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-                letterSpacing: ScopedModel.of<ThemeModel>(context).letterSpacingText,
+                letterSpacing:
+                    ScopedModel.of<ThemeModel>(context).letterSpacingText,
                 color: ScopedModel.of<ThemeModel>(context).emphasis,
                 fontWeight: FontWeight.normal,
               ),
@@ -210,7 +226,8 @@ class ConvertLikeNames {
             textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-              letterSpacing: ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
               color: ScopedModel.of<ThemeModel>(context).title,
               fontWeight: FontWeight.normal,
             ),
@@ -221,7 +238,8 @@ class ConvertLikeNames {
             textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-              letterSpacing: ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
               color: ScopedModel.of<ThemeModel>(context).title,
               fontWeight: FontWeight.normal,
             ),
@@ -232,7 +250,8 @@ class ConvertLikeNames {
             textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-              letterSpacing: ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
               color: ScopedModel.of<ThemeModel>(context).title,
               fontWeight: FontWeight.normal,
             ),
@@ -278,7 +297,9 @@ class ConvertLikeNames {
     } else if (!liked && likeQuantity > 1) {
       return Wrap(
         children: [
-          Icon(Icons.thumb_up_alt_outlined, size: ScopedModel.of<ThemeModel>(context).sizeTitle, color: ScopedModel.of<ThemeModel>(context).emphasis),
+          Icon(Icons.thumb_up_alt_outlined,
+              size: ScopedModel.of<ThemeModel>(context).sizeTitle,
+              color: ScopedModel.of<ThemeModel>(context).emphasis),
           const SizedBox(
             width: 4.0,
           ),
@@ -288,7 +309,8 @@ class ConvertLikeNames {
             textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-              letterSpacing: ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
               color: ScopedModel.of<ThemeModel>(context).title,
               fontWeight: FontWeight.normal,
             ),
@@ -300,9 +322,7 @@ class ConvertLikeNames {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => User(
-                          idUser: like.id,
-                        ),
+                        builder: (context) => User(userMini: like),
                       ),
                     );
                   },
@@ -312,7 +332,8 @@ class ConvertLikeNames {
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-                      letterSpacing: ScopedModel.of<ThemeModel>(context).letterSpacingText,
+                      letterSpacing:
+                          ScopedModel.of<ThemeModel>(context).letterSpacingText,
                       color: ScopedModel.of<ThemeModel>(context).emphasis,
                       fontWeight: FontWeight.normal,
                     ),
@@ -324,7 +345,8 @@ class ConvertLikeNames {
             textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-              letterSpacing: ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
               color: ScopedModel.of<ThemeModel>(context).title,
               fontWeight: FontWeight.normal,
             ),
@@ -335,7 +357,8 @@ class ConvertLikeNames {
             textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-              letterSpacing: ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
               color: ScopedModel.of<ThemeModel>(context).title,
               fontWeight: FontWeight.normal,
             ),
@@ -346,7 +369,8 @@ class ConvertLikeNames {
             textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-              letterSpacing: ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
               color: ScopedModel.of<ThemeModel>(context).title,
               fontWeight: FontWeight.normal,
             ),
@@ -405,7 +429,9 @@ class ConvertLikeNames {
     } else if (!liked && likeQuantity == 1) {
       return Wrap(
         children: [
-          Icon(Icons.thumb_up_alt_outlined, size: ScopedModel.of<ThemeModel>(context).sizeTitle, color: ScopedModel.of<ThemeModel>(context).emphasis),
+          Icon(Icons.thumb_up_alt_outlined,
+              size: ScopedModel.of<ThemeModel>(context).sizeTitle,
+              color: ScopedModel.of<ThemeModel>(context).emphasis),
           const SizedBox(
             width: 4.0,
           ),
@@ -415,7 +441,8 @@ class ConvertLikeNames {
             textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-              letterSpacing: ScopedModel.of<ThemeModel>(context).letterSpacingText,
+              letterSpacing:
+                  ScopedModel.of<ThemeModel>(context).letterSpacingText,
               color: ScopedModel.of<ThemeModel>(context).title,
               fontWeight: FontWeight.normal,
             ),
@@ -427,9 +454,7 @@ class ConvertLikeNames {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => User(
-                          idUser: like.id,
-                        ),
+                        builder: (context) => User(userMini: like),
                       ),
                     );
                   },
@@ -439,7 +464,8 @@ class ConvertLikeNames {
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: ScopedModel.of<ThemeModel>(context).sizeText,
-                      letterSpacing: ScopedModel.of<ThemeModel>(context).letterSpacingText,
+                      letterSpacing:
+                          ScopedModel.of<ThemeModel>(context).letterSpacingText,
                       color: ScopedModel.of<ThemeModel>(context).emphasis,
                       fontWeight: FontWeight.normal,
                     ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:social_network_application/converts/convert_to_enum.dart';
 import 'package:social_network_application/entities/dto/entity_save_dto.dart';
+import 'package:social_network_application/entities/mini_dto/entity_mini.dart';
 import 'package:social_network_application/enuns/type_object.dart';
 import 'package:social_network_application/scoped_model/entity_model2.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
@@ -13,9 +14,9 @@ import 'package:social_network_application/widgets/reviews_2.dart';
 
 // ignore: must_be_immutable
 class Entity2 extends StatefulWidget {
-  String idEntity;
+  EntityMini entityMini;
   bool datasheetIsOpen;
-  Entity2({required this.idEntity, required this.datasheetIsOpen, Key? key}) : super(key: key);
+  Entity2({required this.entityMini, required this.datasheetIsOpen, Key? key}) : super(key: key);
 
   @override
   _Entity2State createState() => _Entity2State();
@@ -70,7 +71,7 @@ class _Entity2State extends State<Entity2> {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<EntityModel2>(
-        model: EntityModel2(entityId: widget.idEntity, contextEntityPage: context),
+        model: EntityModel2(entityId: widget.entityMini.id, contextEntityPage: context),
         child: ScopedModelDescendant<EntityModel2>(builder: (context, child, entity) {
           return Scaffold(
               appBar: AppBar(
@@ -600,26 +601,27 @@ class _Entity2State extends State<Entity2> {
                                       ],
                                     ),
 
-                              Theme(
-                                data: ThemeData().copyWith(dividerColor: Colors.transparent),
-                                child: ExpansionTile(
-                                  tilePadding: const EdgeInsets.all(8.0),
-                                  onExpansionChanged: (_) {
-                                    entity.updateMaxLine();
-                                  },
-                                  title: Text(
-                                    entity.entityMini.description,
-                                    maxLines: entity.maxLine,
-                                    style: TextStyle(
-                                      fontSize: theme.sizeText,
-                                      letterSpacing: theme.letterSpacingText,
-                                      color: theme.title,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                  ),
-                                ),
-                              ),
-
+                              entity.entityMini.description != null
+                                  ? Theme(
+                                      data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                                      child: ExpansionTile(
+                                        tilePadding: const EdgeInsets.all(8.0),
+                                        onExpansionChanged: (_) {
+                                          entity.updateMaxLine();
+                                        },
+                                        title: Text(
+                                          entity.entityMini.description!,
+                                          maxLines: entity.maxLine,
+                                          style: TextStyle(
+                                            fontSize: theme.sizeText,
+                                            letterSpacing: theme.letterSpacingText,
+                                            color: theme.title,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  : Container(),
                               const SizedBox(
                                 height: 16.0,
                               ),

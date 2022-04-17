@@ -1,4 +1,5 @@
 {
-    "editor.wordWrapColumn": 320,
-    "editor.wordWrap": "wordWrapColumn"
+    "editor.wordWrapColumn": 80,
+    "editor.wordWrap": "on",
+    "editor.wrappingIndent": "indent"
 }

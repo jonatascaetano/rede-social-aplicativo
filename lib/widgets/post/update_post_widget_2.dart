@@ -70,31 +70,31 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
 
                 //image profile user
 
-                widget.postUpdateMini.author.imageProfile != null
+                widget.postUpdateMini.author!.imageProfile != null
                     ? GestureDetector(
                         onTap: () {
-                          if (widget.postUpdateMini.author.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
+                          if (widget.postUpdateMini.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => User(idUser: widget.postUpdateMini.author.id)),
+                              MaterialPageRoute(builder: (context) => User(userMini: widget.postUpdateMini.author!)),
                             );
-                          } else if (widget.postUpdateMini.author.id == ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenProfile) {
+                          } else if (widget.postUpdateMini.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenProfile) {
                             Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                           }
                         },
                         child: CircleAvatar(
-                          backgroundImage: NetworkImage(widget.postUpdateMini.author.imageProfile!),
+                          backgroundImage: NetworkImage(widget.postUpdateMini.author!.imageProfile!),
                           radius: 30.0,
                         ),
                       )
                     : GestureDetector(
                         onTap: () {
-                          if (widget.postUpdateMini.author.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
+                          if (widget.postUpdateMini.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => User(idUser: widget.postUpdateMini.author.id)),
+                              MaterialPageRoute(builder: (context) => User(userMini: widget.postUpdateMini.author!)),
                             );
-                          } else if (widget.postUpdateMini.author.id == ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenProfile) {
+                          } else if (widget.postUpdateMini.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenProfile) {
                             Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                           }
                         },
@@ -441,7 +441,7 @@ class _UpdatePostWidget2State extends State<UpdatePostWidget2> {
                             IconButton(
                               padding: EdgeInsets.zero,
                               onPressed: () {
-                                if (widget.postUpdateMini.author.id == ScopedModel.of<ProfileModel>(context).userMini.id) {
+                                if (widget.postUpdateMini.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id) {
                                   ScopedModel.of<ProfileModel>(context).showDeletePostBottomSheet(
                                     context: context,
                                     idPost: widget.postUpdateMini.id!,
@@ -491,17 +491,17 @@ Widget entity({required PostUpdateMini postUpdateMini, required BuildContext con
       children: [
         GestureDetector(
           onTap: () {
-            if (postUpdateMini.author.id != ScopedModel.of<ProfileModel>(context).userMini.id && !screenUser) {
+            if (postUpdateMini.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !screenUser) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => User(idUser: postUpdateMini.author.id)),
+                MaterialPageRoute(builder: (context) => User(userMini: postUpdateMini.author!)),
               );
-            } else if (postUpdateMini.author.id == ScopedModel.of<ProfileModel>(context).userMini.id && !screenProfile) {
+            } else if (postUpdateMini.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id && !screenProfile) {
               Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
             }
           },
           child: Text(
-            postUpdateMini.author.name,
+            postUpdateMini.author!.name,
             // +
             // " " +
             // LanguageModel().entitiesCategories[
@@ -532,13 +532,7 @@ Widget entity({required PostUpdateMini postUpdateMini, required BuildContext con
         const Text(" "),
         GestureDetector(
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => Entity2(
-                          idEntity: postUpdateMini.entity!.id,
-                          datasheetIsOpen: false,
-                        )));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Entity2(entityMini: postUpdateMini.entity!, datasheetIsOpen: false)));
           },
           child: Text(
             postUpdateMini.entity!.name,
@@ -930,7 +924,7 @@ Widget entityImage({
                   ),
                 ),
                 Text(
-                  postUpdateMini.entity!.description,
+                  postUpdateMini.entity!.description!,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 3,
                   //softWrap: false,

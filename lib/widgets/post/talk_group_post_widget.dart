@@ -69,7 +69,7 @@ class _TalkGroupPostWidgetState extends State<TalkGroupPostWidget> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => Group(idGroup: widget.post.group!.id),
+                                  builder: (context) => Group(groupMini: widget.post.group!),
                                 ),
                               );
                             }
@@ -116,7 +116,7 @@ class _TalkGroupPostWidgetState extends State<TalkGroupPostWidget> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => Group(idGroup: widget.post.group!.id),
+                                  builder: (context) => Group(groupMini: widget.post.group!),
                                 ),
                               );
                             }
@@ -190,7 +190,7 @@ class _TalkGroupPostWidgetState extends State<TalkGroupPostWidget> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => Group(idGroup: widget.post.group!.id),
+                                    builder: (context) => Group(groupMini: widget.post.group!),
                                   ),
                                 );
                               }
@@ -216,7 +216,7 @@ class _TalkGroupPostWidgetState extends State<TalkGroupPostWidget> {
                                   if (widget.post.author!.id != ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenUser) {
                                     Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (context) => User(idUser: widget.post.author!.id)),
+                                      MaterialPageRoute(builder: (context) => User(userMini: widget.post.author!)),
                                     );
                                   } else if (widget.post.author!.id == ScopedModel.of<ProfileModel>(context).userMini.id && !widget.screenProfile) {
                                     Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));

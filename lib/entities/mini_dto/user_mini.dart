@@ -1,9 +1,9 @@
 class UserMini {
   late String id;
+
   late String name;
   late String? imageProfile;
   late String? release;
-  late String? lastLogin;
   late String? description;
   late String? place;
   late String email;
@@ -18,8 +18,8 @@ class UserMini {
     id = map["id"];
     name = map["name"];
     imageProfile = map["imageProfile"];
-    release = map["release"];
-    lastLogin = map["lastLogin"];
+    // ignore: prefer_if_null_operators
+    release = map["release"] == null ? null : map["release"];
     description = map["description"];
     place = map["place"];
     email = map["email"];

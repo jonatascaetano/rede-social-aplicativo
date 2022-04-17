@@ -27,7 +27,7 @@ class _FollowerMiniProfileState extends State<FollowerMiniProfile> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => User(
-                            idUser: widget.userMini.id,
+                            userMini: widget.userMini,
                           )));
             }
           },

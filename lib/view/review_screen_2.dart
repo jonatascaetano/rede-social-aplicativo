@@ -105,13 +105,13 @@ class _ReviewScreen2State extends State<ReviewScreen2> {
 
                                           //**/ first imageProfile
 
-                                          review.entitySaveMini!.user.imageProfile != null
+                                          review.entitySaveMini!.user!.imageProfile != null
                                               ? GestureDetector(
                                                   onTap: () {
-                                                    if (review.entitySaveMini!.user.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
+                                                    if (review.entitySaveMini!.user!.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
                                                       Navigator.push(
                                                         context,
-                                                        MaterialPageRoute(builder: (context) => User(idUser: review.entitySaveMini!.user.id)),
+                                                        MaterialPageRoute(builder: (context) => User(userMini: review.entitySaveMini!.user!)),
                                                       );
                                                     } else {
                                                       Navigator.push(
@@ -121,16 +121,16 @@ class _ReviewScreen2State extends State<ReviewScreen2> {
                                                     }
                                                   },
                                                   child: CircleAvatar(
-                                                    backgroundImage: NetworkImage(review.entitySaveMini!.user.imageProfile!),
+                                                    backgroundImage: NetworkImage(review.entitySaveMini!.user!.imageProfile!),
                                                     radius: 30.0,
                                                   ),
                                                 )
                                               : GestureDetector(
                                                   onTap: () {
-                                                    if (review.entitySaveMini!.user.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
+                                                    if (review.entitySaveMini!.user!.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
                                                       Navigator.push(
                                                         context,
-                                                        MaterialPageRoute(builder: (context) => User(idUser: review.entitySaveMini!.user.id)),
+                                                        MaterialPageRoute(builder: (context) => User(userMini: review.entitySaveMini!.user!)),
                                                       );
                                                     } else {
                                                       Navigator.push(
@@ -163,10 +163,10 @@ class _ReviewScreen2State extends State<ReviewScreen2> {
                                               children: [
                                                 GestureDetector(
                                                   onTap: () {
-                                                    if (review.entitySaveMini!.user.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
+                                                    if (review.entitySaveMini!.user!.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
                                                       Navigator.push(
                                                         context,
-                                                        MaterialPageRoute(builder: (context) => User(idUser: review.entitySaveMini!.user.id)),
+                                                        MaterialPageRoute(builder: (context) => User(userMini: review.entitySaveMini!.user!)),
                                                       );
                                                     } else {
                                                       Navigator.push(
@@ -176,7 +176,7 @@ class _ReviewScreen2State extends State<ReviewScreen2> {
                                                     }
                                                   },
                                                   child: Text(
-                                                    review.entitySaveMini!.user.name,
+                                                    review.entitySaveMini!.user!.name,
                                                     style: TextStyle(
                                                       fontSize: theme.sizeText,
                                                       letterSpacing: theme.letterSpacingText,
@@ -503,7 +503,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                 ? GestureDetector(
                     onTap: () {
                       if (widget.commentMini.author.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => User(idUser: widget.commentMini.author.id)));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => User(userMini: widget.commentMini.author)));
                       } else {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                       }
@@ -516,7 +516,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                 : GestureDetector(
                     onTap: () {
                       if (widget.commentMini.author.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => User(idUser: widget.commentMini.author.id)));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => User(userMini: widget.commentMini.author)));
                       } else {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                       }
@@ -554,7 +554,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                         GestureDetector(
                           onTap: () {
                             if (widget.commentMini.author.id != ScopedModel.of<ProfileModel>(context).userMini.id) {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => User(idUser: widget.commentMini.author.id)));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => User(userMini: widget.commentMini.author)));
                             } else {
                               Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
                             }
@@ -592,15 +592,17 @@ class _CommentWidgetState extends State<CommentWidget> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        ConvertDate.convertToDatePost(release: widget.commentMini.release),
-                        style: TextStyle(
-                          fontSize: theme.sizeText,
-                          letterSpacing: theme.letterSpacingText,
-                          color: theme.subtitle,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
+                      widget.commentMini.release == null
+                          ? Container()
+                          : Text(
+                              ConvertDate.convertToDatePost(release: widget.commentMini.release!),
+                              style: TextStyle(
+                                fontSize: theme.sizeText,
+                                letterSpacing: theme.letterSpacingText,
+                                color: theme.subtitle,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
                       Row(
                         children: [
                           Text(

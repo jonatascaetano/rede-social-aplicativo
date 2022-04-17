@@ -23,9 +23,7 @@ class _GroupMiniProfileState extends State<GroupMiniProfile> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => Group(
-                  idGroup: widget.group.id,
-                ),
+                builder: (context) => Group(groupMini: widget.group),
               ),
             );
           },

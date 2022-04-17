@@ -1,6 +1,7 @@
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:social_network_application/entities/mini_dto/user_mini.dart';
 import 'package:social_network_application/helper/return_widget_post.dart';
 import 'package:social_network_application/scoped_model/support/language_model.dart';
 import 'package:social_network_application/scoped_model/support/theme_model.dart';
@@ -15,8 +16,8 @@ import 'package:social_network_application/widgets/mini_profile/group_mini_profi
 
 // ignore: must_be_immutable
 class User extends StatefulWidget {
-  String idUser;
-  User({required this.idUser, Key? key}) : super(key: key);
+  UserMini userMini;
+  User({required this.userMini, Key? key}) : super(key: key);
 
   @override
   _UserState createState() => _UserState();
@@ -59,7 +60,7 @@ class _UserState extends State<User> {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<UserModel>(
-        model: UserModel(idUser: widget.idUser, context: context),
+        model: UserModel(idUser: widget.userMini.id, context: context),
         child: ScopedModelDescendant<UserModel>(builder: (context, child, user) {
           return Scaffold(
             appBar: AppBar(
@@ -112,7 +113,7 @@ class _UserState extends State<User> {
                                                 onPressed: () {
                                                   user.showOptionsUserBottomSheet(
                                                     contextPageUser: context,
-                                                    idUser: widget.idUser,
+                                                    idUser: widget.userMini.id,
                                                   );
                                                 },
                                                 icon: Icon(
@@ -146,7 +147,7 @@ class _UserState extends State<User> {
                                                 onPressed: () {
                                                   user.showOptionsUserBottomSheet(
                                                     contextPageUser: context,
-                                                    idUser: widget.idUser,
+                                                    idUser: widget.userMini.id,
                                                   );
                                                 },
                                                 icon: Icon(
@@ -649,7 +650,7 @@ class _UserState extends State<User> {
                                         (e) => EntityMiniProfile(
                                           index: LanguageModel().typeEntitiesMini.indexOf(e),
                                           isUser: false,
-                                          idUser: widget.idUser,
+                                          idUser: widget.userMini.id,
                                         ),
                                       )
                                       .toList(),
