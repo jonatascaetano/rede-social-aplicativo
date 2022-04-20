@@ -7,13 +7,16 @@ import 'package:social_network_application/view/objects/entity2.dart';
 // ignore: must_be_immutable
 class EntityMiniProfileEvaluated extends StatefulWidget {
   EntitySaveMini entitySaveMini;
-  EntityMiniProfileEvaluated({required this.entitySaveMini, Key? key}) : super(key: key);
+  EntityMiniProfileEvaluated({required this.entitySaveMini, Key? key})
+      : super(key: key);
 
   @override
-  _EntityMiniProfileEvaluatedState createState() => _EntityMiniProfileEvaluatedState();
+  _EntityMiniProfileEvaluatedState createState() =>
+      _EntityMiniProfileEvaluatedState();
 }
 
-class _EntityMiniProfileEvaluatedState extends State<EntityMiniProfileEvaluated> {
+class _EntityMiniProfileEvaluatedState
+    extends State<EntityMiniProfileEvaluated> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
@@ -29,6 +32,7 @@ class _EntityMiniProfileEvaluatedState extends State<EntityMiniProfileEvaluated>
                         )));
           },
           child: SizedBox(
+            //decoration: BoxDecoration(border: Border.all(width: 1.0)),
             width: 120.0,
             child: Column(
               children: [
@@ -36,14 +40,16 @@ class _EntityMiniProfileEvaluatedState extends State<EntityMiniProfileEvaluated>
                     ? Stack(
                         children: [
                           Container(
-                            height: 100,
-                            width: 100,
+                            height: 120,
+                            width: 120,
                             decoration: BoxDecoration(
                               color: theme.shadow,
                               // borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
-                              borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(16.0)),
                               image: DecorationImage(
-                                image: NetworkImage(widget.entitySaveMini.entity!.image!),
+                                image: NetworkImage(
+                                    widget.entitySaveMini.entity!.image!),
                                 fit: BoxFit.fitHeight,
                               ),
                             ),
@@ -71,11 +77,12 @@ class _EntityMiniProfileEvaluatedState extends State<EntityMiniProfileEvaluated>
                           Container(
                               decoration: BoxDecoration(
                                 //borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
-                                borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(16.0)),
                                 color: theme.shadow,
                               ),
-                              height: 100,
-                              width: 100,
+                              height: 120,
+                              width: 120,
                               child: Center(
                                 child: Icon(
                                   Icons.image,
@@ -126,27 +133,37 @@ class _EntityMiniProfileEvaluatedState extends State<EntityMiniProfileEvaluated>
                       Icon(
                         Icons.star,
                         size: 15,
-                        color: widget.entitySaveMini.evaluation! >= 1 ? Colors.yellow[700] : theme.icon,
+                        color: widget.entitySaveMini.evaluation! >= 1
+                            ? Colors.yellow[700]
+                            : theme.icon,
                       ),
                       Icon(
                         Icons.star,
                         size: 15,
-                        color: widget.entitySaveMini.evaluation! >= 2 ? Colors.yellow[700] : theme.icon,
+                        color: widget.entitySaveMini.evaluation! >= 2
+                            ? Colors.yellow[700]
+                            : theme.icon,
                       ),
                       Icon(
                         Icons.star,
                         size: 15,
-                        color: widget.entitySaveMini.evaluation! >= 3 ? Colors.yellow[700] : theme.icon,
+                        color: widget.entitySaveMini.evaluation! >= 3
+                            ? Colors.yellow[700]
+                            : theme.icon,
                       ),
                       Icon(
                         Icons.star,
                         size: 15,
-                        color: widget.entitySaveMini.evaluation! >= 4 ? Colors.yellow[700] : theme.icon,
+                        color: widget.entitySaveMini.evaluation! >= 4
+                            ? Colors.yellow[700]
+                            : theme.icon,
                       ),
                       Icon(
                         Icons.star,
                         size: 15,
-                        color: widget.entitySaveMini.evaluation! >= 5 ? Colors.yellow[700] : theme.icon,
+                        color: widget.entitySaveMini.evaluation! >= 5
+                            ? Colors.yellow[700]
+                            : theme.icon,
                       ),
                     ],
                   ),

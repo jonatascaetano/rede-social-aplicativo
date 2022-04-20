@@ -28,17 +28,19 @@ class _GroupMiniProfileState extends State<GroupMiniProfile> {
             );
           },
           child: SizedBox(
+            //decoration: BoxDecoration(border: Border.all(width: 1.0)),
             width: 120.0,
             child: Column(
               children: [
                 widget.group.image != null
                     ? Container(
-                        height: 100,
-                        width: 100,
+                        height: 120,
+                        width: 120,
                         decoration: BoxDecoration(
                           color: theme.shadow,
                           //borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
-                          borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16.0)),
                           image: DecorationImage(
                             image: NetworkImage(widget.group.image!),
                             fit: BoxFit.cover,
@@ -48,11 +50,12 @@ class _GroupMiniProfileState extends State<GroupMiniProfile> {
                     : Container(
                         decoration: BoxDecoration(
                           //borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
-                          borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16.0)),
                           color: theme.shadow,
                         ),
-                        height: 100,
-                        width: 100,
+                        height: 120,
+                        width: 120,
                         child: Center(
                           child: Icon(
                             Icons.image,

@@ -1,12 +1,18 @@
 com.jonatas_social_network_application.social_network_application
+attr activityAction
+attr activityName
 attr adSize
 attr adSizes
 attr adUnitId
 attr alpha
+attr alwaysExpand
 attr buttonSize
 attr circleCrop
+attr clearTop
 attr colorScheme
 attr coordinatorLayoutStyle
+attr finishPrimaryWithSecondary
+attr finishSecondaryWithPrimary
 attr font
 attr fontProviderAuthority
 attr fontProviderCerts
@@ -28,9 +34,17 @@ attr layout_dodgeInsetEdges
 attr layout_insetEdge
 attr layout_keyline
 attr nestedScrollViewStyle
+attr placeholderActivityName
+attr primaryActivityName
 attr queryPatterns
 attr scopeUris
+attr secondaryActivityAction
+attr secondaryActivityName
 attr shortcutMatchRequired
+attr splitLayoutDirection
+attr splitMinSmallestWidth
+attr splitMinWidth
+attr splitRatio
 attr statusBarBackground
 attr ttcIndex
 color androidx_core_ripple_material_light
@@ -151,6 +165,7 @@ id actions
 id adjust_height
 id adjust_width
 id all
+id androidx_window_activity_scope
 id async
 id auto
 id blocking
@@ -182,6 +197,8 @@ id left
 id light
 id line1
 id line3
+id locale
+id ltr
 id none
 id normal
 id notification_background
@@ -190,6 +207,7 @@ id notification_main_column_container
 id right
 id right_icon
 id right_side
+id rtl
 id standard
 id start
 id tag_accessibility_actions
@@ -267,6 +285,8 @@ style Theme_IAPTheme
 style Widget_Compat_NotificationActionContainer
 style Widget_Compat_NotificationActionText
 style Widget_Support_CoordinatorLayout
+styleable ActivityFilter activityAction activityName
+styleable ActivityRule alwaysExpand
 styleable AdsAttrs adSize adSizes adUnitId
 styleable Capability queryPatterns shortcutMatchRequired
 styleable ColorStateListItem android_color android_alpha alpha
@@ -278,5 +298,8 @@ styleable GradientColor android_startColor android_endColor android_type android
 styleable GradientColorItem android_color android_offset
 styleable LoadingImageView circleCrop imageAspectRatio imageAspectRatioAdjust
 styleable SignInButton buttonSize colorScheme scopeUris
+styleable SplitPairFilter primaryActivityName secondaryActivityAction secondaryActivityName
+styleable SplitPairRule clearTop finishPrimaryWithSecondary finishSecondaryWithPrimary splitLayoutDirection splitMinSmallestWidth splitMinWidth splitRatio
+styleable SplitPlaceholderRule placeholderActivityName splitLayoutDirection splitMinSmallestWidth splitMinWidth splitRatio
 xml flutter_image_picker_file_paths
 xml flutter_share_file_paths

@@ -6,10 +6,12 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_network_application/entities/dto/group_dto.dart';
 import 'package:social_network_application/entities/mini_dto/group_mini.dart';
+import 'package:social_network_application/scoped_model/profile_model.dart';
 import 'package:social_network_application/view/objects/group.dart';
 
 class NewGroupModel extends Model {
-  static const String base = "https://jonatas-social-network-api.herokuapp.com/";
+  static const String base =
+      "https://jonatas-social-network-api.herokuapp.com/";
 
   Future<String> getId() async {
     final prefs = await SharedPreferences.getInstance();
@@ -28,7 +30,10 @@ class NewGroupModel extends Model {
     var url = Uri.parse(base + 'groups');
     var response = await http.post(
       url,
-      headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"},
+      headers: {
+        "Accept": "application/json; charset=utf-8",
+        "content-type": "application/json; charset=utf-8"
+      },
       body: json.encode(groupDTO.toMap()),
     );
     // ignore: avoid_print
@@ -37,9 +42,14 @@ class NewGroupModel extends Model {
       case 201:
         var map = json.decode(response.body);
         groupMini = GroupMini.fromMap(map: map);
+        await ScopedModel.of<ProfileModel>(contextNewGroup)
+            .getGroups(context: contextNewGroup);
         load = false;
         notifyListeners();
-        Navigator.pushReplacement(contextNewGroup, MaterialPageRoute(builder: (contextNewGroup) => Group(groupMini: groupMini)));
+        Navigator.pushReplacement(
+            contextNewGroup,
+            MaterialPageRoute(
+                builder: (contextNewGroup) => Group(groupMini: groupMini)));
         break;
       default:
         load = false;

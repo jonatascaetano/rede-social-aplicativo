@@ -31,12 +31,14 @@ class _AllGoalsProfileState extends State<AllGoalsProfile> {
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(4.0),
           child: GridView.count(
-            childAspectRatio: 1.0 / 1.0,
+            childAspectRatio: 1.0 / 1.2,
             crossAxisCount: 2,
             children: widget.goals.map((e) {
-              return Align(alignment: Alignment.topCenter, child: EntityMiniProfileEvaluated(entitySaveMini: e));
+              return Align(
+                  alignment: Alignment.topCenter,
+                  child: EntityMiniProfileEvaluated(entitySaveMini: e));
             }).toList(),
           ),
         ),
