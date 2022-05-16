@@ -2,7 +2,7 @@
 
 uma rede social desenvolvida em flutter com o objetivo de gerenciar e compartilhar experiencias com consumo de mídia </br>
 
-<h2>Importante:</h2>
+<h2>Importante</h2>
 este projeto foi criado exclusivamente com fins educacionais</br>
 
 <h2> Funções </h2>
@@ -13,9 +13,13 @@ este projeto foi criado exclusivamente com fins educacionais</br>
 	seguir outros usuários</br>
 	criar e entrar em grupos</br>
 
-<h2> para testar o aplicativo use:</h2>
+<h2> Para testar o aplicativo use</h2>
 	e-mail: teste@social.com</br>
 	senha: 123456</br></br>
+
+<h2> Backend </h2>
+O backend deste projeto foi desenvolvido em java utilizando o framework spring, para ver a API  clique <a href="https://github.com/JonatasCaetano/social-network-api">aqui</a></br></br>
+	
 
 <div style="display: inline_block">
 <img src="https://github.com/JonatasCaetano/social-network-application/blob/main/images/Screenshot_20220514-192943.png" />
