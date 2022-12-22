@@ -200,7 +200,7 @@ class _ProfileState extends State<Profile> {
                             children: [
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  primary: theme.buttonMain,
+                                  backgroundColor: theme.buttonMain,
                                   elevation: 0.0,
                                 ),
                                 onPressed: () {

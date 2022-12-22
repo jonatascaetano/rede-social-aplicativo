@@ -24,14 +24,16 @@ class _InvitationState extends State<Invitation> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<RegisterModel>(builder: (context, child, register) {
+      return ScopedModelDescendant<RegisterModel>(
+          builder: (context, child, register) {
         return Form(
           key: _globalKey,
           child: Scaffold(
             body: Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0, vertical: 30.0),
                   //marlbfd6
                   child: ListView(
                     children: [
@@ -53,6 +55,7 @@ class _InvitationState extends State<Invitation> {
                           if (value!.isEmpty) {
                             return 'enter your invitation';
                           }
+                          return null;
                         },
                         controller: invitation,
                         keyboardType: TextInputType.visiblePassword,
@@ -69,6 +72,7 @@ class _InvitationState extends State<Invitation> {
                           if (value!.isEmpty) {
                             return 'enter your first and last name';
                           }
+                          return null;
                         },
                         controller: name,
                         keyboardType: TextInputType.text,
@@ -88,6 +92,7 @@ class _InvitationState extends State<Invitation> {
                           if (!value.contains('@')) {
                             return 'invalid email';
                           }
+                          return null;
                         },
                         controller: email,
                         keyboardType: TextInputType.emailAddress,
@@ -107,6 +112,7 @@ class _InvitationState extends State<Invitation> {
                           if (value.length < 6) {
                             return 'invalid password';
                           }
+                          return null;
                         },
                         controller: password,
                         keyboardType: TextInputType.visiblePassword,
@@ -126,6 +132,7 @@ class _InvitationState extends State<Invitation> {
                           if (value != password.text) {
                             return 'the passwords are different';
                           }
+                          return null;
                         },
                         controller: confirm,
                         keyboardType: TextInputType.visiblePassword,
@@ -139,7 +146,7 @@ class _InvitationState extends State<Invitation> {
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: theme.buttonMain,
+                          backgroundColor: theme.buttonMain,
                           elevation: 0.0,
                         ),
                         onPressed: () {
@@ -157,7 +164,8 @@ class _InvitationState extends State<Invitation> {
                               status: null,
                               release: DateTime.now().toString(),
                             );
-                            register.checkInvitation(userDTO: userDTO, context: context);
+                            register.checkInvitation(
+                                userDTO: userDTO, context: context);
                           }
                         },
                         child: Text(
@@ -173,7 +181,8 @@ class _InvitationState extends State<Invitation> {
                       RichText(
                           text: TextSpan(children: [
                         TextSpan(
-                          text: 'By clicking confirm you declare that you agree with our ',
+                          text:
+                              'By clicking confirm you declare that you agree with our ',
                           style: TextStyle(
                             color: theme.subtitle,
                             fontSize: theme.sizeText,
@@ -191,7 +200,8 @@ class _InvitationState extends State<Invitation> {
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () async {
-                                const url = 'https://euteconto-app.blogspot.com/2020/12/termos-de-uso_29.html';
+                                const url =
+                                    'https://euteconto-app.blogspot.com/2020/12/termos-de-uso_29.html';
                                 if (await canLaunch(url)) {
                                   await launch(url);
                                 } else {
@@ -217,7 +227,8 @@ class _InvitationState extends State<Invitation> {
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () async {
-                                const url = 'https://euteconto-app.blogspot.com/2021/01/politica-de-privacidade.html';
+                                const url =
+                                    'https://euteconto-app.blogspot.com/2021/01/politica-de-privacidade.html';
                                 if (await canLaunch(url)) {
                                   await launch(url);
                                 } else {

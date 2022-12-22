@@ -17,7 +17,8 @@ class Group extends StatefulWidget {
 }
 
 class _GroupState extends State<Group> {
-  void handleEvent(AdmobAdEvent event, Map<String, dynamic> args, String adType) {
+  void handleEvent(
+      AdmobAdEvent event, Map<String, dynamic> args, String adType) {
     switch (event) {
       case AdmobAdEvent.loaded:
         // ignore: avoid_print
@@ -53,8 +54,10 @@ class _GroupState extends State<Group> {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel(
-        model: GroupModel(idGroup: widget.groupMini.id, contextPageGroup: context),
-        child: ScopedModelDescendant<GroupModel>(builder: (context, child, group) {
+        model:
+            GroupModel(idGroup: widget.groupMini.id, contextPageGroup: context),
+        child:
+            ScopedModelDescendant<GroupModel>(builder: (context, child, group) {
           return Scaffold(
             appBar: AppBar(
                 elevation: 0.0,
@@ -82,20 +85,29 @@ class _GroupState extends State<Group> {
                                     ? Container(
                                         margin: EdgeInsets.zero,
                                         padding: EdgeInsets.zero,
-                                        height: (MediaQuery.of(context).size.width / 16) * 9,
-                                        width: MediaQuery.of(context).size.width,
+                                        height:
+                                            (MediaQuery.of(context).size.width /
+                                                    16) *
+                                                9,
+                                        width:
+                                            MediaQuery.of(context).size.width,
                                         decoration: BoxDecoration(
                                           color: theme.shadow,
                                           image: DecorationImage(
-                                            image: NetworkImage(group.groupMini.image!),
+                                            image: NetworkImage(
+                                                group.groupMini.image!),
                                             fit: BoxFit.fitHeight,
                                           ),
                                         ),
                                       )
                                     : Container(
                                         color: theme.shadow,
-                                        height: (MediaQuery.of(context).size.width / 16) * 9,
-                                        width: MediaQuery.of(context).size.width,
+                                        height:
+                                            (MediaQuery.of(context).size.width /
+                                                    16) *
+                                                9,
+                                        width:
+                                            MediaQuery.of(context).size.width,
                                         child: Center(
                                           child: Icon(
                                             Icons.image,
@@ -110,7 +122,7 @@ class _GroupState extends State<Group> {
                                         right: 8.0,
                                         child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
-                                            primary: theme.buttonMain,
+                                            backgroundColor: theme.buttonMain,
                                             elevation: 0.0,
                                             fixedSize: const Size(30, 30),
                                             shape: const CircleBorder(),
@@ -124,7 +136,9 @@ class _GroupState extends State<Group> {
                                           child: Icon(
                                             Icons.add,
                                             size: 30,
-                                            color: ScopedModel.of<ThemeModel>(context).buttonMainText,
+                                            color: ScopedModel.of<ThemeModel>(
+                                                    context)
+                                                .buttonMainText,
                                           ),
                                         ),
                                       ),
@@ -151,7 +165,8 @@ class _GroupState extends State<Group> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  group.groupMini.quantityMembers.toString() + ' members ',
+                                  group.groupMini.quantityMembers.toString() +
+                                      ' members ',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: theme.sizeText,
@@ -173,7 +188,8 @@ class _GroupState extends State<Group> {
                               height: 4.0,
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
                               child: Text(
                                 group.groupMini.description,
                                 textAlign: TextAlign.center,
@@ -247,7 +263,10 @@ class _GroupState extends State<Group> {
                               children: [
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    primary: group.groupMini.userIsMember ? Colors.red : theme.buttonMain,
+                                    backgroundColor:
+                                        group.groupMini.userIsMember
+                                            ? Colors.red
+                                            : theme.buttonMain,
                                     elevation: 0.0,
                                     //fixedSize: const Size(30, 30),
                                     //shape: const CircleBorder(),
@@ -263,7 +282,8 @@ class _GroupState extends State<Group> {
                                           "Exit",
                                           style: TextStyle(
                                             fontSize: theme.sizeButton,
-                                            letterSpacing: theme.letterSpacingButton,
+                                            letterSpacing:
+                                                theme.letterSpacingButton,
                                             color: theme.buttonMainText,
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -272,7 +292,8 @@ class _GroupState extends State<Group> {
                                           "Enter",
                                           style: TextStyle(
                                             fontSize: theme.sizeButton,
-                                            letterSpacing: theme.letterSpacingButton,
+                                            letterSpacing:
+                                                theme.letterSpacingButton,
                                             color: theme.buttonMainText,
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -322,11 +343,13 @@ class _GroupState extends State<Group> {
                                     return Column(
                                       children: [
                                         Container(
-                                          width: MediaQuery.of(context).size.width,
+                                          width:
+                                              MediaQuery.of(context).size.width,
                                           decoration: BoxDecoration(
                                             color: theme.shadow,
                                           ),
-                                          child: getBanner(AdmobBannerSize.MEDIUM_RECTANGLE),
+                                          child: getBanner(
+                                              AdmobBannerSize.MEDIUM_RECTANGLE),
                                         ),
                                         Divider(
                                           height: 10.0,

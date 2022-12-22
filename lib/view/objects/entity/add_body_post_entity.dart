@@ -9,7 +9,9 @@ import 'package:social_network_application/scoped_model/support/theme_model.dart
 class AddBodyPostEntity extends StatefulWidget {
   PostUpdateMini postUpdateMini;
   BuildContext contextEntityPage;
-  AddBodyPostEntity({required this.postUpdateMini, required this.contextEntityPage, Key? key}) : super(key: key);
+  AddBodyPostEntity(
+      {required this.postUpdateMini, required this.contextEntityPage, Key? key})
+      : super(key: key);
 
   @override
   _AddBodyPostEntityState createState() => _AddBodyPostEntityState();
@@ -39,7 +41,8 @@ class _AddBodyPostEntityState extends State<AddBodyPostEntity> {
               )),
           body: Stack(children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
               child: ListView(
                 children: [
                   Row(
@@ -75,6 +78,7 @@ class _AddBodyPostEntityState extends State<AddBodyPostEntity> {
                       if (value!.isEmpty) {
                         return 'comment cannot be null';
                       }
+                      return null;
                     },
                     minLines: 10,
                     maxLines: 10,
@@ -91,7 +95,7 @@ class _AddBodyPostEntityState extends State<AddBodyPostEntity> {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: theme.buttonMain,
+                      backgroundColor: theme.buttonMain,
                       elevation: 0.0,
                     ),
                     onPressed: () {
@@ -109,7 +113,9 @@ class _AddBodyPostEntityState extends State<AddBodyPostEntity> {
                           evaluation: 0,
                           spoiler: spoiler,
                         );
-                        ScopedModel.of<EntityModel2>(widget.contextEntityPage).addBodyPost(postUpdateDTO: postUpdateDTO, context: context);
+                        ScopedModel.of<EntityModel2>(widget.contextEntityPage)
+                            .addBodyPost(
+                                postUpdateDTO: postUpdateDTO, context: context);
                       }
                     },
                     child: Text(

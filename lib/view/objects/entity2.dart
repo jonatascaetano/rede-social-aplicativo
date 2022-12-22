@@ -16,14 +16,16 @@ import 'package:social_network_application/widgets/reviews_2.dart';
 class Entity2 extends StatefulWidget {
   EntityMini entityMini;
   bool datasheetIsOpen;
-  Entity2({required this.entityMini, required this.datasheetIsOpen, Key? key}) : super(key: key);
+  Entity2({required this.entityMini, required this.datasheetIsOpen, Key? key})
+      : super(key: key);
 
   @override
   _Entity2State createState() => _Entity2State();
 }
 
 class _Entity2State extends State<Entity2> {
-  void handleEvent(AdmobAdEvent event, Map<String, dynamic> args, String adType) {
+  void handleEvent(
+      AdmobAdEvent event, Map<String, dynamic> args, String adType) {
     switch (event) {
       case AdmobAdEvent.loaded:
         // ignore: avoid_print
@@ -71,8 +73,10 @@ class _Entity2State extends State<Entity2> {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<EntityModel2>(
-        model: EntityModel2(entityId: widget.entityMini.id, contextEntityPage: context),
-        child: ScopedModelDescendant<EntityModel2>(builder: (context, child, entity) {
+        model: EntityModel2(
+            entityId: widget.entityMini.id, contextEntityPage: context),
+        child: ScopedModelDescendant<EntityModel2>(
+            builder: (context, child, entity) {
           return Scaffold(
               appBar: AppBar(
                 elevation: 0.0,
@@ -104,20 +108,31 @@ class _Entity2State extends State<Entity2> {
                                       ? Container(
                                           margin: EdgeInsets.zero,
                                           padding: EdgeInsets.zero,
-                                          height: (MediaQuery.of(context).size.width / 16) * 9,
-                                          width: MediaQuery.of(context).size.width,
+                                          height: (MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  16) *
+                                              9,
+                                          width:
+                                              MediaQuery.of(context).size.width,
                                           decoration: BoxDecoration(
                                             color: theme.shadow,
                                             image: DecorationImage(
-                                              image: NetworkImage(entity.entityMini.image!),
+                                              image: NetworkImage(
+                                                  entity.entityMini.image!),
                                               fit: BoxFit.fitHeight,
                                             ),
                                           ),
                                         )
                                       : Container(
                                           color: theme.shadow,
-                                          height: (MediaQuery.of(context).size.width / 16) * 9,
-                                          width: MediaQuery.of(context).size.width,
+                                          height: (MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  16) *
+                                              9,
+                                          width:
+                                              MediaQuery.of(context).size.width,
                                           child: Center(
                                             child: Icon(
                                               Icons.image,
@@ -132,13 +147,14 @@ class _Entity2State extends State<Entity2> {
                                           right: 8.0,
                                           child: ElevatedButton(
                                             style: ElevatedButton.styleFrom(
-                                              primary: theme.buttonMain,
+                                              backgroundColor: theme.buttonMain,
                                               elevation: 0.0,
                                               fixedSize: const Size(30, 30),
                                               shape: const CircleBorder(),
                                             ),
                                             onPressed: () {
-                                              entity.showOptionsEntityBottomSheet(
+                                              entity
+                                                  .showOptionsEntityBottomSheet(
                                                 contextAncestor: context,
                                                 entityMini: entity.entityMini,
                                               );
@@ -146,7 +162,9 @@ class _Entity2State extends State<Entity2> {
                                             child: Icon(
                                               Icons.add,
                                               size: 30,
-                                              color: ScopedModel.of<ThemeModel>(context).buttonMainText,
+                                              color: ScopedModel.of<ThemeModel>(
+                                                      context)
+                                                  .buttonMainText,
                                             ),
                                           ),
 
@@ -181,7 +199,12 @@ class _Entity2State extends State<Entity2> {
                                 height: 4.0,
                               ),
                               Text(
-                                LanguageModel().typeEntities[ConvertToEnum.convertTypeEntityToValue(typeEntity: entity.entityMini.typeEntity)].toString(),
+                                LanguageModel()
+                                    .typeEntities[
+                                        ConvertToEnum.convertTypeEntityToValue(
+                                            typeEntity:
+                                                entity.entityMini.typeEntity)]
+                                    .toString(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: theme.sizeText,
@@ -207,11 +230,13 @@ class _Entity2State extends State<Entity2> {
                                       child: Column(
                                         children: [
                                           Text(
-                                            entity.entityMini.category1.toString(),
+                                            entity.entityMini.category1
+                                                .toString(),
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               fontSize: theme.sizeTitle,
-                                              letterSpacing: theme.letterSpacingText,
+                                              letterSpacing:
+                                                  theme.letterSpacingText,
                                               color: theme.title,
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -220,11 +245,18 @@ class _Entity2State extends State<Entity2> {
                                             height: 4.0,
                                           ),
                                           Text(
-                                            LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: entity.entityMini.typeEntity)][1].toString(),
+                                            LanguageModel()
+                                                .entitiesCategories[ConvertToEnum
+                                                    .convertTypeEntityToValue(
+                                                        typeEntity: entity
+                                                            .entityMini
+                                                            .typeEntity)][1]
+                                                .toString(),
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               fontSize: theme.sizeText,
-                                              letterSpacing: theme.letterSpacingText,
+                                              letterSpacing:
+                                                  theme.letterSpacingText,
                                               color: theme.subtitle,
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -237,11 +269,13 @@ class _Entity2State extends State<Entity2> {
                                       child: Column(
                                         children: [
                                           Text(
-                                            entity.entityMini.category2.toString(),
+                                            entity.entityMini.category2
+                                                .toString(),
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               fontSize: theme.sizeTitle,
-                                              letterSpacing: theme.letterSpacingText,
+                                              letterSpacing:
+                                                  theme.letterSpacingText,
                                               color: theme.title,
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -250,11 +284,18 @@ class _Entity2State extends State<Entity2> {
                                             height: 4.0,
                                           ),
                                           Text(
-                                            LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: entity.entityMini.typeEntity)][2].toString(),
+                                            LanguageModel()
+                                                .entitiesCategories[ConvertToEnum
+                                                    .convertTypeEntityToValue(
+                                                        typeEntity: entity
+                                                            .entityMini
+                                                            .typeEntity)][2]
+                                                .toString(),
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               fontSize: theme.sizeText,
-                                              letterSpacing: theme.letterSpacingText,
+                                              letterSpacing:
+                                                  theme.letterSpacingText,
                                               color: theme.subtitle,
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -267,11 +308,13 @@ class _Entity2State extends State<Entity2> {
                                       child: Column(
                                         children: [
                                           Text(
-                                            entity.entityMini.category3.toString(),
+                                            entity.entityMini.category3
+                                                .toString(),
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               fontSize: theme.sizeTitle,
-                                              letterSpacing: theme.letterSpacingText,
+                                              letterSpacing:
+                                                  theme.letterSpacingText,
                                               color: theme.title,
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -280,11 +323,18 @@ class _Entity2State extends State<Entity2> {
                                             height: 4.0,
                                           ),
                                           Text(
-                                            LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: entity.entityMini.typeEntity)][3].toString(),
+                                            LanguageModel()
+                                                .entitiesCategories[ConvertToEnum
+                                                    .convertTypeEntityToValue(
+                                                        typeEntity: entity
+                                                            .entityMini
+                                                            .typeEntity)][3]
+                                                .toString(),
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               fontSize: theme.sizeText,
-                                              letterSpacing: theme.letterSpacingText,
+                                              letterSpacing:
+                                                  theme.letterSpacingText,
                                               color: theme.subtitle,
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -297,11 +347,13 @@ class _Entity2State extends State<Entity2> {
                                       child: Column(
                                         children: [
                                           Text(
-                                            entity.entityMini.category4.toString(),
+                                            entity.entityMini.category4
+                                                .toString(),
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               fontSize: theme.sizeTitle,
-                                              letterSpacing: theme.letterSpacingText,
+                                              letterSpacing:
+                                                  theme.letterSpacingText,
                                               color: theme.title,
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -310,11 +362,18 @@ class _Entity2State extends State<Entity2> {
                                             height: 4.0,
                                           ),
                                           Text(
-                                            LanguageModel().entitiesCategories[ConvertToEnum.convertTypeEntityToValue(typeEntity: entity.entityMini.typeEntity)][4].toString(),
+                                            LanguageModel()
+                                                .entitiesCategories[ConvertToEnum
+                                                    .convertTypeEntityToValue(
+                                                        typeEntity: entity
+                                                            .entityMini
+                                                            .typeEntity)][4]
+                                                .toString(),
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               fontSize: theme.sizeText,
-                                              letterSpacing: theme.letterSpacingText,
+                                              letterSpacing:
+                                                  theme.letterSpacingText,
                                               color: theme.subtitle,
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -333,31 +392,52 @@ class _Entity2State extends State<Entity2> {
                               entity.entitySaveMini == null
                                   ? Container()
                                   : Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Evaluation(
                                           value: 1,
-                                          evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 0,
+                                          evaluation:
+                                              entity.entitySaveMini != null
+                                                  ? entity.entitySaveMini!
+                                                      .evaluation!
+                                                  : 0,
                                           contextEntityPage: context,
                                         ),
                                         Evaluation(
                                           value: 2,
-                                          evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 0,
+                                          evaluation:
+                                              entity.entitySaveMini != null
+                                                  ? entity.entitySaveMini!
+                                                      .evaluation!
+                                                  : 0,
                                           contextEntityPage: context,
                                         ),
                                         Evaluation(
                                           value: 3,
-                                          evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 0,
+                                          evaluation:
+                                              entity.entitySaveMini != null
+                                                  ? entity.entitySaveMini!
+                                                      .evaluation!
+                                                  : 0,
                                           contextEntityPage: context,
                                         ),
                                         Evaluation(
                                           value: 4,
-                                          evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 0,
+                                          evaluation:
+                                              entity.entitySaveMini != null
+                                                  ? entity.entitySaveMini!
+                                                      .evaluation!
+                                                  : 0,
                                           contextEntityPage: context,
                                         ),
                                         Evaluation(
                                           value: 5,
-                                          evaluation: entity.entitySaveMini != null ? entity.entitySaveMini!.evaluation! : 0,
+                                          evaluation:
+                                              entity.entitySaveMini != null
+                                                  ? entity.entitySaveMini!
+                                                      .evaluation!
+                                                  : 0,
                                           contextEntityPage: context,
                                         ),
                                       ],
@@ -372,7 +452,8 @@ class _Entity2State extends State<Entity2> {
                                     ),
 
                               Text(
-                                entity.entityMini.evaluationAverage.toStringAsPrecision(2),
+                                entity.entityMini.evaluationAverage
+                                    .toStringAsPrecision(2),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: theme.sizeAppBar,
@@ -385,7 +466,10 @@ class _Entity2State extends State<Entity2> {
                                 height: 2.0,
                               ),
                               Text(
-                                '( ' + entity.entityMini.evaluationQuantity.toString() + ' evaluations)',
+                                '( ' +
+                                    entity.entityMini.evaluationQuantity
+                                        .toString() +
+                                    ' evaluations)',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: theme.sizeText,
@@ -474,7 +558,8 @@ class _Entity2State extends State<Entity2> {
                                       ? const Text(
                                           'category',
                                         )
-                                      : entity.dropdownList[entity.entitySaveMini!.category! - 1],
+                                      : entity.dropdownList[
+                                          entity.entitySaveMini!.category! - 1],
                                   items: entity.dropdownList,
                                   onChanged: (value) {
                                     // ignore: avoid_print
@@ -495,11 +580,19 @@ class _Entity2State extends State<Entity2> {
                                       release: null,
                                     );
                                     if (entity.entitySaveMini == null) {
-                                      entity.newEntitySave(entitySaveDTO: entitySaveDTO, context: context, contextEntityPage: context);
+                                      entity.newEntitySave(
+                                          entitySaveDTO: entitySaveDTO,
+                                          context: context,
+                                          contextEntityPage: context);
                                     } else {
-                                      if (value != entity.entitySaveMini!.category!) {
-                                        entitySaveDTO.idEntitySave = entity.entitySaveMini!.id;
-                                        entity.updateCategoryEntitySave(entitySaveDTO: entitySaveDTO, context: context, contextEntityPage: context);
+                                      if (value !=
+                                          entity.entitySaveMini!.category!) {
+                                        entitySaveDTO.idEntitySave =
+                                            entity.entitySaveMini!.id;
+                                        entity.updateCategoryEntitySave(
+                                            entitySaveDTO: entitySaveDTO,
+                                            context: context,
+                                            contextEntityPage: context);
                                       }
                                     }
                                   },
@@ -513,19 +606,43 @@ class _Entity2State extends State<Entity2> {
                               entity.entitySaveMini == null
                                   ? Container()
                                   : Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         //review update
                                         ElevatedButton(
                                           style: ElevatedButton.styleFrom(
-                                            primary: theme.buttonMain,
+                                            backgroundColor: theme.buttonMain,
                                             elevation: 1.0,
                                           ),
                                           onPressed: () {
-                                            if (entity.entitySaveMini != null && entity.entitySaveMini!.reviewed) {
-                                              Navigator.push(context, MaterialPageRoute(builder: (contextNavigator) => UpdateReviewEntity(review: entity.entitySaveMini!.review!, contextEntityPage: context, entitySaveMini: entity.entitySaveMini!)));
-                                            } else if (entity.entitySaveMini != null) {
-                                              Navigator.push(context, MaterialPageRoute(builder: (contextNavigator) => UpdateReviewEntity(review: '', contextEntityPage: context, entitySaveMini: entity.entitySaveMini!)));
+                                            if (entity.entitySaveMini != null &&
+                                                entity
+                                                    .entitySaveMini!.reviewed) {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (contextNavigator) =>
+                                                          UpdateReviewEntity(
+                                                              review: entity
+                                                                  .entitySaveMini!
+                                                                  .review!,
+                                                              contextEntityPage:
+                                                                  context,
+                                                              entitySaveMini: entity
+                                                                  .entitySaveMini!)));
+                                            } else if (entity.entitySaveMini !=
+                                                null) {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (contextNavigator) =>
+                                                          UpdateReviewEntity(
+                                                              review: '',
+                                                              contextEntityPage:
+                                                                  context,
+                                                              entitySaveMini: entity
+                                                                  .entitySaveMini!)));
                                             }
                                           },
                                           child: entity.entitySaveMini != null
@@ -533,28 +650,38 @@ class _Entity2State extends State<Entity2> {
                                                   ? Text(
                                                       'update review',
                                                       style: TextStyle(
-                                                        fontSize: theme.sizeButton,
-                                                        letterSpacing: theme.letterSpacingButton,
-                                                        color: theme.buttonMainText,
-                                                        fontWeight: FontWeight.normal,
+                                                        fontSize:
+                                                            theme.sizeButton,
+                                                        letterSpacing: theme
+                                                            .letterSpacingButton,
+                                                        color: theme
+                                                            .buttonMainText,
+                                                        fontWeight:
+                                                            FontWeight.normal,
                                                       ),
                                                     )
                                                   : Text(
                                                       'add review',
                                                       style: TextStyle(
-                                                        fontSize: theme.sizeButton,
-                                                        letterSpacing: theme.letterSpacingButton,
-                                                        color: theme.buttonMainText,
-                                                        fontWeight: FontWeight.normal,
+                                                        fontSize:
+                                                            theme.sizeButton,
+                                                        letterSpacing: theme
+                                                            .letterSpacingButton,
+                                                        color: theme
+                                                            .buttonMainText,
+                                                        fontWeight:
+                                                            FontWeight.normal,
                                                       ),
                                                     )
                                               : Text(
                                                   'add review',
                                                   style: TextStyle(
                                                     fontSize: theme.sizeButton,
-                                                    letterSpacing: theme.letterSpacingButton,
+                                                    letterSpacing: theme
+                                                        .letterSpacingButton,
                                                     color: theme.buttonMainText,
-                                                    fontWeight: FontWeight.normal,
+                                                    fontWeight:
+                                                        FontWeight.normal,
                                                   ),
                                                 ),
                                         ),
@@ -568,14 +695,17 @@ class _Entity2State extends State<Entity2> {
                                         IconButton(
                                           onPressed: () {
                                             if (entity.entitySaveMini != null) {
-                                              EntitySaveDTO entitySaveDTO = EntitySaveDTO(
-                                                idEntitySave: entity.entitySaveMini!.id,
+                                              EntitySaveDTO entitySaveDTO =
+                                                  EntitySaveDTO(
+                                                idEntitySave:
+                                                    entity.entitySaveMini!.id,
                                                 idUser: entity.idUser,
                                                 idEntity: entity.entityMini.id,
                                                 idSeason: null,
                                                 idEpisode: null,
                                                 category: null,
-                                                goal: !entity.entitySaveMini!.goal,
+                                                goal: !entity
+                                                    .entitySaveMini!.goal,
                                                 rated: null,
                                                 reviewed: null,
                                                 evaluation: null,
@@ -584,7 +714,10 @@ class _Entity2State extends State<Entity2> {
                                                 spoiler: false,
                                                 release: null,
                                               );
-                                              entity.updateGoalEntitySave(entitySaveDTO: entitySaveDTO, context: context, contextEntityPage: context);
+                                              entity.updateGoalEntitySave(
+                                                  entitySaveDTO: entitySaveDTO,
+                                                  context: context,
+                                                  contextEntityPage: context);
                                             }
                                           },
                                           icon: Icon(
@@ -603,7 +736,8 @@ class _Entity2State extends State<Entity2> {
 
                               entity.entityMini.description != null
                                   ? Theme(
-                                      data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                                      data: ThemeData().copyWith(
+                                          dividerColor: Colors.transparent),
                                       child: ExpansionTile(
                                         tilePadding: const EdgeInsets.all(8.0),
                                         onExpansionChanged: (_) {
@@ -614,7 +748,8 @@ class _Entity2State extends State<Entity2> {
                                           maxLines: entity.maxLine,
                                           style: TextStyle(
                                             fontSize: theme.sizeText,
-                                            letterSpacing: theme.letterSpacingText,
+                                            letterSpacing:
+                                                theme.letterSpacingText,
                                             color: theme.title,
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -910,14 +1045,16 @@ class _Entity2State extends State<Entity2> {
                               entity.reviews.isEmpty
                                   ? Container()
                                   : Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0, vertical: 30.0),
                                       child: Row(
                                         children: [
                                           Text(
                                             'Reviews',
                                             style: TextStyle(
                                               fontSize: theme.sizeAppBar,
-                                              letterSpacing: theme.letterSpacingText,
+                                              letterSpacing:
+                                                  theme.letterSpacingText,
                                               color: theme.emphasis,
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -929,7 +1066,8 @@ class _Entity2State extends State<Entity2> {
                                             entity.reviews.length.toString(),
                                             style: TextStyle(
                                               fontSize: theme.sizeAppBar,
-                                              letterSpacing: theme.letterSpacingText,
+                                              letterSpacing:
+                                                  theme.letterSpacingText,
                                               color: theme.emphasis,
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -949,7 +1087,8 @@ class _Entity2State extends State<Entity2> {
                                   ? Container()
                                   : ListView.separated(
                                       shrinkWrap: true,
-                                      physics: const NeverScrollableScrollPhysics(),
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
                                       separatorBuilder: (context, index) {
                                         return Divider(
                                           height: 10.0,

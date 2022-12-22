@@ -19,14 +19,16 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<LoginModel>(builder: (context, child, login) {
+      return ScopedModelDescendant<LoginModel>(
+          builder: (context, child, login) {
         return Form(
           key: _globalKey,
           child: Scaffold(
             body: Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0, vertical: 30.0),
                   child: ListView(
                     children: [
                       Text(
@@ -47,6 +49,7 @@ class _LoginState extends State<Login> {
                           if (value!.isEmpty || !value.contains('@')) {
                             return 'invalid email';
                           }
+                          return null;
                         },
                         controller: email,
                         keyboardType: TextInputType.emailAddress,
@@ -63,6 +66,7 @@ class _LoginState extends State<Login> {
                           if (value!.isEmpty || value.length < 6) {
                             return 'invalid password';
                           }
+                          return null;
                         },
                         controller: password,
                         keyboardType: TextInputType.visiblePassword,
@@ -76,12 +80,15 @@ class _LoginState extends State<Login> {
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: theme.buttonMain,
+                          backgroundColor: theme.buttonMain,
                           elevation: 0.0,
                         ),
                         onPressed: () {
                           if (_globalKey.currentState!.validate()) {
-                            login.login(email: email.text, password: password.text, context: context);
+                            login.login(
+                                email: email.text,
+                                password: password.text,
+                                context: context);
                           }
                         },
                         child: Text(
@@ -96,11 +103,14 @@ class _LoginState extends State<Login> {
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: theme.button,
+                          backgroundColor: theme.button,
                           elevation: 0.0,
                         ),
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const Invitation()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Invitation()));
                         },
                         child: Text(
                           "New account",

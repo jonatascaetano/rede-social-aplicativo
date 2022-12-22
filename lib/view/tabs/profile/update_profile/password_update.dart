@@ -19,7 +19,8 @@ class _PasswordUpdateState extends State<PasswordUpdate> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<ProfileModel>(builder: (context, child, profile) {
+      return ScopedModelDescendant<ProfileModel>(
+          builder: (context, child, profile) {
         return Form(
           key: _globalKey,
           child: Scaffold(
@@ -38,7 +39,8 @@ class _PasswordUpdateState extends State<PasswordUpdate> {
             body: Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0, vertical: 30.0),
                   child: ListView(
                     children: [
                       TextFormField(
@@ -49,6 +51,7 @@ class _PasswordUpdateState extends State<PasswordUpdate> {
                           if (value.length < 6) {
                             return 'invalid password';
                           }
+                          return null;
                         },
                         controller: controller1,
                         keyboardType: TextInputType.visiblePassword,
@@ -68,6 +71,7 @@ class _PasswordUpdateState extends State<PasswordUpdate> {
                           if (value != controller1.text) {
                             return 'the passwords are different';
                           }
+                          return null;
                         },
                         controller: controller2,
                         keyboardType: TextInputType.visiblePassword,
@@ -81,7 +85,7 @@ class _PasswordUpdateState extends State<PasswordUpdate> {
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: theme.buttonMain,
+                          backgroundColor: theme.buttonMain,
                           elevation: 0.0,
                         ),
                         onPressed: () {
@@ -99,7 +103,8 @@ class _PasswordUpdateState extends State<PasswordUpdate> {
                               invitation: null,
                               release: '',
                             );
-                            profile.updatePassword(userDTO: userDTO, context: context);
+                            profile.updatePassword(
+                                userDTO: userDTO, context: context);
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Try again later')),

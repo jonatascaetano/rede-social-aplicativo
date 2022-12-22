@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,7 +23,11 @@ class ReviewModel extends Model {
   TextEditingController controller = TextEditingController();
   late String typeObject;
 
-  ReviewModel({required this.idReview, required this.contextEntityPage, required this.contextReviewPage, required this.typeObject}) {
+  ReviewModel(
+      {required this.idReview,
+      required this.contextEntityPage,
+      required this.contextReviewPage,
+      required this.typeObject}) {
     getReview();
     getAllCommentReview(
       idReview: idReview,
@@ -32,7 +35,8 @@ class ReviewModel extends Model {
     );
   }
 
-  static const String base = "https://jonatas-social-network-api.herokuapp.com/";
+  static const String base =
+      "https://jonatas-social-network-api.herokuapp.com/";
 
   Future<String> getId() async {
     final prefs = await SharedPreferences.getInstance();
@@ -43,8 +47,12 @@ class ReviewModel extends Model {
     load = true;
     notifyListeners();
     String idUser = await getId();
-    var url = Uri.parse(base + 'entitysaves/get/entitysave/$idReview/user/$idUser');
-    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
+    var url =
+        Uri.parse(base + 'entitysaves/get/entitysave/$idReview/user/$idUser');
+    var response = await http.get(url, headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
 // ignore: avoid_print
     print("getReview: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -67,18 +75,26 @@ class ReviewModel extends Model {
     }
   }
 
-  updateLikeReview({required BuildContext contextEntityPage, required BuildContext contextReviewPage, required String idReview}) async {
+  updateLikeReview(
+      {required BuildContext contextEntityPage,
+      required BuildContext contextReviewPage,
+      required String idReview}) async {
     load = true;
     notifyListeners();
     String idUser = await getId();
-    var url = Uri.parse(base + 'entitysaves/put/like/entitysave/$idReview/user/$idUser');
-    var response = await http.put(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
+    var url = Uri.parse(
+        base + 'entitysaves/put/like/entitysave/$idReview/user/$idUser');
+    var response = await http.put(url, headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
     // ignore: avoid_print
     print("updateLikePost: " + response.statusCode.toString());
     switch (response.statusCode) {
       case 202:
         getReview();
-        ScopedModel.of<EntityModel2>(contextEntityPage).getReviews(entityId: entitySaveMini!.entity!.id);
+        ScopedModel.of<EntityModel2>(contextEntityPage)
+            .getReviews(entityId: entitySaveMini!.entity!.id);
         // switch (typeObject) {
         //   case TypeObject.ENTITY:
         //     ScopedModel.of<EntityModel>(contextEntityPage).getReviews(entityId: entitySaveMini!.entity!.id);
@@ -104,12 +120,17 @@ class ReviewModel extends Model {
     }
   }
 
-  getAllCommentReview({required String idReview, required BuildContext context}) async {
+  getAllCommentReview(
+      {required String idReview, required BuildContext context}) async {
     load = true;
     notifyListeners();
     String idUser = await getId();
-    var url = Uri.parse(base + 'entitysaves/get/comments/$idReview/user/$idUser');
-    var response = await http.get(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
+    var url =
+        Uri.parse(base + 'entitysaves/get/comments/$idReview/user/$idUser');
+    var response = await http.get(url, headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
     // ignore: avoid_print
     print("getAllCommentReview: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -155,7 +176,10 @@ class ReviewModel extends Model {
     var url = Uri.parse(base + 'comments/post/comment/entitysave');
     var response = await http.post(
       url,
-      headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"},
+      headers: {
+        "Accept": "application/json; charset=utf-8",
+        "content-type": "application/json; charset=utf-8"
+      },
       body: json.encode(commentDTO.toMap()),
     );
     // ignore: avoid_print
@@ -167,7 +191,8 @@ class ReviewModel extends Model {
         getAllCommentReview(idReview: idReview, context: contextReviewPage);
         switch (typeObject) {
           case TypeObject.ENTITY:
-            ScopedModel.of<EntityModel2>(contextEntityPage).getReviews(entityId: entitySaveMini!.entity!.id);
+            ScopedModel.of<EntityModel2>(contextEntityPage)
+                .getReviews(entityId: entitySaveMini!.entity!.id);
             break;
           // case TypeObject.SEASON:
           //   ScopedModel.of<SeasonModel>(context)
@@ -190,7 +215,11 @@ class ReviewModel extends Model {
     }
   }
 
-  removeCommentReview({required String idReview, required BuildContext context, required String idComment, required contextEntityPage}) async {
+  removeCommentReview(
+      {required String idReview,
+      required BuildContext context,
+      required String idComment,
+      required contextEntityPage}) async {
     load = true;
     notifyListeners();
     String id = await getId();
@@ -206,7 +235,10 @@ class ReviewModel extends Model {
     var url = Uri.parse(base + 'comments/delete/comment/entitysave');
     var response = await http.delete(
       url,
-      headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"},
+      headers: {
+        "Accept": "application/json; charset=utf-8",
+        "content-type": "application/json; charset=utf-8"
+      },
       body: json.encode(commentDTO.toMap()),
     );
     // ignore: avoid_print
@@ -217,7 +249,8 @@ class ReviewModel extends Model {
         getAllCommentReview(idReview: idReview, context: context);
         switch (typeObject) {
           case TypeObject.ENTITY:
-            ScopedModel.of<EntityModel2>(contextEntityPage).getReviews(entityId: entitySaveMini!.entity!.id);
+            ScopedModel.of<EntityModel2>(contextEntityPage)
+                .getReviews(entityId: entitySaveMini!.entity!.id);
             break;
           // case TypeObject.SEASON:
           //   ScopedModel.of<SeasonModel>(context)
@@ -240,11 +273,17 @@ class ReviewModel extends Model {
     }
   }
 
-  updateLikeComment({required BuildContext context, required String idComment, required String idReview}) async {
+  updateLikeComment(
+      {required BuildContext context,
+      required String idComment,
+      required String idReview}) async {
     notifyListeners();
     String id = await getId();
     var url = Uri.parse(base + 'comments/put/like/comment/$idComment/user/$id');
-    var response = await http.put(url, headers: {"Accept": "application/json; charset=utf-8", "content-type": "application/json; charset=utf-8"});
+    var response = await http.put(url, headers: {
+      "Accept": "application/json; charset=utf-8",
+      "content-type": "application/json; charset=utf-8"
+    });
     // ignore: avoid_print
     print("updateLikePost: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -263,13 +302,18 @@ class ReviewModel extends Model {
 
   //verificar se o contextPage é o contextPage da tela entity
 
-  showDeleteCommentBottomSheet({required BuildContext contextCommentPage, required String idReview, required String idComment, required BuildContext contextPage}) {
+  showDeleteCommentBottomSheet(
+      {required BuildContext contextCommentPage,
+      required String idReview,
+      required String idComment,
+      required BuildContext contextPage}) {
     showModalBottomSheet<dynamic>(
 
         //isScrollControlled: true,
         context: contextCommentPage,
         builder: (context) {
-          return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
+          return ScopedModelDescendant<ThemeModel>(
+              builder: (context, child, theme) {
             return BottomSheet(
                 backgroundColor: theme.background,
                 onClosing: () {},

@@ -8,7 +8,9 @@ import 'package:social_network_application/scoped_model/support/theme_model.dart
 class NewTalkGroup extends StatefulWidget {
   String idGroup;
   BuildContext contextScreenGroup;
-  NewTalkGroup({required this.idGroup, required this.contextScreenGroup, Key? key}) : super(key: key);
+  NewTalkGroup(
+      {required this.idGroup, required this.contextScreenGroup, Key? key})
+      : super(key: key);
 
   @override
   State<NewTalkGroup> createState() => _NewTalkGroupState();
@@ -25,7 +27,8 @@ class _NewTalkGroupState extends State<NewTalkGroup> {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<NewPostModel>(
           model: NewPostModel(),
-          child: ScopedModelDescendant<NewPostModel>(builder: (context, child, post) {
+          child: ScopedModelDescendant<NewPostModel>(
+              builder: (context, child, post) {
             return Form(
               key: _globalKey,
               child: Scaffold(
@@ -44,7 +47,8 @@ class _NewTalkGroupState extends State<NewTalkGroup> {
                 body: Stack(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 30.0),
                       child: ListView(
                         children: [
                           Row(
@@ -82,6 +86,7 @@ class _NewTalkGroupState extends State<NewTalkGroup> {
                                     if (spoiler && value!.isEmpty) {
                                       return 'your title cannot be empty';
                                     }
+                                    return null;
                                   },
                                   controller: title,
                                   minLines: 2,
@@ -99,6 +104,7 @@ class _NewTalkGroupState extends State<NewTalkGroup> {
                               if (value!.isEmpty) {
                                 return 'your post cannot be empty';
                               }
+                              return null;
                             },
                             controller: controller,
                             minLines: 10,
@@ -113,13 +119,14 @@ class _NewTalkGroupState extends State<NewTalkGroup> {
                           ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: theme.buttonMain,
+                              backgroundColor: theme.buttonMain,
                               elevation: 0.0,
                             ),
                             onPressed: () async {
                               if (_globalKey.currentState!.validate()) {
                                 String id = await post.getId();
-                                PostTalkGroupDTO postTalkGroupDTO = PostTalkGroupDTO(
+                                PostTalkGroupDTO postTalkGroupDTO =
+                                    PostTalkGroupDTO(
                                   idPost: null,
                                   release: DateTime.now().toUtc().toString(),
                                   body: controller.text,
@@ -128,7 +135,11 @@ class _NewTalkGroupState extends State<NewTalkGroup> {
                                   idGroup: widget.idGroup,
                                   title: title.text,
                                 );
-                                post.newTalkGroup(post: postTalkGroupDTO, context: context, contextScreenGroup: widget.contextScreenGroup);
+                                post.newTalkGroup(
+                                    post: postTalkGroupDTO,
+                                    context: context,
+                                    contextScreenGroup:
+                                        widget.contextScreenGroup);
                               }
                             },
                             child: Text(

@@ -298,7 +298,8 @@ class _UserState extends State<User> {
                                                   ElevatedButton(
                                                     style: ElevatedButton
                                                         .styleFrom(
-                                                      primary: theme.buttonMain,
+                                                      backgroundColor:
+                                                          theme.buttonMain,
                                                       elevation: 0.0,
                                                     ),
                                                     onPressed: () {
@@ -347,7 +348,8 @@ class _UserState extends State<User> {
                                                   ElevatedButton(
                                                     style: ElevatedButton
                                                         .styleFrom(
-                                                      primary: theme.buttonMain,
+                                                      backgroundColor:
+                                                          theme.buttonMain,
                                                       elevation: 0.0,
                                                     ),
                                                     onPressed: () {

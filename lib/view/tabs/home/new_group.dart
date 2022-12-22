@@ -20,7 +20,8 @@ class _NewGroupState extends State<NewGroup> {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<NewGroupModel>(
           model: NewGroupModel(),
-          child: ScopedModelDescendant<NewGroupModel>(builder: (context, child, group) {
+          child: ScopedModelDescendant<NewGroupModel>(
+              builder: (context, child, group) {
             return Form(
               key: _globalKey,
               child: Scaffold(
@@ -39,7 +40,8 @@ class _NewGroupState extends State<NewGroup> {
                 body: Stack(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 30.0),
                       child: ListView(
                         children: [
                           const SizedBox(
@@ -50,6 +52,7 @@ class _NewGroupState extends State<NewGroup> {
                               if (value!.isEmpty) {
                                 return 'your name cannot be empty';
                               }
+                              return null;
                             },
                             controller: name,
                             minLines: 2,
@@ -67,6 +70,7 @@ class _NewGroupState extends State<NewGroup> {
                               if (value!.isEmpty) {
                                 return 'your description cannot be empty';
                               }
+                              return null;
                             },
                             controller: description,
                             minLines: 10,
@@ -81,7 +85,7 @@ class _NewGroupState extends State<NewGroup> {
                           ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: theme.buttonMain,
+                              backgroundColor: theme.buttonMain,
                               elevation: 0.0,
                             ),
                             onPressed: () async {
@@ -94,7 +98,9 @@ class _NewGroupState extends State<NewGroup> {
                                   image: null,
                                   creationDate: DateTime.now().toString(),
                                 );
-                                group.newGroup(groupDTO: groupDTO, contextNewGroup: context);
+                                group.newGroup(
+                                    groupDTO: groupDTO,
+                                    contextNewGroup: context);
                               }
                             },
                             child: Text(

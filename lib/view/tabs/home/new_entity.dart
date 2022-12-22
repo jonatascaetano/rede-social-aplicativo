@@ -25,7 +25,8 @@ class _NewEntityState extends State<NewEntity> {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<NewEntityModel>(
           model: NewEntityModel(),
-          child: ScopedModelDescendant<NewEntityModel>(builder: (context, child, newEntity) {
+          child: ScopedModelDescendant<NewEntityModel>(
+              builder: (context, child, newEntity) {
             return Form(
               key: _globalKey,
               child: Scaffold(
@@ -44,7 +45,8 @@ class _NewEntityState extends State<NewEntity> {
                 body: Stack(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 30.0),
                       child: ListView(
                         children: [
                           TextFormField(
@@ -52,6 +54,7 @@ class _NewEntityState extends State<NewEntity> {
                               if (value!.isEmpty) {
                                 return 'inform the name';
                               }
+                              return null;
                             },
                             controller: name,
                             keyboardType: TextInputType.text,
@@ -70,6 +73,7 @@ class _NewEntityState extends State<NewEntity> {
                               if (value!.isEmpty) {
                                 return 'inform the synopsis';
                               }
+                              return null;
                             },
                             controller: description,
                             keyboardType: TextInputType.text,
@@ -85,12 +89,19 @@ class _NewEntityState extends State<NewEntity> {
                           ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: theme.buttonMain,
+                              backgroundColor: theme.buttonMain,
                               elevation: 0.0,
                             ),
                             onPressed: () {
                               if (_globalKey.currentState!.validate()) {
-                                EntityDTO entityDTO = EntityDTO(name: name.text, description: description.text, typeEntity: ConvertToEnum.convertValueToTypeEntity(index: LanguageModel().typeEntities.indexOf(widget.typeEntity)));
+                                EntityDTO entityDTO = EntityDTO(
+                                    name: name.text,
+                                    description: description.text,
+                                    typeEntity:
+                                        ConvertToEnum.convertValueToTypeEntity(
+                                            index: LanguageModel()
+                                                .typeEntities
+                                                .indexOf(widget.typeEntity)));
                                 newEntity.createEntity(
                                   entityDTO: entityDTO,
                                   context: context,

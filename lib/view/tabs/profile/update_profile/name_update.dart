@@ -28,7 +28,8 @@ class _NameUpdateState extends State<NameUpdate> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<ProfileModel>(builder: (context, child, profile) {
+      return ScopedModelDescendant<ProfileModel>(
+          builder: (context, child, profile) {
         return Form(
           key: _globalKey,
           child: Scaffold(
@@ -47,7 +48,8 @@ class _NameUpdateState extends State<NameUpdate> {
             body: Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0, vertical: 30.0),
                   child: ListView(
                     children: [
                       TextFormField(
@@ -58,6 +60,7 @@ class _NameUpdateState extends State<NameUpdate> {
                           if (value == widget.name) {
                             return 'this is already your name';
                           }
+                          return null;
                         },
                         controller: controller,
                         decoration: const InputDecoration(
@@ -70,7 +73,7 @@ class _NameUpdateState extends State<NameUpdate> {
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: theme.buttonMain,
+                          backgroundColor: theme.buttonMain,
                           elevation: 0.0,
                         ),
                         onPressed: () {
@@ -88,7 +91,8 @@ class _NameUpdateState extends State<NameUpdate> {
                               invitation: null,
                               release: '',
                             );
-                            profile.updateName(userDTO: userDTO, context: context);
+                            profile.updateName(
+                                userDTO: userDTO, context: context);
                           }
                         },
                         child: Text(

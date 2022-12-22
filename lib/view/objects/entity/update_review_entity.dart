@@ -10,7 +10,12 @@ class UpdateReviewEntity extends StatefulWidget {
   BuildContext contextEntityPage;
   String review;
   EntitySaveMini entitySaveMini;
-  UpdateReviewEntity({required this.review, required this.entitySaveMini, required this.contextEntityPage, Key? key}) : super(key: key);
+  UpdateReviewEntity(
+      {required this.review,
+      required this.entitySaveMini,
+      required this.contextEntityPage,
+      Key? key})
+      : super(key: key);
 
   @override
   _UpdateReviewEntityState createState() => _UpdateReviewEntityState();
@@ -32,7 +37,8 @@ class _UpdateReviewEntityState extends State<UpdateReviewEntity> {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<UpdateReviewEntityModel>(
           model: UpdateReviewEntityModel(),
-          child: ScopedModelDescendant<UpdateReviewEntityModel>(builder: (context, child, review) {
+          child: ScopedModelDescendant<UpdateReviewEntityModel>(
+              builder: (context, child, review) {
             return Form(
               key: _globalKey,
               child: Scaffold(
@@ -51,7 +57,8 @@ class _UpdateReviewEntityState extends State<UpdateReviewEntity> {
                 body: Stack(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 30.0),
                       child: ListView(
                         children: [
                           Row(
@@ -87,6 +94,7 @@ class _UpdateReviewEntityState extends State<UpdateReviewEntity> {
                               if (value!.isEmpty) {
                                 return 'your review cannot be empty';
                               }
+                              return null;
                             },
                             controller: controller,
                             minLines: 10,
@@ -101,7 +109,7 @@ class _UpdateReviewEntityState extends State<UpdateReviewEntity> {
                           ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: theme.buttonMain,
+                              backgroundColor: theme.buttonMain,
                               elevation: 0.0,
                             ),
                             onPressed: () {
@@ -122,7 +130,10 @@ class _UpdateReviewEntityState extends State<UpdateReviewEntity> {
                                   spoiler: spoiler,
                                   release: DateTime.now().toString(),
                                 );
-                                review.updateReview(entitySaveDTO: entitySaveDTO, contextEntityPage: widget.contextEntityPage, contextUpdateReviewPage: context);
+                                review.updateReview(
+                                    entitySaveDTO: entitySaveDTO,
+                                    contextEntityPage: widget.contextEntityPage,
+                                    contextUpdateReviewPage: context);
                               }
                             },
                             child: Text(

@@ -22,7 +22,8 @@ class _NewTalkUserState extends State<NewTalkUser> {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
       return ScopedModel<NewPostModel>(
           model: NewPostModel(),
-          child: ScopedModelDescendant<NewPostModel>(builder: (context, child, post) {
+          child: ScopedModelDescendant<NewPostModel>(
+              builder: (context, child, post) {
             return Form(
               key: _globalKey,
               child: Scaffold(
@@ -41,7 +42,8 @@ class _NewTalkUserState extends State<NewTalkUser> {
                 body: Stack(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 30.0),
                       child: ListView(
                         children: [
                           Row(
@@ -79,6 +81,7 @@ class _NewTalkUserState extends State<NewTalkUser> {
                                     if (spoiler && value!.isEmpty) {
                                       return 'your title cannot be empty';
                                     }
+                                    return null;
                                   },
                                   controller: title,
                                   minLines: 2,
@@ -96,6 +99,7 @@ class _NewTalkUserState extends State<NewTalkUser> {
                               if (value!.isEmpty) {
                                 return 'your post cannot be empty';
                               }
+                              return null;
                             },
                             controller: controller,
                             minLines: 10,
@@ -110,7 +114,7 @@ class _NewTalkUserState extends State<NewTalkUser> {
                           ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: theme.buttonMain,
+                              backgroundColor: theme.buttonMain,
                               elevation: 0.0,
                             ),
                             onPressed: () async {
@@ -124,7 +128,8 @@ class _NewTalkUserState extends State<NewTalkUser> {
                                   idAuthor: id,
                                   title: title.text,
                                 );
-                                post.newTalkUser(post: postTalkDTO, context: context);
+                                post.newTalkUser(
+                                    post: postTalkDTO, context: context);
                               }
                             },
                             child: Text(

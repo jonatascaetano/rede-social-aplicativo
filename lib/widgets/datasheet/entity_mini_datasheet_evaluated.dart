@@ -7,13 +7,16 @@ import 'package:social_network_application/view/objects/entity2.dart';
 // ignore: must_be_immutable
 class EntityMiniDatasheetEvaluated extends StatefulWidget {
   EntitySaveMini entitySaveMini;
-  EntityMiniDatasheetEvaluated({required this.entitySaveMini, Key? key}) : super(key: key);
+  EntityMiniDatasheetEvaluated({required this.entitySaveMini, Key? key})
+      : super(key: key);
 
   @override
-  _EntityMiniDatasheetEvaluatedState createState() => _EntityMiniDatasheetEvaluatedState();
+  _EntityMiniDatasheetEvaluatedState createState() =>
+      _EntityMiniDatasheetEvaluatedState();
 }
 
-class _EntityMiniDatasheetEvaluatedState extends State<EntityMiniDatasheetEvaluated> {
+class _EntityMiniDatasheetEvaluatedState
+    extends State<EntityMiniDatasheetEvaluated> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
@@ -25,7 +28,9 @@ class _EntityMiniDatasheetEvaluatedState extends State<EntityMiniDatasheetEvalua
             border: Border.all(
               color: theme.shadow,
             ), //  const Color(0xffce93d8)),
-            borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
+            borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(10.0),
+                topRight: Radius.circular(10.0)),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -39,16 +44,21 @@ class _EntityMiniDatasheetEvaluatedState extends State<EntityMiniDatasheetEvalua
                           width: 200,
                           decoration: BoxDecoration(
                             color: theme.shadow,
-                            borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(10.0),
+                                topRight: Radius.circular(10.0)),
                             image: DecorationImage(
-                              image: NetworkImage(widget.entitySaveMini.entity!.image!),
+                              image: NetworkImage(
+                                  widget.entitySaveMini.entity!.image!),
                               fit: BoxFit.fitHeight,
                             ),
                           ),
                         )
                       : Container(
                           decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(10.0),
+                                topRight: Radius.circular(10.0)),
                             color: theme.shadow,
                           ),
                           height: 150,
@@ -79,7 +89,8 @@ class _EntityMiniDatasheetEvaluatedState extends State<EntityMiniDatasheetEvalua
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 0.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 4.0, vertical: 0.0),
                     child: Text(
                       widget.entitySaveMini.entity!.name,
                       overflow: TextOverflow.fade,
@@ -108,27 +119,37 @@ class _EntityMiniDatasheetEvaluatedState extends State<EntityMiniDatasheetEvalua
                     Icon(
                       Icons.star,
                       //size: 50,
-                      color: widget.entitySaveMini.evaluation! >= 1 ? Colors.yellow[700] : theme.icon,
+                      color: widget.entitySaveMini.evaluation! >= 1
+                          ? Colors.yellow[700]
+                          : theme.icon,
                     ),
                     Icon(
                       Icons.star,
                       //size: 50,
-                      color: widget.entitySaveMini.evaluation! >= 2 ? Colors.yellow[700] : theme.icon,
+                      color: widget.entitySaveMini.evaluation! >= 2
+                          ? Colors.yellow[700]
+                          : theme.icon,
                     ),
                     Icon(
                       Icons.star,
                       //size: 50,
-                      color: widget.entitySaveMini.evaluation! >= 3 ? Colors.yellow[700] : theme.icon,
+                      color: widget.entitySaveMini.evaluation! >= 3
+                          ? Colors.yellow[700]
+                          : theme.icon,
                     ),
                     Icon(
                       Icons.star,
                       //size: 50,
-                      color: widget.entitySaveMini.evaluation! >= 4 ? Colors.yellow[700] : theme.icon,
+                      color: widget.entitySaveMini.evaluation! >= 4
+                          ? Colors.yellow[700]
+                          : theme.icon,
                     ),
                     Icon(
                       Icons.star,
                       //size: 50,
-                      color: widget.entitySaveMini.evaluation! >= 5 ? Colors.yellow[700] : theme.icon,
+                      color: widget.entitySaveMini.evaluation! >= 5
+                          ? Colors.yellow[700]
+                          : theme.icon,
                     ),
                   ],
                 ),
@@ -137,7 +158,8 @@ class _EntityMiniDatasheetEvaluatedState extends State<EntityMiniDatasheetEvalua
                 height: 2.0,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 0.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 4.0, vertical: 0.0),
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
@@ -158,7 +180,7 @@ class _EntityMiniDatasheetEvaluatedState extends State<EntityMiniDatasheetEvalua
                     ),
                   ),
                   style: ElevatedButton.styleFrom(
-                    primary: theme.buttonMain,
+                    backgroundColor: theme.buttonMain,
                     elevation: 1.0,
                   ),
                 ),

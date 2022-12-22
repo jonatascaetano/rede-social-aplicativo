@@ -16,7 +16,8 @@ class _ImageUpdateState extends State<ImageUpdate> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<ProfileModel>(builder: (context, child, profile) {
+      return ScopedModelDescendant<ProfileModel>(
+          builder: (context, child, profile) {
         return Scaffold(
           appBar: AppBar(
             elevation: 0.0,
@@ -77,12 +78,24 @@ class _ImageUpdateState extends State<ImageUpdate> {
                       !profile.imageIsNull
                           ? ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: theme.buttonMain,
+                                backgroundColor: theme.buttonMain,
                                 elevation: 0.0,
                               ),
                               onPressed: () {
-                                UserDTO userDTO = UserDTO(idUser: profile.userMini.id, name: null, email: null, password: null, imageProfile: null, description: null, place: null, privacy: null, status: null, invitation: null, release: '');
-                                profile.addImageProfile(userDTO: userDTO, context: context);
+                                UserDTO userDTO = UserDTO(
+                                    idUser: profile.userMini.id,
+                                    name: null,
+                                    email: null,
+                                    password: null,
+                                    imageProfile: null,
+                                    description: null,
+                                    place: null,
+                                    privacy: null,
+                                    status: null,
+                                    invitation: null,
+                                    release: '');
+                                profile.addImageProfile(
+                                    userDTO: userDTO, context: context);
                               },
                               child: Text(
                                 "Confirm",
@@ -96,7 +109,7 @@ class _ImageUpdateState extends State<ImageUpdate> {
                             )
                           : ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: theme.button,
+                                backgroundColor: theme.button,
                                 elevation: 0.0,
                               ),
                               onPressed: () {
@@ -115,7 +128,7 @@ class _ImageUpdateState extends State<ImageUpdate> {
                       !profile.imageIsNull
                           ? ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: theme.button,
+                                backgroundColor: theme.button,
                                 elevation: 0.0,
                               ),
                               onPressed: () {

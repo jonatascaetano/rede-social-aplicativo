@@ -28,7 +28,8 @@ class _DescriptionUpdateState extends State<DescriptionUpdate> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<ProfileModel>(builder: (context, child, profile) {
+      return ScopedModelDescendant<ProfileModel>(
+          builder: (context, child, profile) {
         return Form(
           key: _globalKey,
           child: Scaffold(
@@ -47,11 +48,14 @@ class _DescriptionUpdateState extends State<DescriptionUpdate> {
             body: Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0, vertical: 30.0),
                   child: ListView(
                     children: [
                       TextFormField(
-                        validator: (value) {},
+                        validator: (value) {
+                          return null;
+                        },
                         controller: controller,
                         minLines: 10,
                         maxLines: 10,
@@ -65,7 +69,7 @@ class _DescriptionUpdateState extends State<DescriptionUpdate> {
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: theme.buttonMain,
+                          backgroundColor: theme.buttonMain,
                           elevation: 0.0,
                         ),
                         onPressed: () {
@@ -83,7 +87,8 @@ class _DescriptionUpdateState extends State<DescriptionUpdate> {
                               invitation: null,
                               release: '',
                             );
-                            profile.updateDescription(userUpdateDTO: userUpdateDTO, context: context);
+                            profile.updateDescription(
+                                userUpdateDTO: userUpdateDTO, context: context);
                           }
                         },
                         child: Text(

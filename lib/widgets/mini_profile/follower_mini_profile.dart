@@ -9,7 +9,8 @@ import 'package:social_network_application/view/objects/user.dart';
 class FollowerMiniProfile extends StatefulWidget {
   UserMini userMini;
   bool isUser;
-  FollowerMiniProfile({required this.userMini, required this.isUser, Key? key}) : super(key: key);
+  FollowerMiniProfile({required this.userMini, required this.isUser, Key? key})
+      : super(key: key);
 
   @override
   _FollowerMiniProfileState createState() => _FollowerMiniProfileState();
@@ -19,7 +20,8 @@ class _FollowerMiniProfileState extends State<FollowerMiniProfile> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ThemeModel>(builder: (context, child, theme) {
-      return ScopedModelDescendant<FollowersModel>(builder: (context, child, followers) {
+      return ScopedModelDescendant<FollowersModel>(
+          builder: (context, child, followers) {
         return GestureDetector(
           onTap: () {
             if (widget.userMini.id != followers.id) {
@@ -52,16 +54,21 @@ class _FollowerMiniProfileState extends State<FollowerMiniProfile> {
                             width: 200,
                             decoration: BoxDecoration(
                               color: theme.shadow,
-                              borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(10.0),
+                                  topRight: Radius.circular(10.0)),
                               image: DecorationImage(
-                                image: NetworkImage(widget.userMini.imageProfile!),
+                                image:
+                                    NetworkImage(widget.userMini.imageProfile!),
                                 fit: BoxFit.fitHeight,
                               ),
                             ),
                           )
                         : Container(
                             decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(10.0),
+                                  topRight: Radius.circular(10.0)),
                               color: theme.shadow,
                             ),
                             height: 150,
@@ -92,7 +99,8 @@ class _FollowerMiniProfileState extends State<FollowerMiniProfile> {
                     ),
 
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 0.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 4.0, vertical: 0.0),
                       child: Text(
                         widget.userMini.name,
                         overflow: TextOverflow.fade,
@@ -115,10 +123,13 @@ class _FollowerMiniProfileState extends State<FollowerMiniProfile> {
                 !widget.isUser
                     ? Container()
                     : Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 0.0),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 4.0, vertical: 0.0),
                         child: ElevatedButton(
                           onPressed: () {
-                            followers.removeFollower(idFollower: widget.userMini.id, context: context);
+                            followers.removeFollower(
+                                idFollower: widget.userMini.id,
+                                context: context);
                           },
                           child: Text(
                             'remove',
@@ -130,7 +141,7 @@ class _FollowerMiniProfileState extends State<FollowerMiniProfile> {
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                            primary: theme.detail,
+                            backgroundColor: theme.detail,
                             elevation: 1.0,
                           ),
                         ),
